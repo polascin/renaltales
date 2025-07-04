@@ -66,7 +66,7 @@ class HomeController extends Controller {
                 'status = ?', 
                 ['approved']
             ),
-            'supported_languages' => count($this->language->getSupportedLanguages())
+            'supported_languages' => count($this->languageManager->getSupportedLanguages())
         ];
 
         $this->view('home/index', [

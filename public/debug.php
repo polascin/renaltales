@@ -1,7 +1,7 @@
 <?php
 /**
- * Web Debug Script
- * Simple script to test web environment issues
+ * Comprehensive Web Debug Script
+ * Tests each component step by step to identify the exact failure point
  */
 
 // Enable error reporting
@@ -12,8 +12,10 @@ ini_set('log_errors', 1);
 // Start output buffering to capture any output before headers
 ob_start();
 
-echo "<h1>RenalTales Debug Test</h1>";
-echo "<h2>Environment Check</h2>";
+echo "<h1>RenalTales Comprehensive Debug</h1>";
+echo "<style>body{font-family:Arial,sans-serif;margin:20px;}.success{color:green;}.error{color:red;}.warning{color:orange;}</style>";
+
+$step = 1;
 
 try {
     echo "<p><strong>PHP Version:</strong> " . PHP_VERSION . "</p>";
