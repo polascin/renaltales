@@ -138,6 +138,12 @@ try {
     $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $method = $_SERVER['REQUEST_METHOD'];
     
+    // Remove the base path (/renaltales) if present
+    $basePath = '/renaltales';
+    if (strpos($url, $basePath) === 0) {
+        $url = substr($url, strlen($basePath));
+    }
+    
     // Remove query parameters and clean URL
     $url = rtrim($url, '/') ?: '/';
     

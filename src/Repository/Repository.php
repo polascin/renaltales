@@ -7,6 +7,7 @@ use PDO;
 use RenalTales\Core\Config;
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 
 abstract class Repository
 {
@@ -19,7 +20,12 @@ abstract class Repository
 
     public function __construct(CacheInterface $cache = null)
     {
-        $this->cache = $cache ?? new FilesystemAdapter('renaltales', $this->cacheLifetime, dirname(__DIR__, 2) . '/var/cache');
+        if ($cache === null) {
+            $filesystemAdapter = new FilesystemAdapter('renaltales', $this->cacheLifetime, dirname(__DIR__, 2) . '/var/cache');
+            $this->cache = new Psr16Cache($filesystemAdapter);
+        } else {
+            $this->cache = $cache;
+        }
         $config = new Config(dirname(__DIR__, 2) . '/config/config.php');
         
         $this->db = new PDO(

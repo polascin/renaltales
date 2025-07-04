@@ -32,6 +32,17 @@ class Router {
     public function route($method, $uri) {
         $uri = trim($uri, '/');
         
+        // Handle HEAD requests the same as GET requests
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
+        
+        // Check if method exists in routes
+        if (!isset($this->routes[$method])) {
+            $this->handleNotFound();
+            return;
+        }
+        
         // Try exact match first
         if (isset($this->routes[$method][$uri])) {
             return $this->dispatch($this->routes[$method][$uri]);
