@@ -3,8 +3,8 @@
 <div class="auth-container">
     <div class="auth-card">
         <div class="auth-header">
-            <h1><?= $this->language->get('forgot_password_title', 'Reset Your Password') ?></h1>
-            <p><?= $this->language->get('forgot_password_subtitle', 'Enter your email address and we\'ll send you a link to reset your password.') ?></p>
+            <h1><?= $t['auth.forgot_password.title'] ?? 'Reset Your Password' ?></h1>
+            <p><?= $t['auth.forgot_password.subtitle'] ?? 'Enter your email address and we\'ll send you a link to reset your password.' ?></p>
         </div>
 
         <?php if (isset($errors) && !empty($errors)): ?>
@@ -27,13 +27,13 @@
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
             
             <div class="form-group">
-                <label for="email"><?= $this->language->get('email_label', 'Email Address') ?></label>
+                <label for="email"><?= $t['form.email.label'] ?? 'Email Address' ?></label>
                 <input 
                     type="email" 
                     id="email" 
                     name="email" 
                     class="form-control <?= isset($errors['email']) ? 'error' : '' ?>"
-                    placeholder="<?= $this->language->get('email_placeholder', 'Enter your email address') ?>"
+                    placeholder="<?= $t['form.email.placeholder'] ?? 'Enter your email address' ?>"
                     required
                     autocomplete="email"
                     aria-describedby="<?= isset($errors['email']) ? 'email-error' : '' ?>"
@@ -44,14 +44,14 @@
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">
-                <?= $this->language->get('send_reset_link_button', 'Send Reset Link') ?>
+                <?= $t['auth.forgot_password.button'] ?? 'Send Reset Link' ?>
             </button>
         </form>
 
         <div class="auth-footer">
             <p>
-                <?= $this->language->get('remember_password', 'Remember your password?') ?>
-                <a href="/login"><?= $this->language->get('back_to_login', 'Back to login') ?></a>
+                <?= $t['auth.forgot_password.remember'] ?? 'Remember your password?' ?>
+                <a href="/login"><?= $t['auth.forgot_password.back_to_login'] ?? 'Back to login' ?></a>
             </p>
         </div>
     </div>

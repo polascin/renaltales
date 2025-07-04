@@ -85,6 +85,8 @@ $router->get('/forgot-password', 'AuthController@showForgotPassword');
 $router->post('/forgot-password', 'AuthController@forgotPassword');
 $router->get('/reset-password/{token}', 'AuthController@showResetPassword');
 $router->post('/reset-password', 'AuthController@resetPassword');
+$router->get('/verify-email/{token}', 'AuthController@verifyEmail');
+$router->post('/resend-verification', 'AuthController@resendVerification');
 
 // User profile routes
 $router->get('/profile', 'UserController@profile');

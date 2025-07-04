@@ -556,6 +556,92 @@ class AuthController extends Controller {
     }
     
     /**
+     * Handle email verification
+     */
+    public function verifyEmail($token) {
+        try {
+            if (empty($token)) {
+                $this->flash('errors', ['general' => 'Invalid verification token.']);
+                $this->redirect('/login');
+            }
+            
+            // Validate token
+            $tokenData = $this->db->fetch(
+                "SELECT * FROM email_verification_tokens WHERE token = ? AND expires_at > NOW()",
+                [$token]
+            );
+            
+            if (!$tokenData) {
+                $this->flash('errors', ['general' => 'Invalid or expired verification token.']);
+                $this->redirect('/login');
+            }
+            
+            // Verify user email
+            $this->db->execute(
+                "UPDATE users SET email_verified_at = NOW(), updated_at = NOW() WHERE id = ?",
+                [$tokenData['user_id']]
+            );
+            
+            // Delete used token
+            $this->db->execute("DELETE FROM email_verification_tokens WHERE token = ?", [$token]);
+            
+            // Log email verification
+            $this->logActivity('email_verified', 'Email address verified successfully', $tokenData['user_id']);
+            
+            $this->flash('success', 'Your email has been verified successfully! You can now log in.');
+            $this->redirect('/login');
+            
+        } catch (Exception $e) {
+            error_log("Email verification error: " . $e->getMessage());
+            $this->flash('errors', ['general' => 'An error occurred during verification. Please try again.']);
+            $this->redirect('/login');
+        }
+    }
+    
+    /**
+     * Resend email verification
+     */
+    public function resendVerification() {
+        try {
+            $this->validateCsrf();
+            
+            $email = $this->sanitize($_POST['email'] ?? '');
+            
+            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $this->flash('errors', ['email' => 'Please enter a valid email address.']);
+                $this->redirect('/login');
+            }
+            
+            $user = $this->db->fetch("SELECT id, email, email_verified_at FROM users WHERE email = ?", [$email]);
+            
+            if (!$user) {
+                // For security, don't reveal if email exists
+                $this->flash('success', 'If an unverified account with that email exists, a verification email has been sent.');
+                $this->redirect('/login');
+            }
+            
+            if ($user['email_verified_at']) {
+                $this->flash('info', 'This email address is already verified.');
+                $this->redirect('/login');
+            }
+            
+            // Clean up old tokens for this user
+            $this->db->execute("DELETE FROM email_verification_tokens WHERE user_id = ?", [$user['id']]);
+            
+            // Send new verification email
+            $this->sendVerificationEmail($user['id'], $user['email']);
+            
+            $this->flash('success', 'A new verification email has been sent.');
+            $this->redirect('/login');
+            
+        } catch (Exception $e) {
+            error_log("Resend verification error: " . $e->getMessage());
+            $this->flash('errors', ['general' => 'An error occurred. Please try again.']);
+            $this->redirect('/login');
+        }
+    }
+    
+    /**
      * Send password reset email
      */
     private function sendPasswordResetEmail($user) {
