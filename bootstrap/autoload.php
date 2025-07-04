@@ -4,8 +4,10 @@
  * Initializes Composer autoloading and environment configuration
  */
 
-// Define root path constant
-define('ROOT_PATH', dirname(__DIR__));
+// Define root path constant if not already defined
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(__DIR__));
+}
 
 // Load Composer autoloader
 $autoloader = require ROOT_PATH . '/vendor/autoload.php';
@@ -44,7 +46,7 @@ if (file_exists($envPath)) {
 }
 
 // Set error reporting based on environment
-if ($_ENV['APP_ENV'] === 'development') {
+if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'development') {
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
 } else {

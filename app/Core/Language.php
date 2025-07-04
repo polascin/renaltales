@@ -34,6 +34,11 @@ class Language {
     }
 
     private function detectFromBrowser() {
+        if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) || empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            $this->currentLanguage = $this->fallbackLanguage;
+            return;
+        }
+        
         $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
         foreach ($browserLanguages as $lang) {
             $lang = substr($lang, 0, 2);
