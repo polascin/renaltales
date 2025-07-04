@@ -673,3 +673,74 @@ I'll help you implement multilingual support for your application. Let me start 
 
 ---
 
+I've successfully fixed the "Undefined constant 'DB_HOST'" error in your RenalTales application! Here's what I did:
+
+✅ Issues Fixed:
+
+1. Added missing DB_CHARSET to .env file - The environment variable was missing but required by the Database class
+2. Updated the Database class (app/Core/Database.php) to use the configuration array instead of undefined constants:
+•  Replaced DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_CHARSET constants
+•  Now uses $config['database']['host'], $config['database']['database'], etc.
+1. Fixed environment variable loading in public/index.php:
+•  Added bootstrap autoloader to load environment variables from .env file
+•  Fixed duplicate ROOT_PATH definition issue
+•  Fixed missing config key reference
+1. Fixed minor PHP warnings:
+•  Made __wakeup() method public (required by PHP 8+)
+•  Fixed config array key reference
+
+✅ How it works now:
+
+1. The .env file contains your database configuration
+2. Bootstrap loads these environment variables
+3. Config file (config/config.php) uses environment variables with fallbacks
+4. Database class uses the config array instead of undefined constants
+
+✅ The error is completely resolved:
+
+The Database class now properly loads database configuration from the config array, eliminating the "Undefined constant 'DB_HOST'" error. Your application should now be able to load without this error (assuming MySQL server is running when you need to connect to the database).
+
+---
+
+✅ Database Issue Resolved!
+
+I've successfully resolved the "Unknown database 'renaltales'" error. Here's what I accomplished:
+
+What I did:
+
+1. Created the 'renaltales' database using MySQL with the correct character set:
+```sql
+CREATE DATABASE renaltales CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+2. Applied the database schema by running the migration file 20250704_initial_schema.sql which created:
+•  9 core tables: users, stories, story_categories, story_contents, comments, etc.
+•  Proper relationships: Foreign key constraints between related tables
+•  Default data: 8 default story categories (General, Dialysis, Pre-Transplant, etc.)
+3. Verified the setup by testing the database connection from your application
+
+Database Tables Created:
+•  users - User accounts and authentication
+•  stories - Main story records
+•  story_categories - Categories for organizing stories
+•  story_contents - Story content and translations
+•  story_revisions - Version history for stories
+•  comments - User comments on stories
+•  user_sessions - Secure session management
+•  password_resets - Password reset tokens
+•  email_verifications - Email verification tokens
+
+Default Categories Available:
+•  General, Dialysis, Pre-Transplant, Post-Transplant
+•  Lifestyle, Nutrition, Mental Health, Success Stories
+
+✅ Status:
+Your RenalTales application now has:
+•  ✅ Fixed undefined constants error
+•  ✅ Working database connection  
+•  ✅ Complete database schema
+•  ✅ Ready to use for development
+
+The application should now load without database errors and be ready for use!
+
+---
+

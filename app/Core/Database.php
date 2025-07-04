@@ -12,13 +12,17 @@ class Database {
     private $username;
     private $password;
     private $charset;
+    private $config;
 
     private function __construct() {
-        $this->host = DB_HOST;
-        $this->dbname = DB_NAME;
-        $this->username = DB_USER;
-        $this->password = DB_PASS;
-        $this->charset = DB_CHARSET;
+        // Load config from global variable or directly
+        $this->config = $GLOBALS['CONFIG'] ?? require_once(dirname(__DIR__, 2) . '/config/config.php');
+        
+        $this->host = $this->config['database']['host'];
+        $this->dbname = $this->config['database']['database'];
+        $this->username = $this->config['database']['username'];
+        $this->password = $this->config['database']['password'];
+        $this->charset = $this->config['database']['charset'];
         
         $this->connect();
     }
@@ -137,5 +141,5 @@ class Database {
     private function __clone() {}
 
     // Prevent unserialization
-    private function __wakeup() {}
+    public function __wakeup() {}
 }

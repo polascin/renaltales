@@ -18,14 +18,19 @@ ini_set('display_errors', 1);
 // Set timezone
 date_default_timezone_set('UTC');
 
-// Define constants
-define('ROOT_PATH', dirname(__DIR__));
+// Define constants if not already defined
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(__DIR__));
+}
 define('APP_PATH', ROOT_PATH . '/app');
 define('CONFIG_PATH', ROOT_PATH . '/config');
 define('STORAGE_PATH', ROOT_PATH . '/storage');
 define('PUBLIC_PATH', __DIR__);
 define('CONTROLLERS_PATH', APP_PATH . '/Controllers');
 define('VIEWS_PATH', APP_PATH . '/Views');
+
+// Load bootstrap (which loads environment variables)
+require_once ROOT_PATH . '/bootstrap/autoload.php';
 
 // Include configuration and core files
 $config = require_once CONFIG_PATH . '/config.php';
@@ -43,7 +48,7 @@ ErrorHandler::initialize($config);
 
 // Set global variables for easy access in controllers
 $GLOBALS['STORY_CATEGORIES'] = $config['story_categories'];
-$GLOBALS['SUPPORTED_STORY_LANGUAGES'] = $config['supported_story_languages'];
+$GLOBALS['SUPPORTED_STORY_LANGUAGES'] = $config['story_languages'];
 $GLOBALS['USER_ROLES'] = $config['user_roles'];
 $GLOBALS['ACCESS_LEVELS'] = $config['access_levels'];
 $GLOBALS['CONFIG'] = $config;
