@@ -50,7 +50,9 @@ class AuthController extends Controller {
         try {
             // Rate limiting check
             $ipAddress = $_SERVER['REMOTE_ADDR'];
-            if (!$this->security->checkRateLimit('login', $ipAddress, 5, 900)) { // 5 attempts per 15 minutes
+            try {
+                $this->security->applyRateLimit('login_' . $ipAddress, 5, 900); // 5 attempts per 15 minutes
+            } catch (Exception $e) {
                 $this->flashError('Too many login attempts from this IP address. Please try again in 15 minutes.');
                 $this->redirect('/login');
             }
@@ -175,7 +177,9 @@ class AuthController extends Controller {
         try {
             // Rate limiting for registration attempts
             $ipAddress = $_SERVER['REMOTE_ADDR'];
-            if (!$this->security->checkRateLimit('register', $ipAddress, 3, 3600)) { // 3 attempts per hour
+            try {
+                $this->security->applyRateLimit('register_' . $ipAddress, 3, 3600); // 3 attempts per hour
+            } catch (Exception $e) {
                 $this->flashError('Too many registration attempts from this IP address. Please try again in an hour.');
                 $this->redirect('/register');
             }

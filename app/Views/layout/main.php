@@ -16,146 +16,202 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= Router::asset('images/favicon.ico') ?>">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="<?= Router::asset('css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= Router::asset('css/style.css') ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS for language flags -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="<?= Router::asset('css/style.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Additional CSS for password strength meter -->
     <style>
-        .language-selector .flag {
-            width: 20px;
-            height: 15px;
-            object-fit: cover;
-            margin-right: 5px;
+        .password-strength-bar {
+            height: 4px;
+            background: var(--color-border-light);
+            border-radius: var(--radius-full);
+            overflow: hidden;
         }
-        .navbar-brand {
-            color: #2c5282 !important;
-            font-weight: bold;
+        .password-strength-bar::before {
+            content: ''; 
+            display: block;
+            height: 100%;
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
         }
-        .text-kidney {
-            color: #2c5282;
+        .strength-weak::before {
+            width: 33%;
+            background: var(--color-error);
         }
-        .bg-kidney {
-            background-color: #2c5282;
+        .strength-medium::before {
+            width: 66%;
+            background: var(--color-warning);
         }
-        .btn-kidney {
-            background-color: #2c5282;
-            border-color: #2c5282;
-            color: white;
+        .strength-strong::before {
+            width: 100%;
+            background: var(--color-success);
         }
-        .btn-kidney:hover {
-            background-color: #2a4d7a;
-            border-color: #2a4d7a;
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-light);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: var(--z-dropdown);
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        .autocomplete-item {
+            padding: var(--space-3);
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+        .autocomplete-item:hover {
+            background: var(--color-bg-secondary);
+        }
+        .sr-only-focusable:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: inherit;
+            margin: inherit;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+        }
+        .keyboard-focused {
+            outline: 2px solid var(--primary-500) !important;
+            outline-offset: 2px !important;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container">
+    <nav class="navbar">
+        <div class="container flex justify-between items-center py-4">
             <a class="navbar-brand" href="<?= Router::url() ?>">
-                <i class="fas fa-heart text-kidney"></i>
+                <i class="fas fa-heart mr-2" style="color: var(--primary-600);"></i>
                 RenalTales
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <!-- Mobile menu button -->
+            <button class="navbar-toggler md:hidden btn btn-secondary" type="button" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+            <!-- Desktop Navigation -->
+            <div class="navbar-collapse hidden md:flex">
+                <ul class="navbar-nav flex items-center gap-6">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= Router::url() ?>">Home</a>
+                        <a class="nav-link" href="<?= Router::url() ?>">
+                            <i class="fas fa-home mr-1"></i> Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= Router::url('stories') ?>">Stories</a>
+                        <a class="nav-link" href="<?= Router::url('stories') ?>">
+                            <i class="fas fa-book-open mr-1"></i> Stories
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            Categories
+                        <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false">
+                            <i class="fas fa-folder mr-1"></i> Categories
                         </a>
-                        <ul class="dropdown-menu">
+                        <div class="dropdown-menu">
                             <?php foreach ($GLOBALS['STORY_CATEGORIES'] as $slug => $name): ?>
-                                <li><a class="dropdown-item" href="<?= Router::url("category/{$slug}") ?>"><?= htmlspecialchars($name) ?></a></li>
+                                <a class="dropdown-item" href="<?= Router::url("category/{$slug}") ?>">
+                                    <?= htmlspecialchars($name) ?>
+                                </a>
                             <?php endforeach; ?>
-                        </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= Router::url('about') ?>">About</a>
+                        <a class="nav-link" href="<?= Router::url('about') ?>">
+                            <i class="fas fa-info-circle mr-1"></i> About
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= Router::url('contact') ?>">Contact</a>
+                        <a class="nav-link" href="<?= Router::url('contact') ?>">
+                            <i class="fas fa-envelope mr-1"></i> Contact
+                        </a>
                     </li>
                 </ul>
                 
-                <ul class="navbar-nav">
+                <div class="flex items-center gap-4 ml-6">
                     <!-- Language Selector -->
-                    <li class="nav-item dropdown language-selector">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <img src="<?= Router::asset("images/flags/{$lang}.png") ?>" alt="<?= $lang ?>" class="flag">
+                    <div class="dropdown language-selector">
+                        <button class="nav-link dropdown-toggle btn btn-secondary" aria-expanded="false">
+                            <?php 
+                                // Map language codes to flag codes
+                                $flagMap = [
+                                    'en' => 'gb', 'cs' => 'cz', 'da' => 'dk', 'et' => 'ee', 'el' => 'gr', 
+                                    'sl' => 'si', 'ar' => 'eg', 'hi' => 'in', 'ko' => 'kr', 'ja' => 'jp',
+                                    'zh' => 'cn', 'sv' => 'se'
+                                ];
+                                $flagCode = $flagMap[$lang] ?? $lang;
+                            ?>
+                            <img src="<?= Router::asset("assets/images/flags/{$flagCode}.webp") ?>" alt="<?= $lang ?>" class="language-flag">
                             <?= strtoupper($lang) ?>
-                        </a>
-                        <ul class="dropdown-menu">
+                        </button>
+                        <div class="dropdown-menu">
                             <?php foreach ($supportedLanguages as $code => $name): ?>
-                                <li>
-                                    <a class="dropdown-item" href="<?= Router::url("lang/{$code}") ?>">
-                                        <img src="<?= Router::asset("images/flags/{$code}.png") ?>" alt="<?= $code ?>" class="flag">
-                                        <?= htmlspecialchars($name) ?>
-                                    </a>
-                                </li>
+                                <?php $dropdownFlagCode = $flagMap[$code] ?? $code; ?>
+                                <a class="dropdown-item" href="<?= Router::url("lang/{$code}") ?>">
+                                    <img src="<?= Router::asset("assets/images/flags/{$dropdownFlagCode}.webp") ?>" alt="<?= $code ?>" class="language-flag">
+                                    <?= htmlspecialchars($name) ?>
+                                </a>
                             <?php endforeach; ?>
-                        </ul>
-                    </li>
+                        </div>
+                    </div>
                     
                     <?php if ($currentUser): ?>
                         <!-- Authenticated User Menu -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user"></i>
+                        <div class="dropdown">
+                            <button class="nav-link dropdown-toggle btn btn-secondary" aria-expanded="false">
+                                <i class="fas fa-user mr-1"></i>
                                 <?= htmlspecialchars($currentUser['first_name'] ?? $currentUser['username']) ?>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?= Router::url('profile') ?>">
-                                    <i class="fas fa-user-edit"></i> My Profile
-                                </a></li>
-                                <li><a class="dropdown-item" href="<?= Router::url('story/create') ?>">
-                                    <i class="fas fa-pen"></i> Write Story
-                                </a></li>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="<?= Router::url('profile') ?>">
+                                    <i class="fas fa-user-edit mr-2"></i> My Profile
+                                </a>
+                                <a class="dropdown-item" href="<?= Router::url('story/create') ?>">
+                                    <i class="fas fa-pen mr-2"></i> Write Story
+                                </a>
                                 <?php if ($currentUser['role'] === 'translator' || $currentUser['role'] === 'moderator' || $currentUser['role'] === 'admin'): ?>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="<?= Router::url('admin/pending') ?>">
-                                        <i class="fas fa-tasks"></i> Moderation
-                                    </a></li>
+                                    <hr class="my-2 border-gray-200">
+                                    <a class="dropdown-item" href="<?= Router::url('admin/pending') ?>">
+                                        <i class="fas fa-tasks mr-2"></i> Moderation
+                                    </a>
                                 <?php endif; ?>
                                 <?php if ($currentUser['role'] === 'admin'): ?>
-                                    <li><a class="dropdown-item" href="<?= Router::url('admin/users') ?>">
-                                        <i class="fas fa-users"></i> Manage Users
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="<?= Router::url('admin/statistics') ?>">
-                                        <i class="fas fa-chart-bar"></i> Statistics
-                                    </a></li>
+                                    <a class="dropdown-item" href="<?= Router::url('admin/users') ?>">
+                                        <i class="fas fa-users mr-2"></i> Manage Users
+                                    </a>
+                                    <a class="dropdown-item" href="<?= Router::url('admin/statistics') ?>">
+                                        <i class="fas fa-chart-bar mr-2"></i> Statistics
+                                    </a>
                                 <?php endif; ?>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="<?= Router::url('logout') ?>">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </a></li>
-                            </ul>
-                        </li>
+                                <hr class="my-2 border-gray-200">
+                                <a class="dropdown-item" href="<?= Router::url('logout') ?>">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                                </a>
+                            </div>
+                        </div>
                     <?php else: ?>
                         <!-- Guest User Menu -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= Router::url('login') ?>">
-                                <i class="fas fa-sign-in-alt"></i> Login
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-kidney btn-sm ms-2" href="<?= Router::url('register') ?>">
-                                <i class="fas fa-user-plus"></i> Register
-                            </a>
-                        </li>
+                        <a class="nav-link" href="<?= Router::url('login') ?>">
+                            <i class="fas fa-sign-in-alt mr-1"></i> Login
+                        </a>
+                        <a class="btn btn-primary" href="<?= Router::url('register') ?>">
+                            <i class="fas fa-user-plus mr-1"></i> Register
+                        </a>
                     <?php endif; ?>
-                </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -173,61 +229,72 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-5 mt-5">
+    <footer style="background: var(--gray-900); color: white; padding: 3rem 0; margin-top: 4rem;">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5><i class="fas fa-heart text-danger"></i> RenalTales</h5>
-                    <p>A supportive community platform for people with kidney disorders, sharing stories of hope, courage, and resilience.</p>
-                </div>
-                <div class="col-md-2">
-                    <h6>Platform</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="<?= Router::url('stories') ?>" class="text-light">Stories</a></li>
-                        <li><a href="<?= Router::url('users') ?>" class="text-light">Community</a></li>
-                        <li><a href="<?= Router::url('about') ?>" class="text-light">About</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <h6>Support</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="<?= Router::url('contact') ?>" class="text-light">Contact</a></li>
-                        <li><a href="<?= Router::url('privacy') ?>" class="text-light">Privacy</a></li>
-                        <li><a href="<?= Router::url('terms') ?>" class="text-light">Terms</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h6>Languages Supported</h6>
-                    <p class="small">Stories available in <?= count($supportedLanguages) ?> languages including English, Slovak, Czech, German, and many more.</p>
-                    <div class="d-flex flex-wrap">
-                        <?php $displayLanguages = array_slice($supportedLanguages, 0, 12, true); ?>
-                        <?php foreach ($displayLanguages as $code => $name): ?>
-                            <img src="<?= Router::asset("images/flags/{$code}.png") ?>" 
-                                 alt="<?= $name ?>" 
-                                 title="<?= $name ?>"
-                                 class="flag me-1 mb-1" 
-                                 style="width: 24px; height: 18px;">
-                        <?php endforeach; ?>
-                        <?php if (count($supportedLanguages) > 12): ?>
-                            <span class="text-muted small align-self-end">+<?= count($supportedLanguages) - 12 ?> more</span>
-                        <?php endif; ?>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-heart" style="color: var(--primary-400); font-size: 1.25rem;"></i>
+                        <h3 class="text-xl font-bold">RenalTales</h3>
+                    </div>
+                    <p style="color: var(--gray-300); margin-bottom: 1.5rem; max-width: 28rem;">A supportive community platform for people with kidney disorders, sharing stories of hope, courage, and resilience.</p>
+                    
+                    <!-- Language flags -->
+                    <div class="mb-6">
+                        <h6 class="font-semibold mb-3">Available in <?= count($supportedLanguages) ?> Languages</h6>
+                        <div class="flex flex-wrap gap-2">
+                            <?php 
+                                $displayLanguages = array_slice($supportedLanguages, 0, 12, true);
+                                $footerFlagMap = [
+                                    'en' => 'gb', 'cs' => 'cz', 'da' => 'dk', 'et' => 'ee', 'el' => 'gr', 
+                                    'sl' => 'si', 'ar' => 'eg', 'hi' => 'in', 'ko' => 'kr', 'ja' => 'jp',
+                                    'zh' => 'cn', 'sv' => 'se'
+                                ];
+                            ?>
+                            <?php foreach ($displayLanguages as $code => $name): ?>
+                                <?php $footerFlagCode = $footerFlagMap[$code] ?? $code; ?>
+                                <img src="<?= Router::asset("assets/images/flags/{$footerFlagCode}.webp") ?>" alt="<?= $name ?>" title="<?= $name ?>" class="language-flag" style="opacity: 0.75; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'" onclick="window.location.href='<?= Router::url("lang/{$code}") ?>'">
+                            <?php endforeach; ?>
+                            <?php if (count($supportedLanguages) > 12): ?>
+                                <span style="color: var(--gray-400); font-size: 0.875rem; align-self: center;">+<?= count($supportedLanguages) - 12 ?> more</span>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
+                
+                <div>
+                    <h6 class="font-semibold mb-4">Platform</h6>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="<?= Router::url('stories') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Stories</a></li>
+                        <li><a href="<?= Router::url('users') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Community</a></li>
+                        <li><a href="<?= Router::url('about') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">About</a></li>
+                        <li><a href="<?= Router::url('story/create') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Share Your Story</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="font-semibold mb-4">Support</h6>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="<?= Router::url('contact') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Contact</a></li>
+                        <li><a href="<?= Router::url('privacy') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Privacy Policy</a></li>
+                        <li><a href="<?= Router::url('terms') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Terms of Service</a></li>
+                        <li><a href="<?= Router::url('help') ?>" style="color: var(--gray-300); transition: color 0.3s;" onmouseover="this.style.color='var(--primary-400)'" onmouseout="this.style.color='var(--gray-300)'">Help Center</a></li>
+                    </ul>
+                </div>
             </div>
-            <hr class="my-4">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; <?= date('Y') ?> RenalTales. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-0 small">Built with ❤️ for the kidney community</p>
-                </div>
+            
+            <hr style="border-color: var(--gray-700); margin: 2rem 0;">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p style="color: var(--gray-400); font-size: 0.875rem; margin: 0;">&copy; <?= date('Y') ?> RenalTales. All rights reserved.</p>
+                <p style="color: var(--gray-400); font-size: 0.875rem; margin: 0; display: flex; align-items: center; gap: 0.25rem;">
+                    Built with <i class="fas fa-heart" style="color: #ef4444; font-size: 0.75rem;"></i> for the kidney community
+                </p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= Router::asset('js/app.js') ?>"></script>
     
     <!-- CSRF Protection for AJAX -->
@@ -239,71 +306,5 @@
             <script src="<?= Router::asset("js/{$script}") ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
-    
-    <!-- Security and form enhancement script -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Auto-dismiss alerts after 5 seconds
-        setTimeout(function() {
-            var alerts = document.querySelectorAll('.alert:not(.alert-permanent)');
-            alerts.forEach(function(alert) {
-                var bsAlert = new bootstrap.Alert(alert);
-                bsAlert.close();
-            });
-        }, 5000);
-        
-        // Form validation enhancement
-        var forms = document.querySelectorAll('form[novalidate]');
-        forms.forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            });
-        });
-        
-        // Password strength indicator
-        var passwordFields = document.querySelectorAll('input[type="password"][name="password"]');
-        passwordFields.forEach(function(field) {
-            field.addEventListener('input', function() {
-                var strength = checkPasswordStrength(this.value);
-                updatePasswordStrengthIndicator(this, strength);
-            });
-        });
-    });
-    
-    function checkPasswordStrength(password) {
-        var score = 0;
-        if (password.length >= 12) score++;
-        if (/[a-z]/.test(password)) score++;
-        if (/[A-Z]/.test(password)) score++;
-        if (/\d/.test(password)) score++;
-        if (/[^a-zA-Z\d]/.test(password)) score++;
-        if (password.length >= 16) score++;
-        
-        if (score < 3) return 'weak';
-        if (score < 5) return 'medium';
-        return 'strong';
-    }
-    
-    function updatePasswordStrengthIndicator(field, strength) {
-        var indicator = field.parentNode.querySelector('.password-strength');
-        if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.className = 'password-strength mt-1';
-            field.parentNode.appendChild(indicator);
-        }
-        
-        var colors = {
-            'weak': 'danger',
-            'medium': 'warning', 
-            'strong': 'success'
-        };
-        
-        indicator.innerHTML = '<small class="text-' + colors[strength] + '">Password strength: ' + strength + '</small>';
-    }
-    </script>
 </body>
 </html>
