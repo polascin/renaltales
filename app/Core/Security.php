@@ -6,9 +6,11 @@
 
 class Security {
     private $db;
+    private $config;
     
     public function __construct() {
         $this->db = Database::getInstance();
+        $this->config = $GLOBALS['CONFIG'];
     }
 
     public function setSecurityHeaders() {
@@ -45,8 +47,8 @@ class Security {
     }
 
     public function applyRateLimit($identifier, $limit = null, $window = null) {
-        $limit = $limit ?? RATE_LIMIT_REQUESTS;
-        $window = $window ?? RATE_LIMIT_WINDOW;
+        $limit = $limit ?? $this->config['rate_limit']['requests'];
+        $window = $window ?? $this->config['rate_limit']['window'];
         
         $now = time();
         $windowStart = $now - $window;
@@ -96,14 +98,14 @@ class Security {
     }
 
     public function encryptData($data, $key = null) {
-        $key = $key ?? ENCRYPTION_KEY;
+        $key = $key ?? $this->config['security']['encryption_key'];
         $iv = random_bytes(16);
         $encrypted = openssl_encrypt($data, 'AES-256-CBC', $key, 0, $iv);
         return base64_encode($iv . $encrypted);
     }
 
     public function decryptData($encryptedData, $key = null) {
-        $key = $key ?? ENCRYPTION_KEY;
+        $key = $key ?? $this->config['security']['encryption_key'];
         $data = base64_decode($encryptedData);
         $iv = substr($data, 0, 16);
         $encrypted = substr($data, 16);
@@ -145,7 +147,7 @@ class Security {
     }
 
     public function isSecurePassword($password) {
-        $minLength = PASSWORD_MIN_LENGTH;
+        $minLength = $this->config['security']['password_min_length'];
         
         if (strlen($password) < $minLength) {
             return false;
@@ -178,10 +180,10 @@ class Security {
         $attempts = $this->db->count(
             'login_attempts',
             'identifier = ? AND created_at > ?',
-            [$identifier, date('Y-m-d H:i:s', time() - LOGIN_LOCKOUT_TIME)]
+            [$identifier, date('Y-m-d H:i:s', time() - $this->config['security']['login_lockout_time'])]
         );
         
-        if ($attempts >= MAX_LOGIN_ATTEMPTS) {
+        if ($attempts >= $this->config['security']['max_login_attempts']) {
             throw new Exception('Too many login attempts. Please try again later.');
         }
     }
@@ -199,7 +201,7 @@ class Security {
         $this->db->delete(
             'login_attempts',
             'created_at < ?',
-            [date('Y-m-d H:i:s', time() - (LOGIN_LOCKOUT_TIME * 2))]
+            [date('Y-m-d H:i:s', time() - ($this->config['security']['login_lockout_time'] * 2))]
         );
     }
 
@@ -244,7 +246,7 @@ class Security {
     }
 
     public function validateFileUpload($file, $allowedTypes = null) {
-        $allowedTypes = $allowedTypes ?? array_merge(ALLOWED_IMAGE_TYPES, ALLOWED_DOCUMENT_TYPES);
+        $allowedTypes = $allowedTypes ?? array_merge($this->config['uploads']['allowed_image_types'], $this->config['uploads']['allowed_document_types']);
         
         // Check if file was uploaded
         if (!isset($file['tmp_name']) || empty($file['tmp_name'])) {
@@ -257,7 +259,7 @@ class Security {
         }
         
         // Check file size
-        if ($file['size'] > MAX_FILE_SIZE) {
+        if ($file['size'] > $this->config['uploads']['max_file_size']) {
             throw new Exception('File size exceeds maximum allowed size');
         }
         
@@ -273,7 +275,7 @@ class Security {
         }
         
         // Additional security checks for images
-        if (in_array($extension, ALLOWED_IMAGE_TYPES)) {
+        if (in_array($extension, $this->config['uploads']['allowed_image_types'])) {
             $imageInfo = getimagesize($file['tmp_name']);
             if (!$imageInfo) {
                 throw new Exception('Invalid image file');
@@ -327,7 +329,7 @@ class Security {
         $base64Header = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
         $base64Payload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
         
-        $signature = hash_hmac('sha256', $base64Header . "." . $base64Payload, JWT_SECRET, true);
+        $signature = hash_hmac('sha256', $base64Header . "." . $base64Payload, $this->config['security']['jwt_secret'], true);
         $base64Signature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
         
         return $base64Header . "." . $base64Payload . "." . $base64Signature;
@@ -344,7 +346,7 @@ class Security {
         $payload = base64_decode(str_replace(['-', '_'], ['+', '/'], $parts[1]));
         $signature = str_replace(['-', '_'], ['+', '/'], $parts[2]);
         
-        $expectedSignature = hash_hmac('sha256', $parts[0] . "." . $parts[1], JWT_SECRET, true);
+        $expectedSignature = hash_hmac('sha256', $parts[0] . "." . $parts[1], $this->config['security']['jwt_secret'], true);
         $expectedSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($expectedSignature));
         
         if (!hash_equals($expectedSignature, $signature)) {

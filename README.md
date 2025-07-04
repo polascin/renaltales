@@ -744,3 +744,47 @@ The application should now load without database errors and be ready for use!
 
 ---
 
+Great! It looks like we've fixed all the issues in the core application files. Let me provide a summary of what was fixed:
+
+Problem Summary
+The Security.php file had multiple undefined constants that were causing errors:
+•  RATE_LIMIT_REQUESTS
+•  RATE_LIMIT_WINDOW 
+•  ENCRYPTION_KEY
+•  PASSWORD_MIN_LENGTH
+•  MAX_LOGIN_ATTEMPTS
+•  LOGIN_LOCKOUT_TIME
+•  JWT_SECRET
+•  ALLOWED_IMAGE_TYPES
+•  ALLOWED_DOCUMENT_TYPES
+•  MAX_FILE_SIZE
+
+Solution
+I updated the Security class to properly use the configuration array that's loaded in the application:
+
+1. Added a config property to store the configuration reference
+2. Modified the constructor to get the configuration from $GLOBALS['CONFIG']
+3. Updated all methods to use config values instead of undefined constants:
+
+Rate Limiting
+•  $this->config['rate_limit']['requests']
+•  $this->config['rate_limit']['window']
+
+Security Settings
+•  $this->config['security']['encryption_key']
+•  $this->config['security']['password_min_length']
+•  $this->config['security']['max_login_attempts']
+•  $this->config['security']['login_lockout_time']
+•  $this->config['security']['jwt_secret']
+
+File Upload Settings
+•  $this->config['uploads']['allowed_image_types']
+•  $this->config['uploads']['allowed_document_types']
+•  $this->config['uploads']['max_file_size']
+
+All configuration values are properly defined in config/config.php and loaded into $GLOBALS['CONFIG'] in public/index.php, so now both the Language and Security classes can access them correctly.
+
+The PHP syntax checks confirm that both files are now error-free and should work properly with the application configuration system.
+
+---
+

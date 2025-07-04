@@ -9,11 +9,14 @@ class Language {
     private $defaultLanguage;
     private $fallbackLanguage;
     private $currentLanguage;
+    private $detectBrowserLanguage;
 
     public function __construct() {
+        $config = $GLOBALS['CONFIG'];
         $this->supportedLanguages = $GLOBALS['SUPPORTED_STORY_LANGUAGES'];
-        $this->defaultLanguage = DEFAULT_LANGUAGE;
-        $this->fallbackLanguage = FALLBACK_LANGUAGE;
+        $this->defaultLanguage = $config['languages']['default'];
+        $this->fallbackLanguage = $config['languages']['fallback'];
+        $this->detectBrowserLanguage = $config['languages']['detect_from_browser'];
         $this->detectLanguage();
     }
 
@@ -23,7 +26,7 @@ class Language {
             $_SESSION['language'] = $this->currentLanguage;
         } elseif (isset($_SESSION['language'])) {
             $this->currentLanguage = $_SESSION['language'];
-        } elseif (DETECT_BROWSER_LANGUAGE) {
+        } elseif ($this->detectBrowserLanguage) {
             $this->detectFromBrowser();
         } else {
             $this->currentLanguage = $this->defaultLanguage;
