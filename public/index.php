@@ -24,14 +24,32 @@ define('APP_PATH', ROOT_PATH . '/app');
 define('CONFIG_PATH', ROOT_PATH . '/config');
 define('STORAGE_PATH', ROOT_PATH . '/storage');
 define('PUBLIC_PATH', __DIR__);
+define('CONTROLLERS_PATH', APP_PATH . '/Controllers');
+define('VIEWS_PATH', APP_PATH . '/Views');
 
 // Include configuration and core files
-require_once CONFIG_PATH . '/config.php';
+$config = require_once CONFIG_PATH . '/config.php';
+require_once ROOT_PATH . '/src/helpers.php';
+require_once ROOT_PATH . '/src/Core/ErrorHandler.php';
 require_once APP_PATH . '/Core/Database.php';
 require_once APP_PATH . '/Core/Router.php';
 require_once APP_PATH . '/Core/Controller.php';
 require_once APP_PATH . '/Core/Security.php';
 require_once APP_PATH . '/Core/Language.php';
+
+// Initialize error handler
+use RenalTales\Core\ErrorHandler;
+ErrorHandler::initialize($config);
+
+// Set global variables for easy access in controllers
+$GLOBALS['STORY_CATEGORIES'] = $config['story_categories'];
+$GLOBALS['SUPPORTED_STORY_LANGUAGES'] = $config['supported_story_languages'];
+$GLOBALS['USER_ROLES'] = $config['user_roles'];
+$GLOBALS['ACCESS_LEVELS'] = $config['access_levels'];
+$GLOBALS['CONFIG'] = $config;
+
+// Define APP_URL constant from config
+define('APP_URL', $config['app']['url']);
 
 // Initialize security measures
 $security = new Security();
@@ -65,7 +83,12 @@ $router->post('/reset-password', 'AuthController@resetPassword');
 
 // User profile routes
 $router->get('/profile', 'UserController@profile');
+$router->get('/profile/edit', 'UserController@edit');
 $router->post('/profile/update', 'UserController@updateProfile');
+$router->get('/profile/change-password', 'UserController@showChangePassword');
+$router->post('/profile/change-password', 'UserController@changePassword');
+$router->post('/profile/set-language', 'UserController@setLanguage');
+$router->post('/profile/delete', 'UserController@deleteAccount');
 $router->get('/users', 'UserController@index');
 $router->get('/user/{id}', 'UserController@show');
 

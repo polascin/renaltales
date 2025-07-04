@@ -97,17 +97,21 @@ class Router {
     }
 
     private function handleNotFound() {
-        http_response_code(404);
-        
-        // Check if 404 view exists
-        $notFoundView = VIEWS_PATH . '/errors/404.php';
-        if (file_exists($notFoundView)) {
-            include $notFoundView;
+        // Use ErrorHandler for consistent 404 handling
+        if (class_exists('RenalTales\Core\ErrorHandler')) {
+            \RenalTales\Core\ErrorHandler::handleNotFound();
         } else {
-            echo '<h1>404 - Page Not Found</h1>';
-            echo '<p>The requested page could not be found.</p>';
+            // Fallback for legacy compatibility
+            http_response_code(404);
+            $notFoundView = VIEWS_PATH . '/errors/404.php';
+            if (file_exists($notFoundView)) {
+                include $notFoundView;
+            } else {
+                echo '<h1>404 - Page Not Found</h1>';
+                echo '<p>The requested page could not be found.</p>';
+            }
+            exit;
         }
-        exit;
     }
 
     public function getParams() {

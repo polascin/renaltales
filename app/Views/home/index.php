@@ -3,19 +3,19 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold">Welcome to RenalTales</h1>
-                <p class="lead">A supportive community where people with kidney disorders share their stories, experiences, and hope. Connect with others who understand your journey.</p>
+                <h1 class="display-4 fw-bold"><?= __('home.hero.title') ?></h1>
+                <p class="lead"><?= __('home.hero.subtitle') ?></p>
                 <div class="d-flex gap-3 mt-4">
                     <a href="<?= Router::url('stories') ?>" class="btn btn-light btn-lg">
-                        <i class="fas fa-book-open"></i> Read Stories
+                        <i class="fas fa-book-open"></i> <?= __('home.hero.read_stories') ?>
                     </a>
                     <?php if (!$currentUser): ?>
                         <a href="<?= Router::url('register') ?>" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-user-plus"></i> Join Community
+                            <i class="fas fa-user-plus"></i> <?= __('home.hero.join_community') ?>
                         </a>
                     <?php else: ?>
                         <a href="<?= Router::url('story/create') ?>" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-pen"></i> Share Your Story
+                            <i class="fas fa-pen"></i> <?= __('home.hero.share_story') ?>
                         </a>
                     <?php endif; ?>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <i class="fas fa-book text-kidney display-4 mb-3"></i>
                         <h3 class="fw-bold text-kidney"><?= number_format($stats['total_stories']) ?></h3>
-                        <p class="text-muted mb-0">Stories Shared</p>
+                        <p class="text-muted mb-0"><?= __('home.stats.stories_shared') ?></p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <i class="fas fa-users text-kidney display-4 mb-3"></i>
                         <h3 class="fw-bold text-kidney"><?= number_format($stats['total_users']) ?></h3>
-                        <p class="text-muted mb-0">Community Members</p>
+                        <p class="text-muted mb-0"><?= __('home.stats.community_members') ?></p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <i class="fas fa-comments text-kidney display-4 mb-3"></i>
                         <h3 class="fw-bold text-kidney"><?= number_format($stats['total_comments']) ?></h3>
-                        <p class="text-muted mb-0">Comments & Support</p>
+                        <p class="text-muted mb-0"><?= __('home.stats.comments_support') ?></p>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <div class="card-body">
                         <i class="fas fa-globe text-kidney display-4 mb-3"></i>
                         <h3 class="fw-bold text-kidney"><?= $stats['supported_languages'] ?></h3>
-                        <p class="text-muted mb-0">Languages Supported</p>
+                        <p class="text-muted mb-0"><?= __('home.stats.languages_supported') ?></p>
                     </div>
                 </div>
             </div>

@@ -25,6 +25,11 @@ class LanguageManager
         if (isset($_SESSION['language']) && $this->isSupported($_SESSION['language'])) {
             $this->currentLanguage = $_SESSION['language'];
         }
+        // Load language from cookie if session is not set
+        elseif (isset($_COOKIE['language']) && $this->isSupported($_COOKIE['language'])) {
+            $this->currentLanguage = $_COOKIE['language'];
+            $_SESSION['language'] = $this->currentLanguage; // Update session
+        }
         // Detect from browser if enabled
         elseif ($this->config->get('languages.detect_from_browser')) {
             $this->detectLanguage();
@@ -57,6 +62,15 @@ class LanguageManager
     public function getSupportedLanguages(): array
     {
         return $this->supportedLanguages;
+    }
+    
+    public function getSupportedLanguagesWithNames(): array
+    {
+        $result = [];
+        foreach ($this->supportedLanguages as $code) {
+            $result[$code] = $this->getLanguageName($code);
+        }
+        return $result;
     }
 
     public function translate(string $key, array $parameters = []): string
@@ -91,14 +105,14 @@ class LanguageManager
 
     private function loadTranslations(string $code): void
     {
-        $path = dirname(__DIR__, 2) . "/translations/{$code}.php";
+        $path = dirname(__DIR__, 2) . "/i18n/{$code}.php";
         
         if (file_exists($path)) {
             $this->translations = require $path;
         } else {
             // Fall back to default language if translation file doesn't exist
             $fallbackCode = $this->config->get('languages.fallback');
-            $fallbackPath = dirname(__DIR__, 2) . "/translations/{$fallbackCode}.php";
+            $fallbackPath = dirname(__DIR__, 2) . "/i18n/{$fallbackCode}.php";
             
             if ($code !== $fallbackCode && file_exists($fallbackPath)) {
                 $this->translations = require $fallbackPath;

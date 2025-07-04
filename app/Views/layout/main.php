@@ -6,6 +6,13 @@
     <title><?= isset($title) ? htmlspecialchars($title) . ' - ' : '' ?>RenalTales</title>
     <meta name="description" content="<?= isset($description) ? htmlspecialchars($description) : 'RenalTales - A community platform for people with kidney disorders' ?>">
     
+    <!-- Security Meta Tags -->
+    <?= RenalTales\Security\CSRFProtection::generateMetaTag() ?>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= Router::asset('images/favicon.ico') ?>">
     
@@ -154,15 +161,9 @@
     </nav>
 
     <!-- Flash Messages -->
-    <?php if (isset($_SESSION['flash'])): ?>
+    <?php if (isset($flash_messages) && !empty($flash_messages)): ?>
         <div class="container mt-3">
-            <?php foreach ($_SESSION['flash'] as $type => $message): ?>
-                <div class="alert alert-<?= $type === 'error' ? 'danger' : $type ?> alert-dismissible fade show" role="alert">
-                    <?= htmlspecialchars($message) ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                <?php unset($_SESSION['flash'][$type]); ?>
-            <?php endforeach; ?>
+            <?= RenalTales\Core\FlashMessages::render() ?>
         </div>
     <?php endif; ?>
 
@@ -229,11 +230,80 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= Router::asset('js/app.js') ?>"></script>
     
+    <!-- CSRF Protection for AJAX -->
+    <?= RenalTales\Security\CSRFProtection::generateAjaxScript() ?>
+    
     <!-- Additional page-specific JavaScript -->
     <?php if (isset($scripts)): ?>
         <?php foreach ($scripts as $script): ?>
             <script src="<?= Router::asset("js/{$script}") ?>"></script>
         <?php endforeach; ?>
     <?php endif; ?>
+    
+    <!-- Security and form enhancement script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-dismiss alerts after 5 seconds
+        setTimeout(function() {
+            var alerts = document.querySelectorAll('.alert:not(.alert-permanent)');
+            alerts.forEach(function(alert) {
+                var bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+        
+        // Form validation enhancement
+        var forms = document.querySelectorAll('form[novalidate]');
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+        });
+        
+        // Password strength indicator
+        var passwordFields = document.querySelectorAll('input[type="password"][name="password"]');
+        passwordFields.forEach(function(field) {
+            field.addEventListener('input', function() {
+                var strength = checkPasswordStrength(this.value);
+                updatePasswordStrengthIndicator(this, strength);
+            });
+        });
+    });
+    
+    function checkPasswordStrength(password) {
+        var score = 0;
+        if (password.length >= 12) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^a-zA-Z\d]/.test(password)) score++;
+        if (password.length >= 16) score++;
+        
+        if (score < 3) return 'weak';
+        if (score < 5) return 'medium';
+        return 'strong';
+    }
+    
+    function updatePasswordStrengthIndicator(field, strength) {
+        var indicator = field.parentNode.querySelector('.password-strength');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.className = 'password-strength mt-1';
+            field.parentNode.appendChild(indicator);
+        }
+        
+        var colors = {
+            'weak': 'danger',
+            'medium': 'warning', 
+            'strong': 'success'
+        };
+        
+        indicator.innerHTML = '<small class="text-' + colors[strength] + '">Password strength: ' + strength + '</small>';
+    }
+    </script>
 </body>
 </html>

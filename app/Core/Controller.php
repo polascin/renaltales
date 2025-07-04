@@ -4,15 +4,42 @@
  * Provides common functionality for all controllers
  */
 
+require_once ROOT_PATH . '/src/Validation/Validator.php';
+require_once ROOT_PATH . '/src/Core/FlashMessages.php';
+require_once ROOT_PATH . '/src/Security/CSRFProtection.php';
+require_once ROOT_PATH . '/src/Core/LanguageManager.php';
+require_once ROOT_PATH . '/src/Core/Config.php';
+require_once ROOT_PATH . '/src/Core/Exceptions/HttpException.php';
+require_once ROOT_PATH . '/src/Core/Exceptions/NotFoundException.php';
+require_once ROOT_PATH . '/src/Core/Exceptions/ForbiddenException.php';
+
+use RenalTales\Validation\Validator;
+use RenalTales\Core\FlashMessages;
+use RenalTales\Security\CSRFProtection;
+use RenalTales\Core\LanguageManager;
+use RenalTales\Core\Config;
+
 class Controller {
     protected $db;
     protected $currentUser;
-    protected $language;
+    protected $languageManager;
+    protected $validator;
+    protected $security;
 
     public function __construct() {
         $this->db = Database::getInstance();
         $this->loadCurrentUser();
-        $this->language = new Language();
+        
+        // Initialize language manager
+        $config = new Config(ROOT_PATH . '/config/config.php');
+        $this->languageManager = new LanguageManager($config);
+        $this->languageManager->initialize();
+        
+        $this->validator = new Validator();
+        $this->security = new Security();
+        
+        // Initialize flash message cleanup
+        FlashMessages::cleanup();
     }
 
     protected function loadCurrentUser() {
@@ -72,8 +99,39 @@ class Controller {
         
         // Make common variables available to all views
         $currentUser = $this->currentUser;
-        $lang = $this->language->getCurrentLanguage();
-        $supportedLanguages = $GLOBALS['SUPPORTED_STORY_LANGUAGES'];
+        $lang = $this->languageManager->getCurrentLanguage();
+        $supportedLanguages = $this->languageManager->getSupportedLanguagesWithNames();
+        
+        // Add security and validation helpers
+        $csrf_token = CSRFProtection::getToken();
+        $flash_messages = FlashMessages::getAll();
+        
+        // Create translation array for backward compatibility with existing views
+        $t = [];
+        $translationKeys = [
+            'nav.home', 'nav.stories', 'nav.about', 'nav.contact', 'nav.login', 'nav.register', 'nav.logout', 
+            'nav.profile', 'nav.categories', 'nav.write_story', 'nav.moderation', 'nav.manage_users', 'nav.statistics',
+            'btn.save', 'btn.cancel', 'btn.delete', 'btn.edit', 'btn.view', 'btn.submit', 'btn.search', 'btn.back',
+            'auth.login.title', 'auth.login.subtitle', 'auth.login.email', 'auth.login.email_placeholder',
+            'auth.login.password', 'auth.login.password_placeholder', 'auth.login.remember', 'auth.login.forgot',
+            'auth.login.button', 'auth.login.no_account', 'auth.login.register_link',
+            'auth.register.title', 'auth.register.name', 'auth.register.email', 'auth.register.password',
+            'auth.register.confirm', 'auth.register.agree',
+            'stories.title', 'stories.create', 'stories.read_more', 'stories.category', 'stories.author',
+            'stories.published', 'stories.tags',
+            'form.required', 'form.email.invalid', 'form.password.min', 'form.password.mismatch',
+            'msg.success.saved', 'msg.success.deleted', 'msg.error.generic', 'msg.error.unauthorized', 'msg.error.not_found',
+            'footer.copyright', 'footer.privacy', 'footer.terms', 'footer.support'
+        ];
+        
+        foreach ($translationKeys as $key) {
+            $t[$key] = $this->languageManager->translate($key);
+        }
+        
+        // Security helper functions
+        $escape = function($value) {
+            return htmlspecialchars($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        };
         
         // Start output buffering
         ob_start();
@@ -90,6 +148,9 @@ class Controller {
         // Get the content and clean the buffer
         $content = ob_get_clean();
         
+        // Auto-inject CSRF tokens into forms
+        $content = CSRFProtection::injectTokensIntoForms($content);
+        
         // Include layout if not an AJAX request
         if (!$this->isAjax()) {
             $this->renderLayout($content, $data);
@@ -102,8 +163,8 @@ class Controller {
         extract($data);
         
         $currentUser = $this->currentUser;
-        $lang = $this->language->getCurrentLanguage();
-        $supportedLanguages = $GLOBALS['SUPPORTED_STORY_LANGUAGES'];
+        $lang = $this->languageManager->getCurrentLanguage();
+        $supportedLanguages = $this->languageManager->getSupportedLanguagesWithNames();
         
         $layoutFile = VIEWS_PATH . '/layout/main.php';
         
@@ -137,88 +198,111 @@ class Controller {
                strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 
+    /**
+     * Enhanced CSRF validation using new system
+     */
     protected function validateCsrf() {
-        $token = $_POST['csrf_token'] ?? $_GET['csrf_token'] ?? '';
-        
-        if (empty($token) || !hash_equals($_SESSION['csrf_token'], $token)) {
-            $this->forbidden('Invalid CSRF token');
+        if (!CSRFProtection::validateRequest()) {
+            $this->forbidden('Invalid or expired CSRF token');
         }
     }
 
+    /**
+     * Generate CSRF token using new system
+     */
     protected function generateCsrf() {
-        if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        }
-        return $_SESSION['csrf_token'];
+        return CSRFProtection::getToken();
     }
 
+    /**
+     * Enhanced sanitization for output safety
+     */
     protected function sanitize($input) {
-        if (is_array($input)) {
-            return array_map([$this, 'sanitize'], $input);
-        }
-        
-        return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+        return $this->validator->sanitizeInput($input);
     }
 
-    protected function validate($data, $rules) {
-        $errors = [];
+    /**
+     * Enhanced validation using new validation system
+     */
+    protected function validate($data, $rules, $messages = []) {
+        $isValid = $this->validator->validate($data, $rules, $messages);
         
-        foreach ($rules as $field => $rule) {
-            $value = $data[$field] ?? '';
-            
-            if (strpos($rule, 'required') !== false && empty($value)) {
-                $errors[$field] = ucfirst($field) . ' is required';
-                continue;
-            }
-            
-            if (strpos($rule, 'email') !== false && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                $errors[$field] = ucfirst($field) . ' must be a valid email address';
-            }
-            
-            if (preg_match('/min:(\d+)/', $rule, $matches)) {
-                $min = (int)$matches[1];
-                if (strlen($value) < $min) {
-                    $errors[$field] = ucfirst($field) . " must be at least {$min} characters";
-                }
-            }
-            
-            if (preg_match('/max:(\d+)/', $rule, $matches)) {
-                $max = (int)$matches[1];
-                if (strlen($value) > $max) {
-                    $errors[$field] = ucfirst($field) . " must not exceed {$max} characters";
-                }
-            }
+        if (!$isValid) {
+            return $this->validator->getErrors();
         }
         
-        return $errors;
+        return [];
     }
 
-    protected function flash($key, $message = null) {
+    /**
+     * Get sanitized and validated data
+     */
+    protected function getValidatedData($data, $rules, $messages = []) {
+        if ($this->validator->validate($data, $rules, $messages)) {
+            return $this->validator->getSanitized();
+        }
+        
+        return null;
+    }
+
+    /**
+     * Enhanced flash messaging using new system
+     */
+    protected function flash($type, $message = null) {
         if ($message === null) {
-            $message = $_SESSION['flash'][$key] ?? null;
-            unset($_SESSION['flash'][$key]);
-            return $message;
+            // Get messages of specific type
+            return FlashMessages::get($type);
         }
         
-        $_SESSION['flash'][$key] = $message;
+        // Add message of specific type
+        FlashMessages::add($type, $message);
     }
 
-    protected function notFound() {
-        http_response_code(404);
-        $this->view('errors/404');
-        exit;
+    /**
+     * Add success flash message
+     */
+    protected function flashSuccess($message) {
+        FlashMessages::success($message);
+    }
+
+    /**
+     * Add error flash message
+     */
+    protected function flashError($message) {
+        FlashMessages::error($message);
+    }
+
+    /**
+     * Add warning flash message
+     */
+    protected function flashWarning($message) {
+        FlashMessages::warning($message);
+    }
+
+    /**
+     * Add info flash message
+     */
+    protected function flashInfo($message) {
+        FlashMessages::info($message);
+    }
+
+    /**
+     * Add validation errors as flash messages
+     */
+    protected function flashValidationErrors($errors) {
+        FlashMessages::validationErrors($errors);
+    }
+
+    protected function notFound($message = 'Page not found') {
+        throw new \RenalTales\Core\Exceptions\NotFoundException($message);
     }
 
     protected function forbidden($message = 'Access denied') {
-        http_response_code(403);
-        $this->view('errors/403', ['message' => $message]);
-        exit;
+        throw new \RenalTales\Core\Exceptions\ForbiddenException($message);
     }
 
     protected function error($message = 'An error occurred', $status = 500) {
-        http_response_code($status);
-        $this->view('errors/error', ['message' => $message]);
-        exit;
+        throw new \RenalTales\Core\Exceptions\HttpException($message, $status);
     }
 
     protected function paginate($query, $params, $page, $perPage) {
