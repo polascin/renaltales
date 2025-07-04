@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace RenalTales\Validation;
 
 use RenalTales\Database\DatabaseConnection;
+use PDO;
 
 /**
  * Centralized Validation System
@@ -13,7 +14,7 @@ use RenalTales\Database\DatabaseConnection;
  */
 class Validator
 {
-    private DatabaseConnection $db;
+    private PDO $db;
     private array $errors = [];
     private array $customMessages = [];
     private array $data = [];
@@ -32,7 +33,7 @@ class Validator
     public const NAME_MAX_LENGTH = 100;
     public const TEXTAREA_MAX_LENGTH = 10000;
 
-    public function __construct(?DatabaseConnection $db = null)
+    public function __construct(?PDO $db = null)
     {
         $this->db = $db ?? DatabaseConnection::getInstance();
     }

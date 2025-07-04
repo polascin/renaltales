@@ -893,3 +893,56 @@ If you encounter any routing issues (404 errors) when navigating the application
 
 ---
 
+Summary of Fixes Applied
+
+I successfully resolved the TypeError related to the Validator class:
+
+✅ Root Cause
+The issue was a type mismatch in the Validator class constructor:
+•  Expected: RenalTales\Database\DatabaseConnection object
+•  Received: PDO object from DatabaseConnection::getInstance()
+
+🔧 Primary Fix - Validator Class
+File: src/Validation/Validator.php
+
+1. Updated property type declaration:
+```php
+   // Before
+   private DatabaseConnection $db;
+   
+   // After  
+   private PDO $db;
+```
+2. Updated constructor parameter type:
+```php
+   // Before
+   public function __construct(?DatabaseConnection $db = null)
+   
+   // After
+   public function __construct(?PDO $db = null)
+```
+3. Added PDO import:
+```php
+   use PDO;
+```
+🔧 Secondary Fix - SecurityMiddleware Class
+File: src/Middleware/SecurityMiddleware.php
+
+Fixed inconsistent database class usage by changing from DatabaseConnection::getInstance() to Database::getInstance() to use the wrapper class that has the expected query() method signature.
+
+✅ Verification
+•  All syntax checks pass without errors
+•  Validator instantiation test successful
+•  Validator validation functionality working properly
+
+🎯 Result
+The TypeError has been completely resolved. The Validator class now correctly accepts the PDO object returned by DatabaseConnection::getInstance(), and the application can instantiate and use the Validator without errors.
+
+The core issue was that the application has two database abstraction layers:
+1. DatabaseConnection - Returns raw PDO objects
+2. Database - Wrapper class with convenience methods
+
+The fix ensures each component uses the appropriate database abstraction layer for its needs.
+
+---
+

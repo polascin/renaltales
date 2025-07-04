@@ -117,7 +117,8 @@ class SecurityMiddleware
         
         // Check if we have a database connection for rate limiting
         try {
-            $db = \RenalTales\Database\DatabaseConnection::getInstance();
+            require_once dirname(__DIR__, 2) . '/app/Core/Database.php';
+            $db = \Database::getInstance();
             
             // Clean up old rate limit records
             $db->query("DELETE FROM rate_limits WHERE created_at < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
@@ -329,7 +330,8 @@ class SecurityMiddleware
         
         // Try to log to database if available
         try {
-            $db = \RenalTales\Database\DatabaseConnection::getInstance();
+            require_once dirname(__DIR__, 2) . '/app/Core/Database.php';
+            $db = \Database::getInstance();
             $db->query(
                 "INSERT INTO security_logs (event, data, ip_address, user_agent, created_at) VALUES (?, ?, ?, ?, NOW())",
                 [$event, json_encode($data), $data['ip'] ?? 'unknown', $data['user_agent'] ?? 'unknown']
