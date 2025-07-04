@@ -1,0 +1,34 @@
+{
+    "name": "renaltales/web-app",
+    "description": "Web application for sharing renal tales and stories",
+    "type": "project",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*",
+        "paragonie/password-lock": "^3.0",
+        "paragonie/anti-csrf": "^2.3",
+        "respect/validation": "^2.2",
+        "phpmailer/phpmailer": "^6.8",
+        "defuse/php-encryption": "^2.3",
+        "symfony/http-foundation": "^6.3",
+        "symfony/routing": "^6.3",
+        "monolog/monolog": "^3.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.2",
+        "phpstan/phpstan": "^1.10",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "RenalTales\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RenalTales\\Tests\\": "tests/"
+        }
+    }
+}
