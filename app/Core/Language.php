@@ -1,0 +1,71 @@
+<?php
+/**
+ * Language Class
+ * Handles language detection, switching, and integration
+ */
+
+class Language {
+    private $supportedLanguages;
+    private $defaultLanguage;
+    private $fallbackLanguage;
+    private $currentLanguage;
+
+    public function __construct() {
+        $this->supportedLanguages = $GLOBALS['SUPPORTED_STORY_LANGUAGES'];
+        $this->defaultLanguage = DEFAULT_LANGUAGE;
+        $this->fallbackLanguage = FALLBACK_LANGUAGE;
+        $this->detectLanguage();
+    }
+
+    public function detectLanguage() {
+        if (isset($_GET['lang']) && array_key_exists($_GET['lang'], $this->supportedLanguages)) {
+            $this->currentLanguage = $_GET['lang'];
+            $_SESSION['language'] = $this->currentLanguage;
+        } elseif (isset($_SESSION['language'])) {
+            $this->currentLanguage = $_SESSION['language'];
+        } elseif (DETECT_BROWSER_LANGUAGE) {
+            $this->detectFromBrowser();
+        } else {
+            $this->currentLanguage = $this->defaultLanguage;
+        }
+    }
+
+    private function detectFromBrowser() {
+        $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        foreach ($browserLanguages as $lang) {
+            $lang = substr($lang, 0, 2);
+            if (array_key_exists($lang, $this->supportedLanguages)) {
+                $this->currentLanguage = $lang;
+                return;
+            }
+        }
+        $this->currentLanguage = $this->fallbackLanguage;
+    }
+
+    public function getCurrentLanguage() {
+        return $this->currentLanguage;
+    }
+
+    public function switchLanguage($lang) {
+        if (array_key_exists($lang, $this->supportedLanguages)) {
+            $this->currentLanguage = $lang;
+            $_SESSION['language'] = $lang;
+        }
+    }
+
+    public function getSupportedLanguages() {
+        return $this->supportedLanguages;
+    }
+
+    public function translate($key) {
+        // In a real application, you would load translations from files or a database
+        // For demonstration, return the key as is
+        return $key;
+    }
+
+    public static function getFlagIcon($langCode) {
+        // This assumes you have flag icons named as 'xx.png' where 'xx' is the language code
+        return '/assets/images/flags/' . $langCode . '.png';
+    }
+}
+
