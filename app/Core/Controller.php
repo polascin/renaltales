@@ -324,7 +324,8 @@ class Controller {
         
         // Count total records
         $countQuery = preg_replace('/SELECT.*?FROM/i', 'SELECT COUNT(*) as total FROM', $query);
-        $total = $this->db->fetch($countQuery, $params)['total'];
+        $countResult = $this->db->fetch($countQuery, $params);
+        $total = $countResult && isset($countResult['total']) ? (int)$countResult['total'] : 0;
         
         // Add limit and offset to original query
         $query .= " LIMIT {$perPage} OFFSET {$offset}";
