@@ -1241,3 +1241,116 @@ Everything is now configured to use Slovak as the default language and correctly
 
 ---
 
+###### Summary of Frontend View Corrections
+
+I have successfully corrected the frontend views of the RenalTales web application to ensure proper Slovak language support and translation loading. Here's what was accomplished:
+
+1. Configuration Changes
+•  ✅ Set Slovak as Default Language: Updated .env and .env.example files to use DEFAULT_LANGUAGE=sk
+•  ✅ Fixed Language Class: Enhanced the Language class to properly load translations from files instead of returning keys
+•  ✅ Updated Controller Translation System: Enhanced the base Controller class to support both $t[] array and __() function approaches
+
+2. Translation System Improvements
+•  ✅ Enhanced Translation Loading: Fixed the Language class translate() method to actually load and use translation files
+•  ✅ Global Translation Functions: Ensured __() and lang() helper functions work properly throughout the application
+•  ✅ Backward Compatibility: Maintained support for existing $t[] array usage in views
+
+3. View File Corrections
+•  ✅ Layout Template: Fixed all Slovak/English language defaults and fallbacks
+•  ✅ Home Page: Converted hardcoded English text to use proper translation functions
+•  ✅ Authentication Forms: Ensured login and register forms use Slovak translations by default
+•  ✅ Language Selection: Set Slovak as the default selected language in dropdown menus
+
+4. Translation File Updates
+•  ✅ Complete Slovak Translations: Added comprehensive Slovak translations including:
+•  Navigation items
+•  Authentication forms (login/register)
+•  Home page content
+•  Footer sections
+•  Form validation messages
+•  System messages
+•  ✅ Updated English Translations: Synchronized English translation file to match Slovak completeness
+
+5. Specific Frontend Fixes
+
+#### Layout.php
+•  Fixed HTML lang attribute to default to Slovak (sk)
+•  Updated language selector to show Slovak as active by default
+•  Corrected language flag display logic
+
+#### Home Page (index.php)
+•  Converted "Featured Stories", "Recent Stories", "Explore by Category" to use translations
+•  Replaced all hardcoded English text with __() function calls
+•  Ensured proper Slovak text display
+
+#### Authentication Views
+•  Updated register form to default to Slovak language selection
+•  Added comprehensive Slovak translations for all form fields
+•  Fixed placeholder text and help messages to use Slovak
+
+#### Navigation & Footer
+•  All navigation items now use Slovak translations
+•  Footer content properly displays in Slovak
+•  User menu items correctly translated
+
+6. Technical Improvements
+•  ✅ Error Handling: Added proper fallback mechanisms when translation files are missing
+•  ✅ Performance: Optimized translation loading to avoid repeated file reads
+•  ✅ Consistency: Ensured all views use the same translation approach
+•  ✅ Validation: Confirmed all PHP syntax is correct in translation files
+
+7. Language Support Status
+•  ✅ Primary Language: Slovak (sk) - Complete and set as default
+•  ✅ Secondary Language: English (en) - Complete and available as fallback
+•  ✅ Additional Languages: 40+ other language files exist and can be expanded
+
+The frontend is now fully corrected with:
+•  Slovak as the default language throughout the application
+•  Proper translation loading from language files
+•  Consistent bilingual support (Slovak/English)
+•  Enhanced user experience with native Slovak interface
+•  Maintainable translation system for future updates
+
+All views will now display in Slovak by default while maintaining the ability for users to switch to other supported languages.
+
+---
+
+Summary
+
+I have successfully modified the view logic to dynamically list all supported languages by reading the available language files from the i18n directory. Here's what was implemented:
+
+1. Enhanced LanguageManager (src/Core/LanguageManager.php)
+•  Added discoverSupportedLanguages() method: Automatically scans the i18n directory for .php files and validates them
+•  Added isValidLanguageFile() method: Ensures language files contain proper translation arrays
+•  Updated constructor: Now uses dynamic language detection instead of hardcoded configuration
+•  Improved getLanguageName() method: Added support for all 45 languages and sorted them alphabetically
+
+2. Updated Configuration (config/config.php)
+•  Removed hardcoded supported languages array
+•  Added documentation that languages are now automatically detected
+
+3. Updated Controllers
+•  AuthController: Updated registration form to use dynamic language list
+•  UserController: Updated profile and edit forms to use dynamic language list
+•  All validation rules: Now use the LanguageManager's supported languages
+
+4. Enhanced View Templates
+•  Navigation language dropdown: Now shows all 45 available languages
+•  Footer language display: Shows first 12 languages with "+X more" indicator
+•  Updated flag mappings: Added support for all language codes
+
+5. Key Features
+•  Dynamic Detection: Automatically discovers new language files when added to i18n directory
+•  Validation: Only includes valid language files with proper translation arrays
+•  Fallback Safety: Ensures default and fallback languages are always included
+•  Sorted Display: Languages are displayed alphabetically by code
+•  Comprehensive Coverage: All 45 language files are now supported
+
+6. Results
+The test confirmed that the system now dynamically detects 45 languages instead of the previous 3 hardcoded ones:
+•  am (አማርኛ), ar (العربية), bg (Български), cs (Čeština), da (Dansk), de (Deutsch), el (Ελληνικά), en (English), eo (Esperanto), es (Español), et (Eesti), fi (Suomi), fr (Français), hi (हिन्दी), hr (Hrvatski), hu (Magyar), id (Bahasa Indonesia), is (Íslenska), it (Italiano), ja (日本語), ko (한국어), lt (Lietuvių), lv (Latviešu), mk (Македонски), ms (Bahasa Melayu), nl (Nederlands), no (Norsk), pl (Polski), pt (Português), ro (Română), ru (Русский), sk (Slovenčina), sl (Slovenščina), sq (Shqip), sr (Српски), sv (Svenska), sw (Kiswahili), th (ไทย), tl (Tagalog), tr (Türkçe), uk (Українська), vi (Tiếng Việt), yo (Yorùbá), zh (中文), zu (isiZulu)
+
+The language dropdown in the navigation and all other language selection areas now dynamically show all supported languages without requiring manual maintenance of hardcoded lists.
+
+---
+

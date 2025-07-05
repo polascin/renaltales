@@ -55,7 +55,8 @@ return [
         'default' => $_ENV['DEFAULT_LANGUAGE'] ?? 'sk',
         'fallback' => $_ENV['FALLBACK_LANGUAGE'] ?? 'en',
         'detect_from_browser' => filter_var($_ENV['DETECT_BROWSER_LANGUAGE'] ?? 'true', FILTER_VALIDATE_BOOLEAN),
-        'supported' => ['en', 'sk', 'es'],
+        // Note: Supported languages are now automatically detected from the i18n directory
+        // No need to manually maintain this list - all .php files in i18n/ are automatically included
     ],
 
     // Rate limiting

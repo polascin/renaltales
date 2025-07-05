@@ -77,12 +77,12 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-8">
-                <h2 class="fw-bold text-kidney">Featured Stories</h2>
-                <p class="text-muted">Highlighted stories that inspire and connect our community</p>
+                <h2 class="fw-bold text-kidney"><?= __('home.featured_stories.title') ?></h2>
+                <p class="text-muted"><?= __('home.featured_stories.subtitle') ?></p>
             </div>
             <div class="col-md-4 text-md-end">
                 <a href="<?= Router::url('stories?featured=1') ?>" class="btn btn-outline-kidney">
-                    View All Featured <i class="fas fa-arrow-right"></i>
+                    <?= __('home.featured_stories.view_all') ?> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -136,12 +136,12 @@
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-8">
-                <h2 class="fw-bold text-kidney">Recent Stories</h2>
-                <p class="text-muted">Latest stories from our community members</p>
+                <h2 class="fw-bold text-kidney"><?= __('home.recent_stories.title') ?></h2>
+                <p class="text-muted"><?= __('home.recent_stories.subtitle') ?></p>
             </div>
             <div class="col-md-4 text-md-end">
                 <a href="<?= Router::url('stories') ?>" class="btn btn-outline-kidney">
-                    View All Stories <i class="fas fa-arrow-right"></i>
+                    <?= __('home.recent_stories.view_all') ?> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -188,8 +188,8 @@
 <section class="py-5">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold text-kidney">Explore by Category</h2>
-            <p class="text-muted">Discover stories that resonate with your experience</p>
+            <h2 class="fw-bold text-kidney"><?= __('home.categories.title') ?></h2>
+            <p class="text-muted"><?= __('home.categories.subtitle') ?></p>
         </div>
         
         <div class="row">

@@ -148,9 +148,10 @@
                             <?php 
                                 // Map language codes to flag codes
                                 $flagMap = [
-                                    'en' => 'gb', 'cs' => 'cz', 'da' => 'dk', 'et' => 'ee', 'el' => 'gr', 
-                                    'sl' => 'si', 'ar' => 'eg', 'hi' => 'in', 'ko' => 'kr', 'ja' => 'jp',
-                                    'zh' => 'cn', 'sv' => 'se'
+                                    'am' => 'et', 'ar' => 'sa', 'cs' => 'cz', 'da' => 'dk', 'el' => 'gr',
+                                    'en' => 'gb', 'et' => 'ee', 'hi' => 'in', 'ja' => 'jp', 'ko' => 'kr',
+                                    'sl' => 'si', 'sv' => 'se', 'zh' => 'cn', 'tl' => 'ph', 'yo' => 'ng',
+                                    'zu' => 'za', 'sw' => 'tz'
                                 ];
                                 $flagCode = $flagMap[$lang] ?? $lang;
                             ?>
@@ -246,9 +247,10 @@
                             <?php 
                                 $displayLanguages = array_slice($supportedLanguages, 0, 12, true);
                                 $footerFlagMap = [
-                                    'en' => 'gb', 'cs' => 'cz', 'da' => 'dk', 'et' => 'ee', 'el' => 'gr', 
-                                    'sl' => 'si', 'ar' => 'eg', 'hi' => 'in', 'ko' => 'kr', 'ja' => 'jp',
-                                    'zh' => 'cn', 'sv' => 'se'
+                                    'am' => 'et', 'ar' => 'sa', 'cs' => 'cz', 'da' => 'dk', 'el' => 'gr',
+                                    'en' => 'gb', 'et' => 'ee', 'hi' => 'in', 'ja' => 'jp', 'ko' => 'kr',
+                                    'sl' => 'si', 'sv' => 'se', 'zh' => 'cn', 'tl' => 'ph', 'yo' => 'ng',
+                                    'zu' => 'za', 'sw' => 'tz'
                                 ];
                             ?>
                             <?php foreach ($displayLanguages as $code => $name): ?>

@@ -166,7 +166,7 @@ class AuthController extends Controller {
             'csrf_token' => $this->generateCsrf(),
             'errors' => $this->flash('errors'),
             'old_input' => $this->flash('old_input'),
-            'supported_languages' => $GLOBALS['SUPPORTED_STORY_LANGUAGES']
+            'supported_languages' => $this->languageManager->getSupportedLanguagesWithNames()
         ]);
     }
     
@@ -205,7 +205,7 @@ class AuthController extends Controller {
                 'password' => 'required|password|confirmed',
                 'password_confirmation' => 'required',
                 'full_name' => 'max:100',
-                'language_preference' => 'required|in:' . implode(',', array_keys($GLOBALS['SUPPORTED_STORY_LANGUAGES'])),
+                'language_preference' => 'required|in:' . implode(',', $this->languageManager->getSupportedLanguages()),
                 'agree_terms' => 'required'
             ];
             

@@ -112,13 +112,13 @@
                             >
                                 <?php if (isset($supported_languages)): ?>
                                     <?php foreach ($supported_languages as $code => $name): ?>
-                                        <option value="<?= htmlspecialchars($code) ?>" <?= ($old_input['language_preference'] ?? 'en') === $code ? 'selected' : '' ?>>
+                                        <option value="<?= htmlspecialchars($code) ?>" <?= ($old_input['language_preference'] ?? 'sk') === $code ? 'selected' : '' ?>>
                                             <?= htmlspecialchars($name) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <option value="en" selected>English</option>
-                                    <option value="sk">Slovak</option>
+                                    <option value="sk" selected>Slovenčina</option>
+                                    <option value="en">English</option>
                                 <?php endif; ?>
                             </select>
                             <?php if (isset($errors['language_preference'])): ?>

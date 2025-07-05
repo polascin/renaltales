@@ -115,8 +115,13 @@ class Controller {
             'auth.login.title', 'auth.login.subtitle', 'auth.login.email', 'auth.login.email_placeholder',
             'auth.login.password', 'auth.login.password_placeholder', 'auth.login.remember', 'auth.login.forgot',
             'auth.login.button', 'auth.login.no_account', 'auth.login.register_link',
-            'auth.register.title', 'auth.register.name', 'auth.register.email', 'auth.register.password',
-            'auth.register.confirm', 'auth.register.agree',
+            'auth.register.title', 'auth.register.subtitle', 'auth.register.username', 'auth.register.username_placeholder',
+            'auth.register.username_help', 'auth.register.name', 'auth.register.name_placeholder', 'auth.register.optional',
+            'auth.register.email', 'auth.register.email_placeholder', 'auth.register.language', 'auth.register.password',
+            'auth.register.password_placeholder', 'auth.register.password_help', 'auth.register.confirm', 
+            'auth.register.confirm_placeholder', 'auth.register.agree_start', 'auth.register.terms', 
+            'auth.register.privacy', 'auth.register.button', 'auth.register.have_account', 'auth.register.login_link',
+            'auth.register.agree',
             'auth.forgot_password.title', 'auth.forgot_password.subtitle', 'auth.forgot_password.button', 
             'auth.forgot_password.remember', 'auth.forgot_password.back_to_login',
             'form.email.label', 'form.email.placeholder',
@@ -124,7 +129,13 @@ class Controller {
             'stories.published', 'stories.tags',
             'form.required', 'form.email.invalid', 'form.password.min', 'form.password.mismatch',
             'msg.success.saved', 'msg.success.deleted', 'msg.error.generic', 'msg.error.unauthorized', 'msg.error.not_found',
-            'footer.copyright', 'footer.privacy', 'footer.terms', 'footer.support'
+            'footer.copyright', 'footer.privacy', 'footer.terms', 'footer.support', 'footer.description',
+            'footer.platform', 'footer.community', 'footer.languages', 'footer.languages_desc', 'footer.built_with_love',
+            'home.hero.title', 'home.hero.subtitle', 'home.hero.read_stories', 'home.hero.join_community', 'home.hero.share_story',
+            'home.stats.stories_shared', 'home.stats.community_members', 'home.stats.comments_support', 'home.stats.languages_supported',
+            'home.featured_stories.title', 'home.featured_stories.subtitle', 'home.featured_stories.view_all',
+            'home.recent_stories.title', 'home.recent_stories.subtitle', 'home.recent_stories.view_all',
+            'home.categories.title', 'home.categories.subtitle'
         ];
         
         foreach ($translationKeys as $key) {
@@ -169,7 +180,7 @@ class Controller {
         $lang = $this->languageManager->getCurrentLanguage();
         $supportedLanguages = $this->languageManager->getSupportedLanguagesWithNames();
         
-        $layoutFile = VIEWS_PATH . '/layout/main.php';
+        $layoutFile = VIEWS_PATH . '/layout.php';
         
         if (file_exists($layoutFile)) {
             include $layoutFile;

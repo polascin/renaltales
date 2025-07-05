@@ -43,7 +43,7 @@ class UserController extends Controller {
             'csrf_token' => $this->generateCsrf(),
             'errors' => $this->flash('errors'),
             'success' => $this->flash('success'),
-            'supported_languages' => $GLOBALS['SUPPORTED_STORY_LANGUAGES']
+            'supported_languages' => $this->languageManager->getSupportedLanguagesWithNames()
         ]);
     }
     
@@ -60,7 +60,7 @@ class UserController extends Controller {
             'csrf_token' => $this->generateCsrf(),
             'errors' => $this->flash('errors'),
             'old_input' => $this->flash('old_input'),
-            'supported_languages' => $GLOBALS['SUPPORTED_STORY_LANGUAGES']
+            'supported_languages' => $this->languageManager->getSupportedLanguagesWithNames()
         ]);
     }
     
@@ -299,9 +299,9 @@ class UserController extends Controller {
             
             $language = $this->sanitize($_POST['language'] ?? '');
             
-            if (!array_key_exists($language, $GLOBALS['SUPPORTED_STORY_LANGUAGES'])) {
-                $this->json(['success' => false, 'message' => 'Invalid language selected.'], 400);
-            }
+        if (!in_array($language, $this->languageManager->getSupportedLanguages())) {
+            $this->json(['success' => false, 'message' => 'Invalid language selected.'], 400);
+        }
             
             // Update user's language preference
             $this->db->execute(
@@ -470,7 +470,7 @@ class UserController extends Controller {
         }
         
         // Language preference validation
-        if (!array_key_exists($input['language_preference'], $GLOBALS['SUPPORTED_STORY_LANGUAGES'])) {
+        if (!in_array($input['language_preference'], $this->languageManager->getSupportedLanguages())) {
             $errors['language_preference'] = 'Invalid language preference.';
         }
         

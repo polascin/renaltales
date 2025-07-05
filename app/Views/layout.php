@@ -1,6 +1,6 @@
 <?php if (!defined('ROOT_PATH')) exit; ?>
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars($lang ?? 'en') ?>">
+<html lang="<?= htmlspecialchars($lang ?? 'sk') ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -108,9 +108,9 @@
                     <!-- Language Selector -->
                     <li class="nav-item dropdown language-selector">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <?php if (isset($supportedLanguages[$lang ?? 'en'])): ?>
+                            <?php if (isset($supportedLanguages[$lang ?? 'sk'])): ?>
                                 <img src="<?= Router::asset("images/flags/{$lang}.png") ?>" alt="<?= $lang ?>" class="flag">
-                                <?= strtoupper($lang ?? 'en') ?>
+                                <?= strtoupper($lang ?? 'sk') ?>
                             <?php else: ?>
                                 <i class="fas fa-globe"></i> Language
                             <?php endif; ?>
@@ -119,7 +119,7 @@
                             <?php if (isset($supportedLanguages)): ?>
                                 <?php foreach ($supportedLanguages as $code => $name): ?>
                                     <li>
-                                        <a class="dropdown-item <?= ($lang ?? 'en') === $code ? 'active' : '' ?>" 
+                                        <a class="dropdown-item <?= ($lang ?? 'sk') === $code ? 'active' : '' ?>"
                                            href="/lang/<?= urlencode($code) ?>">
                                             <img src="<?= Router::asset("images/flags/{$code}.png") ?>" alt="<?= $code ?>" class="flag">
                                             <?= htmlspecialchars($name) ?>
