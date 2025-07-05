@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Tantara Voa',
   'welcome' => 'Tongasoa',
   'current_language' => 'Fiteny ankehitriny',
   'footer_copyright' => 'Ľubomír Polaščín',

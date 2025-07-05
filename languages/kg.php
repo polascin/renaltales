@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Makanda ma Mpiku',
   'welcome' => 'Yikwabote',
   'current_language' => 'Zina ya mbanda',
   'footer_copyright' => 'Ľubomír Polaščín',

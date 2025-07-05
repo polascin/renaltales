@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Kisah Buah Pinggang',
   'welcome' => 'Selamat datang',
   'current_language' => 'Bahasa semasa',
   'footer_copyright' => 'Ľubomír Polaščín',

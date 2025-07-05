@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Tarnip Oqaluttuaatit',
   'welcome' => 'Tikilluarit',
   'current_language' => 'Massakkut oqaluttuaq',
   'footer_copyright' => 'Ľubomír Polaščín',

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Hadithi za Figo',
   'welcome' => 'Karibu',
   'current_language' => 'Lugha ya sasa',
   'footer_copyright' => 'Ľubomír Polaščín',

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Mga Kwentong Bato',
   'welcome' => 'Maligayang pagdating',
   'current_language' => 'Kasalukuyang wika',
   'footer_copyright' => 'Ľubomír Polaščín',

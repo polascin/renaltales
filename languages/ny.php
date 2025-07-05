@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Nkhani za Impsyo',
   'welcome' => 'Takulandirani',
   'current_language' => 'Chiyankhulo cha pano',
   'footer_copyright' => 'Ľubomír Polaščín',

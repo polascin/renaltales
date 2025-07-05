@@ -1,6 +1,6 @@
 <?php
 return [
-  'app_title' => 'Почечные истории',
+  'app_title' => 'Почечные сказки',
   'welcome' => 'Добро пожаловать',
   'current_language' => 'Текущий язык',
   'footer_copyright' => 'Ľubomír Polaščín',

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Dikgang tsa Dikoloto',
   'welcome' => 'Dumelang',
   'current_language' => 'Puo ya jaana',
   'footer_copyright' => 'Ľubomír Polaščín',

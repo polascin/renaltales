@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Leeb yu Reer',
   'welcome' => 'Dalal ak jamm',
   'current_language' => 'Làkk bi am leegi',
   'footer_copyright' => 'Ľubomír Polaščín',

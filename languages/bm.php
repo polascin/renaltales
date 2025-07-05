@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Bamanankan Koron',
   'welcome' => 'Bisimila',
   'current_language' => 'Kan beerika',
   'footer_copyright' => 'Ľubomír Polaščín',

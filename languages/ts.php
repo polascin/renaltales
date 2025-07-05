@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Mitsheketo ya Swikoloto',
   'welcome' => 'Avuxeni',
   'current_language' => 'Ririmi ra sweswi',
   'footer_copyright' => 'Ľubomír Polaščín',

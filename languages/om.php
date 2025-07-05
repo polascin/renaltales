@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Seenaa Kalee',
   'welcome' => 'Akkam',
   'current_language' => 'Afaan ammaa',
   'footer_copyright' => 'Ľubomír Polaščín',

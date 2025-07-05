@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'PĂ«rrallat e Veshkave',
   'welcome' => 'Mirë se vini',
   'current_language' => 'Gjuha aktuale',
   'footer_copyright' => 'Ľubomír Polaščín',

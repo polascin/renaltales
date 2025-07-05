@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Dagiti Estoria ti Bekkel',
   'welcome' => 'Nawadwad nga isasangpet',
   'current_language' => 'Agdama a pagsasao',
   'footer_copyright' => 'Ľubomír Polaščín',

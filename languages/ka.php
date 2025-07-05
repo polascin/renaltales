@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 return [
   'app_title' => 'Renal Tales',
   'welcome' => 'კეთილი იყოს თქვენი მობრძანება',

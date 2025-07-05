@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Crita Ginjel',
   'welcome' => 'Sugeng rawuh',
   'current_language' => 'Basa saiki',
   'footer_copyright' => 'Ľubomír Polaščín',

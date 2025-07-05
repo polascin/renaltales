@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'DongĂ©ng Ginjal',
   'welcome' => 'Wilujeng sumping',
   'current_language' => 'Basa ayeuna',
   'footer_copyright' => 'Ľubomír Polaščín',

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Narrativas Renals',
   'welcome' => 'Bainvegni',
   'current_language' => 'Lingua actuala',
   'footer_copyright' => 'Ľubomír Polaščín',

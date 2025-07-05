@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Mga Istorya sa Bato',
   'welcome' => 'Maayong pag-abot',
   'current_language' => 'Karon nga pinulongan',
   'footer_copyright' => 'Ľubomír Polaščín',

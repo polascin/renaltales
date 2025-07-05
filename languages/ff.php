@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Taali Kollaaji',
   'welcome' => 'Jaraama',
   'current_language' => 'Ɗemngal jooni',
   'footer_copyright' => 'Ľubomír Polaščín',

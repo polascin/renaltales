@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'गुर्दे की कहानियाँ',
   'welcome' => 'स्वागत है',
   'current_language' => 'वर्तमान भाषा',
   'footer_copyright' => 'Ľubomír Polaščín',

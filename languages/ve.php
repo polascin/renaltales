@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Dzingano dza Tshikoloto',
   'welcome' => 'Ndaa',
   'current_language' => 'Luambo lwa zwino',
   'footer_copyright' => 'Ľubomír Polaščín',

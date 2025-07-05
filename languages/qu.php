@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'RiĂ±on Willakuykuna',
   'welcome' => 'Allinllachu',
   'current_language' => 'Kunan simi',
   'footer_copyright' => 'Ľubomír Polaščín',

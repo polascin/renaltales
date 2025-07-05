@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Buyrak Hikoyalari',
   'welcome' => 'Xush kelibsiz',
   'current_language' => 'Joriy til',
   'footer_copyright' => 'Ľubomír Polaščín',

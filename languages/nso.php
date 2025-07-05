@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Dipale tĹˇa Dikoloto',
   'welcome' => 'Dumela',
   'current_language' => 'Leleme la bjale',
   'footer_copyright' => 'Ľubomír Polaščín',

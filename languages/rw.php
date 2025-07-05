@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Inkuru z Impyiko',
   'welcome' => 'Murakaza neza',
   'current_language' => 'Ururimi rw\'uyu musi',
   'footer_copyright' => 'Ľubomír Polaščín',

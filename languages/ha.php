@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Labarun Koda',
   'welcome' => 'Barka da zuwa',
   'current_language' => 'Harshen yanzu',
   'footer_copyright' => 'Ľubomír Polaščín',

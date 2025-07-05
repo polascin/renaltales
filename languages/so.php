@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Sheekooyin Kelli',
   'welcome' => 'Soo dhaweyn',
   'current_language' => 'Luqadda hadda',
   'footer_copyright' => 'Ľubomír Polaščín',

@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => '腎臓物語',
   'welcome' => 'いらっしゃいませ',
   'current_language' => '現在の言語',
   'footer_copyright' => 'Ľubomír Polaščín',

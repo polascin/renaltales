@@ -1,17 +1,17 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => '腎臟故事', // Renal Tales
   'welcome' => '歡迎',
   'current_language' => '而家嘅語言',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => '語言選擇',
+  'language_change' => '更改語言',
+  'language_changed' => '語言已更改為',
+  'language_not_found' => '搵唔到語言檔案',
+  'language_default' => '預設語言',
+  'language_default_missing' => '搵唔到預設語言檔案',
+  'language_switch' => '切換語言',
+  'language_switch_success' => '語言已成功切換為',
+  'language_switch_error' => '切換語言時出錯'
 ];
 ?>

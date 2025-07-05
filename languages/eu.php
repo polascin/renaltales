@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Giltzurrun Ipuinak',
   'welcome' => 'Ongi etorri',
   'current_language' => 'Oraingo hizkuntza',
   'footer_copyright' => 'Ľubomír Polaščín',

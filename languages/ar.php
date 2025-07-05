@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'حكايات كلوية',
   'welcome' => 'أهلاً وسهلاً',
   'current_language' => 'اللغة الحالية',
   'footer_copyright' => 'Ľubomír Polaščín',

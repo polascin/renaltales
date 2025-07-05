@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Maluangu a Mpiku',
   'welcome' => 'Tuwelele',
   'current_language' => 'Luloba lua lelu',
   'footer_copyright' => 'Ľubomír Polaščín',

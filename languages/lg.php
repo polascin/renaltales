@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Emboozi z Ensigo',
   'welcome' => 'Tukusanyukidde',
   'current_language' => 'Olulimi olw\'olwa kati',
   'footer_copyright' => 'Ľubomír Polaščín',

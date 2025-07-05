@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Chwedlau Arennau',
   'welcome' => 'Croeso',
   'current_language' => 'Iaith bresennol',
   'footer_copyright' => 'Ľubomír Polaščín',

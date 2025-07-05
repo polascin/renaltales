@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Istwa Ren yo',
   'welcome' => 'Byenveni',
   'current_language' => 'Lang kounye a',
   'footer_copyright' => 'Ľubomír Polaščín',

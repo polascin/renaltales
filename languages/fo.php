@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'NĂ˝rnasogor',
   'welcome' => 'Vælkomin',
   'current_language' => 'Núverandi mál',
   'footer_copyright' => 'Ľubomír Polaščín',

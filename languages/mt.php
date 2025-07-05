@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Stejjer tar-Rieni',
   'welcome' => 'Merħba',
   'current_language' => 'Lingwa attwali',
   'footer_copyright' => 'Ľubomír Polaščín',

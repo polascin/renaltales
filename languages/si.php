@@ -1,17 +1,17 @@
-<?php
+﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'වකුගඩු කතා', // "Renal Tales" in Sinhala
   'welcome' => 'සාදරයෙන් පිළිගනිමු',
   'current_language' => 'වර්තමාන භාෂාව',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'භාෂා තේරීම',
+  'language_change' => 'භාෂාව වෙනස් කරන්න',
+  'language_changed' => 'භාෂාව වෙනස් කර ඇත',
+  'language_not_found' => 'භාෂා ගොනුව සොයාගත නොහැක',
+  'language_default' => 'පෙරනිමි භාෂාව',
+  'language_default_missing' => 'පෙරනිමි භාෂා ගොනුව අහිමිව ඇත',
+  'language_switch' => 'භාෂාව මාරු කරන්න',
+  'language_switch_success' => 'භාෂාව සාර්ථකව මාරු කරන ලදී',
+  'language_switch_error' => 'භාෂාව මාරු කිරීමේ දෝෂයක්'
 ];
 ?>

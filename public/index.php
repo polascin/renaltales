@@ -56,7 +56,7 @@ $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php if (isset($appTitle)) echo $appTitle; else echo APP_TITLE; ?></title>
-    <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">''
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <?php require_once 'assets/js/defaultLanguageFileMissing.php'; ?> 
 </head>
@@ -130,8 +130,9 @@ $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
             </li>
         </ul>
     </nav>
+    <section></section>
     <main>
-        <p><?= $text['current_language']; ?></p> <strong><?php echo $currentLanguageName; ?></strong></p>
+        <p><?= $text['current_language']; ?> <strong><?php echo $currentLanguageName; ?></strong></p>
         <p><?= $text['welcome']; ?></p>
     </main>
     <footer>
