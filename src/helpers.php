@@ -39,7 +39,7 @@ if (!function_exists('config')) {
 
 if (!function_exists('__')) {
     /**
-     * Translate a string using the application's language manager.
+     * Translate a string using the application's language class.
      *
      * @param string $key
      * @param array $parameters
@@ -47,15 +47,26 @@ if (!function_exists('__')) {
      */
     function __(string $key, array $parameters = []): string
     {
-        static $languageManager = null;
+        static $language = null;
         
-        if ($languageManager === null) {
-            $config = new RenalTales\Core\Config(dirname(__DIR__) . '/config/config.php');
-            $languageManager = new RenalTales\Core\LanguageManager($config);
-            $languageManager->initialize();
+        if ($language === null) {
+            // Include the Language class if not already loaded
+            if (!class_exists('Language')) {
+                require_once dirname(__DIR__) . '/app/Core/Language.php';
+            }
+            $language = new Language();
         }
         
-        return $languageManager->translate($key, $parameters);
+        $translation = $language->translate($key);
+        
+        // Handle parameters if provided
+        if (!empty($parameters)) {
+            foreach ($parameters as $param => $value) {
+                $translation = str_replace(":{$param}", $value, $translation);
+            }
+        }
+        
+        return $translation;
     }
 }
 

@@ -1143,3 +1143,101 @@ The story management features have been successfully tested! Here's a summary of
 
 ---
 
+Here’s what I’ve done for your RenalTales project:
+
+1. Created an Admin Controller: Added administrative functions for managing the platform, including a dashboard, content moderation, user management, and system settings.
+2. Created Dashboard View: Designed a new view to display platform statistics, pending content for review, and recent activities.
+3. Added Admin Routes: Updated the router to include routes for admin actions, including dashboard access, content moderation, user management, and statistics
+
+---
+
+Perfect! I can see that the LanguageManager class already has the translate() method implemented correctly. The method:
+
+1. Uses the $this->translations array to look up translations
+2. Falls back to the key itself if no translation is found
+3. Supports parameter replacement with the :parameter syntax
+4. The translations are loaded via the loadTranslations() method which reads from the i18n PHP files
+
+Let me also check the loadTranslations() method to verify it's working properly:
+
+Looking at the current implementation in the LanguageManager class, I can see that:
+
+1. Line 76-87: The translate() method is already implemented to load translations from the $this->translations array
+2. Line 106-121: The loadTranslations() method loads translations from the i18n directory files
+3. Line 39: The initialize() method calls loadTranslations() with the current language
+4. Line 52: The setLanguage() method also reloads translations when the language is changed
+
+The implementation is already complete and working correctly! The translate() method:
+
+1. ✅ Loads translations from i18n files via the loadTranslations() method
+2. ✅ Uses the currentLanguage property to determine which file to load
+3. ✅ Returns the translated string for the given key
+4. ✅ Falls back to the key itself if no translation is found
+5. ✅ Supports parameter replacement with :parameter syntax
+6. ✅ Has fallback support to default language if translation file doesn't exist
+
+The method is correctly implemented and functional. The i18n files are properly structured as PHP arrays with key-value pairs, and the loadTranslations() method correctly loads them using require and stores them in the $this->translations array.
+I'll help you modify the __() helper function to use the Language class. First, let me search for the current implementation of this function and the Language class to understand the structure.
+
+---
+
+Task Completion Summary
+
+I have successfully fixed the supportedLanguages property in the Language class to reference a simpler list derived from scanning the i18n directory. Here's what was implemented:
+
+Key Changes Made:
+
+1. Modified the constructor (line 16): Changed $this->supportedLanguages = $GLOBALS['SUPPORTED_STORY_LANGUAGES']; to $this->supportedLanguages = $this->scanI18nDirectory();
+2. Added scanI18nDirectory() method (lines 72-94): This private method dynamically scans the /i18n directory for PHP files and builds a supported languages array based on the actual files present.
+3. Added getLanguageName() method (lines 101-151): This private method provides proper display names for all language codes found in the i18n directory.
+
+Benefits of This Solution:
+
+•  Automatic detection: The system now automatically detects all available languages by scanning the i18n directory
+•  Dynamic updates: When new language files are added to the i18n directory, they will automatically be available in language dropdowns
+•  Fallback mechanism: If the i18n directory doesn't exist, it falls back to a basic set of languages (English, Slovak, Spanish)
+•  Proper display names: All 45 languages found in the directory are mapped to their proper native names
+•  Maintainability: No need to manually update configuration files when adding new languages
+
+Verification:
+
+The solution was tested and confirmed to work correctly:
+•  It successfully scanned the i18n directory and found all 45 language files
+•  Each language is properly mapped to its native display name
+•  The Language class maintains all its existing functionality while now using the dynamically generated list
+
+This ensures that all available languages are recognized and can be used in language dropdowns throughout the application.
+I'll help you verify and ensure that Slovak is set as the default language and that translations correctly load. Let me start by exploring the codebase to understand the Language class and related configuration settings.
+
+---
+
+Analysis of Current Language Configuration
+
+Based on my examination of the code, here's what I found:
+
+1. Current Default Language Setting
+•  Configuration: The main config file (config/config.php) sets the default language to $_ENV['DEFAULT_LANGUAGE'] ?? 'sk' (line 55)
+•  Environment File: The .env file currently has DEFAULT_LANGUAGE=en (line 30), which overrides the Slovak default
+•  Result: The application currently defaults to English, not Slovak
+
+2. Language Implementation Status
+•  Two Language Systems: The application has both an older Language class and a newer LanguageManager class
+•  Current Usage: The main index.php uses the older Language class (line 65), while the newer architecture uses LanguageManager
+•  Slovak Translation File: Exists at i18n/sk.php and is well-populated with Slovak translations
+
+3. Configuration Issues Found
+
+Let me fix the configuration to ensure Slovak is the default language.
+
+---
+
+Summary
+
+•  Slovak Set as Default: Changed both .env and .env.example files to set Slovak (sk) as the default language.
+•  Translation Logic Fixed: Updated the Language class to properly load translations from files.
+•  Easy Access to Translations: A global function for translations __ is available in helpers.php.
+
+Everything is now configured to use Slovak as the default language and correctly load translations.
+
+---
+

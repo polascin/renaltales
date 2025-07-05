@@ -112,12 +112,15 @@ $router->post('/story/{id}/translate', 'TranslationController@store');
 $router->get('/translation/{id}/edit', 'TranslationController@edit');
 $router->post('/translation/{id}/update', 'TranslationController@update');
 
-// Moderation routes (moderators only)
-$router->get('/admin/pending', 'ModerationController@pending');
-$router->post('/admin/approve/{id}', 'ModerationController@approve');
-$router->post('/admin/reject/{id}', 'ModerationController@reject');
+// Admin routes
+$router->get('/admin/dashboard', 'AdminController@dashboard');
+$router->get('/admin/moderation', 'AdminController@moderation');
 $router->get('/admin/users', 'AdminController@users');
 $router->get('/admin/statistics', 'AdminController@statistics');
+$router->get('/admin/settings', 'AdminController@settings');
+$router->post('/admin/approve-story', 'AdminController@approveStory');
+$router->post('/admin/reject-story', 'AdminController@rejectStory');
+$router->post('/admin/update-user-role', 'AdminController@updateUserRole');
 
 // API routes for AJAX calls
 $router->get('/api/languages', 'ApiController@languages');
