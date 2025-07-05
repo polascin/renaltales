@@ -1354,3 +1354,14 @@ The language dropdown in the navigation and all other language selection areas n
 
 ---
 
+I've fixed the access level issue. The $languageManager property in LanguageController is now protected instead of private, which matches the access level defined in the parent Controller class.
+
+The error should now be resolved. The property access levels in inheritance follow this rule:
+•  private → cannot be overridden in child classes
+•  protected → can be overridden as protected or public in child classes  
+•  public → can only be overridden as public in child classes
+
+Since the base Controller class defines $languageManager as protected, the child LanguageController class must define it as protected or public (not private).
+
+---
+

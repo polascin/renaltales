@@ -12,7 +12,7 @@ use RenalTales\Core\LanguageManager;
 use RenalTales\Core\Config;
 
 class LanguageController extends Controller {
-    private LanguageManager $languageManager;
+    protected LanguageManager $languageManager;
     
     public function __construct() {
         parent::__construct();
