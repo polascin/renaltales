@@ -46,16 +46,6 @@ if (file_exists($languageFile)) {
 // Set application title
 $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
 
-// Debugging: Uncomment the line below to see the current language and its name
-echo "Current Language: $currentLanguage ($currentLanguageName)";
-echo "<br>";
-echo "App Title: $appTitle";
-echo "<br>";
-echo "Default Language Missing: " . ($defaultLangMissing ? 'Yes' : 'No');
-echo "<br>";
-echo "Language File Path: $languageFile";
-
-
 ?>
 
 
@@ -74,9 +64,70 @@ echo "Language File Path: $languageFile";
     <header>
         <h1><?php echo $appTitle; ?></h1>
     </header>
-    <nav>
+    <nav class="language-selector">
         <ul>
-            <li></li>
+            <li>
+                <form method="get" action="">
+                    <select name="lang" onchange="this.form.submit()">
+                        <?php 
+                            // Only show languages for which a language file exists
+                            $selectableLanguages = $languageDetector->getSupportedLanguages(); 
+                            foreach ($selectableLanguages as $lang) {
+                                $langFile = LANGUAGE_PATH . $lang . '.php';
+                                if (!file_exists($langFile)) continue; // Skip if language file does not exist
+                                $langName = $languageDetector->getLanguageName($lang);
+                                $flagPath = $languageDetector->getFlagPath($lang);
+                                echo '<option value="' . $lang . '"';
+                                if ($currentLanguage === $lang) {
+                                    echo ' selected';
+                                }
+                                echo ' data-flag="' . $flagPath . '">';
+                                echo $langName . ' (' . $lang . ')';
+                                echo '</option>';
+                            }
+                        ?>
+                    </select>
+                    <noscript><input type="submit" value="Change"></noscript>
+                    <script>
+                    // Add flags to the language selector
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var select = document.querySelector('select[name="lang"]');
+                        if (!select) return;
+                        
+                        function updateFlag() {
+                            // Remove existing flag if any
+                            var existingFlag = select.parentNode.querySelector('.lang-flag');
+                            if (existingFlag) {
+                                existingFlag.remove();
+                            }
+                            
+                            // Add flag for current selection
+                            var selectedOption = select.options[select.selectedIndex];
+                            var flagSrc = selectedOption.getAttribute('data-flag');
+                            if (flagSrc) {
+                                var flagImg = document.createElement('img');
+                                flagImg.src = flagSrc;
+                                flagImg.alt = selectedOption.textContent;
+                                flagImg.className = 'lang-flag';
+                                flagImg.style.height = '1.2em';
+                                flagImg.style.width = 'auto';
+                                flagImg.style.verticalAlign = 'middle';
+                                flagImg.style.marginRight = '0.5em';
+                                flagImg.style.border = '1px solid #ccc';
+                                flagImg.style.borderRadius = '2px';
+                                select.parentNode.insertBefore(flagImg, select);
+                            }
+                        }
+                        
+                        // Initial flag display
+                        updateFlag();
+                        
+                        // Update flag when selection changes
+                        select.addEventListener('change', updateFlag);
+                    });
+                    </script>
+                </form>
+            </li>
         </ul>
     </nav>
     <main>

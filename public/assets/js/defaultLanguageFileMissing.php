@@ -1,14 +1,14 @@
 <?php if ($defaultLangMissing): ?>
-    <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            alert(
-                "Default language file is missing!\n" +
-                "Timestamp: <?php echo date('Y-m-d H:i:s T'); ?>\n" +
-                "Aborting execution.\n" +
-                "Please contact the administrator."
-            );
-        });
-    </script>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        alert(
+            "Default language file is missing!\n" +
+            "Timestamp: <?php echo date('Y-m-d H:i:s T'); ?>\n" +
+            "Aborting execution.\n" +
+            "Please contact the administrator."
+        );
+    });
+</script>
 </head>
 <body>
     <hr>
@@ -28,4 +28,9 @@
     <hr
 </body>
 </html>
-<?php endif; exit; ?>
+<?php
+    exit; // Stop further execution of the script
+?>
+<?php 
+    endif; 
+?>

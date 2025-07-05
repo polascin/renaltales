@@ -10,6 +10,187 @@
 class LanguageDetector {
     
     /**
+     * Language to country flag mapping
+     */
+    private static $languageToFlag = [
+        // European languages
+        'en' => 'gb',  // English → Great Britain
+        'sk' => 'sk',  // Slovak → Slovakia
+        'cs' => 'cz',  // Czech → Czech Republic
+        'de' => 'de',  // German → Germany
+        'pl' => 'pl',  // Polish → Poland
+        'hu' => 'hu',  // Hungarian → Hungary
+        'uk' => 'ua',  // Ukrainian → Ukraine
+        'ru' => 'ru',  // Russian → Russia
+        'it' => 'it',  // Italian → Italy
+        'nl' => 'nl',  // Dutch → Netherlands
+        'fr' => 'fr',  // French → France
+        'es' => 'es',  // Spanish → Spain
+        'pt' => 'pt',  // Portuguese → Portugal
+        'ro' => 'ro',  // Romanian → Romania
+        'bg' => 'bg',  // Bulgarian → Bulgaria
+        'sl' => 'si',  // Slovenian → Slovenia
+        'hr' => 'hr',  // Croatian → Croatia
+        'sr' => 'rs',  // Serbian → Serbia
+        'mk' => 'mk',  // Macedonian → North Macedonia
+        'sq' => 'al',  // Albanian → Albania
+        'el' => 'gr',  // Greek → Greece
+        'da' => 'dk',  // Danish → Denmark
+        'no' => 'no',  // Norwegian → Norway
+        'sv' => 'se',  // Swedish → Sweden
+        'fi' => 'fi',  // Finnish → Finland
+        'is' => 'is',  // Icelandic → Iceland
+        'et' => 'ee',  // Estonian → Estonia
+        'lv' => 'lv',  // Latvian → Latvia
+        'lt' => 'lt',  // Lithuanian → Lithuania
+        'tr' => 'tr',  // Turkish → Turkey
+        'eo' => 'eo',  // Esperanto → Special Esperanto flag
+        // NEW European languages
+        'ca' => 'ad',  // Catalan → Andorra (also used in Spain)
+        'eu' => 'es',  // Basque → Spain
+        'cy' => 'gb-wls',  // Welsh → Wales
+        'ga' => 'ie',  // Irish → Ireland
+        'gd' => 'gb-sct',  // Scottish Gaelic → Scotland
+        'mt' => 'mt',  // Maltese → Malta
+        'gl' => 'es',  // Galician → Spain
+        'be' => 'by',  // Belarusian → Belarus
+        'lb' => 'lu',  // Luxembourgish → Luxembourg
+        'rm' => 'ch',  // Romansh → Switzerland
+        'fo' => 'fo',  // Faroese → Faroe Islands
+        'kl' => 'gl',  // Greenlandic → Greenland
+        'se' => 'no',  // Northern Sami → Norway
+        
+        // Asian languages
+        'ja' => 'jp',  // Japanese → Japan
+        'zh' => 'cn',  // Chinese → China
+        'ko' => 'kr',  // Korean → South Korea
+        'th' => 'th',  // Thai → Thailand
+        'vi' => 'vn',  // Vietnamese → Vietnam
+        'hi' => 'in',  // Hindi → India
+        'ar' => 'sa',  // Arabic → Saudi Arabia
+        'fa' => 'ir',  // Persian → Iran
+        'he' => 'il',  // Hebrew → Israel
+        'ur' => 'pk',  // Urdu → Pakistan
+        'bn' => 'bd',  // Bengali → Bangladesh
+        'ta' => 'in',  // Tamil → India
+        // NEW Asian languages
+        'id' => 'id',  // Indonesian → Indonesia
+        'ms' => 'my',  // Malay → Malaysia
+        'tl' => 'ph',  // Filipino → Philippines
+        'mr' => 'in',  // Marathi → India
+        'jv' => 'id',  // Javanese → Indonesia
+        'yue' => 'hk',  // Cantonese → Hong Kong
+        'wu' => 'cn',  // Wu Chinese → China
+        'bho' => 'in',  // Bhojpuri → India
+        'ps' => 'af',  // Pashto → Afghanistan
+        'su' => 'id',  // Sundanese → Indonesia
+        'or' => 'in',  // Odia → India
+        'as' => 'in',  // Assamese → India
+        'mai' => 'in',  // Maithili → India
+        'mag' => 'in',  // Magahi → India
+        'gom' => 'in',  // Konkani → India
+        'sat' => 'in',  // Santali → India
+        'ks' => 'in',  // Kashmiri → India
+        'sd' => 'pk',  // Sindhi → Pakistan
+        'bal' => 'pk',  // Balochi → Pakistan
+        'dv' => 'mv',  // Dhivehi → Maldives
+        'ceb' => 'ph',  // Cebuano → Philippines
+        'ilo' => 'ph',  // Ilocano → Philippines
+        'war' => 'ph',  // Waray → Philippines
+        'bcl' => 'ph',  // Bikol → Philippines
+        'pam' => 'ph',  // Kapampangan → Philippines
+        'tsg' => 'ph',  // Tausug → Philippines
+        'min' => 'id',  // Minangkabau → Indonesia
+        'mad' => 'id',  // Madurese → Indonesia
+        'gan' => 'cn',  // Gan Chinese → China
+        'hak' => 'cn',  // Hakka Chinese → China
+        'nan' => 'cn',  // Min Nan Chinese → China
+        'wuu' => 'cn',  // Wu dialects → China
+        'tk' => 'tm',  // Turkmen → Turkmenistan
+        'tt' => 'ru',  // Tatar → Russia
+        'ba' => 'ru',  // Bashkir → Russia
+        'cv' => 'ru',  // Chuvash → Russia
+        'sah' => 'ru',  // Sakha/Yakut → Russia
+        'tyv' => 'ru',  // Tuvan → Russia
+        'alt' => 'ru',  // Altai → Russia
+        'dz' => 'bt',  // Dzongkha → Bhutan
+        'to' => 'to',  // Tongan → Tonga
+        'sm' => 'ws',  // Samoan → Samoa
+        'fj' => 'fj',  // Fijian → Fiji
+        'bi' => 'vu',  // Bislama → Vanuatu
+        'pau' => 'pw',  // Palauan → Palau
+        
+        // Additional Asian languages (missing from previous update)
+        'gu' => 'in',  // Gujarati → India
+        'kn' => 'in',  // Kannada → India
+        'te' => 'in',  // Telugu → India
+        'ml' => 'in',  // Malayalam → India
+        'pa' => 'in',  // Punjabi → India
+        'ne' => 'np',  // Nepali → Nepal
+        'my' => 'mm',  // Burmese → Myanmar
+        'km' => 'kh',  // Khmer → Cambodia
+        'lo' => 'la',  // Lao → Laos
+        'ka' => 'ge',  // Georgian → Georgia
+        'hy' => 'am',  // Armenian → Armenia
+        'az' => 'az',  // Azerbaijani → Azerbaijan
+        'kk' => 'kz',  // Kazakh → Kazakhstan
+        'ky' => 'kg',  // Kyrgyz → Kyrgyzstan
+        'uz' => 'uz',  // Uzbek → Uzbekistan
+        'tg' => 'tj',  // Tajik → Tajikistan
+        'mn' => 'mn',  // Mongolian → Mongolia
+        'si' => 'lk',  // Sinhala → Sri Lanka
+        'bo' => 'cn',  // Tibetan → China (Tibet)
+        'ug' => 'cn',  // Uyghur → China
+        'bh' => 'in',  // Bihari → India
+        'sa' => 'in',  // Sanskrit → India
+        
+        // African languages
+        'sw' => 'ke',  // Swahili → Kenya
+        'af' => 'za',  // Afrikaans → South Africa
+        'am' => 'et',  // Amharic → Ethiopia
+        'ha' => 'ng',  // Hausa → Nigeria
+        'yo' => 'ng',  // Yoruba → Nigeria
+        'ig' => 'ng',  // Igbo → Nigeria
+        'zu' => 'za',  // Zulu → South Africa
+        'xh' => 'za',  // Xhosa → South Africa
+        'tn' => 'za',  // Tswana → South Africa
+        'st' => 'za',  // Sesotho → South Africa
+        'ss' => 'za',  // Swati → South Africa
+        'nr' => 'za',  // Ndebele → South Africa
+        'nso' => 'za', // Northern Sotho → South Africa
+        've' => 'za',  // Venda → South Africa
+        'ts' => 'za',  // Tsonga → South Africa
+        'ti' => 'er',  // Tigrinya → Eritrea
+        'om' => 'et',  // Oromo → Ethiopia
+        'so' => 'so',  // Somali → Somalia
+        'rw' => 'rw',  // Kinyarwanda → Rwanda
+        'rn' => 'bi',  // Kirundi → Burundi
+        'lg' => 'ug',  // Luganda → Uganda
+        'nd' => 'zw',  // Ndebele (Zimbabwe) → Zimbabwe
+        'lua' => 'cd', // Luba-Lulua → DRC
+        'mg' => 'mg',  // Malagasy → Madagascar
+        'ff' => 'sn',  // Fulani/Fula → Senegal
+        'ln' => 'cd',  // Lingala → DRC
+        'bm' => 'ml',  // Bambara → Mali
+        'ak' => 'gh',  // Akan/Twi → Ghana
+        'sn' => 'zw',  // Shona → Zimbabwe
+        'ny' => 'mw',  // Chichewa → Malawi
+        'wo' => 'sn',  // Wolof → Senegal
+        'sg' => 'cf',  // Sango → Central African Republic
+        'kg' => 'cd',  // Kongo → DRC
+        'lu' => 'cd',  // Luba-Katanga → DRC
+        
+        // Additional Philippine languages
+        'hil' => 'ph', // Hiligaynon → Philippines
+        
+        // American languages
+        'qu' => 'pe',  // Quechua → Peru
+        'gn' => 'py',  // Guaraní → Paraguay
+        'ay' => 'bo',  // Aymara → Bolivia
+        'ht' => 'ht',  // Haitian Creole → Haiti
+    ];
+    
+    /**
      * Supported languages with their variants
      */
     private $supportedLanguages = [
@@ -45,6 +226,20 @@ class LanguageDetector {
         'lt' => ['lt', 'lt-lt'],
         'tr' => ['tr', 'tr-tr'],
         'eo' => ['eo'], // Esperanto
+        // NEW European languages
+        'ca' => ['ca', 'ca-es', 'ca-ad'], // Catalan
+        'eu' => ['eu', 'eu-es'], // Basque
+        'cy' => ['cy', 'cy-gb'], // Welsh
+        'ga' => ['ga', 'ga-ie'], // Irish
+        'gd' => ['gd', 'gd-gb'], // Scottish Gaelic
+        'mt' => ['mt', 'mt-mt'], // Maltese
+        'gl' => ['gl', 'gl-es'], // Galician
+        'be' => ['be', 'be-by'], // Belarusian
+        'lb' => ['lb', 'lb-lu'], // Luxembourgish
+        'rm' => ['rm', 'rm-ch'], // Romansh
+        'fo' => ['fo', 'fo-fo'], // Faroese
+        'kl' => ['kl', 'kl-gl'], // Greenlandic
+        'se' => ['se', 'se-no', 'se-se', 'se-fi'], // Northern Sami
         
         // Asian languages
         'ja' => ['ja', 'ja-jp'], // Japanese
@@ -57,16 +252,28 @@ class LanguageDetector {
         'fa' => ['fa', 'fa-ir'], // Persian/Farsi
         'he' => ['he', 'he-il'], // Hebrew
         'ur' => ['ur', 'ur-pk'], // Urdu
-        'bn' => ['bn', 'bn-bd', 'bn-in'], // Bengali
-        'ta' => ['ta', 'ta-in', 'ta-lk'], // Tamil
+        'bn' => ['bn', 'bn-bd'], // Bengali
+        'ta' => ['ta', 'ta-in'], // Tamil
+        // NEW Asian languages
+        'id' => ['id', 'id-id'], // Indonesian
+        'ms' => ['ms', 'ms-my'], // Malay
+        'tl' => ['tl', 'tl-ph'], // Tagalog/Filipino
+        'mr' => ['mr', 'mr-in'], // Marathi
+        'jv' => ['jv', 'jv-id'], // Javanese
+        'yue' => ['yue', 'yue-hk'], // Cantonese
+        'wuu' => ['wuu', 'wuu-cn'], // Wu Chinese
+        'bho' => ['bho', 'bho-in'], // Bhojpuri
+        'ps' => ['ps', 'ps-af'], // Pashto
+        'su' => ['su', 'su-id'], // Sundanese
+        'or' => ['or', 'or-in'], // Odia
+        'as' => ['as', 'as-in'], // Assamese
+        'gu' => ['gu', 'gu-in'], // Gujarati
+        'kn' => ['kn', 'kn-in'], // Kannada
         'te' => ['te', 'te-in'], // Telugu
         'ml' => ['ml', 'ml-in'], // Malayalam
-        'kn' => ['kn', 'kn-in'], // Kannada
-        'gu' => ['gu', 'gu-in'], // Gujarati
         'pa' => ['pa', 'pa-in'], // Punjabi
         'ne' => ['ne', 'ne-np'], // Nepali
-        'si' => ['si', 'si-lk'], // Sinhala
-        'my' => ['my', 'my-mm'], // Myanmar/Burmese
+        'my' => ['my', 'my-mm'], // Burmese
         'km' => ['km', 'km-kh'], // Khmer
         'lo' => ['lo', 'lo-la'], // Lao
         'ka' => ['ka', 'ka-ge'], // Georgian
@@ -75,32 +282,63 @@ class LanguageDetector {
         'kk' => ['kk', 'kk-kz'], // Kazakh
         'ky' => ['ky', 'ky-kg'], // Kyrgyz
         'uz' => ['uz', 'uz-uz'], // Uzbek
+        'tk' => ['tk', 'tk-tm'], // Turkmen
         'tg' => ['tg', 'tg-tj'], // Tajik
         'mn' => ['mn', 'mn-mn'], // Mongolian
+        'si' => ['si', 'si-lk'], // Sinhala
+        'dv' => ['dv', 'dv-mv'], // Divehi
+        'bo' => ['bo', 'bo-cn'], // Tibetan
+        'ug' => ['ug', 'ug-cn'], // Uyghur
+        'sd' => ['sd', 'sd-pk'], // Sindhi
+        'mai' => ['mai', 'mai-in'], // Maithili
+        'bh' => ['bh', 'bh-in'], // Bihari
+        'sa' => ['sa', 'sa-in'], // Sanskrit
         
         // African languages
         'sw' => ['sw', 'sw-ke', 'sw-tz'], // Swahili
-        'am' => ['am', 'am-et'], // Amharic
-        'zu' => ['zu', 'zu-za'], // Zulu
         'af' => ['af', 'af-za'], // Afrikaans
-        'xh' => ['xh', 'xh-za'], // Xhosa
-        'st' => ['st', 'st-za'], // Sesotho
-        'tn' => ['tn', 'tn-za'], // Setswana
-        'ss' => ['ss', 'ss-za'], // Siswati
-        've' => ['ve', 've-za'], // Venda
-        'ts' => ['ts', 'ts-za'], // Tsonga
-        'nr' => ['nr', 'nr-za'], // Ndebele
-        'nso' => ['nso', 'nso-za'], // Northern Sotho
+        'am' => ['am', 'am-et'], // Amharic
         'ha' => ['ha', 'ha-ng'], // Hausa
         'yo' => ['yo', 'yo-ng'], // Yoruba
         'ig' => ['ig', 'ig-ng'], // Igbo
+        'zu' => ['zu', 'zu-za'], // Zulu
+        'xh' => ['xh', 'xh-za'], // Xhosa
+        'tn' => ['tn', 'tn-za'], // Tswana
+        'st' => ['st', 'st-za'], // Sesotho
+        'ss' => ['ss', 'ss-za'], // Swati
+        'nr' => ['nr', 'nr-za'], // Ndebele
+        'nso' => ['nso', 'nso-za'], // Northern Sotho
+        've' => ['ve', 've-za'], // Venda
+        'ts' => ['ts', 'ts-za'], // Tsonga
+        'ti' => ['ti', 'ti-er'], // Tigrinya
+        'om' => ['om', 'om-et'], // Oromo
+        'so' => ['so', 'so-so'], // Somali
         'rw' => ['rw', 'rw-rw'], // Kinyarwanda
         'rn' => ['rn', 'rn-bi'], // Kirundi
         'lg' => ['lg', 'lg-ug'], // Luganda
-        'so' => ['so', 'so-so'], // Somali
-        'ti' => ['ti', 'ti-er'], // Tigrinya
-        'om' => ['om', 'om-et'], // Oromo
+        'ny' => ['ny', 'ny-mw'], // Chichewa
+        'sn' => ['sn', 'sn-zw'], // Shona
+        'nd' => ['nd', 'nd-zw'], // Ndebele (Zimbabwe)
+        'bm' => ['bm', 'bm-ml'], // Bambara
+        'ff' => ['ff', 'ff-sn'], // Fulah
+        'wo' => ['wo', 'wo-sn'], // Wolof
+        'ln' => ['ln', 'ln-cd'], // Lingala
+        'kg' => ['kg', 'kg-cd'], // Kikongo
+        'lua' => ['lua', 'lua-cd'], // Luba-Lulua
+        'sg' => ['sg', 'sg-cf'], // Sango
         'mg' => ['mg', 'mg-mg'], // Malagasy
+        
+        // Additional languages
+        'ht' => ['ht', 'ht-ht'], // Haitian Creole
+        'qu' => ['qu', 'qu-pe'], // Quechua
+        'gn' => ['gn', 'gn-py'], // Guarani
+        'ay' => ['ay', 'ay-bo'], // Aymara
+        'ceb' => ['ceb', 'ceb-ph'], // Cebuano
+        'hil' => ['hil', 'hil-ph'], // Hiligaynon
+        'war' => ['war', 'war-ph'], // Waray
+        'bcl' => ['bcl', 'bcl-ph'], // Bikol
+        'pam' => ['pam', 'pam-ph'], // Kapampangan
+        'ilo' => ['ilo', 'ilo-ph'], // Ilocano
     ];
     
     /**
@@ -124,12 +362,17 @@ class LanguageDetector {
         'IR' => 'fa', 'IL' => 'he', 'PK' => 'ur', 'BD' => 'bn', 'LK' => 'si',
         'MM' => 'my', 'KH' => 'km', 'LA' => 'lo', 'GE' => 'ka', 'AM' => 'hy',
         'AZ' => 'az', 'KZ' => 'kk', 'KG' => 'ky', 'UZ' => 'uz', 'TJ' => 'tg',
-        'MN' => 'mn', 'NP' => 'ne',
+        'MN' => 'mn', 'NP' => 'ne', 'ID' => 'id', 'MY' => 'ms', 'PH' => 'tl',
+        'AF' => 'ps', 'TM' => 'tk', 'MV' => 'dv', 'BT' => 'dz',
         
         // Africa
         'KE' => 'sw', 'TZ' => 'sw', 'ET' => 'am', 'ZA' => 'af', 'NG' => 'ha',
         'RW' => 'rw', 'BI' => 'rn', 'UG' => 'lg', 'SO' => 'so', 'ER' => 'ti',
-        'MG' => 'mg',
+        'MG' => 'mg', 'MW' => 'ny', 'ZW' => 'sn', 'ML' => 'bm', 'SN' => 'wo',
+        'CD' => 'ln', 'CF' => 'sg',
+        
+        // Americas
+        'HT' => 'ht', 'PE' => 'qu', 'PY' => 'gn', 'BO' => 'ay',
         
         // Default English-speaking countries
         'US' => 'en', 'GB' => 'en', 'CA' => 'en', 'AU' => 'en', 'NZ' => 'en',
@@ -222,6 +465,60 @@ class LanguageDetector {
         'ti' => 'ትግርኛ',
         'om' => 'Oromoo',
         'mg' => 'Malagasy',
+        // NEW language names
+        'ca' => 'Català',
+        'eu' => 'Euskera',
+        'cy' => 'Cymraeg',
+        'ga' => 'Gaeilge',
+        'gd' => 'Gàidhlig',
+        'mt' => 'Malti',
+        'gl' => 'Galego',
+        'be' => 'Беларуская',
+        'lb' => 'Lëtzebuergesch',
+        'rm' => 'Rumantsch',
+        'fo' => 'Føroyskt',
+        'kl' => 'Kalaallisut',
+        'se' => 'Sámegiella',
+        'id' => 'Bahasa Indonesia',
+        'ms' => 'Bahasa Melayu',
+        'tl' => 'Filipino',
+        'mr' => 'मराठी',
+        'jv' => 'Basa Jawa',
+        'yue' => '粵語',
+        'wuu' => '吳語',
+        'bho' => 'भोजपुरी',
+        'ps' => 'پښتو',
+        'su' => 'Basa Sunda',
+        'or' => 'ଓଡ଼ିଆ',
+        'as' => 'অসমীয়া',
+        'dv' => 'ދިވެހި',
+        'bo' => 'བོད་ཡིག',
+        'ug' => 'ئۇيغۇرچە',
+        'sd' => 'سنڌي',
+        'mai' => 'मैथिली',
+        'bh' => 'भोजपुरी',
+        'sa' => 'संस्कृतम्',
+        'tk' => 'Türkmen',
+        'ny' => 'Chichewa',
+        'sn' => 'ChiShona',
+        'nd' => 'isiNdebele',
+        'bm' => 'Bamanankan',
+        'ff' => 'Fulfulde',
+        'wo' => 'Wolof',
+        'ln' => 'Lingála',
+        'kg' => 'Kikongo',
+        'lua' => 'Tshiluba',
+        'sg' => 'Sängö',
+        'ht' => 'Kreyòl Ayisyen',
+        'qu' => 'Runasimi',
+        'gn' => 'Avañe\'ẽ',
+        'ay' => 'Aymar aru',
+        'ceb' => 'Cebuano',
+        'hil' => 'Hiligaynon',
+        'war' => 'Winaray',
+        'bcl' => 'Bikol',
+        'pam' => 'Kapampangan',
+        'ilo' => 'Ilokano',
     ];
     
     /**
@@ -451,6 +748,64 @@ class LanguageDetector {
      */
     public function getDirection($lang) {
         return $this->isRTL($lang) ? 'rtl' : 'ltr';
+    }
+    
+    /**
+     * Get flag code for a language
+     * 
+     * @param string $languageCode Language code
+     * @return string Flag code (defaults to 'un' if not found)
+     */
+    public static function getFlagCode($languageCode) {
+        return isset(self::$languageToFlag[$languageCode]) 
+            ? self::$languageToFlag[$languageCode] 
+            : 'un'; // Default to UN flag if not found
+    }
+    
+    /**
+     * Get complete flag path for a language
+     *
+     * @param string $languageCode Language code
+     * @param string $basePath Base path for flags
+     * @param string $extension File extension
+     * @return string Complete path to the flag
+     */
+    public static function getFlagPath($languageCode, $basePath = 'assets/flags/', $extension = '.webp') {
+        $flagCode = self::getFlagCode($languageCode);
+        return $basePath . $flagCode . $extension;
+    }
+    
+    /**
+     * Get the best available flag path with format fallback
+     * Tries WEBP first, then PNG, then JPG
+     * 
+     * @param string $languageCode Language code
+     * @param string $basePath Base path for flags (relative to document root)
+     * @param string $documentRoot Document root path for file existence checking
+     * @return string Complete path to the best available flag format
+     */
+    public static function getBestFlagPath($languageCode, $basePath = 'assets/flags/', $documentRoot = null) {
+        $flagCode = self::getFlagCode($languageCode);
+        
+        // Set default document root if not provided
+        if ($documentRoot === null) {
+            $documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '';
+        }
+        
+        // Try formats in order of preference: WEBP > PNG > JPG
+        $formats = ['.webp', '.png', '.jpg'];
+        
+        foreach ($formats as $extension) {
+            $flagPath = $basePath . $flagCode . $extension;
+            $fullPath = rtrim($documentRoot, '/') . '/' . ltrim($flagPath, '/');
+            
+            if (file_exists($fullPath)) {
+                return $flagPath;
+            }
+        }
+        
+        // If no flag found, return WEBP path (will fallback to UN flag or show as missing)
+        return $basePath . $flagCode . '.webp';
     }
     
     /**
