@@ -9,7 +9,6 @@
             );
         });
     </script>
-<?php endif; ?>
 </head>
 <body>
     <hr>
@@ -29,4 +28,4 @@
     <hr
 </body>
 </html>
-<?php exit; ?>
+<?php endif; exit; ?>

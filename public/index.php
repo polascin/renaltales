@@ -22,9 +22,6 @@ $languageDetector = new LanguageDetector();
 $defaultLanguage = DEFAULT_LANGUAGE;
 $defaultLanguageName = $languageDetector->getLanguageName($defaultLanguage);
 
-// Set default application title
-$appTitle = APP_TITLE;
-
 // Detect the user's language
 $currentLanguage = $languageDetector->detectLanguage();
 $currentLanguageName = $languageDetector->getLanguageName($currentLanguage);
@@ -33,23 +30,35 @@ $currentLanguageName = $languageDetector->getLanguageName($currentLanguage);
 $languageFile = LANGUAGE_PATH . $currentLanguage . '.php';
 $defaultLangMissing = false;
 if (file_exists($languageFile)) {
-    $text = include $languageFile;
+    $text = require_once $languageFile;
 } else {
     // If the language file does not exist, use the default language
     $defaultLangFile = LANGUAGE_PATH . $defaultLanguage . '.php';
     if (file_exists($defaultLangFile)) {
-        $text = include $defaultLangFile;
+        $text = require_once $defaultLangFile;
         $currentLanguage = $defaultLanguage;
         $currentLanguageName = $defaultLanguageName;
-        $appTitle = APP_TITLE; // Reset to default title if language file is not found
     } else {
         $defaultLangMissing = true;
     }
 }
 
+// Set application title
 $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
 
+// Debugging: Uncomment the line below to see the current language and its name
+echo "Current Language: $currentLanguage ($currentLanguageName)";
+echo "<br>";
+echo "App Title: $appTitle";
+echo "<br>";
+echo "Default Language Missing: " . ($defaultLangMissing ? 'Yes' : 'No');
+echo "<br>";
+echo "Language File Path: $languageFile";
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="<?php if (isset($currentLanguage)) echo $currentLanguage; else echo DEFAULT_LANGUAGE; ?>">
