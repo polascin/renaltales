@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Tarnip Oqaluttuaatit',
+  'app_title' => 'Tarnit oqaluttuarisai',
   'welcome' => 'Tikilluarit',
-  'current_language' => 'Massakkut oqaluttuaq',
+  'current_language' => 'Oqaatsit manna',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Oqaatsit toqqarneq',
+  'language_change' => 'Oqaatsit allaqqippoq',
+  'language_changed' => 'Oqaatsit allaqqippuq',
+  'language_not_found' => 'Oqaatsit filiat nassaarneqanngilaq',
+  'language_default' => 'Oqaatsit sivisuit',
+  'language_default_missing' => 'Oqaatsit sivisuit filiat pineqanngilaq',
+  'language_switch' => 'Oqaatsit aullartippaa',
+  'language_switch_success' => 'Oqaatsit allaqqippuq piqqusivullu',
+  'language_switch_error' => 'Oqaatsit allaqqippoq taamak ajorpoq'
 ];
 ?>

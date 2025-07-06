@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'NĂ˝rnasogor',
-  'welcome' => 'Vælkomin',
+  'app_title' => 'Nýrnasøgur',
+  'welcome' => 'Vælkomið',
   'current_language' => 'Núverandi mál',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Málval',
+  'language_change' => 'Skifta mál',
+  'language_changed' => 'Málið er skift',
+  'language_not_found' => 'Málfíla fanst ikki',
+  'language_default' => 'Vanligt mál',
+  'language_default_missing' => 'Vanliga málfíla vantar',
+  'language_switch' => 'Skifta mál',
+  'language_switch_success' => 'Málið er skift væl',
+  'language_switch_error' => 'Villa í málskifti'
 ];
 ?>

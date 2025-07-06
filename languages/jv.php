@@ -4,14 +4,14 @@ return [
   'welcome' => 'Sugeng rawuh',
   'current_language' => 'Basa saiki',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Pilihan basa',
+  'language_change' => 'Ganti basa',
+  'language_changed' => 'Basa wis diganti',
+  'language_not_found' => 'File basa ora ketemu',
+  'language_default' => 'Basa dhasar',
+  'language_default_missing' => 'File basa dhasar ora ana',
+  'language_switch' => 'Alih basa',
+  'language_switch_success' => 'Basa kasil diganti',
+  'language_switch_error' => 'Ana salah nalika ngganti basa'
 ];
 ?>

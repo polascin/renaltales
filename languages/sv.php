@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'NjurberĂ¤ttelser',
+  'app_title' => 'Njurberättelser',
   'welcome' => 'Välkommen',
   'current_language' => 'Nuvarande språk',
   'footer_copyright' => 'Ľubomír Polaščín',
   'language_selection' => 'Språkval',
-  'language_change' => 'Ändra språk',
-  'language_changed' => 'Språket har ändrats till',
-  'language_not_found' => 'Språkfil hittades inte',
+  'language_change' => 'Byt språk',
+  'language_changed' => 'Språket har bytts',
+  'language_not_found' => 'Språkfilen hittades inte',
   'language_default' => 'Standardspråk',
-  'language_default_missing' => 'Standardspråkfil saknas',
-  'language_switch' => 'Växla språk',
-  'language_switch_success' => 'Språket har framgångsrikt ändrats till',
+  'language_default_missing' => 'Standardspråkfilen saknas',
+  'language_switch' => 'Byt språk',
+  'language_switch_success' => 'Språket har bytts framgångsrikt',
   'language_switch_error' => 'Fel vid byte av språk'
 ];
 ?>

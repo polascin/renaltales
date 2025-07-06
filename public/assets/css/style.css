@@ -1,9 +1,14 @@
 /* This file contains the CSS styles for the Renal Tales application. */
 /* File: public/assets/css/style.css */
 
+
+
 /* General Styles */
 
+
+
 /* Language Selector Styles */
+
 nav.language-selector {
     background-color: transparent;
     margin: 10px 0;
@@ -70,6 +75,44 @@ nav.language-selector select option:checked {
 nav.language-selector select option:hover {
     background-color: #e9ecef;
 }
+
+
+
+/* Language Flag Link Styles */
+
+section.language-selection-flags {
+    display: flex;    
+    float: right;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 1rem;
+    font-size: small;
+    clear: both;
+}
+
+section.language-selection-flags a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    border: solid 1px transparent;
+}
+
+section.language-selection-flags a:hover {
+    font-weight: bold;
+    border: solid 1px silver;
+}
+
+section.language-selection-flags a:focus {
+    border: solid 1px red;
+}
+
+section.language-selection-flags a img {
+    height: 1.6rem;
+    width: auto;
+    margin: 0.2rem;
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

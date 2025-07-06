@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Bamanankan Koron',
-  'welcome' => 'Bisimila',
-  'current_language' => 'Kan beerika',
+  'app_title' => 'Kelebolo Ntaanw',
+  'welcome' => 'I ni ce',
+  'current_language' => 'Kan min bɛ kɛ sisan',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Kan sugandi',
+  'language_change' => 'Kan sɛmɛntiya',
+  'language_changed' => 'Kan sɛmɛntiyalen don',
+  'language_not_found' => 'Kan sɛbɛn ma sɔrɔ',
+  'language_default' => 'Kan fɔlɔ',
+  'language_default_missing' => 'Kan fɔlɔ sɛbɛn ma sɔrɔ',
+  'language_switch' => 'Kan sɛmɛntiya',
+  'language_switch_success' => 'Kan sɛmɛntiyalen don ka ɲɛ',
+  'language_switch_error' => 'Fili bɛ kan sɛmɛntiyali la'
 ];
 ?>

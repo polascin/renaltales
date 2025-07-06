@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
-  'welcome' => 'ሰላማት',
-  'current_language' => 'ሕዚ ቋንቋ',
+  'app_title' => 'ናይ ኩላሊት ዛንታታት',
+  'welcome' => 'እንቋዕ ብደሓን መጻእኩም',
+  'current_language' => 'ናይ ሕጂ ቋንቋ',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'ቋንቋ ምምራጽ',
+  'language_change' => 'ቋንቋ ቀይር',
+  'language_changed' => 'ቋንቋ ተቀይሩ',
+  'language_not_found' => 'ናይ ቋንቋ ፋይል አይተረኽበን',
+  'language_default' => 'ቀንዲ ቋንቋ',
+  'language_default_missing' => 'ናይ ቀንዲ ቋንቋ ፋይል የብሉን',
+  'language_switch' => 'ቋንቋ ቀይር',
+  'language_switch_success' => 'ቋንቋ ብዓወት ተቀይሩ',
+  'language_switch_error' => 'ቋንቋ ክቐየር ከሎ ጌጋ ተፈጺሙ'
 ];
 ?>

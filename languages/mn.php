@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
-  'welcome' => 'Тавтай морилно уу',
+  'app_title' => 'Бөөрний түүхүүд',
+  'welcome' => 'Тавтай морил',
   'current_language' => 'Одоогийн хэл',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Хэл сонгох',
+  'language_change' => 'Хэл солих',
+  'language_changed' => 'Хэл солигдсон',
+  'language_not_found' => 'Хэлний файл олдсонгүй',
+  'language_default' => 'Үндсэн хэл',
+  'language_default_missing' => 'Үндсэн хэлний файл байхгүй',
+  'language_switch' => 'Хэл сэлгэх',
+  'language_switch_success' => 'Хэл амжилттай солигдсон',
+  'language_switch_error' => 'Хэл солихад алдаа гарлаа'
 ];
 ?>

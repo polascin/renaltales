@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
-  'welcome' => 'މަރުޙަބާ',
+  'app_title' => 'ގުރުދާގެ ހަދީސްތައް',
+  'welcome' => 'މަރުހަބާ',
   'current_language' => 'މިހާރުގެ ބަސް',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'ބަސް ހޮވުން',
+  'language_change' => 'ބަސް ބަދަލުކުރުން',
+  'language_changed' => 'ބަސް ބަދަލުކުރެވުނު',
+  'language_not_found' => 'ބަހުގެ ފައިލް ނުފެނުނު',
+  'language_default' => 'ޑިފޯލްޓް ބަސް',
+  'language_default_missing' => 'ޑިފޯލްޓް ބަހުގެ ފައިލް ނެތް',
+  'language_switch' => 'ބަސް ބަދަލުކުރުން',
+  'language_switch_success' => 'ބަސް ކާމިޔާބުކަމާއެކު ބަދަލުކުރެވުނު',
+  'language_switch_error' => 'ބަސް ބަދަލުކުރުމުގައި ހުއްޓުވުން'
 ];
 ?>

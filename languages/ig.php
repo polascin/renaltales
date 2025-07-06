@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Aká»Ąká»Ť Aká»Ąrá»Ą',
+  'app_title' => 'Akụkọ Akụrụ',
   'welcome' => 'Nnọọ',
-  'current_language' => 'Asụsụ ugbu a',
+  'current_language' => 'Asụsụ dị ugbu a',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Nhọrọ asụsụ',
+  'language_change' => 'Gbanwee asụsụ',
+  'language_changed' => 'Agbanweela asụsụ',
+  'language_not_found' => 'Achọtaghị faịlụ asụsụ',
+  'language_default' => 'Asụsụ izizi',
+  'language_default_missing' => 'Faịlụ asụsụ izizi adịghị',
+  'language_switch' => 'Gbanwee asụsụ',
+  'language_switch_success' => 'Agbanweela asụsụ nke ọma',
+  'language_switch_error' => 'Njehie na mgbanwe asụsụ'
 ];
 ?>

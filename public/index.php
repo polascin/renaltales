@@ -56,18 +56,17 @@ $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php if (isset($appTitle)) echo $appTitle; else echo APP_TITLE; ?></title>
-    <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">''
+    <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <?php require_once 'assets/js/defaultLanguageFileMissing.php'; ?> 
 </head>
 <body>
     <header>
-        <h1><?php echo $appTitle; ?></h1>
-    </header>
+        <h1><?=$appTitle?></h1>
     <nav class="language-selector">
         <ul>
             <li>
-                <form method="get" action="">
+                <form method="get">
                     <select name="lang" onchange="this.form.submit()">
                         <?php 
                             // Only show languages for which a language file exists
@@ -130,8 +129,24 @@ $appTitle = isset($text['app_title']) ? $text['app_title'] : APP_TITLE;
             </li>
         </ul>
     </nav>
-    <section></section>
     <main>
+        <hr>
+        <section class="language-selection-flags">
+            <?php 
+                // Only show languages for which a language file exists
+                $selectableLanguages = $languageDetector->getSupportedLanguages(); 
+                foreach ($selectableLanguages as $lang) {
+                    $langFile = LANGUAGE_PATH . $lang . '.php';
+                    if (!file_exists($langFile)) continue; // Skip if language file does not exist
+                    $langName = $languageDetector->getLanguageName($lang);
+                    $flagPath = $languageDetector->getFlagPath($lang);
+                    echo '<a href="?lang=' . $lang . '" title="' . htmlspecialchars($langName) . '">';
+                    echo $lang . '<img src="' . $flagPath . '" alt="' . htmlspecialchars($langName) . '">';
+                    echo '</a>';
+                }
+            ?>
+        </section>
+        <hr>
         <p><?= $text['current_language']; ?> <strong><?php echo $currentLanguageName; ?></strong></p>
         <p><?= $text['welcome']; ?></p>
     </main>

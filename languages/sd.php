@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'گردن جون ڪهاڻيون',
   'welcome' => 'ڀلي ڪري آيا',
-  'current_language' => 'موجوده ٻولي',
+  'current_language' => 'هاڻوڪي ٻولي',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'ٻولي چونڊ',
+  'language_change' => 'ٻولي تبديل ڪريو',
+  'language_changed' => 'ٻولي تبديل ٿي وئي',
+  'language_not_found' => 'ٻولي فائل نه ملي',
+  'language_default' => 'بنيادي ٻولي',
+  'language_default_missing' => 'بنيادي ٻولي فائل موجود ناهي',
+  'language_switch' => 'ٻولي تبديل ڪريو',
+  'language_switch_success' => 'ٻولي ڪاميابي سان تبديل ٿي وئي',
+  'language_switch_error' => 'ٻولي تبديل ڪرڻ ۾ خرابي'
 ];
 ?>

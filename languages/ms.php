@@ -6,12 +6,12 @@ return [
   'footer_copyright' => 'Ľubomír Polaščín',
   'language_selection' => 'Pemilihan bahasa',
   'language_change' => 'Tukar bahasa',
-  'language_changed' => 'Bahasa telah ditukar kepada',
+  'language_changed' => 'Bahasa telah ditukar',
   'language_not_found' => 'Fail bahasa tidak dijumpai',
   'language_default' => 'Bahasa lalai',
-  'language_default_missing' => 'Fail bahasa lalai hilang',
-  'language_switch' => 'Tukar bahasa',
-  'language_switch_success' => 'Bahasa berjaya ditukar kepada',
-  'language_switch_error' => 'Ralat semasa menukar bahasa'
+  'language_default_missing' => 'Fail bahasa lalai tiada',
+  'language_switch' => 'Beralih bahasa',
+  'language_switch_success' => 'Bahasa berjaya ditukar',
+  'language_switch_error' => 'Ralat dalam menukar bahasa'
 ];
 ?>

@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Narrativas Renals',
-  'welcome' => 'Bainvegni',
+  'app_title' => 'Istorias dals gnirunchels',
+  'welcome' => 'Bainvegnì',
   'current_language' => 'Lingua actuala',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Tscherna da lingua',
+  'language_change' => 'Midar lingua',
+  'language_changed' => 'La lingua è vegnida midada',
+  'language_not_found' => 'Datoteca da lingua betg chattada',
+  'language_default' => 'Lingua da basa',
+  'language_default_missing' => 'Datoteca da lingua da basa mancanta',
+  'language_switch' => 'Midar lingua',
+  'language_switch_success' => 'La lingua è vegnida midada cun success',
+  'language_switch_error' => 'Errur tar midar la lingua'
 ];
 ?>

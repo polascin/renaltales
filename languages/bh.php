@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
-  'welcome' => 'स्वागत',
-  'current_language' => 'वर्तमान भाषा',
+  'app_title' => 'गुर्दा के कहानी',
+  'welcome' => 'स्वागत बा',
+  'current_language' => 'मौजूदा भाषा',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'भाषा चुनाव',
+  'language_change' => 'भाषा बदलीं',
+  'language_changed' => 'भाषा बदल गइल',
+  'language_not_found' => 'भाषा फाइल ना मिलल',
+  'language_default' => 'मूल भाषा',
+  'language_default_missing' => 'मूल भाषा फाइल नइखे',
+  'language_switch' => 'भाषा बदलीं',
+  'language_switch_success' => 'भाषा सफलतापूर्वक बदल गइल',
+  'language_switch_error' => 'भाषा बदले में त्रुटि'
 ];
 ?>

@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'RiĂ±on Willakuykuna',
-  'welcome' => 'Allinllachu',
-  'current_language' => 'Kunan simi',
+  'app_title' => 'Riñonkunapa willakuynin',
+  'welcome' => 'Allin hamusqayki',
+  'current_language' => 'Kunan rimay',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Rimayta akllay',
+  'language_change' => 'Rimayta hukchay',
+  'language_changed' => 'Rimayqa hukchakun',
+  'language_not_found' => 'Rimaypa archivonmi mana tarisqachu',
+  'language_default' => 'Ñawpaq rimay',
+  'language_default_missing' => 'Ñawpaq rimaypa archivonmi mana kanchu',
+  'language_switch' => 'Rimayta tikray',
+  'language_switch_success' => 'Rimayqa allinta hukchakun',
+  'language_switch_error' => 'Rimayta hukchaypi pantaymi kan'
 ];
 ?>

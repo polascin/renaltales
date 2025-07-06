@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'TĂ® MbĂ«tĂŻ',
-  'welcome' => 'Sengä',
-  'current_language' => 'Yângâ tî nû',
+  'app_title' => 'Âkôlï tî Ngangû',
+  'welcome' => 'Mbôte na tongoû',
+  'current_language' => 'Yângâ tî sô',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Sûngö yângâ',
+  'language_change' => 'Kekeré yângâ',
+  'language_changed' => 'Yângâ akekerê',
+  'language_not_found' => 'Feketê yângâ amû',
+  'language_default' => 'Yângâ tî sîga',
+  'language_default_missing' => 'Feketê yângâ tî sîga amû',
+  'language_switch' => 'Kekeré yângâ',
+  'language_switch_success' => 'Yângâ akekerê na mbênî',
+  'language_switch_error' => 'Kôzo na kekeré yângâ'
 ];
 ?>

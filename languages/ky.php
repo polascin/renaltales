@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'Renal Tales',
+  'app_title' => 'Бөйрөк окуялары',
   'welcome' => 'Кош келиңиз',
   'current_language' => 'Учурдагы тил',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Тил тандоо',
+  'language_change' => 'Тилди өзгөртүү',
+  'language_changed' => 'Тил өзгөртүлдү',
+  'language_not_found' => 'Тил файлы табылган жок',
+  'language_default' => 'Негизги тил',
+  'language_default_missing' => 'Негизги тил файлы жок',
+  'language_switch' => 'Тилди алмаштыруу',
+  'language_switch_success' => 'Тил ийгиликтүү өзгөртүлдү',
+  'language_switch_error' => 'Тил өзгөртүүдө ката'
 ];
 ?>

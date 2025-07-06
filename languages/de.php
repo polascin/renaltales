@@ -6,12 +6,12 @@ return [
   'footer_copyright' => 'Ľubomír Polaščín',
   'language_selection' => 'Sprachauswahl',
   'language_change' => 'Sprache ändern',
-  'language_changed' => 'Sprache wurde geändert zu',
+  'language_changed' => 'Die Sprache wurde geändert',
   'language_not_found' => 'Sprachdatei nicht gefunden',
   'language_default' => 'Standardsprache',
-  'language_default_missing' => 'Standardsprache-Datei fehlt',
+  'language_default_missing' => 'Standardsprachdatei fehlt',
   'language_switch' => 'Sprache wechseln',
-  'language_switch_success' => 'Sprache wurde erfolgreich gewechselt zu',
-  'language_switch_error' => 'Fehler beim Wechseln der Sprache'
+  'language_switch_success' => 'Die Sprache wurde erfolgreich geändert',
+  'language_switch_error' => 'Fehler beim Ändern der Sprache'
 ];
 ?>

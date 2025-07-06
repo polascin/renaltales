@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'BĂ¶wrek Ertekleri',
+  'app_title' => 'Böwrek hekaýalary',
   'welcome' => 'Hoş geldiňiz',
   'current_language' => 'Häzirki dil',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Dil saýlaýşy',
+  'language_change' => 'Dili üýtgetmek',
+  'language_changed' => 'Dil üýtgedildi',
+  'language_not_found' => 'Dil faýly tapylmady',
+  'language_default' => 'Esasy dil',
+  'language_default_missing' => 'Esasy dil faýly ýok',
+  'language_switch' => 'Dili çalyşmak',
+  'language_switch_success' => 'Dil üstünlikli üýtgedildi',
+  'language_switch_error' => 'Dil üýtgetmekde ýalňyşlyk'
 ];
 ?>

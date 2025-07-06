@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'DongĂ©ng Ginjal',
+  'app_title' => 'Carita Ginjal',
   'welcome' => 'Wilujeng sumping',
   'current_language' => 'Basa ayeuna',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Pilihan basa',
+  'language_change' => 'Ganti basa',
+  'language_changed' => 'Basa geus diganti',
+  'language_not_found' => 'Berkas basa teu kapendak',
+  'language_default' => 'Basa dasar',
+  'language_default_missing' => 'Berkas basa dasar teu aya',
+  'language_switch' => 'Alih basa',
+  'language_switch_success' => 'Basa geus hasil diganti',
+  'language_switch_error' => 'Aya lepat dina ngaganti basa'
 ];
 ?>

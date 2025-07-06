@@ -1,17 +1,17 @@
 ﻿<?php
 return [
-  'app_title' => 'BĂˇhppat',
+  'app_title' => 'Betnegat muitalusat',
   'welcome' => 'Bures boahtin',
   'current_language' => 'Dálá giella',
   'footer_copyright' => 'Ľubomír Polaščín',
-  'language_selection' => 'Language selection',
-  'language_change' => 'Change language',
-  'language_changed' => 'Language has been changed to',
-  'language_not_found' => 'Language file not found',
-  'language_default' => 'Default language',
-  'language_default_missing' => 'Default language file is missing',
-  'language_switch' => 'Switch language',
-  'language_switch_success' => 'Language was successfully switched to',
-  'language_switch_error' => 'Error switching language'
+  'language_selection' => 'Giela válljen',
+  'language_change' => 'Rievdat giela',
+  'language_changed' => 'Giella lea rievdaduvvon',
+  'language_not_found' => 'Giellafila ii gávdno',
+  'language_default' => 'Vuođđogiella',
+  'language_default_missing' => 'Vuođđogiellafila ii leat',
+  'language_switch' => 'Molsut giela',
+  'language_switch_success' => 'Giella lea buoremusat rievdaduvvon',
+  'language_switch_error' => 'Meattáhus giela rievdadeamis'
 ];
 ?>
