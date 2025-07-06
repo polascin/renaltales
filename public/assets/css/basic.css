@@ -1,78 +1,105 @@
-/* Basic Responsive Design CSS */
+/* Basic Responsive Design CSS styles for Renal Tales web application */
+/* Created by Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin*/
+
 /* File: public/assets/css/basic.css */
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* Global Variables */
+:root {
+  --title-color: #a7c6ed; /* Pastel Blue */
+  --accent-color: #ff6f61; /* Pastel Coral */
+  --accent-dark: #d95f4f; /* Darker Pastel Coral */
+  --accent-light: #ff8f7b; /* Light Pastel Coral */
+  --accent-lighter: #ffb3a1; /* Lighter Pastel Coral */
+  --accent-lightest: #ffd3d1; /* Lightest Pastel Coral */
+  --accent-darkest: #c94c4c; /* Dark Pastel Coral */
+  --accent-darker: #a43d3d; /* Darker Pastel Coral */
+  --primary-color: #a0c4ff; /* Pastel Steel Blue */
+  --primary-dark: #7c9dd0; /* Darker Pastel Steel Blue */
+  --secondary-color: #b9fbc0; /* Pastel Green */
+  --secondary-dark: #8ef6a6; /* Darker Pastel Green */
+  --danger-color: #ff6b6b; /* Pastel Red */
+  --warning-color: #ffe66d; /* Pastel Yellow */
+  --success-color: #b9fbc0; /* Pastel Green */
+  --info-color: #85e3ff; /* Pastel Cyan */
+  --light-color: #f9f9f9; /* Very Light Pastel Gray */
+  --dark-color: #d3d3d3; /* Light Pastel Gray */
+  --gray-color: #b0b0b0; /* Light Gray */
+  --white-color: #ffffff; /* White */
+  --black-color: #000000; /* Black */
+  --gray-light: #f0f0f0; /* Light Gray */
+  --gray-dark: #808080; /* Dark Gray */
+  --gray-darker: #505050; /* Darker Gray */
+  --gray-darkest: #303030; /* Darkest Gray */
+  --gray-lightest: #f9f9f9; /* Lightest Gray */
+  --gray-lighter: #e0e0e0; /* Lighter Gray */
+  --gray-lightest: #f5f5f5; /* Lightest Gray */
+  --body-bg: #f0f4f8; /* Pastel Background */
+  --text-color: #333333; /* Darker Gray for better contrast */
+  --border-color: #e0e0e0; /* Light Border Color */
+  --panel-bg: cornsilk; /* Color for panels */
+  --panel-border: #dcdcdc; /* Light Gray Border for Panels */
+  --font-family-sans: 'Poppins', sans-serif;
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-mono: 'Source Code Pro', monospace;
+  --font-family-cursive: 'Pacifico', cursive;
+  --font-family-fantasy: 'Eagle Lake', 'Lobster', fantasy;
+  --font-family-system: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-ui: 'ui-serif', 'ui-sans-serif', 'ui-monospace', 'ui-rounded';
+  --font-family-emoji: 'emoji', 'math', 'fangsong';
+  color: whitesmoke
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Base Styles */
 html {
-  font-family: sans-serif;
+  font-family: var(--font-family-system);
   line-height: 1.15;
   max-width: 1280px;
-  margin-left: auto; margin-right: auto;
+  margin: 0 auto;
   box-sizing: border-box;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -ms-overflow-style: scrollbar;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  background: #fafbfc;
-  color: #222;
-}
-
-.container {
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
-}
-
-header, nav, main, footer {
-  padding: 1rem 0;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  text-align: center;
-}
-
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
+  max-width: 1280px;
   padding: 0;
-  margin: 0 0 1rem 0;
-  gap: 1rem;
+  font-family: var(--font-family-sans);
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-nav ul li {
-  margin: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: #4a90e2;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-nav a:hover, nav a:focus {
-  background: #e6f0fa;
-}
-
-main {
-  min-height: 60vh;
+header,
+main,
+footer,
+section,
+article,
+nav,
+aside,
+figure,
+figcaption,
+details,
+summary,
+menu,
+dialog {
+  box-sizing: border-box;
 }
 
 footer {
@@ -85,43 +112,73 @@ footer {
 }
 
 /* Responsive Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1.2;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0 0.5rem;
 }
 
 p {
-  margin: 0 0 1rem 0;
+  margin-bottom: 1rem;
 }
 
 /* Responsive Images */
-img, video, iframe {
+img,
+video,
+iframe {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
 /* Responsive Layout */
-@media (max-width: 900px) {
-  .container {
-    max-width: 95vw;
-    padding: 0.5rem;
+
+/* Mobile First Breakpoints */
+@media (max-width: 320px) {
+  html {
+    font-size: 12px; /* Base font size for very small screens */
   }
-  header h1 {
-    font-size: 1.5rem;
+  main {
+    min-height: 30vh;
   }
 }
 
-@media (max-width: 600px) {
-  nav ul {
-    flex-direction: column;
-    gap: 0.5rem;
+@media (min-width: 321px) and (max-width: 480px) {
+  html {
+    font-size: 13px; /* Base font size for small screens */
   }
-  .container {
-    padding: 0.25rem;
+  main {
+    min-height: 35vh;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 14px; /* Base font size for medium screens */
   }
   main {
     min-height: 40vh;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 15px; /* Base font size for large screens */
+  }
+  main {
+    min-height: 45vh;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px; /* Base font size for extra large screens */
+  }
+  main {
+    min-height: 50vh;
   }
 }

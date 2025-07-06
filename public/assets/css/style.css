@@ -1,130 +1,156 @@
-/* This file contains the CSS styles for the Renal Tales application. */
+/* Additional CSS styles for the Renal Tales web application */
+/* Created by Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin*/
+
 /* File: public/assets/css/style.css */
 
+/* Main Header Container Styles */
+.main-header-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: top;
+  align-content: stretch;
+  padding: 1rem;
+  margin: 0.5rem 0 1rem 0;
+  background-color: var(--panel-bg);
+  border: solid thin var(--panel-border);
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--gray-darker)
+}
+.main-header-container .left-section {
+  flex-grow: 2;
+  flex-shrink: 1;
+  flex-basis: 0;
+  margin-right: 1rem;
+}
+.main-header-container .central-section {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;;
+  margin-right: 1rem;
+}
+.main-header-container .right-section {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;;
+}
+.main-header-container img.logo {
+  float: left;
+  vertical-align: top;
+  height: 12rem;
+  width: auto;
+  margin: 0 1rem 1rem 0;
+}
+.main-header-container h1 {
+  margin: 0;
+}
+.main-header-container h2 {
+  margin: 0;
+}
+.main-header-container h3 {
+  margin: 0;
+}
+.main-header-container h4 {
+  margin: 0;
+  clear: both;
+}
+.main-header-container h5 {
+  margin: 0;
+}
+.main-header-container h6 {
+  margin: 0;
+}
 
 
-/* General Styles */
+/* Content Styles */
 
-
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+  min-height: 100vh;
+  background-color: var(--body-bg);
+}
 
 /* Language Selector Styles */
-
-nav.language-selector {
-    background-color: transparent;
-    margin: 10px 0;
-    padding: 0;
+.language-selector {
+  display: table;
+  margin: 0 0 0 auto;
+  border: thin solid transparent
 }
-
-nav.language-selector ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.language-selector ul, .language-selector li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-
-nav.language-selector li {
-    margin: 0;
-    padding: 0;
+.language-selector form {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin: 0.5rem 0 0 0;
+  border: solid thin transparent;
 }
-
-nav.language-selector form {
-    display: inline-flex;
-    align-items: center;
-    margin: 0;
-    padding: 5px;
-    background: #f8f9fa;
-    border-radius: 5px;
-    border: 1px solid #dee2e6;
+.language-selector select {
+  font-size: 1rem;
+  text-align: right;
+  color: var(--text-color);
 }
-
-nav.language-selector select {
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    color: #333;
-    cursor: pointer;
-    padding: 2px 5px;
-    margin-left: 5px;
+.language-selector .lang-flag {
+  height: 1.25rem;
+  width: auto;
 }
-
-nav.language-selector select:focus {
-    outline: 1px solid #007bff;
-    outline-offset: 1px;
-}
-
-nav.language-selector .lang-flag {
-    height: 1.2em;
-    width: auto;
-    vertical-align: middle;
-    margin-right: 0.5em;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-nav.language-selector select option {
-    background-color: #fff;
-    color: #333;
-    padding: 5px;
-}
-
-nav.language-selector select option:checked {
-    background-color: #007bff;
-    color: #fff;
-}
-
-nav.language-selector select option:hover {
-    background-color: #e9ecef;
-}
-
-
 
 /* Language Flag Link Styles */
-
-section.language-selection-flags {
-    display: flex;    
-    float: right;
-    flex-wrap: wrap;
-    gap: 0.3rem;
-    margin: 1rem;
-    font-size: small;
-    clear: both;
+.language-selection-flags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 3rem 0;
+  color: var(--text-color)
 }
-
-section.language-selection-flags a {
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
-    border: solid 1px transparent;
+.language-selection-flags a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  border: solid 1px transparent;
+  text-align: center;
+  margin: 0 0 0.25rem 0;
 }
-
-section.language-selection-flags a:hover {
-    font-weight: bold;
-    border: solid 1px silver;
+.language-selection-flags a:hover {
+  font-weight: bold;
+  border: solid 1px transparent;
 }
-
-section.language-selection-flags a:focus {
-    border: solid 1px red;
+.language-selection-flags a:focus {
+  border: solid 1px transparent;
+  color: var(--accent-color)
 }
-
-section.language-selection-flags a img {
-    height: 1.6rem;
-    width: auto;
-    margin: 0.2rem;
+.language-selection-flags a img {
+  height: 1.5rem;
+  width: auto;
+  vertical-align: middle;
+  margin: 0 auto 0 auto
+  border: none
 }
-
-
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-    nav.language-selector form {
-        padding: 3px;
-    }
-    
-    nav.language-selector select {
-        font-size: 12px;
-    }
-    
-    nav.language-selector .lang-flag {
-        height: 1em;
-    }
+@media (max-width: 768px) {    
+  .language-selector form {
+    padding: 0.25rem;
+  }
+  .language-selector select {
+    font-size: 0.875rem;
+  }
+  .language-selector .lang-flag {
+    height: 1rem;
+  }
 }
