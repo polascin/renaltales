@@ -141,6 +141,14 @@
   margin: 0 auto 0 auto
   border: none
 }
+.flag {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: cover;
+  background-position: center;
+  margin-right: 0.5rem;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {    
