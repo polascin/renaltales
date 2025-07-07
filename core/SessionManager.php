@@ -14,6 +14,7 @@ class SessionManager {
   private $maxSessionLifetime;
   private $sessionTimeout;
   private $csrfToken;
+  private $sessionStarted = false;
   
   /**
    * Constructor
@@ -30,13 +31,11 @@ class SessionManager {
     $this->sessionTimeout = $sessionTimeout;
     $this->maxSessionLifetime = ini_get('session.gc_maxlifetime');
     
-    // Configure secure session settings
+    // Configure secure session settings BEFORE starting session
     $this->configureSecureSession();
     
     // Start session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-      session_start();
-    }
+    $this->startSession();
     
     // Initialize security measures
     $this->initializeSecurity();
@@ -46,25 +45,55 @@ class SessionManager {
    * Configure secure session settings
    */
   private function configureSecureSession() {
-    // Set secure session configuration
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.cookie_secure', $this->isHttps());
-    ini_set('session.cookie_samesite', 'Strict');
-    ini_set('session.use_strict_mode', 1);
-    ini_set('session.use_only_cookies', 1);
-    ini_set('session.use_trans_sid', 0);
-    ini_set('session.entropy_length', 32);
-    ini_set('session.hash_function', 'sha256');
-    ini_set('session.gc_maxlifetime', $this->sessionTimeout);
-    
-    // Set session name to something non-default
-    session_name('SECURE_SESSION_ID');
+    // Only configure if session is not active
+    if (session_status() === PHP_SESSION_NONE) {
+      // Set secure session configuration
+      ini_set('session.cookie_httponly', 1);
+      ini_set('session.cookie_secure', $this->isHttps());
+      ini_set('session.cookie_samesite', 'Strict');
+      ini_set('session.use_strict_mode', 1);
+      ini_set('session.use_only_cookies', 1);
+      ini_set('session.use_trans_sid', 0);
+      ini_set('session.gc_maxlifetime', $this->sessionTimeout);
+      
+      // Set session name to something non-default
+      session_name('SECURE_SESSION_ID');
+      
+      // Set session cookie parameters
+      session_set_cookie_params([
+        'lifetime' => 0, // Session cookie
+        'path' => '/',
+        'domain' => '', // Current domain
+        'secure' => $this->isHttps(),
+        'httponly' => true,
+        'samesite' => 'Strict'
+      ]);
+    }
+  }
+  
+  /**
+   * Start session safely
+   */
+  private function startSession() {
+    if (session_status() === PHP_SESSION_NONE) {
+      if (session_start()) {
+        $this->sessionStarted = true;
+      } else {
+        throw new Exception('Failed to start session');
+      }
+    } else {
+      $this->sessionStarted = true;
+    }
   }
   
   /**
    * Initialize security measures
    */
   private function initializeSecurity() {
+    if (!$this->sessionStarted) {
+      return;
+    }
+    
     // Check for session hijacking
     $this->checkSessionHijacking();
     
@@ -260,11 +289,15 @@ class SessionManager {
       'request_uri' => $_SERVER['REQUEST_URI'] ?? ''
     ];
     
-    // Log to file (ensure log directory exists and is writable)
-    $logFile = '../logs/security_violations.log';
-    if (is_dir(dirname($logFile))) {
-      error_log(json_encode($logEntry) . "\n", 3, $logFile);
+    // Create logs directory if it doesn't exist
+    $logDir = APP_DIR . '/logs';
+    if (!is_dir($logDir)) {
+      mkdir($logDir, 0755, true);
     }
+    
+    // Log to file
+    $logFile = $logDir . '/security_violations.log';
+    error_log(json_encode($logEntry) . "\n", 3, $logFile);
   }
   
   /**

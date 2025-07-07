@@ -41,3 +41,20 @@ Graceful security violation handling
 Proper HTTP response codes
 Safe fallback behaviors
 This implementation provides enterprise-level security while maintaining the debugging and management functionality you need.
+
+The warning occurs because you're trying to modify session settings after the session has already started. Here's the corrected SessionManager.php:
+
+
+## Key changes made:
+
+1. **Moved session configuration before session start** - Session settings can only be changed before the session is started
+2. **Used `session_set_cookie_params()`** - This is the proper way to set cookie parameters before session start
+3. **Added proper session starting logic** - Check if session is already started before starting
+4. **Removed session start from index.php** - Let SessionManager handle it
+5. **Added exception handling** - If session fails to start, throw an exception
+6. **Added logs directory creation** - Ensure log directory exists before writing to it
+7. **Added session started flag** - Track if session was successfully started
+
+This fixes the warning and ensures proper session initialization order.
+
+Similar code found with 2 license types
