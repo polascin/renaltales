@@ -37,6 +37,37 @@ composer.lock
 *.swo
 *~
 
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Storage directories
+/storage/logs/*.log
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+/storage/temp/*
+!/storage/temp/.gitkeep
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Build files
+build/
+dist/
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -45,6 +76,22 @@ composer.lock
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Backup files
+*.backup
+*.bak
+
+# Database files
+*.sqlite
+*.db
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
 # Application specific
 /var/cache/*
