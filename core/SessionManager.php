@@ -51,7 +51,7 @@ class SessionManager {
       $this->initializeSecurity();
     } catch (Exception $e) {
       error_log('SessionManager initialization failed: ' . $e->getMessage());
-      throw new Exception('Failed to initialize session manager: ' . $e->getMessage());
+      throw new Exception($this->getText('session_init_failed', 'Failed to initialize session manager') . ': ' . $e->getMessage());
     }
   }
   
@@ -90,7 +90,7 @@ class SessionManager {
         
         // Set session name to something non-default
         if (!session_name('SECURE_SESSION_ID')) {
-          throw new Exception('Failed to set session name');
+          throw new Exception($this->getText('session_name_failed', 'Failed to set session name'));
         }
         
         // Set session cookie parameters
@@ -104,10 +104,10 @@ class SessionManager {
         ];
         
         if (!session_set_cookie_params($cookieParams)) {
-          throw new Exception('Failed to set cookie parameters');
+          throw new Exception($this->getText('session_cookie_params_failed', 'Failed to set cookie parameters'));
         }
       } catch (Exception $e) {
-        throw new Exception('Session configuration failed: ' . $e->getMessage());
+        throw new Exception($this->getText('session_config_failed', 'Session configuration failed') . ': ' . $e->getMessage());
       }
     }
   }
@@ -120,13 +120,13 @@ class SessionManager {
   private function startSession() {
     if (session_status() === PHP_SESSION_NONE) {
       if (!session_start()) {
-        throw new Exception('Failed to start session');
+        throw new Exception($this->getText('session_start_failed', 'Failed to start session'));
       }
       $this->sessionStarted = true;
     } elseif (session_status() === PHP_SESSION_ACTIVE) {
       $this->sessionStarted = true;
     } else {
-      throw new Exception('Sessions are disabled');
+      throw new Exception($this->getText('sessions_disabled', 'Sessions are disabled'));
     }
   }
   
@@ -185,13 +185,13 @@ class SessionManager {
       
       // Check for user agent mismatch
       if ($storedUserAgent !== $userAgent) {
-        $this->handleSecurityViolation('User agent mismatch');
+        $this->handleSecurityViolation($this->getText('security_user_agent_mismatch', 'User agent mismatch'));
         return;
       }
       
       // Check for IP address change (optional - can be disabled for mobile users)
       if ($this->shouldCheckIP() && $storedIP !== $ipAddress) {
-        $this->handleSecurityViolation('IP address mismatch');
+        $this->handleSecurityViolation($this->getText('security_ip_mismatch', 'IP address mismatch'));
         return;
       }
     } else {
@@ -260,7 +260,7 @@ class SessionManager {
       $timeSinceLastActivity = time() - $_SESSION['_security']['last_activity'];
       
       if ($timeSinceLastActivity > $this->sessionTimeout) {
-        $this->handleSecurityViolation('Session timeout');
+        $this->handleSecurityViolation($this->getText('security_session_timeout', 'Session timeout'));
         return;
       }
     }
@@ -331,7 +331,37 @@ class SessionManager {
   }
   
   /**
-   * Handle security violations
+   * Handle security response with multilingual support
+   */
+  private function handleSecurityResponse() {
+    // Set appropriate headers
+    http_response_code(403);
+    header('Content-Type: text/html; charset=UTF-8');
+    
+    // Get multilingual error message
+    $errorMessage = $this->getText('security_violation_detected', 'Security violation detected. Session terminated.');
+    $accessDenied = $this->getText('access_denied', 'Access Denied');
+    
+    echo '<!DOCTYPE html>';
+    echo '<html lang="en">';
+    echo '<head>';
+    echo '<meta charset="utf-8">';
+    echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    echo '<title>' . htmlspecialchars($accessDenied, ENT_QUOTES, 'UTF-8') . '</title>';
+    echo '<style>body{font-family:Arial,sans-serif;margin:50px;text-align:center;}.error{color:#d9534f;border:1px solid #d9534f;padding:20px;border-radius:5px;display:inline-block;}</style>';
+    echo '</head>';
+    echo '<body>';
+    echo '<div class="error">';
+    echo '<h1>' . htmlspecialchars($accessDenied, ENT_QUOTES, 'UTF-8') . '</h1>';
+    echo '<p>' . htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') . '</p>';
+    echo '</div>';
+    echo '</body>';
+    echo '</html>';
+    exit;
+  }
+  
+  /**
+   * Handle security violations with multilingual logging
    * 
    * @param string $reason
    */
@@ -343,14 +373,33 @@ class SessionManager {
     
     $this->securityViolationHandled = true;
     
+    // Get translated reason
+    $translatedReason = $this->getSecurityReasonTranslation($reason);
+    
     // Log security violation
-    $this->logSecurityViolation($reason);
+    $this->logSecurityViolation($translatedReason);
     
     // Destroy session
     $this->destroySession();
     
     // Handle security response
     $this->handleSecurityResponse();
+  }
+  
+  /**
+   * Get translated security reason
+   * 
+   * @param string $reason
+   * @return string
+   */
+  private function getSecurityReasonTranslation($reason) {
+    $translations = [
+        'User agent mismatch' => $this->getText('security_user_agent_mismatch', 'User agent mismatch'),
+        'IP address mismatch' => $this->getText('security_ip_mismatch', 'IP address mismatch'),
+        'Session timeout' => $this->getText('security_session_timeout', 'Session timeout'),
+    ];
+    
+    return $translations[$reason] ?? $reason;
   }
   
   /**
@@ -391,35 +440,6 @@ class SessionManager {
     } catch (Exception $e) {
       error_log('Security logging failed: ' . $e->getMessage());
     }
-  }
-  
-  /**
-   * Handle security response
-   */
-  private function handleSecurityResponse() {
-    // Set appropriate headers
-    http_response_code(403);
-    header('Content-Type: text/html; charset=UTF-8');
-    
-    // Simple error page
-    $errorMessage = $this->getText('security_violation', 'Security violation detected. Session terminated.');
-    
-    echo '<!DOCTYPE html>';
-    echo '<html lang="en">';
-    echo '<head>';
-    echo '<meta charset="utf-8">';
-    echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-    echo '<title>Security Violation</title>';
-    echo '<style>body{font-family:Arial,sans-serif;margin:50px;text-align:center;}.error{color:#d9534f;border:1px solid #d9534f;padding:20px;border-radius:5px;display:inline-block;}</style>';
-    echo '</head>';
-    echo '<body>';
-    echo '<div class="error">';
-    echo '<h1>Access Denied</h1>';
-    echo '<p>' . htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') . '</p>';
-    echo '</div>';
-    echo '</body>';
-    echo '</html>';
-    exit;
   }
   
   /**
@@ -508,7 +528,7 @@ class SessionManager {
     $sessionId = session_id();
     
     if (empty($sessionId)) {
-      return 'No session ID';
+      return $this->getText('session_id_none', 'No session ID');
     }
     
     // Mask session ID for security (show only first 8 and last 4 characters)
@@ -542,7 +562,7 @@ class SessionManager {
       'domain' => $params['domain'] ?? '',
       'secure' => $params['secure'] ?? false,
       'httponly' => $params['httponly'] ?? false,
-      'samesite' => $params['samesite'] ?? 'not set'
+      'samesite' => $params['samesite'] ?? $this->getText('not_set', 'not set')
     ];
   }
   
@@ -562,7 +582,7 @@ class SessionManager {
     $sensitiveKeys = ['_security', '_csrf_token', 'password', 'token', 'secret', 'api_key'];
     foreach ($sensitiveKeys as $key) {
       if (isset($sessionData[$key])) {
-        $sessionData[$key] = '[FILTERED]';
+        $sessionData[$key] = $this->getText('filtered', '[FILTERED]');
       }
     }
     
@@ -915,8 +935,8 @@ class SessionManager {
     echo '<ul>';
     echo '<li><strong>' . $this->getText('session_variables_count', 'Variables Count') . ':</strong> ' . $sessionCount . '</li>';
     echo '<li><strong>' . $this->getText('session_data_size', 'Data Size') . ':</strong> ' . $this->formatBytes($sessionSize) . '</li>';
-    echo '<li><strong>' . $this->getText('session_max_lifetime', 'Max Lifetime') . ':</strong> ' . $this->maxSessionLifetime . ' seconds</li>';
-    echo '<li><strong>' . $this->getText('session_cookie_lifetime', 'Cookie Lifetime') . ':</strong> ' . ini_get('session.cookie_lifetime') . ' seconds</li>';
+    echo '<li><strong>' . $this->getText('session_max_lifetime', 'Max Lifetime') . ':</strong> ' . $this->maxSessionLifetime . ' ' . $this->getText('seconds', 'seconds') . '</li>';
+    echo '<li><strong>' . $this->getText('session_cookie_lifetime', 'Cookie Lifetime') . ':</strong> ' . ini_get('session.cookie_lifetime') . ' ' . $this->getText('seconds', 'seconds') . '</li>';
     echo '<li><strong>' . $this->getText('session_security_level', 'Security Level') . ':</strong> ' . ($this->isHttps() ? 'HTTPS' : 'HTTP') . '</li>';
     echo '<li><strong>' . $this->getText('session_save_path', 'Save Path') . ':</strong> ' . $this->sanitizeOutput(session_save_path()) . '</li>';
     echo '</ul>';
@@ -932,11 +952,11 @@ class SessionManager {
    */
   private function formatBytes($bytes) {
     if ($bytes >= 1024 * 1024) {
-      return round($bytes / (1024 * 1024), 2) . ' MB';
+      return round($bytes / (1024 * 1024), 2) . ' ' . $this->getText('mb', 'MB');
     } elseif ($bytes >= 1024) {
-      return round($bytes / 1024, 2) . ' KB';
+      return round($bytes / 1024, 2) . ' ' . $this->getText('kb', 'KB');
     } else {
-      return $bytes . ' bytes';
+      return $bytes . ' ' . $this->getText('bytes', 'bytes');
     }
   }
   
