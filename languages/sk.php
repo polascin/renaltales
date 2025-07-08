@@ -100,5 +100,74 @@ return [
   'session_security_level' => 'Úroveň zabezpečenia',
   'session_comprehensive' => 'Komplexné informácie o relácii',
   'debug_not_allowed' => 'Ladiace informácie nie sú dostupné z bezpečnostných dôvodov.',
+  
+  /* Error handling */
+  'application_error' => 'Chyba aplikácie',
+  'error' => 'Chyba',
+  'service_unavailable' => 'Služba je dočasne nedostupná',
+  'try_again_later' => 'Skúste to prosím neskôr.',
+  
+  /* Debug information */
+  'debug_mode_enabled' => 'Režim ladenia je zapnutý.',
+  'debug_info' => 'Ladiace informácie',
+  'debug_section' => 'Sekcia ladenia',
+  
+  /* Service information section */
+  'service_information_section' => 'Sekcia informácií o službe',
+  'comprehensive_service_info' => 'Komplexné informácie o službe',
+  
+  /* Additional session items */
+  'session_section' => 'Sekcia relácie',
+  'session_overview' => 'Prehľad relácie',
+  'session_details' => 'Podrobnosti relácie',
+  
+  /* Additional server items */
+  'server_section' => 'Sekcia servera',
+  'server_overview' => 'Prehľad servera',
+  'server_details' => 'Podrobnosti servera',
+  'server_environment' => 'Prostredie servera',
+  
+  /* Additional application items */
+  'app_section' => 'Sekcia aplikácie',
+  'app_overview' => 'Prehľad aplikácie',
+  'app_details' => 'Podrobnosti aplikácie',
+  'app_environment' => 'Prostredie aplikácie',
+  'app_configuration' => 'Konfigurácia aplikácie',
+  
+  /* Navigation items */
+  'navigation' => 'Navigácia',
+  'main_navigation' => 'Hlavná navigácia',
+  'language_navigation' => 'Jazyková navigácia',
+  'skip_to_content' => 'Preskočiť na obsah',
+  'skip_to_main' => 'Preskočiť na hlavný obsah',
+  
+  /* Footer items */
+  'footer' => 'Pätička',
+  'copyright' => 'Autorské práva',
+  'all_rights_reserved' => 'Všetky práva vyhradené',
+  
+  /* Accessibility items */
+  'accessibility' => 'Prístupnosť',
+  'screen_reader_only' => 'Len pre čítačky obrazovky',
+  'keyboard_navigation' => 'Klávesová navigácia',
+  
+  /* Form items */
+  'form' => 'Formulár',
+  'submit' => 'Odoslať',
+  'reset' => 'Resetovať',
+  'cancel' => 'Zrušiť',
+  'save' => 'Uložiť',
+  'edit' => 'Upraviť',
+  'delete' => 'Odstrániť',
+  'confirm' => 'Potvrdiť',
+  
+  /* Status messages */
+  'loading' => 'Načítava sa...',
+  'please_wait' => 'Prosím čakajte...',
+  'processing' => 'Spracúva sa...',
+  'success' => 'Úspech',
+  'warning' => 'Upozornenie',
+  'info' => 'Informácia',
+  'notice' => 'Oznámenie',
 ];
 ?>

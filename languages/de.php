@@ -100,5 +100,74 @@ return [
   'session_security_level' => 'Sicherheitsstufe',
   'session_comprehensive' => 'Umfassende Sitzungsinformationen',
   'debug_not_allowed' => 'Debug-Informationen sind aus Sicherheitsgründen nicht verfügbar.',
+  
+  /* Error handling */
+  'application_error' => 'Anwendungsfehler',
+  'error' => 'Fehler',
+  'service_unavailable' => 'Service vorübergehend nicht verfügbar',
+  'try_again_later' => 'Bitte versuchen Sie es später erneut.',
+  
+  /* Debug information */
+  'debug_mode_enabled' => 'Debug-Modus ist aktiviert.',
+  'debug_info' => 'Debug-Informationen',
+  'debug_section' => 'Debug-Bereich',
+  
+  /* Service information section */
+  'service_information_section' => 'Service-Informationsbereich',
+  'comprehensive_service_info' => 'Umfassende Service-Informationen',
+  
+  /* Additional session items */
+  'session_section' => 'Sitzungsbereich',
+  'session_overview' => 'Sitzungsübersicht',
+  'session_details' => 'Sitzungsdetails',
+  
+  /* Additional server items */
+  'server_section' => 'Server-Bereich',
+  'server_overview' => 'Server-Übersicht',
+  'server_details' => 'Server-Details',
+  'server_environment' => 'Server-Umgebung',
+  
+  /* Additional application items */
+  'app_section' => 'Anwendungsbereich',
+  'app_overview' => 'Anwendungsübersicht',
+  'app_details' => 'Anwendungsdetails',
+  'app_environment' => 'Anwendungsumgebung',
+  'app_configuration' => 'Anwendungskonfiguration',
+  
+  /* Navigation items */
+  'navigation' => 'Navigation',
+  'main_navigation' => 'Hauptnavigation',
+  'language_navigation' => 'Sprachnavigation',
+  'skip_to_content' => 'Zum Inhalt springen',
+  'skip_to_main' => 'Zum Hauptinhalt springen',
+  
+  /* Footer items */
+  'footer' => 'Fußzeile',
+  'copyright' => 'Urheberrecht',
+  'all_rights_reserved' => 'Alle Rechte vorbehalten',
+  
+  /* Accessibility items */
+  'accessibility' => 'Barrierefreiheit',
+  'screen_reader_only' => 'Nur für Screenreader',
+  'keyboard_navigation' => 'Tastaturnavigation',
+  
+  /* Form items */
+  'form' => 'Formular',
+  'submit' => 'Absenden',
+  'reset' => 'Zurücksetzen',
+  'cancel' => 'Abbrechen',
+  'save' => 'Speichern',
+  'edit' => 'Bearbeiten',
+  'delete' => 'Löschen',
+  'confirm' => 'Bestätigen',
+  
+  /* Status messages */
+  'loading' => 'Wird geladen...',
+  'please_wait' => 'Bitte warten...',
+  'processing' => 'Wird verarbeitet...',
+  'success' => 'Erfolg',
+  'warning' => 'Warnung',
+  'info' => 'Information',
+  'notice' => 'Hinweis',
 ];
 ?>

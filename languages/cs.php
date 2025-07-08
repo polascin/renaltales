@@ -100,5 +100,74 @@ return [
   'session_security_level' => 'Úroveň zabezpečení',
   'session_comprehensive' => 'Komplexní informace o relaci',
   'debug_not_allowed' => 'Ladicí informace nejsou dostupné z bezpečnostních důvodů.',
+  
+  /* Error handling */
+  'application_error' => 'Chyba aplikace',
+  'error' => 'Chyba',
+  'service_unavailable' => 'Služba je dočasně nedostupná',
+  'try_again_later' => 'Zkuste to prosím později.',
+  
+  /* Debug information */
+  'debug_mode_enabled' => 'Režim ladění je zapnutý.',
+  'debug_info' => 'Ladicí informace',
+  'debug_section' => 'Sekce ladění',
+  
+  /* Service information section */
+  'service_information_section' => 'Sekce informací o službě',
+  'comprehensive_service_info' => 'Komplexní informace o službě',
+  
+  /* Additional session items */
+  'session_section' => 'Sekce relace',
+  'session_overview' => 'Přehled relace',
+  'session_details' => 'Podrobnosti relace',
+  
+  /* Additional server items */
+  'server_section' => 'Sekce serveru',
+  'server_overview' => 'Přehled serveru',
+  'server_details' => 'Podrobnosti serveru',
+  'server_environment' => 'Prostředí serveru',
+  
+  /* Additional application items */
+  'app_section' => 'Sekce aplikace',
+  'app_overview' => 'Přehled aplikace',
+  'app_details' => 'Podrobnosti aplikace',
+  'app_environment' => 'Prostředí aplikace',
+  'app_configuration' => 'Konfigurace aplikace',
+  
+  /* Navigation items */
+  'navigation' => 'Navigace',
+  'main_navigation' => 'Hlavní navigace',
+  'language_navigation' => 'Jazyková navigace',
+  'skip_to_content' => 'Přeskočit na obsah',
+  'skip_to_main' => 'Přeskočit na hlavní obsah',
+  
+  /* Footer items */
+  'footer' => 'Patička',
+  'copyright' => 'Autorská práva',
+  'all_rights_reserved' => 'Všechna práva vyhrazena',
+  
+  /* Accessibility items */
+  'accessibility' => 'Přístupnost',
+  'screen_reader_only' => 'Pouze pro čtečky obrazovky',
+  'keyboard_navigation' => 'Klávesová navigace',
+  
+  /* Form items */
+  'form' => 'Formulář',
+  'submit' => 'Odeslat',
+  'reset' => 'Resetovat',
+  'cancel' => 'Zrušit',
+  'save' => 'Uložit',
+  'edit' => 'Upravit',
+  'delete' => 'Odstranit',
+  'confirm' => 'Potvrdit',
+  
+  /* Status messages */
+  'loading' => 'Načítá se...',
+  'please_wait' => 'Prosím čekejte...',
+  'processing' => 'Zpracovává se...',
+  'success' => 'Úspěch',
+  'warning' => 'Upozornění',
+  'info' => 'Informace',
+  'notice' => 'Oznámení',
 ];
 ?>

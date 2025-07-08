@@ -100,5 +100,74 @@ return [
   'session_security_level' => 'Security Level',
   'session_comprehensive' => 'Comprehensive Session Information',
   'debug_not_allowed' => 'Debug information is not available for security reasons.',
+  
+  /* Error handling */
+  'application_error' => 'Application Error',
+  'error' => 'Error',
+  'service_unavailable' => 'Service Temporarily Unavailable',
+  'try_again_later' => 'Please try again later.',
+  
+  /* Debug information */
+  'debug_mode_enabled' => 'Debug mode is enabled.',
+  'debug_info' => 'Debug information',
+  'debug_section' => 'Debug Section',
+  
+  /* Service information section */
+  'service_information_section' => 'Service Information Section',
+  'comprehensive_service_info' => 'Comprehensive Service Information',
+  
+  /* Additional session items */
+  'session_section' => 'Session Section',
+  'session_overview' => 'Session Overview',
+  'session_details' => 'Session Details',
+  
+  /* Additional server items */
+  'server_section' => 'Server Section',
+  'server_overview' => 'Server Overview',
+  'server_details' => 'Server Details',
+  'server_environment' => 'Server Environment',
+  
+  /* Additional application items */
+  'app_section' => 'Application Section',
+  'app_overview' => 'Application Overview',
+  'app_details' => 'Application Details',
+  'app_environment' => 'Application Environment',
+  'app_configuration' => 'Application Configuration',
+  
+  /* Navigation items */
+  'navigation' => 'Navigation',
+  'main_navigation' => 'Main Navigation',
+  'language_navigation' => 'Language Navigation',
+  'skip_to_content' => 'Skip to content',
+  'skip_to_main' => 'Skip to main content',
+  
+  /* Footer items */
+  'footer' => 'Footer',
+  'copyright' => 'Copyright',
+  'all_rights_reserved' => 'All rights reserved',
+  
+  /* Accessibility items */
+  'accessibility' => 'Accessibility',
+  'screen_reader_only' => 'Screen reader only',
+  'keyboard_navigation' => 'Keyboard navigation',
+  
+  /* Form items */
+  'form' => 'Form',
+  'submit' => 'Submit',
+  'reset' => 'Reset',
+  'cancel' => 'Cancel',
+  'save' => 'Save',
+  'edit' => 'Edit',
+  'delete' => 'Delete',
+  'confirm' => 'Confirm',
+  
+  /* Status messages */
+  'loading' => 'Loading...',
+  'please_wait' => 'Please wait...',
+  'processing' => 'Processing...',
+  'success' => 'Success',
+  'warning' => 'Warning',
+  'info' => 'Information',
+  'notice' => 'Notice',
 ];
 ?>
