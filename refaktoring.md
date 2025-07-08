@@ -70,8 +70,7 @@ Refaktorovanie je o **zlepšení štruktúry a kvality kódu pri zachovaní jeho
 
 
 
-GitHub Copilot
-Here's the refactored index.php with improved structure, security, and maintainability:
+
 
 Key Improvements Made:
 1. Object-Oriented Structure
