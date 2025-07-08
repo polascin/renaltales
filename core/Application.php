@@ -21,21 +21,44 @@ class Application {
   private $text;
   private $appTitle;
   private $isInitialized = false;
+  private $initializationError = null;
   
   /**
    * Constructor - Initialize the application
    */
   public function __construct() {
     try {
+      $this->initializeBasicTexts();
       $this->initializeLanguageDetector();
       $this->loadLanguageTexts();
       $this->initializeSessionManager();
       $this->setApplicationTitle();
       $this->isInitialized = true;
     } catch (Exception $e) {
+      $this->initializationError = $e;
       error_log('Application initialization failed: ' . $e->getMessage());
-      throw new Exception('Failed to initialize application: ' . $e->getMessage());
+      // Don't re-throw here, let the render method handle it
     }
+  }
+  
+  /**
+   * Initialize basic fallback texts before language detection
+   */
+  private function initializeBasicTexts() {
+    $this->text = [
+      'app_title' => 'Renal Tales',
+      'welcome' => 'Welcome',
+      'application_error' => 'Application Error',
+      'service_unavailable' => 'Service Temporarily Unavailable',
+      'try_again_later' => 'Please try again later.',
+      'error' => 'Error',
+      'file' => 'File',
+      'line' => 'Line',
+      'stack_trace' => 'Stack Trace',
+      'initialization_failed' => 'Application initialization failed',
+      'current_language' => 'Current language',
+      'debug_mode_enabled' => 'Debug mode is enabled.',
+    ];
   }
   
   /**
@@ -59,18 +82,16 @@ class Application {
   
   /**
    * Load language texts with fallback
-   * 
-   * @throws Exception if no language files are found
    */
   private function loadLanguageTexts() {
-    $this->text = [];
+    $baseTexts = $this->text; // Keep fallback texts
     
     // Load English as base language
     $englishLanguageFile = LANGUAGE_PATH . 'en.php';
     if (file_exists($englishLanguageFile)) {
       $englishTexts = require $englishLanguageFile;
       if (is_array($englishTexts)) {
-        $this->text = $englishTexts;
+        $this->text = array_merge($baseTexts, $englishTexts);
       }
     }
     
@@ -83,16 +104,6 @@ class Application {
           $this->text = array_merge($this->text, $currentLanguageTexts);
         }
       }
-    }
-    
-    // Fallback if no texts loaded
-    if (empty($this->text)) {
-      $this->text = [
-        'app_title' => 'Renal Tales',
-        'welcome' => 'Welcome',
-        'application_error' => 'Application Error',
-        'service_unavailable' => 'Service Temporarily Unavailable'
-      ];
     }
   }
   
@@ -118,17 +129,20 @@ class Application {
    * Set application title
    */
   private function setApplicationTitle() {
-    $this->appTitle = $this->getText('app_title', APP_TITLE);
+    $this->appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
   }
   
   /**
-   * Get translated text with fallback
+   * Get translated text with fallback (safe to call even during initialization)
    * 
    * @param string $key
    * @param string $fallback
    * @return string
    */
   private function getText($key, $fallback = '') {
+    if (!is_array($this->text)) {
+      return $fallback;
+    }
     return isset($this->text[$key]) ? $this->text[$key] : $fallback;
   }
   
@@ -153,12 +167,21 @@ class Application {
   }
   
   /**
+   * Get initialization error if any
+   * 
+   * @return Exception|null
+   */
+  public function getInitializationError() {
+    return $this->initializationError;
+  }
+  
+  /**
    * Get current language
    * 
    * @return string
    */
   public function getCurrentLanguage() {
-    return $this->currentLanguage;
+    return $this->currentLanguage ?? 'en';
   }
   
   /**
@@ -167,7 +190,7 @@ class Application {
    * @return string
    */
   public function getCurrentLanguageName() {
-    return $this->currentLanguageName;
+    return $this->currentLanguageName ?? 'English';
   }
   
   /**
@@ -176,13 +199,13 @@ class Application {
    * @return string
    */
   public function getAppTitle() {
-    return $this->appTitle;
+    return $this->appTitle ?? 'Renal Tales';
   }
   
   /**
    * Get session manager instance
    * 
-   * @return SessionManager
+   * @return SessionManager|null
    */
   public function getSessionManager() {
     return $this->sessionManager;
@@ -191,7 +214,7 @@ class Application {
   /**
    * Get language detector instance
    * 
-   * @return LanguageDetector
+   * @return LanguageDetector|null
    */
   public function getLanguageDetector() {
     return $this->languageDetector;
@@ -203,7 +226,7 @@ class Application {
    * @return array
    */
   public function getTexts() {
-    return $this->text;
+    return $this->text ?? [];
   }
   
   /**
@@ -212,6 +235,10 @@ class Application {
    * @return string
    */
   private function renderLanguageSelector() {
+    if (!$this->languageDetector) {
+      return '<option value="en">English (en)</option>';
+    }
+    
     $selectableLanguages = $this->languageDetector->getSupportedLanguages();
     $html = '';
     
@@ -237,6 +264,10 @@ class Application {
    * @return string
    */
   private function renderLanguageFlags() {
+    if (!$this->languageDetector) {
+      return '<p>Language selection not available</p>';
+    }
+    
     $selectableLanguages = $this->languageDetector->getSupportedLanguages();
     $html = '';
     
@@ -287,24 +318,35 @@ class Application {
   private function renderApplicationInformation() {
     $html = '<div class="app-info">';
     $html .= '<h2>' . htmlspecialchars($this->getText('application_information', 'Application Information'), ENT_QUOTES, 'UTF-8') . '</h2>';
-    $html .= '<p><strong>' . htmlspecialchars($this->getText('app_title_item', 'Application Title'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->appTitle, ENT_QUOTES, 'UTF-8') . '</p>';
-    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language', 'Current Language'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->currentLanguageName, ENT_QUOTES, 'UTF-8') . '</p>';
-    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_code', 'Current Language Code'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->currentLanguage, ENT_QUOTES, 'UTF-8') . '</p>';
-    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_file', 'Current Language File'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars(LANGUAGE_PATH . $this->currentLanguage . '.php', ENT_QUOTES, 'UTF-8') . '</p>';
-    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_flag', 'Current Language Flag'), ENT_QUOTES, 'UTF-8') . ':</strong> ';
-    $html .= '<img src="' . htmlspecialchars($this->languageDetector->getFlagPath($this->currentLanguage), ENT_QUOTES, 'UTF-8') . '" ';
-    $html .= 'alt="' . htmlspecialchars($this->getText('current_language_flag_alt', 'Flag of the current language'), ENT_QUOTES, 'UTF-8') . '" class="flag"></p>';
+    $html .= '<p><strong>' . htmlspecialchars($this->getText('app_title_item', 'Application Title'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->getAppTitle(), ENT_QUOTES, 'UTF-8') . '</p>';
+    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language', 'Current Language'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->getCurrentLanguageName(), ENT_QUOTES, 'UTF-8') . '</p>';
+    $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_code', 'Current Language Code'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($this->getCurrentLanguage(), ENT_QUOTES, 'UTF-8') . '</p>';
+    
+    if (defined('LANGUAGE_PATH')) {
+      $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_file', 'Current Language File'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars(LANGUAGE_PATH . $this->getCurrentLanguage() . '.php', ENT_QUOTES, 'UTF-8') . '</p>';
+    }
+    
+    if ($this->languageDetector) {
+      $html .= '<p><strong>' . htmlspecialchars($this->getText('current_language_flag', 'Current Language Flag'), ENT_QUOTES, 'UTF-8') . ':</strong> ';
+      $html .= '<img src="' . htmlspecialchars($this->languageDetector->getFlagPath($this->getCurrentLanguage()), ENT_QUOTES, 'UTF-8') . '" ';
+      $html .= 'alt="' . htmlspecialchars($this->getText('current_language_flag_alt', 'Flag of the current language'), ENT_QUOTES, 'UTF-8') . '" class="flag"></p>';
+    }
+    
     $html .= '</div>';
     
     return $html;
   }
   
   /**
-   * Render navigation section
+   * Render language selection section
    * 
    * @return string
    */
-  private function renderNavigation() {
+  private function renderLanguageSelection() {
+    if (!$this->sessionManager) {
+      return '<nav class="language-selector"><p>Language selection not available</p></nav>';
+    }
+    
     $csrfToken = $this->sessionManager->getCSRFToken();
     
     $html = '<nav class="language-selector">';
@@ -333,9 +375,13 @@ class Application {
   private function renderHeader() {
     $html = '<header class="main-header-container">';
     $html .= '<div class="left-section">';
-    $html .= '<img src="assets/images/logos/logo.gif" alt="' . htmlspecialchars($this->appTitle, ENT_QUOTES, 'UTF-8') . ' logo" class="logo">';
-    $html .= '<h1>' . htmlspecialchars($this->appTitle, ENT_QUOTES, 'UTF-8') . '</h1>';
-    $html .= '<h2>' . htmlspecialchars(APP_TITLE, ENT_QUOTES, 'UTF-8') . '</h2>';
+    $html .= '<img src="assets/images/logos/logo.gif" alt="' . htmlspecialchars($this->getAppTitle(), ENT_QUOTES, 'UTF-8') . ' logo" class="logo">';
+    $html .= '<h1>' . htmlspecialchars($this->getAppTitle(), ENT_QUOTES, 'UTF-8') . '</h1>';
+    
+    if (defined('APP_TITLE')) {
+      $html .= '<h2>' . htmlspecialchars(APP_TITLE, ENT_QUOTES, 'UTF-8') . '</h2>';
+    }
+    
     $html .= '<h3>' . htmlspecialchars($this->getText('app_subtitle', 'A Multilingual WebApplication'), ENT_QUOTES, 'UTF-8') . '</h3>';
     $html .= '<h4>' . htmlspecialchars($this->getText('app_description', 'A web application for sharing tales and stories from the community of people with kidney disorders, including those on dialysis, and those who have had or are waiting for a renal transplant.'), ENT_QUOTES, 'UTF-8') . '</h4>';
     $html .= '<h5>' . htmlspecialchars($this->getText('app_version', 'Version 2025.v1.0test'), ENT_QUOTES, 'UTF-8') . '</h5>';
@@ -364,7 +410,7 @@ class Application {
     // Language Selection Flags
     $html .= '<section class="language-selection-flags">';
     $html .= $this->renderLanguageFlags();
-    $html .= '<p>' . htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': <strong>' . htmlspecialchars($this->currentLanguageName, ENT_QUOTES, 'UTF-8') . '</strong></p>';
+    $html .= '<p>' . htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': <strong>' . htmlspecialchars($this->getCurrentLanguageName(), ENT_QUOTES, 'UTF-8') . '</strong></p>';
     $html .= '<p>' . htmlspecialchars($this->getText('welcome', 'Welcome!'), ENT_QUOTES, 'UTF-8') . '</p>';
     $html .= '</section>';
     
@@ -384,15 +430,19 @@ class Application {
     $html .= '<hr>';
     $html .= '<div class="debug-info">';
     $html .= '<p>' . htmlspecialchars($this->getText('debug_mode_enabled', 'Debug mode is enabled.'), ENT_QUOTES, 'UTF-8') . ' ';
-    $html .= htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': ' . htmlspecialchars($this->currentLanguage, ENT_QUOTES, 'UTF-8') . '</p>';
+    $html .= htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': ' . htmlspecialchars($this->getCurrentLanguage(), ENT_QUOTES, 'UTF-8') . '</p>';
     $html .= '</div>';
     
     $html .= '<h1>' . htmlspecialchars($this->getText('service_information', 'Service Information'), ENT_QUOTES, 'UTF-8') . '</h1>';
     
     // Session Information
-    ob_start();
-    $this->sessionManager->displaySessionComprehensive();
-    $html .= ob_get_clean();
+    if ($this->sessionManager) {
+      ob_start();
+      $this->sessionManager->displaySessionComprehensive();
+      $html .= ob_get_clean();
+    } else {
+      $html .= '<p>Session manager not available</p>';
+    }
     
     $html .= '<hr>';
     
@@ -428,6 +478,10 @@ class Application {
    * @return string
    */
   private function renderJavaScript() {
+    if (!$this->sessionManager) {
+      return '<script>console.log("Session manager not available");</script>';
+    }
+    
     $csrfToken = $this->sessionManager->getCSRFToken();
     
     $html = '<script>';
@@ -454,30 +508,35 @@ class Application {
    * @return string
    */
   public function render() {
+    // Handle initialization errors
+    if (!$this->isInitialized && $this->initializationError) {
+      return $this->handleError($this->initializationError);
+    }
+    
     if (!$this->isInitialized) {
       return $this->renderErrorPage('Application not properly initialized');
     }
     
-    $csrfToken = $this->sessionManager->getCSRFToken();
+    $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
     
     ob_start();
     ?>
     <!DOCTYPE html>
-    <html lang="<?php echo htmlspecialchars($this->currentLanguage, ENT_QUOTES, 'UTF-8'); ?>">
+    <html lang="<?php echo htmlspecialchars($this->getCurrentLanguage(), ENT_QUOTES, 'UTF-8'); ?>">
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="csrf-token" content="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
-      <title><?php echo htmlspecialchars($this->appTitle, ENT_QUOTES, 'UTF-8'); ?></title>
+      <title><?php echo htmlspecialchars($this->getAppTitle(), ENT_QUOTES, 'UTF-8'); ?></title>
       <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">
       <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     </head>
     <body>
-      <?php echo $this->renderNavigation(); ?>
+      <?php echo $this->renderLanguageSelection(); ?>
       <?php echo $this->renderHeader(); ?>
       <?php echo $this->renderMainContent(); ?>
       <?php
-        if (DEBUG_MODE) {
+        if (defined('DEBUG_MODE') && DEBUG_MODE) {
           echo $this->renderServiceInformationSection();
         }
       ?>
@@ -500,11 +559,15 @@ class Application {
     $html .= '<html lang="en">';
     $html .= '<head>';
     $html .= '<meta charset="utf-8">';
-    $html .= '<title>Application Error</title>';
+    $html .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    $html .= '<title>' . htmlspecialchars($this->getText('application_error', 'Application Error'), ENT_QUOTES, 'UTF-8') . '</title>';
+    $html .= '<style>body{font-family:Arial,sans-serif;margin:50px;}.error{color:#d9534f;border:1px solid #d9534f;padding:20px;border-radius:5px;}</style>';
     $html .= '</head>';
     $html .= '<body>';
-    $html .= '<h1>Application Error</h1>';
+    $html .= '<div class="error">';
+    $html .= '<h1>' . htmlspecialchars($this->getText('application_error', 'Application Error'), ENT_QUOTES, 'UTF-8') . '</h1>';
     $html .= '<p>' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</p>';
+    $html .= '</div>';
     $html .= '</body>';
     $html .= '</html>';
     
@@ -518,21 +581,45 @@ class Application {
    * @return string
    */
   public function handleError(Exception $e) {
-    $html = '';
+    $isDebugMode = defined('DEBUG_MODE') && DEBUG_MODE;
     
-    if (DEBUG_MODE) {
-      $html .= '<div class="error-debug">';
+    if ($isDebugMode) {
+      $html = '<!DOCTYPE html>';
+      $html .= '<html lang="en">';
+      $html .= '<head>';
+      $html .= '<meta charset="utf-8">';
+      $html .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
+      $html .= '<title>' . htmlspecialchars($this->getText('application_error', 'Application Error'), ENT_QUOTES, 'UTF-8') . '</title>';
+      $html .= '<style>body{font-family:Arial,sans-serif;margin:20px;}.error{color:#d9534f;border:1px solid #d9534f;padding:20px;border-radius:5px;margin-bottom:20px;}pre{background:#f5f5f5;padding:15px;border-radius:5px;overflow:auto;}</style>';
+      $html .= '</head>';
+      $html .= '<body>';
+      $html .= '<div class="error">';
       $html .= '<h1>' . htmlspecialchars($this->getText('application_error', 'Application Error'), ENT_QUOTES, 'UTF-8') . '</h1>';
       $html .= '<p><strong>' . htmlspecialchars($this->getText('error', 'Error'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '</p>';
-      $html .= '<p><strong>File:</strong> ' . htmlspecialchars($e->getFile(), ENT_QUOTES, 'UTF-8') . '</p>';
-      $html .= '<p><strong>Line:</strong> ' . $e->getLine() . '</p>';
+      $html .= '<p><strong>' . htmlspecialchars($this->getText('file', 'File'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($e->getFile(), ENT_QUOTES, 'UTF-8') . '</p>';
+      $html .= '<p><strong>' . htmlspecialchars($this->getText('line', 'Line'), ENT_QUOTES, 'UTF-8') . ':</strong> ' . $e->getLine() . '</p>';
+      $html .= '<h3>' . htmlspecialchars($this->getText('stack_trace', 'Stack Trace'), ENT_QUOTES, 'UTF-8') . '</h3>';
       $html .= '<pre>' . htmlspecialchars($e->getTraceAsString(), ENT_QUOTES, 'UTF-8') . '</pre>';
       $html .= '</div>';
+      $html .= '</body>';
+      $html .= '</html>';
     } else {
-      $html .= '<div class="error-production">';
+      $html = '<!DOCTYPE html>';
+      $html .= '<html lang="en">';
+      $html .= '<head>';
+      $html .= '<meta charset="utf-8">';
+      $html .= '<meta name="viewport" content="width=device-width, initial-scale=1">';
+      $html .= '<title>' . htmlspecialchars($this->getText('service_unavailable', 'Service Temporarily Unavailable'), ENT_QUOTES, 'UTF-8') . '</title>';
+      $html .= '<style>body{font-family:Arial,sans-serif;margin:50px;text-align:center;}.error{color:#d9534f;}</style>';
+      $html .= '</head>';
+      $html .= '<body>';
+      $html .= '<div class="error">';
       $html .= '<h1>' . htmlspecialchars($this->getText('service_unavailable', 'Service Temporarily Unavailable'), ENT_QUOTES, 'UTF-8') . '</h1>';
       $html .= '<p>' . htmlspecialchars($this->getText('try_again_later', 'Please try again later.'), ENT_QUOTES, 'UTF-8') . '</p>';
       $html .= '</div>';
+      $html .= '</body>';
+      $html .= '</html>';
+      
       error_log('Application Error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
     }
     
