@@ -964,7 +964,7 @@ class LanguageDetector {
                 'cloudflare_country' => $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'Not available',
                 'https_detected' => $this->isHttps(),
                 'session_available' => $this->isSessionAvailable(),
-            });
+            ]);
         }
         
         return $debugInfo;
