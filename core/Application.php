@@ -405,16 +405,14 @@ class Application {
    */
   private function renderMainContent() {
     $html = '<main>';
-    $html .= '<hr>';
     
     // Language Selection Flags
     $html .= '<section class="language-selection-flags">';
     $html .= $this->renderLanguageFlags();
-    $html .= '<p>' . htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': <strong>' . htmlspecialchars($this->getCurrentLanguageName(), ENT_QUOTES, 'UTF-8') . '</strong></p>';
-    $html .= '<p>' . htmlspecialchars($this->getText('welcome', 'Welcome!'), ENT_QUOTES, 'UTF-8') . '</p>';
+    $html .= '<p>' . htmlspecialchars($this->getText('current_language', 'Current language'), ENT_QUOTES, 'UTF-8') . ': <strong>' . htmlspecialchars($this->getCurrentLanguageName(), ENT_QUOTES, 'UTF-8') . '</strong>. </p>';
+    $html .= '<p>' . htmlspecialchars($this->getText('welcome', 'Welcome'), ENT_QUOTES, 'UTF-8') . '! </p>';
     $html .= '</section>';
     
-    $html .= '<hr>';
     $html .= '</main>';
     
     return $html;
@@ -443,16 +441,15 @@ class Application {
     } else {
       $html .= '<p>Session manager not available</p>';
     }
-    
     $html .= '<hr>';
     
     // Server Information
     $html .= $this->renderServiceInformation();
-    
     $html .= '<hr>';
     
     // Application Information
     $html .= $this->renderApplicationInformation();
+    $html .= '<hr>';
     
     $html .= '</section>';
     
