@@ -2,10 +2,10 @@
 /**
  * Language Detector Class
  * Detects user's preferred language from multiple sources with fallback to English
- * Supports European, Asian, and African languages
+ * Supports European, Asian, and African languages with enhanced security and error handling
  * 
- * @author Generated for language detection
- * @version 1.0
+ * @author Ľubomír Polaščín
+ * @version 2025.v1.0test
  */
 class LanguageDetector {
     
@@ -73,7 +73,7 @@ class LanguageDetector {
         'ur' => 'pk',  // Urdu → Pakistan
         'bn' => 'bd',  // Bengali → Bangladesh
         'ta' => 'in',  // Tamil → India
-        // NEW Asian languages
+        // Additional Asian languages
         'id' => 'id',  // Indonesian → Indonesia
         'ms' => 'my',  // Malay → Malaysia
         'tl' => 'ph',  // Filipino → Philippines
@@ -86,41 +86,6 @@ class LanguageDetector {
         'su' => 'id',  // Sundanese → Indonesia
         'or' => 'in',  // Odia → India
         'as' => 'in',  // Assamese → India
-        'mai' => 'in',  // Maithili → India
-        'mag' => 'in',  // Magahi → India
-        'gom' => 'in',  // Konkani → India
-        'sat' => 'in',  // Santali → India
-        'ks' => 'in',  // Kashmiri → India
-        'sd' => 'pk',  // Sindhi → Pakistan
-        'bal' => 'pk',  // Balochi → Pakistan
-        'dv' => 'mv',  // Dhivehi → Maldives
-        'ceb' => 'ph',  // Cebuano → Philippines
-        'ilo' => 'ph',  // Ilocano → Philippines
-        'war' => 'ph',  // Waray → Philippines
-        'bcl' => 'ph',  // Bikol → Philippines
-        'pam' => 'ph',  // Kapampangan → Philippines
-        'tsg' => 'ph',  // Tausug → Philippines
-        'min' => 'id',  // Minangkabau → Indonesia
-        'mad' => 'id',  // Madurese → Indonesia
-        'gan' => 'cn',  // Gan Chinese → China
-        'hak' => 'cn',  // Hakka Chinese → China
-        'nan' => 'cn',  // Min Nan Chinese → China
-        'wuu' => 'cn',  // Wu dialects → China
-        'tk' => 'tm',  // Turkmen → Turkmenistan
-        'tt' => 'ru',  // Tatar → Russia
-        'ba' => 'ru',  // Bashkir → Russia
-        'cv' => 'ru',  // Chuvash → Russia
-        'sah' => 'ru',  // Sakha/Yakut → Russia
-        'tyv' => 'ru',  // Tuvan → Russia
-        'alt' => 'ru',  // Altai → Russia
-        'dz' => 'bt',  // Dzongkha → Bhutan
-        'to' => 'to',  // Tongan → Tonga
-        'sm' => 'ws',  // Samoan → Samoa
-        'fj' => 'fj',  // Fijian → Fiji
-        'bi' => 'vu',  // Bislama → Vanuatu
-        'pau' => 'pw',  // Palauan → Palau
-        
-        // Additional Asian languages (missing from previous update)
         'gu' => 'in',  // Gujarati → India
         'kn' => 'in',  // Kannada → India
         'te' => 'in',  // Telugu → India
@@ -141,6 +106,10 @@ class LanguageDetector {
         'si' => 'lk',  // Sinhala → Sri Lanka
         'bo' => 'cn',  // Tibetan → China (Tibet)
         'ug' => 'cn',  // Uyghur → China
+        'dv' => 'mv',  // Dhivehi → Maldives
+        'tk' => 'tm',  // Turkmen → Turkmenistan
+        'sd' => 'pk',  // Sindhi → Pakistan
+        'mai' => 'in',  // Maithili → India
         'bh' => 'in',  // Bihari → India
         'sa' => 'in',  // Sanskrit → India
         
@@ -180,165 +149,40 @@ class LanguageDetector {
         'kg' => 'cd',  // Kongo → DRC
         'lu' => 'cd',  // Luba-Katanga → DRC
         
-        // Additional Philippine languages
-        'hil' => 'ph', // Hiligaynon → Philippines
-        
         // American languages
         'qu' => 'pe',  // Quechua → Peru
         'gn' => 'py',  // Guaraní → Paraguay
         'ay' => 'bo',  // Aymara → Bolivia
         'ht' => 'ht',  // Haitian Creole → Haiti
+        
+        // Additional languages
+        'ceb' => 'ph', // Cebuano → Philippines
+        'hil' => 'ph', // Hiligaynon → Philippines
+        'war' => 'ph', // Waray → Philippines
+        'bcl' => 'ph', // Bikol → Philippines
+        'pam' => 'ph', // Kapampangan → Philippines
+        'ilo' => 'ph', // Ilocano → Philippines
     ];
+    
+    /**
+     * Cache for file existence checks to improve performance
+     */
+    private static $fileExistenceCache = [];
+    
+    /**
+     * Cache for flag paths to improve performance
+     */
+    private static $flagPathCache = [];
     
     /**
      * Supported languages with their variants
      */
     private $supportedLanguages = [
-        // European languages
+        // Core supported languages (languages that have translation files)
         'en' => ['en', 'en-us', 'en-gb', 'en-ca', 'en-au', 'en-nz', 'en-za'],
         'sk' => ['sk', 'sk-sk'],
         'cs' => ['cs', 'cs-cz'],
         'de' => ['de', 'de-de', 'de-at', 'de-ch'],
-        'pl' => ['pl', 'pl-pl'],
-        'hu' => ['hu', 'hu-hu'],
-        'uk' => ['uk', 'uk-ua'],
-        'ru' => ['ru', 'ru-ru', 'ru-by', 'ru-kz'],
-        'it' => ['it', 'it-it', 'it-ch'],
-        'nl' => ['nl', 'nl-nl', 'nl-be'],
-        'fr' => ['fr', 'fr-fr', 'fr-ca', 'fr-be', 'fr-ch'],
-        'es' => ['es', 'es-es', 'es-mx', 'es-ar', 'es-co', 'es-pe', 'es-ve'],
-        'pt' => ['pt', 'pt-br', 'pt-pt'],
-        'ro' => ['ro', 'ro-ro', 'ro-md'],
-        'bg' => ['bg', 'bg-bg'],
-        'sl' => ['sl', 'sl-si'],
-        'hr' => ['hr', 'hr-hr'],
-        'sr' => ['sr', 'sr-rs', 'sr-ba', 'sr-me'],
-        'mk' => ['mk', 'mk-mk'],
-        'sq' => ['sq', 'sq-al', 'sq-xk'],
-        'el' => ['el', 'el-gr'],
-        'da' => ['da', 'da-dk'],
-        'no' => ['no', 'nb', 'nn', 'nb-no', 'nn-no'],
-        'sv' => ['sv', 'sv-se'],
-        'fi' => ['fi', 'fi-fi'],
-        'is' => ['is', 'is-is'],
-        'et' => ['et', 'et-ee'],
-        'lv' => ['lv', 'lv-lv'],
-        'lt' => ['lt', 'lt-lt'],
-        'tr' => ['tr', 'tr-tr'],
-        'eo' => ['eo'], // Esperanto
-        // NEW European languages
-        'ca' => ['ca', 'ca-es', 'ca-ad'], // Catalan
-        'eu' => ['eu', 'eu-es'], // Basque
-        'cy' => ['cy', 'cy-gb'], // Welsh
-        'ga' => ['ga', 'ga-ie'], // Irish
-        'gd' => ['gd', 'gd-gb'], // Scottish Gaelic
-        'mt' => ['mt', 'mt-mt'], // Maltese
-        'gl' => ['gl', 'gl-es'], // Galician
-        'be' => ['be', 'be-by'], // Belarusian
-        'lb' => ['lb', 'lb-lu'], // Luxembourgish
-        'rm' => ['rm', 'rm-ch'], // Romansh
-        'fo' => ['fo', 'fo-fo'], // Faroese
-        'kl' => ['kl', 'kl-gl'], // Greenlandic
-        'se' => ['se', 'se-no', 'se-se', 'se-fi'], // Northern Sami
-        
-        // Asian languages
-        'ja' => ['ja', 'ja-jp'], // Japanese
-        'zh' => ['zh', 'zh-cn', 'zh-tw', 'zh-hk', 'zh-mo', 'zh-sg'], // Chinese
-        'ko' => ['ko', 'ko-kr'], // Korean
-        'th' => ['th', 'th-th'], // Thai
-        'vi' => ['vi', 'vi-vn'], // Vietnamese
-        'hi' => ['hi', 'hi-in'], // Hindi
-        'ar' => ['ar', 'ar-sa', 'ar-eg', 'ar-ae', 'ar-ma', 'ar-dz'], // Arabic
-        'fa' => ['fa', 'fa-ir'], // Persian/Farsi
-        'he' => ['he', 'he-il'], // Hebrew
-        'ur' => ['ur', 'ur-pk'], // Urdu
-        'bn' => ['bn', 'bn-bd'], // Bengali
-        'ta' => ['ta', 'ta-in'], // Tamil
-        // NEW Asian languages
-        'id' => ['id', 'id-id'], // Indonesian
-        'ms' => ['ms', 'ms-my'], // Malay
-        'tl' => ['tl', 'tl-ph'], // Tagalog/Filipino
-        'mr' => ['mr', 'mr-in'], // Marathi
-        'jv' => ['jv', 'jv-id'], // Javanese
-        'yue' => ['yue', 'yue-hk'], // Cantonese
-        'wuu' => ['wuu', 'wuu-cn'], // Wu Chinese
-        'bho' => ['bho', 'bho-in'], // Bhojpuri
-        'ps' => ['ps', 'ps-af'], // Pashto
-        'su' => ['su', 'su-id'], // Sundanese
-        'or' => ['or', 'or-in'], // Odia
-        'as' => ['as', 'as-in'], // Assamese
-        'gu' => ['gu', 'gu-in'], // Gujarati
-        'kn' => ['kn', 'kn-in'], // Kannada
-        'te' => ['te', 'te-in'], // Telugu
-        'ml' => ['ml', 'ml-in'], // Malayalam
-        'pa' => ['pa', 'pa-in'], // Punjabi
-        'ne' => ['ne', 'ne-np'], // Nepali
-        'my' => ['my', 'my-mm'], // Burmese
-        'km' => ['km', 'km-kh'], // Khmer
-        'lo' => ['lo', 'lo-la'], // Lao
-        'ka' => ['ka', 'ka-ge'], // Georgian
-        'hy' => ['hy', 'hy-am'], // Armenian
-        'az' => ['az', 'az-az'], // Azerbaijani
-        'kk' => ['kk', 'kk-kz'], // Kazakh
-        'ky' => ['ky', 'ky-kg'], // Kyrgyz
-        'uz' => ['uz', 'uz-uz'], // Uzbek
-        'tk' => ['tk', 'tk-tm'], // Turkmen
-        'tg' => ['tg', 'tg-tj'], // Tajik
-        'mn' => ['mn', 'mn-mn'], // Mongolian
-        'si' => ['si', 'si-lk'], // Sinhala
-        'dv' => ['dv', 'dv-mv'], // Divehi
-        'bo' => ['bo', 'bo-cn'], // Tibetan
-        'ug' => ['ug', 'ug-cn'], // Uyghur
-        'sd' => ['sd', 'sd-pk'], // Sindhi
-        'mai' => ['mai', 'mai-in'], // Maithili
-        'bh' => ['bh', 'bh-in'], // Bihari
-        'sa' => ['sa', 'sa-in'], // Sanskrit
-        
-        // African languages
-        'sw' => ['sw', 'sw-ke', 'sw-tz'], // Swahili
-        'af' => ['af', 'af-za'], // Afrikaans
-        'am' => ['am', 'am-et'], // Amharic
-        'ha' => ['ha', 'ha-ng'], // Hausa
-        'yo' => ['yo', 'yo-ng'], // Yoruba
-        'ig' => ['ig', 'ig-ng'], // Igbo
-        'zu' => ['zu', 'zu-za'], // Zulu
-        'xh' => ['xh', 'xh-za'], // Xhosa
-        'tn' => ['tn', 'tn-za'], // Tswana
-        'st' => ['st', 'st-za'], // Sesotho
-        'ss' => ['ss', 'ss-za'], // Swati
-        'nr' => ['nr', 'nr-za'], // Ndebele
-        'nso' => ['nso', 'nso-za'], // Northern Sotho
-        've' => ['ve', 've-za'], // Venda
-        'ts' => ['ts', 'ts-za'], // Tsonga
-        'ti' => ['ti', 'ti-er'], // Tigrinya
-        'om' => ['om', 'om-et'], // Oromo
-        'so' => ['so', 'so-so'], // Somali
-        'rw' => ['rw', 'rw-rw'], // Kinyarwanda
-        'rn' => ['rn', 'rn-bi'], // Kirundi
-        'lg' => ['lg', 'lg-ug'], // Luganda
-        'ny' => ['ny', 'ny-mw'], // Chichewa
-        'sn' => ['sn', 'sn-zw'], // Shona
-        'nd' => ['nd', 'nd-zw'], // Ndebele (Zimbabwe)
-        'bm' => ['bm', 'bm-ml'], // Bambara
-        'ff' => ['ff', 'ff-sn'], // Fulah
-        'wo' => ['wo', 'wo-sn'], // Wolof
-        'ln' => ['ln', 'ln-cd'], // Lingala
-        'kg' => ['kg', 'kg-cd'], // Kikongo
-        'lua' => ['lua', 'lua-cd'], // Luba-Lulua
-        'sg' => ['sg', 'sg-cf'], // Sango
-        'mg' => ['mg', 'mg-mg'], // Malagasy
-        
-        // Additional languages
-        'ht' => ['ht', 'ht-ht'], // Haitian Creole
-        'qu' => ['qu', 'qu-pe'], // Quechua
-        'gn' => ['gn', 'gn-py'], // Guarani
-        'ay' => ['ay', 'ay-bo'], // Aymara
-        'ceb' => ['ceb', 'ceb-ph'], // Cebuano
-        'hil' => ['hil', 'hil-ph'], // Hiligaynon
-        'war' => ['war', 'war-ph'], // Waray
-        'bcl' => ['bcl', 'bcl-ph'], // Bikol
-        'pam' => ['pam', 'pam-ph'], // Kapampangan
-        'ilo' => ['ilo', 'ilo-ph'], // Ilocano
     ];
     
     /**
@@ -522,45 +366,189 @@ class LanguageDetector {
     ];
     
     /**
+     * Constructor - Initialize supported languages from available language files
+     */
+    public function __construct() {
+        $this->loadSupportedLanguagesFromFiles();
+    }
+    
+    /**
+     * Load supported languages from available language files
+     */
+    private function loadSupportedLanguagesFromFiles() {
+        if (!defined('LANGUAGE_PATH')) {
+            return; // Keep default supported languages if path not defined
+        }
+        
+        try {
+            $languageFiles = glob(LANGUAGE_PATH . '*.php');
+            if ($languageFiles === false) {
+                return; // Keep default if glob fails
+            }
+            
+            $availableLanguages = [];
+            foreach ($languageFiles as $file) {
+                $langCode = basename($file, '.php');
+                if (preg_match('/^[a-z]{2,3}$/', $langCode)) {
+                    $availableLanguages[$langCode] = [$langCode];
+                }
+            }
+            
+            // Only update if we found language files
+            if (!empty($availableLanguages)) {
+                $this->supportedLanguages = array_merge($this->supportedLanguages, $availableLanguages);
+            }
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Failed to load language files: ' . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Validate language code format
+     * 
+     * @param string $lang Language code to validate
+     * @return bool True if valid format
+     */
+    private function isValidLanguageFormat($lang) {
+        if (!is_string($lang)) {
+            return false;
+        }
+        
+        $lang = trim($lang);
+        
+        // Check for valid language code format (2-3 letters, optionally with region)
+        return preg_match('/^[a-z]{2,3}(-[a-z]{2,4})?$/i', $lang);
+    }
+    
+    /**
+     * Sanitize language input
+     * 
+     * @param string $lang Language code
+     * @return string|null Sanitized language code or null if invalid
+     */
+    private function sanitizeLanguage($lang) {
+        if (!$this->isValidLanguageFormat($lang)) {
+            return null;
+        }
+        
+        return strtolower(trim($lang));
+    }
+    
+    /**
      * Detect user's preferred language using multiple methods
      * 
      * @return string Language code (defaults to 'en')
      */
     public function detectLanguage() {
-        // 1. Check URL parameter first (user's explicit choice)
-        if (isset($_GET['lang']) && $this->isSupported($_GET['lang'])) {
-            $this->setLanguage($_GET['lang']);
-            return $_GET['lang'];
+        try {
+            // 1. Check URL parameter first (user's explicit choice)
+            if (isset($_GET['lang'])) {
+                $urlLang = $this->sanitizeLanguage($_GET['lang']);
+                if ($urlLang && $this->isSupported($urlLang)) {
+                    $this->setLanguage($urlLang);
+                    return $urlLang;
+                }
+            }
+            
+            // 2. Check session (previously set preference)
+            $sessionLang = $this->getSessionLanguage();
+            if ($sessionLang && $this->isSupported($sessionLang)) {
+                return $sessionLang;
+            }
+            
+            // 3. Check cookie (persistent preference)
+            $cookieLang = $this->getCookieLanguage();
+            if ($cookieLang && $this->isSupported($cookieLang)) {
+                $this->setSessionLanguage($cookieLang);
+                return $cookieLang;
+            }
+            
+            // 4. Check Accept-Language header (browser preference)
+            $browserLang = $this->detectFromBrowser();
+            if ($browserLang) {
+                $this->setLanguage($browserLang);
+                return $browserLang;
+            }
+            
+            // 5. Check user's IP geolocation (if available)
+            $geoLang = $this->detectFromGeolocation();
+            if ($geoLang && $this->isSupported($geoLang)) {
+                $this->setLanguage($geoLang);
+                return $geoLang;
+            }
+            
+            // 6. Default to English
+            $this->setLanguage('en');
+            return 'en';
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Language detection failed: ' . $e->getMessage());
+            return 'en'; // Safe fallback
+        }
+    }
+    
+    /**
+     * Get language from session safely
+     * 
+     * @return string|null
+     */
+    private function getSessionLanguage() {
+        if (!$this->isSessionAvailable()) {
+            return null;
         }
         
-        // 2. Check session (previously set preference)
-        if (isset($_SESSION['language']) && $this->isSupported($_SESSION['language'])) {
-            return $_SESSION['language'];
+        $sessionLang = $_SESSION['language'] ?? null;
+        return $this->sanitizeLanguage($sessionLang);
+    }
+    
+    /**
+     * Get language from cookie safely
+     * 
+     * @return string|null
+     */
+    private function getCookieLanguage() {
+        $cookieLang = $_COOKIE['language'] ?? null;
+        return $this->sanitizeLanguage($cookieLang);
+    }
+    
+    /**
+     * Set language in session safely
+     * 
+     * @param string $lang Language code
+     * @return bool Success status
+     */
+    private function setSessionLanguage($lang) {
+        if (!$this->isSessionAvailable()) {
+            return false;
         }
         
-        // 3. Check cookie (persistent preference)
-        if (isset($_COOKIE['language']) && $this->isSupported($_COOKIE['language'])) {
-            $_SESSION['language'] = $_COOKIE['language'];
-            return $_COOKIE['language'];
+        try {
+            $_SESSION['language'] = $lang;
+            return true;
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Failed to set session language: ' . $e->getMessage());
+            return false;
         }
-        
-        // 4. Check Accept-Language header (browser preference)
-        $browserLang = $this->detectFromBrowser();
-        if ($browserLang) {
-            $this->setLanguage($browserLang);
-            return $browserLang;
-        }
-        
-        // 5. Check user's IP geolocation (if available)
-        $geoLang = $this->detectFromGeolocation();
-        if ($geoLang && $this->isSupported($geoLang)) {
-            $this->setLanguage($geoLang);
-            return $geoLang;
-        }
-        
-        // 6. Default to English
-        $this->setLanguage('en');
-        return 'en';
+    }
+    
+    /**
+     * Check if session is available and safe to use
+     * 
+     * @return bool
+     */
+    private function isSessionAvailable() {
+        return session_status() === PHP_SESSION_ACTIVE;
+    }
+    
+    /**
+     * Check if HTTPS is being used
+     * 
+     * @return bool
+     */
+    private function isHttps() {
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
+            || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+            || (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on');
     }
     
     /**
@@ -571,94 +559,121 @@ class LanguageDetector {
     private function detectFromBrowser() {
         $acceptLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
         
-        if (empty($acceptLanguage)) {
-            return null;
+        if (empty($acceptLanguage) || strlen($acceptLanguage) > 1000) {
+            return null; // Prevent potential DoS with very long headers
         }
         
-        // Parse Accept-Language header with quality values
-        preg_match_all('/([a-z]{1,8}(?:-[a-z]{1,8})*)(?:;q=([0-9.]+))?/i', $acceptLanguage, $matches);
-        
-        $languages = [];
-        for ($i = 0; $i < count($matches[1]); $i++) {
-            $lang = strtolower($matches[1][$i]);
-            $quality = isset($matches[2][$i]) && !empty($matches[2][$i]) ? (float)$matches[2][$i] : 1.0;
-            $languages[$lang] = $quality;
-        }
-        
-        // Sort by quality (highest first)
-        arsort($languages);
-        
-        // Find the best supported language
-        foreach ($languages as $lang => $quality) {
-            // Check for exact match first
-            foreach ($this->supportedLanguages as $supportedCode => $variants) {
-                if (in_array($lang, $variants)) {
-                    return $supportedCode;
-                }
+        try {
+            // Parse Accept-Language header with quality values
+            if (!preg_match_all('/([a-z]{1,8}(?:-[a-z]{1,8})*)(?:;q=([0-9.]+))?/i', $acceptLanguage, $matches)) {
+                return null;
             }
             
-            // Check for partial match (language code without region)
-            $langCode = explode('-', $lang)[0];
-            foreach ($this->supportedLanguages as $supportedCode => $variants) {
-                foreach ($variants as $variant) {
-                    if (strpos($variant, $langCode) === 0) {
+            $languages = [];
+            for ($i = 0; $i < count($matches[1]); $i++) {
+                $lang = strtolower($matches[1][$i]);
+                $quality = isset($matches[2][$i]) && !empty($matches[2][$i]) ? (float)$matches[2][$i] : 1.0;
+                
+                // Validate quality value
+                if ($quality < 0 || $quality > 1) {
+                    continue;
+                }
+                
+                $languages[$lang] = $quality;
+            }
+            
+            // Sort by quality (highest first)
+            arsort($languages);
+            
+            // Find the best supported language
+            foreach ($languages as $lang => $quality) {
+                // Check for exact match first
+                foreach ($this->supportedLanguages as $supportedCode => $variants) {
+                    if (in_array($lang, $variants)) {
                         return $supportedCode;
                     }
                 }
+                
+                // Check for partial match (language code without region)
+                $langCode = explode('-', $lang)[0];
+                if ($this->isSupported($langCode)) {
+                    return $langCode;
+                }
             }
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Browser detection failed: ' . $e->getMessage());
         }
         
         return null;
     }
     
     /**
-     * Detect language from user's geolocation (basic implementation)
-     * Note: This is a placeholder for actual geolocation services
+     * Detect language from user's geolocation
      * 
      * @return string|null Language code or null if not detected
      */
     private function detectFromGeolocation() {
-        // This is a basic implementation
-        // In production, you might want to use services like:
-        // - MaxMind GeoIP2
-        // - ip-api.com
-        // - ipinfo.io
-        // - CloudFlare's CF-IPCountry header
-        
-        // Check CloudFlare country header if available
-        if (isset($_SERVER['HTTP_CF_IPCOUNTRY'])) {
-            $country = strtoupper($_SERVER['HTTP_CF_IPCOUNTRY']);
-            return $this->countryToLanguage[$country] ?? null;
-        }
-        
-        // Example: Simple IP-based detection (not reliable for production)
-        $ip = $this->getUserIP();
-        if ($ip && $ip !== '127.0.0.1' && $ip !== '::1') {
-            // You would implement actual geolocation service here
-            // For now, return null to use other detection methods
+        try {
+            // Check CloudFlare country header if available
+            if (isset($_SERVER['HTTP_CF_IPCOUNTRY'])) {
+                $country = strtoupper(trim($_SERVER['HTTP_CF_IPCOUNTRY']));
+                if (preg_match('/^[A-Z]{2}$/', $country)) {
+                    return $this->countryToLanguage[$country] ?? null;
+                }
+            }
+            
+            // Check other common country headers
+            $countryHeaders = [
+                'HTTP_X_COUNTRY_CODE',
+                'HTTP_X_GEOIP_COUNTRY',
+                'HTTP_CF_IPCOUNTRY'
+            ];
+            
+            foreach ($countryHeaders as $header) {
+                if (isset($_SERVER[$header])) {
+                    $country = strtoupper(trim($_SERVER[$header]));
+                    if (preg_match('/^[A-Z]{2}$/', $country)) {
+                        return $this->countryToLanguage[$country] ?? null;
+                    }
+                }
+            }
+            
+            // Could implement actual geolocation service here
+            // For security and performance reasons, we don't do IP-based lookups by default
+            
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Geolocation detection failed: ' . $e->getMessage());
         }
         
         return null;
     }
     
     /**
-     * Get user's real IP address
+     * Get user's real IP address safely
      * 
      * @return string|null IP address or null
      */
     private function getUserIP() {
-        $ipKeys = ['HTTP_X_FORWARDED_FOR', 'HTTP_X_REAL_IP', 'HTTP_CLIENT_IP', 'REMOTE_ADDR'];
+        $ipHeaders = [
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_REAL_IP', 
+            'HTTP_CLIENT_IP',
+            'REMOTE_ADDR'
+        ];
         
-        foreach ($ipKeys as $key) {
-            if (!empty($_SERVER[$key])) {
-                $ips = explode(',', $_SERVER[$key]);
+        foreach ($ipHeaders as $header) {
+            if (!empty($_SERVER[$header])) {
+                $ips = explode(',', $_SERVER[$header]);
                 $ip = trim($ips[0]);
+                
+                // Validate IP and exclude private/reserved ranges for security
                 if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
                     return $ip;
                 }
             }
         }
         
+        // Return local IP as fallback (for development)
         return $_SERVER['REMOTE_ADDR'] ?? null;
     }
     
@@ -669,40 +684,65 @@ class LanguageDetector {
      * @return bool
      */
     public function isSupported($lang) {
-        $lang = strtolower(trim($lang));
+        $lang = $this->sanitizeLanguage($lang);
+        if (!$lang) {
+            return false;
+        }
+        
         return array_key_exists($lang, $this->supportedLanguages);
     }
     
     /**
-     * Set user's language preference
+     * Set user's language preference with enhanced security
      * 
      * @param string $lang Language code
      * @return bool Success status
      */
     public function setLanguage($lang) {
-        if ($this->isSupported($lang)) {
-            // Store in session
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            $_SESSION['language'] = $lang;
+        $lang = $this->sanitizeLanguage($lang);
+        if (!$lang || !$this->isSupported($lang)) {
+            return false;
+        }
+        
+        try {
+            // Store in session if available
+            $this->setSessionLanguage($lang);
             
-            // Store in cookie for 30 days
-            setcookie('language', $lang, [
+            // Store in secure cookie for 30 days
+            $cookieOptions = [
                 'expires' => time() + (86400 * 30),
                 'path' => '/',
-                'secure' => isset($_SERVER['HTTPS']),
+                'domain' => '',
+                'secure' => $this->isHttps(),
                 'httponly' => true,
                 'samesite' => 'Lax'
-            ]);
+            ];
+            
+            if (PHP_VERSION_ID >= 70300) {
+                // Use modern cookie options for PHP 7.3+
+                setcookie('language', $lang, $cookieOptions);
+            } else {
+                // Fallback for older PHP versions
+                setcookie(
+                    'language',
+                    $lang,
+                    $cookieOptions['expires'],
+                    $cookieOptions['path'],
+                    $cookieOptions['domain'],
+                    $cookieOptions['secure'],
+                    $cookieOptions['httponly']
+                );
+            }
             
             return true;
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Failed to set language: ' . $e->getMessage());
+            return false;
         }
-        return false;
     }
     
     /**
-     * Get all supported languages
+     * Get all supported languages (only those with translation files)
      * 
      * @return array Array of language codes
      */
@@ -717,6 +757,11 @@ class LanguageDetector {
      * @return string Language name
      */
     public function getLanguageName($lang) {
+        $lang = $this->sanitizeLanguage($lang);
+        if (!$lang) {
+            return 'Unknown';
+        }
+        
         return $this->languageNames[$lang] ?? ucfirst($lang);
     }
     
@@ -736,7 +781,12 @@ class LanguageDetector {
      * @return bool
      */
     public function isRTL($lang) {
-        $rtlLanguages = ['ar', 'fa', 'he', 'ur'];
+        $lang = $this->sanitizeLanguage($lang);
+        if (!$lang) {
+            return false;
+        }
+        
+        $rtlLanguages = ['ar', 'fa', 'he', 'ur', 'dv', 'sd'];
         return in_array($lang, $rtlLanguages);
     }
     
@@ -751,41 +801,72 @@ class LanguageDetector {
     }
     
     /**
-     * Get flag code for a language
+     * Get flag code for a language with validation
      * 
      * @param string $languageCode Language code
      * @return string Flag code (defaults to 'un' if not found)
      */
-    public static function getFlagCode($languageCode) {
-        return isset(self::$languageToFlag[$languageCode]) 
-            ? self::$languageToFlag[$languageCode] 
-            : 'un'; // Default to UN flag if not found
+    public function getFlagCode($languageCode) {
+        $languageCode = $this->sanitizeLanguage($languageCode);
+        if (!$languageCode) {
+            return 'un';
+        }
+        
+        return self::$languageToFlag[$languageCode] ?? 'un';
     }
     
     /**
-     * Get complete flag path for a language
+     * Get complete flag path for a language with caching
      *
      * @param string $languageCode Language code
      * @param string $basePath Base path for flags
      * @param string $extension File extension
      * @return string Complete path to the flag
      */
-    public static function getFlagPath($languageCode, $basePath = 'assets/flags/', $extension = '.webp') {
-        $flagCode = self::getFlagCode($languageCode);
-        return $basePath . $flagCode . $extension;
+    public function getFlagPath($languageCode, $basePath = 'assets/flags/', $extension = '.webp') {
+        $languageCode = $this->sanitizeLanguage($languageCode);
+        if (!$languageCode) {
+            return $basePath . 'un' . $extension;
+        }
+        
+        // Create cache key
+        $cacheKey = $languageCode . '|' . $basePath . '|' . $extension;
+        
+        if (isset(self::$flagPathCache[$cacheKey])) {
+            return self::$flagPathCache[$cacheKey];
+        }
+        
+        $flagCode = $this->getFlagCode($languageCode);
+        $flagPath = $basePath . $flagCode . $extension;
+        
+        // Cache the result
+        self::$flagPathCache[$cacheKey] = $flagPath;
+        
+        return $flagPath;
     }
     
     /**
-     * Get the best available flag path with format fallback
-     * Tries WEBP first, then PNG, then JPG
+     * Get the best available flag path with format fallback and caching
      * 
      * @param string $languageCode Language code
-     * @param string $basePath Base path for flags (relative to document root)
+     * @param string $basePath Base path for flags
      * @param string $documentRoot Document root path for file existence checking
      * @return string Complete path to the best available flag format
      */
-    public static function getBestFlagPath($languageCode, $basePath = 'assets/flags/', $documentRoot = null) {
-        $flagCode = self::getFlagCode($languageCode);
+    public function getBestFlagPath($languageCode, $basePath = 'assets/flags/', $documentRoot = null) {
+        $languageCode = $this->sanitizeLanguage($languageCode);
+        if (!$languageCode) {
+            return $basePath . 'un.webp';
+        }
+        
+        // Create cache key
+        $cacheKey = $languageCode . '|' . $basePath . '|' . ($documentRoot ?? 'default');
+        
+        if (isset(self::$flagPathCache[$cacheKey])) {
+            return self::$flagPathCache[$cacheKey];
+        }
+        
+        $flagCode = $this->getFlagCode($languageCode);
         
         // Set default document root if not provided
         if ($documentRoot === null) {
@@ -793,19 +874,32 @@ class LanguageDetector {
         }
         
         // Try formats in order of preference: WEBP > PNG > JPG
-        $formats = ['.webp', '.png', '.jpg'];
+        $formats = ['.webp', '.png', '.jpg', '.gif'];
         
         foreach ($formats as $extension) {
             $flagPath = $basePath . $flagCode . $extension;
             $fullPath = rtrim($documentRoot, '/') . '/' . ltrim($flagPath, '/');
             
-            if (file_exists($fullPath)) {
+            // Check cache first
+            if (isset(self::$fileExistenceCache[$fullPath])) {
+                $exists = self::$fileExistenceCache[$fullPath];
+            } else {
+                // Check file existence and cache result
+                $exists = @file_exists($fullPath);
+                self::$fileExistenceCache[$fullPath] = $exists;
+            }
+            
+            if ($exists) {
+                self::$flagPathCache[$cacheKey] = $flagPath;
                 return $flagPath;
             }
         }
         
-        // If no flag found, return WEBP path (will fallback to UN flag or show as missing)
-        return $basePath . $flagCode . '.webp';
+        // If no flag found, return WEBP path as fallback
+        $fallbackPath = $basePath . $flagCode . '.webp';
+        self::$flagPathCache[$cacheKey] = $fallbackPath;
+        
+        return $fallbackPath;
     }
     
     /**
@@ -815,24 +909,65 @@ class LanguageDetector {
      * @return array Array of language variants
      */
     public function getLanguageVariants($lang) {
+        $lang = $this->sanitizeLanguage($lang);
+        if (!$lang) {
+            return [];
+        }
+        
         return $this->supportedLanguages[$lang] ?? [];
     }
     
     /**
-     * Debug information about language detection
+     * Clear all caches (useful for testing or when flags are updated)
+     */
+    public function clearCaches() {
+        self::$fileExistenceCache = [];
+        self::$flagPathCache = [];
+    }
+    
+    /**
+     * Get cache statistics
      * 
-     * @return array Debug information
+     * @return array Cache statistics
+     */
+    public function getCacheStats() {
+        return [
+            'file_existence_cache_size' => count(self::$fileExistenceCache),
+            'flag_path_cache_size' => count(self::$flagPathCache),
+            'memory_usage' => memory_get_usage(true),
+        ];
+    }
+    
+    /**
+     * Debug information about language detection with enhanced security
+     * 
+     * @return array Debug information (filtered for security)
      */
     public function getDebugInfo() {
-        return [
-            'accept_language' => $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'Not set',
-            'session_language' => $_SESSION['language'] ?? 'Not set',
-            'cookie_language' => $_COOKIE['language'] ?? 'Not set',
-            'url_lang' => $_GET['lang'] ?? 'Not set',
-            'user_ip' => $this->getUserIP(),
-            'cloudflare_country' => $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'Not available',
+        $debugInfo = [
             'detected_language' => $this->detectLanguage(),
+            'supported_languages_count' => count($this->supportedLanguages),
+            'cache_stats' => $this->getCacheStats(),
         ];
+        
+        // Only include sensitive information in debug mode and for allowed IPs
+        $clientIP = $this->getUserIP();
+        $allowedDebugIPs = ['127.0.0.1', '::1'];
+        
+        if (defined('DEBUG_MODE') && DEBUG_MODE && in_array($clientIP, $allowedDebugIPs)) {
+            $debugInfo = array_merge($debugInfo, [
+                'accept_language' => $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'Not set',
+                'session_language' => $this->getSessionLanguage() ?? 'Not set',
+                'cookie_language' => $this->getCookieLanguage() ?? 'Not set',
+                'url_lang' => $this->sanitizeLanguage($_GET['lang'] ?? '') ?? 'Not set',
+                'user_ip' => $clientIP,
+                'cloudflare_country' => $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'Not available',
+                'https_detected' => $this->isHttps(),
+                'session_available' => $this->isSessionAvailable(),
+            });
+        }
+        
+        return $debugInfo;
     }
 }
 ?>
