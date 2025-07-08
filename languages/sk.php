@@ -1,15 +1,23 @@
 <?php
 return [
   /* Application metadata */
-  'app_title' => 'Ľadvinové storky',
+  'app_title' => 'Príbehy obličiek',
   'app_title_item' => 'Názov aplikácie',
   'app_subtitle' => 'Viacjazyčná webová aplikácia',
   'app_description' => 'Webová aplikácia na zdieľanie príbehov a rozprávaní od komunity ľudí s ochoreniami obličiek, vrátane tých na dialýze a tých, ktorí mali alebo čakajú na transplantáciu obličiek.',
   'app_version' => 'Verzia 2025.v1.0test',
   'app_author' => 'Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin',
   'footer_copyright' => 'Ľubomír Polaščín',
+  
   /* General text */
   'welcome' => 'Vitajte',
+  'change' => 'Zmeniť',
+  'datetime_placeholder' => 'Tu bude zobrazený dátum, čas, vrátane podrobného internetového času @beat.',
+  'user_information' => 'Informácie o používateľovi',
+  'application_information' => 'Informácie o aplikácii',
+  'server_information' => 'Informácie o serveri',
+  
+  /* Current language */
   'current_language' => 'Aktuálny jazyk',
   'current_language_code' => 'Kód aktuálneho jazyka',
   'current_language_file' => 'Súbor aktuálneho jazyka',
@@ -24,6 +32,7 @@ return [
   'current_language_flag_path_desc' => 'Cesta k obrázku vlajky aktuálneho jazyka, používaná na zobrazenie v rozhraní aplikácie.',
   'current_language_flag_path_alt' => 'Cesta k obrázku vlajky aktuálneho jazyka',
   'current_language_flag_path_title' => 'Cesta k obrázku vlajky aktuálneho jazyka',
+  
   /* Language related text */
   'language' => 'Jazyk',
   'language_name' => 'Názov jazyka',
@@ -49,6 +58,7 @@ return [
   'language_switch' => 'Prepnúť jazyk',
   'language_switch_success' => 'Jazyk bol úspešne zmenený',
   'language_switch_error' => 'Chyba pri zmene jazyka',
+  
   /* Service information */
   'service_information' => 'Informácie o službe',
   'user_agent' => 'Používateľský agent',
@@ -61,6 +71,8 @@ return [
   'query_string' => 'Reťazec dotazu',
   'document_root' => 'Koreň dokumentu',
   'script_name' => 'Názov skriptu',
+  
+  /* Session related text */
   'session_information' => 'Informácie o relácii',
   'session_debug' => 'Ladenie relácie',
   'session_status' => 'Stav relácie',
@@ -85,6 +97,8 @@ return [
   'session_max_lifetime' => 'Maximálna životnosť',
   'session_save_path' => 'Cesta ukladania',
   'session_cookie_lifetime' => 'Životnosť cookie',
+  'session_security_level' => 'Úroveň zabezpečenia',
   'session_comprehensive' => 'Komplexné informácie o relácii',
+  'debug_not_allowed' => 'Ladiace informácie nie sú dostupné z bezpečnostných dôvodov.',
 ];
 ?>

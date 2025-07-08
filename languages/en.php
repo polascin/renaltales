@@ -8,8 +8,16 @@ return [
   'app_version' => 'Version 2025.v1.0test',
   'app_author' => 'Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin',
   'footer_copyright' => 'Ľubomír Polaščín',
+  
   /* General text */
   'welcome' => 'Welcome',
+  'change' => 'Change',
+  'datetime_placeholder' => 'Here will be displayed date, time, including detailed internet time @beat.',
+  'user_information' => 'User information',
+  'application_information' => 'Application Information',
+  'server_information' => 'Server Information',
+  
+  /* Current language */
   'current_language' => 'Current language',
   'current_language_code' => 'Current language code',
   'current_language_file' => 'Current language file',
@@ -24,6 +32,7 @@ return [
   'current_language_flag_path_desc' => 'The path to the flag image of the current language, used for display in the application interface.',
   'current_language_flag_path_alt' => 'Path to the flag image of the current language',
   'current_language_flag_path_title' => 'Path to the flag image of the current language',
+  
   /* Language related text */
   'language' => 'Language',
   'language_name' => 'Language name',
@@ -49,6 +58,7 @@ return [
   'language_switch' => 'Switch language',
   'language_switch_success' => 'Language has been successfully changed',
   'language_switch_error' => 'Error changing language',
+  
   /* Service information */
   'service_information' => 'Service Information',
   'user_agent' => 'User Agent',
@@ -61,6 +71,8 @@ return [
   'query_string' => 'Query String',
   'document_root' => 'Document Root',
   'script_name' => 'Script Name',
+  
+  /* Session related text */
   'session_information' => 'Session Information',
   'session_debug' => 'Session Debug',
   'session_status' => 'Session Status',
@@ -85,6 +97,8 @@ return [
   'session_max_lifetime' => 'Max Lifetime',
   'session_save_path' => 'Save Path',
   'session_cookie_lifetime' => 'Cookie Lifetime',
+  'session_security_level' => 'Security Level',
   'session_comprehensive' => 'Comprehensive Session Information',
+  'debug_not_allowed' => 'Debug information is not available for security reasons.',
 ];
 ?>
