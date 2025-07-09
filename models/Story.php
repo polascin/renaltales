@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Story Model - Story management and operations
  * 
@@ -14,7 +16,7 @@ require_once 'BaseModel.php';
 
 class Story extends BaseModel {
     
-    protected $table = 'stories';
+    protected string $table = 'stories';
     
     /**
      * Constructor
@@ -29,7 +31,7 @@ class Story extends BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         $errors = [];
         
         // Title validation

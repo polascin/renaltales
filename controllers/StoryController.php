@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Story Controller - Handles story management operations
  * 
@@ -18,11 +20,11 @@ require_once 'models/Comment.php';
 
 class StoryController {
     
-    private $storyModel;
-    private $categoryModel;
-    private $tagModel;
-    private $mediaModel;
-    private $commentModel;
+    private mixed $storyModel;
+    private mixed $categoryModel;
+    private mixed $tagModel;
+    private mixed $mediaModel;
+    private mixed $commentModel;
     
     /**
      * Constructor

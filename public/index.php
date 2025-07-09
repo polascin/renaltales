@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Renal Tales - Main Application Entry Point
  * 
@@ -38,11 +40,13 @@ try {
   $inputValidator = new InputValidator();
   $fileUploadManager = new FileUploadManager();
   
-  // Make security components available globally
-  $GLOBALS['securityManager'] = $securityManager;
-  $GLOBALS['rateLimitManager'] = $rateLimitManager;
-  $GLOBALS['inputValidator'] = $inputValidator;
-  $GLOBALS['fileUploadManager'] = $fileUploadManager;
+  // Initialize application components (avoid using globals)
+  $application = [
+    'securityManager' => $securityManager,
+    'rateLimitManager' => $rateLimitManager,
+    'inputValidator' => $inputValidator,
+    'fileUploadManager' => $fileUploadManager,
+  ];
   
   $controller = new ApplicationController($languageModel, $sessionManager);
   

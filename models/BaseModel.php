@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * BaseModel - Base class for all models
  * 
@@ -11,8 +13,8 @@
 
 abstract class BaseModel {
     
-    protected $db;
-    protected $table;
+    protected Database $db;
+    protected string $table;
     
     /**
      * Constructor
@@ -27,7 +29,7 @@ abstract class BaseModel {
      * @param int $id
      * @return array|false
      */
-    public function find($id) {
+    public function find(int $id): array|false {
         $sql = "SELECT * FROM {$this->table} WHERE id = ? LIMIT 1";
         return $this->db->selectOne($sql, [$id]);
     }
@@ -36,11 +38,11 @@ abstract class BaseModel {
      * Find all records
      * 
      * @param array $conditions
-     * @param int $limit
+     * @param int|null $limit
      * @param int $offset
      * @return array
      */
-    public function findAll($conditions = [], $limit = null, $offset = 0) {
+    public function findAll(array $conditions = [], ?int $limit = null, int $offset = 0): array {
         $sql = "SELECT * FROM {$this->table}";
         $params = [];
         
@@ -69,7 +71,7 @@ abstract class BaseModel {
      * @param array $data
      * @return string Last insert ID
      */
-    public function create($data) {
+    public function create(array $data): string {
         $fields = array_keys($data);
         $placeholders = array_fill(0, count($fields), '?');
         
@@ -85,7 +87,7 @@ abstract class BaseModel {
      * @param array $data
      * @return int Number of affected rows
      */
-    public function update($id, $data) {
+    public function update(int $id, array $data): int {
         $fields = [];
         $params = [];
         
@@ -106,7 +108,7 @@ abstract class BaseModel {
      * @param int $id
      * @return int Number of affected rows
      */
-    public function delete($id) {
+    public function delete(int $id): int {
         $sql = "DELETE FROM {$this->table} WHERE id = ?";
         return $this->db->update($sql, [$id]);
     }
@@ -117,7 +119,7 @@ abstract class BaseModel {
      * @param array $conditions
      * @return int
      */
-    public function count($conditions = []) {
+    public function count(array $conditions = []): int {
         $sql = "SELECT COUNT(*) as count FROM {$this->table}";
         $params = [];
         
@@ -140,7 +142,7 @@ abstract class BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    abstract protected function validate($data);
+    abstract protected function validate(array $data): array;
 }
 
 ?>

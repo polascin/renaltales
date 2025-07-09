@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'BaseModel.php';
 
 /**
@@ -13,15 +15,18 @@ require_once 'BaseModel.php';
 
 class LanguageModel extends BaseModel {
     
-    protected $languageDetector;
-    protected $currentLanguage;
-    protected $currentLanguageName;
-    protected $texts = [];
+    protected mixed $languageDetector;
+    protected ?string $currentLanguage;
+    protected ?string $currentLanguageName;
+    protected array $texts = [];
     
     /**
      * Constructor
      */
     public function __construct() {
+        // Call parent constructor to initialize database connection
+        parent::__construct();
+        
         // Initialize language detector
         if (class_exists('LanguageDetector')) {
             $this->languageDetector = new LanguageDetector();
@@ -38,7 +43,7 @@ class LanguageModel extends BaseModel {
     /**
      * Load language texts with fallback
      */
-    private function loadLanguageTexts() {
+    private function loadLanguageTexts(): void {
         // Initialize basic fallback texts
         $this->texts = [
             'app_title' => 'Renal Tales',
@@ -83,7 +88,7 @@ class LanguageModel extends BaseModel {
      * @param string $fallback
      * @return string
      */
-    public function getText($key, $fallback = '') {
+    public function getText(string $key, string $fallback = ''): string {
         return isset($this->texts[$key]) ? $this->texts[$key] : $fallback;
     }
     
@@ -92,7 +97,7 @@ class LanguageModel extends BaseModel {
      * 
      * @return array
      */
-    public function getAllTexts() {
+    public function getAllTexts(): array {
         return $this->texts;
     }
     
@@ -101,7 +106,7 @@ class LanguageModel extends BaseModel {
      * 
      * @return string
      */
-    public function getCurrentLanguage() {
+    public function getCurrentLanguage(): string {
         return $this->currentLanguage ?? 'en';
     }
     
@@ -110,16 +115,16 @@ class LanguageModel extends BaseModel {
      * 
      * @return string
      */
-    public function getCurrentLanguageName() {
+    public function getCurrentLanguageName(): string {
         return $this->currentLanguageName ?? 'English';
     }
     
     /**
      * Get language detector instance
      * 
-     * @return LanguageDetector|null
+     * @return mixed
      */
-    public function getLanguageDetector() {
+    public function getLanguageDetector(): mixed {
         return $this->languageDetector;
     }
     
@@ -128,7 +133,7 @@ class LanguageModel extends BaseModel {
      * 
      * @return array
      */
-    public function getSupportedLanguages() {
+    public function getSupportedLanguages(): array {
         if ($this->languageDetector) {
             return $this->languageDetector->getSupportedLanguages();
         }
@@ -141,7 +146,7 @@ class LanguageModel extends BaseModel {
      * @param string $langCode
      * @return string
      */
-    public function getLanguageName($langCode) {
+    public function getLanguageName(string $langCode): string {
         if ($this->languageDetector) {
             return $this->languageDetector->getLanguageName($langCode);
         }
@@ -154,7 +159,7 @@ class LanguageModel extends BaseModel {
      * @param string $langCode
      * @return string
      */
-    public function getFlagPath($langCode) {
+    public function getFlagPath(string $langCode): string {
         if ($this->languageDetector) {
             return $this->languageDetector->getFlagPath($langCode);
         }
@@ -167,7 +172,7 @@ class LanguageModel extends BaseModel {
      * @param array $data
      * @return array
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         // No validation needed for language model
         return [];
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'BaseView.php';
 
 /**
@@ -16,7 +18,7 @@ class ApplicationView extends BaseView {
     /**
      * Render the main application content
      */
-    protected function renderContent() {
+    protected function renderContent(): void {
         $currentLanguage = $this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en';
         $currentLanguageName = $this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English';
         $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');

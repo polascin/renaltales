@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * User Model - Updated for normalized schema
  * 
@@ -13,7 +15,7 @@ require_once __DIR__ . '/BaseModel.php';
 
 class User extends BaseModel {
     
-    protected $table = 'users';
+    protected string $table = 'users';
     
     /**
      * Find user by email
@@ -21,7 +23,7 @@ class User extends BaseModel {
      * @param string $email
      * @return array|false
      */
-    public function findByEmail($email) {
+    public function findByEmail(string $email): array|false {
         $sql = "SELECT * FROM {$this->table} WHERE email = ? LIMIT 1";
         return $this->db->selectOne($sql, [$email]);
     }
@@ -32,7 +34,7 @@ class User extends BaseModel {
      * @param string $username
      * @return array|false
      */
-    public function findByUsername($username) {
+    public function findByUsername(string $username): array|false {
         $sql = "SELECT * FROM {$this->table} WHERE username = ? LIMIT 1";
         return $this->db->selectOne($sql, [$username]);
     }
@@ -197,7 +199,7 @@ class User extends BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         $errors = [];
         
         // Username validation
@@ -246,4 +248,5 @@ class User extends BaseModel {
     }
 }
 
+?>
 ?>

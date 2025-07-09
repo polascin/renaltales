@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'BaseController.php';
+require_once __DIR__ . '/../views/ApplicationView.php';
+require_once __DIR__ . '/../views/ErrorView.php';
 
 /**
  * ApplicationController - Main application controller
@@ -13,16 +17,16 @@ require_once 'BaseController.php';
 
 class ApplicationController extends BaseController {
     
-    private $languageModel;
-    private $sessionManager;
+    private mixed $languageModel;
+    private mixed $sessionManager;
     
     /**
      * Constructor
      * 
-     * @param LanguageModel $languageModel
-     * @param SessionManager $sessionManager
+     * @param mixed $languageModel
+     * @param mixed $sessionManager
      */
-    public function __construct($languageModel, $sessionManager) {
+    public function __construct(mixed $languageModel, mixed $sessionManager) {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
     }
@@ -30,52 +34,66 @@ class ApplicationController extends BaseController {
     /**
      * Handle the main index action
      */
-    public function index() {
-        // Handle language change if requested
-        $this->handleLanguageChange();
-        
-        // Create and render the main view
-        $view = new ApplicationView($this->languageModel, $this->sessionManager);
-        return $view->render();
+    public function index(): string {
+        try {
+            // Handle language change if requested
+            $this->handleLanguageChange();
+            
+            // Create and render the main view
+            $view = new ApplicationView($this->languageModel, $this->sessionManager);
+            return $view->render();
+        } catch (\Exception $e) {
+            // Log error and return error view
+            error_log("ApplicationController::index() error: " . $e->getMessage());
+            return $this->error($e, defined('DEBUG_MODE') && DEBUG_MODE);
+        }
     }
     
     /**
      * Handle language change requests
      */
-    private function handleLanguageChange() {
-        if (isset($_GET['lang']) && !empty($_GET['lang'])) {
-            $requestedLanguage = $_GET['lang'];
+    private function handleLanguageChange(): void {
+        if (!isset($_GET['lang']) || empty($_GET['lang'])) {
+            return;
+        }
+        
+        $requestedLanguage = $this->sanitizeInput($_GET['lang']);
+        
+        // Validate language code format (should be 2-3 letter code)
+        if (!$this->isValidInput($requestedLanguage, '_-') || strlen($requestedLanguage) > 10) {
+            return;
+        }
+        
+        if (!$this->sessionManager || !$this->languageModel) {
+            return;
+        }
+        
+        // Validate CSRF token
+        $csrfToken = isset($_GET['csrf_token']) ? $this->sanitizeInput($_GET['csrf_token']) : '';
+        if (!$csrfToken || !$this->sessionManager->validateCSRFToken($csrfToken)) {
+            return;
+        }
+        
+        // Check if language is supported
+        $supportedLanguages = $this->languageModel->getSupportedLanguages();
+        
+        if (in_array($requestedLanguage, $supportedLanguages, true)) {
+            // Set language in session
+            $this->sessionManager->setSession('user_language', $requestedLanguage);
             
-            // Validate CSRF token
-            if ($this->sessionManager && isset($_GET['csrf_token'])) {
-                $isValidToken = $this->sessionManager->validateCSRFToken($_GET['csrf_token']);
-                
-                if ($isValidToken) {
-                    // Check if language is supported
-                    $supportedLanguages = $this->languageModel->getSupportedLanguages();
-                    
-                    if (in_array($requestedLanguage, $supportedLanguages)) {
-                        // Set language in session or cookie
-                        if ($this->sessionManager) {
-                            $this->sessionManager->setSession('user_language', $requestedLanguage);
-                        }
-                        
-                        // Redirect to avoid resubmission
-                        $this->redirect($_SERVER['PHP_SELF']);
-                    }
-                }
-            }
+            // Redirect to avoid resubmission
+            $this->redirect($_SERVER['PHP_SELF'] ?? '/');
         }
     }
     
     /**
      * Handle error display
      * 
-     * @param Exception $exception
+     * @param \Exception $exception
      * @param bool $isDebugMode
      * @return string
      */
-    public function error($exception, $isDebugMode = false) {
+    public function error(\Exception $exception, bool $isDebugMode = false): string {
         $errorView = new ErrorView($exception, $isDebugMode, $this->languageModel);
         return $errorView->render();
     }
@@ -85,26 +103,88 @@ class ApplicationController extends BaseController {
      * 
      * @param string $url
      */
-    private function redirect($url) {
+    private function redirect(string $url): void {
+        // Prevent open redirect vulnerabilities
+        if (!$this->isValidRedirectUrl($url)) {
+            $url = '/';
+        }
+        
         header("Location: $url");
         exit;
     }
     
     /**
+     * Validate redirect URL to prevent open redirects
+     * 
+     * @param string $url
+     * @return bool
+     */
+    private function isValidRedirectUrl(string $url): bool {
+        // Allow relative URLs
+        if (strpos($url, '/') === 0 && strpos($url, '//') !== 0) {
+            return true;
+        }
+        
+        // Allow same-origin URLs
+        if (isset($_SERVER['HTTP_HOST'])) {
+            $host = $_SERVER['HTTP_HOST'];
+            $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+            $baseUrl = $scheme . '://' . $host;
+            
+            if (strpos($url, $baseUrl) === 0) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Sanitize input string to prevent XSS and other attacks
+     * 
+     * @param string $input
+     * @return string
+     */
+    private function sanitizeInput(string $input): string {
+        // Trim whitespace
+        $input = trim($input);
+        
+        // Remove null bytes
+        $input = str_replace("\0", '', $input);
+        
+        // Convert special characters to HTML entities
+        $input = htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        
+        return $input;
+    }
+    
+    /**
+     * Validate that a string contains only alphanumeric characters and allowed symbols
+     * 
+     * @param string $input
+     * @param string $allowedChars Additional allowed characters (regex pattern)
+     * @return bool
+     */
+    private function isValidInput(string $input, string $allowedChars = ''): bool {
+        $pattern = '/^[a-zA-Z0-9' . $allowedChars . ']+$/';
+        return preg_match($pattern, $input) === 1;
+    }
+
+    /**
      * Get language model
      * 
-     * @return LanguageModel
+     * @return mixed
      */
-    public function getLanguageModel() {
+    public function getLanguageModel(): mixed {
         return $this->languageModel;
     }
     
     /**
      * Get session manager
      * 
-     * @return SessionManager
+     * @return mixed
      */
-    public function getSessionManager() {
+    public function getSessionManager(): mixed {
         return $this->sessionManager;
     }
 }

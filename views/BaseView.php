@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * BaseView - Base class for all views
  * 
@@ -11,17 +13,17 @@
 
 abstract class BaseView {
     
-    protected $data = [];
-    protected $languageModel;
-    protected $sessionManager;
+    protected array $data = [];
+    protected mixed $languageModel;
+    protected mixed $sessionManager;
     
     /**
      * Constructor
      * 
-     * @param LanguageModel $languageModel
-     * @param SessionManager $sessionManager
+     * @param mixed $languageModel
+     * @param mixed $sessionManager
      */
-    public function __construct($languageModel = null, $sessionManager = null) {
+    public function __construct(mixed $languageModel = null, mixed $sessionManager = null) {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
     }
@@ -31,7 +33,7 @@ abstract class BaseView {
      * 
      * @param array $data
      */
-    public function setData($data) {
+    public function setData(array $data): void {
         $this->data = $data;
     }
     
@@ -42,7 +44,7 @@ abstract class BaseView {
      * @param mixed $default
      * @return mixed
      */
-    public function get($key, $default = null) {
+    public function get(string $key, mixed $default = null): mixed {
         return isset($this->data[$key]) ? $this->data[$key] : $default;
     }
     
@@ -53,7 +55,7 @@ abstract class BaseView {
      * @param string $fallback
      * @return string
      */
-    public function getText($key, $fallback = '') {
+    public function getText(string $key, string $fallback = ''): string {
         if ($this->languageModel) {
             return $this->languageModel->getText($key, $fallback);
         }
@@ -67,7 +69,7 @@ abstract class BaseView {
      * @param string $default
      * @return string
      */
-    protected function getServerVar($key, $default = 'N/A') {
+    protected function getServerVar(string $key, string $default = 'N/A'): string {
         return isset($_SERVER[$key]) ? htmlspecialchars($_SERVER[$key], ENT_QUOTES, 'UTF-8') : $default;
     }
     
@@ -77,7 +79,7 @@ abstract class BaseView {
      * @param string $string
      * @return string
      */
-    protected function escape($string) {
+    protected function escape(string $string): string {
         return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     }
     
@@ -87,7 +89,7 @@ abstract class BaseView {
      * @param string $partial
      * @param array $data
      */
-    protected function partial($partial, $data = []) {
+    protected function partial(string $partial, array $data = []): void {
         $oldData = $this->data;
         $this->data = array_merge($this->data, $data);
         include "partials/{$partial}.php";
@@ -99,7 +101,7 @@ abstract class BaseView {
      * 
      * @return string
      */
-    public function render() {
+    public function render(): string {
         ob_start();
         $this->renderContent();
         return ob_get_clean();
@@ -108,7 +110,7 @@ abstract class BaseView {
     /**
      * Abstract method to be implemented by child classes
      */
-    abstract protected function renderContent();
+    abstract protected function renderContent(): void;
 }
 
 ?>

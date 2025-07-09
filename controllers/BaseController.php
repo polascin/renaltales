@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * BaseController - Base class for all controllers
  * 
@@ -10,7 +12,7 @@
 
 abstract class BaseController {
     
-    protected $view;
+    protected mixed $view;
     
     /**
      * Render a view with optional data
@@ -18,7 +20,7 @@ abstract class BaseController {
      * @param string $viewPath
      * @param array $data
      */
-    public function render($viewPath, $data = []) {
+    public function render(string $viewPath, array $data = []): void {
         extract($data);
         include "views/{$viewPath}.php";
     }
