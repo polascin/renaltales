@@ -8,7 +8,7 @@
 
 return [
     // Application general
-    'app_title' => 'Renal Tales',
+    'app_title' => 'Nierengeschichten',
     'app_subtitle' => 'Eine mehrsprachige Webanwendung',
     'app_description' => 'Eine Webanwendung zum Teilen von Geschichten und Erzählungen der Gemeinschaft von Menschen mit Nierenerkrankungen, einschließlich derer in Dialyse und derer, die eine Nierentransplantation haben oder darauf warten.',
     'app_version' => 'Version 2025.v1.0test',

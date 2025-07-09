@@ -8,7 +8,7 @@
 
 return [
     // Application general
-    'app_title' => 'Renal Tales',
+    'app_title' => 'Ledvinové příběhy',
     'app_subtitle' => 'Vícejazyčná webová aplikace',
     'app_description' => 'Webová aplikace pro sdílení příběhů a vyprávění od komunity lidí s poruchami ledvin, včetně těch na dialýze a těch, kteří měli nebo čekají na transplantaci ledviny.',
     'app_version' => 'Verze 2025.v1.0test',

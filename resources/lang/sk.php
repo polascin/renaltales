@@ -8,7 +8,7 @@
 
 return [
     // Application general
-    'app_title' => 'Renal Tales',
+    'app_title' => 'Ľadvinové storky',
     'app_subtitle' => 'Viacjazyčná webová aplikácia',
     'app_description' => 'Webová aplikácia na zdieľanie príbehov a rozprávok od komunity ľudí s poruchami obličiek, vrátane tých na dialýze a tých, ktorí mali alebo čakajú na transplantáciu obličky.',
     'app_version' => 'Verzia 2025.v1.0test',

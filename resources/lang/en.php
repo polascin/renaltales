@@ -8,7 +8,7 @@
 
 return [
     // Application general
-    'app_title' => 'Renal Tales',
+    'app_title' => 'Kidney Stories',
     'app_subtitle' => 'A Multilingual Web Application',
     'app_description' => 'A web application for sharing tales and stories from the community of people with kidney disorders, including those on dialysis, and those who have had or are waiting for a renal transplant.',
     'app_version' => 'Version 2025.v1.0test',
