@@ -271,7 +271,6 @@ class ApplicationView extends BaseView {
      */
     private function renderJavaScript() {
         if (!$this->sessionManager) {
-            echo '<script>console.log("Session manager not available");</script>';
             return;
         }
         

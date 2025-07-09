@@ -26,8 +26,7 @@ renaltales/
 ├── database/           # Database scripts and migrations
 │   ├── schema/         # Table schema files
 │   ├── setup_database.sql
-│   ├── logging_system_setup.sql
-│   └── test_setup.php
+│   └── logging_system_setup.sql
 ├── docs/               # Project documentation
 │   ├── README.md
 │   ├── MVC_STRUCTURE.md

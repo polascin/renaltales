@@ -37,8 +37,7 @@ renaltales/
 ├── 📁 database/           # Database scripts and migrations
 │   ├── schema/            # Database schema files
 │   ├── setup_database.sql
-│   ├── logging_system_setup.sql
-│   └── test_setup.php
+│   └── logging_system_setup.sql
 ├── 📁 docs/               # Project documentation
 │   ├── README.md
 │   ├── MVC_STRUCTURE.md
@@ -64,6 +63,14 @@ renaltales/
 │   ├── sessions/         # Session storage
 │   ├── temp/             # Temporary files
 │   └── uploads/          # User uploaded files
+├── 📁 scripts/           # Utility scripts
+│   ├── cleanup.php       # Cleanup script
+│   └── README.md         # Scripts documentation
+├── 📁 tests/             # Unit and feature tests
+│   ├── Feature/
+│   ├── Unit/
+│   └── database/         # Database tests
+│       └── test_setup.php # Database setup test
 ├── 📁 views/             # MVC Views
 │   ├── BaseView.php
 │   ├── ApplicationView.php

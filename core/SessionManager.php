@@ -786,23 +786,6 @@ class SessionManager {
   }
   
   /**
-   * Display session information as simple var_dump (debug only)
-   */
-  public function displaySessionVarDump() {
-    if (!$this->isDebugAllowed()) {
-      echo '<p>' . $this->getText('debug_not_allowed', 'Debug information is not available for security reasons.') . '</p>';
-      return;
-    }
-    
-    echo '<div class="session-vardump">';
-    echo '<h3>' . $this->getText('session_vardump', 'Session Var Dump') . '</h3>';
-    echo '<pre>';
-    var_dump($this->getSessionData());
-    echo '</pre>';
-    echo '</div>';
-  }
-  
-  /**
    * Display session information as formatted HTML
    */
   public function displaySessionFormatted() {

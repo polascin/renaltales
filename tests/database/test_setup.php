@@ -8,9 +8,9 @@
  */
 
 // Include required files
-require_once '../core/Database.php';
-require_once '../core/PasswordResetManager.php';
-require_once '../core/EmailVerificationManager.php';
+require_once '../../core/Database.php';
+require_once '../../core/PasswordResetManager.php';
+require_once '../../core/EmailVerificationManager.php';
 
 echo "<h1>Renal Tales - Security Features Test</h1>\n";
 echo "<pre>\n";
