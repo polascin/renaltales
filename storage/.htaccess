@@ -1,0 +1,37 @@
+# Deny direct access to storage directory
+Order Deny,Allow
+Deny from all
+
+# Prevent access to log files
+<FilesMatch "\.(log|txt)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to backup files
+<FilesMatch "\.(bak|backup|sql|gz|zip)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent access to configuration files
+<FilesMatch "\.(conf|config|ini|json|xml)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent execution of PHP files
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>

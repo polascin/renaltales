@@ -116,13 +116,83 @@ class Database {
      */
     public function execute($sql, $params = []) {
         try {
+            // Validate SQL query for potential injection attempts
+            if (!$this->validateSQLQuery($sql)) {
+                throw new Exception('SQL query contains potentially dangerous content');
+            }
+            
             $stmt = $this->connection->prepare($sql);
-            $stmt->execute($params);
+            
+            // Sanitize parameters
+            $sanitizedParams = $this->sanitizeParameters($params);
+            
+            $stmt->execute($sanitizedParams);
             return $stmt;
         } catch (PDOException $e) {
             error_log('Database query failed: ' . $e->getMessage() . ' SQL: ' . $sql);
             throw new Exception('Database query failed: ' . $e->getMessage());
         }
+    }
+    
+    /**
+     * Validate SQL query for potential injection attempts
+     * 
+     * @param string $sql
+     * @return bool
+     */
+    private function validateSQLQuery($sql) {
+        // Remove comments and normalize whitespace
+        $sql = preg_replace('/\s+/', ' ', $sql);
+        $sql = preg_replace('/--.*$/', '', $sql);
+        $sql = preg_replace('/\/\*.*?\*\//s', '', $sql);
+        
+        // Check for dangerous patterns
+        $dangerousPatterns = [
+            '/;\s*(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|EXECUTE)/i',
+            '/UNION\s+(ALL\s+)?SELECT/i',
+            '/(\bOR\b|\bAND\b)\s+\d+\s*=\s*\d+/i',
+            '/(\bOR\b|\bAND\b)\s+[\'"].*[\'"]\s*=\s*[\'"].*[\'"]/',
+            '/\bEXEC\s*\(/i',
+            '/\bEXECUTE\s*\(/i',
+            '/\bSP_\w+/i',
+            '/\bXP_\w+/i',
+            '/\bSHUTDOWN\b/i',
+            '/\bDROP\s+(TABLE|DATABASE|SCHEMA)/i'
+        ];
+        
+        foreach ($dangerousPatterns as $pattern) {
+            if (preg_match($pattern, $sql)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Sanitize parameters for SQL execution
+     * 
+     * @param array $params
+     * @return array
+     */
+    private function sanitizeParameters($params) {
+        $sanitized = [];
+        
+        foreach ($params as $key => $value) {
+            if (is_string($value)) {
+                // Remove null bytes and control characters
+                $value = str_replace(["\0", "\x00", "\x1a"], '', $value);
+                
+                // Limit string length to prevent DoS
+                if (strlen($value) > 10000) {
+                    $value = substr($value, 0, 10000);
+                }
+            }
+            
+            $sanitized[$key] = $value;
+        }
+        
+        return $sanitized;
     }
     
     /**

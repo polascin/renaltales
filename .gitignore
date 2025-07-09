@@ -1,3 +1,18 @@
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore environment files
+.env
+
+# Ignore log files
+storage/logs/
+
+# Ignore cache
+storage/cache/
+
+# Ignore sessions
+storage/sessions/
+
 # Flags Set
 /public/assets/flags/*
 

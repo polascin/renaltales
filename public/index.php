@@ -20,6 +20,10 @@ define('DEBUG_MODE', true); // True in testing. Set to false in production
 require_once APP_DIR . '/core/Database.php';
 require_once APP_DIR . '/core/LanguageDetector.php';
 require_once APP_DIR . '/core/SessionManager.php';
+require_once APP_DIR . '/core/SecurityManager.php';
+require_once APP_DIR . '/core/RateLimitManager.php';
+require_once APP_DIR . '/core/InputValidator.php';
+require_once APP_DIR . '/core/FileUploadManager.php';
 require_once APP_DIR . '/models/LanguageModel.php';
 require_once APP_DIR . '/views/ApplicationView.php';
 require_once APP_DIR . '/views/ErrorView.php';
@@ -29,6 +33,17 @@ require_once APP_DIR . '/controllers/ApplicationController.php';
 try {
   $languageModel = new LanguageModel();
   $sessionManager = new SessionManager($languageModel->getAllTexts(), DEBUG_MODE);
+  $securityManager = new SecurityManager($sessionManager);
+  $rateLimitManager = new RateLimitManager();
+  $inputValidator = new InputValidator();
+  $fileUploadManager = new FileUploadManager();
+  
+  // Make security components available globally
+  $GLOBALS['securityManager'] = $securityManager;
+  $GLOBALS['rateLimitManager'] = $rateLimitManager;
+  $GLOBALS['inputValidator'] = $inputValidator;
+  $GLOBALS['fileUploadManager'] = $fileUploadManager;
+  
   $controller = new ApplicationController($languageModel, $sessionManager);
   
   // Handle the request

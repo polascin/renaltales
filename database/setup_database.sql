@@ -86,6 +86,124 @@ CREATE TABLE IF NOT EXISTS `email_verifications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =========================================
+-- Stories table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `stories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `published` BOOLEAN DEFAULT FALSE,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Categories table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Tags table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL UNIQUE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Story Categories table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `story_categories` (
+  `story_id` INT UNSIGNED NOT NULL,
+  `category_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`story_id`, `category_id`),
+  FOREIGN KEY (`story_id`) REFERENCES `stories`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Story Tags table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `story_tags` (
+  `story_id` INT UNSIGNED NOT NULL,
+  `tag_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`story_id`, `tag_id`),
+  FOREIGN KEY (`story_id`) REFERENCES `stories`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`tag_id`) REFERENCES `tags`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Story Media table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `story_media` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `story_id` INT UNSIGNED NOT NULL,
+  `filename` VARCHAR(255) NOT NULL,
+  `original_filename` VARCHAR(255) NOT NULL,
+  `file_path` VARCHAR(500) NOT NULL,
+  `file_size` INT UNSIGNED NOT NULL,
+  `mime_type` VARCHAR(100) NOT NULL,
+  `media_type` ENUM('image', 'video', 'audio', 'document', 'other') NOT NULL,
+  `alt_text` TEXT NULL,
+  `caption` TEXT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`story_id`) REFERENCES `stories`(`id`) ON DELETE CASCADE,
+  INDEX `idx_story_id` (`story_id`),
+  INDEX `idx_media_type` (`media_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Story Versions table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `story_versions` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `story_id` INT UNSIGNED NOT NULL,
+  `version_number` INT UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `content` TEXT NOT NULL,
+  `metadata` JSON NULL,
+  `created_by` INT UNSIGNED NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `notes` TEXT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`story_id`) REFERENCES `stories`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE SET NULL,
+  UNIQUE KEY `unique_story_version` (`story_id`, `version_number`),
+  INDEX `idx_story_id` (`story_id`),
+  INDEX `idx_version_number` (`version_number`),
+  INDEX `idx_created_by` (`created_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
+-- Story Comments table
+-- =========================================
+CREATE TABLE IF NOT EXISTS `story_comments` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `story_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `parent_id` INT UNSIGNED NULL,
+  `content` TEXT NOT NULL,
+  `status` ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`story_id`) REFERENCES `stories`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`parent_id`) REFERENCES `story_comments`(`id`) ON DELETE CASCADE,
+  INDEX `idx_story_id` (`story_id`),
+  INDEX `idx_user_id` (`user_id`),
+  INDEX `idx_parent_id` (`parent_id`),
+  INDEX `idx_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =========================================
 -- User sessions table (optional - for database-based sessions)
 -- =========================================
 CREATE TABLE IF NOT EXISTS `user_sessions` (
