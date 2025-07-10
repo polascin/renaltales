@@ -7,7 +7,6 @@ This document describes the modern PHP development environment setup for the Ren
 
 ### 1. ✅ Composer Initialization
 - **composer.json**: Created with project metadata and dependencies
-- **PSR-4 Autoloading**: Configured for `RenalTales\` namespace → `src/` directory
 - **Development dependencies**: Added testing and code quality tools
 
 ### 2. ✅ Environment Configuration
@@ -19,13 +18,16 @@ This document describes the modern PHP development environment setup for the Ren
 ### 3. ✅ Directory Structure
 ```
 renaltales/
-├── src/                    # Application source code (PSR-4: RenalTales\)
-├── tests/                  # Test files (PSR-4: RenalTales\Tests\)
+├── core/                   # Core application classes
+├── controllers/            # MVC Controllers
+├── models/                 # Database models
+├── views/                  # View templates
+├── tests/                  # Test files
 ├── storage/
 │   ├── logs/              # Application logs
 │   ├── cache/             # Application cache
 │   ├── sessions/          # Session storage
-│   └── files/             # File storage
+│   └── uploads/           # File uploads
 ├── .env                   # Environment configuration
 ├── .env.example           # Environment template
 ├── .gitignore             # Git ignore rules
@@ -54,10 +56,9 @@ renaltales/
 - **Storage directories**: Logs, cache, sessions excluded
 - **IDE files**: Common IDE files excluded
 
-### 6. ✅ PSR-4 Autoloading
-- **Namespace**: `RenalTales\` → `src/`
-- **Test namespace**: `RenalTales\Tests\` → `tests/`
-- **Sample Application class**: Created in `src/Application.php`
+### 6. ✅ Application Structure
+- **MVC Pattern**: Controllers, Models, and Views organized
+- **Core Components**: Authentication, Database, and Security managers
 
 ## Environment Configuration
 
@@ -80,10 +81,7 @@ Based on your Laragon setup:
 
 ### Running Tests
 ```bash
-# Run the basic environment test
-php test-basic.php
-
-# Install dependencies (once Composer permission issues are resolved)
+# Install dependencies
 composer install
 
 # Run PHPUnit tests

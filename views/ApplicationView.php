@@ -194,14 +194,32 @@ class ApplicationView extends BaseView {
      */
     private function renderMainContent() {
         echo '<main>';
+        echo '<div class="main-container">';
+
+        // Main content goes here
+        echo '<div class="main-menu-container">';
+        echo $this->renderMainMenu();
+        echo '</div>';
+
+        echo '<div class="main-content-container">';
+        echo $this->renderMainContent();
+        echo '</div>';
         
+        echo '<div class="main-notes-container">';
+        echo $this->renderContentNotes();
+        echo '</div>';
+
+        echo '</div>';
+
         // Language Selection Flags
+        echo '<div>';
         echo '<section class="language-selection-flags">';
         echo $this->renderLanguageFlags();
         echo '<p>' . $this->escape($this->getText('current_language', 'Current language')) . ': <strong>' . $this->escape($this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English') . '</strong>. </p>';
         echo '<p>' . $this->escape($this->getText('welcome', 'Welcome')) . '! </p>';
         echo '</section>';
-        
+        echo '</div>'; 
+               
         echo '</main>';
     }
     
