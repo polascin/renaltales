@@ -190,6 +190,263 @@ class ApplicationView extends BaseView {
     }
     
     /**
+     * Render main menu section
+     */
+    private function renderMainMenu() {
+        $html = '<nav class="main-menu">';
+        $html .= '<h3>' . $this->escape($this->getText('main_menu', 'Main Menu')) . '</h3>';
+        $html .= '<ul>';
+        
+        // Home/Dashboard
+        $html .= '<li><a href="/" class="menu-item">';
+        $html .= '<i class="icon-home"></i>';
+        $html .= $this->escape($this->getText('home', 'Home'));
+        $html .= '</a></li>';
+        
+        // Stories section
+        $html .= '<li><a href="?section=stories" class="menu-item">';
+        $html .= '<i class="icon-stories"></i>';
+        $html .= $this->escape($this->getText('stories', 'Stories'));
+        $html .= '</a></li>';
+        
+        // Community section
+        $html .= '<li><a href="?section=community" class="menu-item">';
+        $html .= '<i class="icon-community"></i>';
+        $html .= $this->escape($this->getText('community', 'Community'));
+        $html .= '</a></li>';
+        
+        // Resources section
+        $html .= '<li><a href="?section=resources" class="menu-item">';
+        $html .= '<i class="icon-resources"></i>';
+        $html .= $this->escape($this->getText('resources', 'Resources'));
+        $html .= '</a></li>';
+        
+        // About section
+        $html .= '<li><a href="?section=about" class="menu-item">';
+        $html .= '<i class="icon-about"></i>';
+        $html .= $this->escape($this->getText('about', 'About'));
+        $html .= '</a></li>';
+        
+        // Add authenticated user menu items
+        if ($this->authenticationManager && $this->authenticationManager->isAuthenticated()) {
+            $html .= '<li class="menu-separator"></li>';
+            
+            // My Stories
+            $html .= '<li><a href="?section=my-stories" class="menu-item">';
+            $html .= '<i class="icon-my-stories"></i>';
+            $html .= $this->escape($this->getText('my_stories', 'My Stories'));
+            $html .= '</a></li>';
+            
+            // Profile
+            $html .= '<li><a href="?section=profile" class="menu-item">';
+            $html .= '<i class="icon-profile"></i>';
+            $html .= $this->escape($this->getText('profile', 'Profile'));
+            $html .= '</a></li>';
+            
+            // Settings
+            $html .= '<li><a href="?section=settings" class="menu-item">';
+            $html .= '<i class="icon-settings"></i>';
+            $html .= $this->escape($this->getText('settings', 'Settings'));
+            $html .= '</a></li>';
+        } else {
+            // Guest user menu items
+            $html .= '<li class="menu-separator"></li>';
+            
+            // Login
+            $html .= '<li><a href="?action=login" class="menu-item login-item">';
+            $html .= '<i class="icon-login"></i>';
+            $html .= $this->escape($this->getText('login', 'Login'));
+            $html .= '</a></li>';
+            
+            // Register
+            $html .= '<li><a href="?action=register" class="menu-item register-item">';
+            $html .= '<i class="icon-register"></i>';
+            $html .= $this->escape($this->getText('register', 'Register'));
+            $html .= '</a></li>';
+        }
+        
+        $html .= '</ul>';
+        $html .= '</nav>';
+        
+        return $html;
+    }
+    
+    /**
+     * Render content notes section
+     */
+    private function renderContentNotes() {
+        $html = '<aside class="content-notes">';
+        $html .= '<h3>' . $this->escape($this->getText('important_notes', 'Important Notes')) . '</h3>';
+        
+        $html .= '<div class="note-section">';
+        $html .= '<h4>' . $this->escape($this->getText('about_renal_tales', 'About Renal Tales')) . '</h4>';
+        $html .= '<p>' . $this->escape($this->getText('renal_tales_description', 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.')) . '</p>';
+        $html .= '</div>';
+        
+        $html .= '<div class="note-section">';
+        $html .= '<h4>' . $this->escape($this->getText('community_guidelines', 'Community Guidelines')) . '</h4>';
+        $html .= '<ul>';
+        $html .= '<li>' . $this->escape($this->getText('guideline_respectful', 'Be respectful and supportive to all community members')) . '</li>';
+        $html .= '<li>' . $this->escape($this->getText('guideline_privacy', 'Respect privacy and confidentiality')) . '</li>';
+        $html .= '<li>' . $this->escape($this->getText('guideline_medical', 'Share experiences, not medical advice')) . '</li>';
+        $html .= '<li>' . $this->escape($this->getText('guideline_appropriate', 'Keep content appropriate and relevant')) . '</li>';
+        $html .= '</ul>';
+        $html .= '</div>';
+        
+        $html .= '<div class="note-section">';
+        $html .= '<h4>' . $this->escape($this->getText('getting_started', 'Getting Started')) . '</h4>';
+        $html .= '<p>' . $this->escape($this->getText('getting_started_description', 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.')) . '</p>';
+        $html .= '</div>';
+        
+        $html .= '<div class="note-section">';
+        $html .= '<h4>' . $this->escape($this->getText('support_resources', 'Support Resources')) . '</h4>';
+        $html .= '<p>' . $this->escape($this->getText('support_description', 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.')) . '</p>';
+        $html .= '</div>';
+        
+        $html .= '</aside>';
+        
+        return $html;
+    }
+    
+    /**
+     * Render main content body
+     */
+    private function renderMainContentBody() {
+        $html = '<div class="content-body">';
+        
+        // Get current section from URL parameters
+        $currentSection = isset($_GET['section']) ? $this->sanitizeInput($_GET['section']) : 'home';
+        
+        switch ($currentSection) {
+            case 'stories':
+                $html .= $this->renderStoriesSection();
+                break;
+            case 'community':
+                $html .= $this->renderCommunitySection();
+                break;
+            case 'resources':
+                $html .= $this->renderResourcesSection();
+                break;
+            case 'about':
+                $html .= $this->renderAboutSection();
+                break;
+            case 'my-stories':
+                $html .= $this->renderMyStoriesSection();
+                break;
+            case 'profile':
+                $html .= $this->renderProfileSection();
+                break;
+            case 'settings':
+                $html .= $this->renderSettingsSection();
+                break;
+            case 'home':
+            default:
+                $html .= $this->renderHomeSection();
+                break;
+        }
+        
+        $html .= '</div>';
+        
+        return $html;
+    }
+    
+    /**
+     * Render home section
+     */
+    private function renderHomeSection() {
+        $html = '<section class="home-section">';
+        $html .= '<h2>' . $this->escape($this->getText('welcome_home', 'Welcome to Renal Tales')) . '</h2>';
+        
+        $html .= '<div class="home-intro">';
+        $html .= '<p>' . $this->escape($this->getText('home_intro', 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.')) . '</p>';
+        $html .= '</div>';
+        
+        $html .= '<div class="home-features">';
+        $html .= '<div class="feature-grid">';
+        
+        $html .= '<div class="feature-card">';
+        $html .= '<h3>' . $this->escape($this->getText('share_story', 'Share Your Story')) . '</h3>';
+        $html .= '<p>' . $this->escape($this->getText('share_story_desc', 'Your experience matters. Share your journey to inspire and support others.')) . '</p>';
+        $html .= '<a href="?section=stories&action=new" class="btn btn-primary">' . $this->escape($this->getText('start_sharing', 'Start Sharing')) . '</a>';
+        $html .= '</div>';
+        
+        $html .= '<div class="feature-card">';
+        $html .= '<h3>' . $this->escape($this->getText('read_stories', 'Read Stories')) . '</h3>';
+        $html .= '<p>' . $this->escape($this->getText('read_stories_desc', 'Find inspiration and comfort in the experiences of others in our community.')) . '</p>';
+        $html .= '<a href="?section=stories" class="btn btn-secondary">' . $this->escape($this->getText('browse_stories', 'Browse Stories')) . '</a>';
+        $html .= '</div>';
+        
+        $html .= '<div class="feature-card">';
+        $html .= '<h3>' . $this->escape($this->getText('join_community', 'Join Community')) . '</h3>';
+        $html .= '<p>' . $this->escape($this->getText('join_community_desc', 'Connect with others, participate in discussions, and build lasting friendships.')) . '</p>';
+        $html .= '<a href="?section=community" class="btn btn-secondary">' . $this->escape($this->getText('explore_community', 'Explore Community')) . '</a>';
+        $html .= '</div>';
+        
+        $html .= '</div>';
+        $html .= '</div>';
+        
+        $html .= '</section>';
+        
+        return $html;
+    }
+    
+    /**
+     * Placeholder method for stories section
+     */
+    private function renderStoriesSection() {
+        return '<section class="stories-section"><h2>' . $this->escape($this->getText('stories', 'Stories')) . '</h2><p>' . $this->escape($this->getText('stories_coming_soon', 'Stories section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for community section
+     */
+    private function renderCommunitySection() {
+        return '<section class="community-section"><h2>' . $this->escape($this->getText('community', 'Community')) . '</h2><p>' . $this->escape($this->getText('community_coming_soon', 'Community section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for resources section
+     */
+    private function renderResourcesSection() {
+        return '<section class="resources-section"><h2>' . $this->escape($this->getText('resources', 'Resources')) . '</h2><p>' . $this->escape($this->getText('resources_coming_soon', 'Resources section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for about section
+     */
+    private function renderAboutSection() {
+        return '<section class="about-section"><h2>' . $this->escape($this->getText('about', 'About')) . '</h2><p>' . $this->escape($this->getText('about_coming_soon', 'About section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for my stories section
+     */
+    private function renderMyStoriesSection() {
+        return '<section class="my-stories-section"><h2>' . $this->escape($this->getText('my_stories', 'My Stories')) . '</h2><p>' . $this->escape($this->getText('my_stories_coming_soon', 'My Stories section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for profile section
+     */
+    private function renderProfileSection() {
+        return '<section class="profile-section"><h2>' . $this->escape($this->getText('profile', 'Profile')) . '</h2><p>' . $this->escape($this->getText('profile_coming_soon', 'Profile section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Placeholder method for settings section
+     */
+    private function renderSettingsSection() {
+        return '<section class="settings-section"><h2>' . $this->escape($this->getText('settings', 'Settings')) . '</h2><p>' . $this->escape($this->getText('settings_coming_soon', 'Settings section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Sanitize user input
+     */
+    private function sanitizeInput($input) {
+        return htmlspecialchars(strip_tags(trim($input)), ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
      * Render main content section
      */
     private function renderMainContent() {
@@ -202,7 +459,7 @@ class ApplicationView extends BaseView {
         echo '</div>';
 
         echo '<div class="main-content-container">';
-        echo $this->renderMainContent();
+        echo $this->renderMainContentBody();
         echo '</div>';
         
         echo '<div class="main-notes-container">';
