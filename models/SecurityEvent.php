@@ -12,15 +12,15 @@ require_once __DIR__ . '/BaseModel.php';
 
 class SecurityEvent extends BaseModel {
     
-    protected $table = 'security_events';
+    protected string $table = 'security_events';
     
     /**
      * Create security event
      * 
      * @param array $data
-     * @return bool|string Last insert ID or false on failure
+     * @return string Last insert ID
      */
-    public function create($data) {
+    public function create(array $data): string {
         $fields = array_keys($data);
         $placeholders = array_fill(0, count($fields), '?');
         
@@ -59,7 +59,7 @@ class SecurityEvent extends BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         $errors = [];
         
         // Event type validation

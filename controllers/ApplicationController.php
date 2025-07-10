@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once 'BaseController.php';
 require_once __DIR__ . '/../views/ApplicationView.php';
 require_once __DIR__ . '/../views/ErrorView.php';
+require_once __DIR__ . '/../core/AuthenticationManager.php';
 
 /**
  * ApplicationController - Main application controller
@@ -19,6 +20,7 @@ class ApplicationController extends BaseController {
     
     private mixed $languageModel;
     private mixed $sessionManager;
+    private mixed $authenticationManager;
     
     /**
      * Constructor
@@ -29,6 +31,7 @@ class ApplicationController extends BaseController {
     public function __construct(mixed $languageModel, mixed $sessionManager) {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
+        $this->authenticationManager = new AuthenticationManager($sessionManager);
     }
     
     /**
@@ -40,7 +43,7 @@ class ApplicationController extends BaseController {
             $this->handleLanguageChange();
             
             // Create and render the main view
-            $view = new ApplicationView($this->languageModel, $this->sessionManager);
+            $view = new ApplicationView($this->languageModel, $this->sessionManager, $this->authenticationManager);
             return $view->render();
         } catch (\Exception $e) {
             // Log error and return error view

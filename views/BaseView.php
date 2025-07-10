@@ -16,16 +16,19 @@ abstract class BaseView {
     protected array $data = [];
     protected mixed $languageModel;
     protected mixed $sessionManager;
+    protected mixed $authenticationManager;
     
     /**
      * Constructor
      * 
      * @param mixed $languageModel
      * @param mixed $sessionManager
+     * @param mixed $authenticationManager
      */
-    public function __construct(mixed $languageModel = null, mixed $sessionManager = null) {
+    public function __construct(mixed $languageModel = null, mixed $sessionManager = null, mixed $authenticationManager = null) {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
+        $this->authenticationManager = $authenticationManager;
     }
     
     /**

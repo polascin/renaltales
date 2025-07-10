@@ -129,9 +129,64 @@ class ApplicationView extends BaseView {
         echo '<p>' . $this->escape($this->getText('datetime_placeholder', 'Tu bude zobrazený dátum, čas, vrátane podrobného internetového času @beat.')) . '</p>';
         echo '</div>';
         echo '<div class="right-section">';
-        echo '<p>' . $this->escape($this->getText('user_information', 'User information:')) . '</p>';
+        echo $this->renderUserInformation();
         echo '</div>';
         echo '</header>';
+    }
+    
+    /**
+     * Render user information section
+     */
+    private function renderUserInformation() {
+        if (!$this->authenticationManager) {
+            return '<p>' . $this->escape($this->getText('user_information', 'User information:')) . '</p>';
+        }
+        
+        $html = '<div class="user-info">';
+        $html .= '<p>' . $this->escape($this->getText('user_information', 'User information:')) . '</p>';
+        
+        if ($this->authenticationManager->isAuthenticated()) {
+            $currentUser = $this->authenticationManager->getCurrentUser();
+            
+            if ($currentUser) {
+                $html .= '<div class="logged-in-user">';
+                $html .= '<p><strong>' . $this->escape($this->getText('welcome_user', 'Welcome')) . ':</strong> ';
+                
+                // Display user's display name or username
+                if (isset($currentUser['display_name']) && !empty($currentUser['display_name'])) {
+                    $html .= $this->escape($currentUser['display_name']);
+                } elseif (isset($currentUser['username']) && !empty($currentUser['username'])) {
+                    $html .= $this->escape($currentUser['username']);
+                } elseif (isset($currentUser['email']) && !empty($currentUser['email'])) {
+                    $html .= $this->escape($currentUser['email']);
+                } else {
+                    $html .= $this->escape($this->getText('user', 'User'));
+                }
+                
+                $html .= '</p>';
+                
+                // Display user role if available
+                if (isset($currentUser['role']) && !empty($currentUser['role'])) {
+                    $html .= '<p><small>' . $this->escape($this->getText('role', 'Role')) . ': ' . $this->escape($currentUser['role']) . '</small></p>';
+                }
+                
+                // Add logout link/button
+                $html .= '<p><a href="?action=logout" class="logout-link">' . $this->escape($this->getText('logout', 'Logout')) . '</a></p>';
+                
+                $html .= '</div>';
+            } else {
+                $html .= '<p>' . $this->escape($this->getText('user_data_unavailable', 'User data unavailable')) . '</p>';
+            }
+        } else {
+            $html .= '<div class="guest-user">';
+            $html .= '<p>' . $this->escape($this->getText('not_logged_in', 'Not logged in')) . '</p>';
+            $html .= '<p><a href="?action=login" class="login-link">' . $this->escape($this->getText('login', 'Login')) . '</a></p>';
+            $html .= '</div>';
+        }
+        
+        $html .= '</div>';
+        
+        return $html;
     }
     
     /**
