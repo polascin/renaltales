@@ -135,5 +135,85 @@ return [
     'log_entry_session_id' => 'Session-ID',
     'log_entry_reason' => 'Grund',
     'log_entry_request_uri' => 'Anfrage-URI',
+    
+    // Benutzeroberfläche
+    'welcome_user' => 'Willkommen',
+    'user' => 'Benutzer',
+    'role' => 'Rolle',
+    'logout' => 'Abmelden',
+    'user_data_unavailable' => 'Benutzerdaten nicht verfügbar',
+    'not_logged_in' => 'Nicht angemeldet',
+    'login' => 'Anmelden',
+    'main_menu' => 'Hauptmenü',
+    'home' => 'Startseite',
+    'stories' => 'Geschichten',
+    'community' => 'Gemeinschaft',
+    'resources' => 'Ressourcen',
+    'about' => 'Über uns',
+    'my_stories' => 'Meine Geschichten',
+    'profile' => 'Profil',
+    'settings' => 'Einstellungen',
+    'register' => 'Registrieren',
+    
+    // Inhaltsbereiche
+    'important_notes' => 'Wichtige Hinweise',
+    'about_renal_tales' => 'Über Nierengeschichten',
+    'renal_tales_description' => 'Nierengeschichten ist eine unterstützende Community-Plattform, auf der Menschen mit Nierenerkrankungen ihre Erfahrungen teilen, Unterstützung finden und sich mit anderen auf ähnlichen Wegen verbinden können.',
+    'community_guidelines' => 'Community-Richtlinien',
+    'guideline_respectful' => 'Seien Sie respektvoll und unterstützend gegenüber allen Community-Mitgliedern',
+    'guideline_privacy' => 'Respektieren Sie Privatsphäre und Vertraulichkeit',
+    'guideline_medical' => 'Teilen Sie Erfahrungen, keine medizinischen Ratschläge',
+    'guideline_appropriate' => 'Halten Sie Inhalte angemessen und relevant',
+    'getting_started' => 'Erste Schritte',
+    'getting_started_description' => 'Neu in unserer Community? Beginnen Sie mit dem Lesen von Geschichten, stellen Sie sich vor und erwägen Sie, Ihre eigene Erfahrung zu teilen, wenn Sie bereit sind.',
+    'support_resources' => 'Unterstützungsressourcen',
+    'support_description' => 'Wenn Sie sofortige medizinische Hilfe benötigen oder sich in einer Krise befinden, kontaktieren Sie Ihren Gesundheitsdienstleister oder die Notdienste.',
+    
+    // Startseite
+    'welcome_home' => 'Willkommen bei Nierengeschichten',
+    'home_intro' => 'Willkommen in unserer unterstützenden Community für Menschen mit Nierenerkrankungen. Hier können Sie Ihre Geschichte teilen, Erfahrungen anderer lesen und Unterstützung von Menschen finden, die Ihren Weg verstehen.',
+    'share_story' => 'Teilen Sie Ihre Geschichte',
+    'share_story_desc' => 'Ihre Erfahrung ist wichtig. Teilen Sie Ihren Weg, um andere zu inspirieren und zu unterstützen.',
+    'start_sharing' => 'Teilen beginnen',
+    'read_stories' => 'Geschichten lesen',
+    'read_stories_desc' => 'Finden Sie Inspiration und Trost in den Erfahrungen anderer in unserer Community.',
+    'browse_stories' => 'Geschichten durchsuchen',
+    'join_community' => 'Der Community beitreten',
+    'join_community_desc' => 'Verbinden Sie sich mit anderen, nehmen Sie an Diskussionen teil und bauen Sie dauerhafte Freundschaften auf.',
+    'explore_community' => 'Community erkunden',
+    
+    // Platzhalter-Inhalt
+    'stories_coming_soon' => 'Geschichten-Bereich kommt bald...',
+    'community_coming_soon' => 'Community-Bereich kommt bald...',
+    'resources_coming_soon' => 'Ressourcen-Bereich kommt bald...',
+    'about_coming_soon' => 'Über uns-Bereich kommt bald...',
+    'my_stories_coming_soon' => 'Meine Geschichten-Bereich kommt bald...',
+    'profile_coming_soon' => 'Profil-Bereich kommt bald...',
+    'settings_coming_soon' => 'Einstellungen-Bereich kommt bald...',
+    
+    // Anmeldeseite
+    'login_welcome' => 'Willkommen zurück',
+    'login_subtitle' => 'Melden Sie sich an, um auf Ihr Konto zuzugreifen',
+    'email_or_username' => 'E-Mail oder Benutzername',
+    'enter_email_username' => 'Geben Sie Ihre E-Mail oder Ihren Benutzernamen ein',
+    'password' => 'Passwort',
+    'enter_password' => 'Geben Sie Ihr Passwort ein',
+    'remember_me' => 'Angemeldet bleiben',
+    'sign_in' => 'Anmelden',
+    'forgot_password' => 'Passwort vergessen?',
+    'no_account' => 'Haben Sie kein Konto?',
+    'sign_up_here' => 'Hier registrieren',
+    'back_to_home' => 'Zurück zur Startseite',
+    'please_fill_required_fields' => 'Bitte füllen Sie alle erforderlichen Felder aus.',
+    
+    // Anmelde-Validierung
+    'invalid_csrf_token' => 'Ungültiger Sicherheitstoken. Bitte versuchen Sie es erneut.',
+    'email_required' => 'E-Mail ist erforderlich.',
+    'email_invalid' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+    'password_required' => 'Passwort ist erforderlich.',
+    'login_failed' => 'Ungültige E-Mail oder Passwort.',
+    
+    // Sprachauswahl
+    'language_selection_unavailable' => 'Sprachauswahl nicht verfügbar',
 ];
 ?>

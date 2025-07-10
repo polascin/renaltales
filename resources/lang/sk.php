@@ -8,7 +8,7 @@
 
 return [
     // Application general
-    'app_title' => 'Ľadvinové storky',
+    'app_title' => 'Ľadvinové príbehy',
     'app_subtitle' => 'Viacjazyčná webová aplikácia',
     'app_description' => 'Webová aplikácia na zdieľanie príbehov a rozprávok od komunity ľudí s poruchami obličiek, vrátane tých na dialýze a tých, ktorí mali alebo čakajú na transplantáciu obličky.',
     'app_version' => 'Verzia 2025.v1.0test',
@@ -135,5 +135,85 @@ return [
     'log_entry_session_id' => 'ID relácie',
     'log_entry_reason' => 'Dôvod',
     'log_entry_request_uri' => 'URI požiadavky',
+    
+    // Používateľské rozhranie
+    'welcome_user' => 'Vitajte',
+    'user' => 'Používateľ',
+    'role' => 'Rola',
+    'logout' => 'Odhlásiť sa',
+    'user_data_unavailable' => 'Údaje používateľa nie sú dostupné',
+    'not_logged_in' => 'Neprihlásený',
+    'login' => 'Prihlásiť sa',
+    'main_menu' => 'Hlavné menu',
+    'home' => 'Domov',
+    'stories' => 'Príbehy',
+    'community' => 'Komunita',
+    'resources' => 'Zdroje',
+    'about' => 'O nás',
+    'my_stories' => 'Moje príbehy',
+    'profile' => 'Profil',
+    'settings' => 'Nastavenia',
+    'register' => 'Registrovať sa',
+    
+    // Sekcie obsahu
+    'important_notes' => 'Dôležité poznámky',
+    'about_renal_tales' => 'O Ľadvinových príbehoch',
+    'renal_tales_description' => 'Ľadvinové príbehy sú podporná komunitná platforma, kde ľudia ovplyvnení poruchami obličiek môžu zdieľať svoje skúsenosti, nájsť podporu a spojiť sa s ostatnými na podobných cestách.',
+    'community_guidelines' => 'Pravidlá komunity',
+    'guideline_respectful' => 'Buďte úctiví a podporní ku všetkým členom komunity',
+    'guideline_privacy' => 'Rešpektujte súkromie a dôvernosť',
+    'guideline_medical' => 'Zdieľajte skúsenosti, nie lekárske rady',
+    'guideline_appropriate' => 'Udržujte obsah primeraný a relevantný',
+    'getting_started' => 'Začíname',
+    'getting_started_description' => 'Ste noví v našej komunite? Začnite čítaním príbehov, predstavte sa a zvážte zdieľanie svojej vlastnej skúsenosti, keď budete pripravení.',
+    'support_resources' => 'Zdroje podpory',
+    'support_description' => 'Ak potrebujete okamžitú lekársku pomoc alebo ste v kríze, kontaktujte svojho poskytovateľa zdravotnej starostlivosti alebo záchranné služby.',
+    
+    // Domovská stránka
+    'welcome_home' => 'Vitajte v Ľadvinových príbehoch',
+    'home_intro' => 'Vitajte v našej podpornej komunite pre ľudí ovplyvnených poruchami obličiek. Tu môžete zdieľať svoj príbeh, čítať skúsenosti ostatných a nájsť podporu od ľudí, ktorí rozumejú vašej ceste.',
+    'share_story' => 'Zdieľajte svoj príbeh',
+    'share_story_desc' => 'Vaša skúsenosť má význam. Zdieľajte svoju cestu na inšpiráciu a podporu ostatných.',
+    'start_sharing' => 'Začať zdieľanie',
+    'read_stories' => 'Čítať príbehy',
+    'read_stories_desc' => 'Nájdite inšpiráciu a útechu v skúsenostiach ostatných v našej komunite.',
+    'browse_stories' => 'Prehliadať príbehy',
+    'join_community' => 'Pripojiť sa ku komunite',
+    'join_community_desc' => 'Spojte sa s ostatnými, účastnite sa diskusií a budujte trvalé priateľstvá.',
+    'explore_community' => 'Preskúmať komunitu',
+    
+    // Zástupný obsah
+    'stories_coming_soon' => 'Sekcia príbehov bude čoskoro...',
+    'community_coming_soon' => 'Sekcia komunity bude čoskoro...',
+    'resources_coming_soon' => 'Sekcia zdrojov bude čoskoro...',
+    'about_coming_soon' => 'Sekcia o nás bude čoskoro...',
+    'my_stories_coming_soon' => 'Sekcia moje príbehy bude čoskoro...',
+    'profile_coming_soon' => 'Sekcia profil bude čoskoro...',
+    'settings_coming_soon' => 'Sekcia nastavenia bude čoskoro...',
+    
+    // Prihlasovacia stránka
+    'login_welcome' => 'Vitajte späť',
+    'login_subtitle' => 'Prihláste sa pre prístup k vášmu účtu',
+    'email_or_username' => 'Email alebo používateľské meno',
+    'enter_email_username' => 'Zadajte váš email alebo používateľské meno',
+    'password' => 'Heslo',
+    'enter_password' => 'Zadajte vaše heslo',
+    'remember_me' => 'Zapamätať si ma',
+    'sign_in' => 'Prihlásiť sa',
+    'forgot_password' => 'Zabudli ste heslo?',
+    'no_account' => 'Nemáte účet?',
+    'sign_up_here' => 'Registrujte sa tu',
+    'back_to_home' => 'Späť na domovskú stránku',
+    'please_fill_required_fields' => 'Prosím vyplňte všetky povinné polia.',
+    
+    // Validácia prihlásenia
+    'invalid_csrf_token' => 'Neplatný bezpečnostný token. Skúste to prosím znovu.',
+    'email_required' => 'Email je povinný.',
+    'email_invalid' => 'Zadajte prosím platnú emailovú adresu.',
+    'password_required' => 'Heslo je povinné.',
+    'login_failed' => 'Neplatný email alebo heslo.',
+    
+    // Výber jazyka
+    'language_selection_unavailable' => 'Výber jazyka nie je dostupný',
 ];
 ?>

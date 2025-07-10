@@ -51,7 +51,7 @@ class ApplicationView extends BaseView {
      */
     private function renderLanguageSelection() {
         if (!$this->sessionManager) {
-            echo '<nav class="language-selector"><p>Language selection not available</p></nav>';
+            echo '<nav class="language-selector"><p>' . $this->escape($this->getText('language_selection_unavailable', 'Language selection not available')) . '</p></nav>';
             return;
         }
         

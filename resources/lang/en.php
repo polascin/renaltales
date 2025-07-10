@@ -135,5 +135,85 @@ return [
     'log_entry_session_id' => 'Session ID',
     'log_entry_reason' => 'Reason',
     'log_entry_request_uri' => 'Request URI',
+    
+    // User interface
+    'welcome_user' => 'Welcome',
+    'user' => 'User',
+    'role' => 'Role',
+    'logout' => 'Logout',
+    'user_data_unavailable' => 'User data unavailable',
+    'not_logged_in' => 'Not logged in',
+    'login' => 'Login',
+    'main_menu' => 'Main Menu',
+    'home' => 'Home',
+    'stories' => 'Stories',
+    'community' => 'Community',
+    'resources' => 'Resources',
+    'about' => 'About',
+    'my_stories' => 'My Stories',
+    'profile' => 'Profile',
+    'settings' => 'Settings',
+    'register' => 'Register',
+    
+    // Content sections
+    'important_notes' => 'Important Notes',
+    'about_renal_tales' => 'About Renal Tales',
+    'renal_tales_description' => 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.',
+    'community_guidelines' => 'Community Guidelines',
+    'guideline_respectful' => 'Be respectful and supportive to all community members',
+    'guideline_privacy' => 'Respect privacy and confidentiality',
+    'guideline_medical' => 'Share experiences, not medical advice',
+    'guideline_appropriate' => 'Keep content appropriate and relevant',
+    'getting_started' => 'Getting Started',
+    'getting_started_description' => 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.',
+    'support_resources' => 'Support Resources',
+    'support_description' => 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.',
+    
+    // Home page
+    'welcome_home' => 'Welcome to Renal Tales',
+    'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
+    'share_story' => 'Share Your Story',
+    'share_story_desc' => 'Your experience matters. Share your journey to inspire and support others.',
+    'start_sharing' => 'Start Sharing',
+    'read_stories' => 'Read Stories',
+    'read_stories_desc' => 'Find inspiration and comfort in the experiences of others in our community.',
+    'browse_stories' => 'Browse Stories',
+    'join_community' => 'Join Community',
+    'join_community_desc' => 'Connect with others, participate in discussions, and build lasting friendships.',
+    'explore_community' => 'Explore Community',
+    
+    // Placeholder content
+    'stories_coming_soon' => 'Stories section coming soon...',
+    'community_coming_soon' => 'Community section coming soon...',
+    'resources_coming_soon' => 'Resources section coming soon...',
+    'about_coming_soon' => 'About section coming soon...',
+    'my_stories_coming_soon' => 'My Stories section coming soon...',
+    'profile_coming_soon' => 'Profile section coming soon...',
+    'settings_coming_soon' => 'Settings section coming soon...',
+    
+    // Login page
+    'login_welcome' => 'Welcome Back',
+    'login_subtitle' => 'Sign in to access your account',
+    'email_or_username' => 'Email or Username',
+    'enter_email_username' => 'Enter your email or username',
+    'password' => 'Password',
+    'enter_password' => 'Enter your password',
+    'remember_me' => 'Remember me',
+    'sign_in' => 'Sign In',
+    'forgot_password' => 'Forgot your password?',
+    'no_account' => 'Don\'t have an account?',
+    'sign_up_here' => 'Sign up here',
+    'back_to_home' => 'Back to Home',
+    'please_fill_required_fields' => 'Please fill in all required fields.',
+    
+    // Login validation
+    'invalid_csrf_token' => 'Invalid security token. Please try again.',
+    'email_required' => 'Email is required.',
+    'email_invalid' => 'Please enter a valid email address.',
+    'password_required' => 'Password is required.',
+    'login_failed' => 'Invalid email or password.',
+    
+    // Language selection
+    'language_selection_unavailable' => 'Language selection not available',
 ];
 ?>

@@ -135,5 +135,85 @@ return [
     'log_entry_session_id' => 'ID relace',
     'log_entry_reason' => 'Důvod',
     'log_entry_request_uri' => 'URI požadavku',
+    
+    // Uživatelské rozhraní
+    'welcome_user' => 'Vítejte',
+    'user' => 'Uživatel',
+    'role' => 'Role',
+    'logout' => 'Odhlásit se',
+    'user_data_unavailable' => 'Údaje uživatele nejsou dostupné',
+    'not_logged_in' => 'Nepřihlášen',
+    'login' => 'Přihlásit se',
+    'main_menu' => 'Hlavní menu',
+    'home' => 'Domů',
+    'stories' => 'Příběhy',
+    'community' => 'Komunita',
+    'resources' => 'Zdroje',
+    'about' => 'O nás',
+    'my_stories' => 'Moje příběhy',
+    'profile' => 'Profil',
+    'settings' => 'Nastavení',
+    'register' => 'Registrovat se',
+    
+    // Sekce obsahu
+    'important_notes' => 'Důležité poznámky',
+    'about_renal_tales' => 'O Ledvinových příbězích',
+    'renal_tales_description' => 'Ledvinové příběhy jsou podpůrná komunitní platforma, kde lidé ovlivnění poruchami ledvin mohou sdílet své zkušenosti, najít podporu a spojit se s ostatními na podobných cestách.',
+    'community_guidelines' => 'Pravidla komunity',
+    'guideline_respectful' => 'Buďte uctivý a podpůrný ke všem členům komunity',
+    'guideline_privacy' => 'Respektujte soukromí a důvěrnost',
+    'guideline_medical' => 'Sdílejte zkušenosti, ne lékařské rady',
+    'guideline_appropriate' => 'Udržujte obsah přiměřený a relevantní',
+    'getting_started' => 'Začínáme',
+    'getting_started_description' => 'Jste noví v naší komunitě? Začněte čtením příběhů, představte se a zvažte sdílení své vlastní zkušenosti, až budete připraveni.',
+    'support_resources' => 'Zdroje podpory',
+    'support_description' => 'Pokud potřebujete okamžitou lékařskou pomoc nebo jste v krizi, kontaktujte svého poskytovatele zdravotní péče nebo záchranné služby.',
+    
+    // Domovská stránka
+    'welcome_home' => 'Vítejte v Ledvinových příbězích',
+    'home_intro' => 'Vítejte v naší podpůrné komunitě pro lidi ovlivněné poruchami ledvin. Zde můžete sdílet svůj příběh, číst zkušenosti ostatních a najít podporu od lidí, kteří rozumějí vaší cestě.',
+    'share_story' => 'Sdílejte svůj příběh',
+    'share_story_desc' => 'Vaše zkušenost má význam. Sdílejte svou cestu k inspiraci a podpoře ostatních.',
+    'start_sharing' => 'Začít sdílení',
+    'read_stories' => 'Číst příběhy',
+    'read_stories_desc' => 'Najděte inspiraci a útěchu ve zkušenostech ostatních v naší komunitě.',
+    'browse_stories' => 'Prohlížet příběhy',
+    'join_community' => 'Připojit se ke komunitě',
+    'join_community_desc' => 'Spojte se s ostatními, účastněte se diskusí a budujte trvalá přátelství.',
+    'explore_community' => 'Prozkoumat komunitu',
+    
+    // Zástupný obsah
+    'stories_coming_soon' => 'Sekce příběhů bude brzy...',
+    'community_coming_soon' => 'Sekce komunity bude brzy...',
+    'resources_coming_soon' => 'Sekce zdrojů bude brzy...',
+    'about_coming_soon' => 'Sekce o nás bude brzy...',
+    'my_stories_coming_soon' => 'Sekce moje příběhy bude brzy...',
+    'profile_coming_soon' => 'Sekce profil bude brzy...',
+    'settings_coming_soon' => 'Sekce nastavení bude brzy...',
+    
+    // Přihlašovací stránka
+    'login_welcome' => 'Vítejte zpět',
+    'login_subtitle' => 'Přihlaste se pro přístup k vašemu účtu',
+    'email_or_username' => 'Email nebo uživatelské jméno',
+    'enter_email_username' => 'Zadejte váš email nebo uživatelské jméno',
+    'password' => 'Heslo',
+    'enter_password' => 'Zadejte vaše heslo',
+    'remember_me' => 'Zapamatovat si mě',
+    'sign_in' => 'Přihlásit se',
+    'forgot_password' => 'Zapomněli jste heslo?',
+    'no_account' => 'Nemáte účet?',
+    'sign_up_here' => 'Registrujte se zde',
+    'back_to_home' => 'Zpět na domovskou stránku',
+    'please_fill_required_fields' => 'Prosím vyplňte všechna povinná pole.',
+    
+    // Validace přihlášení
+    'invalid_csrf_token' => 'Neplatný bezpečnostní token. Zkuste to prosím znovu.',
+    'email_required' => 'Email je povinný.',
+    'email_invalid' => 'Zadejte prosím platnou emailovou adresu.',
+    'password_required' => 'Heslo je povinné.',
+    'login_failed' => 'Neplatný email nebo heslo.',
+    
+    // Výběr jazyka
+    'language_selection_unavailable' => 'Výběr jazyka není dostupný',
 ];
 ?>
