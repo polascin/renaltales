@@ -67,7 +67,7 @@
 
 .main-container {
   display: grid;
-  grid-template-columns: 250px 1fr 300px;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "menu content notes";
   gap: 1rem;
   margin: 1rem 0;
@@ -476,4 +476,213 @@
   .feature-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Login Page Styles */
+.login-page {
+  background-color: var(--body-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--panel-bg);
+  border: solid thin var(--panel-border);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-header h1 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.login-header p {
+  color: var(--gray-darker);
+  margin: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(160, 196, 255, 0.1);
+}
+
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+  margin: 0;
+}
+
+.btn-login {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-login:active {
+  transform: translateY(1px);
+}
+
+.login-errors {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #f5c6cb;
+  margin-bottom: 1rem;
+}
+
+.login-errors ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login-links a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+.back-to-home {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.back-to-home a {
+  color: var(--gray-darker);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-to-home a:hover {
+  text-decoration: underline;
+}
+
+/* User Info Styles */
+.user-info {
+  padding: 1rem;
+  background-color: var(--panel-bg);
+  border: solid thin var(--panel-border);
+  border-radius: 0.5rem;
+}
+
+.logged-in-user {
+  padding: 0.5rem;
+  background-color: var(--success-color);
+  color: var(--gray-darkest);
+  border: 1px solid var(--secondary-dark);
+  border-radius: 0.3rem;
+}
+
+.guest-user {
+  padding: 0.5rem;
+  background-color: var(--light-color);
+  color: var(--gray-darker);
+  border: 1px solid var(--border-color);
+  border-radius: 0.3rem;
+}
+
+.login-link, .logout-link {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-link:hover, .logout-link:hover {
+  background-color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.logout-link {
+  background-color: var(--danger-color);
+}
+
+.logout-link:hover {
+  background-color: var(--accent-dark);
+}
+
+/* Menu Item Styles */
+.menu-item.login-item {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.menu-item.register-item {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.menu-separator {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0.5rem 0;
+  list-style: none;
 }

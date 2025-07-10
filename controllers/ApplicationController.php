@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once 'BaseController.php';
+require_once 'LoginController.php';
 require_once __DIR__ . '/../views/ApplicationView.php';
 require_once __DIR__ . '/../views/ErrorView.php';
 require_once __DIR__ . '/../core/AuthenticationManager.php';
@@ -21,6 +22,7 @@ class ApplicationController extends BaseController {
     private mixed $languageModel;
     private mixed $sessionManager;
     private mixed $authenticationManager;
+    private mixed $loginController;
     
     /**
      * Constructor
@@ -32,6 +34,7 @@ class ApplicationController extends BaseController {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
         $this->authenticationManager = new AuthenticationManager($sessionManager);
+        $this->loginController = new LoginController($languageModel, $sessionManager);
     }
     
     /**
@@ -42,9 +45,25 @@ class ApplicationController extends BaseController {
             // Handle language change if requested
             $this->handleLanguageChange();
             
-            // Create and render the main view
-            $view = new ApplicationView($this->languageModel, $this->sessionManager, $this->authenticationManager);
-            return $view->render();
+            // Check for login/logout actions
+            $action = $_GET['action'] ?? '';
+            
+            switch ($action) {
+                case 'login':
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                        return $this->loginController->processLogin();
+                    } else {
+                        return $this->loginController->showLoginForm();
+                    }
+                    
+                case 'logout':
+                    return $this->loginController->logout();
+                    
+                default:
+                    // Create and render the main view
+                    $view = new ApplicationView($this->languageModel, $this->sessionManager, $this->authenticationManager);
+                    return $view->render();
+            }
         } catch (\Exception $e) {
             // Log error and return error view
             error_log("ApplicationController::index() error: " . $e->getMessage());

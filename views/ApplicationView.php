@@ -39,11 +39,6 @@ class ApplicationView extends BaseView {
             <?php $this->renderLanguageSelection(); ?>
             <?php $this->renderHeader(); ?>
             <?php $this->renderMainContent(); ?>
-            <?php
-            if (defined('DEBUG_MODE') && DEBUG_MODE) {
-                $this->renderServiceInformationSection();
-            }
-            ?>
             <?php $this->renderFooter(); ?>
             <?php $this->renderJavaScript(); ?>
         </body>
@@ -153,8 +148,8 @@ class ApplicationView extends BaseView {
                 $html .= '<p><strong>' . $this->escape($this->getText('welcome_user', 'Welcome')) . ':</strong> ';
                 
                 // Display user's display name or username
-                if (isset($currentUser['display_name']) && !empty($currentUser['display_name'])) {
-                    $html .= $this->escape($currentUser['display_name']);
+                if (isset($currentUser['full_name']) && !empty($currentUser['full_name'])) {
+                    $html .= $this->escape($currentUser['full_name']);
                 } elseif (isset($currentUser['username']) && !empty($currentUser['username'])) {
                     $html .= $this->escape($currentUser['username']);
                 } elseif (isset($currentUser['email']) && !empty($currentUser['email'])) {
@@ -503,88 +498,6 @@ class ApplicationView extends BaseView {
             $html .= $this->escape($lang);
             $html .= '</a>';
         }
-        
-        return $html;
-    }
-    
-    /**
-     * Render service information section (for debug mode)
-     */
-    private function renderServiceInformationSection() {
-        echo '<section class="service-information-section">';
-        echo '<hr>';
-        echo '<div class="debug-info">';
-        echo '<p>' . $this->escape($this->getText('debug_mode_enabled', 'Debug mode is enabled.')) . ' ';
-        echo $this->escape($this->getText('current_language', 'Current language')) . ': ' . $this->escape($this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en') . '</p>';
-        echo '</div>';
-        
-        echo '<h1>' . $this->escape($this->getText('service_information', 'Service Information')) . '</h1>';
-        
-        // Session Information
-        if ($this->sessionManager) {
-            ob_start();
-            $this->sessionManager->displaySessionComprehensive();
-            echo ob_get_clean();
-        } else {
-            echo '<p>Session manager not available</p>';
-        }
-        echo '<hr>';
-        
-        // Server Information
-        echo $this->renderServiceInformation();
-        echo '<hr>';
-        
-        // Application Information
-        echo $this->renderApplicationInformation();
-        echo '<hr>';
-        
-        echo '</section>';
-    }
-    
-    /**
-     * Render service information
-     */
-    private function renderServiceInformation() {
-        $html = '<div class="server-info">';
-        $html .= '<h2>' . $this->escape($this->getText('server_information', 'Server Information')) . '</h2>';
-        $html .= '<p><strong>' . $this->escape($this->getText('user_agent', 'User Agent')) . ':</strong> ' . $this->getServerVar('HTTP_USER_AGENT') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('ip_address', 'IP Address')) . ':</strong> ' . $this->getServerVar('REMOTE_ADDR') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('server_software', 'Server Software')) . ':</strong> ' . $this->getServerVar('SERVER_SOFTWARE') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('server_name', 'Server Name')) . ':</strong> ' . $this->getServerVar('SERVER_NAME') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('server_protocol', 'Server Protocol')) . ':</strong> ' . $this->getServerVar('SERVER_PROTOCOL') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('request_method', 'Request Method')) . ':</strong> ' . $this->getServerVar('REQUEST_METHOD') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('request_uri', 'Request URI')) . ':</strong> ' . $this->getServerVar('REQUEST_URI') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('query_string', 'Query String')) . ':</strong> ' . $this->getServerVar('QUERY_STRING') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('document_root', 'Document Root')) . ':</strong> ' . $this->getServerVar('DOCUMENT_ROOT') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('script_name', 'Script Name')) . ':</strong> ' . $this->getServerVar('SCRIPT_NAME') . '</p>';
-        $html .= '</div>';
-        
-        return $html;
-    }
-    
-    /**
-     * Render application information
-     */
-    private function renderApplicationInformation() {
-        $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
-        
-        $html = '<div class="app-info">';
-        $html .= '<h2>' . $this->escape($this->getText('application_information', 'Application Information')) . '</h2>';
-        $html .= '<p><strong>' . $this->escape($this->getText('app_title_item', 'Application Title')) . ':</strong> ' . $this->escape($appTitle) . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('current_language', 'Current Language')) . ':</strong> ' . $this->escape($this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English') . '</p>';
-        $html .= '<p><strong>' . $this->escape($this->getText('current_language_code', 'Current Language Code')) . ':</strong> ' . $this->escape($this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en') . '</p>';
-        
-        if (defined('LANGUAGE_PATH') && $this->languageModel) {
-            $html .= '<p><strong>' . $this->escape($this->getText('current_language_file', 'Current Language File')) . ':</strong> ' . $this->escape(LANGUAGE_PATH . $this->languageModel->getCurrentLanguage() . '.php') . '</p>';
-        }
-        
-        if ($this->languageModel && $this->languageModel->getLanguageDetector()) {
-            $html .= '<p><strong>' . $this->escape($this->getText('current_language_flag', 'Current Language Flag')) . ':</strong> ';
-            $html .= '<img src="' . $this->escape($this->languageModel->getFlagPath($this->languageModel->getCurrentLanguage())) . '" ';
-            $html .= 'alt="' . $this->escape($this->getText('current_language_flag_alt', 'Flag of the current language')) . '" class="flag"></p>';
-        }
-        
-        $html .= '</div>';
         
         return $html;
     }

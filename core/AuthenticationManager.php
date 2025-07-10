@@ -73,12 +73,12 @@ class AuthenticationManager {
                 ];
             }
             
-            // Check if account is active
-            if ($user['status'] !== 'active') {
-                $this->logSecurityEvent($user['id'], 'login_blocked', $ipAddress, 'Inactive account login attempt');
+            // Check if account is active (check email_verified_at instead of status)
+            if (!$user['email_verified_at']) {
+                $this->logSecurityEvent($user['id'], 'login_blocked', $ipAddress, 'Unverified account login attempt');
                 return [
                     'success' => false,
-                    'message' => 'Account is not active. Please contact support.'
+                    'message' => 'Account is not verified. Please check your email for verification link.'
                 ];
             }
             
@@ -209,7 +209,7 @@ class AuthenticationManager {
         try {
             // Get user data
             $userModel = new User();
-            $user = $userModel->findById($userId);
+            $user = $userModel->find($userId);
             
             if (!$user) {
                 return [
@@ -696,7 +696,7 @@ class AuthenticationManager {
             
             // Get user data
             $userModel = new User();
-            $user = $userModel->findById($userId);
+            $user = $userModel->find($userId);
             
             if (!$user) {
                 return [
@@ -730,6 +730,92 @@ class AuthenticationManager {
      */
     public function getTwoFactorManager() {
         return $this->twoFactorManager;
+    }
+    
+    /**
+     * Store remember me token for user
+     * 
+     * @param int $userId User ID
+     * @param string $token Remember me token
+     * @param int $expires Expiration timestamp
+     * @return bool Success status
+     */
+    public function storeRememberToken(int $userId, string $token, int $expires): bool {
+        try {
+            $hashedToken = hash('sha256', $token);
+            
+            // First, clean up expired tokens
+            $this->cleanupExpiredRememberTokens();
+            
+            // Store the new token
+            $sql = "
+                INSERT INTO remember_tokens (user_id, token_hash, expires_at, created_at) 
+                VALUES (?, ?, ?, NOW())
+                ON DUPLICATE KEY UPDATE 
+                    token_hash = VALUES(token_hash),
+                    expires_at = VALUES(expires_at),
+                    created_at = NOW()
+            ";
+            
+            $stmt = $this->db->execute($sql, [
+                $userId,
+                $hashedToken,
+                date('Y-m-d H:i:s', $expires)
+            ]);
+            
+            return $stmt !== false;
+            
+        } catch (Exception $e) {
+            error_log('Error storing remember token: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Verify remember me token
+     * 
+     * @param string $token Remember me token
+     * @return array|false User data or false if invalid
+     */
+    public function verifyRememberToken(string $token) {
+        try {
+            $hashedToken = hash('sha256', $token);
+            
+            $sql = "
+                SELECT u.*, rt.expires_at 
+                FROM remember_tokens rt 
+                JOIN users u ON rt.user_id = u.id 
+                WHERE rt.token_hash = ? AND rt.expires_at > NOW() AND u.is_active = 1
+            ";
+            
+            $result = $this->db->selectOne($sql, [$hashedToken]);
+            
+            if ($result) {
+                // Update token expiration
+                $newExpires = time() + (30 * 24 * 60 * 60); // 30 days
+                $this->storeRememberToken($result['id'], $token, $newExpires);
+                
+                return $result;
+            }
+            
+            return false;
+            
+        } catch (Exception $e) {
+            error_log('Error verifying remember token: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Clean up expired remember tokens
+     */
+    private function cleanupExpiredRememberTokens(): void {
+        try {
+            $sql = "DELETE FROM remember_tokens WHERE expires_at < NOW()";
+            $this->db->execute($sql);
+        } catch (Exception $e) {
+            error_log('Error cleaning up expired remember tokens: ' . $e->getMessage());
+        }
     }
 }
 
