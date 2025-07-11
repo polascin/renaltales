@@ -113,6 +113,7 @@ class LanguageDetector {
         'mai' => 'in',  // Maithili → India
         'bh' => 'in',  // Bihari → India
         'sa' => 'in',  // Sanskrit → India
+        'la' => 'va',  // Latin → Vatican City
         
         // African languages
         'sw' => 'ke',  // Swahili → Kenya
@@ -344,6 +345,7 @@ class LanguageDetector {
         'mai' => 'मैथिली',
         'bh' => 'भोजपुरी',
         'sa' => 'संस्कृतम्',
+        'la' => 'Latina',
         'tk' => 'Türkmen',
         'ny' => 'Chichewa',
         'sn' => 'ChiShona',
@@ -786,7 +788,7 @@ class LanguageDetector {
         'tr', 'el', 'sr', 'mk', 'sq', 'be', 'is', 'mt', 'ga', 'cy', 'eu', 'ca', 'gl', 'lb', 'rm', 'fo', 'kl', 'se', 'gd',
         
         // Asian languages (by speaker count)
-        'zh', 'hi', 'ar', 'bn', 'ur', 'id', 'ja', 'ko', 'vi', 'th', 'ms', 'tl', 'fa', 'he', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ne', 'si', 'my', 'km', 'lo', 'ka', 'hy', 'az', 'kk', 'ky', 'uz', 'tg', 'mn', 'jv', 'yue', 'wuu', 'bho', 'ps', 'su', 'or', 'as', 'mai', 'bh', 'sa', 'sd', 'dv', 'tk', 'bo', 'ug',
+        'zh', 'hi', 'ar', 'bn', 'ur', 'id', 'ja', 'ko', 'vi', 'th', 'ms', 'tl', 'fa', 'he', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ne', 'si', 'my', 'km', 'lo', 'ka', 'hy', 'az', 'kk', 'ky', 'uz', 'tg', 'mn', 'jv', 'yue', 'wuu', 'bho', 'ps', 'su', 'or', 'as', 'mai', 'bh', 'sa', 'la', 'sd', 'dv', 'tk', 'bo', 'ug',
         
         // African languages (by speaker count)
         'sw', 'am', 'ha', 'yo', 'ig', 'zu', 'af', 'xh', 'so', 'mg', 'rw', 'rn', 'lg', 'sn', 'ny', 'wo', 'ln', 'kg', 'lua', 'sg', 'ff', 'bm', 'ak', 'om', 'ti', 'nd', 'nr', 'nso', 'st', 'ss', 've', 'ts', 'tn',
