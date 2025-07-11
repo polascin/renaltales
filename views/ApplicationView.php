@@ -119,7 +119,27 @@ class ApplicationView extends BaseView {
         echo '<h6>' . $this->escape($this->getText('app_author', 'Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin')) . '</h6>';
         echo '</div>';
         echo '<div class="central-section">';
-        echo '<p>' . $this->escape($this->getText('datetime_placeholder', 'Tu bude zobrazený dátum, čas, vrátane podrobného internetového času @beat.')) . '</p>';
+        echo '<div style="margin-left: 0.6rem; margin-right: 0.6rem; margin-bottom: 0.6rem;">';
+        echo '  <div style="border-bottom: solid thin gray; padding: 0.3rem;">';
+        echo '    <a href="https://en.wikipedia.org/wiki/Swatch_Internet_Time" target="_blank" style="color: gray; text-decoration: none; font-weight: bold; font-size: larger;">';
+        echo '      <span>@</span><span id="beatsTime"></span>';
+        echo '    </a>';
+        echo '  </div>';
+        echo '  <div>';
+        echo '    <a href="https://time.is/" target="_blank" style="text-decoration: none; color: gray;">';
+        echo '      <span>Deň:&nbsp;</span><span id="dayOfYear" style="font-weight: bold;"></span>';
+        echo '      <span>&nbsp;Rok:&nbsp;</span><span id="currentYear" style="font-weight: bolder;"></span>';
+        echo '      <span>&nbsp;Týždeň:&nbsp;</span><span id="weekNumber" style="font-weight: bold;"></span>';
+        echo '      <span>&nbsp;Dnes je&nbsp;</span><span id="dayOfWeek" style="font-weight: bold;"></span>';
+        echo '      <span id="dayOfMonth" style="font-weight: bold;"></span>.';
+        echo '      <span id="monthName" style="font-weight: bold;"></span>';
+        echo '      <span id="dateYear" style="font-weight: bold;"></span>';
+        echo '      <span id="currentTime" style="font-weight: bold;"></span>';
+        echo '      <br>';
+        echo '      <span>(</span><span id="timeZone" style="font-style: italic; font-variant: small-caps;"></span><span>)</span>';
+        echo '    </a>';
+        echo '  </div>';
+        echo '</div>';
         echo '</div>';
         echo '<div class="right-section">';
         echo $this->renderUserInformation();
@@ -532,6 +552,55 @@ class ApplicationView extends BaseView {
         echo '}';
         echo '});';
         echo '});';
+        
+        // Time and date display functionality
+        echo 'function updateDateTimeDetails() {';
+        echo 'const now = new Date();';
+        echo 'const dayOfYear = getDayOfYear(now);';
+        echo 'const weekNumber = getWeekNumber(now);';
+        echo 'const dayOfWeek = now.toLocaleString("default", { weekday: "long" });';
+        echo 'const dayOfMonth = now.getDate();';
+        echo 'const monthName = now.toLocaleString("default", { month: "long" });';
+        echo 'const currentYear = now.getFullYear();';
+        echo 'const dateYear = now.getFullYear();';
+        echo 'const currentTime = now.toLocaleTimeString("default", {timeZoneName: "short"});';
+        echo 'const timeZoneFormatter = new Intl.DateTimeFormat("default", {timeZoneName: "long"});';
+        echo 'const timeZone = timeZoneFormatter.format(now);';
+        echo 'const beatsTime = calculateBeatsTime(now);';
+        echo 'if (document.getElementById("dayOfYear")) document.getElementById("dayOfYear").textContent = dayOfYear;';
+        echo 'if (document.getElementById("weekNumber")) document.getElementById("weekNumber").textContent = weekNumber;';
+        echo 'if (document.getElementById("dayOfWeek")) document.getElementById("dayOfWeek").textContent = dayOfWeek;';
+        echo 'if (document.getElementById("dayOfMonth")) document.getElementById("dayOfMonth").textContent = dayOfMonth;';
+        echo 'if (document.getElementById("monthName")) document.getElementById("monthName").textContent = monthName;';
+        echo 'if (document.getElementById("currentYear")) document.getElementById("currentYear").textContent = currentYear;';
+        echo 'if (document.getElementById("dateYear")) document.getElementById("dateYear").textContent = dateYear;';
+        echo 'if (document.getElementById("currentTime")) document.getElementById("currentTime").textContent = currentTime;';
+        echo 'if (document.getElementById("timeZone")) document.getElementById("timeZone").textContent = timeZone;';
+        echo 'if (document.getElementById("beatsTime")) document.getElementById("beatsTime").textContent = beatsTime.toFixed(2);';
+        echo '}';
+        
+        echo 'function getDayOfYear(date) {';
+        echo 'const start = new Date(date.getFullYear(), 0, 0);';
+        echo 'const diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);';
+        echo 'const oneDay = 1000 * 60 * 60 * 24;';
+        echo 'return Math.floor(diff / oneDay);';
+        echo '}';
+        
+        echo 'function getWeekNumber(date) {';
+        echo 'const firstDay = new Date(date.getFullYear(), 0, 1);';
+        echo 'const days = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000)) + ((firstDay.getDay() + 1) % 7);';
+        echo 'return Math.ceil(days / 7);';
+        echo '}';
+        
+        echo 'function calculateBeatsTime(date) {';
+        echo 'const utcHours = date.getUTCHours();';
+        echo 'const utcMinutes = date.getUTCMinutes();';
+        echo 'const utcSeconds = date.getUTCSeconds();';
+        echo 'return ((utcHours * 3600 + utcMinutes * 60 + utcSeconds) / 86.4) % 1000;';
+        echo '}';
+        
+        echo 'setInterval(updateDateTimeDetails, 250);';
+        
         echo '</script>';
     }
 }
