@@ -1,125 +1,75 @@
 <?php
 
 /**
- * Cache Clear Script for Renal Tales Application
+ * Advanced Cache Clear Script for Renal Tales Application
  * 
- * This script clears all cache files from the application
+ * This script uses the modern CacheManager class with detailed reporting
  * 
  * @author Ľubomír Polaščín
  * @version 2025.v1.0
  */
 
-echo "=== Renal Tales Cache Clear Script ===\n";
+// Include the CacheManager
+require_once __DIR__ . '/../core/CacheManager.php';
+
+echo "=== Renal Tales Advanced Cache Clear Script ===\n";
 echo "Started at: " . date('Y-m-d H:i:s') . "\n\n";
 
 try {
-    // Clear cache files
-    echo "Clearing cache files...\n";
-    $cachePath = __DIR__ . '/../storage/cache/';
-    $deletedCache = 0;
+    $cacheManager = new CacheManager();
     
-    if (is_dir($cachePath)) {
-        $cacheFiles = glob($cachePath . '*');
-        
-        foreach ($cacheFiles as $file) {
-            if (is_file($file) && basename($file) !== '.gitkeep') {
-                if (unlink($file)) {
-                    $deletedCache++;
-                    echo "   Deleted: " . basename($file) . "\n";
-                }
-            }
-        }
+    // Display cache statistics before clearing
+    echo "Cache Statistics Before Clearing:\n";
+    $stats = $cacheManager->getStats();
+    
+    echo "- File cache: " . $stats['file_cache']['count'] . " files, " . 
+         number_format($stats['file_cache']['total_size'] / 1024, 2) . " KB\n";
+    echo "- APCu available: " . ($stats['apcu_available'] ? 'Yes' : 'No') . "\n";
+    echo "- OPcache available: " . ($stats['opcache_available'] ? 'Yes' : 'No') . "\n";
+    
+    if ($stats['apcu_available'] && isset($stats['apcu_info']['num_entries'])) {
+        echo "- APCu entries: " . $stats['apcu_info']['num_entries'] . "\n";
     }
     
-    echo "\nTotal deleted cache files: {$deletedCache}\n";
-    
-    // Clear temporary files as well
-    echo "\nClearing temporary files...\n";
-    $tempPath = __DIR__ . '/../storage/temp/';
-    $deletedTemp = 0;
-    
-    if (is_dir($tempPath)) {
-        $tempFiles = glob($tempPath . '*');
-        
-        foreach ($tempFiles as $file) {
-            if (is_file($file) && basename($file) !== '.gitkeep') {
-                if (unlink($file)) {
-                    $deletedTemp++;
-                    echo "   Deleted: " . basename($file) . "\n";
-                }
-            }
-        }
+    if ($stats['opcache_available'] && isset($stats['opcache_info']['opcache_statistics']['num_cached_scripts'])) {
+        echo "- OPcache scripts: " . $stats['opcache_info']['opcache_statistics']['num_cached_scripts'] . "\n";
     }
     
-    echo "\nTotal deleted temporary files: {$deletedTemp}\n";
+    echo "\nClearing cache...\n";
+    $results = $cacheManager->clearAll();
     
-    // Clear OPcache if available
-    if (function_exists('opcache_reset')) {
-        echo "\nClearing OPcache...\n";
-        if (opcache_reset()) {
-            echo "   OPcache cleared successfully\n";
-        } else {
-            echo "   Failed to clear OPcache\n";
-        }
-    } else {
-        echo "\nOPcache not available\n";
+    // Detailed results display
+    echo "\nCache Clear Results:\n";
+    echo "==================\n";
+    
+    echo "File Cache:\n";
+    echo "- Files cleared: " . $results['file_cache']['count'] . "\n";
+    if (!empty($results['file_cache']['errors'])) {
+        echo "- Errors: " . implode(', ', $results['file_cache']['errors']) . "\n";
     }
     
-    // Clear user data cache if available
-    echo "\nChecking for user cache systems...\n";
-    
-    $userCacheCleared = false;
-    
-    // Check for APC extension (legacy)
-    if (extension_loaded('apc') && function_exists('apc_clear_cache')) {
-        $apcEnabled = ini_get('apc.enabled');
-        $apcCliEnabled = ini_get('apc.enable_cli');
-        $isCli = (php_sapi_name() === 'cli');
-        
-        if ($apcEnabled && (!$isCli || $apcCliEnabled)) {
-            echo "   Attempting to clear APC user cache...\n";
-            try {
-                $result = @apc_clear_cache('user');
-                if ($result) {
-                    echo "   APC user cache cleared successfully\n";
-                    $userCacheCleared = true;
-                } else {
-                    echo "   APC clear cache returned false\n";
-                }
-            } catch (Throwable $e) {
-                echo "   APC error: " . $e->getMessage() . "\n";
-            }
-        } else {
-            echo "   APC extension found but not enabled for current context\n";
-            echo "   - APC enabled: " . ($apcEnabled ? 'yes' : 'no') . "\n";
-            echo "   - CLI mode: " . ($isCli ? 'yes' : 'no') . "\n";
-            echo "   - APC CLI enabled: " . ($apcCliEnabled ? 'yes' : 'no') . "\n";
-        }
-    }
-    // Check for APCu extension (modern replacement)
-    elseif (extension_loaded('apcu') && function_exists('apcu_clear_cache')) {
-        $apcuEnabled = ini_get('apc.enabled');
-        echo "   Attempting to clear APCu cache...\n";
-        try {
-            $result = @apcu_clear_cache();
-            if ($result) {
-                echo "   APCu cache cleared successfully\n";
-                $userCacheCleared = true;
-            } else {
-                echo "   APCu clear cache returned false\n";
-            }
-        } catch (Throwable $e) {
-            echo "   APCu error: " . $e->getMessage() . "\n";
-        }
-    } else {
-        echo "   No user cache extensions (APC/APCu) found\n";
+    echo "\nTemporary Files:\n";
+    echo "- Files cleared: " . $results['temp_files']['count'] . "\n";
+    if (!empty($results['temp_files']['errors'])) {
+        echo "- Errors: " . implode(', ', $results['temp_files']['errors']) . "\n";
     }
     
-    if (!$userCacheCleared) {
-        echo "   User cache systems not available or not cleared\n";
+    echo "\nSession Files:\n";
+    echo "- Old sessions cleared: " . $results['sessions']['count'] . "\n";
+    if (!empty($results['sessions']['errors'])) {
+        echo "- Errors: " . implode(', ', $results['sessions']['errors']) . "\n";
     }
+    
+    echo "\nAPCu Cache:\n";
+    echo "- Status: " . $results['apcu_cache']['message'] . "\n";
+    
+    echo "\nOPcache:\n";
+    echo "- Status: " . $results['opcache']['message'] . "\n";
+    
+    $totalFiles = $results['file_cache']['count'] + $results['temp_files']['count'] + $results['sessions']['count'];
     
     echo "\n=== Cache Clear Completed Successfully ===\n";
+    echo "Total files deleted: {$totalFiles}\n";
     echo "Finished at: " . date('Y-m-d H:i:s') . "\n";
     
 } catch (Exception $e) {
@@ -127,4 +77,3 @@ try {
     exit(1);
 }
 
-?>

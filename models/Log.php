@@ -16,9 +16,9 @@ class Log extends BaseModel {
      * Create a log entry
      *
      * @param array $data
-     * @return bool|string Last insert ID or false on failure
+     * @return string Last insert ID
      */
-    public function create($data) {
+    public function create(array $data): string {
         $fields = array_keys($data);
         $placeholders = array_fill(0, count($fields), '?');
 
@@ -57,7 +57,7 @@ class Log extends BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         $errors = [];
 
         // Level validation

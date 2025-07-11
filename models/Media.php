@@ -40,7 +40,7 @@ class Media extends BaseModel {
      * @param array $data
      * @return array Validation errors
      */
-    protected function validate($data) {
+    protected function validate(array $data): array {
         $errors = [];
         
         // Story ID validation

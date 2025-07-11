@@ -40,7 +40,9 @@
   vertical-align: top;
   height: auto;
   width: 33%;
-  margin: 0; padding: 0; border: solid thin transparent;
+  margin: 0; 
+  padding: 0; 
+  border: solid thin transparent;
 }
 .main-header-container h1 {
   font-family: var(--font-family-fantasy);
@@ -53,28 +55,41 @@
 .main-header-container h2 {
   font-family: var(--font-family-cursive);
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: normal;
+  font-variant: small-caps;
   color: var(--secondary-dark);
   margin: 0;
   text-shadow: 1px 1px 1px var(--black-color), 0 0 10px var(--accent-color);
 }
 .main-header-container h3 {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-system);
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: normal;
   color: var(--warning-color);
   margin: 0;
   text-shadow: 1px 1px 2px var(--text-color);
 }
 .main-header-container h4 {
-  margin: 0;
-  clear: both;
+  font-family: var(--font-family-system);
+  font-size: small;
+  font-weight: normal;
+  color: var(--text-color);
+  margin: 0.5rem 0 0 0;
 }
 .main-header-container h5 {
-  margin: 0;
+  margin: 0.25rem 0 0 0;
+  font-family: var(--font-family-system);
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--text-color);
 }
 .main-header-container h6 {
-  margin: 0;
+  margin: 0.5rem 0 0 0;
+  font-family: var(--font-family-system);
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--text-color);
+  clear: both;
 }
 
 

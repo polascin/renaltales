@@ -14,6 +14,9 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
     die('Access denied');
 }
 
+// Include the modern CacheManager
+require_once __DIR__ . '/../../core/CacheManager.php';
+
 // Handle cache clear request
 if ($_POST['action'] ?? '' === 'clear_cache') {
     $result = clearApplicationCache();
@@ -22,68 +25,34 @@ if ($_POST['action'] ?? '' === 'clear_cache') {
 }
 
 /**
- * Clear application cache
+ * Clear application cache using modern CacheManager
  */
 function clearApplicationCache() {
-    $result = [
-        'success' => true,
-        'message' => '',
-        'details' => []
-    ];
-    
     try {
-        // Clear file cache
-        $cachePath = __DIR__ . '/../../storage/cache/';
-        $deletedCache = 0;
+        $cacheManager = new CacheManager();
+        $results = $cacheManager->clearAll();
         
-        if (is_dir($cachePath)) {
-            $cacheFiles = glob($cachePath . '*');
-            
-            foreach ($cacheFiles as $file) {
-                if (is_file($file) && basename($file) !== '.gitkeep') {
-                    if (unlink($file)) {
-                        $deletedCache++;
-                    }
-                }
-            }
-        }
+        $totalFiles = $results['file_cache']['count'] + $results['temp_files']['count'] + $results['sessions']['count'];
         
-        $result['details']['cache_files'] = $deletedCache;
-        
-        // Clear temporary files
-        $tempPath = __DIR__ . '/../../storage/temp/';
-        $deletedTemp = 0;
-        
-        if (is_dir($tempPath)) {
-            $tempFiles = glob($tempPath . '*');
-            
-            foreach ($tempFiles as $file) {
-                if (is_file($file) && basename($file) !== '.gitkeep') {
-                    if (unlink($file)) {
-                        $deletedTemp++;
-                    }
-                }
-            }
-        }
-        
-        $result['details']['temp_files'] = $deletedTemp;
-        
-        // Clear OPcache if available
-        if (function_exists('opcache_reset')) {
-            $opcacheCleared = opcache_reset();
-            $result['details']['opcache'] = $opcacheCleared ? 'cleared' : 'failed';
-        } else {
-            $result['details']['opcache'] = 'not_available';
-        }
-        
-        $result['message'] = "Cache cleared successfully. Files: {$deletedCache}, Temp: {$deletedTemp}";
+        return [
+            'success' => true,
+            'message' => "Cache cleared successfully. Files: {$totalFiles}",
+            'details' => [
+                'cache_files' => $results['file_cache']['count'],
+                'temp_files' => $results['temp_files']['count'],
+                'sessions' => $results['sessions']['count'],
+                'apcu' => $results['apcu_cache']['message'],
+                'opcache' => $results['opcache']['message']
+            ]
+        ];
         
     } catch (Exception $e) {
-        $result['success'] = false;
-        $result['message'] = 'Error: ' . $e->getMessage();
+        return [
+            'success' => false,
+            'message' => 'Error: ' . $e->getMessage(),
+            'details' => []
+        ];
     }
-    
-    return $result;
 }
 
 ?>
