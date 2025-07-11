@@ -1,63 +1,45 @@
-# Ignore Composer dependencies
-/vendor/
+# ===============================================
+# Renal Tales - .gitignore
+# ===============================================
 
-# Ignore environment files
-.env
-
-# Ignore log files
-storage/logs/
-
-# Ignore cache
-storage/cache/
-
-# Ignore sessions
-storage/sessions/
-
-# Flags Set
-/public/assets/flags/*
-
-# Environment files
+# ===== SECURITY & ENVIRONMENT =================
+# Environment configuration files
 .env
 .env.*
 !.env.example
+!.env.local.example
+!.env.production.example
 
+# Configuration files with sensitive data
+config/*.local.php
+config/*.prod.php
+config/secrets.php
+
+# Certificate and key files
+*.pem
+*.key
+*.crt
+*.csr
+*.srl
+*.p12
+*.pfx
+
+# ===== DEPENDENCIES ===========================
 # Composer
 /vendor/
 composer.phar
-composer.lock
+# Note: composer.lock should be committed for applications
 
-# PHP CS Fixer
-.php_cs
-.php_cs.cache
-.php-cs-fixer.cache
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
 
-# PHPUnit
-/phpunit.xml
-.phpunit.result.cache
-.phpunit.cache/
-
-# PHP Static Analysis
-.phpstan-cache/
-
-# IDE and Editor files
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
-*.komodoproject
-.project
-.buildpath
-.settings/
-*.swp
-*.swo
-*~
-
-# Environment files
-.env
-.env.local
-.env.*.local
-
-# Storage directories
+# ===== STORAGE & UPLOADS ======================
+# Application storage
 /storage/logs/*.log
 /storage/cache/*
 !/storage/cache/.gitkeep
@@ -67,38 +49,38 @@ composer.lock
 !/storage/temp/.gitkeep
 /storage/uploads/*
 !/storage/uploads/.gitkeep
+/storage/backups/*
+!/storage/backups/.gitkeep
 
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Public uploads
+/public/uploads/*
+!/public/uploads/.gitkeep
+/uploads/*
+!/uploads/.gitkeep
 
-# Dependency directories
-node_modules/
-vendor/
+# Legacy logs directory
+/logs/*
+!/logs/.gitkeep
 
-# Build files
-build/
-dist/
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Backup files
-*.backup
-*.bak
-
+# ===== DATABASE ===============================
 # Database files
 *.sqlite
+*.sqlite3
 *.db
+*.sql.backup
+
+# Database dumps
+*.sql.gz
+*.sql.bz2
+database_dump_*.sql
+
+# ===== BUILD & COMPILED FILES =================
+# Build artifacts
+/build/
+/dist/
+/public/build/
+/public/dist/
+/public/hot/
 
 # Compiled files
 *.com
@@ -108,7 +90,100 @@ Thumbs.db
 *.o
 *.so
 
-# Application specific
+# ===== DEVELOPMENT TOOLS ======================
+# IDE and Editor files
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.project
+.buildpath
+.settings/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+
+# ===== TESTING & COVERAGE =====================
+# PHPUnit
+/phpunit.xml
+.phpunit.result.cache
+.phpunit.cache/
+
+# Test coverage
+/coverage/
+.coverage
+coverage.xml
+*.coverage
+*.coveragexml
+
+# Test files (keep structured tests, ignore ad-hoc test files)
+test_*.php
+!tests/
+
+# ===== CODE QUALITY TOOLS =====================
+# PHP CS Fixer
+.php_cs
+.php_cs.cache
+.php-cs-fixer.cache
+
+# PHP Static Analysis
+.phpstan-cache/
+.psalm-cache/
+
+# ===== OPERATING SYSTEM FILES =================
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ===== BACKUP & TEMPORARY FILES ===============
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+*_backup.*
+backup_*
+
+# Log files
+*.log
+*.out
+*.pid
+error_log
+
+# Temporary files
+*.tmp
+*.temp
+
+# ===== PROJECT SPECIFIC =======================
+# Application documentation (if auto-generated)
+/docs/generated/
+
+# Cache files
+cache.properties
+
+# Application specific temporary files
 /var/cache/*
 !/var/cache/.gitkeep
 /var/logs/*
@@ -116,57 +191,26 @@ Thumbs.db
 /var/sessions/*
 !/var/sessions/.gitkeep
 
-# Uploaded files
-/public/uploads/*
-!/public/uploads/.gitkeep
+# Asset flags (if they are downloaded/generated)
+/public/assets/flags/*
+!/public/assets/flags/.gitkeep
 
-# Build artifacts
-/node_modules/
-/public/build/
-/public/dist/
-/public/hot/
-npm-debug.log
-yarn-debug.log
-yarn-error.log
+# Documentation reports (if auto-generated)
+*_REPORT.md
+*_SUMMARY.md
+!README.md
+!SETUP.md
+!SECURITY.md
 
-# Test coverage reports
-/coverage/
-.coverage
-coverage.xml
-*.coverage
-*.coveragexml
+# Workspace files
+*.code-workspace
 
-# Backup files
-*.bak
-*.backup
-*.old
-*.orig
-
-# Configuration files that might contain sensitive data
-config/*.local.php
-config/*.prod.php
-config/secrets.php
-
-# Database
-*.sqlite
-*.sqlite3
-*.db
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-*.out
-*.pid
-
-# Certificate files
-*.pem
-*.key
-*.crt
-*.csr
-*.srl
-
-# Windows specific
-Thumbs.db
-Desktop.ini
-$RECYCLE.BIN/
+# ===== KEEP THESE FILES =======================
+# Important: These patterns ensure critical files are tracked
+!.htaccess
+!.github/
+!composer.json
+!package.json
+!README.md
+!LICENSE
+!CHANGELOG.md
