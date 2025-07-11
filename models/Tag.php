@@ -229,5 +229,3 @@ class Tag extends BaseModel {
         return $this->db->select($sql, [$limit]);
     }
 }
-
-?>

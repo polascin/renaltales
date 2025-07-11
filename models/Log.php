@@ -73,5 +73,3 @@ class Log extends BaseModel {
         return $errors;
     }
 }
-
-?>

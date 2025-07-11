@@ -514,5 +514,3 @@ class DatabaseRateLimitStorage {
         // Implement database delete
     }
 }
-
-?>

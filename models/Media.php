@@ -371,5 +371,3 @@ class Media extends BaseModel {
         return $this->db->select($sql);
     }
 }
-
-?>

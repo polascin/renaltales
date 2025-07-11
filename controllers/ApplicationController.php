@@ -210,5 +210,3 @@ class ApplicationController extends BaseController {
         return $this->sessionManager;
     }
 }
-
-?>

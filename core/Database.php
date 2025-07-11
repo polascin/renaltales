@@ -294,5 +294,3 @@ class Database {
         $this->close();
     }
 }
-
-?>

@@ -247,6 +247,3 @@ class User extends BaseModel {
         return $errors;
     }
 }
-
-?>
-?>

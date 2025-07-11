@@ -192,5 +192,3 @@ class UserProfile extends BaseModel {
         return $errors;
     }
 }
-
-?>

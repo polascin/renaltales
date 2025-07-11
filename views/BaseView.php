@@ -115,5 +115,3 @@ abstract class BaseView {
      */
     abstract protected function renderContent(): void;
 }
-
-?>

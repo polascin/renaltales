@@ -213,5 +213,3 @@ class LoginController extends BaseController {
         exit;
     }
 }
-
-?>

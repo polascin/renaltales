@@ -1021,8 +1021,5 @@ class SessionManager {
     } catch (Exception $e) {
       error_log('Session export failed: ' . $e->getMessage());
       return false;
-    }
-  }
+    }    }
 }
-
-?>

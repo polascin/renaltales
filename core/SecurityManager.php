@@ -420,5 +420,3 @@ class SecurityManager {
         return $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     }
 }
-
-?>

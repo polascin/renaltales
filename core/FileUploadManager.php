@@ -767,5 +767,3 @@ class FileUploadManager {
         return $this->uploadedFiles;
     }
 }
-
-?>

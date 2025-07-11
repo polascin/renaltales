@@ -82,5 +82,3 @@ class SecurityEvent extends BaseModel {
         return $errors;
     }
 }
-
-?>

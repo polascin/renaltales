@@ -144,5 +144,3 @@ abstract class BaseModel {
      */
     abstract protected function validate(array $data): array;
 }
-
-?>

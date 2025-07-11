@@ -236,5 +236,3 @@ return [
         'allow_weak_passwords' => false
     ]
 ];
-
-?>

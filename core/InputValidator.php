@@ -553,5 +553,3 @@ class InputValidator {
         return $filename;
     }
 }
-
-?>

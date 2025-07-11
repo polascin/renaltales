@@ -255,5 +255,3 @@ class LoginView extends BaseView {
         echo '</script>';
     }
 }
-
-?>

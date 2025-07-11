@@ -438,5 +438,3 @@ class Story extends BaseModel {
         return $this->update($id, ['published' => false, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }
-
-?>

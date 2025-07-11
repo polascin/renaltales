@@ -178,5 +178,3 @@ class Category extends BaseModel {
         return $this->db->select($sql, [$limit]);
     }
 }
-
-?>

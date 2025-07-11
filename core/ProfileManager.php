@@ -84,5 +84,3 @@ class ProfileManager {
         return $this->userModel->getLanguagePreferences($userId);
     }
 }
-
-?>

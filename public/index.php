@@ -72,5 +72,3 @@ try {
   // Log the error
   error_log('Application Error: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
 }
-
-?>

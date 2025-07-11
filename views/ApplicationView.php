@@ -24,26 +24,24 @@ class ApplicationView extends BaseView {
         $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
         $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
         
-        ?>
-        <!DOCTYPE html>
-        <html lang="<?php echo $this->escape($currentLanguage); ?>">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta name="csrf-token" content="<?php echo $this->escape($csrfToken); ?>">
-            <title><?php echo $this->escape($appTitle); ?></title>
-            <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">
-            <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
-        </head>
-        <body>
-            <?php $this->renderLanguageSelection(); ?>
-            <?php $this->renderHeader(); ?>
-            <?php $this->renderMainContent(); ?>
-            <?php $this->renderFooter(); ?>
-            <?php $this->renderJavaScript(); ?>
-        </body>
-        </html>
-<?php
+        echo '<!DOCTYPE html>';
+        echo '<html lang="' . $this->escape($currentLanguage) . '">';
+        echo '<head>';
+        echo '<meta charset="utf-8">';
+        echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+        echo '<meta name="csrf-token" content="' . $this->escape($csrfToken) . '">';
+        echo '<title>' . $this->escape($appTitle) . '</title>';
+        echo '<link rel="stylesheet" href="assets/css/basic.css?v=' . time() . '">';
+        echo '<link rel="stylesheet" href="assets/css/style.css?v=' . time() . '">';
+        echo '</head>';
+        echo '<body>';
+        $this->renderLanguageSelection();
+        $this->renderHeader();
+        $this->renderMainContent();
+        $this->renderFooter();
+        $this->renderJavaScript();
+        echo '</body>';
+        echo '</html>';
     }
     
     /**
@@ -108,7 +106,7 @@ class ApplicationView extends BaseView {
         
         echo '<header class="main-header-container">';
         echo '<div class="left-section">';
-        echo '<img src="assets/images/logos/logo_framed.gif?v=' . time() . '" alt="' . $this->escape($appTitle) . ' logo" class="logo">';
+        echo '<img src="assets/images/logos/logo_shifted.gif" alt="' . $this->escape($appTitle) . ' logo" class="logo">';
         echo '<h1>' . $this->escape($appTitle) . '</h1>';
         
         if (defined('APP_TITLE')) {

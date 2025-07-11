@@ -177,5 +177,3 @@ class LanguageModel extends BaseModel {
         return [];
     }
 }
-
-?>

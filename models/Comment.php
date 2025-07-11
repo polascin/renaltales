@@ -386,5 +386,3 @@ class Comment extends BaseModel {
         return $this->db->select($sql, [$limit]);
     }
 }
-
-?>

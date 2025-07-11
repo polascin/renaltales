@@ -166,5 +166,3 @@ class ErrorView extends BaseView {
         <?php
     }
 }
-
-?>
