@@ -127,16 +127,16 @@ class ApplicationView extends BaseView {
         echo '  </div>';
         echo '  <div>';
         echo '    <a href="https://time.is/" target="_blank" style="text-decoration: none; color: gray;">';
-        echo '      <span>Deň:&nbsp;</span><span id="dayOfYear" style="font-weight: bold;"></span>';
-        echo '      <span>&nbsp;Rok:&nbsp;</span><span id="currentYear" style="font-weight: bolder;"></span>';
-        echo '      <span>&nbsp;Týždeň:&nbsp;</span><span id="weekNumber" style="font-weight: bold;"></span>';
-        echo '      <span>&nbsp;Dnes je&nbsp;</span><span id="dayOfWeek" style="font-weight: bold;"></span>';
-        echo '      <span id="dayOfMonth" style="font-weight: bold;"></span>.';
+        echo '      <span>' . $this->escape($this->getText('day', 'Day')) . ':&nbsp;</span><span id="dayOfYear" style="font-weight: bold;"></span>';
+        echo '      <span>&nbsp;' . $this->escape($this->getText('year', 'Year')) . ':&nbsp;</span><span id="currentYear" style="font-weight: bolder;"></span>';
+        echo '      <span>&nbsp;' . $this->escape($this->getText('week', 'Week')) . ':&nbsp;</span><span id="weekNumber" style="font-weight: bold;"></span>';
+        echo '      <span>&nbsp;' . $this->escape($this->getText('today_is', 'Today is')) . '&nbsp;</span><span id="dayOfWeek" style="font-weight: bold;"></span>';
+        echo '      <span id="dayOfMonth" style="font-weight: bold;"></span><span id="dayPeriod"></span>';
         echo '      <span id="monthName" style="font-weight: bold;"></span>';
         echo '      <span id="dateYear" style="font-weight: bold;"></span>';
         echo '      <span id="currentTime" style="font-weight: bold;"></span>';
         echo '      <br>';
-        echo '      <span>(</span><span id="timeZone" style="font-style: italic; font-variant: small-caps;"></span><span>)</span>';
+        echo '      <span>(</span><span id="timeZone" style="font-style: italic; font-variant: small-caps; font-size: small;"></span><span>)</span>';
         echo '    </a>';
         echo '  </div>';
         echo '</div>';
@@ -553,30 +553,70 @@ class ApplicationView extends BaseView {
         echo '});';
         echo '});';
         
+        // Get current language and convert to proper locale
+        $currentLanguage = $this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en';
+        $localeMap = [
+            'en' => 'en-US', 'sk' => 'sk-SK', 'de' => 'de-DE', 'fr' => 'fr-FR', 'es' => 'es-ES',
+            'it' => 'it-IT', 'pt' => 'pt-PT', 'ru' => 'ru-RU', 'pl' => 'pl-PL', 'cs' => 'cs-CZ',
+            'hu' => 'hu-HU', 'nl' => 'nl-NL', 'sv' => 'sv-SE', 'no' => 'nb-NO', 'da' => 'da-DK',
+            'fi' => 'fi-FI', 'ja' => 'ja-JP', 'ko' => 'ko-KR', 'zh' => 'zh-CN', 'ar' => 'ar-SA',
+            'he' => 'he-IL', 'hi' => 'hi-IN', 'th' => 'th-TH', 'tr' => 'tr-TR', 'vi' => 'vi-VN',
+            'uk' => 'uk-UA', 'bg' => 'bg-BG', 'ro' => 'ro-RO', 'hr' => 'hr-HR', 'sr' => 'sr-RS',
+            'sl' => 'sl-SI', 'et' => 'et-EE', 'lv' => 'lv-LV', 'lt' => 'lt-LT', 'el' => 'el-GR',
+            'ca' => 'ca-ES', 'eu' => 'eu-ES', 'gl' => 'gl-ES', 'is' => 'is-IS', 'ga' => 'ga-IE',
+            'cy' => 'cy-GB', 'mt' => 'mt-MT', 'sq' => 'sq-AL', 'mk' => 'mk-MK', 'bs' => 'bs-BA',
+            'be' => 'be-BY', 'kk' => 'kk-KZ', 'ky' => 'ky-KG', 'uz' => 'uz-UZ', 'tg' => 'tg-TJ',
+            'mn' => 'mn-MN', 'ka' => 'ka-GE', 'hy' => 'hy-AM', 'az' => 'az-AZ', 'fa' => 'fa-IR',
+            'ur' => 'ur-PK', 'bn' => 'bn-BD', 'ta' => 'ta-IN', 'te' => 'te-IN', 'ml' => 'ml-IN',
+            'kn' => 'kn-IN', 'gu' => 'gu-IN', 'pa' => 'pa-IN', 'ne' => 'ne-NP', 'si' => 'si-LK',
+            'my' => 'my-MM', 'km' => 'km-KH', 'lo' => 'lo-LA', 'id' => 'id-ID', 'ms' => 'ms-MY',
+            'tl' => 'tl-PH', 'sw' => 'sw-KE', 'am' => 'am-ET', 'om' => 'om-ET', 'so' => 'so-SO',
+            'ha' => 'ha-NG', 'yo' => 'yo-NG', 'ig' => 'ig-NG', 'zu' => 'zu-ZA', 'xh' => 'xh-ZA',
+            'af' => 'af-ZA', 'st' => 'st-ZA', 'tn' => 'tn-ZA', 'ss' => 'ss-ZA', 've' => 've-ZA'
+        ];
+        $locale = isset($localeMap[$currentLanguage]) ? $localeMap[$currentLanguage] : 'en-US';
+        
         // Time and date display functionality
+        echo 'const appLocale = "' . $this->escape($locale) . '";';
         echo 'function updateDateTimeDetails() {';
+        echo 'try {';
         echo 'const now = new Date();';
         echo 'const dayOfYear = getDayOfYear(now);';
         echo 'const weekNumber = getWeekNumber(now);';
-        echo 'const dayOfWeek = now.toLocaleString("default", { weekday: "long" });';
+        echo 'let dayOfWeek, monthName, currentTime, timeZone;';
+        echo 'try {';
+        echo 'dayOfWeek = now.toLocaleString(appLocale, { weekday: "long" });';
+        echo 'monthName = now.toLocaleString(appLocale, { month: "long" });';
+        echo 'currentTime = now.toLocaleTimeString(appLocale, {timeZoneName: "short"});';
+        echo 'const timeZoneFormatter = new Intl.DateTimeFormat(appLocale, {timeZoneName: "long"});';
+        echo 'timeZone = timeZoneFormatter.format(now);';
+        echo '} catch(localeError) {';
+        echo 'console.warn("Locale error, falling back to English:", localeError);';
+        echo 'dayOfWeek = now.toLocaleString("en-US", { weekday: "long" });';
+        echo 'monthName = now.toLocaleString("en-US", { month: "long" });';
+        echo 'currentTime = now.toLocaleTimeString("en-US", {timeZoneName: "short"});';
+        echo 'const timeZoneFormatter = new Intl.DateTimeFormat("en-US", {timeZoneName: "long"});';
+        echo 'timeZone = timeZoneFormatter.format(now);';
+        echo '}';
         echo 'const dayOfMonth = now.getDate();';
-        echo 'const monthName = now.toLocaleString("default", { month: "long" });';
         echo 'const currentYear = now.getFullYear();';
         echo 'const dateYear = now.getFullYear();';
-        echo 'const currentTime = now.toLocaleTimeString("default", {timeZoneName: "short"});';
-        echo 'const timeZoneFormatter = new Intl.DateTimeFormat("default", {timeZoneName: "long"});';
-        echo 'const timeZone = timeZoneFormatter.format(now);';
         echo 'const beatsTime = calculateBeatsTime(now);';
+        echo 'const dayPeriod = (appLocale.startsWith("sk") || appLocale.startsWith("cs") || appLocale.startsWith("pl")) ? "." : "";';
         echo 'if (document.getElementById("dayOfYear")) document.getElementById("dayOfYear").textContent = dayOfYear;';
         echo 'if (document.getElementById("weekNumber")) document.getElementById("weekNumber").textContent = weekNumber;';
         echo 'if (document.getElementById("dayOfWeek")) document.getElementById("dayOfWeek").textContent = dayOfWeek;';
         echo 'if (document.getElementById("dayOfMonth")) document.getElementById("dayOfMonth").textContent = dayOfMonth;';
+        echo 'if (document.getElementById("dayPeriod")) document.getElementById("dayPeriod").textContent = dayPeriod;';
         echo 'if (document.getElementById("monthName")) document.getElementById("monthName").textContent = monthName;';
         echo 'if (document.getElementById("currentYear")) document.getElementById("currentYear").textContent = currentYear;';
         echo 'if (document.getElementById("dateYear")) document.getElementById("dateYear").textContent = dateYear;';
         echo 'if (document.getElementById("currentTime")) document.getElementById("currentTime").textContent = currentTime;';
         echo 'if (document.getElementById("timeZone")) document.getElementById("timeZone").textContent = timeZone;';
         echo 'if (document.getElementById("beatsTime")) document.getElementById("beatsTime").textContent = beatsTime.toFixed(2);';
+        echo '} catch(error) {';
+        echo 'console.error("Error updating date/time:", error);';
+        echo '}';
         echo '}';
         
         echo 'function getDayOfYear(date) {';

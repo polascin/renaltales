@@ -158,7 +158,7 @@ return [
     // Content sections
     'important_notes' => 'Important Notes',
     'about_renal_tales' => 'About Renal Tales',
-    'renal_tales_description' => 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.',
+    'renal_tales_description' => 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys. This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
     'community_guidelines' => 'Community Guidelines',
     'guideline_respectful' => 'Be respectful and supportive to all community members',
     'guideline_privacy' => 'Respect privacy and confidentiality',
@@ -171,7 +171,7 @@ return [
     
     // Home page
     'welcome_home' => 'Welcome to Renal Tales',
-    'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
+    'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey. Join us to connect with others, share your experiences, and find support in our community. Together, we can make a difference in the lives of those affected by kidney disorders. Thank you for being a part of our community! A web application designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.🌟',
     'share_story' => 'Share Your Story',
     'share_story_desc' => 'Your experience matters. Share your journey to inspire and support others.',
     'start_sharing' => 'Start Sharing',
@@ -215,5 +215,11 @@ return [
     
     // Language selection
     'language_selection_unavailable' => 'Language selection not available',
+    
+    // Time and date display
+    'day' => 'Day',
+    'year' => 'Year',
+    'week' => 'Week',
+    'today_is' => 'Today is',
 ];
 ?>

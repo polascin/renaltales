@@ -215,5 +215,11 @@ return [
     
     // Výber jazyka
     'language_selection_unavailable' => 'Výber jazyka nie je dostupný',
+    
+    // Zobrazenie času a dátumu
+    'day' => 'Deň',
+    'year' => 'Rok',
+    'week' => 'Týždeň',
+    'today_is' => 'Dnes je',
 ];
 ?>

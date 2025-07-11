@@ -12,6 +12,12 @@ return [
   'language_default_missing' => 'Fichier de langue par défaut manquant',
   'language_switch' => 'Changer de langue',
   'language_switch_success' => 'La langue a été changée avec succès',
-  'language_switch_error' => 'Erreur lors du changement de langue'
+  'language_switch_error' => 'Erreur lors du changement de langue',
+  
+  // Time and date display
+  'day' => 'Jour',
+  'year' => 'Année',
+  'week' => 'Semaine',
+  'today_is' => 'Aujourd\'hui c\'est',
 ];
 ?>

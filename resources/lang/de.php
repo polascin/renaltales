@@ -215,5 +215,11 @@ return [
     
     // Sprachauswahl
     'language_selection_unavailable' => 'Sprachauswahl nicht verfügbar',
+    
+    // Zeit- und Datumsanzeige
+    'day' => 'Tag',
+    'year' => 'Jahr',
+    'week' => 'Woche',
+    'today_is' => 'Heute ist',
 ];
 ?>
