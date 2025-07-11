@@ -22,10 +22,10 @@ try {
     
     // Show existing users
     echo "\nExisting users:\n";
-    $users = $db->select("SELECT id, username, email, display_name, role FROM users LIMIT 5");
+    $users = $db->select("SELECT id, username, email, full_name, role FROM users LIMIT 5");
     
     foreach ($users as $user) {
-        echo "- ID: " . $user['id'] . ", Username: " . $user['username'] . ", Email: " . $user['email'] . ", Role: " . $user['role'] . "\n";
+        echo "- ID: " . $user['id'] . ", Username: " . $user['username'] . ", Email: " . $user['email'] . ", Full Name: " . $user['full_name'] . ", Role: " . $user['role'] . "\n";
     }
     
 } catch (Exception $e) {

@@ -16,9 +16,54 @@ require_once APP_ROOT . DS . 'vendor' . DS . 'autoload.php';
 // Load environment variables
 use Symfony\Component\Dotenv\Dotenv;
 
-if (class_exists(Dotenv::class)) {
-    $dotenv = new Dotenv();
-    $dotenv->loadEnv(APP_ROOT . DS . '.env');
+$envFile = APP_ROOT . DS . '.env';
+
+if (file_exists($envFile)) {
+    // Try Symfony Dotenv first
+    if (class_exists(Dotenv::class)) {
+        try {
+            $dotenv = new Dotenv();
+            $dotenv->loadEnv($envFile);
+        } catch (Exception $e) {
+            // Fallback to manual parsing
+            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if (empty($line) || strpos($line, '#') === 0) continue;
+                
+                if (strpos($line, '=') !== false) {
+                    list($key, $value) = explode('=', $line, 2);
+                    $key = trim($key);
+                    $value = trim($value, '"\'');
+                    $_ENV[$key] = $value;
+                    putenv("$key=$value");
+                }
+            }
+        }
+    } else {
+        // Manual parsing if Symfony Dotenv is not available
+        $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if (empty($line) || strpos($line, '#') === 0) continue;
+            
+            if (strpos($line, '=') !== false) {
+                list($key, $value) = explode('=', $line, 2);
+                $key = trim($key);
+                $value = trim($value, '"\'');
+                $_ENV[$key] = $value;
+                putenv("$key=$value");
+            }
+        }
+    }
+} else {
+    // Create basic environment if no .env file exists
+    $_ENV['APP_ENV'] = 'development';
+    $_ENV['APP_DEBUG'] = 'true';
+    $_ENV['DB_HOST'] = 'localhost';
+    $_ENV['DB_DATABASE'] = 'renaltales';
+    $_ENV['DB_USERNAME'] = 'root';
+    $_ENV['DB_PASSWORD'] = '';
 }
 
 // Set up error reporting based on environment
@@ -65,8 +110,8 @@ $config = [
     ],
     'database' => [
         'host' => $_ENV['DB_HOST'] ?? 'localhost',
-        'name' => $_ENV['DB_NAME'] ?? 'renaltales',
-        'user' => $_ENV['DB_USER'] ?? 'root',
+        'name' => $_ENV['DB_DATABASE'] ?? 'renaltales',
+        'user' => $_ENV['DB_USERNAME'] ?? 'root',
         'password' => $_ENV['DB_PASSWORD'] ?? '',
         'charset' => $_ENV['DB_CHARSET'] ?? 'utf8mb4',
         'collation' => $_ENV['DB_COLLATION'] ?? 'utf8mb4_unicode_ci',

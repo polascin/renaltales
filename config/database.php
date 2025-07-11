@@ -9,6 +9,37 @@
  * @version 2025.v1.0
  */
 
+/**
+ * Helper function to get environment variables
+ * This would be replaced by a proper environment loader in a full framework
+ */
+if (!function_exists('env')) {
+    function env($key, $default = null) {
+        $value = getenv($key);
+        
+        // Also check $_ENV array
+        if ($value === false && isset($_ENV[$key])) {
+            $value = $_ENV[$key];
+        }
+        
+        if ($value === false) {
+            return $default;
+        }
+        
+        // Convert boolean strings
+        if (in_array(strtolower($value), ['true', 'false'])) {
+            return strtolower($value) === 'true';
+        }
+        
+        // Convert null string
+        if (strtolower($value) === 'null') {
+            return null;
+        }
+        
+        return $value;
+    }
+}
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -91,26 +122,3 @@ return [
         ],
     ],
 ];
-
-/**
- * Helper function to get environment variables
- * This would be replaced by a proper environment loader in a full framework
- */
-function env($key, $default = null) {
-    $value = getenv($key);
-    if ($value === false) {
-        return $default;
-    }
-    
-    // Convert boolean strings
-    if (in_array(strtolower($value), ['true', 'false'])) {
-        return strtolower($value) === 'true';
-    }
-    
-    // Convert null string
-    if (strtolower($value) === 'null') {
-        return null;
-    }
-    
-    return $value;
-}

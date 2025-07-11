@@ -24,14 +24,42 @@ class Database {
      * Constructor - Private to implement singleton pattern
      */
     private function __construct() {
-        // Database configuration based on provided rules
-        $this->host = 'localhost';
-        $this->database = 'renaltales';
-        $this->username = 'root';
-        $this->password = ''; // Empty password for local development
-        $this->charset = 'utf8mb4';
-        
+        // Load database configuration
+        $this->loadConfiguration();
         $this->connect();
+    }
+    
+    /**
+     * Load database configuration from config file
+     */
+    private function loadConfiguration() {
+        // Include bootstrap to ensure environment is loaded
+        if (!isset($GLOBALS['config'])) {
+            require_once dirname(__DIR__) . '/bootstrap.php';
+        }
+        
+        // Try to load config from database.php
+        $configFile = dirname(__DIR__) . '/config/database.php';
+        if (file_exists($configFile)) {
+            $dbConfig = require $configFile;
+            $connection = $dbConfig['connections'][$dbConfig['default']] ?? $dbConfig['connections']['mysql'];
+            
+            $this->host = $connection['host'];
+            $this->database = $connection['database'];
+            $this->username = $connection['username'];
+            $this->password = $connection['password'];
+            $this->charset = $connection['charset'];
+        } else {
+            // Fallback to global config if available
+            $config = $GLOBALS['config'] ?? [];
+            $dbConfig = $config['database'] ?? [];
+            
+            $this->host = $dbConfig['host'] ?? 'localhost';
+            $this->database = $dbConfig['name'] ?? 'renaltales';
+            $this->username = $dbConfig['user'] ?? 'root';
+            $this->password = $dbConfig['password'] ?? '';
+            $this->charset = $dbConfig['charset'] ?? 'utf8mb4';
+        }
     }
     
     /**
@@ -285,6 +313,40 @@ class Database {
     public function close() {
         $this->connection = null;
         $this->isConnected = false;
+    }
+    
+    /**
+     * Test database connection
+     * 
+     * @return array Connection status information
+     */
+    public function testConnection() {
+        $status = [
+            'connected' => false,
+            'host' => $this->host,
+            'database' => $this->database,
+            'username' => $this->username,
+            'charset' => $this->charset,
+            'error' => null,
+            'version' => null
+        ];
+        
+        try {
+            if ($this->isConnected && $this->connection !== null) {
+                // Test with a simple query
+                $stmt = $this->connection->query('SELECT VERSION() as version');
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                $status['connected'] = true;
+                $status['version'] = $result['version'] ?? 'Unknown';
+            } else {
+                $status['error'] = 'Database not connected';
+            }
+        } catch (PDOException $e) {
+            $status['error'] = $e->getMessage();
+        }
+        
+        return $status;
     }
     
     /**
