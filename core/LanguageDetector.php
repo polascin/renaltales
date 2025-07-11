@@ -15,6 +15,7 @@ class LanguageDetector {
     private static $languageToFlag = [
         // European languages
         'en' => 'gb',  // English → Great Britain
+        'en-us' => 'us',  // American English → United States
         'sk' => 'sk',  // Slovak → Slovakia
         'cs' => 'cz',  // Czech → Czech Republic
         'de' => 'de',  // German → Germany
@@ -219,7 +220,7 @@ class LanguageDetector {
         'HT' => 'ht', 'PE' => 'qu', 'PY' => 'gn', 'BO' => 'ay',
         
         // Default English-speaking countries
-        'US' => 'en', 'GB' => 'en', 'CA' => 'en', 'AU' => 'en', 'NZ' => 'en',
+        'US' => 'en-us', 'GB' => 'en', 'CA' => 'en', 'AU' => 'en', 'NZ' => 'en',
     ];
     
     /**
@@ -227,6 +228,7 @@ class LanguageDetector {
      */
     private $languageNames = [
         'en' => 'English',
+        'en-us' => 'English (US)',
         'sk' => 'Slovenčina',
         'cs' => 'Čeština',
         'de' => 'Deutsch',
@@ -389,7 +391,8 @@ class LanguageDetector {
             $availableLanguages = [];
             foreach ($languageFiles as $file) {
                 $langCode = basename($file, '.php');
-                if (preg_match('/^[a-z]{2,3}$/', $langCode)) {
+                // Support both standard language codes (2-3 letters) and region-specific codes (en-us)
+                if (preg_match('/^[a-z]{2,3}(-[a-z]{2})?$/', $langCode)) {
                     $availableLanguages[$langCode] = [$langCode];
                 }
             }
@@ -483,6 +486,35 @@ class LanguageDetector {
         } catch (Exception $e) {
             error_log('LanguageDetector: Language detection failed: ' . $e->getMessage());
             return 'en'; // Safe fallback
+        }
+    }
+    
+    /**
+     * Get current active language
+     * Returns the currently set language from session, cookie, or detects it
+     * 
+     * @return string Current language code
+     */
+    public function getCurrentLanguage() {
+        try {
+            // First check session
+            $sessionLang = $this->getSessionLanguage();
+            if ($sessionLang && $this->isSupported($sessionLang)) {
+                return $sessionLang;
+            }
+            
+            // Then check cookie
+            $cookieLang = $this->getCookieLanguage();
+            if ($cookieLang && $this->isSupported($cookieLang)) {
+                return $cookieLang;
+            }
+            
+            // Finally detect from browser/system
+            return $this->detectLanguage();
+            
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Failed to get current language: ' . $e->getMessage());
+            return 'en'; // Default fallback
         }
     }
     
@@ -742,12 +774,58 @@ class LanguageDetector {
     }
     
     /**
-     * Get all supported languages (only those with translation files)
+     * Priority order for language display
+     * Based on: en, sk, cs, de, pl, hu, uk, ru, fr, es, it, pt, nl, da, no, se, fi, lt, lv, et, sl, hr, bg, ro,
+     * then other European languages by speaker count, then Asian languages by speaker count, then all others by speaker count
+     */
+    private $languagePriority = [
+        // Core priority languages
+        'en', 'en-us', 'sk', 'cs', 'de', 'pl', 'hu', 'uk', 'ru', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'sv', 'fi', 'lt', 'lv', 'et', 'sl', 'hr', 'bg', 'ro',
+        
+        // Other European languages (by speaker count)
+        'tr', 'el', 'sr', 'mk', 'sq', 'be', 'is', 'mt', 'ga', 'cy', 'eu', 'ca', 'gl', 'lb', 'rm', 'fo', 'kl', 'se', 'gd',
+        
+        // Asian languages (by speaker count)
+        'zh', 'hi', 'ar', 'bn', 'ur', 'id', 'ja', 'ko', 'vi', 'th', 'ms', 'tl', 'fa', 'he', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ne', 'si', 'my', 'km', 'lo', 'ka', 'hy', 'az', 'kk', 'ky', 'uz', 'tg', 'mn', 'jv', 'yue', 'wuu', 'bho', 'ps', 'su', 'or', 'as', 'mai', 'bh', 'sa', 'sd', 'dv', 'tk', 'bo', 'ug',
+        
+        // African languages (by speaker count)
+        'sw', 'am', 'ha', 'yo', 'ig', 'zu', 'af', 'xh', 'so', 'mg', 'rw', 'rn', 'lg', 'sn', 'ny', 'wo', 'ln', 'kg', 'lua', 'sg', 'ff', 'bm', 'ak', 'om', 'ti', 'nd', 'nr', 'nso', 'st', 'ss', 've', 'ts', 'tn',
+        
+        // American indigenous and other languages
+        'ht', 'qu', 'gn', 'ay', 'eo',
+        
+        // Regional/minority languages
+        'ceb', 'hil', 'war', 'bcl', 'pam', 'ilo'
+    ];
+
+    /**
+     * Get all supported languages (only those with translation files) in prioritized order
      * 
-     * @return array Array of language codes
+     * @return array Array of language codes in priority order
      */
     public function getSupportedLanguages() {
-        return array_keys($this->supportedLanguages);
+        $availableLanguages = array_keys($this->supportedLanguages);
+        $prioritizedLanguages = [];
+        $remainingLanguages = [];
+        
+        // First, add languages in priority order if they exist
+        foreach ($this->languagePriority as $priorityLang) {
+            if (in_array($priorityLang, $availableLanguages)) {
+                $prioritizedLanguages[] = $priorityLang;
+            }
+        }
+        
+        // Then add any remaining languages that weren't in the priority list
+        foreach ($availableLanguages as $lang) {
+            if (!in_array($lang, $prioritizedLanguages)) {
+                $remainingLanguages[] = $lang;
+            }
+        }
+        
+        // Sort remaining languages alphabetically
+        sort($remainingLanguages);
+        
+        return array_merge($prioritizedLanguages, $remainingLanguages);
     }
     
     /**

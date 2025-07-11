@@ -397,6 +397,10 @@ class ApplicationView extends BaseView {
         
         $html .= '</div>';
         $html .= '</div>';
+
+        $html .= '<div class="home-intro">';
+        $html .= '<p>' . $this->escape($this->getText('home_intro2', 'This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.')) . '</p>';
+        $html .= '</div>';
         
         $html .= '</section>';
         

@@ -28,6 +28,213 @@ return [
     'enabled' => 'Povoleno',
     'disabled' => 'Zakázáno',
     'available' => 'Dostupné',
+    'not_available' => 'Není dostupné',
+    
+    // Error messages
+    'application_error' => 'Chyba aplikace',
+    'service_unavailable' => 'Služba je dočasně nedostupná',
+    'try_again_later' => 'Prosím, zkuste to znovu později.',
+    'error' => 'Chyba',
+    'file' => 'Soubor',
+    'line' => 'Řádek',
+    'stack_trace' => 'Trasování zásobníku',
+    'initialization_failed' => 'Inicializace aplikace selhala',
+    'debug_not_allowed' => 'Debug režim není dostupný z bezpečnostních důvodů.',
+    'access_denied' => 'Přístup odepřen',
+    'security_violation' => 'Bezpečnostní porušení zjištěno. Relace ukončena.',
+    
+    // Session management
+    'session_init_failed' => 'Inicializace správce relací selhala',
+    'session_name_failed' => 'Nepodařilo se nastavit název relace',
+    'session_cookie_params_failed' => 'Nepodařilo se nastavit parametry cookie',
+    'session_config_failed' => 'Konfigurace relace selhala',
+    'session_start_failed' => 'Nepodařilo se spustit relaci',
+    'sessions_disabled' => 'Relace jsou zakázány',
+    'session_disabled' => 'Relace je zakázána',
+    'session_none' => 'Žádná relace není spuštěna',
+    'session_active' => 'Relace je aktivní',
+    'session_unknown' => 'Neznámý stav relace',
+    'session_id_none' => 'Žádné ID relace',
+    'session_empty' => 'Relace je prázdná',
+    'session_vardump' => 'Dump proměnných relace',
+    'session_information' => 'Informace o relaci',
+    'session_json' => 'JSON relace',
+    'session_debug' => 'Debug relace',
+    'session_table' => 'Tabulka relace',
+    'session_statistics' => 'Statistiky relace',
+    'session_comprehensive' => 'Komplexní informace o relaci',
+    'session_status' => 'Stav relace',
+    'session_id' => 'ID relace',
+    'session_name' => 'Název relace',
+    'session_data' => 'Data relace',
+    'session_cookie_params' => 'Parametry cookie',
+    'session_key' => 'Klíč',
+    'session_value' => 'Hodnota',
+    'session_type' => 'Typ',
+    'session_variables_count' => 'Počet proměnných',
+    'session_data_size' => 'Velikost dat',
+    'session_max_lifetime' => 'Maximální životnost',
+    'session_cookie_lifetime' => 'Životnost cookie',
+    'session_security_level' => 'Úroveň bezpečnosti',
+    'session_save_path' => 'Cesta uložení',
+    'session_export_failed' => 'Export relace selhal',
+    'session_regeneration_failed' => 'Regenerace relace selhala',
+    'session_destruction_failed' => 'Zničení relace selhalo',
+    'session_security_init_failed' => 'Inicializace bezpečnosti selhala',
+    'session_log_dir_create_failed' => 'Nepodařilo se vytvořit adresář logů',
+    'session_security_log_failed' => 'Logování bezpečnostního porušení selhalo',
+    'session_security_log_injection_failed' => 'Injekce bezpečnostního logu selhala',
+    
+    // Security messages
+    'security_violation_detected' => 'Bezpečnostní porušení zjištěno. Relace ukončena.',
+    'security_user_agent_mismatch' => 'Nesoulad user agenta',
+    'security_ip_mismatch' => 'Nesoulad IP adresy',
+    'security_session_timeout' => 'Časový limit relace',
+    'security_hijacking_attempt' => 'Pokus o únos relace zjištěn',
+    'security_invalid_token' => 'Neplatný bezpečnostní token',
+    'security_token_expired' => 'Bezpečnostní token vypršel',
+    
+    // Server information
+    'server_information' => 'Informace o serveru',
+    'application_information' => 'Informace o aplikaci',
+    'user_agent' => 'User agent',
+    'ip_address' => 'IP adresa',
+    'server_software' => 'Server software',
+    'server_name' => 'Název serveru',
+    'server_protocol' => 'Protokol serveru',
+    'request_method' => 'Metoda požadavku',
+    'request_uri' => 'URI požadavku',
+    'query_string' => 'Query string',
+    'document_root' => 'Document root',
+    'script_name' => 'Název skriptu',
+    'app_title_item' => 'Název aplikace',
+    'current_language_code' => 'Kód aktuálního jazyka',
+    'current_language_file' => 'Soubor aktuálního jazyka',
+    'current_language_flag' => 'Vlajka aktuálního jazyka',
+    'current_language_flag_alt' => 'Vlajka aktuálního jazyka',
+    
+    // Date and time
+    'datetime_placeholder' => 'Datum, čas včetně detailního internetového času @beat se zobrazí zde.',
+    'debug_mode_enabled' => 'Debug režim je povolen.',
+    'service_information' => 'Informace o službě',
+    'user_information' => 'Informace o uživateli:',
+    'footer_copyright' => 'Ľubomír Polaščín',
+    
+    // Cookie and session parameters
+    'cookie_lifetime' => 'Životnost',
+    'cookie_path' => 'Cesta',
+    'cookie_domain' => 'Doména',
+    'cookie_secure' => 'Bezpečné',
+    'cookie_httponly' => 'Pouze HTTP',
+    'cookie_samesite' => 'Stejná stránka',
+    
+    // Log messages
+    'log_entry_timestamp' => 'Časové razítko',
+    'log_entry_ip' => 'IP adresa',
+    'log_entry_user_agent' => 'User agent',
+    'log_entry_session_id' => 'ID relace',
+    'log_entry_reason' => 'Důvod',
+    'log_entry_request_uri' => 'URI požadavku',
+    
+    // User interface
+    'welcome_user' => 'Vítejte',
+    'user' => 'Uživatel',
+    'role' => 'Role',
+    'logout' => 'Odhlásit se',
+    'user_data_unavailable' => 'Data uživatele nejsou dostupná',
+    'not_logged_in' => 'Nejste přihlášeni',
+    'login' => 'Přihlásit se',
+    'main_menu' => 'Hlavní menu',
+    'home' => 'Domů',
+    'stories' => 'Příběhy',
+    'community' => 'Komunita',
+    'resources' => 'Zdroje',
+    'about' => 'O nás',
+    'my_stories' => 'Moje příběhy',
+    'profile' => 'Profil',
+    'settings' => 'Nastavení',
+    'register' => 'Registrovat se',
+    
+    // Content sections
+    'important_notes' => 'Důležité poznámky',
+    'about_renal_tales' => 'O ledvinových příbězích',
+    'renal_tales_description' => 'Ledvinové příběhy je podpůrná komunitní platforma, kde lidé s poruchami ledvin mohou sdílet své zkušenosti, najít podporu a spojit se s ostatními na podobných cestách.',
+    'community_guidelines' => 'Pravidla komunity',
+    'guideline_respectful' => 'Buďte úctiví a podpůrní ke všem členům komunity',
+    'guideline_privacy' => 'Respektujte soukromí a důvěrnost',
+    'guideline_medical' => 'Sdílejte zkušenosti, ne lékařské rady',
+    'guideline_appropriate' => 'Udržujte obsah vhodný a relevantní',
+    'getting_started' => 'Začínáme',
+    'getting_started_description' => 'Jste noví v naší komunitě? Začněte čtením některých příběhů, představte se a zvažte sdílení vlastní zkušenosti, až budete připraveni.',
+    'support_resources' => 'Podpůrné zdroje',
+    'support_description' => 'Pokud potřebujete okamžitou lékařskou pomoc nebo jste v krizi, kontaktujte svého poskytovatele zdravotní péče nebo pohotovostní služby.',
+    
+    // Home page
+    'welcome_home' => 'Vítejte v ledvinových příbězích',
+    'home_intro' => 'Vítejte v naší podpůrné komunitě pro lidi s poruchami ledvin. Zde můžete sdílet svůj příběh, číst zkušenosti ostatních a najít podporu od lidí, kteří rozumějí vaší cestě.',
+    'home_intro2' => 'Tato webová aplikace je navržena pro usnadnění sdílení osobních příběhů a vyprávění mezi jednotlivci s poruchami ledvin, včetně těch podstupujících dialýzu, těch v před- nebo po-dialyzačním stadiu a jednotlivců žijících bez omezení dialýzy. Tato platforma si klade za cíl podporovat komunitu, která umožňuje uživatelům spojit se, sdílet zkušenosti a poskytovat poznatky, které mohou pomoci ostatním navigovat jejich cestami se zdravím ledvin.',
+    'share_story' => 'Sdílejte svůj příběh',
+    'share_story_desc' => 'Vaše zkušenost je důležitá. Sdílejte svou cestu, abyste inspirovali a podpořili ostatní.',
+    'start_sharing' => 'Začít sdílet',
+    'read_stories' => 'Číst příběhy',
+    'read_stories_desc' => 'Najděte inspiraci a útěchu ve zkušenostech ostatních v naší komunitě.',
+    'browse_stories' => 'Procházet příběhy',
+    'join_community' => 'Připojte se ke komunitě',
+    'join_community_desc' => 'Spojte se s ostatními, zapojte se do diskusí a budujte trvalá přátelství.',
+    'explore_community' => 'Prozkoumat komunitu',
+    
+    // Placeholder content
+    'stories_coming_soon' => 'Sekce příběhů již brzy...',
+    'community_coming_soon' => 'Sekce komunity již brzy...',
+    'resources_coming_soon' => 'Sekce zdrojů již brzy...',
+    'about_coming_soon' => 'Sekce o nás již brzy...',
+    'my_stories_coming_soon' => 'Sekce mých příběhů již brzy...',
+    'profile_coming_soon' => 'Sekce profilu již brzy...',
+    'settings_coming_soon' => 'Sekce nastavení již brzy...',
+    
+    // Login page
+    'login_welcome' => 'Vítejte zpět',
+    'login_subtitle' => 'Přihlaste se pro přístup k vašemu účtu',
+    'email_or_username' => 'Email nebo uživatelské jméno',
+    'enter_email_username' => 'Zadejte svou emailovou adresu nebo uživatelské jméno',
+    'password' => 'Heslo',
+    'enter_password' => 'Zadejte své heslo',
+    'remember_me' => 'Zapamatovat si mě',
+    'sign_in' => 'Přihlásit se',
+    'forgot_password' => 'Zapomněli jste heslo?',
+    'no_account' => 'Nemáte účet?',
+    'sign_up_here' => 'Zaregistrujte se zde',
+    'back_to_home' => 'Zpět domů',
+    'please_fill_required_fields' => 'Prosím, vyplňte všechna povinná pole.',
+    
+    // Login validation
+    'invalid_csrf_token' => 'Neplatný bezpečnostní token. Prosím, zkuste to znovu.',
+    'email_required' => 'Email je povinný.',
+    'email_invalid' => 'Prosím, zadejte platnou emailovou adresu.',
+    'password_required' => 'Heslo je povinné.',
+    'login_failed' => 'Neplatný email nebo heslo.',
+    
+    // Language selection
+    'language_selection_unavailable' => 'Výběr jazyka není dostupný',
+    
+    // Time and date display
+    'day' => 'Den',
+    'year' => 'Rok',
+    'week' => 'Týden',
+    'today_is' => 'Dnes je',
+    
+    // Legacy language management (maintained for compatibility)
+    'language_selection' => 'Výběr jazyka',
+    'language_change' => 'Změnit jazyk',
+    'language_changed' => 'Jazyk změněn',
+    'language_not_found' => 'Jazykový soubor nenalezen',
+    'language_default' => 'Výchozí jazyk',
+    'language_default_missing' => 'Výchozí jazykový soubor chybí',
+    'language_switch' => 'Přepnout jazyk',
+    'language_switch_success' => 'Jazyk úspěšně změněn',
+    'language_switch_error' => 'Chyba při změně jazyka'
+];
+?>
     'not_available' => 'Nedostupné',
     
     // Error messages
@@ -172,6 +379,7 @@ return [
     // Domovská stránka
     'welcome_home' => 'Vítejte v Ledvinových příbězích',
     'home_intro' => 'Vítejte v naší podpůrné komunitě pro lidi ovlivněné poruchami ledvin. Zde můžete sdílet svůj příběh, číst zkušenosti ostatních a najít podporu od lidí, kteří rozumějí vaší cestě.',
+    'home_intro2' => 'Tato webová aplikace je navržena k usnadnění sdílení osobních příběhů a vyprávění mezi jednotlivci ovlivněnými poruchami ledvin, včetně těch, kteří podstupují dialýzu, těch v před- nebo podialyzačním stadiu a jednotlivců žijících bez omezení dialýzy.',
     'share_story' => 'Sdílejte svůj příběh',
     'share_story_desc' => 'Vaše zkušenost má význam. Sdílejte svou cestu k inspiraci a podpoře ostatních.',
     'start_sharing' => 'Začít sdílení',
@@ -215,5 +423,11 @@ return [
     
     // Výběr jazyka
     'language_selection_unavailable' => 'Výběr jazyka není dostupný',
+    
+    // Zobrazení času a data
+    'day' => 'Den',
+    'year' => 'Rok',
+    'week' => 'Týden',
+    'today_is' => 'Dnes je',
 ];
 ?>

@@ -105,42 +105,44 @@
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-areas: "menu content notes";
   gap: 1rem;
-  margin: 1rem 0;
+  margin: 0;
+  padding: 0;
 }
 
 .main-content-container {
   grid-area: content;
-  flex-grow: 1;
+  flex-grow: 3;
   flex-shrink: 1;
   flex-basis: 0;
-  margin-right: 1rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
   background-color: var(--content-bg);
   border: solid thin var(--content-border);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 }
 
 .main-menu-container {
   grid-area: menu;
-  flex-grow: 0;
-  flex-shrink: 0;
+  flex-grow: 1;
+  flex-shrink: 3;
   flex-basis: 20%;
-  margin-right: 1rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
   background-color: var(--menu-bg);
   border: solid thin var(--menu-border);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 }
 
 .main-notes-container {
   grid-area: notes;
-  flex-grow: 0;
-  flex-shrink: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
   flex-basis: 20%;
-  padding: 1rem;
+  padding: 0;
+  margin: 0;
   background-color: var(--notes-bg);
   border: solid thin var(--notes-border);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 }
 
 /* Language Selector Styles */
@@ -181,7 +183,8 @@
   gap: 0.25rem;
   font-size: 0.75rem;
   text-align: center;
-  margin: 0;
+  margin: 1.5rem 0 0 0;
+  border: solid thin transparent;
   color: var(--text-color)
 }
 .language-selection-flags a {
@@ -225,7 +228,7 @@
   padding: 0.5rem;
   background-color: var(--success-bg, #d4edda);
   border: 1px solid var(--success-border, #c3e6cb);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -233,7 +236,7 @@
   padding: 0.5rem;
   background-color: var(--info-bg, #d1ecf1);
   border: 1px solid var(--info-border, #bee5eb);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -274,7 +277,7 @@
 .main-menu {
   background-color: var(--panel-bg, #f8f9fa);
   border: 1px solid var(--panel-border, #dee2e6);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   padding: 1rem;
 }
 
@@ -345,34 +348,40 @@
 .content-body {
   background-color: var(--panel-bg, #fff);
   border: 1px solid var(--panel-border, #dee2e6);
-  border-radius: 0.5rem;
-  padding: 2rem;
+  border-radius: 1rem;
+  padding: 1rem;
   min-height: 400px;
 }
 
 .home-section h2 {
   color: var(--primary-color, #007bff);
-  margin-bottom: 1rem;
+  margin: 0;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px var(--text-color);
 }
 
 .home-intro {
-  margin-bottom: 2rem;
+  margin: 1rem 0 0 0;
   padding: 1rem;
+  text-align: justify;
   background-color: var(--info-bg, #d1ecf1);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border-left: 4px solid var(--info-border, #bee5eb);
 }
 
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: 1rem 0;
   gap: 1.5rem;
 }
 
 .feature-card {
-  background-color: var(--panel-bg, #f8f9fa);
-  border: 1px solid var(--panel-border, #dee2e6);
-  border-radius: 0.5rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
   padding: 1.5rem;
   text-align: center;
 }
@@ -418,7 +427,7 @@
 .content-notes {
   background-color: var(--panel-bg, #f8f9fa);
   border: 1px solid var(--panel-border, #dee2e6);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   padding: 1rem;
 }
 
@@ -567,7 +576,7 @@
 .form-group input[type="password"] {
   padding: 0.75rem;
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-size: 1rem;
   transition: border-color 0.3s ease;
 }
@@ -594,7 +603,7 @@
   background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -613,7 +622,7 @@
   background-color: #f8d7da;
   color: #721c24;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border: 1px solid #f5c6cb;
   margin-bottom: 1rem;
 }
@@ -661,7 +670,7 @@
   padding: 1rem;
   background-color: var(--panel-bg);
   border: solid thin var(--panel-border);
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 }
 
 .logged-in-user {
