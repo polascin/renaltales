@@ -38,7 +38,27 @@ class Database {
             require_once dirname(__DIR__) . '/bootstrap.php';
         }
         
-        // Try to load config from database.php
+        // Load DatabaseConfig if available
+        if (file_exists(__DIR__ . '/DatabaseConfig.php')) {
+            require_once __DIR__ . '/DatabaseConfig.php';
+            
+            try {
+                $dbConfig = DatabaseConfig::getInstance();
+                $connection = $dbConfig->getConnection();
+                
+                $this->host = $connection['host'];
+                $this->database = $connection['database'];
+                $this->username = $connection['username'];
+                $this->password = $connection['password'];
+                $this->charset = $connection['charset'];
+                return;
+            } catch (Exception $e) {
+                error_log('DatabaseConfig failed: ' . $e->getMessage());
+                // Fall through to legacy configuration
+            }
+        }
+        
+        // Legacy configuration loading
         $configFile = dirname(__DIR__) . '/config/database.php';
         if (file_exists($configFile)) {
             $dbConfig = require $configFile;
