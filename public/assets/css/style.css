@@ -38,18 +38,33 @@
 .main-header-container img.logo {
   float: left;
   vertical-align: top;
-  height: 12rem;
-  width: auto;
-  margin: 0 1rem 1rem 0;
+  height: auto;
+  width: 33%;
+  margin: 0; padding: 0; border: solid thin transparent;
 }
 .main-header-container h1 {
+  font-family: var(--font-family-fantasy);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--title-color);
   margin: 0;
+  text-shadow: 1px 1px 1px var(--black-color), 0 0 25px var(--accent-color), 0 0 10px var(--accent-darker);
 }
 .main-header-container h2 {
+  font-family: var(--font-family-cursive);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--secondary-dark);
   margin: 0;
+  text-shadow: 1px 1px 1px var(--black-color), 0 0 10px var(--accent-color);
 }
 .main-header-container h3 {
+  font-family: var(--font-family-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--warning-color);
   margin: 0;
+  text-shadow: 1px 1px 2px var(--text-color);
 }
 .main-header-container h4 {
   margin: 0;

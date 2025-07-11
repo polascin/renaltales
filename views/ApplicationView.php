@@ -43,7 +43,7 @@ class ApplicationView extends BaseView {
             <?php $this->renderJavaScript(); ?>
         </body>
         </html>
-        <?php
+<?php
     }
     
     /**
@@ -108,7 +108,7 @@ class ApplicationView extends BaseView {
         
         echo '<header class="main-header-container">';
         echo '<div class="left-section">';
-        echo '<img src="assets/images/logos/logo.gif" alt="' . $this->escape($appTitle) . ' logo" class="logo">';
+        echo '<img src="assets/images/logos/logo_framed.gif?v=' . time() . '" alt="' . $this->escape($appTitle) . ' logo" class="logo">';
         echo '<h1>' . $this->escape($appTitle) . '</h1>';
         
         if (defined('APP_TITLE')) {
@@ -537,5 +537,3 @@ class ApplicationView extends BaseView {
         echo '</script>';
     }
 }
-
-?>
