@@ -1,4 +1,4 @@
-<?php declare(strict_types=1); ob_start();
+<?php declare(strict_types=1);
 
 define('APP_DIR', dirname(__DIR__));
 define('DEFAULT_LANGUAGE', 'sk');
@@ -18,11 +18,8 @@ try {
     $languageModel = new LanguageModel();
     $sessionManager = new SessionManager($languageModel->getAllTexts(), DEBUG_MODE);
     $controller = new ApplicationController($languageModel, $sessionManager);
-    $output = $controller->index();
-    ob_end_clean();
-    echo $output;
+    echo $controller->index();
 } catch (Exception $e) {
-    ob_end_clean();
     $errorView = new ErrorViewFinal($e, DEBUG_MODE, null);
     echo $errorView->render();
 }
