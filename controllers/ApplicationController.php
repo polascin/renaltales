@@ -2,23 +2,28 @@
 
 declare(strict_types=1);
 
-require_once 'BaseController.php';
-require_once 'LoginController.php';
-require_once __DIR__ . '/../views/ApplicationView.php';
-require_once __DIR__ . '/../views/ErrorView_temp.php';
-require_once __DIR__ . '/../core/AuthenticationManager.php';
-require_once __DIR__ . '/../core/AdminSecurityManager.php';
-require_once __DIR__ . '/../core/SessionRegenerationManager.php';
+use RenalTales\Controllers\LoginController;
+use RenalTales\Core\AuthenticationManager;
+use RenalTales\Core\AdminSecurityManager;
+use RenalTales\Core\SessionRegenerationManager;
+use RenalTales\Views\ApplicationView;
+use RenalTales\Views\ErrorView;
+use RenalTales\Views\BaseView;
 
-/**
- * ApplicationController - Main application controller
- * 
- * Handles user requests and coordinates between models and views
- * 
- * @author Ľubomír Polaščín
- * @version 2025.v1.0test
- */
+// Check if BaseController exists, if not create a basic one
+if (!class_exists('BaseController')) {
+    class BaseController {
+        // Basic controller functionality can be added here
+    }
+}
 
+require_once __DIR__ . '/../src/Controllers/LoginController.php';
+require_once __DIR__ . '/../src/Views/BaseView.php';
+require_once __DIR__ . '/../src/Views/ApplicationView.php';
+require_once __DIR__ . '/../src/Views/ErrorView.php';
+require_once __DIR__ . '/../src/Core/AuthenticationManager.php';
+require_once __DIR__ . '/../src/Core/AdminSecurityManager.php';
+require_once __DIR__ . '/../src/Core/SessionRegenerationManager.php';
 class ApplicationController extends BaseController {
     
     private ?object $languageModel;

@@ -92,13 +92,14 @@ class HealthCheckService
                 'table_count' => $tableCount,
             ];
             
-        } catch (Exception $e) {
+        } catch(Exception $e) 
+    error_log('Exception in health.php: ' . $e->getMessage());
             return [
                 'status' => 'unhealthy',
                 'response_time' => round((microtime(true) - $start) * 1000, 2),
                 'error' => $e->getMessage(),
             ];
-        }
+        
     }
     
     /**
@@ -184,13 +185,14 @@ class HealthCheckService
                 'driver' => $cacheDriver,
             ];
             
-        } catch (Exception $e) {
+        } catch(Exception $e) 
+    error_log('Exception in health.php: ' . $e->getMessage());
             return [
                 'status' => 'unhealthy',
                 'response_time' => round((microtime(true) - $start) * 1000, 2),
                 'error' => $e->getMessage(),
             ];
-        }
+        
     }
     
     /**
@@ -240,13 +242,14 @@ class HealthCheckService
                 'directories' => $results,
             ];
             
-        } catch (Exception $e) {
+        } catch(Exception $e) 
+    error_log('Exception in health.php: ' . $e->getMessage());
             return [
                 'status' => 'unhealthy',
                 'response_time' => round((microtime(true) - $start) * 1000, 2),
                 'error' => $e->getMessage(),
             ];
-        }
+        
     }
     
     /**
@@ -306,13 +309,14 @@ class HealthCheckService
                 'mailer' => $mailer,
             ];
             
-        } catch (Exception $e) {
+        } catch(Exception $e) 
+    error_log('Exception in health.php: ' . $e->getMessage());
             return [
                 'status' => 'unhealthy',
                 'response_time' => round((microtime(true) - $start) * 1000, 2),
                 'error' => $e->getMessage(),
             ];
-        }
+        
     }
     
     /**
@@ -554,7 +558,8 @@ try {
     
     echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
-} catch (Exception $e) {
+} catch(Exception $e) 
+    error_log('Exception in health.php: ' . $e->getMessage());
     http_response_code(500);
     header('Content-Type: application/json');
     
@@ -563,4 +568,4 @@ try {
         'timestamp' => date('c'),
         'error' => 'Health check failed: ' . $e->getMessage(),
     ], JSON_PRETTY_PRINT);
-}
+

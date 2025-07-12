@@ -26,6 +26,10 @@
     },
     "autoload": {
         "psr-4": {
+            "RenalTales\\Controllers\\": "src/Controllers/",
+            "RenalTales\\Core\\": "src/Core/",
+            "RenalTales\\Models\\": "src/Models/",
+            "RenalTales\\Views\\": "src/Views/"
         }
     },
     "autoload-dev": {

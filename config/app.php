@@ -12,13 +12,14 @@
 return [
     // Application Settings
     'app' => [
-        'name' => 'Renal Tales',
-        'version' => '2025.v1.0',
-        'environment' => 'development', // development, testing, production
-        'debug' => true,
-        'timezone' => 'Europe/Bratislava',
+        'name' => env('APP_NAME', 'Renal Tales'),
+        'version' => env('APP_VERSION', '2025.v1.0'),
+        'environment' => env('APP_ENV', 'development'), // development, testing, production
+        'debug' => env('APP_DEBUG', true),
+        'url' => env('APP_URL', 'http://localhost'),
+        'timezone' => env('APP_TIMEZONE', 'Europe/Bratislava'),
         'charset' => 'UTF-8',
-        'locale' => 'sk_SK',
+        'locale' => env('APP_LOCALE', 'sk_SK'),
     ],
 
     // Language Settings

@@ -22,8 +22,9 @@ try {
     $output = $controller->index();
     ob_end_clean();
     echo $output;
-} catch (Exception $e) {
+} catch(Exception $e) 
+    error_log('Exception in index_working2.php: ' . $e->getMessage());
     ob_end_clean();
     $errorView = new ErrorViewFinal($e, DEBUG_MODE, null);
     echo $errorView->render();
-}
+

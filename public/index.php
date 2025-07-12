@@ -2,17 +2,26 @@
 
 define('APP_DIR', dirname(__DIR__));
 define('DEFAULT_LANGUAGE', 'sk');
-define('LANGUAGE_PATH', APP_DIR . '/resources/lang/');
 define('DEBUG_MODE', true);
 
-require_once APP_DIR . '/models/BaseModel.php';
-require_once APP_DIR . '/models/LanguageModel.php';
-require_once APP_DIR . '/core/LanguageDetector.php';
-require_once APP_DIR . '/core/Database.php';
-require_once APP_DIR . '/core/SessionManager.php';
-require_once APP_DIR . '/controllers/BaseController.php';
-require_once APP_DIR . '/controllers/ApplicationController.php';
-require_once APP_DIR . '/views/ErrorViewFinal.php';
+// Include bootstrap for proper setup
+require_once APP_DIR . '/bootstrap.php';
+
+// Include necessary files using correct paths
+require_once APP_DIR . '/src/Models/BaseModel.php';
+require_once APP_DIR . '/src/Models/LanguageModel.php';
+require_once APP_DIR . '/src/Core/LanguageDetector.php';
+require_once APP_DIR . '/src/Core/Database.php';
+require_once APP_DIR . '/src/Core/SessionManager.php';
+require_once APP_DIR . '/src/Controllers/BaseController.php';
+require_once APP_DIR . '/src/Controllers/ApplicationController.php';
+require_once APP_DIR . '/src/Views/ErrorView.php';
+
+// Add namespace usage
+use RenalTales\Core\LanguageDetector;
+use RenalTales\Core\SessionManager;
+use RenalTales\Models\LanguageModel;
+use RenalTales\Controllers\ApplicationController;
 
 try {
     $languageModel = new LanguageModel();
@@ -21,8 +30,9 @@ try {
     $output = $controller->index();
     ob_end_clean();
     echo $output;
-} catch (Exception $e) {
+} catch(Exception $e) {
+    error_log('Exception in index.php: ' . $e->getMessage());
     ob_end_clean();
-    $errorView = new ErrorView($e, DEBUG_MODE, null);
+    $errorView = new ErrorView($e, DEBUG_MODE, $languageModel ?? null);
     echo $errorView->render();
 }

@@ -19,7 +19,8 @@ try {
     $sessionManager = new SessionManager($languageModel->getAllTexts(), DEBUG_MODE);
     $controller = new ApplicationController($languageModel, $sessionManager);
     echo $controller->index();
-} catch (Exception $e) {
+} catch(Exception $e) 
+    error_log('Exception in index_clean.php: ' . $e->getMessage());
     $errorView = new ErrorView($e, DEBUG_MODE, null);
     echo $errorView->render();
-}
+
