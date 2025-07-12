@@ -23,6 +23,6 @@ try {
     echo $output;
 } catch (Exception $e) {
     ob_end_clean();
-    $errorView = new ErrorViewFinal($e, DEBUG_MODE, null);
+    $errorView = new ErrorView($e, DEBUG_MODE, null);
     echo $errorView->render();
 }
