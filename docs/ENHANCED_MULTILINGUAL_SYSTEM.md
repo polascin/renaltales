@@ -9,7 +9,7 @@ The enhanced multilingual system provides a comprehensive, modern architecture f
 ### Core Components
 
 1. **MultilingualServiceProvider** - Central service provider (Singleton pattern)
-2. **LanguageManager** - Enhanced language detection and management 
+2. **LanguageManager** - Enhanced language detection and management
 3. **TranslationManager** - Advanced translation management with caching
 4. **LanguageInterface** - Contract for language management implementations
 5. **TranslationInterface** - Contract for translation management implementations
@@ -175,7 +175,7 @@ $text = $multilingual->getTextWithContext('save', 'document', 'Save Document');
 
 ### File Structure
 
-```
+```txt
 resources/lang/
 ├── en.php          # English translations
 ├── sk.php          # Slovak translations
@@ -299,6 +299,7 @@ php multilingual_migration.php
 ```
 
 This will:
+
 - Test the new system
 - Check compatibility with existing code
 - Generate usage examples
@@ -449,7 +450,7 @@ $multilingual = MultilingualServiceProvider::getInstance();
 $multilingual->initialize();
 ```
 
-2. **Update translation calls:**
+1. **Update translation calls:**
 
 ```php
 // Old
@@ -461,7 +462,7 @@ $multilingual->getText('common.welcome', 'Welcome')
 $multilingual->getText('common.hello', 'Hello {name}!', ['name' => $user])
 ```
 
-3. **Update language detection:**
+1. **Update language detection:**
 
 ```php
 // Old
