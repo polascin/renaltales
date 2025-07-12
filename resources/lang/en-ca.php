@@ -1,6 +1,6 @@
-﻿<?php
+<?php
 /**
- * English language file for Renal Tales
+ * Canadian English language file for Renal Tales
  * 
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
@@ -84,6 +84,21 @@ return [
     'session_log_dir_create_failed' => 'Failed to create log directory',
     'session_security_log_failed' => 'Security violation logging failed',
     'session_security_log_injection_failed' => 'Security log injection failed',
+    'session_regenerate_failed' => 'Failed to regenerate session ID',
+    'session_destroyed' => 'Session has been destroyed',
+    'session_inactive' => 'Session is inactive',
+    'session_timeout' => 'Session timeout',
+    'csrf_token_missing' => 'CSRF token is missing',
+    'csrf_token_invalid' => 'CSRF token is invalid',
+    'security_warning' => 'Security Warning',
+    'attempt_blocked' => 'Security attempt blocked',
+    'suspicious_activity' => 'Suspicious activity detected',
+    'too_many_attempts' => 'Too many failed attempts',
+    'account_locked' => 'Account has been temporarily locked',
+    'rate_limit_exceeded' => 'Rate limit exceeded',
+    'ip_blocked' => 'Your IP address has been blocked',
+    'invalid_request' => 'Invalid request',
+    'unauthorized_access' => 'Unauthorized access attempt',
     
     // Security messages
     'security_violation_detected' => 'Security violation detected. Session terminated.',
@@ -98,331 +113,23 @@ return [
     'server_information' => 'Server information',
     'application_information' => 'Application information',
     'user_agent' => 'User agent',
-    'ip_address' => 'IP address',
-    'server_software' => 'Server software',
-    'server_name' => 'Server name',
-    'server_protocol' => 'Server protocol',
+    'server_time' => 'Server time',
+    'php_version' => 'PHP version',
+    'memory_usage' => 'Memory usage',
+    'execution_time' => 'Execution time',
     'request_method' => 'Request method',
     'request_uri' => 'Request URI',
-    'query_string' => 'Query string',
-    'document_root' => 'Document root',
-    'script_name' => 'Script name',
-    'app_title_item' => 'Application title',
-    'current_language_code' => 'Current language code',
-    'current_language_file' => 'Current language file',
-    'current_language_flag' => 'Current language flag',
-    'current_language_flag_alt' => 'Current language flag',
-    
-    // Date and time
-    'datetime_placeholder' => 'Date, time including detailed internet time @beat will be displayed here.',
-    'debug_mode_enabled' => 'Debug mode is enabled.',
-    'service_information' => 'Service information',
-    'user_information' => 'User information:',
-    'footer_copyright' => 'Ľubomír Polaščín',
-    
-    // Cookie and session parameters
-    'cookie_lifetime' => 'Lifetime',
-    'cookie_path' => 'Path',
-    'cookie_domain' => 'Domain',
-    'cookie_secure' => 'Secure',
-    'cookie_httponly' => 'HTTP Only',
-    'cookie_samesite' => 'Same Site',
-    
-    // Log messages
-    'log_entry_timestamp' => 'Timestamp',
-    'log_entry_ip' => 'IP address',
-    'log_entry_user_agent' => 'User agent',
-    'log_entry_session_id' => 'Session ID',
-    'log_entry_reason' => 'Reason',
-    'log_entry_request_uri' => 'Request URI',
-    
-    // User interface
-    'welcome_user' => 'Welcome',
-    'user' => 'User',
-    'role' => 'Role',
-    'logout' => 'Logout',
-    'user_data_unavailable' => 'User data unavailable',
-    'not_logged_in' => 'Not logged in',
-    'login' => 'Login',
-    'main_menu' => 'Main Menu',
-    'home' => 'Home',
-    'stories' => 'Stories',
-    'community' => 'Community',
-    'resources' => 'Resources',
-    'about' => 'About',
-    'my_stories' => 'My Stories',
-    'profile' => 'Profile',
-    'settings' => 'Settings',
-    'register' => 'Register',
-    
-    // Content sections
-    'important_notes' => 'Important Notes',
-    'about_renal_tales' => 'About Renal Tales',
-    'renal_tales_description' => 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.',
-    'community_guidelines' => 'Community Guidelines',
-    'guideline_respectful' => 'Be respectful and supportive to all community members',
-    'guideline_privacy' => 'Respect privacy and confidentiality',
-    'guideline_medical' => 'Share experiences, not medical advice',
-    'guideline_appropriate' => 'Keep content appropriate and relevant',
-    'getting_started' => 'Getting Started',
-    'getting_started_description' => 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.',
-    'support_resources' => 'Support Resources',
-    'support_description' => 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.',
-    
-    // Home page
-    'welcome_home' => 'Welcome to Renal Tales',
-    'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
-    'home_intro2' => 'This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
-    'share_story' => 'Share Your Story',
-    'share_story_desc' => 'Your experience matters. Share your journey to inspire and support others.',
-    'start_sharing' => 'Start Sharing',
-    'read_stories' => 'Read Stories',
-    'read_stories_desc' => 'Find inspiration and comfort in the experiences of others in our community.',
-    'browse_stories' => 'Browse Stories',
-    'join_community' => 'Join Community',
-    'join_community_desc' => 'Connect with others, participate in discussions, and build lasting friendships.',
-    'explore_community' => 'Explore Community',
-    
-    // Placeholder content
-    'stories_coming_soon' => 'Stories section coming soon...',
-    'community_coming_soon' => 'Community section coming soon...',
-    'resources_coming_soon' => 'Resources section coming soon...',
-    'about_coming_soon' => 'About section coming soon...',
-    'my_stories_coming_soon' => 'My Stories section coming soon...',
-    'profile_coming_soon' => 'Profile section coming soon...',
-    'settings_coming_soon' => 'Settings section coming soon...',
-    
-    // Login page
-    'login_welcome' => 'Welcome Back',
-    'login_subtitle' => 'Sign in to access your account',
-    'email_or_username' => 'Email or Username',
-    'enter_email_username' => 'Enter your email address or username',
-    'password' => 'Password',
-    'enter_password' => 'Enter your password',
-    'remember_me' => 'Remember me',
-    'sign_in' => 'Sign In',
-    'forgot_password' => 'Forgot your password?',
-    'no_account' => 'Don\'t have an account?',
-    'sign_up_here' => 'Sign up here',
-    'back_to_home' => 'Back to Home',
-    'please_fill_required_fields' => 'Please fill in all required fields.',
-    
-    // Login validation
-    'invalid_csrf_token' => 'Invalid security token. Please try again.',
-    'email_required' => 'Email is required.',
-    'email_invalid' => 'Please enter a valid email address.',
-    'password_required' => 'Password is required.',
-    'login_failed' => 'Invalid email or password.',
+    'remote_ip' => 'Remote IP',
+    'referer' => 'Referer',
+    'browser_language' => 'Browser language',
+    'detected_language' => 'Detected language',
+    'session_language' => 'Session language',
+    'url_language' => 'URL language',
+    'default_language' => 'Default language',
+    'final_language' => 'Final language',
     
     // Language selection
-    'language_selection_unavailable' => 'Language selection not available',
-    
-    // Time and date display
-    'day' => 'Day',
-    'year' => 'Year',
-    'week' => 'Week',
-    'today_is' => 'Today is',
-    
-    // Legacy language management (maintained for compatibility)
-    'language_selection' => 'Language selection',
-    'language_change' => 'Change language',
-    'language_changed' => 'Language changed',
-    'language_not_found' => 'Language file not found',
-    'language_default' => 'Default language',
-    'language_default_missing' => 'Default language file missing',
-    'language_switch' => 'Switch language',
-    'language_switch_success' => 'Language successfully changed',
-    'language_switch_error' => 'Error changing language'
-];
-?>
-    'not_available' => 'Not available',
-    
-    // Error messages
-    'application_error' => 'Application Error',
-    'service_unavailable' => 'Service Temporarily Unavailable',
-    'try_again_later' => 'Please try again later.',
-    'error' => 'Error',
-    'file' => 'File',
-    'line' => 'Line',
-    'stack_trace' => 'Stack Trace',
-    'initialization_failed' => 'Application initialization failed',
-    'debug_not_allowed' => 'Debug information is not available for security reasons.',
-    'access_denied' => 'Access Denied',
-    'security_violation' => 'Security violation detected. Session terminated.',
-    
-    // Session management
-    'session_init_failed' => 'Session manager initialization failed',
-    'session_name_failed' => 'Failed to set session name',
-    'session_cookie_params_failed' => 'Failed to set cookie parameters',
-    'session_config_failed' => 'Session configuration failed',
-    'session_start_failed' => 'Failed to start session',
-    'sessions_disabled' => 'Sessions are disabled',
-    'session_disabled' => 'Sessions are disabled',
-    'session_none' => 'No session started',
-    'session_active' => 'Session is active',
-    'session_unknown' => 'Unknown session status',
-    'session_id_none' => 'No session ID',
-    'session_empty' => 'Session is empty',
-    'session_vardump' => 'Session Var Dump',
-    'session_information' => 'Session Information',
-    'session_json' => 'Session JSON',
-    'session_debug' => 'Session Debug',
-    'session_table' => 'Session Table',
-    'session_statistics' => 'Session Statistics',
-    'session_comprehensive' => 'Comprehensive Session Information',
-    'session_status' => 'Session Status',
-    'session_id' => 'Session ID',
-    'session_name' => 'Session Name',
-    'session_data' => 'Session Data',
-    'session_cookie_params' => 'Cookie Parameters',
-    'session_key' => 'Key',
-    'session_value' => 'Value',
-    'session_type' => 'Type',
-    'session_variables_count' => 'Variables Count',
-    'session_data_size' => 'Data Size',
-    'session_max_lifetime' => 'Max Lifetime',
-    'session_cookie_lifetime' => 'Cookie Lifetime',
-    'session_security_level' => 'Security Level',
-    'session_save_path' => 'Save Path',
-    'session_export_failed' => 'Session export failed',
-    'session_regeneration_failed' => 'Session regeneration failed',
-    'session_destruction_failed' => 'Session destruction failed',
-    'session_security_init_failed' => 'Security initialization failed',
-    'session_log_dir_create_failed' => 'Failed to create log directory',
-    'session_security_log_failed' => 'Failed to write security violation log',
-    'session_security_log_injection_failed' => 'Security logging failed',
-    
-    // Security messages
-    'security_violation_detected' => 'Security violation detected. Session terminated.',
-    'security_user_agent_mismatch' => 'User agent mismatch',
-    'security_ip_mismatch' => 'IP address mismatch',
-    'security_session_timeout' => 'Session timeout',
-    'security_hijacking_attempt' => 'Session hijacking attempt detected',
-    'security_invalid_token' => 'Invalid security token',
-    'security_token_expired' => 'Security token expired',
-    
-    // Server information
-    'server_information' => 'Server Information',
-    'application_information' => 'Application Information',
-    'user_agent' => 'User Agent',
-    'ip_address' => 'IP Address',
-    'server_software' => 'Server Software',
-    'server_name' => 'Server Name',
-    'server_protocol' => 'Server Protocol',
-    'request_method' => 'Request Method',
-    'request_uri' => 'Request URI',
-    'query_string' => 'Query String',
-    'document_root' => 'Document Root',
-    'script_name' => 'Script Name',
-    'app_title_item' => 'Application Title',
-    'current_language_code' => 'Current Language Code',
-    'current_language_file' => 'Current Language File',
-    'current_language_flag' => 'Current Language Flag',
-    'current_language_flag_alt' => 'Flag of the current language',
-    
-    // Date and time
-    'datetime_placeholder' => 'Here will be displayed date, time, including detailed internet time @beat.',
-    'debug_mode_enabled' => 'Debug mode is enabled.',
-    'service_information' => 'Service Information',
-    'user_information' => 'User information:',
-    'footer_copyright' => 'Ľubomír Polaščín',
-    
-    // Cookie and session parameters
-    'cookie_lifetime' => 'Lifetime',
-    'cookie_path' => 'Path',
-    'cookie_domain' => 'Domain',
-    'cookie_secure' => 'Secure',
-    'cookie_httponly' => 'HTTP Only',
-    'cookie_samesite' => 'SameSite',
-    
-    // Log messages
-    'log_entry_timestamp' => 'Timestamp',
-    'log_entry_ip' => 'IP Address',
-    'log_entry_user_agent' => 'User Agent',
-    'log_entry_session_id' => 'Session ID',
-    'log_entry_reason' => 'Reason',
-    'log_entry_request_uri' => 'Request URI',
-    
-    // User interface
-    'welcome_user' => 'Welcome',
-    'user' => 'User',
-    'role' => 'Role',
-    'logout' => 'Logout',
-    'user_data_unavailable' => 'User data unavailable',
-    'not_logged_in' => 'Not logged in',
-    'login' => 'Login',
-    'main_menu' => 'Main Menu',
-    'home' => 'Home',
-    'stories' => 'Stories',
-    'community' => 'Community',
-    'resources' => 'Resources',
-    'about' => 'About',
-    'my_stories' => 'My Stories',
-    'profile' => 'Profile',
-    'settings' => 'Settings',
-    'register' => 'Register',
-    
-    // Content sectionsCon
-    'important_notes' => 'Important Notes',
-    'about_renal_tales' => 'About Renal Tales',
-    'renal_tales_description' => 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.',
-    'community_guidelines' => 'Community Guidelines',
-    'guideline_respectful' => 'Be respectful and supportive to all community members',
-    'guideline_privacy' => 'Respect privacy and confidentiality',
-    'guideline_medical' => 'Share experiences, not medical advice',
-    'guideline_appropriate' => 'Keep content appropriate and relevant',
-    'getting_started' => 'Getting Started',
-    'getting_started_description' => 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.',
-    'support_resources' => 'Support Resources',
-    'support_description' => 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.',
-    
-    // Home page
-    'welcome_home' => 'Welcome to Renal Tales',
-    'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey. Join us to connect with others, share your experiences, and find support in our community. Together, we can make a difference in the lives of those affected by kidney disorders. Thank you for being a part of our community!',
-    'home_intro2' => 'This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
-    'share_story' => 'Share Your Story',
-    'share_story_desc' => 'Your experience matters. Share your journey to inspire and support others.',
-    'start_sharing' => 'Start Sharing',
-    'read_stories' => 'Read Stories',
-    'read_stories_desc' => 'Find inspiration and comfort in the experiences of others in our community.',
-    'browse_stories' => 'Browse Stories',
-    'join_community' => 'Join Community',
-    'join_community_desc' => 'Connect with others, participate in discussions, and build lasting friendships.',
-    'explore_community' => 'Explore Community',
-    
-    // Placeholder content
-    'stories_coming_soon' => 'Stories section coming soon...',
-    'community_coming_soon' => 'Community section coming soon...',
-    'resources_coming_soon' => 'Resources section coming soon...',
-    'about_coming_soon' => 'About section coming soon...',
-    'my_stories_coming_soon' => 'My Stories section coming soon...',
-    'profile_coming_soon' => 'Profile section coming soon...',
-    'settings_coming_soon' => 'Settings section coming soon...',
-    
-    // Login page
-    'login_welcome' => 'Welcome Back',
-    'login_subtitle' => 'Sign in to access your account',
-    'email_or_username' => 'Email or Username',
-    'enter_email_username' => 'Enter your email or username',
-    'password' => 'Password',
-    'enter_password' => 'Enter your password',
-    'remember_me' => 'Remember me',
-    'sign_in' => 'Sign In',
-    'forgot_password' => 'Forgot your password?',
-    'no_account' => 'Don\'t have an account?',
-    'sign_up_here' => 'Sign up here',
-    'back_to_home' => 'Back to Home',
-    'please_fill_required_fields' => 'Please fill in all required fields.',
-    
-    // Login validation
-    'invalid_csrf_token' => 'Invalid security token. Please try again.',
-    'email_required' => 'Email is required.',
-    'email_invalid' => 'Please enter a valid email address.',
-    'password_required' => 'Password is required.',
-    'login_failed' => 'Invalid email or password.',
-    
-    // Language selection
-    'language_selection_unavailable' => 'Language selection not available',
+    'language_selection_unavailable' => 'Language selection unavailable',
     
     // Time and date display
     'day' => 'Day',
@@ -545,12 +252,12 @@ return [
     'passwords_dont_match' => 'Passwords do not match',
     'terms_required' => 'You must agree to the Terms of Service',
     
-    // Medical terminology - Renal/Kidney specific
+    // Medical terminology - Renal/Kidney specific (Canadian English - mix of US/UK conventions)
     'kidney' => 'Kidney',
     'kidneys' => 'Kidneys',
     'renal' => 'Renal',
     'dialysis' => 'Dialysis',
-    'hemodialysis' => 'Hemodialysis',
+    'hemodialysis' => 'Hemodialysis',  // Canadian uses US spelling
     'peritoneal_dialysis' => 'Peritoneal dialysis',
     'transplant' => 'Transplant',
     'transplantation' => 'Transplantation',
@@ -570,7 +277,7 @@ return [
     'hypertension' => 'Hypertension',
     'diabetes' => 'Diabetes',
     'proteinuria' => 'Proteinuria',
-    'hematuria' => 'Hematuria',
+    'hematuria' => 'Hematuria',  // Canadian typically follows US spelling
     'nephrology' => 'Nephrology',
     'nephrologist' => 'Nephrologist',
     'fistula' => 'Fistula',
@@ -627,7 +334,7 @@ return [
     'employment' => 'Employment',
     'disability' => 'Disability',
     'travel' => 'Travel',
-    'vacation' => 'Vacation',
+    'vacation' => 'Vacation',  // Canadian uses US term
     'hope' => 'Hope',
     'courage' => 'Courage',
     'strength' => 'Strength',
@@ -655,7 +362,7 @@ return [
     'time_management' => 'Time management',
     'planning' => 'Planning',
     'preparation' => 'Preparation',
-    'organization' => 'Organization',
+    'organization' => 'Organization',  // Canadian uses US spelling
     'communication' => 'Communication',
     'discussion' => 'Discussion',
     'conversation' => 'Conversation',
@@ -741,4 +448,3 @@ return [
     'immunosuppression' => 'Immunosuppression',
     'anti_rejection_medication' => 'Anti-rejection medication',
 ];
-?>

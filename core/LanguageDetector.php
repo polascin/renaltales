@@ -16,6 +16,11 @@ class LanguageDetector {
         // European languages
         'en' => 'gb',  // English → Great Britain
         'en-us' => 'us',  // American English → United States
+        'en-gb' => 'gb',  // British English → Great Britain
+        'en-ca' => 'ca',  // Canadian English → Canada
+        'en-au' => 'au',  // Australian English → Australia
+        'en-nz' => 'nz',  // New Zealand English → New Zealand
+        'en-za' => 'za',  // South African English → South Africa
         'sk' => 'sk',  // Slovak → Slovakia
         'cs' => 'cz',  // Czech → Czech Republic
         'de' => 'de',  // German → Germany
@@ -230,6 +235,11 @@ class LanguageDetector {
     private $languageNames = [
         'en' => 'English',
         'en-us' => 'English (US)',
+        'en-gb' => 'English (UK)',
+        'en-ca' => 'English (Canada)',
+        'en-au' => 'English (Australia)',
+        'en-nz' => 'English (New Zealand)',
+        'en-za' => 'English (South Africa)',
         'sk' => 'Slovenčina',
         'cs' => 'Čeština',
         'de' => 'Deutsch',
@@ -395,7 +405,20 @@ class LanguageDetector {
                 $langCode = basename($file, '.php');
                 // Support both standard language codes (2-3 letters) and region-specific codes (en-us)
                 if (preg_match('/^[a-z]{2,3}(-[a-z]{2})?$/', $langCode)) {
-                    $availableLanguages[$langCode] = [$langCode];
+                    // Determine base language (e.g., 'en' from 'en-us')
+                    $baseLang = strpos($langCode, '-') !== false ? substr($langCode, 0, strpos($langCode, '-')) : $langCode;
+                    
+                    // Add to appropriate language group
+                    if (!isset($availableLanguages[$baseLang])) {
+                        $availableLanguages[$baseLang] = [];
+                    }
+                    
+                    // Ensure base language is first in its group
+                    if ($langCode === $baseLang && !in_array($baseLang, $availableLanguages[$baseLang])) {
+                        array_unshift($availableLanguages[$baseLang], $baseLang);
+                    } elseif ($langCode !== $baseLang && !in_array($langCode, $availableLanguages[$baseLang])) {
+                        $availableLanguages[$baseLang][] = $langCode;
+                    }
                 }
             }
             
@@ -782,7 +805,7 @@ class LanguageDetector {
      */
     private $languagePriority = [
         // Core priority languages
-        'en', 'en-us', 'sk', 'cs', 'de', 'pl', 'hu', 'uk', 'ru', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'sv', 'fi', 'lt', 'lv', 'et', 'sl', 'hr', 'bg', 'ro',
+        'en', 'en-us', 'en-gb', 'en-ca', 'en-au', 'en-nz', 'en-za', 'sk', 'cs', 'de', 'pl', 'hu', 'uk', 'ru', 'fr', 'es', 'it', 'pt', 'nl', 'da', 'no', 'sv', 'fi', 'lt', 'lv', 'et', 'sl', 'hr', 'bg', 'ro',
         
         // Other European languages (by speaker count)
         'tr', 'el', 'sr', 'mk', 'sq', 'be', 'is', 'mt', 'ga', 'cy', 'eu', 'ca', 'gl', 'lb', 'rm', 'fo', 'kl', 'se', 'gd',
