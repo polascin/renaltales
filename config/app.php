@@ -142,7 +142,6 @@ return [
     // View Settings
     'view' => [
         'paths' => [
-            dirname(__DIR__) . '/resources/views',
             dirname(__DIR__) . '/views',
         ],
         'compiled' => dirname(__DIR__) . '/storage/cache/views',

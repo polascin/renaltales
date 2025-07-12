@@ -50,8 +50,8 @@ class HealthChecker {
         
         $criticalDirs = [
             __DIR__ . '/storage',
-            __DIR__ . '/uploads',
-            __DIR__ . '/logs'
+            __DIR__ . '/storage/uploads',
+            __DIR__ . '/storage/logs'
         ];
         
         foreach ($criticalDirs as $dir) {

@@ -71,7 +71,7 @@ class ApplicationView extends BaseView {
         echo '<nav class="language-selector">';
         echo '<ul>';
         echo '<li>';
-        echo '<form method="post" action="">';
+        echo '<form method="POST" action="">';
         echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
         echo '<select name="lang" onchange="this.form.submit()">';
         echo $this->renderLanguageSelector();
@@ -462,7 +462,7 @@ class ApplicationView extends BaseView {
     private function generatePostButton($action, $section, $text, $class = '', $icon = '') {
         $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
         
-        $html = '<form method="post" action="" style="display: inline;">';
+        $html = '<form method="POST" action="" style="display: inline;">';
         $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
         
         if ($action) {
@@ -554,7 +554,7 @@ class ApplicationView extends BaseView {
             $flagPath = $this->languageModel->getFlagPath($lang);
             
             // Use secure POST form instead of GET link to avoid CSRF token exposure
-            $html .= '<form method="POST">';
+            $html .= '<form method="POST" action="">';
             $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
             
             // Add CSRF token if SecurityManager is available
@@ -563,7 +563,7 @@ class ApplicationView extends BaseView {
                 $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
             }
             
-            $html .= '<button type="submit" onclick="this.form.submit()" title="' . $this->escape($langName) . '">';
+            $html .= '<button type="submit" title="' . $this->escape($langName) . '">';
             $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '">';
             $html .= '<span>' . $this->escape($lang) . '</span>';
             $html .= '</button>';
