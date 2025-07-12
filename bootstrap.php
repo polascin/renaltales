@@ -14,46 +14,22 @@ define('APP_ROOT', __DIR__);
 require_once APP_ROOT . DS . 'vendor' . DS . 'autoload.php';
 
 // Load environment variables
-use Symfony\Component\Dotenv\Dotenv;
-
+// Ensure the Dotenv class is available before trying to use it
 $envFile = APP_ROOT . DS . '.env';
 
 if (file_exists($envFile)) {
-    // Try Symfony Dotenv first
-    if (class_exists(Dotenv::class)) {
-        try {
-            $dotenv = new Dotenv();
-            $dotenv->loadEnv($envFile);
-        } catch (Exception $e) {
-            // Fallback to manual parsing
-            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            foreach ($lines as $line) {
-                $line = trim($line);
-                if (empty($line) || strpos($line, '#') === 0) continue;
-                
-                if (strpos($line, '=') !== false) {
-                    list($key, $value) = explode('=', $line, 2);
-                    $key = trim($key);
-                    $value = trim($value, '"\'');
-                    $_ENV[$key] = $value;
-                    putenv("$key=$value");
-                }
-            }
-        }
-    } else {
-        // Manual parsing if Symfony Dotenv is not available
-        $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (empty($line) || strpos($line, '#') === 0) continue;
-            
-            if (strpos($line, '=') !== false) {
-                list($key, $value) = explode('=', $line, 2);
-                $key = trim($key);
-                $value = trim($value, '"\'');
-                $_ENV[$key] = $value;
-                putenv("$key=$value");
-            }
+    // Manual parsing of .env file
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (empty($line) || strpos($line, '#') === 0) continue;
+        
+        if (strpos($line, '=') !== false) {
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value, '"\'');
+            $_ENV[$key] = $value;
+            putenv("$key=$value");
         }
     }
 } else {
@@ -67,7 +43,7 @@ if (file_exists($envFile)) {
 }
 
 // Set up error reporting based on environment
-if ($_ENV['APP_DEBUG'] ?? false) {
+if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 } else {
@@ -92,7 +68,15 @@ if (class_exists(Logger::class)) {
         mkdir($logDir, 0755, true);
     }
     
-    $logger->pushHandler(new StreamHandler($logPath, Logger::DEBUG));
+    // Use appropriate log level constant based on Monolog version
+    if (class_exists('\Monolog\Level')) {
+        // Monolog 3.x uses enum-based levels
+        $debugLevel = \Monolog\Level::Debug;
+    } else {
+        // Fallback to raw integer value (100 = DEBUG level)
+        $debugLevel = 100;
+    }
+    $logger->pushHandler(new StreamHandler($logPath, $debugLevel));
     
     // Make logger available globally
     $GLOBALS['logger'] = $logger;
@@ -104,7 +88,7 @@ $config = [
         'name' => $_ENV['APP_NAME'] ?? 'RenalTales',
         'version' => $_ENV['APP_VERSION'] ?? '2025.v2.0',
         'env' => $_ENV['APP_ENV'] ?? 'development',
-        'debug' => $_ENV['APP_DEBUG'] ?? false,
+        'debug' => filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN),
         'url' => $_ENV['APP_URL'] ?? 'http://localhost',
         'timezone' => $_ENV['APP_TIMEZONE'] ?? 'UTC',
     ],

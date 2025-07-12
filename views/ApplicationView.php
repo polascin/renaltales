@@ -543,7 +543,7 @@ class ApplicationView extends BaseView {
             $flagPath = $this->languageModel->getFlagPath($lang);
             
             // Use secure POST form instead of GET link to avoid CSRF token exposure
-            $html .= '<form method="POST">';
+            $html .= '<form method="POST" action="">';
             $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
             
             // Add CSRF token if SecurityManager is available
