@@ -177,12 +177,37 @@ class ApplicationController extends BaseController {
             error_log("ApplicationController: Supported languages: " . print_r($supportedLanguages, true));
             
             if (in_array($requestedLanguage, $supportedLanguages, true)) {
-                // Set language in session
-                error_log("ApplicationController: Setting language in session: " . $requestedLanguage);
-                $this->sessionManager->setSession('user_language', $requestedLanguage);
+                // Set language using LanguageDetector
+                error_log("ApplicationController: Setting language using LanguageDetector: " . $requestedLanguage);
+                
+                // Get language detector from language model
+                if ($this->languageModel && method_exists($this->languageModel, 'getLanguageDetector')) {
+                    $languageDetector = $this->languageModel->getLanguageDetector();
+                    if ($languageDetector && method_exists($languageDetector, 'setLanguage')) {
+                        $setResult = $languageDetector->setLanguage($requestedLanguage);
+                        error_log("ApplicationController: LanguageDetector setLanguage result: " . ($setResult ? 'SUCCESS' : 'FAILED'));
+                    } else {
+                        error_log("ApplicationController: LanguageDetector not available or missing setLanguage method");
+                        // Fallback to direct session setting
+                        $_SESSION['language'] = $requestedLanguage;
+                        error_log("ApplicationController: Fallback - set language directly in session");
+                    }
+                } else {
+                    error_log("ApplicationController: LanguageModel missing getLanguageDetector method");
+                    // Fallback to direct session setting
+                    $_SESSION['language'] = $requestedLanguage;
+                    error_log("ApplicationController: Fallback - set language directly in session");
+                }
+                
+                // Verify it was actually set
+                if (isset($_SESSION['language'])) {
+                    error_log("ApplicationController: Session language after setting: " . $_SESSION['language']);
+                } else {
+                    error_log("ApplicationController: Session language NOT SET after setLanguage call");
+                }
                 
                 // Redirect to avoid resubmission
-                error_log("ApplicationController: Redirecting after language change");
+                error_log("ApplicationController: Redirecting after language change to: " . ($_SERVER['PHP_SELF'] ?? '/'));
                 $this->redirect($_SERVER['PHP_SELF'] ?? '/');
             } else {
                 error_log("ApplicationController: Unsupported language: " . $requestedLanguage);

@@ -641,27 +641,34 @@ class SessionManager {
    * @return bool
    */
   public function setSession($key, $value, $allowOverwrite = true) {
+    error_log("SessionManager: setSession called with key: " . $key . ", value: " . print_r($value, true));
+    
     if (!$this->sessionStarted) {
+      error_log("SessionManager: Session not started, cannot set " . $key);
       return false;
     }
     
     // Validate key
     if (!is_string($key) || empty($key)) {
+      error_log("SessionManager: Invalid key for setSession: " . $key);
       return false;
     }
     
     // Prevent setting system keys
     if (strpos($key, '_') === 0) {
+      error_log("SessionManager: Blocked system key: " . $key);
       return false;
     }
     
     // Check key length and characters
     if (strlen($key) > 64 || !preg_match('/^[a-zA-Z0-9_.-]+$/', $key)) {
+      error_log("SessionManager: Invalid key format: " . $key);
       return false;
     }
     
     // Check if key exists and overwrite is not allowed
     if (!$allowOverwrite && isset($_SESSION[$key])) {
+      error_log("SessionManager: Key exists and overwrite not allowed: " . $key);
       return false;
     }
     
@@ -670,11 +677,13 @@ class SessionManager {
       $value = trim($value);
       // Limit string length
       if (strlen($value) > 10000) {
+        error_log("SessionManager: Value too long for key: " . $key);
         return false;
       }
     }
     
     $_SESSION[$key] = $value;
+    error_log("SessionManager: Successfully set session key: " . $key . " to value: " . print_r($value, true));
     return true;
   }
   
