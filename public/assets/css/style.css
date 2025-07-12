@@ -177,17 +177,15 @@
 .language-selection-flags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  justify-items: center;
-  gap: 0.25rem;
-  font-size: 0.75rem;
+  font-size: small;
   text-align: center;
   margin: 1.5rem 0 0 0;
   border: solid thin transparent;
   color: var(--text-color)
 }
-.language-selection-flags a {
+.language-selection-flags button {
   display: inline-block;
   text-decoration: none;
   color: inherit;
@@ -195,15 +193,15 @@
   text-align: center;
   margin: 0 0 0.25rem 0;
 }
-.language-selection-flags a:hover {
+.language-selection-flags button:hover {
   font-weight: bold;
-  border: solid 1px transparent;
+  background-color: var(--accent-lightest);
 }
-.language-selection-flags a:focus {
-  border: solid 1px transparent;
-  color: var(--accent-color)
+.language-selection-flags button:focus {
+  background-color: var(--accent-lightest);
+  color: var(--accent-color);
 }
-.language-selection-flags a img {
+.language-selection-flags img {
   height: 1.5rem;
   width: auto;
   vertical-align: middle;
@@ -213,10 +211,21 @@
 .flag {
   display: inline-block;
   width: 1.5rem;
-  height: 1.5rem;
+  height: auto;
   background-size: cover;
   background-position: center;
-  margin-right: 0.5rem;
+  margin: 0;;
+}
+.flags-language-welcome-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 3rem 0;
+  padding: 0.5rem;
+  font-family: var(--font-family-system);
+  font-size: small;
+  font-weight: normal;
+  color: var(--text-color);
 }
 
 /* User Information Styles */

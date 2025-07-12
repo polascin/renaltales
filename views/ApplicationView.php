@@ -505,9 +505,9 @@ class ApplicationView extends BaseView {
         echo '</div>';
 
         // Language Selection Flags
-        echo '<div>';
         echo '<section class="language-selection-flags">';
         echo $this->renderLanguageFlags();
+        echo '</section>';
         
         // Safely get current language name
         $currentLangName = 'English';
@@ -516,9 +516,9 @@ class ApplicationView extends BaseView {
             $currentLangName = is_string($langName) ? $langName : 'English';
         }
         
+        echo '<div class="flags-language-welcome-message">';
         echo '<p>' . $this->escape($this->getText('current_language', 'Current language')) . ': <strong>' . $this->escape($currentLangName) . '</strong>. </p>';
-        echo '<p>' . $this->escape($this->getText('welcome', 'Welcome')) . '! </p>';
-        echo '</section>';
+        echo '<p>' . $this->escape($this->getText('welcome', 'Welcome')) . '</p>';
         echo '</div>'; 
                
         echo '</main>';
@@ -533,7 +533,7 @@ class ApplicationView extends BaseView {
         }
         
         $selectableLanguages = $this->languageModel->getSupportedLanguages();
-        $html = '<div class="language-flags">';
+        $html = '<div class="language-selection-flags">';
         
         foreach ($selectableLanguages as $lang) {
             $langFile = LANGUAGE_PATH . $lang . '.php';
@@ -543,7 +543,7 @@ class ApplicationView extends BaseView {
             $flagPath = $this->languageModel->getFlagPath($lang);
             
             // Use secure POST form instead of GET link to avoid CSRF token exposure
-            $html .= '<form method="POST" class="language-flag-form">';
+            $html .= '<form method="POST">';
             $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
             
             // Add CSRF token if SecurityManager is available
@@ -554,7 +554,7 @@ class ApplicationView extends BaseView {
             
             $html .= '<button type="submit" title="' . $this->escape($langName) . '">';
             $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '">';
-            $html .= '<span style="font-size: 12px; display: block;">' . $this->escape($lang) . '</span>';
+            $html .= '<span>' . $this->escape($lang) . '</span>';
             $html .= '</button>';
             $html .= '</form>';
         }
