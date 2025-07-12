@@ -12,7 +12,7 @@ require_once APP_DIR . '/core/Database.php';
 require_once APP_DIR . '/core/SessionManager.php';
 require_once APP_DIR . '/controllers/BaseController.php';
 require_once APP_DIR . '/controllers/ApplicationController.php';
-require_once APP_DIR . '/views/ErrorViewFinal.php';
+require_once APP_DIR . '/views/ErrorView.php';
 
 try {
     $languageModel = new LanguageModel();
@@ -23,6 +23,6 @@ try {
     echo $output;
 } catch (Exception $e) {
     ob_end_clean();
-    $errorView = new ErrorViewFinal($e, DEBUG_MODE, null);
+    $errorView = new ErrorView($e, DEBUG_MODE, null);
     echo $errorView->render();
 }
