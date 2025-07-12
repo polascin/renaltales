@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once 'BaseController.php';
 require_once 'LoginController.php';
 require_once __DIR__ . '/../views/ApplicationView.php';
-require_once __DIR__ . '/../views/ErrorView.php';
+require_once __DIR__ . '/../views/ErrorViewFinal.php';
 require_once __DIR__ . '/../core/AuthenticationManager.php';
 require_once __DIR__ . '/../core/AdminSecurityManager.php';
 require_once __DIR__ . '/../core/SessionRegenerationManager.php';
@@ -267,7 +267,7 @@ class ApplicationController extends BaseController {
      * @return string
      */
     public function error(\Exception $exception, bool $isDebugMode = false): string {
-        $errorView = new ErrorView($exception, $isDebugMode, $this->languageModel);
+        $errorView = new ErrorViewFinal($exception, $isDebugMode, $this->languageModel);
         return $errorView->render();
     }
     
