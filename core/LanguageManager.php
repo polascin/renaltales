@@ -303,6 +303,103 @@ class LanguageManager implements LanguageInterface {
     }
     
     /**
+     * Get best available flag path with fallback support
+     */
+    public function getBestFlagPath(string $language, string $basePath = 'assets/flags/', ?string $documentRoot = null): string {
+        $cacheKey = "flag_path_{$language}_{$basePath}";
+        
+        // Check cache first
+        if (isset($this->cache[$cacheKey]) && 
+            time() - $this->cache[$cacheKey]['time'] < self::CACHE_LIFETIME) {
+            return $this->cache[$cacheKey]['data'];
+        }
+        
+        $flagCode = $this->getFlagCode($language);
+        $extensions = ['.webp', '.png', '.jpg', '.gif'];
+        $actualDocumentRoot = $documentRoot ?? $_SERVER['DOCUMENT_ROOT'] ?? getcwd();
+        
+        // Add public prefix if needed
+        $fullBasePath = $actualDocumentRoot;
+        if (!str_ends_with($fullBasePath, '/')) {
+            $fullBasePath .= '/';
+        }
+        if (!str_starts_with($basePath, 'public/')) {
+            $fullBasePath .= 'public/';
+        }
+        $fullBasePath .= $basePath;
+        
+        // Try each extension in order of preference
+        foreach ($extensions as $ext) {
+            $filePath = $fullBasePath . $flagCode . $ext;
+            $webPath = $basePath . $flagCode . $ext;
+            
+            if (file_exists($filePath)) {
+                // Cache successful result
+                $this->cache[$cacheKey] = [
+                    'data' => $webPath,
+                    'time' => time()
+                ];
+                
+                $this->logFlagAccess($language, $flagCode, $webPath, true);
+                return $webPath;
+            }
+        }
+        
+        // Fallback to UN flag
+        $fallbackCode = 'un';
+        foreach ($extensions as $ext) {
+            $filePath = $fullBasePath . $fallbackCode . $ext;
+            $webPath = $basePath . $fallbackCode . $ext;
+            
+            if (file_exists($filePath)) {
+                $this->logFlagAccess($language, $flagCode, $webPath, false, 'UN fallback');
+                
+                // Cache fallback result
+                $this->cache[$cacheKey] = [
+                    'data' => $webPath,
+                    'time' => time()
+                ];
+                
+                return $webPath;
+            }
+        }
+        
+        // Final fallback - return expected path even if file doesn't exist
+        $fallbackPath = $basePath . $flagCode . '.webp';
+        $this->logFlagAccess($language, $flagCode, $fallbackPath, false, 'File not found');
+        
+        return $fallbackPath;
+    }
+    
+    /**
+     * Log flag access for debugging and monitoring
+     */
+    private function logFlagAccess(string $language, string $flagCode, string $path, bool $found, string $note = ''): void {
+        // Only log if we're in debug mode or on localhost
+        if ($this->isDebugMode()) {
+            $status = $found ? 'FOUND' : 'MISSING';
+            $message = "Flag {$status}: {$language} -> {$flagCode} -> {$path}";
+            if ($note) {
+                $message .= " ({$note})";
+            }
+            error_log("LanguageManager: {$message}");
+        }
+    }
+    
+    /**
+     * Check if we're in debug mode
+     */
+    private function isDebugMode(): bool {
+        return (
+            isset($_SERVER['SERVER_ADDR']) && 
+            ($_SERVER['SERVER_ADDR'] === '127.0.0.1' || $_SERVER['SERVER_ADDR'] === '::1')
+        ) || (
+            isset($_SERVER['HTTP_HOST']) && 
+            (str_contains($_SERVER['HTTP_HOST'], 'localhost') || str_contains($_SERVER['HTTP_HOST'], '127.0.0.1'))
+        );
+    }
+    
+    /**
      * Load supported languages from files
      */
     private function loadSupportedLanguages(): void {
@@ -558,7 +655,7 @@ class LanguageManager implements LanguageInterface {
      * Get language flag URL
      */
     public function getLanguageFlag(string $language): string {
-        return $this->getFlagPath($language);
+        return $this->getBestFlagPath($language);
     }
     
     /**

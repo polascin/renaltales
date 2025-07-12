@@ -182,6 +182,16 @@ class LanguageDetector {
     private static $flagPathCache = [];
     
     /**
+     * Flag usage statistics for monitoring
+     */
+    private static $flagUsageStats = [];
+    
+    /**
+     * Missing flag logs to track gaps
+     */
+    private static $missingFlagLogs = [];
+    
+    /**
      * Supported languages with their variants
      */
     private $supportedLanguages = [
@@ -478,9 +488,9 @@ class LanguageDetector {
                 }
             }
             
-            // 2. Check session (previously set preference)
+            // 2. Check session (previously set preference) - return early if valid
             $sessionLang = $this->getSessionLanguage();
-            if ($sessionLang && $this->isSupported($sessionLang)) {
+            if ($sessionLang && $this->isSupported($sessionLang) && $this->isValidSessionLanguage($sessionLang)) {
                 return $sessionLang;
             }
             
@@ -522,15 +532,17 @@ class LanguageDetector {
      */
     public function getCurrentLanguage() {
         try {
-            // First check session
+            // First check session with validation - return early if valid
             $sessionLang = $this->getSessionLanguage();
-            if ($sessionLang && $this->isSupported($sessionLang)) {
+            if ($sessionLang && $this->isSupported($sessionLang) && $this->isValidSessionLanguage($sessionLang)) {
                 return $sessionLang;
             }
             
             // Then check cookie
             $cookieLang = $this->getCookieLanguage();
             if ($cookieLang && $this->isSupported($cookieLang)) {
+                // Update session with cookie language
+                $this->setSessionLanguage($cookieLang);
                 return $cookieLang;
             }
             
@@ -594,6 +606,37 @@ class LanguageDetector {
      */
     private function isSessionAvailable() {
         return session_status() === PHP_SESSION_ACTIVE;
+    }
+    
+    /**
+     * Validate session language to prevent overriding valid settings
+     * 
+     * @param string $sessionLang Language code from session
+     * @return bool True if session language is valid and should be used
+     */
+    private function isValidSessionLanguage($sessionLang) {
+        if (!$sessionLang) {
+            return false;
+        }
+        
+        // Check if session language is properly formatted
+        if (!$this->isValidLanguageFormat($sessionLang)) {
+            return false;
+        }
+        
+        // Check if session language is supported
+        if (!$this->isSupported($sessionLang)) {
+            return false;
+        }
+        
+        // Additional validation: check if session was set in current request
+        // This prevents stale session data from overriding URL parameters
+        if (isset($_GET['lang']) && $this->sanitizeLanguage($_GET['lang']) !== $sessionLang) {
+            // If URL parameter exists and differs from session, URL takes priority
+            return false;
+        }
+        
+        return true;
     }
     
     /**
@@ -762,7 +805,7 @@ class LanguageDetector {
         }
         
         try {
-            // Store in session if available
+            // Store in session if available (with validation)
             $this->setSessionLanguage($lang);
             
             // Store in secure cookie for 30 days (only if headers not already sent)
@@ -799,6 +842,56 @@ class LanguageDetector {
             return true;
         } catch (Exception $e) {
             error_log('LanguageDetector: Failed to set language: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Reset language preference (useful for testing)
+     * 
+     * @return bool Success status
+     */
+    public function resetLanguage() {
+        try {
+            // Clear session language
+            if ($this->isSessionAvailable()) {
+                unset($_SESSION['language']);
+            }
+            
+            // Clear cookie from $_COOKIE superglobal for immediate effect
+            if (isset($_COOKIE['language'])) {
+                unset($_COOKIE['language']);
+            }
+            
+            // Clear cookie if headers not sent
+            if (!headers_sent()) {
+                $cookieOptions = [
+                    'expires' => time() - 3600, // Set to past time to delete
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => $this->isHttps(),
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ];
+                
+                if (PHP_VERSION_ID >= 70300) {
+                    setcookie('language', '', $cookieOptions);
+                } else {
+                    setcookie(
+                        'language',
+                        '',
+                        $cookieOptions['expires'],
+                        $cookieOptions['path'],
+                        $cookieOptions['domain'],
+                        $cookieOptions['secure'],
+                        $cookieOptions['httponly']
+                    );
+                }
+            }
+            
+            return true;
+        } catch (Exception $e) {
+            error_log('LanguageDetector: Failed to reset language: ' . $e->getMessage());
             return false;
         }
     }
@@ -950,6 +1043,9 @@ class LanguageDetector {
         // Cache the result
         self::$flagPathCache[$cacheKey] = $flagPath;
         
+        // Record usage
+        self::$flagUsageStats[$flagCode] = (self::$flagUsageStats[$flagCode] ?? 0) + 1;
+        
         return $flagPath;
     }
     
@@ -1003,9 +1099,12 @@ class LanguageDetector {
             }
         }
         
-        // If no flag found, return WEBP path as fallback
+        // If no flag found, log it and return WEBP path as fallback
         $fallbackPath = $basePath . $flagCode . '.webp';
         self::$flagPathCache[$cacheKey] = $fallbackPath;
+        
+        // Log missing flag for monitoring
+        $this->logMissingFlag($languageCode, $flagCode);
         
         return $fallbackPath;
     }
@@ -1076,5 +1175,226 @@ class LanguageDetector {
         }
         
         return $debugInfo;
+    }
+    
+    /**
+     * Log missing flag for monitoring and alerting
+     * 
+     * @param string $languageCode Original language code
+     * @param string $flagCode Flag code that was missing
+     */
+    private function logMissingFlag($languageCode, $flagCode) {
+        $logKey = $languageCode . '|' . $flagCode;
+        
+        // Prevent duplicate logging for the same missing flag
+        if (isset(self::$missingFlagLogs[$logKey])) {
+            return;
+        }
+        
+        self::$missingFlagLogs[$logKey] = [
+            'timestamp' => time(),
+            'language_code' => $languageCode,
+            'flag_code' => $flagCode,
+            'user_ip' => $this->getUserIP(),
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
+        ];
+        
+        // Log to error log
+        $message = sprintf(
+            'FLAG_MISSING: Language=%s, Flag=%s, IP=%s, UserAgent=%s',
+            $languageCode,
+            $flagCode,
+            $this->getUserIP(),
+            substr($_SERVER['HTTP_USER_AGENT'] ?? 'Unknown', 0, 100)
+        );
+        
+        error_log($message);
+    }
+    
+    /**
+     * Get flag usage statistics
+     * 
+     * @return array Flag usage statistics
+     */
+    public function getFlagUsageStats() {
+        return self::$flagUsageStats;
+    }
+    
+    /**
+     * Get missing flag logs
+     * 
+     * @return array Missing flag logs
+     */
+    public function getMissingFlagLogs() {
+        return self::$missingFlagLogs;
+    }
+    
+    /**
+     * Get detailed flag monitoring report
+     * 
+     * @return array Comprehensive flag monitoring data
+     */
+    public function getFlagMonitoringReport() {
+        $report = [
+            'timestamp' => time(),
+            'cache_stats' => $this->getCacheStats(),
+            'usage_stats' => self::$flagUsageStats,
+            'missing_flags' => self::$missingFlagLogs,
+            'total_flag_requests' => array_sum(self::$flagUsageStats),
+            'unique_flags_used' => count(self::$flagUsageStats),
+            'missing_flag_count' => count(self::$missingFlagLogs),
+            'cache_hit_rate' => $this->calculateCacheHitRate(),
+            'top_flags' => $this->getTopFlags(),
+            'recommendations' => $this->generateMonitoringRecommendations()
+        ];
+        
+        return $report;
+    }
+    
+    /**
+     * Calculate cache hit rate
+     * 
+     * @return float Cache hit rate percentage
+     */
+    private function calculateCacheHitRate() {
+        $totalRequests = array_sum(self::$flagUsageStats);
+        $cacheSize = count(self::$flagPathCache);
+        
+        if ($totalRequests === 0) {
+            return 0.0;
+        }
+        
+        // Simplified calculation based on cache size vs requests
+        return min(($cacheSize / $totalRequests) * 100, 100.0);
+    }
+    
+    /**
+     * Get top used flags
+     * 
+     * @param int $limit Number of top flags to return
+     * @return array Top flags with usage counts
+     */
+    private function getTopFlags($limit = 10) {
+        $sortedFlags = self::$flagUsageStats;
+        arsort($sortedFlags);
+        
+        return array_slice($sortedFlags, 0, $limit, true);
+    }
+    
+    /**
+     * Generate monitoring recommendations
+     * 
+     * @return array Recommendations for flag system optimization
+     */
+    private function generateMonitoringRecommendations() {
+        $recommendations = [];
+        
+        // Check for missing flags
+        if (count(self::$missingFlagLogs) > 0) {
+            $recommendations[] = 'Create missing flag files: ' . implode(', ', array_unique(array_column(self::$missingFlagLogs, 'flag_code')));
+        }
+        
+        // Check cache performance
+        $cacheHitRate = $this->calculateCacheHitRate();
+        if ($cacheHitRate < 80) {
+            $recommendations[] = 'Consider optimizing cache strategy - current hit rate: ' . number_format($cacheHitRate, 1) . '%';
+        }
+        
+        // Check for frequently used flags
+        $totalRequests = array_sum(self::$flagUsageStats);
+        if ($totalRequests > 1000) {
+            $recommendations[] = 'High flag usage detected - consider implementing flag preloading';
+        }
+        
+        // Check for unused flags (if we have filesystem access)
+        if (count(self::$flagUsageStats) < 50) {
+            $recommendations[] = 'Many flags unused - consider cleanup or optimization';
+        }
+        
+        return $recommendations;
+    }
+    
+    /**
+     * Reset monitoring statistics (useful for testing)
+     */
+    public function resetMonitoringStats() {
+        self::$flagUsageStats = [];
+        self::$missingFlagLogs = [];
+    }
+    
+    /**
+     * Validate flag system integrity
+     * 
+     * @param string $flagsDirectory Path to flags directory
+     * @return array Validation results
+     */
+    public function validateFlagSystem($flagsDirectory = null) {
+        if ($flagsDirectory === null) {
+            $flagsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/assets/flags/';
+        }
+        
+        $results = [
+            'valid' => true,
+            'total_languages' => 0,
+            'available_flags' => 0,
+            'missing_flags' => [],
+            'formats' => [],
+            'errors' => []
+        ];
+        
+        try {
+            // Check if flags directory exists
+            if (!is_dir($flagsDirectory)) {
+                $results['valid'] = false;
+                $results['errors'][] = 'Flags directory does not exist: ' . $flagsDirectory;
+                return $results;
+            }
+            
+            // Get all unique flag codes from language mapping
+            $allFlagCodes = array_unique(array_values(self::$languageToFlag));
+            $results['total_languages'] = count($allFlagCodes);
+            
+            // Check each flag code
+            foreach ($allFlagCodes as $flagCode) {
+                $found = false;
+                $formats = ['.webp', '.png', '.jpg', '.gif'];
+                
+                foreach ($formats as $format) {
+                    $flagPath = $flagsDirectory . $flagCode . $format;
+                    if (file_exists($flagPath)) {
+                        $found = true;
+                        $results['formats'][$format] = ($results['formats'][$format] ?? 0) + 1;
+                        break;
+                    }
+                }
+                
+                if ($found) {
+                    $results['available_flags']++;
+                } else {
+                    $results['missing_flags'][] = $flagCode;
+                    $results['valid'] = false;
+                }
+            }
+            
+            // Check for UN flag (critical for fallback)
+            $unFlagExists = false;
+            foreach (['.webp', '.png', '.jpg', '.gif'] as $format) {
+                if (file_exists($flagsDirectory . 'un' . $format)) {
+                    $unFlagExists = true;
+                    break;
+                }
+            }
+            
+            if (!$unFlagExists) {
+                $results['valid'] = false;
+                $results['errors'][] = 'Critical: UN flag not found - fallback will not work';
+            }
+            
+        } catch (Exception $e) {
+            $results['valid'] = false;
+            $results['errors'][] = 'Validation error: ' . $e->getMessage();
+        }
+        
+        return $results;
     }
 }

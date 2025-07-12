@@ -102,6 +102,16 @@ interface LanguageInterface {
     public function getFlagPath(string $language, string $basePath = 'assets/flags/', string $extension = '.webp'): string;
     
     /**
+     * Get best available flag path with fallback support
+     * 
+     * @param string $language Language code
+     * @param string $basePath Base path for flags
+     * @param string|null $documentRoot Document root path
+     * @return string Best available flag file path
+     */
+    public function getBestFlagPath(string $language, string $basePath = 'assets/flags/', ?string $documentRoot = null): string;
+    
+    /**
      * Get available languages with info
      * 
      * @return array Available languages

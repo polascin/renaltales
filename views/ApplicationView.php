@@ -69,19 +69,18 @@ class ApplicationView extends BaseView {
         $csrfToken = $this->sessionManager->getCSRFToken();
         
         echo '<nav class="language-selector">';
-        echo '<ul>';
-        echo '<li>';
-        echo '<form method="POST" action="">';
+        echo '<div class="language-selector-container">';
+        echo '<form method="POST" action="" class="language-form">';
         echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
-        echo '<select name="lang" onchange="this.form.submit()">';
+        echo '<label for="lang-select" class="language-label">' . $this->escape($this->getText('select_language', 'Select Language')) . ':</label>';
+        echo '<select id="lang-select" name="lang" class="language-select" onchange="this.form.submit()">';
         echo $this->renderLanguageSelector();
         echo '</select>';
-        echo '<noscript><input type="submit" value="' . $this->escape($this->getText('change', 'Change')) . '"></noscript>';
-        echo '<script src="assets/js/addFlags.js"></script>';
+        echo '<noscript><input type="submit" value="' . $this->escape($this->getText('change', 'Change')) . '" class="language-submit"></noscript>';
         echo '</form>';
-        echo '</li>';
-        echo '</ul>';
+        echo '</div>';
         echo '</nav>';
+        echo '<script src="assets/js/addFlags.js"></script>';
     }
     
     /**
@@ -95,19 +94,30 @@ class ApplicationView extends BaseView {
         $selectableLanguages = $this->languageModel->getSupportedLanguages();
         $html = '';
         
+        // Safely get current language for comparison
+        $currentLang = 'en';
+        if (method_exists($this->languageModel, 'getCurrentLanguage')) {
+            $currLang = $this->languageModel->getCurrentLanguage();
+            $currentLang = is_string($currLang) ? $currLang : 'en';
+        }
+        
         foreach ($selectableLanguages as $lang) {
             $langFile = LANGUAGE_PATH . $lang . '.php';
             if (!file_exists($langFile)) continue;
             
             $langName = $this->languageModel->getLanguageName($lang);
-            $flagPath = $this->languageModel->getFlagPath($lang);
             
-            // Safely get current language for comparison
-            $currentLang = 'en';
-            if (method_exists($this->languageModel, 'getCurrentLanguage')) {
-                $currLang = $this->languageModel->getCurrentLanguage();
-                $currentLang = is_string($currLang) ? $currLang : 'en';
+            // Get best available flag path with fallback
+            $flagPath = 'assets/flags/un.webp'; // Default fallback
+            if ($this->languageModel->getLanguageDetector()) {
+                $detector = $this->languageModel->getLanguageDetector();
+                if (method_exists($detector, 'getBestFlagPath')) {
+                    $flagPath = $detector->getBestFlagPath($lang, 'assets/flags/', $_SERVER['DOCUMENT_ROOT'] ?? '');
+                } else {
+                    $flagPath = $this->languageModel->getFlagPath($lang);
+                }
             }
+            
             $selected = ($currentLang === $lang) ? ' selected' : '';
             
             $html .= '<option value="' . $this->escape($lang) . '"' . $selected . ' data-flag="' . $this->escape($flagPath) . '">';
@@ -546,15 +556,35 @@ class ApplicationView extends BaseView {
         $selectableLanguages = $this->languageModel->getSupportedLanguages();
         $html = '<div class="language-selection-flags">';
         
+        // Get current language for highlighting
+        $currentLang = 'en';
+        if (method_exists($this->languageModel, 'getCurrentLanguage')) {
+            $currLang = $this->languageModel->getCurrentLanguage();
+            $currentLang = is_string($currLang) ? $currLang : 'en';
+        }
+        
         foreach ($selectableLanguages as $lang) {
             $langFile = LANGUAGE_PATH . $lang . '.php';
             if (!file_exists($langFile)) continue;
             
             $langName = $this->languageModel->getLanguageName($lang);
-            $flagPath = $this->languageModel->getFlagPath($lang);
+            
+            // Get best available flag path with fallback
+            $flagPath = 'assets/flags/un.webp'; // Default fallback
+            if ($this->languageModel->getLanguageDetector()) {
+                $detector = $this->languageModel->getLanguageDetector();
+                if (method_exists($detector, 'getBestFlagPath')) {
+                    $flagPath = $detector->getBestFlagPath($lang, 'assets/flags/', $_SERVER['DOCUMENT_ROOT'] ?? '');
+                } else {
+                    $flagPath = $this->languageModel->getFlagPath($lang);
+                }
+            }
+            
+            // Add current language class for styling
+            $currentClass = ($currentLang === $lang) ? ' current-language' : '';
             
             // Use secure POST form instead of GET link to avoid CSRF token exposure
-            $html .= '<form method="POST" action="">';
+            $html .= '<form method="POST" action="" class="flag-form' . $currentClass . '">';
             $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
             
             // Add CSRF token if SecurityManager is available
@@ -563,9 +593,9 @@ class ApplicationView extends BaseView {
                 $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
             }
             
-            $html .= '<button type="submit" title="' . $this->escape($langName) . '">';
-            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '">';
-            $html .= '<span>' . $this->escape($lang) . '</span>';
+            $html .= '<button type="submit" class="flag-button" title="' . $this->escape($langName) . ' (' . $this->escape($lang) . ')">';
+            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '" class="flag-image" onerror="this.src=\'assets/flags/un.webp\'">';
+            $html .= '<span class="flag-code">' . $this->escape($lang) . '</span>';
             $html .= '</button>';
             $html .= '</form>';
         }

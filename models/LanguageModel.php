@@ -19,6 +19,7 @@ class LanguageModel extends BaseModel {
     protected ?string $currentLanguage;
     protected ?string $currentLanguageName;
     protected array $texts = [];
+    protected bool $initialized = false;
     
     /**
      * Constructor
@@ -31,7 +32,8 @@ class LanguageModel extends BaseModel {
         try {
             if (class_exists('LanguageDetector')) {
                 $this->languageDetector = new LanguageDetector();
-                $this->currentLanguage = $this->languageDetector->detectLanguage();
+                // Use getCurrentLanguage() instead of detectLanguage() to respect existing preferences
+                $this->currentLanguage = $this->languageDetector->getCurrentLanguage();
                 $this->currentLanguageName = $this->languageDetector->getLanguageName($this->currentLanguage);
             } else {
                 $this->currentLanguage = 'en';
@@ -44,12 +46,18 @@ class LanguageModel extends BaseModel {
         }
         
         $this->loadLanguageTexts();
+        $this->initialized = true;
     }
     
     /**
      * Load language texts with fallback
      */
     private function loadLanguageTexts(): void {
+        // Prevent redundant loading if already initialized
+        if ($this->initialized && !empty($this->texts)) {
+            return;
+        }
+        
         // Initialize basic fallback texts
         $this->texts = [
             'app_title' => 'Renal Tales',
@@ -170,6 +178,52 @@ class LanguageModel extends BaseModel {
             return $this->languageDetector->getFlagPath($langCode);
         }
         return '';
+    }
+    
+    /**
+     * Check if the language model is properly initialized
+     * 
+     * @return bool
+     */
+    public function isInitialized(): bool {
+        return $this->initialized;
+    }
+    
+    /**
+     * Verify that texts are properly loaded for the selected language
+     * 
+     * @return bool
+     */
+    public function areTextsLoaded(): bool {
+        // Check if we have basic required texts loaded
+        $requiredTexts = ['app_title', 'welcome', 'error'];
+        
+        foreach ($requiredTexts as $key) {
+            if (!isset($this->texts[$key]) || empty($this->texts[$key])) {
+                return false;
+            }
+        }
+        
+        // Check if current language file was loaded (if not English)
+        if ($this->currentLanguage !== 'en') {
+            $languageFile = LANGUAGE_PATH . $this->currentLanguage . '.php';
+            if (file_exists($languageFile)) {
+                // If file exists, verify that we have more texts than just the basic fallback
+                return count($this->texts) > 10; // Basic fallback has ~13 texts
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Force reload of language texts (useful for language switching)
+     * 
+     * @return void
+     */
+    public function reloadTexts(): void {
+        $this->texts = [];
+        $this->loadLanguageTexts();
     }
     
     /**

@@ -65,11 +65,12 @@ class MultilingualServiceProvider {
      */
     public function initialize(string $defaultLanguage = null): bool {
         try {
-            // Detect or set language
+            // Get current language or set default
             if ($defaultLanguage) {
                 $language = $defaultLanguage;
             } else {
-                $language = $this->languageManager->detectLanguage();
+                // Use getCurrentLanguage() to respect existing preferences
+                $language = $this->languageManager->getCurrentLanguage();
             }
             
             // Set current language
