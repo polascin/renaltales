@@ -29,11 +29,11 @@ return [
         'connections' => [
             'mysql' => [
                 'driver' => 'mysql',
-                'host' => env('DB_HOST', 'mariadb114.r6.websupport.sk'),
+                'host' => env('DB_HOST'),
                 'port' => env('DB_PORT', '3306'),
-                'database' => env('DB_DATABASE', 'SvwfeoXW'),
-                'username' => env('DB_USERNAME', 'by80b9pH'),
-                'password' => env('DB_PASSWORD', 'WsVZOl#;D07ju~0@_dF@'),
+                'database' => env('DB_DATABASE'),
+                'username' => env('DB_USERNAME'),
+                'password' => env('DB_PASSWORD'),
                 'charset' => env('DB_CHARSET', 'utf8mb4'),
                 'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
                 'prefix' => env('DB_PREFIX', ''),

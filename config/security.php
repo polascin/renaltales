@@ -234,5 +234,54 @@ return [
         'bypass_rate_limits' => false,
         'disable_csrf' => false,
         'allow_weak_passwords' => false
-    ]
+    ],
+
+    // Admin Security Settings
+    'admin_security' => [
+        'session_timeout' => 3600, // 1 hour
+        'regeneration_interval' => 180, // 3 minutes
+        'max_concurrent_sessions' => 2,
+        'require_2fa' => true,
+        'ip_whitelisting' => false,
+        'allowed_ips' => [
+            // '192.168.1.100',
+            // '10.0.0.5'
+        ],
+        'password_complexity' => 4, // Highest level
+        'session_cookie_secure' => true,
+        'admin_only_https' => true,
+        'admin_session_path' => '/admin/',
+        'auto_logout_idle' => 1800, // 30 minutes
+        'concurrent_login_limit' => 2,
+        'admin_audit_logging' => true,
+        'security_alerts' => [
+            'enable_email_alerts' => true,
+            'alert_emails' => ['admin@renaltales.com'],
+            'alert_threshold' => 3, // Failed attempts before alert
+            'alert_cooldown' => 300 // 5 minutes between alerts
+        ]
+    ],
+    
+    // Security Monitoring Configuration
+    'security_monitoring' => [
+        'enable_real_time_monitoring' => true,
+        'monitor_admin_actions' => true,
+        'monitor_privilege_changes' => true,
+        'monitor_suspicious_patterns' => true,
+        'alert_on_new_admin_ip' => true,
+        'alert_on_concurrent_sessions' => true,
+        'alert_on_off_hours_access' => true,
+        'business_hours' => [
+            'start' => '08:00',
+            'end' => '18:00',
+            'timezone' => 'Europe/Bratislava'
+        ],
+        'security_dashboard' => true,
+        'log_retention_days' => 90,
+        'automated_responses' => [
+            'auto_block_suspicious_ips' => false,
+            'auto_terminate_suspicious_sessions' => true,
+            'auto_require_2fa_on_risk' => true
+        ]
+    ],
 ];

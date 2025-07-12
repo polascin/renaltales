@@ -5,37 +5,86 @@
  * Displays a dropdown for language selection
  */
 
-use RenalTales\Helpers\TranslationHelper;
+// Check if we have language model available
+$availableLanguages = [];
+$currentLanguage = 'en'; // Default fallback
+$languageModel = null;
 
-$availableLanguages = available_languages();
-$currentLanguage = current_language();
+// Try to get language model from global scope or initialize it
+if (class_exists('LanguageModel')) {
+    $languageModel = new LanguageModel();
+    $availableLanguages = $languageModel->getSupportedLanguages();
+    $currentLanguage = $languageModel->getCurrentLanguage();
+}
+
+// Fallback to basic languages if model not available
+if (empty($availableLanguages)) {
+    $availableLanguages = [
+        ['code' => 'en', 'name' => 'English', 'native_name' => 'English', 'flag_icon' => 'us'],
+        ['code' => 'sk', 'name' => 'Slovak', 'native_name' => 'Slovenčina', 'flag_icon' => 'sk'],
+        ['code' => 'cs', 'name' => 'Czech', 'native_name' => 'Čeština', 'flag_icon' => 'cz'],
+        ['code' => 'de', 'name' => 'German', 'native_name' => 'Deutsch', 'flag_icon' => 'de'],
+    ];
+}
+
+// Get translation function
+function translateText($key, $group = 'common') {
+    // Check if global translation function exists
+    if (function_exists('__')) {
+        return call_user_func('__', $key, $group);
+    }
+    
+    // Fallback translations
+    $translations = [
+        'change_language' => 'Change Language',
+    ];
+    
+    return $translations[$key] ?? $key;
+}
 ?>
 
 <div class="language-switcher">
     <div class="dropdown">
         <button class="dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <?php if (language_flag()): ?>
-                <img src="/assets/flags/<?php echo htmlspecialchars(language_flag()); ?>.png" alt="<?php echo htmlspecialchars(language_name()); ?>" class="flag-icon">
+            <?php 
+            $currentLangData = null;
+            foreach ($availableLanguages as $lang) {
+                if ($lang['code'] === $currentLanguage) {
+                    $currentLangData = $lang;
+                    break;
+                }
+            }
+            if ($currentLangData && isset($currentLangData['flag_icon'])): ?>
+                <img src="/assets/flags/<?php echo htmlspecialchars($currentLangData['flag_icon']); ?>.png" alt="<?php echo htmlspecialchars($currentLangData['name']); ?>" class="flag-icon">
             <?php endif; ?>
-            <span class="language-name"><?php echo htmlspecialchars(language_native_name()); ?></span>
+            <span class="language-name"><?php echo htmlspecialchars($currentLangData['native_name'] ?? $currentLanguage); ?></span>
             <span class="caret"></span>
         </button>
         
         <div class="dropdown-menu" aria-labelledby="languageDropdown">
-            <h6 class="dropdown-header"><?php echo __('change_language', 'common'); ?></h6>
+            <h6 class="dropdown-header"><?php echo translateText('change_language', 'common'); ?></h6>
             <div class="dropdown-divider"></div>
             
             <?php foreach ($availableLanguages as $language): ?>
-                <a class="dropdown-item <?php echo $language['code'] === $currentLanguage ? 'active' : ''; ?>" 
-                   href="?lang=<?php echo htmlspecialchars($language['code']); ?>"
-                   data-lang="<?php echo htmlspecialchars($language['code']); ?>">
-                    <?php if ($language['flag_icon']): ?>
-                        <img src="/assets/flags/<?php echo htmlspecialchars($language['flag_icon']); ?>.png" 
-                             alt="<?php echo htmlspecialchars($language['name']); ?>" 
-                             class="flag-icon">
+                <form method="POST" style="display: inline;" class="language-form">
+                    <input type="hidden" name="lang" value="<?php echo htmlspecialchars($language['code']); ?>">
+                    <?php if (isset($securityManager)): ?>
+                        <?= $securityManager->getCSRFTokenField() ?>
                     <?php endif; ?>
-                    <span class="language-name"><?php echo htmlspecialchars($language['native_name']); ?></span>
-                    <small class="text-muted">(<?php echo htmlspecialchars($language['name']); ?>)</small>
+                    <button type="submit" class="dropdown-item <?php echo $language['code'] === $currentLanguage ? 'active' : ''; ?>" 
+                            data-lang="<?php echo htmlspecialchars($language['code']); ?>">
+                        <?php if (isset($language['flag_icon']) && $language['flag_icon']): ?>
+                            <img src="/assets/flags/<?php echo htmlspecialchars($language['flag_icon']); ?>.png" 
+                                 alt="<?php echo htmlspecialchars($language['name']); ?>" 
+                                 class="flag-icon">
+                        <?php endif; ?>
+                        <span class="language-name"><?php echo htmlspecialchars($language['native_name']); ?></span>
+                        <small class="text-muted">(<?php echo htmlspecialchars($language['name']); ?>)</small>
+                    </button>
+                </form>
+                <!-- Fallback GET link for compatibility -->
+                <a class="dropdown-item-fallback" href="?lang=<?php echo htmlspecialchars($language['code']); ?>" style="display: none;">
+                    Fallback link
                 </a>
             <?php endforeach; ?>
         </div>
@@ -178,34 +227,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Handle language selection
-    items.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const lang = this.getAttribute('data-lang');
+    // Handle language selection - Use form submission instead of direct links
+    const forms = menu.querySelectorAll('.language-form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const lang = form.querySelector('input[name="lang"]').value;
+            console.log('Switching to language:', lang);
             
-            // Send AJAX request to change language
-            fetch('?action=change_language', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'language=' + encodeURIComponent(lang)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Reload page or update content
-                    window.location.reload();
-                } else {
-                    console.error('Failed to change language');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                // Fallback to URL parameter method
-                window.location.href = '?lang=' + encodeURIComponent(lang);
-            });
+            // Close dropdown
+            menu.classList.remove('show');
+            
+            // Form will submit via POST with CSRF token (secure method)
+            // No need to prevent default, let form submit naturally
+        });
+    });
+    
+    // Fallback for browsers without JS or if POST fails
+    const fallbackLinks = menu.querySelectorAll('.dropdown-item-fallback');
+    fallbackLinks.forEach(item => {
+        item.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            console.log('Using fallback method for language switch');
+            window.location.href = href;
         });
     });
     

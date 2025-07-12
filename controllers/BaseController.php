@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 abstract class BaseController {
     
-    protected mixed $view;
+    protected ?object $view;
     
     /**
      * Render a view with optional data
@@ -22,7 +22,14 @@ abstract class BaseController {
      */
     public function render(string $viewPath, array $data = []): void {
         extract($data);
-        include "views/{$viewPath}.php";
+        $fullPath = "views/{$viewPath}.php";
+        
+        if (file_exists($fullPath)) {
+            include $fullPath;
+        } else {
+            error_log("BaseController: View file not found: " . $fullPath);
+            throw new \RuntimeException("View file not found: " . $viewPath);
+        }
     }
 }
 

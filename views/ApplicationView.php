@@ -506,7 +506,7 @@ class ApplicationView extends BaseView {
         }
         
         $selectableLanguages = $this->languageModel->getSupportedLanguages();
-        $html = '';
+        $html = '<div class="language-flags">';
         
         foreach ($selectableLanguages as $lang) {
             $langFile = LANGUAGE_PATH . $lang . '.php';
@@ -515,12 +515,24 @@ class ApplicationView extends BaseView {
             $langName = $this->languageModel->getLanguageName($lang);
             $flagPath = $this->languageModel->getFlagPath($lang);
             
-            $html .= '<a href="?lang=' . urlencode($lang) . '" title="' . $this->escape($langName) . '">';
-            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '">';
-            $html .= $this->escape($lang);
-            $html .= '</a>';
+            // Use secure POST form instead of GET link to avoid CSRF token exposure
+            $html .= '<form method="POST" style="display: inline-block; margin: 2px;" class="language-flag-form">';
+            $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
+            
+            // Add CSRF token if SecurityManager is available
+            if ($this->sessionManager) {
+                $csrfToken = $this->sessionManager->getCSRFToken();
+                $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
+            }
+            
+            $html .= '<button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;" title="' . $this->escape($langName) . '">';
+            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '" style="border: 1px solid #ddd; margin: 2px;">';
+            $html .= '<span style="font-size: 12px; display: block;">' . $this->escape($lang) . '</span>';
+            $html .= '</button>';
+            $html .= '</form>';
         }
         
+        $html .= '</div>';
         return $html;
     }
     

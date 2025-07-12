@@ -7,6 +7,8 @@ require_once 'LoginController.php';
 require_once __DIR__ . '/../views/ApplicationView.php';
 require_once __DIR__ . '/../views/ErrorView.php';
 require_once __DIR__ . '/../core/AuthenticationManager.php';
+require_once __DIR__ . '/../core/AdminSecurityManager.php';
+require_once __DIR__ . '/../core/SessionRegenerationManager.php';
 
 /**
  * ApplicationController - Main application controller
@@ -19,22 +21,35 @@ require_once __DIR__ . '/../core/AuthenticationManager.php';
 
 class ApplicationController extends BaseController {
     
-    private mixed $languageModel;
-    private mixed $sessionManager;
-    private mixed $authenticationManager;
-    private mixed $loginController;
+    private ?object $languageModel;
+    private ?object $sessionManager;
+    private ?AuthenticationManager $authenticationManager;
+    private ?LoginController $loginController;
+    private ?AdminSecurityManager $adminSecurityManager;
+    private ?SessionRegenerationManager $sessionRegenerationManager;
     
     /**
      * Constructor
      * 
-     * @param mixed $languageModel
-     * @param mixed $sessionManager
+     * @param object|null $languageModel
+     * @param object|null $sessionManager
      */
-    public function __construct(mixed $languageModel, mixed $sessionManager) {
+    public function __construct(?object $languageModel, ?object $sessionManager) {
         $this->languageModel = $languageModel;
         $this->sessionManager = $sessionManager;
-        $this->authenticationManager = new AuthenticationManager($sessionManager);
-        $this->loginController = new LoginController($languageModel, $sessionManager);
+        
+        try {
+            $this->authenticationManager = new AuthenticationManager($sessionManager);
+            $this->loginController = new LoginController($languageModel, $sessionManager);
+            $this->adminSecurityManager = new AdminSecurityManager();
+            $this->sessionRegenerationManager = new SessionRegenerationManager();
+        } catch (\Exception $e) {
+            error_log("ApplicationController::__construct() error: " . $e->getMessage());
+            $this->authenticationManager = null;
+            $this->loginController = null;
+            $this->adminSecurityManager = null;
+            $this->sessionRegenerationManager = null;
+        }
     }
     
     /**
@@ -42,6 +57,23 @@ class ApplicationController extends BaseController {
      */
     public function index(): string {
         try {
+            // Ensure dependencies are available
+            if (!$this->loginController) {
+                throw new \RuntimeException("LoginController not initialized properly");
+            }
+            
+            // Initialize security tracking
+            $this->initializeSecurityTracking();
+            
+            // Enhanced session security
+            $this->enhanceSessionSecurity();
+            
+            // Output buffering and content security
+            ob_start();
+            
+            // Security headers for all responses
+            $this->setSecurityHeaders();
+            
             // Handle language change if requested
             $this->handleLanguageChange();
             
@@ -75,36 +107,95 @@ class ApplicationController extends BaseController {
      * Handle language change requests
      */
     private function handleLanguageChange(): void {
-        if (!isset($_GET['lang']) || empty($_GET['lang'])) {
+        // Check if this is a POST request for secure language switching
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lang'])) {
+            $this->handleLanguageChangePost();
             return;
         }
         
-        $requestedLanguage = $this->sanitizeInput($_GET['lang']);
+        // Handle GET request for basic language switching (legacy support)
+        if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+            $this->handleLanguageChangeGet();
+        }
+    }
+    
+    /**
+     * Handle secure language change via POST
+     */
+    private function handleLanguageChangePost(): void {
+        $requestedLanguage = $this->sanitizeInput($_POST['lang'] ?? '');
         
         // Validate language code format (should be 2-3 letter code)
         if (!$this->isValidInput($requestedLanguage, '_-') || strlen($requestedLanguage) > 10) {
+            error_log("ApplicationController: Invalid language code format: " . $requestedLanguage);
             return;
         }
         
         if (!$this->sessionManager || !$this->languageModel) {
+            error_log("ApplicationController: Missing sessionManager or languageModel for language change");
             return;
         }
         
-        // Validate CSRF token
-        $csrfToken = isset($_GET['csrf_token']) ? $this->sanitizeInput($_GET['csrf_token']) : '';
+        // Validate CSRF token from POST data (secure)
+        $csrfToken = $this->sanitizeInput($_POST['_csrf_token'] ?? '');
         if (!$csrfToken || !$this->sessionManager->validateCSRFToken($csrfToken)) {
+            error_log("ApplicationController: Invalid CSRF token for language change");
             return;
         }
         
         // Check if language is supported
-        $supportedLanguages = $this->languageModel->getSupportedLanguages();
-        
-        if (in_array($requestedLanguage, $supportedLanguages, true)) {
-            // Set language in session
-            $this->sessionManager->setSession('user_language', $requestedLanguage);
+        try {
+            $supportedLanguages = $this->languageModel->getSupportedLanguages();
             
-            // Redirect to avoid resubmission
-            $this->redirect($_SERVER['PHP_SELF'] ?? '/');
+            if (in_array($requestedLanguage, $supportedLanguages, true)) {
+                // Set language in session
+                $this->sessionManager->setSession('user_language', $requestedLanguage);
+                
+                // Redirect to avoid resubmission
+                $this->redirect($_SERVER['PHP_SELF'] ?? '/');
+            } else {
+                error_log("ApplicationController: Unsupported language: " . $requestedLanguage);
+            }
+        } catch (\Exception $e) {
+            error_log("ApplicationController: Error during language change: " . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Handle basic language change via GET (legacy - no CSRF protection)
+     */
+    private function handleLanguageChangeGet(): void {
+        $requestedLanguage = $this->sanitizeInput($_GET['lang'] ?? '');
+        
+        // Validate language code format (should be 2-3 letter code)
+        if (!$this->isValidInput($requestedLanguage, '_-') || strlen($requestedLanguage) > 10) {
+            error_log("ApplicationController: Invalid language code format in GET: " . $requestedLanguage);
+            return;
+        }
+        
+        if (!$this->sessionManager || !$this->languageModel) {
+            error_log("ApplicationController: Missing sessionManager or languageModel for GET language change");
+            return;
+        }
+        
+        // For GET requests, only do basic validation (no CSRF token required)
+        // This is less secure but provides backward compatibility
+        
+        try {
+            // Check if language is supported
+            $supportedLanguages = $this->languageModel->getSupportedLanguages();
+            
+            if (in_array($requestedLanguage, $supportedLanguages, true)) {
+                // Set language in session
+                $this->sessionManager->setSession('user_language', $requestedLanguage);
+                
+                // Redirect to avoid resubmission
+                $this->redirect($_SERVER['PHP_SELF'] ?? '/');
+            } else {
+                error_log("ApplicationController: Unsupported language in GET: " . $requestedLanguage);
+            }
+        } catch (\Exception $e) {
+            error_log("ApplicationController: Error during GET language change: " . $e->getMessage());
         }
     }
     
@@ -164,10 +255,15 @@ class ApplicationController extends BaseController {
     /**
      * Sanitize input string to prevent XSS and other attacks
      * 
-     * @param string $input
+     * @param mixed $input
      * @return string
      */
-    private function sanitizeInput(string $input): string {
+    private function sanitizeInput($input): string {
+        // Convert to string if not already
+        if (!is_string($input)) {
+            $input = (string) $input;
+        }
+        
         // Trim whitespace
         $input = trim($input);
         
@@ -195,18 +291,249 @@ class ApplicationController extends BaseController {
     /**
      * Get language model
      * 
-     * @return mixed
+     * @return object|null
      */
-    public function getLanguageModel(): mixed {
+    public function getLanguageModel(): ?object {
         return $this->languageModel;
     }
     
     /**
      * Get session manager
      * 
-     * @return mixed
+     * @return object|null
      */
-    public function getSessionManager(): mixed {
+    public function getSessionManager(): ?object {
         return $this->sessionManager;
+    }
+    
+    /**
+     * Enhance session security with intelligent regeneration and monitoring
+     */
+    private function enhanceSessionSecurity(): void {
+        try {
+            if (!$this->sessionRegenerationManager) {
+                return;
+            }
+            
+            // Build security context
+            $context = [
+                'is_admin' => $this->isAdminUser(),
+                'privilege_change' => $this->hasPrivilegeChange(),
+                'suspicious_activity' => $this->hasSuspiciousActivity(),
+                'ip_change' => $this->hasIPAddressChanged(),
+                'user_agent_change' => $this->hasUserAgentChanged()
+            ];
+            
+            // Perform intelligent session regeneration
+            $regenerated = $this->sessionRegenerationManager->intelligentRegeneration($context);
+            
+            if ($regenerated) {
+                error_log("Session regenerated for enhanced security");
+            }
+            
+            // Validate admin session if applicable
+            if ($this->isAdminUser() && $this->adminSecurityManager) {
+                if (!$this->adminSecurityManager->validateAdminSession()) {
+                    $this->handleAdminSecurityViolation();
+                }
+            }
+            
+        } catch (\Exception $e) {
+            error_log("Enhanced security error: " . $e->getMessage());
+        }
+    }
+    
+    /**
+     * Check if current user is admin
+     */
+    private function isAdminUser(): bool {
+        return isset($_SESSION['admin_user_id']) || 
+               (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin');
+    }
+    
+    /**
+     * Check for privilege changes
+     */
+    private function hasPrivilegeChange(): bool {
+        // Check if user role has changed in this request
+        $currentRole = $_SESSION['user_role'] ?? null;
+        $previousRole = $_SESSION['_security']['previous_role'] ?? null;
+        
+        if ($previousRole && $currentRole !== $previousRole) {
+            $_SESSION['_security']['previous_role'] = $currentRole;
+            return true;
+        }
+        
+        $_SESSION['_security']['previous_role'] = $currentRole;
+        return false;
+    }
+    
+    /**
+     * Check for suspicious activity indicators
+     */
+    private function hasSuspiciousActivity(): bool {
+        // Check for rapid requests
+        $now = time();
+        $lastRequest = $_SESSION['_security']['last_request_time'] ?? 0;
+        $_SESSION['_security']['last_request_time'] = $now;
+        
+        if ($now - $lastRequest < 1) {
+            return true;
+        }
+        
+        // Check for suspicious parameters
+        $suspiciousParams = ['exec', 'eval', 'system', 'shell_exec', '<script', 'javascript:'];
+        $allParams = array_merge($_GET, $_POST);
+        
+        foreach ($allParams as $value) {
+            if (is_string($value)) {
+                foreach ($suspiciousParams as $param) {
+                    if (stripos($value, $param) !== false) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Check if IP address has changed
+     */
+    private function hasIPAddressChanged(): bool {
+        $currentIP = $this->getClientIP();
+        $storedIP = $_SESSION['_security']['ip_address'] ?? '';
+        
+        return !empty($storedIP) && $storedIP !== $currentIP;
+    }
+    
+    /**
+     * Check if user agent has changed
+     */
+    private function hasUserAgentChanged(): bool {
+        $currentUA = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        $storedUA = $_SESSION['_security']['user_agent'] ?? '';
+        
+        return !empty($storedUA) && $storedUA !== $currentUA;
+    }
+    
+    /**
+     * Handle admin security violation
+     */
+    private function handleAdminSecurityViolation(): void {
+        // Log the violation
+        error_log("Admin security violation detected for user: " . ($_SESSION['admin_user_id'] ?? 'unknown'));
+        
+        // Destroy admin session
+        if ($this->adminSecurityManager) {
+            $this->adminSecurityManager->destroyAdminSession();
+        }
+        
+        // Redirect to login
+        $this->redirect('/?action=login&error=security_violation');
+    }
+    
+    /**
+     * Get client IP address
+     */
+    private function getClientIP(): string {
+        $ipHeaders = [
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_FORWARDED',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+            'HTTP_FORWARDED_FOR',
+            'HTTP_FORWARDED',
+            'REMOTE_ADDR'
+        ];
+        
+        foreach ($ipHeaders as $header) {
+            if (!empty($_SERVER[$header])) {
+                $ip = $_SERVER[$header];
+                if (strpos($ip, ',') !== false) {
+                    $ip = trim(explode(',', $ip)[0]);
+                }
+                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                    return $ip;
+                }
+            }
+        }
+        
+        return $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    }
+    
+    /**
+     * Initialize security tracking for the session
+     */
+    private function initializeSecurityTracking(): void {
+        if (!isset($_SESSION['_security'])) {
+            $_SESSION['_security'] = [
+                'created_at' => time(),
+                'ip_address' => $this->getClientIP(),
+                'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+                'last_activity' => time(),
+                'request_count' => 0,
+                'previous_role' => null,
+                'last_request_time' => 0
+            ];
+        } else {
+            $_SESSION['_security']['last_activity'] = time();
+            $_SESSION['_security']['request_count'] = ($_SESSION['_security']['request_count'] ?? 0) + 1;
+        }
+    }
+    
+    /**
+     * Set comprehensive security headers
+     */
+    private function setSecurityHeaders(): void {
+        // Prevent XSS
+        header('X-XSS-Protection: 1; mode=block');
+        
+        // Prevent MIME type sniffing
+        header('X-Content-Type-Options: nosniff');
+        
+        // Prevent clickjacking
+        header('X-Frame-Options: DENY');
+        
+        // Strict transport security (HTTPS only)
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+        }
+        
+        // Content Security Policy
+        $csp = "default-src 'self'; " .
+               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; " .
+               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " .
+               "font-src 'self' https://fonts.gstatic.com; " .
+               "img-src 'self' data: https:; " .
+               "connect-src 'self'; " .
+               "frame-src 'none'; " .
+               "object-src 'none'; " .
+               "base-uri 'self';";
+        header("Content-Security-Policy: " . $csp);
+        
+        // Referrer Policy
+        header('Referrer-Policy: strict-origin-when-cross-origin');
+        
+        // Permissions Policy
+        header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
+        
+        // Cache control for sensitive pages
+        if ($this->isAdminUser() || $this->requiresAuth()) {
+            header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+            header('Pragma: no-cache');
+            header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+        }
+    }
+    
+    /**
+     * Check if current page requires authentication
+     */
+    private function requiresAuth(): bool {
+        $action = $_GET['action'] ?? 'home';
+        $authRequiredActions = ['admin', 'profile', 'settings', 'upload', 'story_editor'];
+        
+        return in_array($action, $authRequiredActions);
     }
 }
