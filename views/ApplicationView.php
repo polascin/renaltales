@@ -586,10 +586,10 @@ class ApplicationView extends BaseView {
         echo 'document.addEventListener("DOMContentLoaded", function() {';
         echo 'const forms = document.querySelectorAll("form");';
         echo 'forms.forEach(function(form) {';
-        echo 'if (!form.querySelector("input[name=\\"csrf_token\\"]")) {';
+        echo 'if (!form.querySelector("input[name=\\"_csrf_token\\"]")) {';
         echo 'const csrfInput = document.createElement("input");';
         echo 'csrfInput.type = "hidden";';
-        echo 'csrfInput.name = "csrf_token";';
+        echo 'csrfInput.name = "_csrf_token";';
         echo 'csrfInput.value = "' . $this->escape($csrfToken) . '";';
         echo 'form.appendChild(csrfInput);';
         echo '}';

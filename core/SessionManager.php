@@ -273,7 +273,7 @@ class SessionManager {
    * Generate CSRF token
    */
   private function generateCSRFToken() {
-    if (!isset($_SESSION['_csrf_token'])) {
+    if (!isset($_SESSION['_csrf_token']) || !is_string($_SESSION['_csrf_token'])) {
       try {
         $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
       } catch (Exception $e) {
@@ -281,6 +281,12 @@ class SessionManager {
         $_SESSION['_csrf_token'] = hash('sha256', uniqid(mt_rand(), true));
       }
     }
+    
+    // Ensure the token is always a string
+    if (!is_string($_SESSION['_csrf_token'])) {
+      $_SESSION['_csrf_token'] = hash('sha256', uniqid(mt_rand(), true));
+    }
+    
     $this->csrfToken = $_SESSION['_csrf_token'];
   }
   
@@ -290,13 +296,18 @@ class SessionManager {
    * @return string
    */
   public function getCSRFToken() {
+    // Ensure we have a valid string token
+    if (!is_string($this->csrfToken) || empty($this->csrfToken)) {
+      $this->generateCSRFToken();
+    }
+    
     return $this->csrfToken ?? '';
   }
   
   /**
    * Validate CSRF token
    * 
-   * @param string $token
+   * @param mixed $token
    * @return bool
    */
   public function validateCSRFToken($token) {
@@ -304,7 +315,19 @@ class SessionManager {
       return false;
     }
     
-    return hash_equals($_SESSION['_csrf_token'], $token);
+    // Ensure both values are strings
+    $sessionToken = $_SESSION['_csrf_token'];
+    if (!is_string($sessionToken)) {
+      error_log("SessionManager: CSRF session token is not a string: " . gettype($sessionToken));
+      return false;
+    }
+    
+    if (!is_string($token)) {
+      error_log("SessionManager: CSRF token parameter is not a string: " . gettype($token));
+      return false;
+    }
+    
+    return hash_equals($sessionToken, $token);
   }
   
   /**

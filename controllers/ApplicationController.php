@@ -107,14 +107,21 @@ class ApplicationController extends BaseController {
      * Handle language change requests
      */
     private function handleLanguageChange(): void {
+        // Debug logging
+        error_log("ApplicationController: handleLanguageChange() - REQUEST_METHOD: " . ($_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN'));
+        error_log("ApplicationController: handleLanguageChange() - POST data: " . print_r($_POST, true));
+        error_log("ApplicationController: handleLanguageChange() - GET data: " . print_r($_GET, true));
+        
         // Check if this is a POST request for secure language switching
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lang'])) {
+            error_log("ApplicationController: Handling POST language change for: " . $_POST['lang']);
             $this->handleLanguageChangePost();
             return;
         }
         
         // Handle GET request for basic language switching (legacy support)
         if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+            error_log("ApplicationController: Handling GET language change for: " . $_GET['lang']);
             $this->handleLanguageChangeGet();
         }
     }
@@ -123,7 +130,11 @@ class ApplicationController extends BaseController {
      * Handle secure language change via POST
      */
     private function handleLanguageChangePost(): void {
+        error_log("ApplicationController: handleLanguageChangePost() called");
+        error_log("ApplicationController: POST data: " . print_r($_POST, true));
+        
         $requestedLanguage = $this->sanitizeInput($_POST['lang'] ?? '');
+        error_log("ApplicationController: Requested language: " . $requestedLanguage);
         
         // Validate language code format (should be 2-3 letter code)
         if (!$this->isValidInput($requestedLanguage, '_-') || strlen($requestedLanguage) > 10) {
@@ -137,21 +148,41 @@ class ApplicationController extends BaseController {
         }
         
         // Validate CSRF token from POST data (secure)
-        $csrfToken = $this->sanitizeInput($_POST['_csrf_token'] ?? '');
+        $csrfTokenRaw = $_POST['_csrf_token'] ?? '';
+        error_log("ApplicationController: Looking for CSRF token in POST data");
+        error_log("ApplicationController: Available POST keys: " . implode(', ', array_keys($_POST)));
+        
+        // Check for alternative CSRF token names
+        if (!$csrfTokenRaw && isset($_POST['csrf_token'])) {
+            $csrfTokenRaw = $_POST['csrf_token'];
+            error_log("ApplicationController: Found alternative csrf_token field");
+        }
+        
+        // Debug logging
+        error_log("ApplicationController: Raw CSRF token type: " . gettype($csrfTokenRaw));
+        if (is_string($csrfTokenRaw)) {
+            error_log("ApplicationController: Raw CSRF token value: " . substr($csrfTokenRaw, 0, 50) . "...");
+        }
+        
+        $csrfToken = $this->sanitizeInput($csrfTokenRaw);
         if (!$csrfToken || !$this->sessionManager->validateCSRFToken($csrfToken)) {
             error_log("ApplicationController: Invalid CSRF token for language change");
             return;
         }
+        error_log("ApplicationController: CSRF token validated successfully");
         
         // Check if language is supported
         try {
             $supportedLanguages = $this->languageModel->getSupportedLanguages();
+            error_log("ApplicationController: Supported languages: " . print_r($supportedLanguages, true));
             
             if (in_array($requestedLanguage, $supportedLanguages, true)) {
                 // Set language in session
+                error_log("ApplicationController: Setting language in session: " . $requestedLanguage);
                 $this->sessionManager->setSession('user_language', $requestedLanguage);
                 
                 // Redirect to avoid resubmission
+                error_log("ApplicationController: Redirecting after language change");
                 $this->redirect($_SERVER['PHP_SELF'] ?? '/');
             } else {
                 error_log("ApplicationController: Unsupported language: " . $requestedLanguage);
@@ -259,9 +290,39 @@ class ApplicationController extends BaseController {
      * @return string
      */
     private function sanitizeInput($input): string {
-        // Convert to string if not already
-        if (!is_string($input)) {
+        // Handle arrays or objects
+        if (is_array($input)) {
+            error_log("ApplicationController: Received array input, using first string value");
+            // Get first string value from array
+            foreach ($input as $value) {
+                if (is_string($value)) {
+                    $input = $value;
+                    break;
+                }
+            }
+            // If no string found, convert to empty string
+            if (is_array($input)) {
+                $input = '';
+            }
+        } elseif (is_object($input)) {
+            error_log("ApplicationController: Received object input, converting to string");
             $input = (string) $input;
+        } elseif (!is_string($input)) {
+            $input = (string) $input;
+        }
+        
+        // Check if input looks like HTML-encoded JSON (e.g., {"token":"..."} -> {&quot;token&quot;:...})
+        if (str_contains($input, '&quot;') || str_contains($input, '&#')) {
+            // Decode HTML entities first
+            $input = html_entity_decode($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            
+            // If it's JSON, try to extract the token value
+            if (str_starts_with($input, '{') && str_contains($input, 'token')) {
+                $decoded = json_decode($input, true);
+                if (is_array($decoded) && isset($decoded['token'])) {
+                    $input = $decoded['token'];
+                }
+            }
         }
         
         // Trim whitespace
@@ -270,8 +331,11 @@ class ApplicationController extends BaseController {
         // Remove null bytes
         $input = str_replace("\0", '', $input);
         
-        // Convert special characters to HTML entities
-        $input = htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // For CSRF tokens, don't HTML encode - keep them as-is
+        // For other inputs, convert special characters to HTML entities
+        if (!preg_match('/^[a-f0-9]{64}$/', $input)) {
+            $input = htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        }
         
         return $input;
     }
