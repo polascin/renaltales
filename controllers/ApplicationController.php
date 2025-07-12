@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once 'BaseController.php';
 require_once 'LoginController.php';
 require_once __DIR__ . '/../views/ApplicationView.php';
-require_once __DIR__ . '/../views/ErrorView.php';
+require_once __DIR__ . '/../views/ErrorView_temp.php';
 require_once __DIR__ . '/../core/AuthenticationManager.php';
 require_once __DIR__ . '/../core/AdminSecurityManager.php';
 require_once __DIR__ . '/../core/SessionRegenerationManager.php';
