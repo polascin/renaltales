@@ -1,0 +1,52 @@
+[2025-07-12 11:49:48] ✅ Basic translation test: Welcome
+[2025-07-12 11:49:48] ✅ Pluralization test: 5 items
+[2025-07-12 11:49:48] ✅ Parameter test: Hello User!
+[2025-07-12 11:49:48] ✅ Context test: Save
+[2025-07-12 11:49:48] ✅ Language switching test (SK): Welcome
+[2025-07-12 11:49:48] ✅ RTL detection test (Arabic): RTL
+[2025-07-12 11:49:48] ✅ Language info test: {
+    "code": "en",
+    "name": "English",
+    "native_name": "English",
+    "direction": "ltr",
+    "is_rtl": false,
+    "flag": "assets\/flags\/gb.webp",
+    "flag_code": "gb"
+}
+[2025-07-12 11:49:48] 📝 Found existing file: core/LanguageDetector.php
+[2025-07-12 11:49:48]   - Uses getCurrentLanguage method
+[2025-07-12 11:49:48]   - Uses detectLanguage method
+[2025-07-12 11:49:48] 📝 Found existing file: models/LanguageModel.php
+[2025-07-12 11:49:48]   - Uses old LanguageDetector
+[2025-07-12 11:49:48]   - Uses getText method
+[2025-07-12 11:49:48]   - Uses getCurrentLanguage method
+[2025-07-12 11:49:48]   - Uses detectLanguage method
+[2025-07-12 11:49:48] 📝 Found existing file: views/ApplicationView.php
+[2025-07-12 11:49:48]   - Uses old LanguageModel
+[2025-07-12 11:49:48]   - Uses getText method
+[2025-07-12 11:49:48]   - Uses getCurrentLanguage method
+[2025-07-12 11:49:48]   - Uses renderLanguageSelection method
+[2025-07-12 11:49:48] Basic Translation:
+[2025-07-12 11:49:48]   Old: $this->languageModel->getText("welcome")
+[2025-07-12 11:49:48]   New: $multilingual->getText("common.welcome", "Welcome")
+[2025-07-12 11:49:48] With Parameters:
+[2025-07-12 11:49:48]   Old: $this->languageModel->getText("hello_user", ["name" => $user])
+[2025-07-12 11:49:48]   New: $multilingual->getText("common.hello_user", "Hello {name}!", ["name" => $user])
+[2025-07-12 11:49:48] Pluralization:
+[2025-07-12 11:49:48]   Old: $this->languageModel->getPlural("item", $count)
+[2025-07-12 11:49:48]   New: $multilingual->getPlural("common.item", $count, ["count" => $count], "{count} items")
+[2025-07-12 11:49:48] Language Detection:
+[2025-07-12 11:49:48]   Old: $this->languageDetector->detectLanguage()
+[2025-07-12 11:49:48]   New: $multilingual->getCurrentLanguage()
+[2025-07-12 11:49:48] Language Switching:
+[2025-07-12 11:49:48]   Old: $this->languageDetector->setLanguage($lang)
+[2025-07-12 11:49:48]   New: $multilingual->setLanguage($lang)
+[2025-07-12 11:49:48] Check RTL:
+[2025-07-12 11:49:48]   Old: $this->languageDetector->isRTL($lang)
+[2025-07-12 11:49:48]   New: $multilingual->isRTL($lang)
+[2025-07-12 11:49:49] Health Status: warning
+[2025-07-12 11:49:49] ⚠️ Issue: Translation manager missing basic translations
+[2025-07-12 11:49:49] System Statistics:
+[2025-07-12 11:49:49]   - Current Language: en
+[2025-07-12 11:49:49]   - Supported Languages: 142
+[2025-07-12 11:49:49]   - Memory Usage: 2 MB
