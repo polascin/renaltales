@@ -4,7 +4,7 @@
 
 ### **Problem Description**
 
-```
+```txt
 Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must be of type string, array given in G:\Môj disk\www\renaltales\core\SessionManager.php:307
 ```
 
@@ -23,6 +23,7 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
 **Changes Made:**
 
 - **Type Safety in Token Validation**:
+
   ```php
   public function validateCSRFToken($token) {
       // Ensure both values are strings
@@ -42,6 +43,7 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
   ```
 
 - **Improved Token Generation**:
+
   ```php
   private function generateCSRFToken() {
       if (!isset($_SESSION['_csrf_token']) || !is_string($_SESSION['_csrf_token'])) {
@@ -56,6 +58,7 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
   ```
 
 - **Enhanced Token Retrieval**:
+
   ```php
   public function getCSRFToken() {
       // Ensure we have a valid string token
@@ -74,6 +77,7 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
 **Changes Made:**
 
 - **Advanced Input Sanitization**:
+
   ```php
   private function sanitizeInput($input): string {
       // Handle arrays, objects, and complex data types
@@ -101,6 +105,7 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
   ```
 
 - **Debug Logging**:
+
   ```php
   // Validate CSRF token from POST data (secure)
   $csrfTokenRaw = $_POST['_csrf_token'] ?? '';
@@ -129,12 +134,14 @@ Fatal error: Uncaught TypeError: hash_equals(): Argument #1 ($known_string) must
 ### **Testing Results**
 
 #### ✅ Syntax Validation
+
 ```bash
 php -l core/SessionManager.php        # ✅ No syntax errors
 php -l controllers/ApplicationController.php  # ✅ No syntax errors
 ```
 
 #### ✅ Type Safety
+
 - **Before**: `TypeError: hash_equals(): Argument #1 ($known_string) must be of type string, array given`
 - **After**: ✅ **All inputs validated as strings before hash_equals()**
 
@@ -154,4 +161,4 @@ php -l controllers/ApplicationController.php  # ✅ No syntax errors
 **Solution**: Enhanced type safety + input sanitization  
 **Testing**: ✅ All syntax checks pass  
 
-*Fixed on: July 12, 2025*
+### Fixed on: July 12, 2025
