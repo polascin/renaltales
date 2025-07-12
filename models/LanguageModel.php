@@ -28,11 +28,17 @@ class LanguageModel extends BaseModel {
         parent::__construct();
         
         // Initialize language detector
-        if (class_exists('LanguageDetector')) {
-            $this->languageDetector = new LanguageDetector();
-            $this->currentLanguage = $this->languageDetector->detectLanguage();
-            $this->currentLanguageName = $this->languageDetector->getLanguageName($this->currentLanguage);
-        } else {
+        try {
+            if (class_exists('LanguageDetector')) {
+                $this->languageDetector = new LanguageDetector();
+                $this->currentLanguage = $this->languageDetector->detectLanguage();
+                $this->currentLanguageName = $this->languageDetector->getLanguageName($this->currentLanguage);
+            } else {
+                $this->currentLanguage = 'en';
+                $this->currentLanguageName = 'English';
+            }
+        } catch (Exception $e) {
+            error_log('LanguageModel: Failed to initialize language detector: ' . $e->getMessage());
             $this->currentLanguage = 'en';
             $this->currentLanguageName = 'English';
         }

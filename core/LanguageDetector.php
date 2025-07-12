@@ -765,30 +765,35 @@ class LanguageDetector {
             // Store in session if available
             $this->setSessionLanguage($lang);
             
-            // Store in secure cookie for 30 days
-            $cookieOptions = [
-                'expires' => time() + (86400 * 30),
-                'path' => '/',
-                'domain' => '',
-                'secure' => $this->isHttps(),
-                'httponly' => true,
-                'samesite' => 'Lax'
-            ];
-            
-            if (PHP_VERSION_ID >= 70300) {
-                // Use modern cookie options for PHP 7.3+
-                setcookie('language', $lang, $cookieOptions);
+            // Store in secure cookie for 30 days (only if headers not already sent)
+            if (!headers_sent()) {
+                $cookieOptions = [
+                    'expires' => time() + (86400 * 30),
+                    'path' => '/',
+                    'domain' => '',
+                    'secure' => $this->isHttps(),
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ];
+                
+                if (PHP_VERSION_ID >= 70300) {
+                    // Use modern cookie options for PHP 7.3+
+                    setcookie('language', $lang, $cookieOptions);
+                } else {
+                    // Fallback for older PHP versions
+                    setcookie(
+                        'language',
+                        $lang,
+                        $cookieOptions['expires'],
+                        $cookieOptions['path'],
+                        $cookieOptions['domain'],
+                        $cookieOptions['secure'],
+                        $cookieOptions['httponly']
+                    );
+                }
             } else {
-                // Fallback for older PHP versions
-                setcookie(
-                    'language',
-                    $lang,
-                    $cookieOptions['expires'],
-                    $cookieOptions['path'],
-                    $cookieOptions['domain'],
-                    $cookieOptions['secure'],
-                    $cookieOptions['httponly']
-                );
+                // Headers already sent, skip cookie setting but log it
+                error_log('LanguageDetector: Headers already sent, skipping cookie setting for language: ' . $lang);
             }
             
             return true;

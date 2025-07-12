@@ -45,6 +45,7 @@ class ApplicationView extends BaseView {
         echo '<title>' . $this->escape($appTitle) . '</title>';
         echo '<link rel="stylesheet" href="assets/css/basic.css?v=' . time() . '">';
         echo '<link rel="stylesheet" href="assets/css/style.css?v=' . time() . '">';
+        echo '<link rel="stylesheet" href="assets/css/post-navigation.css?v=' . time() . '">';
         echo '</head>';
         echo '<body>';
         $this->renderLanguageSelection();
@@ -70,8 +71,8 @@ class ApplicationView extends BaseView {
         echo '<nav class="language-selector">';
         echo '<ul>';
         echo '<li>';
-        echo '<form method="get" action="">';
-        echo '<input type="hidden" name="csrf_token" value="' . $this->escape($csrfToken) . '">';
+        echo '<form method="post" action="">';
+        echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
         echo '<select name="lang" onchange="this.form.submit()">';
         echo $this->renderLanguageSelector();
         echo '</select>';
@@ -202,8 +203,8 @@ class ApplicationView extends BaseView {
                     $html .= '<p><small>' . $this->escape($this->getText('role', 'Role')) . ': ' . $this->escape($currentUser['role']) . '</small></p>';
                 }
                 
-                // Add logout link/button
-                $html .= '<p><a href="?action=logout" class="logout-link">' . $this->escape($this->getText('logout', 'Logout')) . '</a></p>';
+                // Add logout button
+                $html .= '<p>' . $this->generatePostButton('logout', '', $this->getText('logout', 'Logout'), 'logout-link', '') . '</p>';
                 
                 $html .= '</div>';
             } else {
@@ -212,7 +213,7 @@ class ApplicationView extends BaseView {
         } else {
             $html .= '<div class="guest-user">';
             $html .= '<p>' . $this->escape($this->getText('not_logged_in', 'Not logged in')) . '</p>';
-            $html .= '<p><a href="?action=login" class="login-link">' . $this->escape($this->getText('login', 'Login')) . '</a></p>';
+            $html .= '<p>' . $this->generatePostButton('login', '', $this->getText('login', 'Login'), 'login-link', '') . '</p>';
             $html .= '</div>';
         }
         
@@ -230,71 +231,41 @@ class ApplicationView extends BaseView {
         $html .= '<ul>';
         
         // Home/Dashboard
-        $html .= '<li><a href="/" class="menu-item">';
-        $html .= '<i class="icon-home"></i>';
-        $html .= $this->escape($this->getText('home', 'Home'));
-        $html .= '</a></li>';
+        $html .= '<li>' . $this->generatePostButton('', 'home', $this->getText('home', 'Home'), 'menu-item', 'icon-home') . '</li>';
         
         // Stories section
-        $html .= '<li><a href="?section=stories" class="menu-item">';
-        $html .= '<i class="icon-stories"></i>';
-        $html .= $this->escape($this->getText('stories', 'Stories'));
-        $html .= '</a></li>';
+        $html .= '<li>' . $this->generatePostButton('', 'stories', $this->getText('stories', 'Stories'), 'menu-item', 'icon-stories') . '</li>';
         
         // Community section
-        $html .= '<li><a href="?section=community" class="menu-item">';
-        $html .= '<i class="icon-community"></i>';
-        $html .= $this->escape($this->getText('community', 'Community'));
-        $html .= '</a></li>';
+        $html .= '<li>' . $this->generatePostButton('', 'community', $this->getText('community', 'Community'), 'menu-item', 'icon-community') . '</li>';
         
         // Resources section
-        $html .= '<li><a href="?section=resources" class="menu-item">';
-        $html .= '<i class="icon-resources"></i>';
-        $html .= $this->escape($this->getText('resources', 'Resources'));
-        $html .= '</a></li>';
+        $html .= '<li>' . $this->generatePostButton('', 'resources', $this->getText('resources', 'Resources'), 'menu-item', 'icon-resources') . '</li>';
         
         // About section
-        $html .= '<li><a href="?section=about" class="menu-item">';
-        $html .= '<i class="icon-about"></i>';
-        $html .= $this->escape($this->getText('about', 'About'));
-        $html .= '</a></li>';
+        $html .= '<li>' . $this->generatePostButton('', 'about', $this->getText('about', 'About'), 'menu-item', 'icon-about') . '</li>';
         
         // Add authenticated user menu items
         if ($this->authenticationManager && $this->authenticationManager->isAuthenticated()) {
             $html .= '<li class="menu-separator"></li>';
             
             // My Stories
-            $html .= '<li><a href="?section=my-stories" class="menu-item">';
-            $html .= '<i class="icon-my-stories"></i>';
-            $html .= $this->escape($this->getText('my_stories', 'My Stories'));
-            $html .= '</a></li>';
+            $html .= '<li>' . $this->generatePostButton('', 'my-stories', $this->getText('my_stories', 'My Stories'), 'menu-item', 'icon-my-stories') . '</li>';
             
             // Profile
-            $html .= '<li><a href="?section=profile" class="menu-item">';
-            $html .= '<i class="icon-profile"></i>';
-            $html .= $this->escape($this->getText('profile', 'Profile'));
-            $html .= '</a></li>';
+            $html .= '<li>' . $this->generatePostButton('', 'profile', $this->getText('profile', 'Profile'), 'menu-item', 'icon-profile') . '</li>';
             
             // Settings
-            $html .= '<li><a href="?section=settings" class="menu-item">';
-            $html .= '<i class="icon-settings"></i>';
-            $html .= $this->escape($this->getText('settings', 'Settings'));
-            $html .= '</a></li>';
+            $html .= '<li>' . $this->generatePostButton('', 'settings', $this->getText('settings', 'Settings'), 'menu-item', 'icon-settings') . '</li>';
         } else {
             // Guest user menu items
             $html .= '<li class="menu-separator"></li>';
             
             // Login
-            $html .= '<li><a href="?action=login" class="menu-item login-item">';
-            $html .= '<i class="icon-login"></i>';
-            $html .= $this->escape($this->getText('login', 'Login'));
-            $html .= '</a></li>';
+            $html .= '<li>' . $this->generatePostButton('login', '', $this->getText('login', 'Login'), 'menu-item login-item', 'icon-login') . '</li>';
             
             // Register
-            $html .= '<li><a href="?action=register" class="menu-item register-item">';
-            $html .= '<i class="icon-register"></i>';
-            $html .= $this->escape($this->getText('register', 'Register'));
-            $html .= '</a></li>';
+            $html .= '<li>' . $this->generatePostButton('register', '', $this->getText('register', 'Register'), 'menu-item register-item', 'icon-register') . '</li>';
         }
         
         $html .= '</ul>';
@@ -346,8 +317,20 @@ class ApplicationView extends BaseView {
     private function renderMainContentBody() {
         $html = '<div class="content-body">';
         
-        // Get current section from URL parameters
-        $currentSection = isset($_GET['section']) ? $this->sanitizeInput($_GET['section']) : 'home';
+        // Get current section from POST or session
+        $currentSection = 'home';
+        if (isset($_POST['section'])) {
+            $currentSection = $this->sanitizeInput($_POST['section']);
+            // Store in session for persistence
+            if ($this->sessionManager) {
+                $this->sessionManager->setSession('current_section', $currentSection);
+            }
+        } elseif ($this->sessionManager) {
+            $storedSection = $this->sessionManager->getSession('current_section');
+            if ($storedSection) {
+                $currentSection = $storedSection;
+            }
+        }
         
         switch ($currentSection) {
             case 'stories':
@@ -399,21 +382,19 @@ class ApplicationView extends BaseView {
         $html .= '<div class="feature-card">';
         $html .= '<h3>' . $this->escape($this->getText('share_story', 'Share Your Story')) . '</h3>';
         $html .= '<p>' . $this->escape($this->getText('share_story_desc', 'Your experience matters. Share your journey to inspire and support others.')) . '</p>';
-        $html .= '<a href="?section=stories&action=new" class="btn btn-primary">' . $this->escape($this->getText('start_sharing', 'Start Sharing')) . '</a>';
+        $html .= $this->generatePostButton('new', 'stories', $this->getText('start_sharing', 'Start Sharing'), 'btn btn-primary');
         $html .= '</div>';
         
         $html .= '<div class="feature-card">';
         $html .= '<h3>' . $this->escape($this->getText('read_stories', 'Read Stories')) . '</h3>';
         $html .= '<p>' . $this->escape($this->getText('read_stories_desc', 'Find inspiration and comfort in the experiences of others in our community.')) . '</p>';
-        $html .= '<a href="?section=stories" class="btn btn-secondary">' . $this->escape($this->getText('browse_stories', 'Browse Stories')) . '</a>';
+        $html .= $this->generatePostButton('', 'stories', $this->getText('browse_stories', 'Browse Stories'), 'btn btn-secondary');
         $html .= '</div>';
         
         $html .= '<div class="feature-card">';
         $html .= '<h3>' . $this->escape($this->getText('join_community', 'Join Community')) . '</h3>';
         $html .= '<p>' . $this->escape($this->getText('join_community_desc', 'Connect with others, participate in discussions, and build lasting friendships.')) . '</p>';
-        $html .= '<a href="?section=community" class="btn btn-secondary">' . $this->escape($this->getText('explore_community', 'Explore Community')) . '</a>';
-        $html .= '</div>';
-        
+        $html .= $this->generatePostButton('', 'community', $this->getText('explore_community', 'Explore Community'), 'btn btn-secondary');
         $html .= '</div>';
         $html .= '</div>';
 
@@ -473,6 +454,36 @@ class ApplicationView extends BaseView {
      */
     private function renderSettingsSection() {
         return '<section class="settings-section"><h2>' . $this->escape($this->getText('settings', 'Settings')) . '</h2><p>' . $this->escape($this->getText('settings_coming_soon', 'Settings section coming soon...')) . '</p></section>';
+    }
+    
+    /**
+     * Generate POST form button for navigation
+     */
+    private function generatePostButton($action, $section, $text, $class = '', $icon = '') {
+        $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
+        
+        $html = '<form method="post" action="" style="display: inline;">';
+        $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
+        
+        if ($action) {
+            $html .= '<input type="hidden" name="action" value="' . $this->escape($action) . '">';
+        }
+        
+        if ($section) {
+            $html .= '<input type="hidden" name="section" value="' . $this->escape($section) . '">';
+        }
+        
+        $html .= '<button type="submit" class="' . $this->escape($class) . ' post-nav-btn">';
+        
+        if ($icon) {
+            $html .= '<i class="' . $this->escape($icon) . '"></i>';
+        }
+        
+        $html .= $this->escape($text);
+        $html .= '</button>';
+        $html .= '</form>';
+        
+        return $html;
     }
     
     /**

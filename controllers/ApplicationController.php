@@ -77,8 +77,11 @@ class ApplicationController extends BaseController {
             // Handle language change if requested
             $this->handleLanguageChange();
             
+            // Handle navigation and actions
+            $this->handleNavigation();
+            
             // Check for login/logout actions
-            $action = $_GET['action'] ?? '';
+            $action = $_POST['action'] ?? '';
             
             switch ($action) {
                 case 'login':
@@ -119,11 +122,8 @@ class ApplicationController extends BaseController {
             return;
         }
         
-        // Handle GET request for basic language switching (legacy support)
-        if (isset($_GET['lang']) && !empty($_GET['lang'])) {
-            error_log("ApplicationController: Handling GET language change for: " . $_GET['lang']);
-            $this->handleLanguageChangeGet();
-        }
+        // No longer supporting GET requests for language changes
+        // All language changes must use secure POST requests
     }
     
     /**
@@ -218,40 +218,44 @@ class ApplicationController extends BaseController {
     }
     
     /**
-     * Handle basic language change via GET (legacy - no CSRF protection)
+     * Handle navigation requests via POST
      */
-    private function handleLanguageChangeGet(): void {
-        $requestedLanguage = $this->sanitizeInput($_GET['lang'] ?? '');
-        
-        // Validate language code format (should be 2-3 letter code)
-        if (!$this->isValidInput($requestedLanguage, '_-') || strlen($requestedLanguage) > 10) {
-            error_log("ApplicationController: Invalid language code format in GET: " . $requestedLanguage);
-            return;
-        }
-        
-        if (!$this->sessionManager || !$this->languageModel) {
-            error_log("ApplicationController: Missing sessionManager or languageModel for GET language change");
-            return;
-        }
-        
-        // For GET requests, only do basic validation (no CSRF token required)
-        // This is less secure but provides backward compatibility
-        
-        try {
-            // Check if language is supported
-            $supportedLanguages = $this->languageModel->getSupportedLanguages();
+    private function handleNavigation(): void {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['section'])) {
+            error_log("ApplicationController: Handling POST navigation to section: " . $_POST['section']);
             
-            if (in_array($requestedLanguage, $supportedLanguages, true)) {
-                // Set language in session
-                $this->sessionManager->setSession('user_language', $requestedLanguage);
-                
-                // Redirect to avoid resubmission
-                $this->redirect($_SERVER['PHP_SELF'] ?? '/');
-            } else {
-                error_log("ApplicationController: Unsupported language in GET: " . $requestedLanguage);
+            $requestedSection = $this->sanitizeInput($_POST['section'] ?? '');
+            
+            // Validate section name format
+            if (!$this->isValidInput($requestedSection, '-') || strlen($requestedSection) > 20) {
+                error_log("ApplicationController: Invalid section name format: " . $requestedSection);
+                return;
             }
-        } catch (\Exception $e) {
-            error_log("ApplicationController: Error during GET language change: " . $e->getMessage());
+            
+            if (!$this->sessionManager) {
+                error_log("ApplicationController: Missing sessionManager for navigation");
+                return;
+            }
+            
+            // Validate CSRF token from POST data
+            $csrfTokenRaw = $_POST['_csrf_token'] ?? '';
+            $csrfToken = $this->sanitizeInput($csrfTokenRaw);
+            
+            if (!$csrfToken || !$this->sessionManager->validateCSRFToken($csrfToken)) {
+                error_log("ApplicationController: Invalid CSRF token for navigation");
+                return;
+            }
+            
+            // Store section in session for persistence
+            $this->sessionManager->setSession('current_section', $requestedSection);
+            
+            // Also handle any additional action parameter
+            if (isset($_POST['action']) && !empty($_POST['action'])) {
+                $action = $this->sanitizeInput($_POST['action']);
+                $this->sessionManager->setSession('current_action', $action);
+            }
+            
+            error_log("ApplicationController: Navigation successful - section set to: " . $requestedSection);
         }
     }
     
@@ -519,8 +523,8 @@ class ApplicationController extends BaseController {
             $this->adminSecurityManager->destroyAdminSession();
         }
         
-        // Redirect to login
-        $this->redirect('/?action=login&error=security_violation');
+        // Redirect to login (will be handled via POST form)
+        $this->redirect('/');
     }
     
     /**
@@ -620,9 +624,13 @@ class ApplicationController extends BaseController {
      * Check if current page requires authentication
      */
     private function requiresAuth(): bool {
-        $action = $_GET['action'] ?? 'home';
-        $authRequiredActions = ['admin', 'profile', 'settings', 'upload', 'story_editor'];
+        // Check current section from session
+        $section = $this->sessionManager ? $this->sessionManager->getSession('current_section') : 'home';
+        $action = $this->sessionManager ? $this->sessionManager->getSession('current_action') : '';
         
-        return in_array($action, $authRequiredActions);
+        $authRequiredSections = ['profile', 'settings', 'my-stories'];
+        $authRequiredActions = ['admin', 'upload', 'story_editor', 'new'];
+        
+        return in_array($section, $authRequiredSections) || in_array($action, $authRequiredActions);
     }
 }

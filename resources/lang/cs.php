@@ -232,9 +232,9 @@ return [
     'language_default_missing' => 'Výchozí jazykový soubor chybí',
     'language_switch' => 'Přepnout jazyk',
     'language_switch_success' => 'Jazyk úspěšně změněn',
-    'language_switch_error' => 'Chyba při změně jazyka'
-];
-?>
+    'language_switch_error' => 'Chyba při změně jazyka',
+    
+    // Miscellaneous
     'not_available' => 'Nedostupné',
     
     // Error messages
@@ -430,4 +430,3 @@ return [
     'week' => 'Týden',
     'today_is' => 'Dnes je',
 ];
-?>

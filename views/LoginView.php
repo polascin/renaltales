@@ -57,6 +57,7 @@ class LoginView extends BaseView {
             <title><?php echo $this->escape($this->getText('login', 'Login')); ?> - <?php echo $this->escape($appTitle); ?></title>
             <link rel="stylesheet" href="assets/css/basic.css?v=<?php echo time(); ?>">
             <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
+            <link rel="stylesheet" href="assets/css/post-navigation.css?v=<?php echo time(); ?>">
         </head>
         <body class="login-page">
             <?php $this->renderLanguageSelection(); ?>
@@ -83,9 +84,9 @@ class LoginView extends BaseView {
         echo '<nav class="language-selector">';
         echo '<ul>';
         echo '<li>';
-        echo '<form method="get" action="">';
+        echo '<form method="post" action="">';
         echo '<input type="hidden" name="action" value="login">';
-        echo '<input type="hidden" name="csrf_token" value="' . $this->escape($csrfToken) . '">';
+        echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
         echo '<select name="lang" onchange="this.form.submit()">';
         echo $this->renderLanguageSelector();
         echo '</select>';
@@ -134,13 +135,18 @@ class LoginView extends BaseView {
      */
     private function renderLoginHeader() {
         $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
+        $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
         
         echo '<header class="login-header">';
         echo '<div class="login-header-content">';
-        echo '<a href="/" class="logo-link">';
+        echo '<form method="post" action="" style="display: inline;" class="logo-link">';
+        echo '<input type="hidden" name="section" value="home">';
+        echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
+        echo '<button type="submit" style="background: none; border: none; cursor: pointer; display: inline;">';
         echo '<img src="assets/images/logos/logo.gif" alt="' . $this->escape($appTitle) . ' logo" class="logo">';
         echo '<h1>' . $this->escape($appTitle) . '</h1>';
-        echo '</a>';
+        echo '</button>';
+        echo '</form>';
         echo '<h2>' . $this->escape($this->getText('login_welcome', 'Welcome Back')) . '</h2>';
         echo '<p>' . $this->escape($this->getText('login_subtitle', 'Sign in to access your account')) . '</p>';
         echo '</div>';
@@ -157,8 +163,9 @@ class LoginView extends BaseView {
         echo '<div class="login-container">';
         echo '<div class="login-form-wrapper">';
         
-        echo '<form method="post" action="?action=login" class="login-form" novalidate>';
-        echo '<input type="hidden" name="csrf_token" value="' . $this->escape($csrfToken) . '">';
+        echo '<form method="post" action="" class="login-form" novalidate>';
+        echo '<input type="hidden" name="action" value="login">';
+        echo '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
         
         // Display general errors
         if (!empty($this->errors['general'])) {

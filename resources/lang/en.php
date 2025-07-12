@@ -172,7 +172,7 @@ return [
     // Home page
     'welcome_home' => 'Welcome to Renal Tales',
     'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
-    'home_intro2' => 'This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
+    'home_intro2' => 'This web application is designed to facilitate the sharing of personal experiences, tales, and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
     'share_story' => 'Share Your Story',
     'share_story_desc' => 'Your experience matters. Share your journey to inspire and support others.',
     'start_sharing' => 'Start Sharing',
@@ -232,9 +232,7 @@ return [
     'language_default_missing' => 'Default language file missing',
     'language_switch' => 'Switch language',
     'language_switch_success' => 'Language successfully changed',
-    'language_switch_error' => 'Error changing language'
-];
-?>
+    'language_switch_error' => 'Error changing language',
     'not_available' => 'Not available',
     
     // Error messages
@@ -741,4 +739,4 @@ return [
     'immunosuppression' => 'Immunosuppression',
     'anti_rejection_medication' => 'Anti-rejection medication',
 ];
-?>
+// End of resources/lang/en.php
