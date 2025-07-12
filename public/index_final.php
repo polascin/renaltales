@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 declare(strict_types=1);
 
 define('APP_DIR', dirname(__DIR__));
@@ -6,8 +6,12 @@ define('DEFAULT_LANGUAGE', 'sk');
 define('LANGUAGE_PATH', APP_DIR . '/resources/lang/');
 define('DEBUG_MODE', true);
 
+require_once APP_DIR . '/models/BaseModel.php';
 require_once APP_DIR . '/models/LanguageModel.php';
+require_once APP_DIR . '/core/LanguageDetector.php';
+require_once APP_DIR . '/core/Database.php';
 require_once APP_DIR . '/core/SessionManager.php';
+require_once APP_DIR . '/controllers/BaseController.php';
 require_once APP_DIR . '/controllers/ApplicationController.php';
 require_once APP_DIR . '/views/ErrorViewFinal.php';
 
