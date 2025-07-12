@@ -19,8 +19,20 @@ class ApplicationView extends BaseView {
      * Render the main application content
      */
     protected function renderContent(): void {
-        $currentLanguage = $this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en';
-        $currentLanguageName = $this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English';
+        // Safely get current language and ensure it's a string
+        $currentLanguage = 'en';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
+            $lang = $this->languageModel->getCurrentLanguage();
+            $currentLanguage = is_string($lang) ? $lang : 'en';
+        }
+        
+        // Safely get current language name
+        $currentLanguageName = 'English';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguageName')) {
+            $langName = $this->languageModel->getCurrentLanguageName();
+            $currentLanguageName = is_string($langName) ? $langName : 'English';
+        }
+        
         $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
         $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
         
@@ -88,7 +100,14 @@ class ApplicationView extends BaseView {
             
             $langName = $this->languageModel->getLanguageName($lang);
             $flagPath = $this->languageModel->getFlagPath($lang);
-            $selected = ($this->languageModel->getCurrentLanguage() === $lang) ? ' selected' : '';
+            
+            // Safely get current language for comparison
+            $currentLang = 'en';
+            if (method_exists($this->languageModel, 'getCurrentLanguage')) {
+                $currLang = $this->languageModel->getCurrentLanguage();
+                $currentLang = is_string($currLang) ? $currLang : 'en';
+            }
+            $selected = ($currentLang === $lang) ? ' selected' : '';
             
             $html .= '<option value="' . $this->escape($lang) . '"' . $selected . ' data-flag="' . $this->escape($flagPath) . '">';
             $html .= $this->escape($langName) . ' (' . $this->escape($lang) . ')';
@@ -489,7 +508,15 @@ class ApplicationView extends BaseView {
         echo '<div>';
         echo '<section class="language-selection-flags">';
         echo $this->renderLanguageFlags();
-        echo '<p>' . $this->escape($this->getText('current_language', 'Current language')) . ': <strong>' . $this->escape($this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English') . '</strong>. </p>';
+        
+        // Safely get current language name
+        $currentLangName = 'English';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguageName')) {
+            $langName = $this->languageModel->getCurrentLanguageName();
+            $currentLangName = is_string($langName) ? $langName : 'English';
+        }
+        
+        echo '<p>' . $this->escape($this->getText('current_language', 'Current language')) . ': <strong>' . $this->escape($currentLangName) . '</strong>. </p>';
         echo '<p>' . $this->escape($this->getText('welcome', 'Welcome')) . '! </p>';
         echo '</section>';
         echo '</div>'; 
@@ -516,7 +543,7 @@ class ApplicationView extends BaseView {
             $flagPath = $this->languageModel->getFlagPath($lang);
             
             // Use secure POST form instead of GET link to avoid CSRF token exposure
-            $html .= '<form method="POST" style="display: inline-block; margin: 2px;" class="language-flag-form">';
+            $html .= '<form method="POST" class="language-flag-form">';
             $html .= '<input type="hidden" name="lang" value="' . $this->escape($lang) . '">';
             
             // Add CSRF token if SecurityManager is available
@@ -525,8 +552,8 @@ class ApplicationView extends BaseView {
                 $html .= '<input type="hidden" name="_csrf_token" value="' . $this->escape($csrfToken) . '">';
             }
             
-            $html .= '<button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;" title="' . $this->escape($langName) . '">';
-            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '" style="border: 1px solid #ddd; margin: 2px;">';
+            $html .= '<button type="submit" title="' . $this->escape($langName) . '">';
+            $html .= '<img src="' . $this->escape($flagPath) . '" alt="' . $this->escape($langName) . '">';
             $html .= '<span style="font-size: 12px; display: block;">' . $this->escape($lang) . '</span>';
             $html .= '</button>';
             $html .= '</form>';
@@ -570,7 +597,11 @@ class ApplicationView extends BaseView {
         echo '});';
         
         // Get current language and convert to proper locale
-        $currentLanguage = $this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en';
+        $currentLanguage = 'en';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
+            $lang = $this->languageModel->getCurrentLanguage();
+            $currentLanguage = is_string($lang) ? $lang : 'en';
+        }
         $localeMap = [
             'en' => 'en-US', 'sk' => 'sk-SK', 'de' => 'de-DE', 'fr' => 'fr-FR', 'es' => 'es-ES',
             'it' => 'it-IT', 'pt' => 'pt-PT', 'ru' => 'ru-RU', 'pl' => 'pl-PL', 'cs' => 'cs-CZ',

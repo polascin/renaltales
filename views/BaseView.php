@@ -79,11 +79,21 @@ abstract class BaseView {
     /**
      * Escape HTML output
      * 
-     * @param string $string
+     * @param mixed $input
      * @return string
      */
-    protected function escape(string $string): string {
-        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    protected function escape($input): string {
+        if (is_array($input)) {
+            // If array, convert to string safely
+            return htmlspecialchars(json_encode($input), ENT_QUOTES, 'UTF-8');
+        }
+        
+        if (!is_string($input)) {
+            // Convert non-strings to string
+            $input = (string) $input;
+        }
+        
+        return htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     }
     
     /**

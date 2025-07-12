@@ -102,7 +102,8 @@ class ErrorView extends BaseView {
         // Get current language or default to English
         $currentLang = 'en';
         if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
-            $currentLang = $this->languageModel->getCurrentLanguage() ?? 'en';
+            $lang = $this->languageModel->getCurrentLanguage();
+            $currentLang = is_string($lang) ? $lang : 'en';
         }
         
         ?>

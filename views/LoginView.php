@@ -30,8 +30,20 @@ class LoginView extends BaseView {
      * Render the login page content
      */
     protected function renderContent(): void {
-        $currentLanguage = $this->languageModel ? $this->languageModel->getCurrentLanguage() : 'en';
-        $currentLanguageName = $this->languageModel ? $this->languageModel->getCurrentLanguageName() : 'English';
+        // Safely get current language and ensure it's a string
+        $currentLanguage = 'en';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
+            $lang = $this->languageModel->getCurrentLanguage();
+            $currentLanguage = is_string($lang) ? $lang : 'en';
+        }
+        
+        // Safely get current language name
+        $currentLanguageName = 'English';
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguageName')) {
+            $langName = $this->languageModel->getCurrentLanguageName();
+            $currentLanguageName = is_string($langName) ? $langName : 'English';
+        }
+        
         $appTitle = $this->getText('app_title', defined('APP_TITLE') ? APP_TITLE : 'Renal Tales');
         $csrfToken = $this->sessionManager ? $this->sessionManager->getCSRFToken() : 'no-token';
         
@@ -100,7 +112,14 @@ class LoginView extends BaseView {
             if (!file_exists($langFile)) continue;
             
             $langName = $this->languageModel->getLanguageName($lang);
-            $selected = ($this->languageModel->getCurrentLanguage() === $lang) ? ' selected' : '';
+            
+            // Safely get current language for comparison
+            $currentLang = 'en';
+            if (method_exists($this->languageModel, 'getCurrentLanguage')) {
+                $currLang = $this->languageModel->getCurrentLanguage();
+                $currentLang = is_string($currLang) ? $currLang : 'en';
+            }
+            $selected = ($currentLang === $lang) ? ' selected' : '';
             
             $html .= '<option value="' . $this->escape($lang) . '"' . $selected . '>';
             $html .= $this->escape($langName) . ' (' . $this->escape($lang) . ')';
