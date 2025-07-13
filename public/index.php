@@ -8,20 +8,12 @@ define('DEBUG_MODE', true);
 require_once APP_DIR . '/bootstrap.php';
 
 // Include necessary files using correct paths
-require_once APP_DIR . '/src/Models/BaseModel.php';
-require_once APP_DIR . '/src/Models/LanguageModel.php';
-require_once APP_DIR . '/src/Core/LanguageDetector.php';
-require_once APP_DIR . '/src/Core/Database.php';
-require_once APP_DIR . '/src/Core/SessionManager.php';
-require_once APP_DIR . '/src/Controllers/BaseController.php';
-require_once APP_DIR . '/src/Controllers/ApplicationController.php';
-require_once APP_DIR . '/src/Views/ErrorView.php';
-
-// Add namespace usage
+// Autoload necessary classes
 use RenalTales\Core\LanguageDetector;
 use RenalTales\Core\SessionManager;
 use RenalTales\Models\LanguageModel;
 use RenalTales\Controllers\ApplicationController;
+use RenalTales\Views\ErrorView;
 
 try {
     $languageModel = new LanguageModel();

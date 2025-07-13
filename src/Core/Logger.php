@@ -1,29 +1,39 @@
 <?php
+
+declare(strict_types=1);
+
+namespace RenalTales\Core;
+
+use PDO;
+
 /**
  * Renal Tales Logging System
- * 
+ *
  * This class provides methods to log various user activities and security events
  * to the database logging tables.
  */
 
-class Logger {
-    private $db;
-    
-    public function __construct($database) {
+class Logger
+{
+    private \PDO $db;
+
+    public function __construct(\PDO $database)
+    {
         $this->db = $database;
     }
-    
+
     /**
      * Log user registration events
      */
-    public function logRegistration($userId, $username, $email, $status, $failureReason = null, $additionalData = null) {
+    public function logRegistration(?int $userId, string $username, string $email, string $status, ?string $failureReason = null, ?array $additionalData = null): bool
+    {
         $stmt = $this->db->prepare("
             INSERT INTO user_registration_logs 
             (user_id, username, email, registration_status, failure_reason, ip_address, user_agent, 
              country, city, registration_source, referrer, additional_data) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
+
         return $stmt->execute([
             $userId,
             $username,
@@ -39,17 +49,18 @@ class Logger {
             $additionalData ? json_encode($additionalData) : null
         ]);
     }
-    
+
     /**
      * Log user login events
      */
-    public function logLogin($userId, $username, $additionalData = null) {
+    public function logLogin($userId, $username, $additionalData = null)
+    {
         $stmt = $this->db->prepare("
             INSERT INTO login_logs 
             (user_id, username, ip_address, user_agent, country, city, login_source, additional_data) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
+
         return $stmt->execute([
             $userId,
             $username,
@@ -61,17 +72,18 @@ class Logger {
             $additionalData ? json_encode($additionalData) : null
         ]);
     }
-    
+
     /**
      * Log user logout events
      */
-    public function logLogout($userId, $username, $additionalData = null) {
+    public function logLogout($userId, $username, $additionalData = null)
+    {
         $stmt = $this->db->prepare("
             INSERT INTO logout_logs 
             (user_id, username, ip_address, user_agent, country, city, logout_source, additional_data) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
+
         return $stmt->execute([
             $userId,
             $username,
@@ -83,13 +95,22 @@ class Logger {
             $additionalData ? json_encode($additionalData) : null
         ]);
     }
-    
+
     /**
      * Log user activity events
      */
-    public function logActivity($userId, $username, $actionType, $actionDescription, $resourceType = null, 
-                               $resourceId = null, $oldValues = null, $newValues = null, $severity = 'medium', 
-                               $additionalData = null) {
+    public function logActivity(
+        $userId,
+        $username,
+        $actionType,
+        $actionDescription,
+        $resourceType = null,
+        $resourceId = null,
+        $oldValues = null,
+        $newValues = null,
+        $severity = 'medium',
+        $additionalData = null
+    ) {
         $stmt = $this->db->prepare("
             INSERT INTO user_activity_logs 
             (user_id, username, action_type, action_description, resource_type, resource_id, 
@@ -97,7 +118,7 @@ class Logger {
              request_url, session_id, severity, additional_data) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
+
         return $stmt->execute([
             $userId,
             $username,
@@ -118,13 +139,21 @@ class Logger {
             $additionalData ? json_encode($additionalData) : null
         ]);
     }
-    
+
     /**
      * Log failed login attempts
      */
-    public function logFailedLogin($userId, $usernameOrEmail, $failureReason, $attemptCount = 1, 
-                                  $isBlocked = false, $blockedUntil = null, $threatLevel = 'medium', 
-                                  $attemptedPasswordHash = null, $additionalData = null) {
+    public function logFailedLogin(
+        $userId,
+        $usernameOrEmail,
+        $failureReason,
+        $attemptCount = 1,
+        $isBlocked = false,
+        $blockedUntil = null,
+        $threatLevel = 'medium',
+        $attemptedPasswordHash = null,
+        $additionalData = null
+    ) {
         $stmt = $this->db->prepare("
             INSERT INTO failed_login_attempts 
             (user_id, username_or_email, ip_address, user_agent, country, city, failure_reason, 
@@ -132,7 +161,7 @@ class Logger {
              is_blocked, blocked_until, threat_level, additional_data) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        
+
         return $stmt->execute([
             $userId,
             $usernameOrEmail,
@@ -152,15 +181,16 @@ class Logger {
             $additionalData ? json_encode($additionalData) : null
         ]);
     }
-    
+
     /**
      * Check if IP is currently blocked
      */
-    public function isIPBlocked($ipAddress = null) {
+    public function isIPBlocked($ipAddress = null)
+    {
         if (!$ipAddress) {
             $ipAddress = $this->getClientIP();
         }
-        
+
         $stmt = $this->db->prepare("
             SELECT COUNT(*) as blocked_count 
             FROM failed_login_attempts 
@@ -168,38 +198,40 @@ class Logger {
             AND is_blocked = 1 
             AND (blocked_until IS NULL OR blocked_until > NOW())
         ");
-        
+
         $stmt->execute([$ipAddress]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return $result['blocked_count'] > 0;
     }
-    
+
     /**
      * Get failed login attempt count for IP in last hour
      */
-    public function getFailedAttemptCount($ipAddress = null, $hours = 1) {
+    public function getFailedAttemptCount($ipAddress = null, $hours = 1)
+    {
         if (!$ipAddress) {
             $ipAddress = $this->getClientIP();
         }
-        
+
         $stmt = $this->db->prepare("
             SELECT COUNT(*) as attempt_count 
             FROM failed_login_attempts 
             WHERE ip_address = ? 
             AND created_at > DATE_SUB(NOW(), INTERVAL ? HOUR)
         ");
-        
+
         $stmt->execute([$ipAddress, $hours]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         return $result['attempt_count'];
     }
-    
+
     /**
      * Block IP address for specified duration
      */
-    public function blockIP($ipAddress, $duration = '1 HOUR', $threatLevel = 'high') {
+    public function blockIP($ipAddress, $duration = '1 HOUR', $threatLevel = 'high')
+    {
         $stmt = $this->db->prepare("
             UPDATE failed_login_attempts 
             SET is_blocked = 1, 
@@ -208,19 +240,26 @@ class Logger {
             WHERE ip_address = ? 
             AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)
         ");
-        
+
         return $stmt->execute([$threatLevel, $ipAddress]);
     }
-    
+
     // Helper methods to get client information
-    
-    private function getClientIP() {
+
+    private function getClientIP()
+    {
         $ipKeys = ['HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'];
         foreach ($ipKeys as $key) {
             if (array_key_exists($key, $_SERVER) === true) {
                 foreach (explode(',', $_SERVER[$key]) as $ip) {
                     $ip = trim($ip);
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
+                    if (
+                        filter_var(
+                            $ip,
+                            FILTER_VALIDATE_IP,
+                            FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+                        ) !== false
+                    ) {
                         return $ip;
                     }
                 }
@@ -228,28 +267,34 @@ class Logger {
         }
         return $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
     }
-    
-    private function getUserAgent() {
+
+    private function getUserAgent()
+    {
         return $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
     }
-    
-    private function getRequestMethod() {
+
+    private function getRequestMethod()
+    {
         return $_SERVER['REQUEST_METHOD'] ?? 'GET';
     }
-    
-    private function getRequestUrl() {
+
+    private function getRequestUrl()
+    {
         return $_SERVER['REQUEST_URI'] ?? '';
     }
-    
-    private function getSessionId() {
+
+    private function getSessionId()
+    {
         return session_id() ?: null;
     }
-    
-    private function getReferrer() {
+
+    private function getReferrer()
+    {
         return $_SERVER['HTTP_REFERER'] ?? null;
     }
-    
-    private function getRegistrationSource() {
+
+    private function getRegistrationSource()
+    {
         // Detect source based on user agent or other factors
         $userAgent = $this->getUserAgent();
         if (strpos($userAgent, 'Mobile') !== false) {
@@ -259,22 +304,26 @@ class Logger {
         }
         return 'web';
     }
-    
-    private function getLoginSource() {
+
+    private function getLoginSource()
+    {
         return $this->getRegistrationSource();
     }
-    
-    private function getLogoutSource() {
+
+    private function getLogoutSource()
+    {
         return $this->getRegistrationSource();
     }
-    
-    private function getCountry() {
+
+    private function getCountry()
+    {
         // This would typically use a GeoIP service
         // For now, return null - implement with your preferred GeoIP service
         return null;
     }
-    
-    private function getCity() {
+
+    private function getCity()
+    {
         // This would typically use a GeoIP service
         // For now, return null - implement with your preferred GeoIP service
         return null;

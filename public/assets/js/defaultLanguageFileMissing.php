@@ -13,7 +13,7 @@
 <body>
     <hr>
     <h1>Fatal Error</h1>
-    <h2><?= APP_TITLE ?> - Default Language File Missing</h2>
+    <h2><?php echo APP_TITLE ?> - Default Language File Missing</h2>
     <p>
         The default language file is missing.<br>
         Timestamp: <?php echo date('Y-m-d H:i:s T'); ?><br>
@@ -21,11 +21,11 @@
     </p>
     <hr>
     <h1>Závažná chyba</h1>
-    <h2><?= APP_TITLE ?> - Chýba predvolený jazykový súbor</h2>
+    <h2><?php echo APP_TITLE ?> - Chýba predvolený jazykový súbor</h2>
     <p>
         Chýba predvolený jazykový súbor. Ak chcete tento problém vyriešiť, kontaktujte administrátora.
     </p>
-    <hr
+    <hr>
 </body>
 </html>
 <?php

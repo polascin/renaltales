@@ -24,11 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Include required files
 require_once '../bootstrap.php';
-require_once '../controllers/StoryController.php';
-require_once '../core/SecurityManager.php';
-require_once '../core/RateLimitManager.php';
-require_once '../core/InputValidator.php';
-require_once '../core/SessionManager.php';
+
+// Use PSR-4 autoloaded classes
+use RenalTales\Controllers\StoryController;
+use RenalTales\Core\SecurityManager;
+use RenalTales\Core\RateLimitManager;
+use RenalTales\Core\InputValidator;
+use RenalTales\Core\SessionManager;
 
 // Initialize security components
 $sessionManager = new SessionManager();

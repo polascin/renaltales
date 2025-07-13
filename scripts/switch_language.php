@@ -9,8 +9,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include the LanguageManager
-require_once 'src/Core/LanguageManager.php';
+// Include bootstrap for autoloading
+require_once __DIR__ . '/../bootstrap.php';
+
+// Use PSR-4 autoloaded classes
+use RenalTales\Core\LanguageManager;
+use Exception;
 
 // Set JSON header
 header('Content-Type: application/json');

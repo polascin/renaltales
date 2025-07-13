@@ -1,5 +1,7 @@
 <?php
 
+namespace RenalTales\Scripts\Backup;
+
 /**
  * RenalTales Backup System
  * 

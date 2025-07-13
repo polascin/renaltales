@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales;
+
 /**
  * PHP Issue Fix Script
  * 

@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales\Scripts;
+
 /**
  * Test Execution Script
  * 

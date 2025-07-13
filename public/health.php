@@ -1,5 +1,7 @@
 <?php
 
+namespace RenalTales\Public;
+
 /**
  * RenalTales Health Check Endpoint
  * 
@@ -11,6 +13,11 @@
  */
 
 require_once dirname(__DIR__) . '/bootstrap.php';
+
+use Exception;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use PDO;
 
 class HealthCheckService
 {

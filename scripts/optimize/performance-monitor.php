@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales\Scripts\Optimize;
+
 /**
  * Performance Monitor for Renal Tales Application
  * 

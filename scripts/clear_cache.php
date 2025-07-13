@@ -9,8 +9,12 @@
  * @version 2025.v1.0
  */
 
-// Include the CacheManager
-require_once __DIR__ . '/../core/CacheManager.php';
+// Include bootstrap for autoloading
+require_once __DIR__ . '/../bootstrap.php';
+
+// Use PSR-4 autoloaded classes
+use RenalTales\Core\CacheManager;
+use Exception;
 
 echo "=== Renal Tales Advanced Cache Clear Script ===\n";
 echo "Started at: " . date('Y-m-d H:i:s') . "\n\n";

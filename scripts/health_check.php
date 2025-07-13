@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales\Scripts;
+
 /**
  * Health Check Script for VS Code Problems
  * Checks for common issues and validates system integrity

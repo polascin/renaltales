@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace RenalTales\Scripts;
+
 require_once 'core/MultilingualServiceProvider.php';
 
 /**

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * English language file for Renal Tales
  * 

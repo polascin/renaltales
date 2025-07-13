@@ -1,5 +1,7 @@
 <?php
 
+namespace RenalTales\Scripts\Optimize;
+
 /**
  * RenalTales Production Optimizer
  * 

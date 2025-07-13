@@ -313,27 +313,27 @@ function getBackupFiles() {
                 <form id="database-config-form">
                     <div class="form-group">
                         <label for="DB_HOST">Database Host</label>
-                        <input type="text" id="DB_HOST" name="DB_HOST" value="<?= htmlspecialchars($currentConfig['DB_HOST'] ?? '') ?>" required>
+                        <input type="text" id="DB_HOST" name="DB_HOST" value="<?php echo htmlspecialchars($currentConfig['DB_HOST'] ?? '') ?>" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="DB_PORT">Port</label>
-                        <input type="number" id="DB_PORT" name="DB_PORT" value="<?= htmlspecialchars($currentConfig['DB_PORT'] ?? '3306') ?>" required>
+                        <input type="number" id="DB_PORT" name="DB_PORT" value="<?php echo htmlspecialchars($currentConfig['DB_PORT'] ?? '3306') ?>" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="DB_DATABASE">Database Name</label>
-                        <input type="text" id="DB_DATABASE" name="DB_DATABASE" value="<?= htmlspecialchars($currentConfig['DB_DATABASE'] ?? '') ?>" required>
+                        <input type="text" id="DB_DATABASE" name="DB_DATABASE" value="<?php echo htmlspecialchars($currentConfig['DB_DATABASE'] ?? '') ?>" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="DB_USERNAME">Username</label>
-                        <input type="text" id="DB_USERNAME" name="DB_USERNAME" value="<?= htmlspecialchars($currentConfig['DB_USERNAME'] ?? '') ?>" required>
+                        <input type="text" id="DB_USERNAME" name="DB_USERNAME" value="<?php echo htmlspecialchars($currentConfig['DB_USERNAME'] ?? '') ?>" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="DB_PASSWORD">Password</label>
-                        <input type="password" id="DB_PASSWORD" name="DB_PASSWORD" value="<?= htmlspecialchars($currentConfig['DB_PASSWORD'] ?? '') ?>">
+                        <input type="password" id="DB_PASSWORD" name="DB_PASSWORD" value="<?php echo htmlspecialchars($currentConfig['DB_PASSWORD'] ?? '') ?>">
                         <small>Leave empty to keep current password</small>
                     </div>
                     
@@ -363,10 +363,10 @@ function getBackupFiles() {
                         <?php foreach ($backupFiles as $backup): ?>
                             <div class="backup-item">
                                 <div>
-                                    <strong><?= htmlspecialchars($backup['filename']) ?></strong><br>
-                                    <small><?= htmlspecialchars($backup['date']) ?> (<?= number_format($backup['size']) ?> bytes)</small>
+                                    <strong><?php echo htmlspecialchars($backup['filename']) ?></strong><br>
+                                    <small><?php echo htmlspecialchars($backup['date']) ?> (<?php echo number_format($backup['size']) ?> bytes)</small>
                                 </div>
-                                <button type="button" class="btn danger" onclick="restoreBackup('<?= htmlspecialchars($backup['filename']) ?>')">
+                                <button type="button" class="btn danger" onclick="restoreBackup('<?php echo htmlspecialchars($backup['filename']) ?>')">
                                     Restore
                                 </button>
                             </div>

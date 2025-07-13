@@ -1,7 +1,10 @@
 <?php
+
+namespace RenalTales\Scripts;
+
 /**
  * Comprehensive Multilingual Environment Consistency Check
- * Tests all aspects of language implementation across the application
+ * 
  */
 
 // Set up basic constants and autoloading

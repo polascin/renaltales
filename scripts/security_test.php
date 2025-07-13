@@ -1,5 +1,7 @@
 <?php
 
+namespace RenalTales\Scripts;
+
 /**
  * Security Testing and Validation Script
  * 

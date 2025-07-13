@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales\Scripts;
+
 /**
  * Flag Path Validation and Testing Script
  * 

@@ -1,4 +1,7 @@
 <?php
+
+namespace RenalTales\Database;
+
 /**
  * Database Migration Runner
  * 
