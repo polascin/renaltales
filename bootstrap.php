@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Bootstrap file for RenalTales application
  * This file initializes the application environment and sets up autoloading
@@ -7,11 +8,22 @@
 // Ensure we're using the correct directory separator
 define('DS', DIRECTORY_SEPARATOR);
 
-// Define application root directory
-define('APP_ROOT', __DIR__);
+// Define APP_ROOT if not already defined
+if (!defined('APP_ROOT')) {
+    define('APP_ROOT', __DIR__);
+}
+
 
 // Load Composer autoloader
 require_once APP_ROOT . DS . 'vendor' . DS . 'autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// Ensure Monolog classes are loaded
+if (!class_exists(\Monolog\Logger::class)) {
+    throw new \RuntimeException('Monolog is not installed. Run "composer require monolog/monolog".');
+}
 
 // Load environment variables
 // Ensure the Dotenv class is available before trying to use it
@@ -23,7 +35,7 @@ if (file_exists($envFile)) {
     foreach ($lines as $line) {
         $line = trim($line);
         if (empty($line) || strpos($line, '#') === 0) continue;
-        
+
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
@@ -51,33 +63,28 @@ if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
     ini_set('display_errors', 0);
 }
 
-// Set default timezone
-date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
-
 // Initialize logging
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+
+
 
 if (class_exists(Logger::class)) {
     $logger = new Logger('renaltales');
     $logPath = APP_ROOT . DS . ($_ENV['LOG_PATH'] ?? 'storage/logs/app.log');
-    
+
     // Create log directory if it doesn't exist
     $logDir = dirname($logPath);
     if (!is_dir($logDir)) {
         mkdir($logDir, 0755, true);
     }
-    
+
     // Use appropriate log level constant based on Monolog version
-    if (class_exists('\Monolog\Level')) {
-        // Monolog 3.x uses enum-based levels
-        $debugLevel = \Monolog\Level::Debug;
+    if (defined('Monolog\\Logger::DEBUG')) {
+        $debugLevel = Logger::DEBUG;
     } else {
-        // Fallback to raw integer value (100 = DEBUG level)
         $debugLevel = 100;
     }
+
     $logger->pushHandler(new StreamHandler($logPath, $debugLevel));
-    
     // Make logger available globally
     $GLOBALS['logger'] = $logger;
 }
