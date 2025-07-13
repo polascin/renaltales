@@ -30,6 +30,24 @@ class ErrorView extends BaseView {
         $this->exception = $exception;
         $this->isDebugMode = $isDebugMode;
     }
+
+    /**
+     * Get translated text or fallback to default
+     *
+     * @param string $key
+     * @param string $default
+     * @return string
+     */
+    protected function getText(string $key, string $default): string
+    {
+        if ($this->languageModel && method_exists($this->languageModel, 'getText')) {
+            $text = $this->languageModel->getText($key);
+            if (is_string($text) && $text !== '') {
+                return $text;
+            }
+        }
+        return $default;
+    }
     
     /**
      * Render error page content
