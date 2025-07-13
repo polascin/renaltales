@@ -126,6 +126,12 @@ coverage.xml
 test_*.php
 !tests/
 
+# Debug and development files
+debug_*.php
+fix_*.php
+check_*.php
+simple_*.php
+
 # ===== CODE QUALITY TOOLS =====================
 # PHP CS Fixer
 .php_cs
@@ -198,6 +204,18 @@ cache.properties
 # Documentation reports (if auto-generated)
 *_REPORT.md
 *_SUMMARY.md
+*_FIXES.md
+*_RESOLUTION.md
+*_IMPLEMENTATION.md
+*_COMPLETE.md
+*_ALERT.md
+*_ANALYSIS*.md
+*_CONSISTENCY*.md
+*_INTEGRITY*.md
+*_COMPATIBILITY*.md
+*_COMPLIANCE*.md
+*_REMAINING*.md
+*.html
 !README.md
 !SETUP.md
 !SECURITY.md
