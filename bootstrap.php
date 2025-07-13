@@ -26,20 +26,19 @@ if (!class_exists(\Monolog\Logger::class)) {
 }
 
 // Load environment variables
-// Ensure the Dotenv class is available before trying to use it
 $envFile = APP_ROOT . DS . '.env';
 
 if (file_exists($envFile)) {
-    // Manual parsing of .env file
+    // Manual parsing of .env file - reliable and works in all environments
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         $line = trim($line);
         if (empty($line) || strpos($line, '#') === 0) continue;
-
+        
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
-            $value = trim($value, '"\'');
+            $value = trim($value, '"\'\'');
             $_ENV[$key] = $value;
             putenv("$key=$value");
         }
@@ -52,6 +51,12 @@ if (file_exists($envFile)) {
     $_ENV['DB_DATABASE'] = 'renaltales';
     $_ENV['DB_USERNAME'] = 'root';
     $_ENV['DB_PASSWORD'] = '';
+    $_ENV['DB_CHARSET'] = 'utf8mb4';
+    
+    // Set putenv for backward compatibility
+    foreach ($_ENV as $key => $value) {
+        putenv("$key=$value");
+    }
 }
 
 // Set up error reporting based on environment
@@ -63,10 +68,10 @@ if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
     ini_set('display_errors', 0);
 }
 
+// Set timezone
+date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
+
 // Initialize logging
-
-
-
 if (class_exists(Logger::class)) {
     $logger = new Logger('renaltales');
     $logPath = APP_ROOT . DS . ($_ENV['LOG_PATH'] ?? 'storage/logs/app.log');
