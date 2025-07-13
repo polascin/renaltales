@@ -30,7 +30,10 @@
             "RenalTales\\Core\\": "src/Core/",
             "RenalTales\\Models\\": "src/Models/",
             "RenalTales\\Views\\": "src/Views/"
-        }
+        },
+        "files": [
+            "src/Core/database_helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

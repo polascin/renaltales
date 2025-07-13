@@ -5,11 +5,13 @@
  * Creates a test user for testing the login system
  */
 
-require_once __DIR__ . '/core/Database.php';
+use RenalTales\Core\Database;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+echo "Checking database and creating test user...\n";
 
 try {
-    echo "Checking database and creating test user...\n";
-    
     $db = Database::getInstance();
     
     // Check if users table exists
@@ -36,7 +38,7 @@ try {
     }
     
     // Check if test user exists
-    $existingUser = $db->selectOne("SELECT id FROM users WHERE email = ?", ['test@example.com']);
+    $existingUser = $db->fetchOne("SELECT id FROM users WHERE email = ?", ['test@example.com']);
     
     if (!$existingUser) {
         echo "Creating test user...\n";

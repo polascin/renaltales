@@ -14,10 +14,12 @@ define('APP_TITLE', 'Renal Tales');
 define('DEBUG_MODE', true);
 
 // Include required classes
-require_once APP_DIR . '/core/Database.php';
-require_once APP_DIR . '/core/LanguageDetector.php';
-require_once APP_DIR . '/core/SessionManager.php';
-require_once APP_DIR . '/models/LanguageModel.php';
+use RenalTales\Core\Database;
+use RenalTales\Core\LanguageDetector;
+use RenalTales\Core\SessionManager;
+use RenalTales\Models\LanguageModel;
+
+require_once APP_DIR . '/../vendor/autoload.php';
 
 echo "=" . str_repeat("=", 60) . "\n";
 echo "         LANGUAGE PERSISTENCE VERIFICATION REPORT\n";

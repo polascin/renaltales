@@ -5,7 +5,9 @@
  * Create remember_tokens table
  */
 
-require_once __DIR__ . '/core/Database.php';
+use RenalTales\Core\Database;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 try {
     echo "Starting database migration...\n";

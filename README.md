@@ -1,8 +1,7 @@
-# **Renal Tales** 
+# **Renal Tales**
 
 > *Web Application by* ***Lumpe Paskuden von Lumpenen*** *aka* ***Walter Kyo*** *or* ***Walter Csoelle Kyo***
 > *Author:* Lubomir Polascin (Ľubomír Polaščín)
-
 > *Technology used:* **PHP**, **HTML**, **CSS**, **JavaScript**, **MySQL**
 
 ---
@@ -17,7 +16,7 @@ The project follows modern PHP application best practices with a well-organized 
 
 ### 📁 Project Structure
 
-```
+```txt
 renaltales/
 ├── 📁 config/              # Configuration files
 │   ├── app.php             # Main application settings
@@ -83,6 +82,7 @@ renaltales/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - PHP 7.4 or higher
 - MySQL 5.7 or higher
 - Apache/Nginx web server
@@ -91,6 +91,7 @@ renaltales/
 ### Installation
 
 1. **Clone/Download** the project to your web server directory
+
    ```bash
    # For Laragon users
    Place in: C:\laragon\www\renaltales
@@ -98,6 +99,7 @@ renaltales/
    ```
 
 2. **Set up Environment**
+
    ```bash
    cp .env.example .env
    # Edit .env file with your database credentials
@@ -109,6 +111,7 @@ renaltales/
    - Run schema files from `database/schema/`
 
 4. **Set Permissions** (if on Linux/macOS)
+
    ```bash
    chmod -R 755 storage/
    chmod -R 755 resources/lang/
@@ -121,6 +124,7 @@ renaltales/
 ## 🔧 Configuration
 
 ### Main Configuration (`config/app.php`)
+
 - Application settings
 - Language configuration  
 - Security settings
@@ -128,11 +132,13 @@ renaltales/
 - Cache settings
 
 ### Database Configuration (`config/database.php`)
+
 - Database connections
 - Connection options
 - Environment-based settings
 
 ### Environment Variables (`.env`)
+
 ```env
 # Database
 DB_HOST=localhost
@@ -148,6 +154,7 @@ APP_DEBUG=true
 ## 🌍 Multilingual Support
 
 The application supports **136 languages** with automatic detection:
+
 - Language files: `resources/lang/`
 - Default language: Slovak (sk)
 - Fallback language: English (en)
@@ -156,11 +163,13 @@ The application supports **136 languages** with automatic detection:
 ## 🏗️ Architecture
 
 ### MVC Pattern
+
 - **Models**: Data access and business logic
 - **Views**: Presentation layer and HTML generation  
 - **Controllers**: Request handling and application flow
 
 ### Key Features
+
 - ✅ CSRF Protection
 - ✅ Session Management
 - ✅ Input Sanitization
@@ -172,11 +181,13 @@ The application supports **136 languages** with automatic detection:
 ## 📝 Development
 
 ### Adding New Features
+
 1. **Controller**: Extend `BaseController`
 2. **Model**: Extend `BaseModel`
 3. **View**: Extend `BaseView`
 
 ### Directory Best Practices
+
 - **config/**: All configuration files
 - **storage/**: Never commit storage contents
 - **docs/**: Keep documentation updated
@@ -195,6 +206,7 @@ The application supports **136 languages** with automatic detection:
 ## 📊 Logging
 
 Logs are stored in `storage/logs/`:
+
 - `application.log`: General application logs
 - `error.log`: Error and exception logs
 
@@ -205,9 +217,29 @@ Logs are stored in `storage/logs/`:
 3. Add proper documentation
 4. Test thoroughly before submitting
 
+## 🧑‍💻 Coding Standards
+
+This project adheres to the PSR-12 coding standard for PHP code. These standards ensure consistency and quality across the project:
+
+- **PSR-1**: Basic Coding Standard
+- **PSR-12**: Extended Coding Style
+
+Code style checks are enforced using PHP_CodeSniffer. Use the following command to check code style:
+
+```bash
+composer phpcs
+```
+
+To automatically fix coding standard violations, execute:
+
+```bash
+composer phpcbf
+```
+
 ## 📖 Documentation
 
 Detailed documentation available in `docs/`:
+
 - `MVC_STRUCTURE.md`: Architecture details
 - `database_README.md`: Database documentation
 - `refaktoring.md`: Refactoring process (Slovak)
@@ -215,6 +247,7 @@ Detailed documentation available in `docs/`:
 ## 📞 Support
 
 For issues or questions regarding the directory structure or application:
+
 - Check documentation in `docs/`
 - Review configuration in `config/`
 - Check logs in `storage/logs/`
@@ -222,26 +255,31 @@ For issues or questions regarding the directory structure or application:
 ## 🚀 Deployment Preparation
 
 ### Documentation
+
 - **Deployment Guide**: `docs/DEPLOYMENT.md` - Complete deployment instructions
 - **User Guide**: `docs/USER_GUIDE.md` - End-user documentation
 - **Admin Guide**: `docs/ADMIN_GUIDE.md` - Administrator documentation
 
 ### Environment Configurations
+
 - **Development**: `config/environments/development.php`
 - **Production**: `config/environments/production.php`
 - **Environment Templates**: `.env.example` with all required variables
 
 ### Backup & Recovery
+
 - **Backup System**: `scripts/backup/backup-system.php`
 - **Automated Backups**: Database, files, and configuration backups
 - **Recovery Procedures**: Complete restoration workflows
 
 ### Monitoring & Health Checks
+
 - **Health Endpoint**: `public/health.php` - Application health monitoring
 - **System Monitoring**: Database, cache, storage, and performance checks
 - **Alerting**: Built-in monitoring and alerting system
 
 ### Production Optimization
+
 - **Asset Optimization**: `scripts/optimize/production-optimizer.php`
 - **Caching**: Redis integration for production environments
 - **Minification**: CSS/JS minification and compression
@@ -249,6 +287,7 @@ For issues or questions regarding the directory structure or application:
 - **Image Optimization**: Automatic image compression
 
 ### Security Features
+
 - **Environment-specific configurations**
 - **HTTPS enforcement in production**
 - **Security headers and CSP**
@@ -256,6 +295,7 @@ For issues or questions regarding the directory structure or application:
 - **Database security hardening**
 
 ### Performance Features
+
 - **OPcache optimization**
 - **Redis caching**
 - **Asset bundling and minification**

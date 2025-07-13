@@ -10,25 +10,25 @@
  */
 
 // Include required files
-require_once __DIR__ . '/../core/Database.php';
-require_once __DIR__ . '/../core/PasswordResetManager.php';
-require_once __DIR__ . '/../core/EmailVerificationManager.php';
+use RenalTales\Core\Database;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 echo "=== Renal Tales Cleanup Script ===\n";
 echo "Started at: " . date('Y-m-d H:i:s') . "\n\n";
 
 try {
-    // 1. Clean up expired password reset tokens
+    // 1. Clean up expired password reset tokens (TODO: Implement after refactoring)
     echo "1. Cleaning up expired password reset tokens...\n";
-    $resetManager = new PasswordResetManager();
-    $deletedResets = $resetManager->cleanupExpiredTokens();
-    echo "   Deleted: {$deletedResets} expired password reset tokens\n\n";
+    // $resetManager = new PasswordResetManager();
+    // $deletedResets = $resetManager->cleanupExpiredTokens();
+    echo "   Skipped: Password reset cleanup not implemented yet\n\n";
     
-    // 2. Clean up expired email verification tokens
+    // 2. Clean up expired email verification tokens (TODO: Implement after refactoring)
     echo "2. Cleaning up expired email verification tokens...\n";
-    $verificationManager = new EmailVerificationManager();
-    $deletedVerifications = $verificationManager->cleanupExpiredTokens();
-    echo "   Deleted: {$deletedVerifications} expired email verification tokens\n\n";
+    // $verificationManager = new EmailVerificationManager();
+    // $deletedVerifications = $verificationManager->cleanupExpiredTokens();
+    echo "   Skipped: Email verification cleanup not implemented yet\n\n";
     
     // 3. Clean up old session files (older than 1 day)
     echo "3. Cleaning up old session files...\n";

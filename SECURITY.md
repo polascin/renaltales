@@ -19,12 +19,14 @@ The application implements multiple layers of security to protect against common
 ### 1. SecurityManager (`core/SecurityManager.php`)
 
 The main security component that handles:
+
 - CSRF token generation and validation
 - XSS prevention through input sanitization
 - Security headers configuration
 - Content Security Policy (CSP) management
 
 **Usage:**
+
 ```php
 $securityManager = new SecurityManager($sessionManager);
 
@@ -43,12 +45,14 @@ $cleanInput = $securityManager->sanitizeInput($userInput);
 ### 2. RateLimitManager (`core/RateLimitManager.php`)
 
 Implements rate limiting to prevent abuse:
+
 - Per-endpoint rate limits
 - Burst protection
 - IP-based and user-based limiting
 - Automatic blocking of repeat offenders
 
 **Usage:**
+
 ```php
 $rateLimitManager = new RateLimitManager();
 $clientId = $rateLimitManager->getClientIdentifier();
@@ -64,12 +68,14 @@ if (!$result['allowed']) {
 ### 3. InputValidator (`core/InputValidator.php`)
 
 Comprehensive input validation and sanitization:
+
 - Multiple validation rules
 - SQL injection prevention
 - XSS attack prevention
 - Custom validation rules
 
 **Usage:**
+
 ```php
 $validator = new InputValidator();
 $validator->setRules([
@@ -88,6 +94,7 @@ if ($validator->validate($data)) {
 ### 4. FileUploadManager (`core/FileUploadManager.php`)
 
 Secure file upload handling:
+
 - File type validation
 - MIME type checking
 - Virus scanning (optional)
@@ -95,6 +102,7 @@ Secure file upload handling:
 - Image processing and thumbnail generation
 
 **Usage:**
+
 ```php
 $uploadManager = new FileUploadManager();
 $result = $uploadManager->uploadFile($_FILES['file']);
@@ -109,6 +117,7 @@ if ($result['success']) {
 ### 5. Enhanced Database Security (`core/Database.php`)
 
 SQL injection protection:
+
 - Prepared statements enforcement
 - Query validation
 - Parameter sanitization
@@ -119,6 +128,7 @@ SQL injection protection:
 ### CSRF Protection
 
 All forms include CSRF tokens:
+
 ```html
 <form method="post">
     <?= $securityManager->getCSRFTokenField() ?>
@@ -129,6 +139,7 @@ All forms include CSRF tokens:
 ### XSS Prevention
 
 Input is automatically sanitized:
+
 ```php
 // Sanitize for output
 $safeOutput = $securityManager->sanitizeInput($userInput);
@@ -140,6 +151,7 @@ $safeHtml = $validator->sanitizeHTML($htmlContent);
 ### Security Headers
 
 Automatically set on all responses:
+
 - Content Security Policy (CSP)
 - X-Frame-Options: DENY
 - X-Content-Type-Options: nosniff
@@ -150,6 +162,7 @@ Automatically set on all responses:
 ### Rate Limiting
 
 Configured per endpoint:
+
 ```php
 'endpoints' => [
     'api/stories' => ['limit' => 60, 'window' => 3600],
@@ -161,6 +174,7 @@ Configured per endpoint:
 ### Input Validation Rules
 
 Available validation rules:
+
 - `required`: Field must not be empty
 - `email`: Valid email address
 - `url`: Valid URL
@@ -196,6 +210,7 @@ Available validation rules:
 ### File Upload Security
 
 Security checks performed:
+
 1. File size validation
 2. Extension validation
 3. MIME type validation
@@ -228,6 +243,7 @@ return [
 ## Security Logs
 
 Security events are logged to:
+
 - `storage/logs/security_events.log`
 - `storage/logs/rate_limit_violations.log`
 - `storage/logs/file_upload_security.log`
@@ -275,6 +291,7 @@ Security events are logged to:
 ### Automated Testing
 
 Consider using security testing tools:
+
 - **OWASP ZAP** for vulnerability scanning
 - **Nikto** for web server testing
 - **SQLMap** for SQL injection testing
@@ -307,6 +324,7 @@ In case of security incidents:
 ## Compliance
 
 This security implementation helps with:
+
 - **GDPR**: Data protection and privacy
 - **OWASP Top 10**: Protection against common vulnerabilities
 - **PCI DSS**: Payment card data security (if applicable)
@@ -332,7 +350,8 @@ This security implementation helps with:
 ## Contact
 
 For security-related questions or to report vulnerabilities:
-- Email: security@renaltales.com
+
+- Email: <security@renaltales.com>
 - Create an issue in the project repository
 - Contact the development team directly
 

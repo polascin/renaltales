@@ -2,6 +2,8 @@
 
 namespace RenalTales\Database;
 
+use RenalTales\Core\Database;
+
 /**
  * Database Migration Runner
  * 
@@ -12,7 +14,7 @@ namespace RenalTales\Database;
  */
 
 // Include the database class
-require_once __DIR__ . '/../core/Database.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class MigrationRunner {
     
@@ -100,7 +102,7 @@ class MigrationRunner {
      */
     private function getExecutedMigrations() {
         try {
-            $result = $this->db->select("SELECT migration FROM database_migrations ORDER BY id");
+            $result = $this->db->fetchAll("SELECT migration FROM database_migrations ORDER BY id");
             return array_column($result, 'migration');
         } catch (Exception $e) {
             // Table doesn't exist yet
@@ -228,7 +230,7 @@ class MigrationRunner {
      */
     public function testConnection() {
         try {
-            $result = $this->db->selectOne("SELECT 1 as test");
+            $result = $this->db->fetchOne("SELECT 1 as test");
             if ($result && $result['test'] === 1) {
                 echo "✓ Database connection successful\n";
                 return true;
