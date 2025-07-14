@@ -19,12 +19,19 @@ require_once dirname(__DIR__) . DS . 'config' . DS . 'constants.php';
 // Include bootstrap for proper setup
 require_once APP_DIR . DS . 'bootstrap.php';
 
-// Include necessary files using correct paths
-// Autoload necessary classes
-use RenalTales\Core\LanguageDetector;
+// Set up the output buffer
+ob_start();
+// Include the necessary classes
+require_once APP_DIR . DS . 'loader.php';
+// Set the default timezone
+date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
+// Check if the application is in debug mode
+define('DEBUG_MODE', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
+// Initialize the application components
+use RenalTales\Controllers\ApplicationController;
+// Start the session manager with the language model texts
 use RenalTales\Core\SessionManager;
 use RenalTales\Models\LanguageModel;
-use RenalTales\Controllers\ApplicationController;
 use RenalTales\Views\ErrorView;
 
 try {
