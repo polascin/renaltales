@@ -2,9 +2,9 @@
 
 /**
  * Renal Tales - Main Application Configuration
- * 
+ *
  * This file contains the main configuration settings for the application.
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0
  */
@@ -16,7 +16,7 @@ return [
         'version' => env('APP_VERSION', '2025.v1.0'),
         'environment' => env('APP_ENV', 'development'), // development, testing, production
         'debug' => env('APP_DEBUG', true),
-        'url' => env('APP_URL', 'http://localhost'),
+        'url' => env('APP_URL', 'http://localhost/renaltales'),
         'timezone' => env('APP_TIMEZONE', 'Europe/Bratislava'),
         'charset' => 'UTF-8',
         'locale' => env('APP_LOCALE', 'sk_SK'),
@@ -27,7 +27,16 @@ return [
         'default' => 'sk',
         'fallback' => 'en',
         'supported' => [
-            'sk', 'cs', 'de', 'en', 'es', 'fr', 'it', 'ru', 'pl', 'hu',
+            'sk',
+            'cs',
+            'de',
+            'en',
+            'es',
+            'fr',
+            'it',
+            'ru',
+            'pl',
+            'hu',
             // Add other supported languages as needed
         ],
         'path' => dirname(__DIR__) . '/resources/lang/',

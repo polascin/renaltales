@@ -21,8 +21,8 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 // Ensure Monolog classes are loaded
-if (!class_exists(\Monolog\Logger::class)) {
-    throw new \RuntimeException('Monolog is not installed. Run "composer require monolog/monolog".');
+if (!class_exists(Logger::class) || !class_exists(StreamHandler::class)) {
+    throw new \RuntimeException('Monolog is not installed or StreamHandler is missing. Run "composer require monolog/monolog".');
 }
 
 // Load environment variables
@@ -34,11 +34,11 @@ if (file_exists($envFile)) {
     foreach ($lines as $line) {
         $line = trim($line);
         if (empty($line) || strpos($line, '#') === 0) continue;
-        
+
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
-            $value = trim($value, '"\'\'');
+            $value = trim($value, "\"' ");
             $_ENV[$key] = $value;
             putenv("$key=$value");
         }
@@ -52,7 +52,7 @@ if (file_exists($envFile)) {
     $_ENV['DB_USERNAME'] = 'root';
     $_ENV['DB_PASSWORD'] = '';
     $_ENV['DB_CHARSET'] = 'utf8mb4';
-    
+
     // Set putenv for backward compatibility
     foreach ($_ENV as $key => $value) {
         putenv("$key=$value");
@@ -72,9 +72,9 @@ if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
 date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
 
 // Initialize logging
-if (class_exists(Logger::class)) {
+if (class_exists(Logger::class) && class_exists(StreamHandler::class)) {
     $logger = new Logger('renaltales');
-    $logPath = APP_ROOT . DS . ($_ENV['LOG_PATH'] ?? 'storage/logs/app.log');
+    $logPath = APP_ROOT . DS . (isset($_ENV['LOG_PATH']) && $_ENV['LOG_PATH'] ? $_ENV['LOG_PATH'] : 'storage/logs/app.log');
 
     // Create log directory if it doesn't exist
     $logDir = dirname($logPath);
@@ -83,11 +83,7 @@ if (class_exists(Logger::class)) {
     }
 
     // Use appropriate log level constant based on Monolog version
-    if (defined('Monolog\\Logger::DEBUG')) {
-        $debugLevel = Logger::DEBUG;
-    } else {
-        $debugLevel = 100;
-    }
+    $debugLevel = defined('Monolog\\Logger::DEBUG') ? Logger::DEBUG : 100;
 
     $logger->pushHandler(new StreamHandler($logPath, $debugLevel));
     // Make logger available globally
