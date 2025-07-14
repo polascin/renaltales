@@ -46,9 +46,15 @@ class LanguageModel {
    * @param string|null $defaultLanguage
    */
   public function __construct(?string $languagePath = null, ?string $defaultLanguage = null) {
-    $this->languagePath = $languagePath ?? dirname(__DIR__, 2) . '/resources/lang/';
+    // Use APP_ROOT constant if available, otherwise calculate from current directory
+    $appRoot = defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2);
+    $this->languagePath = $languagePath ?? $appRoot . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
+    
     $this->loadSupportedLanguages();
-    $this->currentLanguage = $this->detectLanguage($defaultLanguage ?? (defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en'));
+    
+    // Determine default language from constant or fallback to 'en'
+    $defaultLang = $defaultLanguage ?? (defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en');
+    $this->currentLanguage = $this->detectLanguage($defaultLang);
     $this->loadTranslations($this->currentLanguage);
   }
 
@@ -163,11 +169,32 @@ class LanguageModel {
    * Load all supported languages from the language directory
    */
   private function loadSupportedLanguages(): void {
-    if (!is_dir($this->languagePath)) {
+    if (!is_dir($this->languagePath) || !is_readable($this->languagePath)) {
       $this->supportedLanguages = ['en'];
       return;
     }
+    
     $files = glob($this->languagePath . '*.php');
+    if ($files === false) {
+      // glob() failed, fallback to basic directory scan
+      $files = [];
+      try {
+        $handle = opendir($this->languagePath);
+        if ($handle !== false) {
+          while (($file = readdir($handle)) !== false) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+              $files[] = $this->languagePath . $file;
+            }
+          }
+          closedir($handle);
+        }
+      } catch (Exception $e) {
+        // If directory scanning fails, use default
+        $this->supportedLanguages = ['en'];
+        return;
+      }
+    }
+    
     $languages = [];
     foreach ($files as $file) {
       $language = basename($file, '.php');
@@ -176,6 +203,7 @@ class LanguageModel {
         $languages[] = strtolower($language);
       }
     }
+    
     sort($languages);
     $this->supportedLanguages = $languages ?: ['en'];
   }
@@ -200,5 +228,513 @@ class LanguageModel {
         $this->translations = [];
       }
     }
+  }
+  /**
+   * Convert a language code to a country code for flag display.
+   * Handles common mappings and fallbacks.
+   *
+   * @param string $language
+   * @return string Country code (ISO 3166-1 alpha-2, lowercase)
+   */
+  public static function languageToCountryCode(string $language): string {
+    // Custom mappings for languages that don't match country codes directly
+
+    $map = [
+      // European languages
+      'be' => 'by',
+      'bg' => 'bg',
+      'ca' => 'es',
+      'cs' => 'cz',
+      'cy' => 'gb',
+      'da' => 'dk',
+      'de' => 'de',
+      'el' => 'gr',
+      'en' => 'gb',
+      'en-gb' => 'gb',
+      'eo' => 'eu',
+      'es' => 'es',
+      'et' => 'ee',
+      'eu' => 'es',
+      'fi' => 'fi',
+      'fo' => 'fo',
+      'fr' => 'fr',
+      'ga' => 'ie',
+      'gd' => 'gb',
+      'gl' => 'es',
+      'hr' => 'hr',
+      'hu' => 'hu',
+      'is' => 'is',
+      'it' => 'it',
+      'lb' => 'lu',
+      'lt' => 'lt',
+      'lv' => 'lv',
+      'mk' => 'mk',
+      'mt' => 'mt',
+      'nl' => 'nl',
+      'no' => 'no',
+      'pl' => 'pl',
+      'pt' => 'pt',
+      'rm' => 'ch',
+      'ro' => 'ro',
+      'ru' => 'ru',
+      'se' => 'no',
+      'sk' => 'sk',
+      'sl' => 'si',
+      'sq' => 'al',
+      'sr' => 'rs',
+      'sv' => 'se',
+      'uk' => 'ua',
+
+      // Asian languages
+      'am' => 'et',
+      'ar' => 'sa',
+      'as' => 'in',
+      'bn' => 'bd',
+      'bo' => 'cn',
+      'dv' => 'mv',
+      'fa' => 'ir',
+      'gu' => 'in',
+      'he' => 'il',
+      'hi' => 'in',
+      'hy' => 'am',
+      'ja' => 'jp',
+      'jv' => 'id',
+      'ka' => 'ge',
+      'kk' => 'kz',
+      'km' => 'kh',
+      'kn' => 'in',
+      'ko' => 'kr',
+      'lo' => 'la',
+      'ml' => 'in',
+      'mn' => 'mn',
+      'mr' => 'in',
+      'my' => 'mm',
+      'ne' => 'np',
+      'or' => 'in',
+      'pa' => 'in',
+      'ps' => 'af',
+      'sa' => 'in',
+      'sd' => 'pk',
+      'si' => 'lk',
+      'ta' => 'in',
+      'te' => 'in',
+      'th' => 'th',
+      'ti' => 'er',
+      'tk' => 'tm',
+      'ug' => 'cn',
+      'ur' => 'pk',
+      'uz' => 'uz',
+      'vi' => 'vn',
+      'wuu' => 'cn',
+      'yue' => 'cn',
+      'zh' => 'cn',
+      'zh-cn' => 'cn',
+      'zh-tw' => 'tw',
+
+      // American languages
+      'ay' => 'bo',
+      'bho' => 'in',
+      'gn' => 'py',
+      'ht' => 'ht',
+      'qu' => 'pe',
+      'war' => 'ph',
+      'en-us' => 'us',
+      'en-ca' => 'ca',
+      'es' => 'es',
+      'pt-br' => 'br',
+
+      // African languages
+      'af' => 'za',
+      'bm' => 'ml',
+      'ff' => 'sn',
+      'ha' => 'ng',
+      'ig' => 'ng',
+      'kg' => 'cd',
+      'lg' => 'ug',
+      'ln' => 'cd',
+      'nd' => 'zw',
+      'nr' => 'za',
+      'nso' => 'za',
+      'ny' => 'mw',
+      'om' => 'et',
+      'rn' => 'bi',
+      'rw' => 'rw',
+      'sn' => 'zw',
+      'so' => 'so',
+      'ss' => 'sz',
+      'st' => 'ls',
+      'sw' => 'tz',
+      'tn' => 'za',
+      'ts' => 'za',
+      've' => 'za',
+      'xh' => 'za',
+      'yo' => 'ng',
+      'zu' => 'za',
+
+      // Australia, Oceania, and New Zealand languages
+      'en-au' => 'au',
+      'en-nz' => 'nz',
+      'fj' => 'fj',
+      'mt' => 'mt',
+      'su' => 'id',
+
+      // Other languages
+      'az' => 'az',
+      'bcl' => 'ph',
+      'bh' => 'in',
+      'ceb' => 'ph',
+      'hil' => 'ph',
+      'ilo' => 'ph',
+      'kl' => 'gl',
+      'ky' => 'kg',
+      'la' => 'va',
+      'lua' => 'cd',
+      'mai' => 'in',
+      'mg' => 'mg',
+      'ms' => 'my',
+      'pam' => 'ph',
+    ];
+
+    $lang = strtolower($language);
+    if (isset($map[$lang])) {
+      return $map[$lang];
+    }
+    // If regional (e.g., en-us), use the part after the dash
+    if (strpos($lang, '-') !== false) {
+      $parts = explode('-', $lang);
+      return strtolower($parts[1]);
+    }
+    // Fallback: use the language code itself
+    return $lang;
+  }
+
+  /**
+   * Get the native name of a language by code.
+   *
+   * @param string $code
+   * @return string
+   */
+  public static function getNativeLanguageName(string $code): string {
+    $map = [
+      // European languages
+      'be' => 'Беларуская',
+      'bg' => 'Български',
+      'ca' => 'Català',
+      'cs' => 'Čeština',
+      'cy' => 'Cymraeg',
+      'da' => 'Dansk',
+      'de' => 'Deutsch',
+      'el' => 'Ελληνικά',
+      'en' => 'English',
+      'en-gb' => 'English (UK)',
+      'eo' => 'Esperanto',
+      'es' => 'Español',
+      'et' => 'Eesti',
+      'eu' => 'Euskara',
+      'fi' => 'Suomi',
+      'fo' => 'Føroyskt',
+      'fr' => 'Français',
+      'ga' => 'Gaeilge',
+      'gd' => 'Gàidhlig',
+      'gl' => 'Galego',
+      'hr' => 'Hrvatski',
+      'hu' => 'Magyar',
+      'is' => 'Íslenska',
+      'it' => 'Italiano',
+      'lb' => 'Lëtzebuergesch',
+      'lt' => 'Lietuvių',
+      'lv' => 'Latviešu',
+      'mk' => 'Македонски',
+      'mt' => 'Malti',
+      'nl' => 'Nederlands',
+      'no' => 'Norsk',
+      'pl' => 'Polski',
+      'pt' => 'Português',
+      'rm' => 'Rumantsch',
+      'ro' => 'Română',
+      'ru' => 'Русский',
+      'se' => 'Sámegiella',
+      'sk' => 'Slovenčina',
+      'sl' => 'Slovenščina',
+      'sq' => 'Shqip',
+      'sr' => 'Српски',
+      'sv' => 'Svenska',
+      'uk' => 'Українська',
+
+      // Asian languages
+      'am' => 'አማርኛ',
+      'ar' => 'العربية',
+      'as' => 'অসমীয়া',
+      'bn' => 'বাংলা',
+      'bo' => 'བོད་སྐད་',
+      'dv' => 'ދިވެހި',
+      'fa' => 'فارسی',
+      'gu' => 'ગુજરાતી',
+      'he' => 'עברית',
+      'hi' => 'हिन्दी',
+      'hy' => 'Հայերեն',
+      'ja' => '日本語',
+      'jv' => 'Basa Jawa',
+      'ka' => 'ქართული',
+      'kk' => 'Қазақша',
+      'km' => 'ភាសាខ្មែរ',
+      'kn' => 'ಕನ್ನಡ',
+      'ko' => '한국어',
+      'lo' => 'ລາວ',
+      'ml' => 'മലയാളം',
+      'mn' => 'Монгол',
+      'mr' => 'मराठी',
+      'my' => 'မြန်မာဘာသာ',
+      'ne' => 'नेपाली',
+      'or' => 'ଓଡ଼ିଆ',
+      'pa' => 'ਪੰਜਾਬੀ',
+      'ps' => 'پښتو',
+      'sa' => 'संस्कृतम्',
+      'sd' => 'سنڌي',
+      'si' => 'සිංහල',
+      'ta' => 'தமிழ்',
+      'te' => 'తెలుగు',
+      'th' => 'ไทย',
+      'ti' => 'ትግርኛ',
+      'tk' => 'Türkmen',
+      'ug' => 'ئۇيغۇرچە',
+      'ur' => 'اردو',
+      'uz' => 'Oʻzbek',
+      'vi' => 'Tiếng Việt',
+      'wuu' => '吴语',
+      'yue' => '粵語',
+      'zh' => '中文',
+      'zh-cn' => '简体中文',
+      'zh-tw' => '繁體中文',
+
+      // American languages
+      'ay' => 'Aymar aru',
+      'bho' => 'भोजपुरी',
+      'gn' => 'Avañeʼẽ',
+      'ht' => 'Kreyòl ayisyen',
+      'qu' => 'Runa Simi',
+      'war' => 'Winaray',
+      'en-us' => 'English (US)',
+      'en-ca' => 'English (Canada)',
+      'pt-br' => 'Português (Brasil)',
+
+      // African languages
+      'af' => 'Afrikaans',
+      'bm' => 'Bamanankan',
+      'ff' => 'Fula',
+      'ha' => 'Hausa',
+      'ig' => 'Igbo',
+      'kg' => 'Kikongo',
+      'lg' => 'Luganda',
+      'ln' => 'Lingála',
+      'nd' => 'isiNdebele',
+      'nr' => 'isiNdebele',
+      'nso' => 'Sesotho sa Leboa',
+      'ny' => 'Chichewa',
+      'om' => 'Oromoo',
+      'rn' => 'Kirundi',
+      'rw' => 'Kinyarwanda',
+      'sn' => 'chiShona',
+      'so' => 'Soomaали',
+      'ss' => 'SiSwati',
+      'st' => 'Sesotho',
+      'sw' => 'Kiswahili',
+      'tn' => 'Setswana',
+      'ts' => 'Xitsonga',
+      've' => 'Tshivenda',
+      'xh' => 'isiXhosa',
+      'yo' => 'Yorùbá',
+      'zu' => 'isiZulu',
+
+      // Australia, Oceania, and New Zealand languages
+      'en-au' => 'English (Australia)',
+      'en-nz' => 'English (NZ)',
+      'fj' => 'Fijian',
+      'mt' => 'Malti',
+      'su' => 'Basa Sunda',
+
+      // Other languages
+      'az' => 'Azərbaycanca',
+      'bcl' => 'Bikol',
+      'bh' => 'भोजपुरी',
+      'ceb' => 'Cebuano',
+      'hil' => 'Hiligaynon',
+      'ilo' => 'Ilokano',
+      'kl' => 'Kalaallisut',
+      'ky' => 'Кыргызча',
+      'la' => 'Latina',
+      'lua' => 'Tshiluba',
+      'mai' => 'मैथिली',
+      'mg' => 'Malagasy',
+      'ms' => 'Bahasa Melayu',
+      'pam' => 'Kapampangan',
+    ];
+    $code = strtolower($code);
+    return $map[$code] ?? $code;
+  }
+
+  /**
+   * Get the English name of a language by code, sorted by supported languages if available.
+   *
+   * @param string $code
+   * @return string
+   */
+  public static function getEnglishLanguageName(string $code): string {
+    $map = [
+      // European languages
+      'be' => 'Belarusian',
+      'bg' => 'Bulgarian',
+      'ca' => 'Catalan',
+      'cs' => 'Czech',
+      'cy' => 'Welsh',
+      'da' => 'Danish',
+      'de' => 'German',
+      'el' => 'Greek',
+      'en' => 'English',
+      'en-gb' => 'English (UK)',
+      'eo' => 'Esperanto',
+      'es' => 'Spanish',
+      'et' => 'Estonian',
+      'eu' => 'Basque',
+      'fi' => 'Finnish',
+      'fo' => 'Faroese',
+      'fr' => 'French',
+      'ga' => 'Irish',
+      'gd' => 'Scottish Gaelic',
+      'gl' => 'Galician',
+      'hr' => 'Croatian',
+      'hu' => 'Hungarian',
+      'is' => 'Icelandic',
+      'it' => 'Italian',
+      'lb' => 'Luxembourgish',
+      'lt' => 'Lithuanian',
+      'lv' => 'Latvian',
+      'mk' => 'Macedonian',
+      'mt' => 'Maltese',
+      'nl' => 'Dutch',
+      'no' => 'Norwegian',
+      'pl' => 'Polish',
+      'pt' => 'Portuguese',
+      'rm' => 'Romansh',
+      'ro' => 'Romanian',
+      'ru' => 'Russian',
+      'se' => 'Northern Sami',
+      'sk' => 'Slovak',
+      'sl' => 'Slovenian',
+      'sq' => 'Albanian',
+      'sr' => 'Serbian',
+      'sv' => 'Swedish',
+      'uk' => 'Ukrainian',
+
+      // Asian languages
+      'am' => 'Amharic',
+      'ar' => 'Arabic',
+      'as' => 'Assamese',
+      'bn' => 'Bengali',
+      'bo' => 'Tibetan',
+      'dv' => 'Divehi',
+      'fa' => 'Persian',
+      'gu' => 'Gujarati',
+      'he' => 'Hebrew',
+      'hi' => 'Hindi',
+      'hy' => 'Armenian',
+      'ja' => 'Japanese',
+      'jv' => 'Javanese',
+      'ka' => 'Georgian',
+      'kk' => 'Kazakh',
+      'km' => 'Khmer',
+      'kn' => 'Kannada',
+      'ko' => 'Korean',
+      'lo' => 'Lao',
+      'ml' => 'Malayalam',
+      'mn' => 'Mongolian',
+      'mr' => 'Marathi',
+      'my' => 'Burmese',
+      'ne' => 'Nepali',
+      'or' => 'Oriya',
+      'pa' => 'Punjabi',
+      'ps' => 'Pashto',
+      'sa' => 'Sanskrit',
+      'sd' => 'Sindhi',
+      'si' => 'Sinhala',
+      'ta' => 'Tamil',
+      'te' => 'Telugu',
+      'th' => 'Thai',
+      'ti' => 'Tigrinya',
+      'tk' => 'Turkmen',
+      'ug' => 'Uyghur',
+      'ur' => 'Urdu',
+      'uz' => 'Uzbek',
+      'vi' => 'Vietnamese',
+      'wuu' => 'Wu Chinese',
+      'yue' => 'Cantonese',
+      'zh' => 'Chinese',
+      'zh-cn' => 'Chinese (Simplified)',
+      'zh-tw' => 'Chinese (Traditional)',
+
+      // American languages
+      'ay' => 'Aymara',
+      'bho' => 'Bhojpuri',
+      'gn' => 'Guarani',
+      'ht' => 'Haitian',
+      'qu' => 'Quechua',
+      'war' => 'Waray',
+      'en-us' => 'English (US)',
+      'en-ca' => 'English (Canada)',
+      'pt-br' => 'Portuguese (Brazil)',
+
+      // African languages
+      'af' => 'Afrikaans',
+      'bm' => 'Bambara',
+      'ff' => 'Fulah',
+      'ha' => 'Hausa',
+      'ig' => 'Igbo',
+      'kg' => 'Kongo',
+      'lg' => 'Ganda',
+      'ln' => 'Lingala',
+      'nd' => 'North Ndebele',
+      'nr' => 'South Ndebele',
+      'nso' => 'Northern Sotho',
+      'ny' => 'Nyanja',
+      'om' => 'Oromo',
+      'rn' => 'Rundi',
+      'rw' => 'Kinyarwanda',
+      'sn' => 'Shona',
+      'so' => 'Somali',
+      'ss' => 'Swati',
+      'st' => 'Southern Sotho',
+      'sw' => 'Swahili',
+      'tn' => 'Tswana',
+      'ts' => 'Tsonga',
+      've' => 'Venda',
+      'xh' => 'Xhosa',
+      'yo' => 'Yoruba',
+      'zu' => 'Zulu',
+
+      // Australia, Oceania, and New Zealand languages
+      'en-au' => 'English (Australia)',
+      'en-nz' => 'English (NZ)',
+      'fj' => 'Fijian',
+      'mt' => 'Maltese',
+      'su' => 'Sundanese',
+
+      // Other languages
+      'az' => 'Azerbaijani',
+      'bcl' => 'Bikol',
+      'bh' => 'Bihari',
+      'ceb' => 'Cebuano',
+      'hil' => 'Hiligaynon',
+      'ilo' => 'Iloko',
+      'kl' => 'Kalaallisut',
+      'ky' => 'Kyrgyz',
+      'la' => 'Latin',
+      'lua' => 'Luba-Lulua',
+      'mai' => 'Maithili',
+      'mg' => 'Malagasy',
+      'ms' => 'Malay',
+      'pam' => 'Pampanga',
+    ];
+    $code = strtolower($code);
+    return $map[$code] ?? $code;
   }
 }
