@@ -9,19 +9,23 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include the LanguageManager
-require_once 'src/Core/LanguageManager.php';
+// Include bootstrap for autoloading
+require_once __DIR__ . '/../bootstrap.php';
+
+// Use PSR-4 autoloaded classes
+use RenalTales\Models\LanguageModel;
+use Exception;
 
 // Set JSON header
 header('Content-Type: application/json');
 header('Cache-Control: no-cache');
 
 try {
-    $languageManager = new LanguageManager();
+    $languageModel = new LanguageModel();
     
     // Get current language information
-    $currentLanguage = $languageManager->getCurrentLanguage();
-    $supportedLanguages = $languageManager->getSupportedLanguages();
+    $currentLanguage = $languageModel->getCurrentLanguage();
+    $supportedLanguages = $languageModel->getSupportedLanguages();
     
     // Get session information
     $sessionInfo = [
@@ -41,18 +45,18 @@ try {
     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'not available';
     
     // Get flag for current language
-    $flag = $languageManager->getFlagCode($currentLanguage);
+    $flag = $languageModel->getFlagCode($currentLanguage);
     
     // Get all supported languages with their names
     $supportedLanguagesWithNames = [];
     foreach ($supportedLanguages as $lang) {
-        $supportedLanguagesWithNames[$lang] = $languageManager->getLanguageName($lang);
+        $supportedLanguagesWithNames[$lang] = $languageModel->getLanguageName($lang);
     }
     
     // Prepare response
     $response = [
         'language' => $currentLanguage,
-        'language_name' => $languageManager->getLanguageName($currentLanguage),
+        'language_name' => $languageModel->getLanguageName($currentLanguage),
         'flag' => $flag,
         'session' => json_encode($sessionInfo),
         'cookies' => json_encode($cookieInfo),

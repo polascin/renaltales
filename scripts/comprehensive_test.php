@@ -7,11 +7,11 @@
  */
 
 require_once 'bootstrap.php';
-require_once 'src/Core/LanguageManager.php';
 require_once 'src/Core/SessionManager.php';
 
-use RenalTales\Core\LanguageManager;
+use RenalTales\Models\LanguageModel;
 use RenalTales\Core\SessionManager;
+use Exception;
 
 // Initialize error tracking
 $errors = [];
@@ -19,13 +19,13 @@ $successes = [];
 
 try {
     // Initialize systems
-    $languageManager = new LanguageManager();
+    $languageModel = new LanguageModel();
     $sessionManager = new SessionManager([], true, ['127.0.0.1', '::1'], 1800);
     
     // Test 1: Language System Basic Functionality
     echo "<h2>Test 1: Language System Basic Functionality</h2>";
     
-    $supportedLanguages = $languageManager->getSupportedLanguages();
+    $supportedLanguages = $languageModel->getSupportedLanguages();
     if (empty($supportedLanguages)) {
         $errors[] = "No supported languages found";
     } else {
@@ -34,7 +34,7 @@ try {
     }
     
     // Test if 'en' is supported
-    if ($languageManager->isSupported('en')) {
+    if ($languageModel->isSupported('en')) {
         $successes[] = "English language is supported";
     } else {
         $errors[] = "English language is not supported";
@@ -43,7 +43,7 @@ try {
     // Test 2: Language Detection
     echo "<h2>Test 2: Language Detection</h2>";
     
-    $detectedLanguage = $languageManager->detectLanguage();
+    $detectedLanguage = $languageModel->detectLanguage();
     if ($detectedLanguage) {
         $successes[] = "Language detected: " . $detectedLanguage;
         echo "<p>Detected language: <strong>" . $detectedLanguage . "</strong></p>";
@@ -71,8 +71,8 @@ try {
     
     if (isset($_GET['switch_to'])) {
         $newLanguage = $_GET['switch_to'];
-        if ($languageManager->isSupported($newLanguage)) {
-            $languageManager->setLanguage($newLanguage);
+        if ($languageModel->isSupported($newLanguage)) {
+            $languageModel->setLanguage($newLanguage);
             $sessionManager->setSession('language', $newLanguage);
             $successes[] = "Language switched to: " . $newLanguage;
             echo "<p>Language switched to: <strong>" . $newLanguage . "</strong></p>";
@@ -98,21 +98,22 @@ try {
     echo "<h2>Test 6: Language Flag Integration</h2>";
     
     $currentLang = $sessionManager->getSession('language') ?: $detectedLanguage;
-    $flagPath = $languageManager->getFlagPath($currentLang);
-    $flagCode = $languageManager->getFlagCode($currentLang);
+    $flagCode = $languageModel->getFlagCode($currentLang);
     
     echo "<p>Current language flag: <strong>" . $flagCode . "</strong></p>";
-    echo "<p>Flag path: <strong>" . $flagPath . "</strong></p>";
+    // Note: getFlagPath is not available in LanguageModel, so we'll skip this line
+    echo "<p>Flag code: <strong>" . $flagCode . "</strong></p>";
     
     // Test 7: Language Information
     echo "<h2>Test 7: Language Information</h2>";
     
-    $languageInfo = $languageManager->getLanguageInfo($currentLang);
+    // getLanguageInfo is not available in LanguageModel, so we'll show basic info
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Property</th><th>Value</th></tr>";
-    foreach ($languageInfo as $key => $value) {
-        echo "<tr><td>" . htmlspecialchars($key) . "</td><td>" . htmlspecialchars(is_bool($value) ? ($value ? 'true' : 'false') : $value) . "</td></tr>";
-    }
+    echo "<tr><td>Language Code</td><td>" . htmlspecialchars($currentLang) . "</td></tr>";
+    echo "<tr><td>Language Name</td><td>" . htmlspecialchars($languageModel->getLanguageName($currentLang)) . "</td></tr>";
+    echo "<tr><td>Flag Code</td><td>" . htmlspecialchars($flagCode) . "</td></tr>";
+    echo "<tr><td>Is Supported</td><td>" . ($languageModel->isSupported($currentLang) ? 'true' : 'false') . "</td></tr>";
     echo "</table>";
     
     // Test 8: Cookie Integration
@@ -124,30 +125,25 @@ try {
     // Test 9: System Statistics
     echo "<h2>Test 9: System Statistics</h2>";
     
-    $systemStats = $languageManager->getSystemStats();
+    // getSystemStats is not available in LanguageModel, so we'll show basic stats
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Statistic</th><th>Value</th></tr>";
-    foreach ($systemStats as $key => $value) {
-        $displayValue = is_array($value) ? json_encode($value) : $value;
-        echo "<tr><td>" . htmlspecialchars($key) . "</td><td>" . htmlspecialchars($displayValue) . "</td></tr>";
-    }
+    echo "<tr><td>Total Supported Languages</td><td>" . count($supportedLanguages) . "</td></tr>";
+    echo "<tr><td>Current Language</td><td>" . htmlspecialchars($languageModel->getCurrentLanguage()) . "</td></tr>";
+    echo "<tr><td>Total Translations</td><td>" . count($languageModel->getAllTexts()) . "</td></tr>";
     echo "</table>";
     
     // Test 10: Debug Information
     echo "<h2>Test 10: Debug Information</h2>";
     
-    $debugInfo = $languageManager->getDebugInfo();
-    if ($debugInfo['debug_mode']) {
-        echo "<table border='1' cellpadding='5' cellspacing='0'>";
-        echo "<tr><th>Debug Property</th><th>Value</th></tr>";
-        foreach ($debugInfo as $key => $value) {
-            $displayValue = is_array($value) ? json_encode($value) : $value;
-            echo "<tr><td>" . htmlspecialchars($key) . "</td><td>" . htmlspecialchars($displayValue) . "</td></tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "<p>Debug mode is not enabled</p>";
-    }
+    // getDebugInfo is not available in LanguageModel, so we'll show basic debug info
+    echo "<table border='1' cellpadding='5' cellspacing='0'>";
+    echo "<tr><th>Debug Property</th><th>Value</th></tr>";
+    echo "<tr><td>Current Language</td><td>" . htmlspecialchars($languageModel->getCurrentLanguage()) . "</td></tr>";
+    echo "<tr><td>Session Language</td><td>" . htmlspecialchars($sessionManager->getSession('language') ?: 'Not set') . "</td></tr>";
+    echo "<tr><td>Cookie Language</td><td>" . htmlspecialchars($_COOKIE['language'] ?? 'Not set') . "</td></tr>";
+    echo "<tr><td>Browser Language</td><td>" . htmlspecialchars($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'Not available') . "</td></tr>";
+    echo "</table>";
     
 } catch (Exception $e) {
     $errors[] = "Critical error: " . $e->getMessage();
@@ -251,7 +247,7 @@ try {
         <?php
         if (isset($supportedLanguages) && !empty($supportedLanguages)) {
             foreach (array_slice($supportedLanguages, 0, 10) as $lang) {
-                $langName = $languageManager->getLanguageName($lang);
+                $langName = $languageModel->getLanguageName($lang);
                 echo "<a href='?switch_to=" . urlencode($lang) . "'>" . htmlspecialchars($langName) . " (" . htmlspecialchars($lang) . ")</a> ";
             }
         }

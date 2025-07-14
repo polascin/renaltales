@@ -49,9 +49,9 @@ class LanguageModel {
     // Use APP_ROOT constant if available, otherwise calculate from current directory
     $appRoot = defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2);
     $this->languagePath = $languagePath ?? $appRoot . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
-    
+
     $this->loadSupportedLanguages();
-    
+
     // Determine default language from constant or fallback to 'en'
     $defaultLang = $defaultLanguage ?? (defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en');
     $this->currentLanguage = $this->detectLanguage($defaultLang);
@@ -173,7 +173,7 @@ class LanguageModel {
       $this->supportedLanguages = ['en'];
       return;
     }
-    
+
     $files = glob($this->languagePath . '*.php');
     if ($files === false) {
       // glob() failed, fallback to basic directory scan
@@ -194,7 +194,7 @@ class LanguageModel {
         return;
       }
     }
-    
+
     $languages = [];
     foreach ($files as $file) {
       $language = basename($file, '.php');
@@ -203,7 +203,7 @@ class LanguageModel {
         $languages[] = strtolower($language);
       }
     }
-    
+
     sort($languages);
     $this->supportedLanguages = $languages ?: ['en'];
   }
@@ -229,6 +229,26 @@ class LanguageModel {
       }
     }
   }
+  /**
+   * Get the native name of a language by code.
+   *
+   * @param string $language
+   * @return string
+   */
+  public function getLanguageName(string $language): string {
+    return self::getNativeLanguageName($language);
+  }
+
+  /**
+   * Get the flag code (country code) for a language.
+   *
+   * @param string $language
+   * @return string
+   */
+  public function getFlagCode(string $language): string {
+    return self::languageToCountryCode($language);
+  }
+
   /**
    * Convert a language code to a country code for flag display.
    * Handles common mappings and fallbacks.
@@ -284,7 +304,6 @@ class LanguageModel {
       'sr' => 'rs',
       'sv' => 'se',
       'uk' => 'ua',
-
       // Asian languages
       'am' => 'et',
       'ar' => 'sa',

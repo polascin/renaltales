@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../bootstrap.php';
 
 // Use PSR-4 autoloaded classes
-use RenalTales\Core\LanguageManager;
+use RenalTales\Models\LanguageModel;
 use Exception;
 
 // Set JSON header
@@ -27,14 +27,14 @@ try {
         throw new Exception('No language specified');
     }
 
-    $languageManager = new LanguageManager();
+$languageModel = new LanguageModel();
     
-    if ($languageManager->isSupported($lang)) {
-        $result = $languageManager->setLanguage($lang);
+if ($languageModel->isSupported($lang)) {
+$result = $languageModel->setLanguage($lang);
         if ($result) {
             // Get updated language information
-            $currentLanguage = $languageManager->getCurrentLanguage();
-            $flag = $languageManager->getFlagCode($currentLanguage);
+$currentLanguage = $languageModel->getCurrentLanguage();
+$flag = $languageModel->getFlagCode($currentLanguage);
             
             // Get session information
             $sessionInfo = [
@@ -56,7 +56,7 @@ try {
             $response = [
                 'success' => true,
                 'language' => $currentLanguage,
-                'language_name' => $languageManager->getLanguageName($currentLanguage),
+'language_name' => $languageModel->getLanguageName($currentLanguage),
                 'flag' => $flag,
                 'session' => json_encode($sessionInfo),
                 'cookies' => json_encode($cookieInfo),

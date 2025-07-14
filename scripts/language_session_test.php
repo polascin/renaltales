@@ -1,16 +1,16 @@
 <?php
 
 require_once 'bootstrap.php';
-require_once 'src/Core/LanguageManager.php';
 require_once 'src/Core/SessionManager.php';
 
-use RenalTales\Core\LanguageManager;
+use RenalTales\Models\LanguageModel;
 use RenalTales\Core\SessionManager;
+use Exception;
 
 try {
-    // Initialize LanguageManager
-    $languageManager = new LanguageManager();
-    echo "LanguageManager initialized successfully.\n";
+    // Initialize LanguageModel
+    $languageModel = new LanguageModel();
+    echo "LanguageModel initialized successfully.\n";
 
     // Initialize SessionManager with sample data
     $sessionText = [
@@ -25,7 +25,7 @@ try {
     echo "SessionManager initialized successfully.\n";
 
     // Test language detection and session integration
-    $currentLanguage = $languageManager->detectLanguage();
+    $currentLanguage = $languageModel->detectLanguage();
     echo "Detected language: $currentLanguage\n";
 
     $sessionManager->setSession('language', $currentLanguage);
@@ -33,7 +33,7 @@ try {
 
     // Validate potential interaction between session and language
     $sessionLanguage = $sessionManager->getSession('language');
-    if ($languageManager->isSupported($sessionLanguage)) {
+    if ($languageModel->isSupported($sessionLanguage)) {
         echo "Language $sessionLanguage is supported.\n";
     } else {
         echo "Language $sessionLanguage is not supported.\n";

@@ -28,16 +28,16 @@ define('DEBUG_MODE', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOO
 
 
 try {
-  // Instantiate the language manager
-  $languageManager = new \RenalTales\Core\LanguageManager();
-  $sessionManager = new \RenalTales\Core\SessionManager($languageManager->getAllTexts());
-  $controller = new \RenalTales\Controllers\ApplicationController($languageManager, $sessionManager);
+  // Instantiate the language model directly
+  $languageModel = new \RenalTales\Models\LanguageModel();
+  $sessionManager = new \RenalTales\Core\SessionManager($languageModel->getAllTexts());
+  $controller = new \RenalTales\Controllers\ApplicationController($languageModel, $sessionManager);
   $output = $controller->index();
   ob_end_clean();
   echo $output;
 } catch (Exception $e) {
   error_log('Exception in index.php: ' . $e->getMessage());
   ob_end_clean();
-  $errorView = new \RenalTales\Views\ErrorView($e, DEBUG_MODE, $languageManager ?? null);
+  $errorView = new \RenalTales\Views\ErrorView($e, DEBUG_MODE, $languageModel ?? null);
   echo $errorView->render();
 }
