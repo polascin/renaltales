@@ -36,6 +36,7 @@ define('CONFIG_DIR', APP_DIR . DS . 'config');
 define('RESOURCES_DIR', APP_DIR . DS . 'resources');
 // Define paths for language files
 define('LANG_DIR', RESOURCES_DIR . DS . 'lang');
+define('LANGUAGE_PATH', RESOURCES_DIR . DS . 'lang');
 // Directory where the public files are located
 define('PUBLIC_DIR', __DIR__);
 // Define paths for public assets

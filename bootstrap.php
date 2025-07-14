@@ -108,9 +108,6 @@ $config = [
     ],
 ];
 
-// Define additional constants
-define('LANGUAGE_PATH', APP_ROOT . '/resources/lang/');
-
 // Make config available globally
 $GLOBALS['config'] = $config;
 

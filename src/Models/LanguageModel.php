@@ -10,22 +10,22 @@ namespace RenalTales\Models;
  * Handles language loading, support checks, and translations
  *
  * @author Ľubomír Polaščín
- * @version 2025.v1.0
+ * @version 2025.v3.0dev
  */
 class LanguageModel
 {
-    private string $currentLanguage = 'en';
+    private string $currentLanguage = DEFAULT_LANGUAGE;
     private array $supportedLanguages = [];
     private array $translations = [];
     private string $languagePath;
-    private ?int $languagesCacheTime = null;
+    private string $languageFlagPath = FLAGS_DIR;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->languagePath = defined('LANGUAGE_PATH') ? LANGUAGE_PATH : dirname(__DIR__, 2) . '/resources/lang/';
+        $this->languagePath = defined('LANGUAGE_PATH') ? LANGUAGE_PATH : dirname(__DIR__) . DS . 'resources' . DS . 'lang';
         // Dynamically load supported languages
         $this->loadSupportedLanguages();
         // Initialize with default language, will be set by LanguageDetector
@@ -111,7 +111,6 @@ class LanguageModel
     {
         if (!is_dir($this->languagePath)) {
             $this->supportedLanguages = ['en'];
-            $this->languagesCacheTime = time();
             return;
         }
 
@@ -128,10 +127,9 @@ class LanguageModel
 
         // Sort languages alphabetically for consistent ordering
         sort($languages);
-        
+
         // Fallback to English if none found
         $this->supportedLanguages = $languages ?: ['en'];
-        $this->languagesCacheTime = time();
     }
 
     /**

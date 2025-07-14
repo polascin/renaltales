@@ -18,7 +18,7 @@ use RenalTales\Models\LanguageModel;
 class LanguageManager
 {
     private LanguageModel $languageModel;
-    private LanguageDetector $languageDetector;
+    private $languageDetector;
 
     /**
      * Constructor
@@ -26,8 +26,7 @@ class LanguageManager
     public function __construct()
     {
         $this->languageModel = new LanguageModel();
-        $this->languageDetector = new LanguageDetector($this->languageModel);
-        
+
         // Initialize with detected language
         $detectedLanguage = $this->languageDetector->detectLanguage();
         $this->languageModel->setLanguage($detectedLanguage);
@@ -60,7 +59,7 @@ class LanguageManager
             $this->languageDetector->setCookieLanguage($language);
             return true;
         }
-        
+
         return false;
     }
 
