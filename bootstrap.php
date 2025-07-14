@@ -3,8 +3,9 @@
 /**
  * Bootstrap file for RenalTales application
  * This file initializes the application environment and sets up autoloading
+ *
  * @package RenalTales
- * @version 2025.v2.0
+ * @version 2025.v3.0dev
  * @author Ľubomír Polaščín
 **/
 

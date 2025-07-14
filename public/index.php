@@ -2,17 +2,22 @@
 
 /**
  * Main entry point for the RenalTales application
+ *
  * @package RenalTales
- * @version 2025.v3.0testing
+ * @version 2025.v3.0dev
  * @author Ľubomír Polaščín
 **/
 
 // File: public/index.php
 
-require_once __DIR__ . '/../config/constants.php';
+// Directory separator constant for cross-platform compatibility
+define('DS', DIRECTORY_SEPARATOR);
+
+// Include application constants definitions
+require_once dirname(__DIR__) . DS . 'config' . DS . 'constants.php';
 
 // Include bootstrap for proper setup
-require_once APP_DIR . '/bootstrap.php';
+require_once APP_DIR . DS . 'bootstrap.php';
 
 // Include necessary files using correct paths
 // Autoload necessary classes

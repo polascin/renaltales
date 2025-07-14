@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Loader to load all needed classes
+ *
+ * @package RenalTales
+ * @version 2025.v3.0dev
+ * @author Ľubomír Polaščín
+ */
+
+// File: /loader.php
+
 // Load classes
 require_once CONTROLLERS_DIR . DS . 'ApplicationController.php';
 require_once CONTRACTS_DIR . DS . 'DatabaseInterface.php';

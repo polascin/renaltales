@@ -10,7 +10,7 @@ namespace RenalTales\Core;
  * Detects and manages user language preferences
  *
  * @author Ľubomír Polaščín
- * @version 2025.v1.0
+ * @version 2025.v3.0dev
  */
 class LanguageDetector
 {
@@ -31,33 +31,25 @@ class LanguageDetector
      */
     public function detectLanguage(): string
     {
-        // Check session first
-        if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['language'])) {
-            $sessionLang = $_SESSION['language'];
-            if ($this->isSupported($sessionLang)) {
-                return $sessionLang;
-            }
+        // Prioritize session
+        if (isset($_SESSION['language']) && $this->isSupported($_SESSION['language'])) {
+            return $_SESSION['language'];
         }
 
-        // Check cookie
-        if (isset($_COOKIE['language'])) {
-            $cookieLang = $_COOKIE['language'];
-            if ($this->isSupported($cookieLang)) {
-                return $cookieLang;
-            }
+        // Fall back to cookie
+        if (isset($_COOKIE['language']) && $this->isSupported($_COOKIE['language'])) {
+            return $_COOKIE['language'];
         }
 
-        // Check browser Accept-Language header
+        // Last resort: browser's Accept-Language header
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $acceptLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-            $languages = explode(',', $acceptLang);
+            $languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-            foreach ($languages as $lang) {
-                $lang = trim(explode(';', $lang)[0]);
-                $lang = substr($lang, 0, 2); // Get primary language code
+            foreach ($languages as $language) {
+                $language = substr(trim(explode(';', $language)[0]), 0, 2);
 
-                if ($this->isSupported($lang)) {
-                    return $lang;
+                if ($this->isSupported($language)) {
+                    return $language;
                 }
             }
         }

@@ -27,8 +27,6 @@ define('APP_ROOT', dirname(__DIR__));
 define('APP_ENV', 'development');
 // Debug mode; set to true for development, false for production
 define('APP_DEBUG', true);
-// Directory separator constant for cross-platform compatibility
-define('DS', DIRECTORY_SEPARATOR);
 // Directory where the application is located
 define('APP_DIR', dirname(__DIR__));
 // Define paths for assets and logs
