@@ -7,109 +7,45 @@ namespace RenalTales\Core;
 use RenalTales\Models\LanguageModel;
 
 /**
- * Language Manager
+ * LanguageManager
  *
- * Coordinates the interaction between LanguageDetector and LanguageModel
- * Provides a unified interface for language management
+ * Facade/wrapper for LanguageModel to maintain backward compatibility.
  *
  * @author Ľubomír Polaščín
- * @version 2025.v1.0
+ * @version 2025.v3.0dev
  */
-class LanguageManager
-{
-    private LanguageModel $languageModel;
-    private $languageDetector;
+class LanguageManager {
+  private LanguageModel $model;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->languageModel = new LanguageModel();
+  public function __construct() {
+    $this->model = new LanguageModel();
+  }
 
-        // Initialize with detected language
-        $detectedLanguage = $this->languageDetector->detectLanguage();
-        $this->languageModel->setLanguage($detectedLanguage);
-    }
+  public function getAllTexts(): array {
+    return $this->model->getAllTexts();
+  }
 
-    /**
-     * Get the language model instance
-     */
-    public function getLanguageModel(): LanguageModel
-    {
-        return $this->languageModel;
-    }
+  public function getSupportedLanguages(): array {
+    return $this->model->getSupportedLanguages();
+  }
 
-    /**
-     * Get the language detector instance
-     */
-    public function getLanguageDetector(): LanguageDetector
-    {
-        return $this->languageDetector;
-    }
+  public function getCurrentLanguage(): string {
+    return $this->model->getCurrentLanguage();
+  }
 
-    /**
-     * Set language with proper detection coordination
-     */
-    public function setLanguage(string $language): bool
-    {
-        if ($this->languageModel->setLanguage($language)) {
-            // Update user preferences after successful language change
-            $this->languageDetector->setSessionLanguage($language);
-            $this->languageDetector->setCookieLanguage($language);
-            return true;
-        }
+  public function setLanguage(string $language): bool {
+    return $this->model->setLanguage($language);
+  }
 
-        return false;
-    }
+  public function isSupported(string $language): bool {
+    return $this->model->isSupported($language);
+  }
 
-    /**
-     * Get current language
-     */
-    public function getCurrentLanguage(): string
-    {
-        return $this->languageModel->getCurrentLanguage();
-    }
+  public function getText(string $key, array $parameters = [], string $fallback = ''): string {
+    return $this->model->getText($key, $parameters, $fallback);
+  }
 
-    /**
-     * Get supported languages
-     */
-    public function getSupportedLanguages(): array
-    {
-        return $this->languageModel->getSupportedLanguages();
-    }
-
-    /**
-     * Check if language is supported
-     */
-    public function isSupported(string $language): bool
-    {
-        return $this->languageModel->isSupported($language);
-    }
-
-    /**
-     * Get translated text
-     */
-    public function getText(string $key, array $parameters = [], string $fallback = ''): string
-    {
-        return $this->languageModel->getText($key, $parameters, $fallback);
-    }
-
-    /**
-     * Get all translations
-     */
-    public function getAllTexts(): array
-    {
-        return $this->languageModel->getAllTexts();
-    }
-
-    /**
-     * Re-detect and set language (useful for runtime changes)
-     */
-    public function redetectLanguage(): string
-    {
-        $detectedLanguage = $this->languageDetector->detectLanguage();
-        $this->languageModel->setLanguage($detectedLanguage);
-        return $detectedLanguage;
-    }
+  public function getLanguageModel(): LanguageModel {
+    return $this->model;
+  }
 }

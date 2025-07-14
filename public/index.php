@@ -6,7 +6,7 @@
  * @package RenalTales
  * @version 2025.v3.0dev
  * @author Ľubomír Polaščín
-**/
+ **/
 
 // File: public/index.php
 
@@ -21,28 +21,23 @@ require_once APP_DIR . DS . 'bootstrap.php';
 
 // Set up the output buffer
 ob_start();
-// Include the necessary classes
-require_once APP_DIR . DS . 'loader.php';
 // Set the default timezone
 date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
 // Check if the application is in debug mode
 define('DEBUG_MODE', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
-// Initialize the application components
-use RenalTales\Controllers\ApplicationController;
-use RenalTales\Core\SessionManager;
-use RenalTales\Core\LanguageManager;
-use RenalTales\Views\ErrorView;
+
 
 try {
-    $languageManager = new LanguageManager();
-    $sessionManager = new SessionManager($languageManager->getAllTexts());
-    $controller = new ApplicationController($languageManager, $sessionManager);
-    $output = $controller->index();
-    ob_end_clean();
-    echo $output;
-} catch(Exception $e) {
-    error_log('Exception in index.php: ' . $e->getMessage());
-    ob_end_clean();
-    $errorView = new ErrorView($e, DEBUG_MODE, $languageManager->getLanguageModel() ?? null);
-    echo $errorView->render();
+  // Instantiate the language manager
+  $languageManager = new \RenalTales\Core\LanguageManager();
+  $sessionManager = new \RenalTales\Core\SessionManager($languageManager->getAllTexts());
+  $controller = new \RenalTales\Controllers\ApplicationController($languageManager, $sessionManager);
+  $output = $controller->index();
+  ob_end_clean();
+  echo $output;
+} catch (Exception $e) {
+  error_log('Exception in index.php: ' . $e->getMessage());
+  ob_end_clean();
+  $errorView = new \RenalTales\Views\ErrorView($e, DEBUG_MODE, $languageManager ?? null);
+  echo $errorView->render();
 }

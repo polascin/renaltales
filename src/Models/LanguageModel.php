@@ -4,178 +4,201 @@ declare(strict_types=1);
 
 namespace RenalTales\Models;
 
+
 /**
  * Language Model
  *
- * Handles language loading, support checks, and translations
+ * Handles dynamic language loading, support checks, translation lookup, and user language preference for a multilingual web application.
  *
  * @author Ľubomír Polaščín
  * @version 2025.v3.0dev
  */
-class LanguageModel
-{
-    private string $currentLanguage = DEFAULT_LANGUAGE;
-    private array $supportedLanguages = [];
-    private array $translations = [];
-    private string $languagePath;
-    private string $languageFlagPath = FLAGS_DIR;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->languagePath = defined('LANGUAGE_PATH') ? LANGUAGE_PATH : dirname(__DIR__) . DS . 'resources' . DS . 'lang';
-        // Dynamically load supported languages
-        $this->loadSupportedLanguages();
-        // Initialize with default language, will be set by LanguageDetector
-        $this->currentLanguage = defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en';
-        $this->loadTranslations($this->currentLanguage);
+// File: src/Models/LanguageModel.php
+
+
+class LanguageModel {
+  /**
+   * @var string Path to language files
+   */
+  private string $languagePath;
+
+  /**
+   * @var array<string> List of supported language codes
+   */
+  private array $supportedLanguages = [];
+
+  /**
+   * @var string Current language code
+   */
+  private string $currentLanguage;
+
+  /**
+   * @var array<string, string> Loaded translations for current language
+   */
+  private array $translations = [];
+
+  /**
+   * LanguageModel constructor.
+   * Loads supported languages and sets current language.
+   *
+   * @param string|null $languagePath
+   * @param string|null $defaultLanguage
+   */
+  public function __construct(?string $languagePath = null, ?string $defaultLanguage = null) {
+    $this->languagePath = $languagePath ?? dirname(__DIR__, 2) . '/resources/lang/';
+    $this->loadSupportedLanguages();
+    $this->currentLanguage = $this->detectLanguage($defaultLanguage ?? (defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en'));
+    $this->loadTranslations($this->currentLanguage);
+  }
+
+  /**
+   * Detect user's preferred language (session > cookie > browser > default)
+   *
+   * @param string $defaultLanguage
+   * @return string
+   */
+  public function detectLanguage(string $defaultLanguage = 'en'): string {
+    // Session
+    if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['language'])) {
+      $sessionLang = $_SESSION['language'];
+      if ($this->isSupported($sessionLang)) {
+        return $sessionLang;
+      }
     }
-
-
-    /**
-     * Get current language
-     */
-    public function getCurrentLanguage(): string
-    {
-        return $this->currentLanguage;
+    // Cookie
+    if (isset($_COOKIE['language'])) {
+      $cookieLang = $_COOKIE['language'];
+      if ($this->isSupported($cookieLang)) {
+        return $cookieLang;
+      }
     }
-
-    /**
-     * Set current language
-     */
-    public function setLanguage(string $language): bool
-    {
-        if (!$this->isSupported($language)) {
-            return false;
+    // Browser Accept-Language
+    if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+      $languages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+      foreach ($languages as $lang) {
+        $lang = substr(trim(explode(';', $lang)[0]), 0, 2);
+        if ($this->isSupported($lang)) {
+          return $lang;
         }
-
-        $this->currentLanguage = $language;
-        $this->loadTranslations($language);
-
-        return true;
+      }
     }
+    // Fallback
+    return $defaultLanguage;
+  }
 
-    /**
-     * Check if language is supported
-     */
-    public function isSupported(string $language): bool
-    {
-        return in_array($language, $this->supportedLanguages, true);
+  /**
+   * Get the current language code
+   */
+  public function getCurrentLanguage(): string {
+    return $this->currentLanguage;
+  }
+
+  /**
+   * Set the current language and persist to session/cookie
+   *
+   * @param string $language
+   * @return bool
+   */
+  public function setLanguage(string $language): bool {
+    if (!$this->isSupported($language)) {
+      return false;
     }
-
-    /**
-     * Get translated text
-     */
-    public function getText(string $key, array $parameters = [], string $fallback = ''): string
-    {
-        $text = $this->translations[$key] ?? $fallback ?: $key;
-
-        // Replace parameters
-        foreach ($parameters as $param => $value) {
-            $text = str_replace("{{$param}}", (string)$value, $text);
-        }
-
-        return $text;
+    $this->currentLanguage = $language;
+    $this->loadTranslations($language);
+    // Session
+    if (session_status() === PHP_SESSION_ACTIVE) {
+      $_SESSION['language'] = $language;
     }
+    // Cookie (30 days)
+    setcookie('language', $language, time() + (30 * 24 * 60 * 60), '/');
+    return true;
+  }
 
-    /**
-     * Get all translations for current language
-     */
-    public function getAllTexts(): array
-    {
-        return $this->translations;
+  /**
+   * Get all supported language codes
+   *
+   * @return array<string>
+   */
+  public function getSupportedLanguages(): array {
+    return $this->supportedLanguages;
+  }
+
+  /**
+   * Check if a language code is supported
+   *
+   * @param string $language
+   * @return bool
+   */
+  public function isSupported(string $language): bool {
+    return in_array($language, $this->supportedLanguages, true);
+  }
+
+  /**
+   * Get a translated string by key, with optional parameters and fallback
+   *
+   * @param string $key
+   * @param array<string, string|int|float> $parameters
+   * @param string $fallback
+   * @return string
+   */
+  public function getText(string $key, array $parameters = [], string $fallback = ''): string {
+    $text = $this->translations[$key] ?? $fallback ?: $key;
+    foreach ($parameters as $param => $value) {
+      $text = str_replace('{' . $param . '}', (string)$value, $text);
     }
+    return $text;
+  }
 
-    /**
-     * Get supported languages
-     */
-    public function getSupportedLanguages(): array
-    {
-        return $this->supportedLanguages;
+  /**
+   * Get all translations for the current language
+   *
+   * @return array<string, string>
+   */
+  public function getAllTexts(): array {
+    return $this->translations;
+  }
+
+  /**
+   * Load all supported languages from the language directory
+   */
+  private function loadSupportedLanguages(): void {
+    if (!is_dir($this->languagePath)) {
+      $this->supportedLanguages = ['en'];
+      return;
     }
-
-    /**
-     * Refresh supported languages (reload from directory)
-     */
-    public function refreshSupportedLanguages(): void
-    {
-        $this->loadSupportedLanguages();
+    $files = glob($this->languagePath . '*.php');
+    $languages = [];
+    foreach ($files as $file) {
+      $language = basename($file, '.php');
+      // Accept language codes like en, en-us, zh, zh-cn, etc.
+      if (preg_match('/^[a-z]{2}(-[a-z]{2})?$/i', $language)) {
+        $languages[] = strtolower($language);
+      }
     }
+    sort($languages);
+    $this->supportedLanguages = $languages ?: ['en'];
+  }
 
-    /**
-     * Load supported languages from directory dynamically
-     */
-    private function loadSupportedLanguages(): void
-    {
-        if (!is_dir($this->languagePath)) {
-            $this->supportedLanguages = ['en'];
-            return;
-        }
-
-        $files = glob($this->languagePath . '*.php');
-        $languages = [];
-
-        foreach ($files as $file) {
-            $language = basename($file, '.php');
-            // Ensure language code format is valid (2-3 char codes, with optional region)
-            if (preg_match('/^[a-z]{2,3}(-[a-z]{2,3})?$/', $language)) {
-                $languages[] = $language;
-            }
-        }
-
-        // Sort languages alphabetically for consistent ordering
-        sort($languages);
-
-        // Fallback to English if none found
-        $this->supportedLanguages = $languages ?: ['en'];
+  /**
+   * Load translations for a specific language
+   *
+   * @param string $language
+   */
+  private function loadTranslations(string $language): void {
+    $filePath = $this->languagePath . $language . '.php';
+    if (file_exists($filePath)) {
+      $translations = include $filePath;
+      $this->translations = is_array($translations) ? $translations : [];
+    } else {
+      // Fallback to English if available
+      $defaultPath = $this->languagePath . 'en.php';
+      if (file_exists($defaultPath)) {
+        $translations = include $defaultPath;
+        $this->translations = is_array($translations) ? $translations : [];
+      } else {
+        $this->translations = [];
+      }
     }
-
-    /**
-     * Load translations for specific language
-     */
-    public function loadTranslations(string $language): void
-    {
-        $filePath = $this->languagePath . $language . '.php';
-
-        if (file_exists($filePath)) {
-            $translations = include $filePath;
-            $this->translations = is_array($translations) ? $translations : [];
-        } else {
-            // Try to load default language
-            $defaultPath = $this->languagePath . 'en.php';
-            if (file_exists($defaultPath)) {
-                $translations = include $defaultPath;
-                $this->translations = is_array($translations) ? $translations : [];
-            } else {
-                $this->translations = [];
-            }
-        }
-    }
-
-    /**
-     * Check if language file exists
-     */
-    public function languageFileExists(string $language): bool
-    {
-        $filePath = $this->languagePath . $language . '.php';
-        return file_exists($filePath);
-    }
-
-    /**
-     * Get language file path
-     */
-    public function getLanguageFilePath(string $language): string
-    {
-        return $this->languagePath . $language . '.php';
-    }
-
-    /**
-     * Get language directory path
-     */
-    public function getLanguagePath(): string
-    {
-        return $this->languagePath;
-    }
+  }
 }
