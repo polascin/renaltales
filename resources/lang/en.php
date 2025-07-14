@@ -429,6 +429,17 @@ return [
     'today_is' => 'Today is',
     
     // Navigation and menu
+    'nav.home' => 'Home',
+    'nav.stories' => 'Stories',
+    'nav.community' => 'Community',
+    'nav.resources' => 'Resources',
+    'nav.about' => 'About',
+    'nav.my_stories' => 'My Stories',
+    'nav.profile' => 'Profile',
+    'nav.settings' => 'Settings',
+    'nav.login' => 'Log In',
+    'nav.logout' => 'Log Out',
+    'nav.register' => 'Sign Up',
     'main_menu' => 'Main Menu',
     'home' => 'Home',
     'stories' => 'Stories',
@@ -464,6 +475,9 @@ return [
     'support_description' => 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.',
     
     // Home page content
+    'home.title' => 'Renal Tales - Home',
+    'home.welcome' => 'Welcome to Renal Tales',
+    'home.description' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
     'welcome_home' => 'Welcome to Renal Tales',
     'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
     'home_intro2' => 'This web application is designed to facilitate the sharing of personal tales and stories among individuals affected by kidney disorders, including those undergoing dialysis, those in the pre- or post-dialysis stage, and individuals living without the limitations of dialysis. This platform aims to foster a supportive community, allowing users to connect, share experiences, and provide insights that can help others navigate their journeys with kidney health.',
