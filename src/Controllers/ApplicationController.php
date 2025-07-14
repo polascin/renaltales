@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace RenalTales\Controllers;
 
 use RenalTales\Models\LanguageModel;
+use RenalTales\Controllers\LanguageController;
 use RenalTales\Core\SessionManager;
+use RenalTales\Core\SecurityManager;
 use RenalTales\Views\HomeView;
+use RenalTales\Views\ErrorView;
 
 /**
  * Application Controller

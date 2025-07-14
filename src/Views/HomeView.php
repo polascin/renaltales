@@ -24,7 +24,6 @@ class HomeView {
         // Render the language switcher component
         ob_start();
         $currentLanguage = $this->language;
-        $availableLanguages = $availableLanguages;
         include __DIR__ . '/../../resources/views/components/language-switcher.php';
         $languageSwitcher = ob_get_clean();
 

@@ -11,30 +11,30 @@
  */
 
 if (!isset($currentLanguage)) $currentLanguage = 'en';
-if (!isset($availableLanguages)) $availableLanguages = [
+if (!isset($supportedLanguages)) $supportedLanguages = [
     'en' => 'English',
     'sk' => 'Slovak',
     'la' => 'Latin',
 ];
 ?>
 <div class="language-switcher">
-    <form method="get" action="">
-        <label for="lang-select">Language:</label>
-        <select name="lang" id="lang-select" onchange="this.form.submit()">
-            <?php foreach ($availableLanguages as $code => $name): ?>
-                <option value="<?= htmlspecialchars($code) ?>" <?= $code === $currentLanguage ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($name) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
+  <form method="get" action="">
+    <label for="lang-select">Language:</label>
+    <select name="lang" id="lang-select" onchange="this.form.submit()">
+      <?php foreach ($supportedLanguages as $code => $name): ?>
+      <option value="<?= htmlspecialchars($code) ?>" <?= $code === $currentLanguage ? 'selected' : '' ?>>
+        <?= htmlspecialchars($name) ?>
+      </option>
+      <?php endforeach; ?>
+    </select>
+  </form>
 </div>
 <style>
-    .language-switcher {
-        margin: 1em 0;
-    }
+.language-switcher {
+  margin: 1em 0;
+}
 
-    .language-switcher select {
-        padding: 0.2em;
-    }
+.language-switcher select {
+  padding: 0.2em;
+}
 </style>
