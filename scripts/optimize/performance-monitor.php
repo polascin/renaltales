@@ -14,20 +14,15 @@ namespace RenalTales\Scripts\Optimize;
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../bootstrap.php';
-require_once __DIR__ . '/../../src/Core/Database.php';
 require_once __DIR__ . '/../../src/Core/CacheManager.php';
-
-use RenalTales\Core\Database;
 
 class PerformanceMonitor {
     
-    private Database $db;
     private CacheManager $cache;
     private array $slowQueries = [];
     private array $recommendations = [];
     
     public function __construct() {
-        $this->db = Database::getInstance();
         $this->cache = new CacheManager();
     }
     
@@ -51,24 +46,8 @@ class PerformanceMonitor {
      */
     private function analyzeSlowQueries(): void {
         echo "📊 Analyzing slow queries...\n";
-        
-        try {
-            // Enable slow query log temporarily if not enabled
-            $this->db->execute("SET GLOBAL slow_query_log = 'ON'");
-            $this->db->execute("SET GLOBAL long_query_time = 1");
-            
-            // Get slow query log status
-            $result = $this->db->select("SHOW VARIABLES LIKE 'slow_query_log%'");
-            foreach ($result as $row) {
-                echo "  - {$row['Variable_name']}: {$row['Value']}\n";
-            }
-            
-            // Analyze queries that might be slow
-            $this->analyzeCommonQueries();
-            
-        } catch (Exception $e) {
-            echo "  ⚠️  Error analyzing slow queries: " . $e->getMessage() . "\n";
-        }
+        echo "  ℹ️  Database functionality removed - focusing on language processing\n";
+        echo "  ℹ️  This analysis is no longer available\n";
     }
     
     /**
@@ -110,28 +89,8 @@ class PerformanceMonitor {
      */
     private function analyzeMissingIndexes(): void {
         echo "\n🔍 Analyzing indexes...\n";
-        
-        try {
-            // Check for tables without proper indexes
-            $tables = ['stories', 'users', 'translations', 'story_categories', 'categories'];
-            
-            foreach ($tables as $table) {
-                $indexes = $this->db->select("SHOW INDEX FROM `{$table}`");
-                echo "  📋 Table: {$table}\n";
-                
-                $indexNames = [];
-                foreach ($indexes as $index) {
-                    $indexNames[] = $index['Key_name'];
-                    echo "    - Index: {$index['Key_name']} on {$index['Column_name']}\n";
-                }
-                
-                // Recommend missing indexes
-                $this->recommendIndexes($table, $indexNames);
-            }
-            
-        } catch (Exception $e) {
-            echo "  ⚠️  Error analyzing indexes: " . $e->getMessage() . "\n";
-        }
+        echo "  ℹ️  Database functionality removed - focusing on language processing\n";
+        echo "  ℹ️  This analysis is no longer available\n";
     }
     
     /**
@@ -206,30 +165,8 @@ class PerformanceMonitor {
      */
     private function analyzeTableStats(): void {
         echo "\n📈 Analyzing table statistics...\n";
-        
-        try {
-            $tables = $this->db->select("SHOW TABLE STATUS");
-            
-            foreach ($tables as $table) {
-                $name = $table['Name'];
-                $rows = $table['Rows'];
-                $dataLength = $table['Data_length'];
-                $indexLength = $table['Index_length'];
-                
-                echo "  📋 Table: {$name}\n";
-                echo "    - Rows: " . number_format($rows) . "\n";
-                echo "    - Data size: " . $this->formatBytes($dataLength) . "\n";
-                echo "    - Index size: " . $this->formatBytes($indexLength) . "\n";
-                
-                // Check for tables that might need optimization
-                if ($rows > 10000 && $indexLength < $dataLength * 0.1) {
-                    $this->recommendations[] = "Table {$name} has many rows but few indexes. Consider adding appropriate indexes.";
-                }
-            }
-            
-        } catch (Exception $e) {
-            echo "  ⚠️  Error analyzing table stats: " . $e->getMessage() . "\n";
-        }
+        echo "  ℹ️  Database functionality removed - focusing on language processing\n";
+        echo "  ℹ️  This analysis is no longer available\n";
     }
     
     /**
@@ -296,29 +233,8 @@ class PerformanceMonitor {
      */
     public function testCachePerformance(): void {
         echo "\n🧪 Testing cache performance...\n";
-        
-        $testQuery = "SELECT * FROM stories WHERE published = 1 LIMIT 10";
-        $iterations = 100;
-        
-        // Test without cache
-        $this->db->setCacheEnabled(false);
-        $start = microtime(true);
-        for ($i = 0; $i < $iterations; $i++) {
-            $this->db->select($testQuery);
-        }
-        $noCacheTime = microtime(true) - $start;
-        
-        // Test with cache
-        $this->db->setCacheEnabled(true);
-        $start = microtime(true);
-        for ($i = 0; $i < $iterations; $i++) {
-            $this->db->select($testQuery);
-        }
-        $cacheTime = microtime(true) - $start;
-        
-        echo "  - {$iterations} queries without cache: " . round($noCacheTime * 1000, 2) . "ms\n";
-        echo "  - {$iterations} queries with cache: " . round($cacheTime * 1000, 2) . "ms\n";
-        echo "  - Performance improvement: " . round((($noCacheTime - $cacheTime) / $noCacheTime) * 100, 2) . "%\n";
+        echo "  ℹ️  Database functionality removed - focusing on language processing\n";
+        echo "  ℹ️  This analysis is no longer available\n";
     }
 }
 

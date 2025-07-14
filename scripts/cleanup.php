@@ -10,7 +10,6 @@
  */
 
 // Include required files
-use RenalTales\Core\Database;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

@@ -64,7 +64,6 @@ define('SEGMENTS_DIR', APP_DIR . DS . 'resources' . DS . 'segments');
 define('UPLOADS_DIR', APP_DIR . DS . 'storage' . DS . 'uploads');
 // Define paths for application source directories
 define('CORE_DIR', APP_DIR . DS . 'src' . DS . 'Core');
-define('CONTRACTS_DIR', CORE_DIR . DS . 'Contracts');
 define('CONTROLLERS_DIR', APP_DIR . DS . 'src' . DS . 'Controllers');
 define('MODELS_DIR', APP_DIR . DS . 'src' . DS . 'Models');
 define('VIEWS_DIR', APP_DIR . DS . 'src' . DS . 'Views');

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace RenalTales\Models;
 
-use RenalTales\Core\Contracts\LanguageInterface;
-
 /**
  * Language Model
  *
- * Handles language-related operations and translations
+ * Handles language loading, support checks, and translations
  *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0
@@ -20,6 +18,7 @@ class LanguageModel
     private array $supportedLanguages = [];
     private array $translations = [];
     private string $languagePath;
+    private ?int $languagesCacheTime = null;
 
     /**
      * Constructor
@@ -27,50 +26,13 @@ class LanguageModel
     public function __construct()
     {
         $this->languagePath = defined('LANGUAGE_PATH') ? LANGUAGE_PATH : dirname(__DIR__, 2) . '/resources/lang/';
+        // Dynamically load supported languages
         $this->loadSupportedLanguages();
-        $this->currentLanguage = $this->detectLanguage();
+        // Initialize with default language, will be set by LanguageDetector
+        $this->currentLanguage = defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en';
         $this->loadTranslations($this->currentLanguage);
     }
 
-    /**
-     * Detect user's preferred language
-     */
-    public function detectLanguage(): string
-    {
-        // Check session first
-        if (session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['language'])) {
-            $sessionLang = $_SESSION['language'];
-            if ($this->isSupported($sessionLang)) {
-                return $sessionLang;
-            }
-        }
-
-        // Check cookie
-        if (isset($_COOKIE['language'])) {
-            $cookieLang = $_COOKIE['language'];
-            if ($this->isSupported($cookieLang)) {
-                return $cookieLang;
-            }
-        }
-
-        // Check browser Accept-Language header
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $acceptLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-            $languages = explode(',', $acceptLang);
-
-            foreach ($languages as $lang) {
-                $lang = trim(explode(';', $lang)[0]);
-                $lang = substr($lang, 0, 2); // Get primary language code
-
-                if ($this->isSupported($lang)) {
-                    return $lang;
-                }
-            }
-        }
-
-        // Default to defined constant or English
-        return defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en';
-    }
 
     /**
      * Get current language
@@ -91,14 +53,6 @@ class LanguageModel
 
         $this->currentLanguage = $language;
         $this->loadTranslations($language);
-
-        // Save to session
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            $_SESSION['language'] = $language;
-        }
-
-        // Save to cookie (30 days)
-        setcookie('language', $language, time() + (30 * 24 * 60 * 60), '/');
 
         return true;
     }
@@ -143,12 +97,21 @@ class LanguageModel
     }
 
     /**
-     * Load supported languages from directory
+     * Refresh supported languages (reload from directory)
+     */
+    public function refreshSupportedLanguages(): void
+    {
+        $this->loadSupportedLanguages();
+    }
+
+    /**
+     * Load supported languages from directory dynamically
      */
     private function loadSupportedLanguages(): void
     {
         if (!is_dir($this->languagePath)) {
             $this->supportedLanguages = ['en'];
+            $this->languagesCacheTime = time();
             return;
         }
 
@@ -157,18 +120,24 @@ class LanguageModel
 
         foreach ($files as $file) {
             $language = basename($file, '.php');
-            if (preg_match('/^[a-z]{2}(-[a-z]{2})?$/', $language)) {
+            // Ensure language code format is valid (2-3 char codes, with optional region)
+            if (preg_match('/^[a-z]{2,3}(-[a-z]{2,3})?$/', $language)) {
                 $languages[] = $language;
             }
         }
 
+        // Sort languages alphabetically for consistent ordering
+        sort($languages);
+        
+        // Fallback to English if none found
         $this->supportedLanguages = $languages ?: ['en'];
+        $this->languagesCacheTime = time();
     }
 
     /**
      * Load translations for specific language
      */
-    private function loadTranslations(string $language): void
+    public function loadTranslations(string $language): void
     {
         $filePath = $this->languagePath . $language . '.php';
 
@@ -185,5 +154,30 @@ class LanguageModel
                 $this->translations = [];
             }
         }
+    }
+
+    /**
+     * Check if language file exists
+     */
+    public function languageFileExists(string $language): bool
+    {
+        $filePath = $this->languagePath . $language . '.php';
+        return file_exists($filePath);
+    }
+
+    /**
+     * Get language file path
+     */
+    public function getLanguageFilePath(string $language): string
+    {
+        return $this->languagePath . $language . '.php';
+    }
+
+    /**
+     * Get language directory path
+     */
+    public function getLanguagePath(): string
+    {
+        return $this->languagePath;
     }
 }

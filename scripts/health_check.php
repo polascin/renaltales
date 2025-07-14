@@ -88,7 +88,6 @@ class HealthChecker {
         echo "📁 Checking required files...\n";
         
         $requiredFiles = [
-            'core/Database.php',
             'core/AuthenticationManager.php',
             'core/SessionManager.php',
             'core/SecurityManager.php',
@@ -131,19 +130,8 @@ class HealthChecker {
             $this->info[] = "ℹ️ This is expected in development - use .env.development or .env.production";
         }
         
-        // Check database connection if variables are set
-        if (empty($missingVars)) {
-            try {
-                if (class_exists('Database')) {
-                    $db = new Database();
-                    $this->info[] = "✅ Database connection successful";
-                } else {
-                    $this->warnings[] = "Database class not available for connection test";
-                }
-            } catch (Exception $e) {
-                $this->warnings[] = "Database connection failed: " . $e->getMessage();
-            }
-        }
+        // Database functionality removed for language processing focus
+        $this->info[] = "ℹ️ Database functionality removed - focusing on language processing";
     }
     
     private function checkSecurityConfig(): void {

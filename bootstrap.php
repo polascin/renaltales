@@ -36,11 +36,6 @@ if (file_exists($envFile)) {
     // Create basic environment if no .env file exists
     $_ENV['APP_ENV'] = 'development';
     $_ENV['APP_DEBUG'] = 'true';
-    $_ENV['DB_HOST'] = 'localhost';
-    $_ENV['DB_DATABASE'] = 'renaltales';
-    $_ENV['DB_USERNAME'] = 'root';
-    $_ENV['DB_PASSWORD'] = '';
-    $_ENV['DB_CHARSET'] = 'utf8mb4';
 
     // Set putenv for backward compatibility
     foreach ($_ENV as $key => $value) {
@@ -92,14 +87,7 @@ $config = [
         'url' => $_ENV['APP_URL'] ?? 'http://localhost',
         'timezone' => $_ENV['APP_TIMEZONE'] ?? 'UTC',
     ],
-    'database' => [
-        'host' => $_ENV['DB_HOST'] ?? 'localhost',
-        'name' => $_ENV['DB_DATABASE'] ?? 'renaltales',
-        'user' => $_ENV['DB_USERNAME'] ?? 'root',
-        'password' => $_ENV['DB_PASSWORD'] ?? '',
-        'charset' => $_ENV['DB_CHARSET'] ?? 'utf8mb4',
-        'collation' => $_ENV['DB_COLLATION'] ?? 'utf8mb4_unicode_ci',
-    ],
+    // Database configuration removed
     'security' => [
         'app_secret' => $_ENV['APP_SECRET'] ?? 'your-secret-key-here',
         'jwt_secret' => $_ENV['JWT_SECRET'] ?? 'your-jwt-secret-here',

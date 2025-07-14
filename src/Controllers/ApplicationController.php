@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RenalTales\Controllers;
 
-use RenalTales\Models\LanguageModel;
+use RenalTales\Core\LanguageManager;
 use RenalTales\Core\SessionManager;
 use RenalTales\Views\HomeView;
 
@@ -17,14 +17,14 @@ use RenalTales\Views\HomeView;
  * @version 2025.v1.0
  */
 class ApplicationController {
-    private LanguageModel $languageModel;
+    private LanguageManager $languageManager;
     private SessionManager $sessionManager;
 
     /**
      * Constructor
      */
-    public function __construct(LanguageModel $languageModel, SessionManager $sessionManager) {
-        $this->languageModel = $languageModel;
+    public function __construct(LanguageManager $languageManager, SessionManager $sessionManager) {
+        $this->languageManager = $languageManager;
         $this->sessionManager = $sessionManager;
     }
 
@@ -34,7 +34,7 @@ class ApplicationController {
      * @return string
      */
     public function index(): string {
-        $lang = $this->languageModel->getCurrentLanguage();
+        $lang = $this->languageManager->getCurrentLanguage();
         $appName = $_ENV['APP_NAME'] ?? 'Renal Tales';
         $view = new HomeView($lang, $appName);
         return $view->render();

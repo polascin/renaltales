@@ -29,21 +29,20 @@ date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
 define('DEBUG_MODE', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
 // Initialize the application components
 use RenalTales\Controllers\ApplicationController;
-// Start the session manager with the language model texts
 use RenalTales\Core\SessionManager;
-use RenalTales\Models\LanguageModel;
+use RenalTales\Core\LanguageManager;
 use RenalTales\Views\ErrorView;
 
 try {
-    $languageModel = new LanguageModel();
-    $sessionManager = new SessionManager($languageModel->getAllTexts());
-    $controller = new ApplicationController($languageModel, $sessionManager);
+    $languageManager = new LanguageManager();
+    $sessionManager = new SessionManager($languageManager->getAllTexts());
+    $controller = new ApplicationController($languageManager, $sessionManager);
     $output = $controller->index();
     ob_end_clean();
     echo $output;
 } catch(Exception $e) {
     error_log('Exception in index.php: ' . $e->getMessage());
     ob_end_clean();
-    $errorView = new ErrorView($e, DEBUG_MODE, $languageModel ?? null);
+    $errorView = new ErrorView($e, DEBUG_MODE, $languageManager->getLanguageModel() ?? null);
     echo $errorView->render();
 }

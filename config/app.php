@@ -52,25 +52,6 @@ return [
         'lockout_duration' => 900, // 15 minutes in seconds
     ],
 
-    // Database Settings (will be overridden by database.php)
-    'database' => [
-        'default' => 'mysql',
-        'connections' => [
-            'mysql' => [
-                'driver' => 'mysql',
-                'host' => env('DB_HOST'),
-                'port' => env('DB_PORT', '3306'),
-                'database' => env('DB_DATABASE'),
-                'username' => env('DB_USERNAME'),
-                'password' => env('DB_PASSWORD'),
-                'charset' => 'utf8mb4',
-                'collation' => 'utf8mb4_unicode_ci',
-                'prefix' => '',
-                'strict' => true,
-                'engine' => null,
-            ],
-        ],
-    ],
 
     // Logging Settings
     'logging' => [

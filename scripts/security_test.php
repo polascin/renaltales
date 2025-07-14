@@ -14,7 +14,6 @@ namespace RenalTales\Scripts;
 // Include the bootstrap file
 require_once dirname(__DIR__) . '/bootstrap.php';
 
-use RenalTales\Core\Database;
 use RenalTales\Core\SecurityManager;
 use RenalTales\Core\SessionManager;
 use RenalTales\Core\InputValidator;
@@ -25,10 +24,8 @@ use RenalTales\Core\CSRFHelper;
 class SecurityTester {
     
     private $results = [];
-    private $db;
     
     public function __construct() {
-        $this->db = Database::getInstance();
         echo "<h1>🔒 Security Testing Results</h1>\n";
         echo "<style>
             body { font-family: Arial, sans-serif; margin: 20px; }
@@ -46,7 +43,6 @@ class SecurityTester {
     }
     
     public function runAllTests(): void {
-        $this->testDatabaseSecurity();
         $this->testCSRFProtection();
         $this->testSessionSecurity();
         $this->testInputValidation();
@@ -59,57 +55,6 @@ class SecurityTester {
         $this->generateSummary();
     }
     
-    private function testDatabaseSecurity(): void {
-        echo "<div class='test-section'>\n";
-        echo "<h2>🗄️ Database Security Tests</h2>\n";
-        
-        try {
-            // Test SQL injection protection
-            $testQueries = [
-                "SELECT * FROM users WHERE id = 1 OR 1=1",
-                "SELECT * FROM users WHERE username = 'admin' OR '1'='1'",
-                "SELECT * FROM users; DROP TABLE users; --",
-                "SELECT * FROM users UNION SELECT * FROM admin_users"
-            ];
-            
-            $sqlInjectionPrevented = true;
-            foreach ($testQueries as $query) {
-                try {
-                    $result = $this->db->execute($query, []);
-                    $sqlInjectionPrevented = false;
-                    break;
-                } catch (Exception $e) {
-                    // Good - query was blocked
-                }
-            }
-            
-            $this->addResult('SQL Injection Protection', 
-                $sqlInjectionPrevented ? 'PASS' : 'FAIL',
-                $sqlInjectionPrevented ? 'Dangerous SQL patterns are blocked' : 'SQL injection vulnerabilities detected'
-            );
-            
-            // Test prepared statements
-            try {
-                $stmt = $this->db->execute("SELECT COUNT(*) as count FROM information_schema.tables WHERE table_schema = ?", ['information_schema']);
-                $this->addResult('Prepared Statements', 'PASS', 'Database uses prepared statements');
-            } catch (Exception $e) {
-                $this->addResult('Prepared Statements', 'WARNING', 'Could not verify prepared statements: ' . $e->getMessage());
-            }
-            
-            // Test database connection security
-            $connectionInfo = $this->db->testConnection();
-            if ($connectionInfo['connected']) {
-                $this->addResult('Database Connection', 'PASS', 'Database connection is secure');
-            } else {
-                $this->addResult('Database Connection', 'FAIL', 'Database connection failed: ' . $connectionInfo['error']);
-            }
-            
-        } catch (Exception $e) {
-            $this->addResult('Database Security', 'FAIL', 'Database security test failed: ' . $e->getMessage());
-        }
-        
-        echo "</div>\n";
-    }
     
     private function testCSRFProtection(): void {
         echo "<div class='test-section'>\n";

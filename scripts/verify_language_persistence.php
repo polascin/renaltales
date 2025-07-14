@@ -14,7 +14,6 @@ define('APP_TITLE', 'Renal Tales');
 define('DEBUG_MODE', true);
 
 // Include required classes
-use RenalTales\Core\Database;
 use RenalTales\Core\LanguageDetector;
 use RenalTales\Core\SessionManager;
 use RenalTales\Models\LanguageModel;
