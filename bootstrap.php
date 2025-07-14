@@ -3,18 +3,15 @@
 /**
  * Bootstrap file for RenalTales application
  * This file initializes the application environment and sets up autoloading
- */
+ * @package RenalTales
+ * @version 2025.v2.0
+ * @author Ľubomír Polaščín
+**/
 
-// Ensure we're using the correct directory separator
-define('DS', DIRECTORY_SEPARATOR);
+// File: /bootstrap.php
 
-// Define APP_ROOT if not already defined
-if (!defined('APP_ROOT')) {
-    define('APP_ROOT', __DIR__);
-}
-
-
-// No Composer autoloader or Monolog used. Using simple file logger below.
+// Load classes
+require_once APP_DIR . DS . 'loader.php';
 
 // Load environment variables
 $envFile = APP_ROOT . DS . '.env';
@@ -68,6 +65,12 @@ $logDir = dirname($logPath);
 if (!is_dir($logDir)) {
     mkdir($logDir, 0755, true);
 }
+/**
+ * Simple file logger
+ *
+ * @param string $message
+ * @param array $context
+ */
 function app_log($message, $context = []) {
     global $logPath;
     $date = date('Y-m-d H:i:s');

@@ -1,8 +1,15 @@
-<?php declare(strict_types=1); ob_start();
+<?php
 
-define('APP_DIR', dirname(__DIR__));
-define('DEFAULT_LANGUAGE', 'sk');
-define('DEBUG_MODE', true);
+/**
+ * Main entry point for the RenalTales application
+ * @package RenalTales
+ * @version 2025.v3.0testing
+ * @author Ľubomír Polaščín
+**/
+
+// File: public/index.php
+
+require_once __DIR__ . '/../config/constants.php';
 
 // Include bootstrap for proper setup
 require_once APP_DIR . '/bootstrap.php';
@@ -17,7 +24,7 @@ use RenalTales\Views\ErrorView;
 
 try {
     $languageModel = new LanguageModel();
-    $sessionManager = new SessionManager($languageModel->getAllTexts(), DEBUG_MODE);
+    $sessionManager = new SessionManager($languageModel->getAllTexts());
     $controller = new ApplicationController($languageModel, $sessionManager);
     $output = $controller->index();
     ob_end_clean();
