@@ -14,16 +14,7 @@ if (!defined('APP_ROOT')) {
 }
 
 
-// Load Composer autoloader
-require_once APP_ROOT . DS . 'vendor' . DS . 'autoload.php';
-
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-
-// Ensure Monolog classes are loaded
-if (!class_exists(Logger::class) || !class_exists(StreamHandler::class)) {
-    throw new \RuntimeException('Monolog is not installed or StreamHandler is missing. Run "composer require monolog/monolog".');
-}
+// No Composer autoloader or Monolog used. Using simple file logger below.
 
 // Load environment variables
 $envFile = APP_ROOT . DS . '.env';
@@ -71,24 +62,21 @@ if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
 // Set timezone
 date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
 
-// Initialize logging
-if (class_exists(Logger::class) && class_exists(StreamHandler::class)) {
-    $logger = new Logger('renaltales');
-    $logPath = APP_ROOT . DS . (isset($_ENV['LOG_PATH']) && $_ENV['LOG_PATH'] ? $_ENV['LOG_PATH'] : 'storage/logs/app.log');
-
-    // Create log directory if it doesn't exist
-    $logDir = dirname($logPath);
-    if (!is_dir($logDir)) {
-        mkdir($logDir, 0755, true);
-    }
-
-    // Use appropriate log level constant based on Monolog version
-    $debugLevel = defined('Monolog\\Logger::DEBUG') ? Logger::DEBUG : 100;
-
-    $logger->pushHandler(new StreamHandler($logPath, $debugLevel));
-    // Make logger available globally
-    $GLOBALS['logger'] = $logger;
+// Simple file logger (no Composer/Monolog)
+$logPath = APP_ROOT . DS . (isset($_ENV['LOG_PATH']) && $_ENV['LOG_PATH'] ? $_ENV['LOG_PATH'] : 'storage/logs/app.log');
+$logDir = dirname($logPath);
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0755, true);
 }
+function app_log($message, $context = []) {
+    global $logPath;
+    $date = date('Y-m-d H:i:s');
+    $ctx = $context ? ' | ' . json_encode($context) : '';
+    file_put_contents($logPath, "[$date] $message$ctx\n", FILE_APPEND);
+}
+$GLOBALS['logger'] = function ($msg, $ctx = []) {
+    app_log($msg, $ctx);
+};
 
 // Basic configuration array
 $config = [
@@ -135,10 +123,8 @@ define('LANGUAGE_PATH', APP_ROOT . '/resources/lang/');
 $GLOBALS['config'] = $config;
 
 // Application initialization complete
-if (isset($logger)) {
-    $logger->info('Application bootstrap completed', [
-        'app_name' => $config['app']['name'],
-        'environment' => $config['app']['env'],
-        'debug' => $config['app']['debug'],
-    ]);
-}
+app_log('Application bootstrap completed', [
+    'app_name' => $config['app']['name'],
+    'environment' => $config['app']['env'],
+    'debug' => $config['app']['debug'],
+]);
