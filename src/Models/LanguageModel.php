@@ -24,10 +24,6 @@ class LanguageModel {
    */
   private string $languagePath;
 
-  /**
-   * @var array<string> List of supported language codes
-   */
-  private array $supportedLanguages = [];
 
   /**
    * @var string Current language code
@@ -41,7 +37,7 @@ class LanguageModel {
 
   /**
    * LanguageModel constructor.
-   * Loads supported languages and sets current language.
+   * Sets current language and loads translations.
    *
    * @param string|null $languagePath
    * @param string|null $defaultLanguage
@@ -50,8 +46,6 @@ class LanguageModel {
     // Use APP_ROOT constant if available, otherwise calculate from current directory
     $appRoot = defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2);
     $this->languagePath = $languagePath ?? $appRoot . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang' . DIRECTORY_SEPARATOR;
-
-    $this->loadSupportedLanguages();
 
     // Determine default language from constant or fallback to 'en'
     $defaultLang = $defaultLanguage ?? (defined('DEFAULT_LANGUAGE') ? DEFAULT_LANGUAGE : 'en');
@@ -128,7 +122,19 @@ class LanguageModel {
    * @return array<string>
    */
   public function getSupportedLanguages(): array {
-    return $this->supportedLanguages;
+    return [
+      'af', 'am', 'ar', 'as', 'ay', 'az', 'bcl', 'be', 'bg', 'bh', 'bho', 'bm', 'bn', 'bo',
+      'ca', 'ceb', 'cs', 'cy', 'da', 'de', 'dv', 'el', 'en', 'en-au', 'en-ca', 'en-gb', 
+      'en-nz', 'en-us', 'en-za', 'eo', 'es', 'et', 'eu', 'fa', 'ff', 'fi', 'fo', 'fr',
+      'ga', 'gd', 'gl', 'gn', 'gu', 'ha', 'he', 'hi', 'hil', 'hr', 'ht', 'hu', 'hy',
+      'id', 'ig', 'ilo', 'is', 'it', 'ja', 'jv', 'ka', 'kg', 'kk', 'kl', 'km', 'kn',
+      'ko', 'ky', 'la', 'lb', 'lg', 'ln', 'lo', 'lt', 'lua', 'lv', 'mai', 'mg', 'mk',
+      'ml', 'mn', 'mr', 'ms', 'mt', 'my', 'nd', 'ne', 'nl', 'no', 'nr', 'nso', 'ny',
+      'om', 'or', 'pa', 'pam', 'pl', 'ps', 'pt', 'qu', 'rm', 'rn', 'ro', 'ru', 'rw',
+      'sa', 'sd', 'se', 'sg', 'si', 'sk', 'sl', 'sn', 'so', 'sq', 'sr', 'ss', 'st',
+      'su', 'sv', 'sw', 'ta', 'te', 'tg', 'th', 'ti', 'tk', 'tl', 'tn', 'tr', 'ts',
+      'ug', 'uk', 'ur', 'uz', 've', 'vi', 'war', 'wuu', 'xh', 'yo', 'yue', 'zh', 'zu'
+    ];
   }
 
   /**
@@ -138,7 +144,7 @@ class LanguageModel {
    * @return bool
    */
   public function isSupported(string $language): bool {
-    return in_array($language, $this->supportedLanguages, true);
+    return in_array($language, $this->getSupportedLanguages(), true);
   }
 
   /**
@@ -166,48 +172,6 @@ class LanguageModel {
     return $this->translations;
   }
 
-  /**
-   * Load all supported languages from the language directory
-   */
-  private function loadSupportedLanguages(): void {
-    if (!is_dir($this->languagePath) || !is_readable($this->languagePath)) {
-      $this->supportedLanguages = ['en'];
-      return;
-    }
-
-    $files = glob($this->languagePath . '*.php');
-    if ($files === false) {
-      // glob() failed, fallback to basic directory scan
-      $files = [];
-      try {
-        $handle = opendir($this->languagePath);
-        if ($handle !== false) {
-          while (($file = readdir($handle)) !== false) {
-            if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
-              $files[] = $this->languagePath . $file;
-            }
-          }
-          closedir($handle);
-        }
-      } catch (\Exception $e) {
-        // If directory scanning fails, use default
-        $this->supportedLanguages = ['en'];
-        return;
-      }
-    }
-
-    $languages = [];
-    foreach ($files as $file) {
-      $language = basename($file, '.php');
-      // Accept language codes like en, en-us, zh, zh-cn, etc.
-      if (preg_match('/^[a-z]{2}(-[a-z]{2})?$/i', $language)) {
-        $languages[] = strtolower($language);
-      }
-    }
-
-    sort($languages);
-    $this->supportedLanguages = $languages ?: ['en'];
-  }
 
   /**
    * Load translations for a specific language
