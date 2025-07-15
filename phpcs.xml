@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<ruleset name="RenalTales">
+    <description>RenalTales PHP Coding Standards</description>
+    
+    <!-- Files to check -->
+    <file>src</file>
+    
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>resources/lang/*</exclude-pattern>
+    
+    <!-- Use PSR-12 as base standard -->
+    <rule ref="PSR12"/>
+    
+    <!-- Additional rules for modern PHP -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Files.ByteOrderMark"/>
+    <rule ref="Generic.Files.LineEndings"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="120"/>
+        </properties>
+    </rule>
+    
+    <!-- Enforce strict types -->
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes"/>
+    
+    <!-- PHP 8.4 specific rules -->
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
+    
+    <!-- Naming conventions -->
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
+    
+    <!-- Security -->
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array">
+                <element key="eval" value="null"/>
+                <element key="create_function" value="null"/>
+                <element key="exec" value="null"/>
+                <element key="system" value="null"/>
+                <element key="shell_exec" value="null"/>
+                <element key="passthru" value="null"/>
+            </property>
+        </properties>
+    </rule>
+    
+    <!-- Show progress -->
+    <arg name="colors"/>
+    <arg value="p"/>
+    <arg name="parallel" value="8"/>
+</ruleset>

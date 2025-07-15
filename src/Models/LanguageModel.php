@@ -12,7 +12,8 @@ namespace RenalTales\Models;
  * and user language preference for a multilingual web application.
  *
  * @author Ľubomír Polaščín
- * @version 2025.v3.0dev
+ * @package RenalTales
+ * @version 2025.3.1.dev
  */
 
 // File: src/Models/LanguageModel.php

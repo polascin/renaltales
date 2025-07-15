@@ -4,71 +4,131 @@ declare(strict_types=1);
 
 namespace RenalTales\Core;
 
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+use Psr\Log\InvalidArgumentException;
+
 /**
- * Simple File-Based Logger
+ * Simple File-Based Logger (Legacy)
  *
- * This class provides basic logging functionality without database dependency
+ * This class provides basic logging functionality without database dependency.
+ * Implements PSR-3 LoggerInterface for compatibility with the new logging system.
+ * For advanced logging, use the LoggerFactory to create Monolog loggers.
  *
- * @package RenalTales
- * @version 2025.v3.0dev
+ * @package RenalTales\Core
+ * @version 2025.3.1.dev
  * @author Ľubomír Polaščín
  */
-class Logger
+class Logger implements LoggerInterface
 {
     private string $logFile;
-    
-    public function __construct(string $logFile = null)
+    private array $logLevels = [
+        LogLevel::EMERGENCY => 0,
+        LogLevel::ALERT => 1,
+        LogLevel::CRITICAL => 2,
+        LogLevel::ERROR => 3,
+        LogLevel::WARNING => 4,
+        LogLevel::NOTICE => 5,
+        LogLevel::INFO => 6,
+        LogLevel::DEBUG => 7,
+    ];
+
+    public function __construct(?string $logFile = null)
     {
         $this->logFile = $logFile ?? (APP_ROOT . '/storage/logs/app.log');
-        
+
         // Ensure log directory exists
         $logDir = dirname($this->logFile);
         if (!is_dir($logDir)) {
             mkdir($logDir, 0755, true);
         }
     }
-    
+
     /**
      * Log a message with timestamp
      */
-    public function log(string $level, string $message, array $context = []): void
+    public function log($level, string|\Stringable $message, array $context = []): void
     {
+        if (!isset($this->logLevels[$level])) {
+            throw new InvalidArgumentException('Unknown log level: ' . $level);
+        }
+
         $timestamp = date('Y-m-d H:i:s');
-        $contextString = !empty($context) ? json_encode($context) : '';
-        $logEntry = "[{$timestamp}] [{$level}] {$message} {$contextString}" . PHP_EOL;
-        
+        $contextString = !empty($context) ? ' ' . json_encode($context) : '';
+        $logEntry = "[{$timestamp}] [{$level}] {$message}{$contextString}" . PHP_EOL;
+
         file_put_contents($this->logFile, $logEntry, FILE_APPEND | LOCK_EX);
     }
-    
+
     /**
-     * Log info message
+     * System is unusable.
      */
-    public function info(string $message, array $context = []): void
+    public function emergency(string|\Stringable $message, array $context = []): void
     {
-        $this->log('INFO', $message, $context);
+        $this->log(LogLevel::EMERGENCY, $message, $context);
     }
-    
+
     /**
-     * Log warning message
+     * Action must be taken immediately.
      */
-    public function warning(string $message, array $context = []): void
+    public function alert(string|\Stringable $message, array $context = []): void
     {
-        $this->log('WARNING', $message, $context);
+        $this->log(LogLevel::ALERT, $message, $context);
     }
-    
+
     /**
-     * Log error message
+     * Critical conditions.
      */
-    public function error(string $message, array $context = []): void
+    public function critical(string|\Stringable $message, array $context = []): void
     {
-        $this->log('ERROR', $message, $context);
+        $this->log(LogLevel::CRITICAL, $message, $context);
     }
-    
+
     /**
-     * Log debug message
+     * Runtime errors that do not require immediate action.
      */
-    public function debug(string $message, array $context = []): void
+    public function error(string|\Stringable $message, array $context = []): void
     {
-        $this->log('DEBUG', $message, $context);
+        $this->log(LogLevel::ERROR, $message, $context);
+    }
+
+    /**
+     * Exceptional occurrences that are not errors.
+     */
+    public function warning(string|\Stringable $message, array $context = []): void
+    {
+        $this->log(LogLevel::WARNING, $message, $context);
+    }
+
+    /**
+     * Normal but significant events.
+     */
+    public function notice(string|\Stringable $message, array $context = []): void
+    {
+        $this->log(LogLevel::NOTICE, $message, $context);
+    }
+
+    /**
+     * Interesting events.
+     */
+    public function info(string|\Stringable $message, array $context = []): void
+    {
+        $this->log(LogLevel::INFO, $message, $context);
+    }
+
+    /**
+     * Detailed debug information.
+     */
+    public function debug(string|\Stringable $message, array $context = []): void
+    {
+        $this->log(LogLevel::DEBUG, $message, $context);
+    }
+
+    /**
+     * Get the log file path
+     */
+    public function getLogFile(): string
+    {
+        return $this->logFile;
     }
 }

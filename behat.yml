@@ -1,0 +1,31 @@
+default:
+  suites:
+    web:
+      paths:
+        - "%paths.base%/features/web"
+      contexts:
+        - RenalTales\Tests\Context\WebContext
+        - RenalTales\Tests\Context\DatabaseContext
+        - RenalTales\Tests\Context\LanguageContext
+    api:
+      paths:
+        - "%paths.base%/features/api"
+      contexts:
+        - RenalTales\Tests\Context\ApiContext
+        - RenalTales\Tests\Context\DatabaseContext
+    multilingual:
+      paths:
+        - "%paths.base%/features/multilingual"
+      contexts:
+        - RenalTales\Tests\Context\MultilingualContext
+        - RenalTales\Tests\Context\DatabaseContext
+  extensions:
+    # Basic Behat setup without complex extensions for now
+  formatters:
+    pretty: true
+    progress: ~
+    junit:
+      output_path: 'tests/logs'
+  gherkin:
+    filters:
+      tags: ~

@@ -5,30 +5,35 @@ declare(strict_types=1);
 namespace RenalTales\Core;
 
 use Exception;
+use RenalTales\Services\RateLimiterService;
+use RenalTales\Services\PasswordHashingService;
 
 /**
  * SecurityManager - Comprehensive security management
  *
- * Handles CSRF protection, XSS prevention, security headers, and other security measures
+ * Handles CSRF protection, XSS prevention, security headers, rate limiting,
+ * and other security measures
  *
  * @author Ľubomír Polaščín
- * @version 2025.v1.0
+ * @version 2025.v3.1
  */
 
 class SecurityManager
 {
-    private $csrfToken;
-    private $csrfTokenName = '_csrf_token';
-    private $sessionManager;
-    private $config;
+    private ?string $csrfToken = null;
+    private string $csrfTokenName = '_csrf_token';
+    private ?SessionManager $sessionManager = null;
+    private array $config = [];
+    private ?RateLimiterService $rateLimiter = null;
+    private ?PasswordHashingService $passwordHasher = null;
 
     /**
      * Constructor
      *
-     * @param SessionManager $sessionManager
-     * @param array $config Security configuration
+     * @param SessionManager|null $sessionManager
+     * @param array<string, mixed> $config Security configuration
      */
-    public function __construct($sessionManager = null, $config = [])
+    public function __construct(?SessionManager $sessionManager = null, array $config = [])
     {
         $this->sessionManager = $sessionManager;
         $this->config = array_merge([
@@ -68,7 +73,7 @@ class SecurityManager
     /**
      * Initialize security measures
      */
-    private function initializeSecurity()
+    private function initializeSecurity(): void
     {
         // Set security headers
         $this->setSecurityHeaders();
@@ -85,7 +90,7 @@ class SecurityManager
     /**
      * Set security headers
      */
-    public function setSecurityHeaders()
+    public function setSecurityHeaders(): void
     {
         // Don't set headers if they've already been sent
         if (headers_sent()) {
@@ -118,7 +123,7 @@ class SecurityManager
      *
      * @return string
      */
-    private function buildCSPHeader()
+    private function buildCSPHeader(): string
     {
         $csp = [];
         foreach ($this->config['content_security_policy'] as $directive => $value) {
@@ -132,7 +137,7 @@ class SecurityManager
      *
      * @return bool
      */
-    private function isHttps()
+    private function isHttps(): bool
     {
         return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
             || (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
@@ -144,7 +149,7 @@ class SecurityManager
      *
      * @return bool
      */
-    private function isSensitivePage()
+    private function isSensitivePage(): bool
     {
         $sensitivePaths = ['/admin', '/dashboard', '/profile', '/settings', '/login'];
         $currentPath = $_SERVER['REQUEST_URI'] ?? '';
@@ -161,7 +166,7 @@ class SecurityManager
     /**
      * Initialize CSRF protection
      */
-    private function initializeCSRF()
+    private function initializeCSRF(): void
     {
         if ($this->sessionManager) {
             $this->csrfToken = $this->sessionManager->getCSRFToken();
@@ -173,7 +178,7 @@ class SecurityManager
     /**
      * Generate CSRF token
      */
-    private function generateCSRFToken()
+    private function generateCSRFToken(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
@@ -201,7 +206,7 @@ class SecurityManager
      *
      * @return bool
      */
-    private function isCSRFTokenExpired()
+    private function isCSRFTokenExpired(): bool
     {
         if (!isset($_SESSION[$this->csrfTokenName]['time'])) {
             return true;
@@ -215,7 +220,7 @@ class SecurityManager
      *
      * @return string
      */
-    public function getCSRFToken()
+    public function getCSRFToken(): string
     {
         return $this->csrfToken;
     }
@@ -225,7 +230,7 @@ class SecurityManager
      *
      * @return string
      */
-    public function getCSRFTokenField()
+    public function getCSRFTokenField(): string
     {
         return '<input type="hidden" name="' . htmlspecialchars($this->csrfTokenName) .
             '" value="' . htmlspecialchars($this->getCSRFToken()) . '">';
@@ -237,7 +242,7 @@ class SecurityManager
      * @param string $token Token to validate
      * @return bool
      */
-    public function validateCSRFToken($token)
+    public function validateCSRFToken(string $token): bool
     {
         if ($this->sessionManager) {
             return $this->sessionManager->validateCSRFToken($token);
@@ -264,7 +269,7 @@ class SecurityManager
     /**
      * Regenerate CSRF token
      */
-    public function regenerateCSRFToken()
+    public function regenerateCSRFToken(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             unset($_SESSION[$this->csrfTokenName]);
@@ -275,7 +280,7 @@ class SecurityManager
     /**
      * Enable XSS protection
      */
-    private function enableXSSProtection()
+    private function enableXSSProtection(): void
     {
         // Set appropriate headers for XSS protection
         if (!headers_sent()) {
@@ -291,7 +296,7 @@ class SecurityManager
      * @param bool $allowHTML
      * @return mixed
      */
-    public function sanitizeInput($input, $allowHTML = false)
+    public function sanitizeInput(mixed $input, bool $allowHTML = false): mixed
     {
         if (is_string($input)) {
             if ($allowHTML) {
@@ -316,7 +321,7 @@ class SecurityManager
      * @param string $html
      * @return string
      */
-    private function sanitizeHTML($html)
+    private function sanitizeHTML(string $html): string
     {
         // Define allowed tags and attributes
         $allowedTags = [
@@ -349,11 +354,8 @@ class SecurityManager
      * @param string $input
      * @return bool
      */
-    public function validateInput($input)
+    public function validateInput(string $input): bool
     {
-        if (!is_string($input)) {
-            return true;
-        }
 
         // Check for common injection patterns
         $dangerousPatterns = [
@@ -393,7 +395,7 @@ class SecurityManager
      * @param string $event
      * @param array $context
      */
-    public function logSecurityEvent($event, $context = [])
+    public function logSecurityEvent(string $event, array $context = []): void
     {
         $logEntry = [
             'timestamp' => date('Y-m-d H:i:s'),
@@ -421,7 +423,7 @@ class SecurityManager
      *
      * @return string
      */
-    private function getClientIP()
+    private function getClientIP(): string
     {
         $ipHeaders = [
             'HTTP_CLIENT_IP',
@@ -446,5 +448,352 @@ class SecurityManager
         }
 
         return $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    }
+
+    /**
+     * Set rate limiter service
+     *
+     * @param RateLimiterService $rateLimiter
+     * @return void
+     */
+    public function setRateLimiter(RateLimiterService $rateLimiter): void
+    {
+        $this->rateLimiter = $rateLimiter;
+    }
+
+    /**
+     * Set password hasher service
+     *
+     * @param PasswordHashingService $passwordHasher
+     * @return void
+     */
+    public function setPasswordHasher(PasswordHashingService $passwordHasher): void
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
+    /**
+     * Check if request is rate limited
+     *
+     * @param string $type Type of rate limit (login, api, etc.)
+     * @param string|null $identifier Custom identifier, uses IP if null
+     * @return bool True if request is allowed, false if rate limited
+     */
+    public function isRateLimited(string $type, ?string $identifier = null): bool
+    {
+        if (!$this->rateLimiter) {
+            return false;
+        }
+
+        $key = $identifier ?? $this->getClientIP();
+        return !$this->rateLimiter->isAllowed($key, $type);
+    }
+
+    /**
+     * Record rate limit attempt
+     *
+     * @param string $type Type of rate limit
+     * @param string|null $identifier Custom identifier, uses IP if null
+     * @return void
+     */
+    public function recordRateLimitAttempt(string $type, ?string $identifier = null): void
+    {
+        if (!$this->rateLimiter) {
+            return;
+        }
+
+        $key = $identifier ?? $this->getClientIP();
+        $this->rateLimiter->recordAttempt($key, $type);
+    }
+
+    /**
+     * Reset rate limit attempts
+     *
+     * @param string $type Type of rate limit
+     * @param string|null $identifier Custom identifier, uses IP if null
+     * @return void
+     */
+    public function resetRateLimitAttempts(string $type, ?string $identifier = null): void
+    {
+        if (!$this->rateLimiter) {
+            return;
+        }
+
+        $key = $identifier ?? $this->getClientIP();
+        $this->rateLimiter->resetAttempts($key, $type);
+    }
+
+    /**
+     * Get remaining rate limit attempts
+     *
+     * @param string $type Type of rate limit
+     * @param string|null $identifier Custom identifier, uses IP if null
+     * @return int Number of remaining attempts
+     */
+    public function getRemainingAttempts(string $type, ?string $identifier = null): int
+    {
+        if (!$this->rateLimiter) {
+            return PHP_INT_MAX;
+        }
+
+        $key = $identifier ?? $this->getClientIP();
+        return $this->rateLimiter->getRemainingAttempts($key, $type);
+    }
+
+    /**
+     * Get time until rate limit reset
+     *
+     * @param string $type Type of rate limit
+     * @param string|null $identifier Custom identifier, uses IP if null
+     * @return int Time in seconds until reset
+     */
+    public function getTimeUntilReset(string $type, ?string $identifier = null): int
+    {
+        if (!$this->rateLimiter) {
+            return 0;
+        }
+
+        $key = $identifier ?? $this->getClientIP();
+        return $this->rateLimiter->getTimeUntilReset($key, $type);
+    }
+
+    /**
+     * Hash password using secure algorithm
+     *
+     * @param string $password Password to hash
+     * @return string Hashed password
+     * @throws Exception If hashing fails
+     */
+    public function hashPassword(string $password): string
+    {
+        if (!$this->passwordHasher) {
+            throw new Exception('Password hasher not configured');
+        }
+
+        return $this->passwordHasher->hashPassword($password);
+    }
+
+    /**
+     * Verify password against hash
+     *
+     * @param string $password Password to verify
+     * @param string $hash Hash to verify against
+     * @return bool True if password matches hash
+     */
+    public function verifyPassword(string $password, string $hash): bool
+    {
+        if (!$this->passwordHasher) {
+            return false;
+        }
+
+        return $this->passwordHasher->verifyPassword($password, $hash);
+    }
+
+    /**
+     * Validate password against security requirements
+     *
+     * @param string $password Password to validate
+     * @return bool True if password meets requirements
+     */
+    public function validatePassword(string $password): bool
+    {
+        if (!$this->passwordHasher) {
+            return strlen($password) >= 8;
+        }
+
+        return $this->passwordHasher->validatePassword($password);
+    }
+
+    /**
+     * Check if password hash needs rehashing
+     *
+     * @param string $hash Hash to check
+     * @return bool True if rehashing is needed
+     */
+    public function needsPasswordRehash(string $hash): bool
+    {
+        if (!$this->passwordHasher) {
+            return false;
+        }
+
+        return $this->passwordHasher->needsRehash($hash);
+    }
+
+    /**
+     * Get password requirements
+     *
+     * @return array Array of password requirements
+     */
+    public function getPasswordRequirements(): array
+    {
+        if (!$this->passwordHasher) {
+            return ['Must be at least 8 characters long'];
+        }
+
+        return $this->passwordHasher->getPasswordRequirements();
+    }
+
+    /**
+     * Calculate password strength
+     *
+     * @param string $password Password to evaluate
+     * @return int Strength score (0-100)
+     */
+    public function calculatePasswordStrength(string $password): int
+    {
+        if (!$this->passwordHasher) {
+            return strlen($password) >= 8 ? 50 : 20;
+        }
+
+        return $this->passwordHasher->calculatePasswordStrength($password);
+    }
+
+    /**
+     * Enhanced Content Security Policy with nonce support
+     *
+     * @return string Generated nonce for CSP
+     */
+    public function generateCSPNonce(): string
+    {
+        try {
+            return base64_encode(random_bytes(16));
+        } catch (Exception $e) {
+            return base64_encode(hash('sha256', uniqid(mt_rand(), true), true));
+        }
+    }
+
+    /**
+     * Validate file upload security
+     *
+     * @param array $file $_FILES array element
+     * @return bool True if file is safe to upload
+     */
+    public function validateFileUpload(array $file): bool
+    {
+        // Check if file was uploaded
+        if (!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+            return false;
+        }
+
+        // Check file size
+        $maxSize = $this->config['input_validation']['max_file_size'] ?? 10 * 1024 * 1024;
+        if ($file['size'] > $maxSize) {
+            return false;
+        }
+
+        // Check file extension
+        $allowedTypes = $this->config['input_validation']['allowed_file_types'] ?? ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($extension, $allowedTypes)) {
+            return false;
+        }
+
+        // Check MIME type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $allowedMimeTypes = [
+            'image/jpeg' => ['jpg', 'jpeg'],
+            'image/png' => ['png'],
+            'image/gif' => ['gif'],
+            'application/pdf' => ['pdf'],
+            'application/msword' => ['doc'],
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => ['docx']
+        ];
+
+        $validMime = false;
+        foreach ($allowedMimeTypes as $mime => $extensions) {
+            if ($mimeType === $mime && in_array($extension, $extensions)) {
+                $validMime = true;
+                break;
+            }
+        }
+
+        return $validMime;
+    }
+
+    /**
+     * Generate secure random token
+     *
+     * @param int $length Token length
+     * @return string Generated token
+     */
+    public function generateSecureToken(int $length = 32): string
+    {
+        try {
+            return bin2hex(random_bytes($length));
+        } catch (Exception $e) {
+            return hash('sha256', uniqid(mt_rand(), true) . microtime());
+        }
+    }
+
+    /**
+     * Validate request origin
+     *
+     * @param array $allowedOrigins List of allowed origins
+     * @return bool True if origin is allowed
+     */
+    public function validateOrigin(array $allowedOrigins = []): bool
+    {
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? '';
+        
+        if (empty($origin)) {
+            return false;
+        }
+
+        if (empty($allowedOrigins)) {
+            $allowedOrigins = [$this->config['app']['url'] ?? 'http://localhost'];
+        }
+
+        foreach ($allowedOrigins as $allowedOrigin) {
+            if (strpos($origin, $allowedOrigin) === 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the rate limiter service
+     *
+     * @param RateLimiterService $rateLimiter
+     * @return void
+     */
+    public function setRateLimiterService(RateLimiterService $rateLimiter): void
+    {
+        $this->rateLimiter = $rateLimiter;
+    }
+
+    /**
+     * Set the password hashing service
+     *
+     * @param PasswordHashingService $passwordHasher
+     * @return void
+     */
+    public function setPasswordHashingService(PasswordHashingService $passwordHasher): void
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
+    /**
+     * Get the rate limiter service
+     *
+     * @return RateLimiterService|null
+     */
+    public function getRateLimiterService(): ?RateLimiterService
+    {
+        return $this->rateLimiter;
+    }
+
+    /**
+     * Get the password hashing service
+     *
+     * @return PasswordHashingService|null
+     */
+    public function getPasswordHashingService(): ?PasswordHashingService
+    {
+        return $this->passwordHasher;
     }
 }

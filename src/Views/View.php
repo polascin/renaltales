@@ -1,5 +1,6 @@
 <?php
-// src/Views/View.php
+
+// File: /src/Views/View.php
 
 declare(strict_types=1);
 
@@ -8,441 +9,276 @@ namespace RenalTales\Views;
 use RenalTales\Core\LanguageManager;
 use RenalTales\Core\SessionManager;
 use RenalTales\Core\SecurityManager;
-use RenalTales\Models\LanguageModel;
+use RenalTales\Services\LanguageService;
 use RenalTales\Controllers\ViewController;
 use RenalTales\Controllers\LanguageController;
-use RenalTales\View\ErrorView;
+use RenalTales\Views\ErrorView;
 
-
+/**
+ * View Class
+ *
+ * @package RenalTales
+ * @version 2025.3.1.dev
+ * @author Ľubomír Polaščín
+ */
 
 class View {
 
-  private LanguageModel $languageModel;
-  private SessionManager $sessionManager;
-  private SecurityManager $securityManager;
-  private ViewController $viewController;
+  private LanguageService $languageService;
+  private string $requestedPage;
+  private string $currentLanguage;
   private string $html;
+  private string $pageDescription = '';
+  private string $pageTitle = '';
 
-  public function __construct(LanguageModel $languageModel) {
-    $this->languageModel = $languageModel;
+  public function __construct($requestedPage, $currentLanguage, LanguageService $languageService) {
+    $this->languageService = $languageService;
+    $this->requestedPage = $requestedPage;
+    $this->currentLanguage = $currentLanguage;
     $this->html = '';
+
+    // Set page title and description based on requested page
+    switch ($requestedPage) {
+      case 'home':
+        $this->pageTitle = $this->languageService->getText('home_title', [], 'Renal Tales - Home');
+        $this->pageDescription = $this->languageService->getText('home_description', [], 'Welcome to Renal Tales, a place to share and read stories about kidney health and wellness.');
+        $this->renderHome();
+        break;
+      case 'stories':
+        $this->pageTitle = $this->languageService->getText('stories_title', [], 'Stories');
+        $this->pageDescription = $this->languageService->getText('stories_description', [], 'Read and share inspiring kidney health stories.');
+        $this->renderStories();
+        break;
+      case 'community':
+        $this->pageTitle = $this->languageService->getText('community_title', [], 'Community');
+        $this->pageDescription = $this->languageService->getText('community_description', [], 'Join the Renal Tales community and connect with others.');
+        $this->renderCommunity();
+        break;
+      case 'resources':
+        $this->pageTitle = $this->languageService->getText('resources_title', [], 'Resources');
+        $this->pageDescription = $this->languageService->getText('resources_description', [], 'Find helpful resources about kidney health.');
+        $this->renderResources();
+        break;
+      case 'about':
+        $this->pageTitle = $this->languageService->getText('about_title', [], 'About');
+        $this->pageDescription = $this->languageService->getText('about_description', [], 'Learn more about Renal Tales.');
+        $this->renderAbout();
+        break;
+      default:
+        $this->pageTitle = $this->languageService->getText('notfound_title', [], 'Page Not Found');
+        $this->pageDescription = $this->languageService->getText('notfound_description', [], 'Sorry, the page you are looking for does not exist.');
+        $this->renderNotFound();
+    }
+  }
+
+  private function renderHome() {
+    $this->html .= $this->renderHTMLdesignation();
+    $this->html .= $this->renderHTMLhead();
+    $this->html .= $this->renderHTMLlanguageSwitcher();
+    $this->html .= $this->renderHTMLheader();
+    $this->html .= $this->renderHTMLwelcomePanel();
+    $this->html .= $this->renderHTMLmainContent();
+    $this->html .= $this->renderHTMLfootNotes();
+    $this->html .= $this->renderHTMLfooter();
   }
 
   /**
-   * Main render method that returns a complete HTML page
-   *
-   * @return string Complete HTML page
+   * Render the complete view
    */
-  public function render(): string {
-    $currentLanguage = $this->languageModel->getCurrentLanguage();
-    $pageTitle = $this->languageModel->getText('home.title', [], 'Renal Tales');
-    $pageDescription = $this->languageModel->getText('home.description', [], 'A modern PHP application for renal health management');
-    $welcomeTitle = $this->languageModel->getText('home.welcome', [], 'Welcome to Renal Tales');
-    $homeIntro = $this->languageModel->getText('home.description', [], 'Welcome to our supportive community for people affected by kidney disorders.');
-    $homeIntro2 = $this->languageModel->getText('home_intro2', [], 'This platform aims to foster a supportive community.');
-    $currentLanguageText = $this->languageModel->getText('current_language', [], 'Current language');
-    $footerCopyright = $this->languageModel->getText('footer_copyright', [], 'Ľubomír Polaščín');
-
-    return <<<HTML
-<!DOCTYPE html>
-<html lang="{$currentLanguage}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{$pageDescription}">
-    <meta name="author" content="Ľubomír Polaščín">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#a0c4ff">
-    <meta property="og:title" content="{$pageTitle}">
-    <meta property="og:description" content="{$pageDescription}">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="{$currentLanguage}">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{$pageTitle}">
-    <meta name="twitter:description" content="{$pageDescription}">
-
-    <title>{$pageTitle}</title>
-
-    <!-- Favicon links -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#a0c4ff">
-    <meta name="msapplication-TileColor" content="#a0c4ff">
-
-    <!-- CSS Styles -->
-    <link rel="stylesheet" href="/assets/css/basic.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/post-navigation.css">
-
-    <!-- Google Fonts are imported in basic.css -->
-
-    <!-- Custom inline styles for responsive design -->
-    <style>
-        /* Additional responsive styles */
-        .main-container {
-            display: grid;
-            grid-template-columns: 1fr 3fr 1fr;
-            grid-template-areas: "menu content notes";
-            gap: 1rem;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Mobile responsive adjustments */
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                grid-template-areas:
-                    "content"
-                    "menu"
-                    "notes";
-                gap: 1rem;
-            }
-
-            .main-header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .main-header-container .left-section,
-            .main-header-container .central-section,
-            .main-header-container .right-section {
-                margin: 0.5rem 0;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .language-selection-flags {
-                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-            }
-        }
-
-        /* Tablet responsive adjustments */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 200px 1fr 250px;
-            }
-
-            .feature-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
-        /* Print styles */
-        @media print {
-            .main-menu-container,
-            .main-notes-container,
-            .language-selector {
-                display: none;
-            }
-
-            .main-container {
-                grid-template-columns: 1fr;
-                grid-template-areas: "content";
-            }
-
-            body {
-                font-size: 12pt;
-                line-height: 1.4;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Main header container -->
-    <header class="main-header-container">
-        <div class="left-section">
-            <img src="/assets/images/logos/logo_shifted.gif" alt="Renal Tales Logo" class="logo" onerror="this.style.display='none'">
-            <h1>{$pageTitle}</h1>
-            <h2>{$this->languageModel->getText('app_subtitle', [], 'A Multilingual Web Application')}</h2>
-        </div>
-
-        <div class="central-section">
-            <h3>{$this->languageModel->getText('app_version', [], 'Version 2025.v3.0dev')}</h3>
-            <h4>{$this->languageModel->getText('datetime_placeholder', [], 'Date, time including detailed internet time @beat will be displayed here.')}</h4>
-        </div>
-
-        <div class="right-section">
-            {$this->renderLanguageSwitcher()}
-            {$this->renderUserInfo()}
-        </div>
-    </header>
-
-    <!-- Main content container -->
-    <div class="main-container">
-        <!-- Main menu -->
-        <aside class="main-menu-container">
-            {$this->renderMainMenu()}
-        </aside>
-
-        <!-- Main content -->
-        <main class="main-content-container">
-            <div class="content-body">
-                <div class="home-section">
-                    <h2>{$welcomeTitle}</h2>
-                    <div class="home-intro">
-                        <p>{$homeIntro}</p>
-                        <p>{$homeIntro2}</p>
-                    </div>
-
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>{$this->languageModel->getText('share_story', [], 'Share Your Story')}</h3>
-                            <p>{$this->languageModel->getText('share_story_desc', [], 'Your experience matters. Share your journey to inspire and support others.')}</p>
-                            <a href="#" class="btn btn-primary">{$this->languageModel->getText('start_sharing', [], 'Start Sharing')}</a>
-                        </div>
-
-                        <div class="feature-card">
-                            <h3>{$this->languageModel->getText('read_stories', [], 'Read Stories')}</h3>
-                            <p>{$this->languageModel->getText('read_stories_desc', [], 'Find inspiration and comfort in the experiences of others in our community.')}</p>
-                            <a href="#" class="btn btn-secondary">{$this->languageModel->getText('browse_stories', [], 'Browse Stories')}</a>
-                        </div>
-
-                        <div class="feature-card">
-                            <h3>{$this->languageModel->getText('join_community', [], 'Join Community')}</h3>
-                            <p>{$this->languageModel->getText('join_community_desc', [], 'Connect with others, participate in discussions, and build lasting friendships.')}</p>
-                            <a href="#" class="btn btn-primary">{$this->languageModel->getText('explore_community', [], 'Explore Community')}</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Notes/sidebar -->
-        <aside class="main-notes-container">
-            {$this->renderNotes()}
-        </aside>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 {$footerCopyright}</p>
-        <p><small>{$this->languageModel->getText('current_language', [], 'Current language')}: <strong>{$currentLanguage}</strong></small></p>
-    </footer>
-
-    <!-- JavaScript for enhanced functionality -->
-    <script>
-        // Auto-submit language selector
-        document.addEventListener('DOMContentLoaded', function() {
-            const languageSelect = document.getElementById('lang-select');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', function() {
-                    this.form.submit();
-                });
-            }
-
-            // Add loading state for language changes
-            const languageForms = document.querySelectorAll('.flag-form');
-            languageForms.forEach(form => {
-                form.addEventListener('submit', function() {
-                    const button = this.querySelector('.flag-button');
-                    if (button) {
-                        button.style.opacity = '0.6';
-                        button.innerHTML = button.innerHTML + ' <span style="font-size: 0.8em;">...</span>';
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
-HTML;
+  public function render(): void {
+    echo $this->html;
+    ob_flush();
   }
 
+  private function renderStories() {
+  }
+  private function renderCommunity() {
+  }
+  private function renderResources() {
+  }
+  private function renderAbout() {
+  }
+  private function renderNotFound() {
+  }
+
+  private function renderHTMLdesignation() {
+    $html = "<!DOCTYPE html>";
+    $html .= "<html lang='{$this->currentLanguage}'>";
+    return $html;
+  }
+  private function renderHTMLhead() {
+    $html = '';
+    $html .= "<head>";
+    $html .= "<meta charset=\"UTF-8\">";
+    $html .= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
+    $html .= "<meta name=\"description\" content=\"{$this->pageDescription}\">";
+    $html .= "<meta name=\"author\" content=\"Ľubomír Polaščín\">";
+    $html .= "<meta name=\"robots\" content=\"index, follow\">";
+    $html .= "<meta name=\"theme-color\" content=\"#a0c4ff\">";
+    $html .= "<meta property=\"og:title\" content=\"{$this->pageTitle}\">";
+    $html .= "<meta property=\"og:description\" content=\"{$this->pageDescription}\">";
+    $html .= "<meta property=\"og:type\" content=\"website\">";
+    $html .= "<meta property=\"og:locale\" content=\"{$this->currentLanguage}\">";
+    $html .= "<meta name=\"twitter:card\" content=\"summary\">";
+    $html .= "<meta name=\"twitter:title\" content=\"{$this->pageTitle}\">";
+    $html .= "<meta name=\"twitter:description\" content=\"{$this->pageDescription}\">";
+    $html .= "<meta name=\"twitter:site\" content=\"@RenalTales\">";
+    $html .= "<meta name=\"twitter:creator\" content=\"@RenalTales\">";
+    $html .= "<meta name=\"twitter:locale\" content=\"{$this->currentLanguage}\">";
+    $html .= "<title>{$this->pageTitle}</title>";
+    $html .= "<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\">";
+    $html .= "<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\">";
+    $html .= "<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\">";
+    $html .= "<link rel=\"manifest\" href=\"/site.webmanifest\">";
+    $html .= "<link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#a0c4ff\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/basic.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/style.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/post-navigation.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/responsive.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/footnotes.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/footnotes-responsive.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">";
+    $html .= "<link rel=\"stylesheet\" href=\"/assets/css/language-switcher.css\">";
+    $html .= "</head>";
+    $html .= "<body>";
+    return $html;
+  }
+
+  private function renderHTMLlanguageSwitcher() {
+  }
+  private function renderHTMLheader() {
+    $html = '';
+    $html .= "<!-- Main header container -->";
+    $html .= "<header class=\"main-header\">";
+    $html .= "<div class=\"header-left\">";
+    $html .= "<img src=\"/assets/images/logos/logo_shifted.gif\" alt=\"Renal Tales Logo\" class=\"logo\" onerror=\"this.style.display='none'\">";
+    $html .= "<h1>{$this->languageService->getText('app_name', [], 'Renal Tales')}</h1>";
+    $html .= "</div>";
+    $html .= "<div class=\"header-center\">";
+    $html .= "<h2>{$this->languageService->getText('app_subtitle', [], 'A Multilingual Web Application')}</h2>";
+    $html .= "</div>";
+    $html .= "<div class=\"header-right\">";
+    $html .= $this->renderLanguageSwitcher();
+    $html .= $this->renderUserInfo();
+    $html .= "</div>";
+    $html .= "</header>";
+    return $html;
+  }
+  private function renderHTMLwelcomePanel() {
+    $html = '';
+    $html .= "<div class=\"welcome-panel\">";
+    $html .= "<h2>{$this->languageService->getText('welcome_title', [], 'Welcome to Renal Tales')}</h2>";
+    $html .= "<p>{$this->languageService->getText('welcome_message', [], 'A place to share and read stories about kidney health and wellness.')}</p>";
+    $html .= "</div>";
+    return $html;
+  }
+  private function renderHTMLmainContent() {
+    $html = '';
+    $html .= "<!-- Main content container -->";
+    $html .= "<div class=\"main-container\">";
+    $html .= "<!-- Main menu -->";
+    $html .= "<aside class=\"main-menu-container\">";
+    $html .= $this->renderMainMenu();
+    $html .= "</aside>";
+    $html .= "<!-- Main content -->";
+    $html .= "<main class=\"main-content-container\">";
+    $html .= "<div class=\"content-body\">";
+    $html .= "<div class=\"home-section\">";
+    $html .= "<h2>{$this->languageService->getText('welcome_title', [], 'Welcome to Renal Tales')}</h2>";
+    $html .= "<div class=\"home-intro\">";
+    $html .= "<p>{$this->languageService->getText('home_intro', [], 'Welcome to our supportive community for people affected by kidney disorders.')}</p>";
+    $html .= "<p>{$this->languageService->getText('home_intro2', [], 'This web application is designed to facilitate the sharing of personal experiences among individuals affected by kidney disorders.')}</p>";
+    $html .= "</div>";
+    $html .= "<div class=\"feature-grid\">";
+    $html .= "<div class=\"feature-card\">";
+    $html .= "<h3>{$this->languageService->getText('share_story', [], 'Share Your Story')}</h3>";
+    $html .= "<p>{$this->languageService->getText('share_story_desc', [], 'Your experience matters. Share your ourney to inspire and support others.')}</p>";
+    $html .= "<a href=\"#\" class=\"btn btn-primary\">{$this->languageService->getText('start_sharing', [], 'Start haring')}</a>";
+    $html .= "</div>";
+    $html .= "<div class=\"feature-card\">";
+    $html .= "<h3>{$this->languageService->getText('read_stories', [], 'Read Stories')}</h3>";
+    $html .= "<p>{$this->languageService->getText('read_stories_desc', [], 'Find inspiration and comfort in the xperiences of others in our community.')}</p>";
+    $html .= "<a href=\"#\" class=\"btn btn-secondary\">{$this->languageService->getText('browse_stories', [], 'Browse Stories')}</a>";
+    $html .= "</div>";
+    $html .= "<div class=\"feature-card\">";
+    $html .= "<h3>{$this->languageService->getText('join_community', [], 'Join Community')}</h3>";
+    $html .= "<p>{$this->languageService->getText('join_community_desc', [], 'Connect with others, participate n discussions, and build lasting friendships.')}</p>";
+    $html .= "<a href=\"#\" class=\"btn btn-primary\">{$this->languageService->getText('explore_community', [], 'Explore Community')}</a>";
+    $html .= "</div>";
+    $html .= "</div>"; // feature-grid
+    $html .= "</div>"; // home-section
+    $html .= "</div>"; // content-body
+    $html .= "</main>";
+    $html .= "<!-- Notes/sidebar -->";
+    $html .= "<aside class=\"main-notes-container\">";
+    $html .= $this->renderNotes();
+    $html .= "</aside>";
+    $html .= "</div>"; // main-container
+    return $html;
+  }
+  private function renderHTMLfootNotes() {
+    $html = '';
+    $html .= "<div class=\"footnotes\">";
+    $html .= "<h2>{$this->languageService->getText('footnotes_title', [], 'Footnotes')}</h2>";
+    $html .= "<ul>";
+    $html .= "<li>{$this->languageService->getText('footnote_1', [], 'This is the first footnote.')}</li>";
+    $html .= "<li>{$this->languageService->getText('footnote_2', [], 'This is the second footnote.')}</li>";
+    $html .= "</ul>";
+    $html .= "</div>";
+    return $html;
+  }
+  private function renderHTMLfooter() {
+    $html = '';
+    $html .= "<footer class=\"main-footer\">";
+    $html .= "<p>{$this->languageService->getText('footer_text', [], '© 2025 Renal Tales. All rights reserved.')}</p>";
+    $html .= "</footer>";
+    return $html;
+  }
 
   /**
-   * Render the language switcher component
+   * Renders the language switcher HTML.
+   * This method is a placeholder and should be implemented to display language options.
    *
-   * @return string HTML for language switcher
+   * @return string The HTML for the language switcher.
    */
   private function renderLanguageSwitcher(): string {
-    $currentLanguage = $this->languageModel->getCurrentLanguage();
-    $supportedLanguages = $this->languageModel->getSupportedLanguages();
-    $languageLabel = $this->languageModel->getText('language_selection', [], 'Language');
-    $changeLabel = $this->languageModel->getText('change', [], 'Change');
-
-    $html = '<div class="language-selector">';
-    $html .= '<div class="language-selector-container">';
-    $html .= '<form method="get" action="" class="language-form">';
-    $html .= '<label for="lang-select" class="language-label">' . htmlspecialchars($languageLabel) . ':</label>';
-    $html .= '<select name="lang" id="lang-select" class="language-select">';
-
-    foreach ($supportedLanguages as $code) {
-      $languageName = $this->languageModel->getLanguageName($code);
-      $selected = $code === $currentLanguage ? 'selected' : '';
-      $html .= '<option value="' . htmlspecialchars($code) . '" ' . $selected . '>';
-      $html .= htmlspecialchars($languageName);
-      $html .= '</option>';
-    }
-
-    $html .= '</select>';
-    $html .= '<button type="submit" class="language-submit">' . htmlspecialchars($changeLabel) . '</button>';
-    $html .= '</form>';
-    $html .= '</div>';
-
-    // Add flag-based language selection
-    $html .= '<div class="language-selection-flags">';
-    $html .= '<div class="flags-language-welcome-message">';
-    $html .= $this->languageModel->getText('language_selection', [], 'Select your language');
-    $html .= '</div>';
-
-    foreach ($supportedLanguages as $code) {
-      $languageName = $this->languageModel->getLanguageName($code);
-      $flagCode = $this->languageModel->getFlagCode($code);
-      $isCurrentLanguage = $code === $currentLanguage;
-      $formClass = $isCurrentLanguage ? 'flag-form current-language' : 'flag-form';
-
-      $html .= '<form method="get" action="" class="' . $formClass . '">';
-      $html .= '<input type="hidden" name="lang" value="' . htmlspecialchars($code) . '">';
-      $html .= '<button type="submit" class="flag-button" title="' . htmlspecialchars($languageName) . '">';
-      $html .= '<img src="/assets/images/flags/' . htmlspecialchars($flagCode) . '.svg" alt="' . htmlspecialchars($languageName) . '" class="flag-image" onerror="this.style.display=\'none\'">';
-      $html .= '<span class="flag-code">' . htmlspecialchars(strtoupper($code)) . '</span>';
-      $html .= '</button>';
-      $html .= '</form>';
-    }
-
-    $html .= '</div>';
-    $html .= '</div>';
-
-    return $html;
+    // Placeholder for language switcher logic.
+    // This would typically involve iterating through supported languages
+    // and creating links or a dropdown to switch languages.
+    return '<div class="language-switcher">Language Switcher Placeholder</div>';
   }
 
   /**
-   * Render user information section
+   * Renders the user information section HTML.
+   * This method is a placeholder and should be implemented to display user-specific information
+   * like login/logout links, username, etc.
    *
-   * @return string HTML for user info
+   * @return string The HTML for the user information section.
    */
   private function renderUserInfo(): string {
-    $html = '<div class="user-info">';
-
-    // Check if user is logged in (placeholder logic)
-    $isLoggedIn = false; // TODO: Implement actual user session check
-
-    if ($isLoggedIn) {
-      $html .= '<div class="logged-in-user">';
-      $html .= '<p>' . $this->languageModel->getText('welcome_user', [], 'Welcome') . ', <strong>User</strong></p>';
-      $html .= '<p><small>' . $this->languageModel->getText('role', [], 'Role') . ': Member</small></p>';
-      $html .= '</div>';
-      $html .= '<a href="/logout" class="logout-link">' . $this->languageModel->getText('logout', [], 'Logout') . '</a>';
-    } else {
-      $html .= '<div class="guest-user">';
-      $html .= '<p>' . $this->languageModel->getText('not_logged_in', [], 'Not logged in') . '</p>';
-      $html .= '</div>';
-      $html .= '<a href="/login" class="login-link">' . $this->languageModel->getText('login', [], 'Login') . '</a>';
-    }
-
-    $html .= '</div>';
-    return $html;
+    return '<div class="user-info">User Info Placeholder</div>';
   }
 
   /**
-   * Render main navigation menu
+   * Renders the main menu HTML.
+   * This method is a placeholder and should be implemented to display the main navigation menu.
    *
-   * @return string HTML for main menu
+   * @return string The HTML for the main menu.
    */
   private function renderMainMenu(): string {
-    $html = '<nav class="main-menu">';
-    $html .= '<h3>' . $this->languageModel->getText('main_menu', [], 'Main Menu') . '</h3>';
-    $html .= '<ul>';
-
-    $menuItems = [
-      ['url' => '/', 'key' => 'nav.home', 'default' => 'Home'],
-      ['url' => '/stories', 'key' => 'nav.stories', 'default' => 'Stories'],
-      ['url' => '/community', 'key' => 'nav.community', 'default' => 'Community'],
-      ['url' => '/resources', 'key' => 'nav.resources', 'default' => 'Resources'],
-      ['url' => '/about', 'key' => 'nav.about', 'default' => 'About'],
-    ];
-
-    foreach ($menuItems as $item) {
-      $html .= '<li>';
-      $html .= '<a href="' . htmlspecialchars($item['url']) . '" class="menu-item">';
-      $html .= htmlspecialchars($this->languageModel->getText($item['key'], [], $item['default']));
-      $html .= '</a>';
-      $html .= '</li>';
-    }
-
-    $html .= '<li class="menu-separator"></li>';
-
-    // Check if user is logged in for conditional menu items
-    $isLoggedIn = false; // TODO: Implement actual user session check
-
-    if ($isLoggedIn) {
-      $userMenuItems = [
-        ['url' => '/my-stories', 'key' => 'nav.my_stories', 'default' => 'My Stories'],
-        ['url' => '/profile', 'key' => 'nav.profile', 'default' => 'Profile'],
-        ['url' => '/settings', 'key' => 'nav.settings', 'default' => 'Settings'],
-      ];
-
-      foreach ($userMenuItems as $item) {
-        $html .= '<li>';
-        $html .= '<a href="' . htmlspecialchars($item['url']) . '" class="menu-item">';
-        $html .= htmlspecialchars($this->languageModel->getText($item['key'], [], $item['default']));
-        $html .= '</a>';
-        $html .= '</li>';
-      }
-    } else {
-      $html .= '<li>';
-      $html .= '<a href="/login" class="menu-item login-item">';
-      $html .= htmlspecialchars($this->languageModel->getText('nav.login', [], 'Login'));
-      $html .= '</a>';
-      $html .= '</li>';
-      $html .= '<li>';
-      $html .= '<a href="/register" class="menu-item register-item">';
-      $html .= htmlspecialchars($this->languageModel->getText('nav.register', [], 'Register'));
-      $html .= '</a>';
-      $html .= '</li>';
-    }
-
-    $html .= '</ul>';
-    $html .= '</nav>';
-
-    return $html;
+    // Placeholder for main menu logic.
+    // You can replace this with actual menu items as needed.
+    return '<nav class="main-menu">Main Menu Placeholder</nav>';
   }
 
   /**
-   * Render notes/sidebar content
+   * Renders the notes section HTML.
+   * This method is a placeholder and should be implemented to display notes or sidebar content.
    *
-   * @return string HTML for notes section
+   * @return string The HTML for the notes section.
    */
   private function renderNotes(): string {
-    $html = '<div class="content-notes">';
-    $html .= '<h3>' . $this->languageModel->getText('important_notes', [], 'Important Notes') . '</h3>';
-
-    // About section
-    $html .= '<div class="note-section">';
-    $html .= '<h4>' . $this->languageModel->getText('about_renal_tales', [], 'About Renal Tales') . '</h4>';
-    $html .= '<p>' . $this->languageModel->getText('renal_tales_description', [], 'Renal Tales is a supportive community platform where people affected by kidney disorders can share their experiences, find support, and connect with others on similar journeys.') . '</p>';
-    $html .= '</div>';
-
-    // Community guidelines
-    $html .= '<div class="note-section">';
-    $html .= '<h4>' . $this->languageModel->getText('community_guidelines', [], 'Community Guidelines') . '</h4>';
-    $html .= '<ul>';
-    $html .= '<li>' . $this->languageModel->getText('guideline_respectful', [], 'Be respectful and supportive to all community members') . '</li>';
-    $html .= '<li>' . $this->languageModel->getText('guideline_privacy', [], 'Respect privacy and confidentiality') . '</li>';
-    $html .= '<li>' . $this->languageModel->getText('guideline_medical', [], 'Share experiences, not medical advice') . '</li>';
-    $html .= '<li>' . $this->languageModel->getText('guideline_appropriate', [], 'Keep content appropriate and relevant') . '</li>';
-    $html .= '</ul>';
-    $html .= '</div>';
-
-    // Getting started
-    $html .= '<div class="note-section">';
-    $html .= '<h4>' . $this->languageModel->getText('getting_started', [], 'Getting Started') . '</h4>';
-    $html .= '<p>' . $this->languageModel->getText('getting_started_description', [], 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.') . '</p>';
-    $html .= '</div>';
-
-    // Support resources
-    $html .= '<div class="note-section">';
-    $html .= '<h4>' . $this->languageModel->getText('support_resources', [], 'Support Resources') . '</h4>';
-    $html .= '<p>' . $this->languageModel->getText('support_description', [], 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.') . '</p>';
-    $html .= '</div>';
-
-    $html .= '</div>';
-
-    return $html;
+    // Placeholder for notes/sidebar logic.
+    return '<div class="notes-section">Notes Placeholder</div>';
   }
 }

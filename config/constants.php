@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 // -*- coding: utf-8 -*-
 
 /**
  * Constants for the RenalTales application
  * This file defines various constants used throughout the application
+ * such as application name, version, and default language.
+ *
  * @package RenalTales
  * @version 2025.3.1.dev
  * @author Ľubomír Polaščín

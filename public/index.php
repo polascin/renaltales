@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+namespace RenalTales;
+
+use RenalTales\Core\SecurityManager;
+use RenalTales\Controllers\ViewController;
+use RenalTales\Controllers\ApplicationController;
+use RenalTales\Models\LanguageModel;
+use RenalTales\Views\ErrorView;
+use RenalTales\Core\SessionManager;
+use RenalTales\Core\Logger;
+
 /**
  * Main entry point for the RenalTales application
  *
@@ -19,25 +31,33 @@ require_once dirname(__DIR__) . DS . 'config' . DS . 'constants.php';
 // Include bootstrap for proper setup
 require_once APP_DIR . DS . 'bootstrap.php';
 
-// Set up the output buffer
+// Start output buffering
 ob_start();
-// Set the default timezone
-date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
-// Check if the application is in debug mode
-define('DEBUG_MODE', filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN));
-
 
 try {
-  // Instantiate the language model directly
-  $languageModel = new \RenalTales\Models\LanguageModel();
-  $sessionManager = new \RenalTales\Core\SessionManager($languageModel->getAllTexts());
-  $controller = new \RenalTales\Controllers\ApplicationController($languageModel, $sessionManager);
-  $output = $controller->index();
-  ob_end_clean();
-  echo $output;
-} catch (Exception $e) {
-  error_log('Exception in index.php: ' . $e->getMessage());
-  ob_end_clean();
-  $errorView = new \RenalTales\Views\ErrorView($e, DEBUG_MODE, $languageModel ?? null);
+  // Initialize and bootstrap the application
+  $app = new \RenalTales\Core\Application();
+  $app->bootstrap();
+  $app->run();
+
+} catch (\Throwable $e) {
+  // Clean any buffered output before showing error
+  if (ob_get_level()) {
+    ob_end_clean();
+  }
+  
+  error_log('Error in index.php: ' . $e->getMessage());
+  
+  // Try to get language service if application was initialized
+  $languageService = null;
+  if (isset($app) && $app->isBootstrapped()) {
+    $languageService = $app->get(\RenalTales\Services\LanguageService::class);
+  }
+  
+  // Get debug mode from environment or constant
+  $debugMode = filter_var($_ENV['APP_DEBUG'] ?? APP_DEBUG ?? false, FILTER_VALIDATE_BOOLEAN);
+  
+  $errorView = new \RenalTales\Views\ErrorView($e, $debugMode, $languageService);
   echo $errorView->render();
+  exit;
 }

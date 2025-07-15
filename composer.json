@@ -11,11 +11,34 @@
         }
     ],
     "require": {
-        "php": "^8.4"
+        "php": "^8.4",
+        "doctrine/annotations": "^2.0",
+        "doctrine/cache": "^2.2",
+        "doctrine/dbal": "^4.0",
+        "doctrine/migrations": "^3.6",
+        "doctrine/orm": "^3.0",
+        "monolog/monolog": "^3.9",
+        "predis/predis": "^2.0",
+        "react/async": "^4.0",
+        "react/mysql": "0.6",
+        "react/promise": "^3.0",
+        "react/stream": "^1.2",
+        "symfony/cache": "^7.0",
+        "symfony/console": "^7.0",
+        "symfony/dotenv": "^7.0",
+        "symfony/rate-limiter": "^7.0",
+        "symfony/security-csrf": "^7.0",
+        "symfony/yaml": "^7.0",
+        "twig/html-extra": "^3.0",
+        "twig/twig": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0",
         "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.0",
+        "behat/behat": "^3.12",
+        "fakerphp/faker": "^1.23",
+        "phpunit/php-code-coverage": "^10.1",
+        "slevomat/coding-standard": "^8.19",
         "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
@@ -30,13 +53,32 @@
     },
     "scripts": {
         "test": "phpunit",
+        "test:unit": "phpunit --testsuite=Unit",
+        "test:integration": "phpunit --testsuite=Integration",
+        "test:feature": "phpunit --testsuite=Feature",
+        "test:coverage": "phpunit --coverage-html=coverage --coverage-clover=coverage.xml",
+        "test:coverage-text": "phpunit --coverage-text",
+        "behat": "behat",
+        "behat:suite": "behat --suite=",
+        "test:bdd": "behat --strict",
+        "test:all": [
+            "@test:coverage",
+            "@test:bdd"
+        ],
+        "quality": [
+            "@phpstan",
+            "@phpcs"
+        ],
         "phpstan": "phpstan analyse src",
         "phpcs": "phpcs src --standard=PSR12",
         "phpcbf": "phpcbf src --standard=PSR12"
     },
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

@@ -6,14 +6,18 @@ namespace RenalTales\Controllers;
 
 use RenalTales\Models\LanguageModel;
 
+// -*- coding: utf-8 -*-
+
 /**
  * LanguageController
  *
  * Handles language switching and language-related endpoints for the application.
  *
+ * @package RenalTales
  * @author Ľubomír Polaščín
- * @version 2025.v3.0dev
+ * @version 2025.3.1.dev
  */
+
 class LanguageController {
   private LanguageModel $languageModel;
 
@@ -25,8 +29,8 @@ class LanguageController {
    * Switch the application's language (expects 'lang' parameter via GET/POST)
    * Responds with JSON for AJAX or redirects for standard requests.
    */
-  public function switchLanguage(): void {
-    $requestedLang = $_POST['lang'] ?? $_GET['lang'] ?? null;
+  public function switchLanguage(string $request): void {
+    $requestedLang = $_POST['lang'] ?? $_GET['lang'] ?? $request ?? $this->languageModel->getCurrentLanguage();
     $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
     if ($requestedLang && $this->languageModel->isSupported($requestedLang)) {
