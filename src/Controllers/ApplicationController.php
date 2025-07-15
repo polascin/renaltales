@@ -45,44 +45,14 @@ class ApplicationController {
                 $this->languageModel->setLanguage($requestedLang);
             }
         }
-        
+
         $lang = $this->languageModel->getCurrentLanguage();
         $appName = $this->languageModel->getText('app_title', [], 'RenalTales');
-        
+
         // Get supported languages from the language model
-        $supportedLanguages = $this->getSupportedLanguages();
-        
+        $supportedLanguages = $this->languageModel->getSupportedLanguages();
+
         $view = new HomeView($this->languageModel, $appName, $supportedLanguages);
         return $view->render();
-    }
-    
-    /**
-     * Get supported languages
-     *
-     * @return array Array of supported languages (code => name)
-     */
-    private function getSupportedLanguages(): array {
-        return [
-            'en' => 'English',
-            'sk' => 'Slovak',
-            'la' => 'Latin',
-            'de' => 'German',
-            'fr' => 'French',
-            'es' => 'Spanish',
-            'it' => 'Italian',
-            'pt' => 'Portuguese',
-            'nl' => 'Dutch',
-            'pl' => 'Polish',
-            'cs' => 'Czech',
-            'ru' => 'Russian',
-            'zh' => 'Chinese',
-            'ja' => 'Japanese',
-            'ko' => 'Korean',
-            'ar' => 'Arabic',
-            'hi' => 'Hindi',
-            'th' => 'Thai',
-            'vi' => 'Vietnamese',
-            'tr' => 'Turkish'
-        ];
     }
 }
