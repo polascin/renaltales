@@ -1,10 +1,12 @@
 <?php
 
+// -*- coding: utf-8 -*-
+
 /**
  * Constants for the RenalTales application
  * This file defines various constants used throughout the application
  * @package RenalTales
- * @version 2025.v3.0dev
+ * @version 2025.3.1.dev
  * @author Ľubomír Polaščín
  */
 
@@ -13,7 +15,7 @@
 // Define application constants
 // Name, version, and default language of the application; change as needed
 define('APP_NAME', 'RenalTales');
-define('APP_VERSION', '2025.v3.0dev');
+define('APP_VERSION', '2025.3.1.dev');
 define('DEFAULT_LANGUAGE', 'sk');
 // Base URL of the application; change as needed; https://ladvina.eu/ in production
 define('APP_URL', 'https://renaltales.test/');
@@ -68,3 +70,5 @@ define('CORE_DIR', APP_DIR . DS . 'src' . DS . 'Core');
 define('CONTROLLERS_DIR', APP_DIR . DS . 'src' . DS . 'Controllers');
 define('MODELS_DIR', APP_DIR . DS . 'src' . DS . 'Models');
 define('VIEWS_DIR', APP_DIR . DS . 'src' . DS . 'Views');
+
+// End of file
