@@ -346,7 +346,7 @@ HTML;
             $options = '';
             foreach ($this->supportedLanguages as $code => $name) {
                 $selected = $code === $currentLanguage ? 'selected' : '';
-                $options .= "<option value=\"" . htmlspecialchars($code, ENT_QUOTES, 'UTF-8') . "\" {$selected}>" . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . "</option>";
+                $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected}>" . htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . "</option>";
             }
             
             return <<<HTML
