@@ -189,7 +189,7 @@ class LanguageModel {
           }
           closedir($handle);
         }
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
         // If directory scanning fails, use default
         $this->supportedLanguages = ['en'];
         return;
