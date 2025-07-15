@@ -8,7 +8,8 @@ namespace RenalTales\Models;
 /**
  * Language Model
  *
- * Handles dynamic language loading, support checks, translation lookup, and user language preference for a multilingual web application.
+ * Handles dynamic language loading, support checks, translation lookup,
+ * and user language preference for a multilingual web application.
  *
  * @author Ľubomír Polaščín
  * @version 2025.v3.0dev
@@ -304,6 +305,7 @@ class LanguageModel {
       'sr' => 'rs',
       'sv' => 'se',
       'uk' => 'ua',
+
       // Asian languages
       'am' => 'et',
       'ar' => 'sa',
