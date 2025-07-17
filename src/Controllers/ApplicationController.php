@@ -1,116 +1,90 @@
 <?php
 
-// File: /src/Controllers/ApplicationController.php
-
 declare(strict_types=1);
 
 namespace RenalTales\Controllers;
 
 use RenalTales\Services\LanguageService;
-use RenalTales\Core\SessionManager;
 use RenalTales\Core\SecurityManager;
+use RenalTales\Core\SessionManager;
+use RenalTales\Contracts\ControllerInterface;
 use RenalTales\Views\HomeView;
 use RenalTales\Views\ErrorView;
+use RenalTales\Http\Response;
+use Psr\Log\LoggerInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Application Controller
  *
- * Handles the main application logic using dependency injection
- * and service layer architecture.
+ * Handles the main application logic using dependency injection.
  *
  * @package RenalTales
- * @author Ľubomír Polaščín
- * @version 2025.3.1.dev
  */
-class ApplicationController
+class ApplicationController extends AbstractController implements ControllerInterface
 {
-    /**
-     * @var LanguageService The language service
-     */
-    private LanguageService $languageService;
-
-    /**
-     * @var SessionManager The session manager
-     */
-    private SessionManager $sessionManager;
-
-    /**
-     * @var SecurityManager The security manager
-     */
-    private SecurityManager $securityManager;
-
-    /**
-     * @var ViewController The view controller
-     */
     private ViewController $viewController;
-
-    /**
-     * @var string The current language
-     */
-    private string $currentLanguage;
-
-    /**
-     * @var string The requested page
-     */
     private string $requestedPage;
 
-    /**
-     * Constructor with dependency injection
-     *
-     * @param LanguageService $languageService The language service
-     * @param SessionManager $sessionManager The session manager
-     * @param SecurityManager $securityManager The security manager
-     */
     public function __construct(
         LanguageService $languageService,
         SessionManager $sessionManager,
-        SecurityManager $securityManager
+        SecurityManager $securityManager,
+        LoggerInterface $logger
     ) {
-        $this->languageService = $languageService;
-        $this->sessionManager = $sessionManager;
-        $this->securityManager = $securityManager;
-
-        // Initialize the application
-        $this->initialize();
+        parent::__construct($languageService, $securityManager, $sessionManager, $logger);
     }
 
     /**
-     * Initialize the application
+     * Handle HTTP request
      *
-     * @return void
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
      */
-    private function initialize(): void
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        // Get current language from service
-        $this->currentLanguage = $this->languageService->getCurrentLanguage();
-
-        // Determine requested page
-        $this->requestedPage = $this->determineRequestedPage();
-
-        // Create view controller with dependencies
-        $this->viewController = new ViewController(
-            $this->requestedPage,
-            $this->currentLanguage,
-            $this->languageService
-        );
+        try {
+            $this->requestedPage = $this->determineRequestedPage($request);
+            $this->viewController = new ViewController($this->requestedPage, $this->languageService);
+            return $this->view($this->viewController);
+        } catch (\Exception $e) {
+            $this->logError('Error handling request', $e);
+            $errorView = new ErrorView($e, true, null);
+            return $this->view($errorView);
+        }
     }
 
     /**
-     * Determine the requested page from request parameters
+     * Determine the requested page
      *
-     * @return string The requested page
+     * @param ServerRequestInterface $request
+     * @return string
      */
-    private function determineRequestedPage(): string
+    private function determineRequestedPage(ServerRequestInterface $request): string
     {
-        if (isset($_GET['page']) && is_string($_GET['page'])) {
-            return trim($_GET['page']);
-        }
+        $page = $this->getParameter($request, 'page', 'home');
+        return is_string($page) ? trim($page) : 'home';
+    }
 
-        if (isset($_POST['page']) && is_string($_POST['page'])) {
-            return trim($_POST['page']);
-        }
+    /**
+     * Create a basic response
+     *
+     * @param string $body
+     * @param int $status
+     * @return ResponseInterface
+     */
+    protected function createResponse(string $body, int $status = 200): ResponseInterface
+    {
+        return new Response($status, [], $body);
+    }
 
-        return 'home';
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return 'ApplicationController';
     }
 
     /**
@@ -124,36 +98,6 @@ class ApplicationController
     }
 
     /**
-     * Get the language service
-     *
-     * @return LanguageService The language service
-     */
-    public function getLanguageService(): LanguageService
-    {
-        return $this->languageService;
-    }
-
-    /**
-     * Get the session manager
-     *
-     * @return SessionManager The session manager
-     */
-    public function getSessionManager(): SessionManager
-    {
-        return $this->sessionManager;
-    }
-
-    /**
-     * Get the security manager
-     *
-     * @return SecurityManager The security manager
-     */
-    public function getSecurityManager(): SecurityManager
-    {
-        return $this->securityManager;
-    }
-
-    /**
      * Get the view controller
      *
      * @return ViewController The view controller
@@ -162,15 +106,4 @@ class ApplicationController
     {
         return $this->viewController;
     }
-
-    /**
-     * Get the current language
-     *
-     * @return string The current language
-     */
-    public function getCurrentLanguage(): string
-    {
-        return $this->currentLanguage;
-    }
-
 }

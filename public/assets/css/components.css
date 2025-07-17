@@ -199,6 +199,17 @@
   appearance: none;
 }
 
+.form-select:focus {
+  border-color: var(--primary-color);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select:disabled {
+  background-color: var(--light-color);
+  opacity: 1;
+}
+
 .form-check {
   display: block;
   min-height: 1.5rem;

@@ -17,113 +17,106 @@ use Exception;
  * @package RenalTales
  * @version 2025.3.1.dev
  */
-class HomeView {
-  private ?LanguageModel $languageModel;
-  private string $appName;
-  private array $supportedLanguages;
+class HomeView extends AbstractView
+{
+    private array $supportedLanguages;
 
-  /**
-   * HomeView constructor
-   *
-   * @param string|LanguageModel $language The language string or LanguageModel instance
-   * @param string $appName The application name
-   * @param array $supportedLanguages Array of supported languages (code => name)
-   */
-  public function __construct(string|LanguageModel|null $language, string $appName, array $supportedLanguages = []) {
-    // Handle missing or invalid language model gracefully
-    try {
-      if ($language === null) {
-        $this->languageModel = null;
-      } elseif (is_string($language)) {
-        $this->languageModel = new LanguageModel();
-        $this->languageModel->setLanguage($language);
-      } else {
-        $this->languageModel = $language;
-      }
-    } catch (Exception $e) {
-      // Log error and fallback to null
-      error_log("HomeView: Failed to initialize language model - " . $e->getMessage());
-      $this->languageModel = null;
+    /**
+     * HomeView constructor
+     *
+     * @param string|LanguageModel|null $language The language string or LanguageModel instance
+     * @param string $appName The application name
+     * @param array $supportedLanguages Array of supported languages (code => name)
+     */
+    public function __construct($language = null, string $appName = 'RenalTales', array $supportedLanguages = [])
+    {
+        parent::__construct($language, $appName);
+
+        $this->supportedLanguages = $supportedLanguages ?: [
+            'en' => 'English',
+            'sk' => 'Slovak',
+            'la' => 'Latin',
+        ];
     }
 
-    $this->appName = htmlspecialchars($appName, ENT_QUOTES, 'UTF-8');
-    $this->supportedLanguages = $supportedLanguages ?: [
-      'en' => 'English',
-      'sk' => 'Slovak',
-      'la' => 'Latin',
-    ];
-  }
+    /**
+     * {@inheritdoc}
+     */
+    public function render(array $data = []): string
+    {
+        try {
+            $this->data = array_merge($this->data, $data);
+            $currentLanguage = $this->getCurrentLanguage();
 
-  /**
-   * Render the home page
-   *
-   * @return string The rendered home page HTML
-   */
-  public function render(): string {
-    try {
-      $currentLanguage = $this->getCurrentLanguage();
+            // Get all text content using translation keys with fallback values
+            $pageTitle = $this->getText('home.title', 'Renal Tales - Home');
+            $welcomeTitle = $this->getText('home.welcome', "Welcome to {$this->appName}!");
+            $homeIntro = $this->getText('home.description', 'Welcome to our supportive community for people affected by kidney disorders.');
+            $homeDescription = $this->getText('home_intro2', 'This web application is designed to facilitate the sharing of personal experiences among individuals affected by kidney disorders.');
 
-      // Get all text content using new translation keys with fallback values
-      $pageTitle = $this->getText('home.title', 'Renal Tales - Home');
-      $welcomeTitle = $this->getText('home.welcome', "Welcome to {$this->appName}!");
-      $homeIntro = $this->getText('home.description', 'Welcome to our supportive community for people affected by kidney disorders.');
-      $homeDescription = $this->getText('home_intro2', 'This web application is designed to facilitate the sharing of personal experiences among individuals affected by kidney disorders.');
+            // Feature cards content
+            $shareStoryTitle = $this->getText('share_story', 'Share Your Story');
+            $shareStoryDesc = $this->getText('share_story_desc', 'Your experience matters. Share your journey to inspire and support others.');
+            $startSharing = $this->getText('start_sharing', 'Start Sharing');
 
-      // Feature cards content
-      $shareStoryTitle = $this->getText('share_story', 'Share Your Story');
-      $shareStoryDesc = $this->getText('share_story_desc', 'Your experience matters. Share your journey to inspire and support others.');
-      $startSharing = $this->getText('start_sharing', 'Start Sharing');
+            $readStoriesTitle = $this->getText('read_stories', 'Read Stories');
+            $readStoriesDesc = $this->getText('read_stories_desc', 'Find inspiration and comfort in the experiences of others in our community.');
+            $browseStories = $this->getText('browse_stories', 'Browse Stories');
 
-      $readStoriesTitle = $this->getText('read_stories', 'Read Stories');
-      $readStoriesDesc = $this->getText('read_stories_desc', 'Find inspiration and comfort in the experiences of others in our community.');
-      $browseStories = $this->getText('browse_stories', 'Browse Stories');
+            $joinCommunityTitle = $this->getText('join_community', 'Join Community');
+            $joinCommunityDesc = $this->getText('join_community_desc', 'Connect with others, participate in discussions, and build lasting friendships.');
+            $exploreCommunity = $this->getText('explore_community', 'Explore Community');
 
-      $joinCommunityTitle = $this->getText('join_community', 'Join Community');
-      $joinCommunityDesc = $this->getText('join_community_desc', 'Connect with others, participate in discussions, and build lasting friendships.');
-      $exploreCommunity = $this->getText('explore_community', 'Explore Community');
+            // Navigation items using navigation keys with fallback values
+            $home = $this->getText('nav.home', 'Home');
+            $stories = $this->getText('nav.stories', 'Stories');
+            $community = $this->getText('nav.community', 'Community');
+            $about = $this->getText('nav.about', 'About');
+            $login = $this->getText('nav.login', 'Login');
+            $register = $this->getText('nav.register', 'Register');
 
-      // Navigation items using new navigation keys with fallback values
-      $home = $this->getText('nav.home', 'Home');
-      $stories = $this->getText('nav.stories', 'Stories');
-      $community = $this->getText('nav.community', 'Community');
-      $about = $this->getText('nav.about', 'About');
-      $login = $this->getText('nav.login', 'Login');
-      $register = $this->getText('nav.register', 'Register');
+            // Footer
+            $footerCopyright = $this->getText('footer_copyright', 'Ľubomír Polaščín');
+            $currentYear = date('Y');
 
-      // Footer
-      $footerCopyright = $this->getText('footer_copyright', 'Ľubomír Polaščín');
-      $currentYear = date('Y');
-
-      return $this->getHomePageTemplate(
-        $currentLanguage,
-        $pageTitle,
-        $welcomeTitle,
-        $homeIntro,
-        $homeDescription,
-        $shareStoryTitle,
-        $shareStoryDesc,
-        $startSharing,
-        $readStoriesTitle,
-        $readStoriesDesc,
-        $browseStories,
-        $joinCommunityTitle,
-        $joinCommunityDesc,
-        $exploreCommunity,
-        $home,
-        $stories,
-        $community,
-        $about,
-        $login,
-        $register,
-        $footerCopyright,
-        $currentYear
-      );
-    } catch (Exception $e) {
-      // Log error and return safe error message
-      error_log("HomeView: Error rendering page - " . $e->getMessage());
-      return $this->getErrorTemplate('Home Page Error', 'An error occurred while loading the home page. Please try again later.');
+            return $this->getHomePageTemplate(
+                $currentLanguage,
+                $pageTitle,
+                $welcomeTitle,
+                $homeIntro,
+                $homeDescription,
+                $shareStoryTitle,
+                $shareStoryDesc,
+                $startSharing,
+                $readStoriesTitle,
+                $readStoriesDesc,
+                $browseStories,
+                $joinCommunityTitle,
+                $joinCommunityDesc,
+                $exploreCommunity,
+                $home,
+                $stories,
+                $community,
+                $about,
+                $login,
+                $register,
+                $footerCopyright,
+                $currentYear
+            );
+        } catch (Exception $e) {
+            // Log error and return safe error message
+            error_log("HomeView: Error rendering page - " . $e->getMessage());
+            return $this->getErrorTemplate('Home Page Error', 'An error occurred while loading the home page. Please try again later.');
+        }
     }
-  }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return 'home';
+    }
 
   /**
    * Get the home page template
@@ -195,22 +188,34 @@ class HomeView {
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/navigation.css">
+    <link rel="stylesheet" href="/assets/css/language-switcher.css">
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
     <!-- Header Section -->
 <header class="main-header" role="banner">
-    <div class="navbar-wrap">
-        <nav class="navbar">
-            <a href="#" class="navbar-brand">
-                <img src="/assets/images/logo.png" alt="{pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
-            </a>
+    <div class="container">
+        <div class="main-header-container">
+            <div class="left-section">
+                <a href="/" class="navbar-brand">
+                    <img src="/assets/images/logos/logo.gif" alt="{$pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
+                </a>
+            </div>
+            <div class="central-section">
+                <h1>{$this->getAppName()}</h1>
+                <h2>{$this->trans('app.subtitle', 'Supporting Kidney Health Stories')}</h2>
+            </div>
+            <div class="right-section">
+                {$languageSwitcher}
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-md">
             <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item active"><a href="/" class="nav-link">{$home}</a></li>
                     <li class="nav-item"><a href="/stories" class="nav-link">{$stories}</a></li>
                     <li class="nav-item"><a href="/community" class="nav-link">{$community}</a></li>
@@ -218,11 +223,10 @@ class HomeView {
                     <li class="nav-item"><a href="/login" class="nav-link btn btn-primary">{$login}</a></li>
                     <li class="nav-item"><a href="/register" class="nav-link btn btn-secondary">{$register}</a></li>
                 </ul>
-                {$languageSwitcher}
             </div>
         </nav>
     </div>
-    </header>
+</header>
 
     <!-- Hero/Welcome Section -->
     <section class="hero-section">
@@ -329,16 +333,18 @@ class HomeView {
         </div>
     </footer>
 
+    <!-- JavaScript Files -->
+    <script src="/assets/js/language-switcher.js"></script>
     <script>
         // Mobile navigation toggle
         document.addEventListener('DOMContentLoaded', function() {
             const navbarToggler = document.querySelector('.navbar-toggler');
             const navbarCollapse = document.querySelector('.navbar-collapse');
-            
+
             if (navbarToggler && navbarCollapse) {
                 navbarToggler.addEventListener('click', function() {
                     const isExpanded = navbarCollapse.classList.contains('show');
-                    
+
                     if (isExpanded) {
                         navbarCollapse.classList.remove('show');
                         navbarToggler.setAttribute('aria-expanded', 'false');
@@ -347,7 +353,7 @@ class HomeView {
                         navbarToggler.setAttribute('aria-expanded', 'true');
                     }
                 });
-                
+
                 // Close mobile menu when clicking on a link
                 const navLinks = navbarCollapse.querySelectorAll('.nav-link');
                 navLinks.forEach(function(link) {
@@ -356,7 +362,7 @@ class HomeView {
                         navbarToggler.setAttribute('aria-expanded', 'false');
                     });
                 });
-                
+
                 // Close mobile menu when clicking outside
                 document.addEventListener('click', function(e) {
                     if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
@@ -365,6 +371,14 @@ class HomeView {
                     }
                 });
             }
+
+            // Language switcher keyboard shortcuts help
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.altKey && e.key === 'h') {
+                    e.preventDefault();
+                    alert('Language Switcher Shortcuts:\n\nCtrl+Alt+L: Focus language selector\nCtrl+Alt+E: Switch to English\nCtrl+Alt+S: Switch to Slovak');
+                }
+            });
         });
     </script>
 </body>
@@ -381,20 +395,33 @@ HTML;
     try {
       $currentLanguage = $this->getCurrentLanguage();
       $languageLabel = $this->getText('current_language', 'Language');
+      $switchLanguageText = $this->getText('switch_language', 'Switch Language');
+      $currentLanguageText = $this->getText('current_language_is', 'Current language is');
 
-      $options = '';
-      foreach ($this->supportedLanguages as $code => $name) {
-        $selected = $code === $currentLanguage ? 'selected' : '';
-        $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected}>" . htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . "</option>";
-      }
+        $options = '';
+        // Iterate through supported languages to build options
+        foreach ($this->supportedLanguages as $code => $name) {
+            $selected = $code === $currentLanguage ? 'selected' : '';
+            $flagClass = 'flag-' . strtolower($code);
+            $displayText = htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . ' [' . strtoupper(htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8')) . ']';
+            $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected} data-flag=\"{$flagClass}\">" . $displayText . "</option>";
+        }
 
-      return <<<HTML
+        // Get current language name for display
+        $currentLanguageName = $this->supportedLanguages[$currentLanguage] ?? 'English';
+        $tooltipText = $currentLanguageText . ' ' . $currentLanguageName;
+
+        // HTML structure for language selector
+        return <<<HTML
 <div class="language-selector">
-    <div class="language-selector-container">
-        <form class="language-form" method="get" action="">
-            <label for="lang-select" class="language-label">{$languageLabel}:</label>
-            <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
-                {$options}
+    <div class="language-switcher" data-tooltip="{$tooltipText}" role="group" aria-label="{$switchLanguageText}">
+        <form class="language-form" method="get" action="" onsubmit="this.querySelector('.language-switcher').classList.add('loading')">
+            <label for="lang-select" class="language-label sr-only">{$languageLabel}:</label>
+            <select name="lang" id="lang-select" class="form-select language-select" 
+                    onchange="this.form.submit()" 
+                    aria-label="{$switchLanguageText}"
+                    title="{$switchLanguageText}">
+                {$options} <!-- Render language options -->
             </select>
         </form>
     </div>
@@ -451,7 +478,7 @@ HTML;
    *
    * @return string The current language code
    */
-  private function getCurrentLanguage(): string {
+  protected function getCurrentLanguage(): string {
     if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
       try {
         return $this->languageModel->getCurrentLanguage();

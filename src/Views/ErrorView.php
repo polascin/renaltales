@@ -95,24 +95,31 @@ class ErrorView {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{$errorTitle} - RenalTales</title>
     <link rel="stylesheet" href="/assets/css/basic.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/error.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
-    <div class="error-container">
-        <div class="error-icon">⚠️</div>
-        <h1 class="error-title">{$errorTitle}</h1>
-        <p class="error-message">{$errorMessage}</p>
+    <div class="container">
+        <div class="error-container card">
+            <div class="card-body">
+                <div class="error-icon">⚠️</div>
+                <h1 class="error-title">{$errorTitle}</h1>
+                <p class="error-message">{$errorMessage}</p>
 
-        <div class="error-buttons">
-            <a href="javascript:history.back()" class="btn btn-secondary">{$backButton}</a>
-            <a href="/" class="btn btn-primary">{$homeButton}</a>
+                <div class="error-buttons d-flex justify-content-center">
+                    <a href="javascript:history.back()" class="btn btn-secondary mr-2">{$backButton}</a>
+                    <a href="/" class="btn btn-primary">{$homeButton}</a>
+                </div>
+
+                <div class="error-code mt-3">
+                    <small class="text-muted">Error Code: {$this->exception->getCode()}</small>
+                </div>
+
+                {$debugInfo}
+            </div>
         </div>
-
-        <div class="error-code">
-            Error Code: {$this->exception->getCode()}
-        </div>
-
-        {$debugInfo}
     </div>
 </body>
 </html>

@@ -222,7 +222,10 @@ class SecurityManager
      */
     public function getCSRFToken(): string
     {
-        return $this->csrfToken;
+        if ($this->csrfToken === null) {
+            $this->initializeCSRF();
+        }
+        return $this->csrfToken ?? '';
     }
 
     /**

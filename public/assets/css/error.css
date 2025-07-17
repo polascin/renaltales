@@ -51,33 +51,24 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Keeping the original error-title definition but with updated styling */
 .error-title {
     font-size: 2rem;
     font-weight: 700;
-    color: var(--text-color);
+    color: var(--danger-color);
     margin: 1rem 0;
 }
 
 .error-description {
     font-size: 1.1rem;
-    color: var(--gray-dark);
+    color: var(--text-color);
     margin: 1rem 0 2rem;
     line-height: 1.6;
 }
 
-/* Extracted and consolidated error-specific styles from ErrorView.php */
 .error-icon {
     font-size: 64px;
-    color: #e74c3c;
+    color: var(--danger-color);
     margin-bottom: 20px;
-}
-
-.error-title {
-    font-size: 28px;
-    color: #e74c3c;
-    margin-bottom: 20px;
-    font-weight: 600;
 }
 
 .error-buttons {
@@ -170,7 +161,7 @@
 /* Consolidated error message styles - updated to handle both extracted and original versions */
 .error-message {
     font-size: 18px;
-    color: #666;
+    color: var(--text-color);
     margin-bottom: 30px;
     line-height: 1.5;
     padding: 1rem;
@@ -244,41 +235,27 @@
     white-space: pre-wrap;
     color: var(--gray-dark);
     line-height: 1.4;
+    font-family: var(--font-family-mono);
+    font-size: 0.9rem;
+    overflow-x: auto;
 }
 
-/* Extracted debug styles from ErrorView.php */
 .debug-info {
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    padding: 20px;
-    margin-top: 30px;
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
     text-align: left;
 }
 
 .debug-title {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
-    color: #495057;
-    margin-bottom: 15px;
-}
-
-.debug-content {
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #6c757d;
-    background: white;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #e9ecef;
-    overflow-x: auto;
-}
-
-.error-code {
-    font-size: 14px;
-    color: #999;
-    margin-top: 20px;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .stack-trace {
@@ -353,12 +330,6 @@
  * 4. ERROR UTILITIES
  * ======================================== */
 
-/* Keeping the original error-icon definition (utilities section) */
-.error-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: var(--danger-color);
-}
 
 .error-breadcrumb {
     margin-bottom: 1rem;

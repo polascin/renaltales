@@ -8,7 +8,8 @@
   --accent-color: #ff6f61;
   --panel-bg: seashell;
   --panel-border: #dcdcdc;
-  --text-color: #333333;
+  --text-color: #000000; /* Pure black for maximum contrast */
+  --text-muted: #333333; /* Darker muted text for better contrast */
   --background-color: snow;
 }
 
@@ -18,9 +19,16 @@
   color: white;
   padding: 3rem 1rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0 1rem 2rem 1rem;
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container overrides for hero section */
+.hero-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 .hero-content {
   max-width: 800px;
@@ -213,6 +221,7 @@
   color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-weight: 500; /* Make links more readable */
 }
 .footer-section a:hover {
   color: var(--primary-color);
@@ -222,6 +231,7 @@
   padding-top: 1rem;
   border-top: 1px solid var(--panel-border);
   color: var(--text-color);
+  font-weight: 500; /* Make footer text more readable */
 }
 
 /* Feature Cards */
@@ -251,7 +261,7 @@
   font-weight: 600;
 }
 .feature-card p {
-  color: var(--text-color);
+  color: var(--text-muted, #4a4a4a);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
@@ -292,9 +302,10 @@
 .home-intro p {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--text-color);
+  color: var(--white-color);
   max-width: 800px;
   margin: 0 auto;
+  font-weight: 500; /* Make text slightly bolder for better readability */
 }
 
 /* Sidebar Styles */
@@ -354,7 +365,7 @@
   font-weight: 600;
 }
 .note-section p {
-  color: var(--text-color);
+  color: var(--text-muted, #4a4a4a);
   line-height: 1.6;
   font-size: 0.9rem;
 }
@@ -363,7 +374,7 @@
   padding-left: 1.5rem;
 }
 .note-section li {
-  color: var(--text-color);
+  color: var(--text-muted, #4a4a4a);
   margin-bottom: 0.25rem;
   font-size: 0.9rem;
 }
@@ -372,7 +383,7 @@
 @media (max-width: 1024px) {
   .main-container {
     grid-template-columns: 1fr;
-    grid-template-areas: 
+    grid-template-areas:
       "content"
       "menu"
       "notes";
@@ -453,4 +464,3 @@
     padding: 1rem;
   }
 }
-

@@ -1,15 +1,13 @@
 <?php
 
-// File: /src/Controllers/ViewController.php
-
 declare(strict_types=1);
 
 namespace RenalTales\Controllers;
 
 use RenalTales\Services\LanguageService;
-use RenalTales\Core\SecurityManager;
-use RenalTales\Core\SessionManager;
-use RenalTales\Views\View;
+use RenalTales\Contracts\ViewInterface;
+use RenalTales\Views\HomeView;
+use RenalTales\Views\ErrorView;
 
 /**
  * View Controller
@@ -21,42 +19,24 @@ use RenalTales\Views\View;
  * @author Ľubomír Polaščín
  * @version 2025.3.1.dev
  */
-class ViewController
+class ViewController implements ViewInterface
 {
-    /**
-     * @var LanguageService The language service
-     */
     private LanguageService $languageService;
-
-    /**
-     * @var string The current language
-     */
-    private string $currentLanguage;
-
-    /**
-     * @var string The requested page
-     */
     private string $requestedPage;
-
-    /**
-     * @var View The view instance
-     */
-    private View $view;
+    private ViewInterface $view;
+    private array $data = [];
 
     /**
      * Constructor with dependency injection
      *
      * @param string $requestedPage The requested page
-     * @param string $currentLanguage The current language
      * @param LanguageService $languageService The language service
      */
     public function __construct(
         string $requestedPage,
-        string $currentLanguage,
         LanguageService $languageService
     ) {
         $this->languageService = $languageService;
-        $this->currentLanguage = $currentLanguage;
         $this->requestedPage = $requestedPage;
         
         // Initialize the view
@@ -64,17 +44,69 @@ class ViewController
     }
 
     /**
-     * Initialize the view
+     * Initialize the view based on requested page
      *
      * @return void
      */
     private function initializeView(): void
     {
-        $this->view = new View(
-            $this->requestedPage,
-            $this->currentLanguage,
-            $this->languageService
-        );
+        switch ($this->requestedPage) {
+            case 'home':
+                $this->view = new HomeView(
+                    $this->languageService->getCurrentLanguage(),
+                    'RenalTales',
+                    $this->languageService->getSupportedLanguagesWithNames()
+                );
+                break;
+            case 'login':
+                // TODO: Implement LoginView
+                $this->view = new HomeView(
+                    $this->languageService->getCurrentLanguage(),
+                    'RenalTales',
+                    $this->languageService->getSupportedLanguagesWithNames()
+                );
+                break;
+            default:
+                $this->view = new HomeView(
+                    $this->languageService->getCurrentLanguage(),
+                    'RenalTales',
+                    $this->languageService->getSupportedLanguagesWithNames()
+                );
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function render(array $data = []): string
+    {
+        $mergedData = array_merge($this->data, $data);
+        return $this->view->render($mergedData);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function with(array $data): ViewInterface
+    {
+        $this->data = array_merge($this->data, $data);
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return 'ViewController:' . $this->requestedPage;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists(): bool
+    {
+        return $this->view->exists();
     }
 
     /**
@@ -94,7 +126,7 @@ class ViewController
      */
     public function getCurrentLanguage(): string
     {
-        return $this->currentLanguage;
+        return $this->languageService->getCurrentLanguage();
     }
 
     /**
@@ -110,20 +142,10 @@ class ViewController
     /**
      * Get the view instance
      *
-     * @return View The view instance
+     * @return ViewInterface The view instance
      */
-    public function getView(): View
+    public function getView(): ViewInterface
     {
         return $this->view;
-    }
-
-    /**
-     * Render the view
-     *
-     * @return void
-     */
-    public function render(): void
-    {
-        $this->view->render();
     }
 }

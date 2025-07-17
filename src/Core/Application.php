@@ -7,6 +7,9 @@ namespace RenalTales\Core;
 use RenalTales\Core\Container;
 use RenalTales\Core\ServiceProvider;
 use RenalTales\Controllers\ApplicationController;
+use RenalTales\Http\ServerRequest;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Exception;
 
 /**
@@ -92,9 +95,14 @@ class Application
             throw new Exception('Application must be bootstrapped before running');
         }
 
-        // Get the view controller and render the view
-        $viewController = $this->applicationController->getViewController();
-        $viewController->render();
+        // Create a PSR-7 request from globals
+        $request = $this->createRequestFromGlobals();
+        
+        // Handle the request and get the response
+        $response = $this->applicationController->handle($request);
+        
+        // Send the response
+        $this->sendResponse($response);
     }
 
     /**
@@ -225,5 +233,68 @@ class Application
     public function isDebug(): bool
     {
         return APP_DEBUG ?? false;
+    }
+
+    /**
+     * Create a PSR-7 request from PHP globals
+     *
+     * @return ServerRequestInterface
+     */
+    private function createRequestFromGlobals(): ServerRequestInterface
+    {
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
+        $headers = [];
+        $body = '';
+        
+        // Extract headers from $_SERVER
+        foreach ($_SERVER as $key => $value) {
+            if (strpos($key, 'HTTP_') === 0) {
+                $headerName = str_replace('HTTP_', '', $key);
+                $headerName = str_replace('_', '-', $headerName);
+                $headers[ucwords(strtolower($headerName), '-')] = $value;
+            }
+        }
+        
+        // Get request body for POST/PUT/PATCH requests
+        if (in_array($method, ['POST', 'PUT', 'PATCH'])) {
+            $body = file_get_contents('php://input') ?: '';
+        }
+        
+        return new ServerRequest(
+            $method,
+            $uri,
+            $headers,
+            $body,
+            $_GET,
+            $_POST,
+            $_COOKIE,
+            $_FILES,
+            $_SERVER
+        );
+    }
+
+    /**
+     * Send a PSR-7 response to the client
+     *
+     * @param ResponseInterface $response
+     * @return void
+     */
+    private function sendResponse(ResponseInterface $response): void
+    {
+        // Set the response status code
+        if (!headers_sent()) {
+            http_response_code($response->getStatusCode());
+            
+            // Set response headers
+            foreach ($response->getHeaders() as $name => $values) {
+                foreach ($values as $value) {
+                    header(sprintf('%s: %s', $name, $value), false);
+                }
+            }
+        }
+        
+        // Output the response body
+        echo $response->getBody();
     }
 }
