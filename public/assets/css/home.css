@@ -1,18 +1,5 @@
 /* Extracted CSS styles from HomeView.php for the RenalTales application */
 
-:root {  /* Define global CSS variables */
-  --primary-color: #a0c4ff;
-  --primary-dark: #7c9dd0;
-  --secondary-color: #b9fbc0;
-  --secondary-dark: #8ef6a6;
-  --accent-color: #ff6f61;
-  --panel-bg: seashell;
-  --panel-border: #dcdcdc;
-  --text-color: #000000; /* Pure black for maximum contrast */
-  --text-muted: #333333; /* Darker muted text for better contrast */
-  --background-color: snow;
-}
-
 /* Hero Section Styles */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color), var(--accent-color));

@@ -8,8 +8,7 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  align-items: center;
-  align-content: stretch;
+  align-items: flex-start;
   padding: 1rem;
   margin: 0.5rem 0 1rem 0;
   background-color: var(--panel-bg);
@@ -20,35 +19,21 @@
 }
 
 .header-left {
-  flex-grow: 2;
-  flex-shrink: 1;
-  flex-basis: 0;
-  margin-right: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.header-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
-  margin-right: 1rem;
-  text-align: center;
+}
+
+.header-center {
+  flex-grow: 3;
+  flex-shrink: 1;
+  flex-basis: 0;
 }
 
 .header-right {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
 }
 
 .main-header-container {
@@ -76,7 +61,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  flex-grow: 2;
+  flex-grow: 3;
   flex-shrink: 1;
   flex-basis: auto;
   margin-right: 1rem;
@@ -84,7 +69,7 @@
 }
 .main-header-container .right-section {
   flex-grow: 1;
-  flex-shrink: 1;
+  flex-shrink: 2;
   flex-basis: 0;
 }
 .main-header-container img.logo {
@@ -99,10 +84,10 @@
 }
 .main-header-container h1 {
   font-family: var(--font-family-fantasy);
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   color: var(--title-color);
-  margin: 1rem 0 1rem 0;
+  margin: 0 0 1rem 0;
   text-shadow: 1px 1px 1px var(--black-color), 0 0 25px var(--accent-color), 0 0 10px var(--accent-darker);
 }
 .main-header-container h2 {
@@ -147,50 +132,7 @@
 
 /* Content Styles */
 
-.main-container {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas: "menu content notes";
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-
-.main-content-container {
-  grid-area: content;
-  flex-grow: 3;
-  flex-shrink: 1;
-  flex-basis: 0;
-  margin: 0;
-  padding: 0;
-  background-color: var(--content-bg);
-  border: solid thin var(--content-border);
-  border-radius: 1rem;
-}
-
-.main-menu-container {
-  grid-area: menu;
-  flex-grow: 1;
-  flex-shrink: 3;
-  flex-basis: 20%;
-  margin: 0;
-  padding: 0;
-  background-color: var(--menu-bg);
-  border: solid thin var(--menu-border);
-  border-radius: 1rem;
-}
-
-.main-notes-container {
-  grid-area: notes;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 20%;
-  padding: 0;
-  margin: 0;
-  background-color: var(--notes-bg);
-  border: solid thin var(--notes-border);
-  border-radius: 1rem;
-}
+/* Main container styles moved to layout.css for better organization */
 
 
 /* User Information Styles */
@@ -371,32 +313,7 @@
   margin-bottom: 1.5rem;
 }
 
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 0.25rem;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary {
-  background-color: var(--primary-bg, #007bff);
-  color: var(--primary-text, #fff);
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-hover, #0056b3);
-}
-
-.btn-secondary {
-  background-color: var(--secondary-bg, #6c757d);
-  color: var(--secondary-text, #fff);
-}
-
-.btn-secondary:hover {
-  background-color: var(--secondary-hover, #545b62);
-}
+/* Button styles moved to modern-home.css for better organization */
 
 /* Content Notes Styles */
 .content-notes {
@@ -445,61 +362,7 @@
   margin-bottom: 0.25rem;
 }
 
-/* Responsive adjustments */
-/* TABLET LAYOUT: Reduce sidebar widths for better balance */
-@media (max-width: 1024px) {
-  .main-container {
-    grid-template-columns: 200px 1fr 250px;
-  }
-}
-
-/* MOBILE LAYOUT: Stack elements vertically for better usability */
-@media (max-width: 768px) {
-  .language-selector form {
-    padding: 0.25rem;
-  }
-  .language-selector select {
-    font-size: 0.875rem;
-  }
-  .language-selector .lang-flag {
-    height: 1rem;
-  }
-
-  .user-info {
-    text-align: center; /* Center align for mobile */
-  }
-
-  .main-header-container .right-section {
-    margin-top: 1rem; /* Add spacing for stacked layout */
-  }
-
-  /* MOBILE GRID STACK: Transform 3-column layout to single column */
-  .main-container {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "content"
-      "menu"
-      "notes";
-    gap: 1rem;
-  }
-
-  /* MOBILE ORDERING: Prioritize content, then menu, then notes */
-  .main-menu {
-    order: 2;
-  }
-
-  .main-content-container {
-    order: 1;
-  }
-
-  .main-notes-container {
-    order: 3;
-  }
-
-  .feature-grid {
-    grid-template-columns: 1fr; /* Single column for mobile */
-  }
-}
+/* Responsive styles moved to responsive.css for better organization */
 
 /* Login Page Styles */
 .login-page {

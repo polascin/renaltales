@@ -189,7 +189,7 @@ class HomeView extends AbstractView
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/navigation.css">
     <link rel="stylesheet" href="/assets/css/language-switcher.css">
-    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/modern-home.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
@@ -199,7 +199,7 @@ class HomeView extends AbstractView
         <div class="main-header-container">
             <div class="left-section">
                 <a href="/" class="navbar-brand">
-                    <img src="/assets/images/logos/logo.gif" alt="{$pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
+                    <img src="/assets/images/logos/logo.webp" alt="{$pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
                 </a>
             </div>
             <div class="central-section">
@@ -417,8 +417,8 @@ HTML;
     <div class="language-switcher" data-tooltip="{$tooltipText}" role="group" aria-label="{$switchLanguageText}">
         <form class="language-form" method="get" action="" onsubmit="this.querySelector('.language-switcher').classList.add('loading')">
             <label for="lang-select" class="language-label sr-only">{$languageLabel}:</label>
-            <select name="lang" id="lang-select" class="form-select language-select" 
-                    onchange="this.form.submit()" 
+            <select name="lang" id="lang-select" class="form-select language-select"
+                    onchange="this.form.submit()"
                     aria-label="{$switchLanguageText}"
                     title="{$switchLanguageText}">
                 {$options} <!-- Render language options -->

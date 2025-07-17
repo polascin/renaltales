@@ -10,126 +10,205 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/basic.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="/assets/css/navigation.css">
     <link rel="stylesheet" href="/assets/css/language-switcher.css">
-    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/modern-home.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
     <!-- Header Section -->
-<header class="main-header" role="banner">
-    <div class="navbar-wrap">
-        <nav class="navbar">
-            <a href="#" class="navbar-brand">
-                <img src="/assets/images/logos/logo.gif" alt="Renal Tales - Home Logo" class="logo" role="img" onerror="this.style.display='none'">
-            </a>
-            <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/stories" class="nav-link">Stories</a></li>
-                    <li class="nav-item"><a href="/community" class="nav-link">Community</a></li>
-                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="/login" class="nav-link btn btn-primary">Login</a></li>
-                    <li class="nav-item"><a href="/register" class="nav-link btn btn-secondary">Register</a></li>
-                </ul>
-                <div class="language-selector">
-    <div class="language-selector-container">
-        <form class="language-form" method="get" action="">
-            <label for="lang-select" class="language-label">Aktuálny jazyk:</label>
-            <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
-                <option value="be" >Беларуская [BE]</option><option value="bg" >Български [BG]</option><option value="ca" >Català [CA]</option><option value="cs" >Čeština [CS]</option><option value="cy" >Cymraeg [CY]</option><option value="da" >Dansk [DA]</option><option value="de" >Deutsch [DE]</option><option value="el" >Ελληνικά [EL]</option><option value="en" >English [EN]</option><option value="en-gb" >English (UK) [EN-GB]</option><option value="eo" >Esperanto [EO]</option><option value="es" >Español [ES]</option><option value="et" >Eesti [ET]</option><option value="eu" >Euskara [EU]</option><option value="fi" >Suomi [FI]</option><option value="fo" >Føroyskt [FO]</option><option value="fr" >Français [FR]</option><option value="ga" >Gaeilge [GA]</option><option value="gd" >Gàidhlig [GD]</option><option value="gl" >Galego [GL]</option><option value="hr" >Hrvatski [HR]</option><option value="hu" >Magyar [HU]</option><option value="is" >Íslenska [IS]</option><option value="it" >Italiano [IT]</option><option value="lb" >Lëtzebuergesch [LB]</option><option value="lt" >Lietuvių [LT]</option><option value="lv" >Latviešu [LV]</option><option value="mk" >Македонски [MK]</option><option value="mt" >Malti [MT]</option><option value="nl" >Nederlands [NL]</option><option value="no" >Norsk [NO]</option><option value="pl" >Polski [PL]</option><option value="pt" >Português [PT]</option><option value="rm" >Rumantsch [RM]</option><option value="ro" >Română [RO]</option><option value="ru" >Русский [RU]</option><option value="se" >Sámegiella [SE]</option><option value="sk" selected>Slovenčina [SK]</option><option value="sl" >Slovenščina [SL]</option><option value="sq" >Shqip [SQ]</option><option value="sr" >Српски [SR]</option><option value="sv" >Svenska [SV]</option><option value="uk" >Українська [UK]</option><option value="am" >አማርኛ [AM]</option><option value="ar" >العربية [AR]</option><option value="as" >অসমীয়া [AS]</option><option value="bn" >বাংলা [BN]</option><option value="bo" >བོད་སྐད་ [BO]</option><option value="dv" >ދިވެހި [DV]</option><option value="fa" >فارسی [FA]</option><option value="gu" >ગુજરાતી [GU]</option><option value="he" >עברית [HE]</option><option value="hi" >हिन्दी [HI]</option><option value="hy" >Հայերեն [HY]</option><option value="ja" >日本語 [JA]</option><option value="jv" >Basa Jawa [JV]</option><option value="ka" >ქართული [KA]</option><option value="kk" >Қазақша [KK]</option><option value="km" >ភាសាខ្មែរ [KM]</option><option value="kn" >ಕನ್ನಡ [KN]</option><option value="ko" >한국어 [KO]</option><option value="lo" >ລາວ [LO]</option><option value="ml" >മലയാളം [ML]</option><option value="mn" >Монгол [MN]</option><option value="mr" >मराठी [MR]</option><option value="my" >မြန်မာဘာသာ [MY]</option><option value="ne" >नेपाली [NE]</option><option value="or" >ଓଡ଼ିଆ [OR]</option><option value="pa" >ਪੰਜਾਬੀ [PA]</option><option value="ps" >پښتو [PS]</option><option value="sa" >संस्कृतम् [SA]</option><option value="sd" >سنڌي [SD]</option><option value="si" >සිංහල [SI]</option><option value="ta" >தமிழ் [TA]</option><option value="te" >తెలుగు [TE]</option><option value="th" >ไทย [TH]</option><option value="ti" >ትግርኛ [TI]</option><option value="tk" >Türkmen [TK]</option><option value="ug" >ئۇيغۇرچە [UG]</option><option value="ur" >اردو [UR]</option><option value="uz" >Oʻzbek [UZ]</option><option value="vi" >Tiếng Việt [VI]</option><option value="wuu" >吴语 [WUU]</option><option value="yue" >粵語 [YUE]</option><option value="zh" >中文 [ZH]</option><option value="zh-cn" >简体中文 [ZH-CN]</option><option value="zh-tw" >繁體中文 [ZH-TW]</option><option value="ay" >Aymar aru [AY]</option><option value="bho" >भोजपुरी [BHO]</option><option value="gn" >Avañeʼẽ [GN]</option><option value="ht" >Kreyòl ayisyen [HT]</option><option value="qu" >Runa Simi [QU]</option><option value="war" >Winaray [WAR]</option><option value="en-us" >English (US) [EN-US]</option><option value="en-ca" >English (Canada) [EN-CA]</option><option value="pt-br" >Português (Brasil) [PT-BR]</option><option value="af" >Afrikaans [AF]</option><option value="bm" >Bamanankan [BM]</option><option value="ff" >Fula [FF]</option><option value="ha" >Hausa [HA]</option><option value="ig" >Igbo [IG]</option><option value="kg" >Kikongo [KG]</option><option value="lg" >Luganda [LG]</option><option value="ln" >Lingála [LN]</option><option value="nd" >isiNdebele [ND]</option><option value="nr" >isiNdebele [NR]</option><option value="nso" >Sesotho sa Leboa [NSO]</option><option value="ny" >Chichewa [NY]</option><option value="om" >Oromoo [OM]</option><option value="rn" >Kirundi [RN]</option><option value="rw" >Kinyarwanda [RW]</option><option value="sn" >chiShona [SN]</option><option value="so" >Soomaали [SO]</option><option value="ss" >SiSwati [SS]</option><option value="st" >Sesotho [ST]</option><option value="sw" >Kiswahili [SW]</option><option value="tn" >Setswana [TN]</option><option value="ts" >Xitsonga [TS]</option><option value="ve" >Tshivenda [VE]</option><option value="xh" >isiXhosa [XH]</option><option value="yo" >Yorùbá [YO]</option><option value="zu" >isiZulu [ZU]</option><option value="en-au" >English (Australia) [EN-AU]</option><option value="en-nz" >English (NZ) [EN-NZ]</option><option value="fj" >Fijian [FJ]</option><option value="su" >Basa Sunda [SU]</option><option value="az" >Azərbaycanca [AZ]</option><option value="bcl" >Bikol [BCL]</option><option value="bh" >भोजपुरी [BH]</option><option value="ceb" >Cebuano [CEB]</option><option value="hil" >Hiligaynon [HIL]</option><option value="ilo" >Ilokano [ILO]</option><option value="kl" >Kalaallisut [KL]</option><option value="ky" >Кыргызча [KY]</option><option value="la" >Latina [LA]</option><option value="lua" >Tshiluba [LUA]</option><option value="mai" >मैथिली [MAI]</option><option value="mg" >Malagasy [MG]</option><option value="ms" >Bahasa Melayu [MS]</option><option value="pam" >Kapampangan [PAM]</option> <!-- Render language options -->
-            </select>
-        </form>
-    </div>
-</div>
+    <header class="main-header" role="banner">
+        <div class="container">
+            <div class="header-container">
+                <div class="header-left">
+                    <a href="/" class="brand-logo">
+                        <img src="/assets/images/logos/logo.gif" alt="Renal Tales Logo" class="logo" role="img" onerror="this.style.display='none'">
+                    </a>
+                </div>
+                <div class="header-center">
+                    <h1 class="site-title">Renal Tales</h1>
+                    <p class="site-tagline">Supporting Kidney Health Stories</p>
+                </div>
+                <div class="header-right">
+                    <div class="language-selector">
+                        <div class="language-switcher">
+                            <form class="language-form" method="get" action="">
+                                <label for="lang-select" class="language-label">Jazyk:</label>
+                                <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
+                                    <option value="sk" selected>Slovenčina</option>
+                                    <option value="en">English</option>
+                                    <option value="cs">Čeština</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="fr">Français</option>
+                                    <option value="es">Español</option>
+                                    <option value="it">Italiano</option>
+                                    <option value="ru">Русский</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </div>
+        </div>
     </header>
 
-    <!-- Hero/Welcome Section -->
+    <!-- Navigation -->
+    <nav class="main-navigation" role="navigation">
+        <div class="container">
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link active">Domov</a></li>
+                <li class="nav-item"><a href="/stories" class="nav-link">Príbehy</a></li>
+                <li class="nav-item"><a href="/community" class="nav-link">Komunita</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">O nás</a></li>
+                <li class="nav-item nav-actions">
+                    <a href="/login" class="nav-link btn btn-outline">Prihlásenie</a>
+                    <a href="/register" class="nav-link btn btn-primary">Registrácia</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-content">
-            <h2 class="hero-title">Welcome to RenalTales!</h2>
-            <p class="hero-intro">Welcome to our supportive community for people affected by kidney disorders.</p>
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Vitajte v Renal Tales!</h2>
+                <p class="hero-subtitle">Podporná komunita pre ľudí postihnutých poruchami obličiek</p>
+                <p class="hero-description">Zdieľajte svoje príbehy, nájdite podporu a spojte sa s ostatnými na podobných cestách.</p>
+                <div class="hero-actions">
+                    <a href="/stories/create" class="btn btn-primary btn-large">Zdieľať príbeh</a>
+                    <a href="/stories" class="btn btn-secondary btn-large">Čítať príbehy</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Main Content Area -->
-    <main class="main-container">
-        <div class="main-content-container">
-            <div class="content-body">
-                <section class="home-section">
-                    <div class="home-intro">
-                        <p>Táto webová aplikácia je navrhnutá na uľahčenie zdieľania osobných príbehov a rozprávok medzi jednotlivcami s poruchami obličiek, vrátane tých, ktorí podstupujú dialýzu, tých v pred- alebo po-dialyzačnom štádiu a jednotlivcov žijúcich bez obmedzení dialýzy. Táto platforma si kladie za cieľ podporiť komunitu, ktorá umožňuje používateľom spojiť sa, zdieľať skúsenosti a poskytovať poznatky, ktoré môžu pomôcť ostatným navigovať ich cesty so zdravím obličiek.</p>
-                    </div>
-
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h3>Zdieľajte svoj príbeh</h3>
-                            <p>Vaša skúsenosť je dôležitá. Zdieľajte svoju cestu, aby ste inšpirovali a podporili ostatných.</p>
-                            <a href="/stories/create" class="btn btn-primary">Začať zdieľať</a>
-                        </div>
-
-                        <div class="feature-card">
-                            <h3>Čítať príbehy</h3>
-                            <p>Nájdite inšpiráciu a útěchu v skúsenostiach ostatných v našej komunite.</p>
-                            <a href="/stories" class="btn btn-secondary">Prehliadať príbehy</a>
-                        </div>
-
-                        <div class="feature-card">
-                            <h3>Pripojte sa ku komunite</h3>
-                            <p>Spojte sa s ostatnými, zapojte sa do diskusií a budujte trvalé priateľstvá.</p>
-                            <a href="/community" class="btn btn-primary">Preskúmať komunitu</a>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-
-        <aside class="main-menu-container">
-            <div class="main-menu">
-                <h3>Hlavné menu</h3>
-                <ul>
-                    <li><a href="/" class="menu-item">Home</a></li>
-                    <li><a href="/stories" class="menu-item">Stories</a></li>
-                    <li><a href="/community" class="menu-item">Community</a></li>
-                    <li><a href="/about" class="menu-item">About</a></li>
-                    <li class="menu-separator"></li>
-                    <li><a href="/login" class="menu-item login-item">Login</a></li>
-                    <li><a href="/register" class="menu-item register-item">Register</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <aside class="main-notes-container">
-            <div class="content-notes">
-                <h3>Dôležité poznámky</h3>
-                <div class="note-section">
-                    <h4>O ľadvinových príbehoch</h4>
-                    <p>Ľadvinové príbehy je podporná komunitná platforma, kde ľudia s poruchami obličiek môžu zdieľať svoje skúsenosti, nájsť podporu a spojiť sa s ostatnými na podobných cestách.</p>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Features Section -->
+            <section class="features-section">
+                <div class="section-header">
+                    <h2>Ako vám môžeme pomôcť</h2>
+                    <p>Naša platforma ponúka rôzne spôsoby, ako sa spojiť s komunitou a nájsť podporu.</p>
                 </div>
-                <div class="note-section">
-                    <h4>Pravidlá komunity</h4>
-                    <ul>
-                        <li>Buďte úctiví a podporní ku všetkým členom komunity</li>
-                        <li>Rešpektujte súkromie a dôvernosť</li>
-                        <li>Zdieľajte skúsenosti, nie lekárske rady</li>
-                        <li>Udržujte obsah vhodný a relevantný</li>
-                    </ul>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>Zdieľajte svoj príbeh</h3>
+                        <p>Vaša skúsenosť je cenná. Zdieľajte svoju cestu, aby ste inšpirovali a podporili ostatných v našej komunite.</p>
+                        <a href="/stories/create" class="btn btn-outline">Začať písať</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                        </div>
+                        <h3>Čítajte príbehy</h3>
+                        <p>Nájdite inšpiráciu a útěchu v skúsenostiach ostatných členov našej komunity.</p>
+                        <a href="/stories" class="btn btn-outline">Prehliadať príbehy</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3>Pripojte sa ku komunite</h3>
+                        <p>Spojte sa s ostatnými, zapojte sa do diskusií a budujte trvalé priateľstvá.</p>
+                        <a href="/community" class="btn btn-outline">Preskúmať komunitu</a>
+                    </div>
                 </div>
-                <div class="note-section">
-                    <h4>Podporné zdroje</h4>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>O Renal Tales</h2>
+                        <p>Renal Tales je podporná komunitná platforma navrhnutá špeciálne pre ľudí postihnutých poruchami obličiek. Bez ohľadu na to, či podstupujete dialýzu, ste v pred- alebo po-dialyzačnom štádiu, alebo žijete bez obmedzení dialýzy - toto je vaše miesto.</p>
+                        <p>Naša platforma umožňuje používateľom spojiť sa, zdieľať skúsenosti a poskytovať poznatky, ktoré môžu pomôcť ostatným navigovať ich cesty so zdravím obličiek.</p>
+                        <a href="/about" class="btn btn-secondary">Dozvedieť sa viac</a>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Zdieľaných príbehov</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1,200+</div>
+                            <div class="stat-label">Členov komunity</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Krajín</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Guidelines -->
+            <section class="guidelines-section">
+                <div class="guidelines-content">
+                    <h2>Pravidlá komunity</h2>
+                    <div class="guidelines-grid">
+                        <div class="guideline-item">
+                            <div class="guideline-icon">🤝</div>
+                            <h3>Buďte úctiví</h3>
+                            <p>Rešpektujte všetkých členov komunity a ich skúsenosti</p>
+                        </div>
+                        <div class="guideline-item">
+                            <div class="guideline-icon">🔒</div>
+                            <h3>Ochrana súkromia</h3>
+                            <p>Rešpektujte súkromie a dôvernosť ostatných</p>
+                        </div>
+                        <div class="guideline-item">
+                            <div class="guideline-icon">💬</div>
+                            <h3>Zdieľajte skúsenosti</h3>
+                            <p>Zdieľajte osobné skúsenosti, nie lekárske rady</p>
+                        </div>
+                        <div class="guideline-item">
+                            <div class="guideline-icon">✅</div>
+                            <h3>Relevantný obsah</h3>
+                            <p>Udržujte obsah vhodný a relevantný k téme</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section class="support-section">
+                <div class="support-content">
+                    <h2>Potrebujete pomoc?</h2>
                     <p>Ak potrebujete okamžitú lekársku pomoc alebo ste v kríze, kontaktujte svojho poskytovateľa zdravotnej starostlivosti alebo pohotovostné služby.</p>
+                    <div class="support-actions">
+                        <a href="/help" class="btn btn-outline">Centrum pomoci</a>
+                        <a href="/contact" class="btn btn-outline">Kontaktovať nás</a>
+                    </div>
                 </div>
-            </div>
-        </aside>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -159,41 +238,72 @@
     </footer>
 
     <script>
-        // Mobile navigation toggle
+        // Modern navigation toggle
         document.addEventListener('DOMContentLoaded', function() {
-            const navbarToggler = document.querySelector('.navbar-toggler');
-            const navbarCollapse = document.querySelector('.navbar-collapse');
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-            if (navbarToggler && navbarCollapse) {
-                navbarToggler.addEventListener('click', function() {
-                    const isExpanded = navbarCollapse.classList.contains('show');
-
+            // Toggle mobile menu
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    const isExpanded = navMenu.classList.contains('active');
+                    
                     if (isExpanded) {
-                        navbarCollapse.classList.remove('show');
-                        navbarToggler.setAttribute('aria-expanded', 'false');
+                        navMenu.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navToggle.classList.remove('active');
                     } else {
-                        navbarCollapse.classList.add('show');
-                        navbarToggler.setAttribute('aria-expanded', 'true');
+                        navMenu.classList.add('active');
+                        navToggle.setAttribute('aria-expanded', 'true');
+                        navToggle.classList.add('active');
                     }
                 });
 
                 // Close mobile menu when clicking on a link
-                const navLinks = navbarCollapse.querySelectorAll('.nav-link');
                 navLinks.forEach(function(link) {
                     link.addEventListener('click', function() {
-                        navbarCollapse.classList.remove('show');
-                        navbarToggler.setAttribute('aria-expanded', 'false');
+                        navMenu.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navToggle.classList.remove('active');
                     });
                 });
 
                 // Close mobile menu when clicking outside
                 document.addEventListener('click', function(e) {
-                    if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
-                        navbarCollapse.classList.remove('show');
-                        navbarToggler.setAttribute('aria-expanded', 'false');
+                    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                        navMenu.classList.remove('active');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                        navToggle.classList.remove('active');
                     }
                 });
             }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add loading animation to forms
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function() {
+                    const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Loading...';
+                    }
+                });
+            });
         });
     </script>
 </body>

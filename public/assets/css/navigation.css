@@ -301,14 +301,13 @@
  * ======================================== */
 
 .language-selector {
-  display: table;
+  display: inline-block;
   margin: 0 0 0 auto;
-  border: 2px solid var(--border-color, #e0e0e0);
+  border: 1px solid var(--border-color, #e0e0e0);
   background-color: var(--background-color, #ffffff);
-  border-radius: 0.75rem;
-  padding: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -643,7 +642,7 @@
 /* Mobile Navigation Adjustments */
 @media (max-width: 768px) {
   .language-selector {
-    padding: 0.5rem;
+    padding: 0.4rem;
   }
   
   .language-switcher {
@@ -687,7 +686,7 @@
 /* Extra small screens for navigation */
 @media (max-width: 480px) {
   .language-selector {
-    padding: 0.4rem;
+    padding: 0.3rem;
   }
   
   .language-switcher {

@@ -2,7 +2,7 @@
 .language-selector {
     position: relative;
     display: inline-block;
-    margin: auto 0 0 auto;
+    margin: 0 0 0 auto;
 }
 
 .language-switcher {
