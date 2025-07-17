@@ -1,9 +1,29 @@
-/* Basic Responsive Design CSS styles for Renal Tales web application */
+/*!*
+ * BASIC.CSS - Foundation Styles for Renal Tales
+ * ==============================================
+ * 
+ * Core CSS reset, variables, root styles, and typography basics
+ * 
+ * Table of Contents:
+ * 1. CSS Reset
+ * 2. CSS Variables
+ * 3. Root Styles
+ * 4. Typography Basics
+ * 5. Base Element Styles
+ * 6. Responsive Typography
+ * 7. Accessibility
+ * 
+ * @author Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin
+ * @version 1.0.0
+ * @since 2024
+ */
 
-/* File: public/assets/css/basic.css */
-
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+/* Google Fonts should be loaded via HTML <link> tags for better performance */
+/* Add this to your HTML head:
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+*/
 
 /* Global Variables */
 :root {
@@ -32,9 +52,8 @@
   --gray-dark: #808080; /* Dark Gray */
   --gray-darker: #505050; /* Darker Gray */
   --gray-darkest: #303030; /* Darkest Gray */
-  --gray-lightest: #f9f9f9; /* Lightest Gray */
-  --gray-lighter: #e0e0e0; /* Lighter Gray */
   --gray-lightest: #f5f5f5; /* Lightest Gray */
+  --gray-lighter: #e0e0e0; /* Lighter Gray */
   --body-bg: #f0f4f8; /* Pastel Background */
   --background-color: snow; /* Light Background Color */
   --text-color: #333333; /* Darker Gray for better contrast */

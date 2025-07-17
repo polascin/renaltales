@@ -1,0 +1,102 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.wordWrap": "on",
+  "editor.rulers": [
+    120
+  ],
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.eol": "\n",
+  "files.associations": {
+    "*.php": "php"
+  },
+  "files.exclude": {
+    "**/vendor/**": true,
+    "**/storage/logs/**": true,
+    "**/storage/cache/**": true,
+    "**/storage/sessions/**": true,
+    "**/storage/temp/**": true,
+    "**/node_modules/**": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "search.exclude": {
+    "**/vendor/**": true,
+    "**/storage/logs/**": true,
+    "**/storage/cache/**": true,
+    "**/storage/sessions/**": true,
+    "**/storage/temp/**": true,
+    "**/node_modules/**": true,
+    "**/.git": true
+  },
+  "php.validate.enable": true,
+  "php.validate.executablePath": "C:\\laragon\\bin\\php\\php-8.4.10-nts-Win32-vs17-x64/php.exe",
+  "php.validate.run": "onSave",
+  "php.suggest.basic": true,
+  "php.format.enable": true,
+  "phpcs.enable": true,
+  "phpcs.standard": "PSR12",
+  "phpcs.executablePath": "vendor/bin/phpcs",
+  "phpcs.showWarnings": true,
+  "phpcs.showSources": true,
+  "phpcbf.enable": true,
+  "phpcbf.standard": "PSR12",
+  "phpcbf.executablePath": "vendor/bin/phpcbf",
+  "phpcbf.onsave": false,
+  "phpstan.enabled": true,
+  "phpstan.path": "vendor/bin/phpstan",
+  "phpstan.level": "7",
+  "phpstan.configFile": "phpstan.neon",
+  "intelephense.format.enable": true,
+  "intelephense.format.braces": "k&r",
+  "intelephense.diagnostics.enable": true,
+  "intelephense.diagnostics.run": "onSave",
+  "intelephense.diagnostics.embeddedLanguages": false,
+  "intelephense.diagnostics.undefinedVariables": true,
+  "intelephense.diagnostics.undefinedFunctions": true,
+  "intelephense.diagnostics.undefinedConstants": true,
+  "intelephense.diagnostics.undefinedClassConstants": true,
+  "intelephense.diagnostics.undefinedMethods": true,
+  "intelephense.diagnostics.undefinedProperties": true,
+  "intelephense.diagnostics.undefinedTypes": true,
+  "intelephense.diagnostics.duplicateSymbols": true,
+  "intelephense.diagnostics.argumentCount": true,
+  "intelephense.diagnostics.typeErrors": true,
+  "intelephense.diagnostics.deprecated": true,
+  "intelephense.diagnostics.languageConstraints": true,
+  "emmet.includeLanguages": {
+    "php": "html"
+  },
+  "git.ignoreLimitWarning": true,
+  "git.autoRepositoryDetection": true,
+  "extensions.recommendations": [
+    "bmewburn.vscode-intelephense-client",
+    "ikappas.phpcs",
+    "persoderlind.vscode-phpcbf",
+    "sanderronde.phpstan-vscode",
+    "ms-vscode.vscode-json",
+    "bradlc.vscode-tailwindcss",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "streetsidesoftware.code-spell-checker",
+    "gruntfuggly.todo-tree",
+    "eamodio.gitlens"
+  ],
+  "codeium.enableConfig": {
+    "*": true
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.tree.indent": 32,
+  "editor.wrappingStrategy": "advanced"
+}

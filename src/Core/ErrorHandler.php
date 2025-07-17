@@ -271,11 +271,8 @@ class ErrorHandler
 <html>
 <head>
     <title>{$title}</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; }
-        .debug { background: #f4f4f4; padding: 10px; margin-top: 10px; }
-    </style>
+    <link rel="stylesheet" href="/assets/css/basic.css">
+    <link rel="stylesheet" href="/assets/css/error.css">
 </head>
 <body>
     <h1>{$title}</h1>

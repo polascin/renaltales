@@ -85,7 +85,7 @@
 .main-header-container .right-section {
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 0;;
+  flex-basis: 0;
 }
 .main-header-container img.logo {
   float: left;
@@ -192,9 +192,10 @@
 }
 
 /* Enhanced Language Selector Styles */
+/* NOTE: Using table display for legacy compatibility and auto-margin for right alignment */
 .language-selector {
   display: table;
-  margin: 0 0 0 auto;
+  margin: 0 0 0 auto; /* HACK: Auto left margin for right alignment */
   border: thin solid transparent;
   background-color: var(--content-bg, #ffffff);
   border-radius: 0.5rem;
@@ -350,7 +351,7 @@
   height: auto;
   background-size: cover;
   background-position: center;
-  margin: 0;;
+  margin: 0;
 }
 .flags-language-welcome-message {
   display: flex;
@@ -616,12 +617,14 @@
 }
 
 /* Responsive adjustments */
+/* TABLET LAYOUT: Reduce sidebar widths for better balance */
 @media (max-width: 1024px) {
   .main-container {
     grid-template-columns: 200px 1fr 250px;
   }
 }
 
+/* MOBILE LAYOUT: Stack elements vertically for better usability */
 @media (max-width: 768px) {    
   .language-selector form {
     padding: 0.25rem;
@@ -634,13 +637,14 @@
   }
   
   .user-info {
-    text-align: center;
+    text-align: center; /* Center align for mobile */
   }
   
   .main-header-container .right-section {
-    margin-top: 1rem;
+    margin-top: 1rem; /* Add spacing for stacked layout */
   }
   
+  /* MOBILE GRID STACK: Transform 3-column layout to single column */
   .main-container {
     grid-template-columns: 1fr;
     grid-template-areas: 
@@ -650,6 +654,7 @@
     gap: 1rem;
   }
   
+  /* MOBILE ORDERING: Prioritize content, then menu, then notes */
   .main-menu {
     order: 2;
   }
@@ -663,7 +668,7 @@
   }
   
   .feature-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for mobile */
   }
 }
 

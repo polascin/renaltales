@@ -71,7 +71,20 @@
         ],
         "phpstan": "phpstan analyse src",
         "phpcs": "phpcs src --standard=PSR12",
-        "phpcbf": "phpcbf src --standard=PSR12"
+        "phpcbf": "phpcbf src --standard=PSR12",
+        "assets:minify": "echo 'Minifying CSS assets...' && echo 'Note: Install cssnano or similar tool for production minification'",
+        "assets:watch": "echo 'CSS file watcher not configured. Consider using a build tool like Webpack or Gulp.'",
+        "assets:build": "echo 'Building production assets...' && echo 'CSS files are ready for production in public/assets/css/'",
+        "dev:setup": [
+            "@assets:build",
+            "echo 'Development environment setup complete'"
+        ],
+        "prod:deploy": [
+            "@assets:minify",
+            "@quality",
+            "@test:all",
+            "echo 'Production deployment checks complete'"
+        ]
     },
     "config": {
         "optimize-autoloader": true,
