@@ -1,0 +1,37 @@
+/* Footnotes styling */
+.footnotes {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.9rem;
+}
+
+.footnotes h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.footnotes ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footnotes li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.footnotes li:before {
+    content: counter(footnote-counter);
+    counter-increment: footnote-counter;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    color: #666;
+}
+
+.footnotes {
+    counter-reset: footnote-counter;
+}
