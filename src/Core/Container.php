@@ -37,7 +37,7 @@ class Container
     private array $singletons = [];
 
     /**
-     * @var array<string, callable> Factory functions
+     * @var array<string, callable(Container, array): mixed> Factory functions
      */
     private array $factories = [];
 
@@ -45,14 +45,14 @@ class Container
      * Bind a service to the container
      *
      * @param string $abstract The service identifier
-     * @param string|callable|null $concrete The concrete implementation
+     * @param string|callable(Container, array): mixed|null $concrete The concrete implementation
      * @param bool $singleton Whether the service should be a singleton
      * @return void
      */
-    public function bind(string $abstract, $concrete = null, bool $singleton = false): void
+    public function bind(string $abstract, string|callable|null $concrete = null, bool $singleton = false): void
     {
         $this->bindings[$abstract] = $concrete ?? $abstract;
-        
+
         if ($singleton) {
             $this->singletons[$abstract] = true;
         }
@@ -62,10 +62,10 @@ class Container
      * Register a singleton service
      *
      * @param string $abstract The service identifier
-     * @param string|callable|null $concrete The concrete implementation
+     * @param string|callable(Container, array): mixed|null $concrete The concrete implementation
      * @return void
      */
-    public function singleton(string $abstract, $concrete = null): void
+    public function singleton(string $abstract, string|callable|null $concrete = null): void
     {
         $this->bind($abstract, $concrete, true);
     }
@@ -74,7 +74,7 @@ class Container
      * Register a factory for creating instances
      *
      * @param string $abstract The service identifier
-     * @param callable $factory The factory function
+     * @param callable(Container, array): mixed $factory The factory function
      * @return void
      */
     public function factory(string $abstract, callable $factory): void
@@ -103,7 +103,7 @@ class Container
      * @return mixed The resolved service
      * @throws Exception When the service cannot be resolved
      */
-    public function resolve(string $abstract, array $parameters = [])
+    public function resolve(string $abstract, array $parameters = []): mixed
     {
         // Return existing singleton instance
         if (isset($this->instances[$abstract])) {
@@ -113,11 +113,11 @@ class Container
         // Use factory if available
         if (isset($this->factories[$abstract])) {
             $instance = $this->factories[$abstract]($this, $parameters);
-            
+
             if ($this->isSingleton($abstract)) {
                 $this->instances[$abstract] = $instance;
             }
-            
+
             return $instance;
         }
 
@@ -202,7 +202,7 @@ class Container
      * @return mixed The resolved dependency
      * @throws Exception When the dependency cannot be resolved
      */
-    protected function resolveDependency(ReflectionParameter $parameter, array $primitives = [])
+    protected function resolveDependency(ReflectionParameter $parameter, array $primitives = []): mixed
     {
         $name = $parameter->getName();
 
@@ -236,12 +236,12 @@ class Container
                     }
                 }
             }
-            
+
             // If no class type could be resolved, check for default value
             if ($parameter->isDefaultValueAvailable()) {
                 return $parameter->getDefaultValue();
             }
-            
+
             throw new Exception("Cannot resolve union type for parameter '{$name}'");
         }
 
@@ -308,7 +308,7 @@ class Container
      * @param array<string, mixed> $parameters Constructor parameters
      * @return mixed The resolved service
      */
-    public function make(string $abstract, array $parameters = [])
+    public function make(string $abstract, array $parameters = []): mixed
     {
         return $this->resolve($abstract, $parameters);
     }
@@ -319,7 +319,7 @@ class Container
      * @param string $abstract The service identifier
      * @return mixed|null The service instance or null
      */
-    public function get(string $abstract)
+    public function get(string $abstract): mixed
     {
         try {
             return $this->resolve($abstract);

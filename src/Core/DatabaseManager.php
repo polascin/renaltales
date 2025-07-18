@@ -205,7 +205,7 @@ class DatabaseManager
     private function setupDatabaseLogging(\Doctrine\ORM\Configuration $config): void
     {
         if ($this->logger) {
-            $sqlLogger = new class($this->logger) implements \Doctrine\DBAL\Logging\SQLLogger {
+            $sqlLogger = new class ($this->logger) implements \Doctrine\DBAL\Logging\SQLLogger {
                 private Logger $logger;
 
                 public function __construct(Logger $logger)
@@ -270,10 +270,10 @@ class DatabaseManager
         }
 
         $migrationConfig = $this->config['migrations'] ?? [];
-        
+
         // Create migration configuration
         $configuration = new PhpFile((defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/config/migrations.php');
-        
+
         // Create dependency factory
         return DependencyFactory::fromEntityManager(
             $configuration,

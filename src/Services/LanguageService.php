@@ -85,7 +85,7 @@ class LanguageService
         }
 
         $result = $this->languageModel->setLanguage($language);
-        
+
         if ($result) {
             // Store in session for persistence
             $this->sessionManager->set('language', $language);

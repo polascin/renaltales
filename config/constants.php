@@ -16,10 +16,13 @@ declare(strict_types=1);
 
 // File: config/constants.php
 
+// Directory separator constant for cross-platform compatibility
+define('DS', DIRECTORY_SEPARATOR);
+
 // Define application constants
 // Name, version, and default language of the application; change as needed
 define('APP_NAME', 'RenalTales');
-define('APP_VERSION', '2025.3.1.dev');
+define('APP_VERSION', '1.0.0');
 define('DEFAULT_LANGUAGE', 'sk');
 // Base URL of the application; change as needed; https://ladvina.eu/ in production
 define('APP_URL', 'https://renaltales.test/');
@@ -34,17 +37,17 @@ define('APP_ENV', 'development');
 // Debug mode; set to true for development, false for production
 define('APP_DEBUG', true);
 // Directory where the application is located
-define('APP_DIR', dirname(__DIR__));
+define('APP_DIR', APP_ROOT . DS . 'src');
 // Define paths for assets and logs
-define('LOGS_DIR', APP_DIR . DS . 'logs');
+define('LOGS_DIR', APP_ROOT . DS . 'logs');
 // Define paths for configuration and resources
-define('CONFIG_DIR', APP_DIR . DS . 'config');
-define('RESOURCES_DIR', APP_DIR . DS . 'resources');
+define('CONFIG_DIR', APP_ROOT . DS . 'config');
+define('RESOURCES_DIR', APP_ROOT . DS . 'resources');
 // Define paths for language files
 define('LANG_DIR', RESOURCES_DIR . DS . 'lang');
 define('LANGUAGE_PATH', RESOURCES_DIR . DS . 'lang');
 // Directory where the public files are located
-define('PUBLIC_DIR', __DIR__);
+define('PUBLIC_DIR', APP_ROOT . DS . 'public');
 // Define paths for public assets
 define('ASSETS_DIR', PUBLIC_DIR . DS . 'assets');
 // Define paths for public images
@@ -66,13 +69,13 @@ define('SCRIPTS_DIR', ASSETS_DIR . DS . 'js');
 // Define paths for public fonts
 define('FONTS_DIR', ASSETS_DIR . DS . 'fonts');
 // Define paths for segments of HTML code
-define('SEGMENTS_DIR', APP_DIR . DS . 'resources' . DS . 'segments');
+define('SEGMENTS_DIR', APP_ROOT . DS . 'resources' . DS . 'segments');
 // Define paths for public uploads
-define('UPLOADS_DIR', APP_DIR . DS . 'storage' . DS . 'uploads');
+define('UPLOADS_DIR', APP_ROOT . DS . 'storage' . DS . 'uploads');
 // Define paths for application source directories
-define('CORE_DIR', APP_DIR . DS . 'src' . DS . 'Core');
-define('CONTROLLERS_DIR', APP_DIR . DS . 'src' . DS . 'Controllers');
-define('MODELS_DIR', APP_DIR . DS . 'src' . DS . 'Models');
-define('VIEWS_DIR', APP_DIR . DS . 'src' . DS . 'Views');
+define('CORE_DIR', APP_DIR . DS . 'Core');
+define('CONTROLLERS_DIR', APP_DIR . DS . 'Controllers');
+define('MODELS_DIR', APP_DIR . DS . 'Models');
+define('VIEWS_DIR', APP_DIR . DS . 'Views');
 
 // End of file

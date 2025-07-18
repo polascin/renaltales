@@ -740,7 +740,7 @@ class SecurityManager
     public function validateOrigin(array $allowedOrigins = []): bool
     {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? '';
-        
+
         if (empty($origin)) {
             return false;
         }

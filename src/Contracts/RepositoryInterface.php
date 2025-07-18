@@ -22,12 +22,12 @@ interface RepositoryInterface
      * @param mixed $id The identifier
      * @return mixed|null The entity or null if not found
      */
-    public function find($id);
+    public function find($id): mixed;
 
     /**
      * Find all entities
      *
-     * @return array<mixed> Array of entities
+     * @return array<mixed> Array of all entities
      */
     public function findAll(): array;
 
@@ -48,7 +48,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $criteria Search criteria
      * @return mixed|null The entity or null if not found
      */
-    public function findOneBy(array $criteria);
+    public function findOneBy(array $criteria): mixed;
 
     /**
      * Create a new entity
@@ -56,7 +56,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $data Entity data
      * @return mixed The created entity
      */
-    public function create(array $data);
+    public function create(array $data): mixed;
 
     /**
      * Update an existing entity
@@ -65,7 +65,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $data Updated data
      * @return mixed The updated entity
      */
-    public function update($id, array $data);
+    public function update($id, array $data): mixed;
 
     /**
      * Delete an entity

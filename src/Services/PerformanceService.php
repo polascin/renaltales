@@ -111,7 +111,7 @@ class PerformanceService
     public function recordMetric(string $name, float $value): void
     {
         $this->metrics[$name] = $value;
-        
+
         // Cache metric for persistence
         $this->cache->set("metric_{$name}", $value, 3600);
     }
@@ -129,7 +129,7 @@ class PerformanceService
         }
 
         $this->hitCounters[$name]++;
-        
+
         // Update cached counter
         $this->cache->increment("counter_{$name}");
 
@@ -191,7 +191,7 @@ class PerformanceService
         // Check if query can be cached
         if ($this->isQueryCacheable($query)) {
             $cacheKey = 'query_' . md5($query . serialize($params));
-            
+
             $cached = $this->cache->get($cacheKey);
             if ($cached !== null) {
                 $this->incrementHitCounter('cache_hits');
@@ -206,13 +206,13 @@ class PerformanceService
                 ->then(function ($result) use ($query, $params) {
                     $this->stopTimer('query_execution');
                     $this->incrementHitCounter('database_queries');
-                    
+
                     // Cache result if query is cacheable
                     if ($this->isQueryCacheable($query)) {
                         $cacheKey = 'query_' . md5($query . serialize($params));
                         $this->cache->set($cacheKey, $result, 1800); // Cache for 30 minutes
                     }
-                    
+
                     return $result;
                 });
         }
@@ -220,7 +220,7 @@ class PerformanceService
         // Synchronous fallback
         $this->stopTimer('query_execution');
         $this->incrementHitCounter('database_queries');
-        
+
         // In a real implementation, this would execute the query
         // For now, we'll return a placeholder
         return [];
@@ -274,11 +274,11 @@ class PerformanceService
             $hits = $stats['redis_info']['keyspace_hits'];
             $misses = $stats['redis_info']['keyspace_misses'];
             $total = $hits + $misses;
-            
+
             if ($total > 0) {
                 $hitRatio = $hits / $total;
                 $optimizations['hit_ratio'] = $hitRatio;
-                
+
                 if ($hitRatio < 0.8) {
                     $optimizations['recommendations'][] = 'Consider increasing cache TTL or warming up cache';
                 }
@@ -289,11 +289,11 @@ class PerformanceService
         if (isset($stats['redis_info']['used_memory'], $stats['redis_info']['maxmemory'])) {
             $used = $stats['redis_info']['used_memory'];
             $max = $stats['redis_info']['maxmemory'];
-            
+
             if ($max > 0) {
                 $memoryUsage = $used / $max;
                 $optimizations['memory_usage'] = $memoryUsage;
-                
+
                 if ($memoryUsage > 0.8) {
                     $optimizations['recommendations'][] = 'Consider increasing Redis memory limit or implementing LRU eviction';
                 }
@@ -318,7 +318,7 @@ class PerformanceService
         // Check for slow responses
         if ($responseTime > 1.0) {
             $this->log("Slow response detected for {$endpoint}: {$responseTime}s", 'warning');
-            
+
             // Record slow response
             $this->incrementHitCounter("slow_responses_{$endpoint}");
         }
@@ -390,7 +390,7 @@ class PerformanceService
         $this->metrics = [];
         $this->hitCounters = [];
         $this->timers = [];
-        
+
         // Clear cached metrics
         $this->cache->deleteMultiple([
             'metric_cache_hits',
@@ -409,7 +409,7 @@ class PerformanceService
     private function isQueryCacheable(string $query): bool
     {
         $query = strtolower(trim($query));
-        
+
         // Only cache SELECT queries
         if (strpos($query, 'select') !== 0) {
             return false;
@@ -437,13 +437,13 @@ class PerformanceService
     {
         $avgKey = "avg_response_time_{$endpoint}";
         $countKey = "response_count_{$endpoint}";
-        
+
         $currentAvg = $this->cache->get($avgKey) ?? 0.0;
         $currentCount = $this->cache->get($countKey) ?? 0;
-        
+
         $newCount = $currentCount + 1;
         $newAvg = (($currentAvg * $currentCount) + $responseTime) / $newCount;
-        
+
         $this->cache->set($avgKey, $newAvg, 3600);
         $this->cache->set($countKey, $newCount, 3600);
     }

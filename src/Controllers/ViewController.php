@@ -38,7 +38,7 @@ class ViewController implements ViewInterface
     ) {
         $this->languageService = $languageService;
         $this->requestedPage = $requestedPage;
-        
+
         // Initialize the view
         $this->initializeView();
     }

@@ -74,17 +74,17 @@ class CachedLanguageRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function find($id): mixed
     {
         $cacheKey = self::CACHE_PREFIX . $id;
-        
+
         $cached = $this->cache->get($cacheKey);
         if ($cached !== null) {
             return $cached;
         }
 
         $result = $this->repository->find($id);
-        
+
         if ($result !== null) {
             $this->cache->set($cacheKey, $result, $this->defaultTtl);
         }
@@ -119,7 +119,7 @@ class CachedLanguageRepository implements RepositoryInterface
 
         $cacheKey = self::CACHE_ALL_LANGUAGES;
         $cached = $this->cache->get($cacheKey);
-        
+
         if ($cached !== null) {
             return \React\Promise\resolve($cached);
         }
@@ -137,7 +137,7 @@ class CachedLanguageRepository implements RepositoryInterface
     public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
     {
         $cacheKey = $this->buildCacheKey('findBy', $criteria, $orderBy, $limit, $offset);
-        
+
         return $this->cache->remember(
             $cacheKey,
             function () use ($criteria, $orderBy, $limit, $offset) {
@@ -150,10 +150,10 @@ class CachedLanguageRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findOneBy(array $criteria)
+    public function findOneBy(array $criteria): mixed
     {
         $cacheKey = $this->buildCacheKey('findOneBy', $criteria);
-        
+
         return $this->cache->remember(
             $cacheKey,
             function () use ($criteria) {
@@ -166,10 +166,10 @@ class CachedLanguageRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $data)
+    public function create(array $data): mixed
     {
         $result = $this->repository->create($data);
-        
+
         if ($result) {
             $this->invalidateCache();
         }
@@ -180,10 +180,10 @@ class CachedLanguageRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function update($id, array $data)
+    public function update($id, array $data): mixed
     {
         $result = $this->repository->update($id, $data);
-        
+
         if ($result) {
             $this->invalidateCache();
         }
@@ -197,7 +197,7 @@ class CachedLanguageRepository implements RepositoryInterface
     public function delete($id): bool
     {
         $result = $this->repository->delete($id);
-        
+
         if ($result) {
             $this->invalidateCache();
         }
@@ -221,7 +221,7 @@ class CachedLanguageRepository implements RepositoryInterface
         }
 
         $cacheKey = $this->buildCacheKey('count', $criteria);
-        
+
         return $this->cache->remember(
             $cacheKey,
             function () use ($criteria) {
@@ -237,7 +237,7 @@ class CachedLanguageRepository implements RepositoryInterface
     public function exists($id): bool
     {
         $cacheKey = self::CACHE_LANGUAGE_EXISTS . $id;
-        
+
         return $this->cache->remember(
             $cacheKey,
             function () use ($id) {
@@ -261,7 +261,7 @@ class CachedLanguageRepository implements RepositoryInterface
 
         $cacheKey = self::CACHE_LANGUAGE_EXISTS . $id;
         $cached = $this->cache->get($cacheKey);
-        
+
         if ($cached !== null) {
             return \React\Promise\resolve($cached);
         }
@@ -285,13 +285,13 @@ class CachedLanguageRepository implements RepositoryInterface
             function () {
                 $languages = $this->findAll();
                 $names = [];
-                
+
                 foreach ($languages as $language) {
                     // This would typically call a method to get native name
                     // For now, we'll use a placeholder
                     $names[$language] = $this->getLanguageNativeName($language);
                 }
-                
+
                 return $names;
             },
             86400 // Cache for 24 hours
@@ -307,7 +307,7 @@ class CachedLanguageRepository implements RepositoryInterface
     public function getTranslations(string $language): array
     {
         $cacheKey = self::CACHE_TRANSLATIONS . $language;
-        
+
         return $this->cache->remember(
             $cacheKey,
             function () use ($language) {
@@ -331,7 +331,7 @@ class CachedLanguageRepository implements RepositoryInterface
 
         $cacheKey = self::CACHE_TRANSLATIONS . $language;
         $cached = $this->cache->get($cacheKey);
-        
+
         if ($cached !== null) {
             return \React\Promise\resolve($cached);
         }
@@ -367,13 +367,13 @@ class CachedLanguageRepository implements RepositoryInterface
                 // Preload translations for common languages
                 $commonLanguages = ['en', 'es', 'fr', 'de', 'it'];
                 $translationPromises = [];
-                
+
                 foreach ($commonLanguages as $language) {
                     if ($this->exists($language)) {
                         $translationPromises[] = $this->getTranslationsAsync($language);
                     }
                 }
-                
+
                 return \React\Promise\all($translationPromises);
             });
     }
@@ -388,31 +388,31 @@ class CachedLanguageRepository implements RepositoryInterface
     {
         $result = [];
         $uncachedCodes = [];
-        
+
         // Check cache first
         foreach ($languageCodes as $code) {
             $cacheKey = self::CACHE_LANGUAGE_EXISTS . $code;
             $cached = $this->cache->get($cacheKey);
-            
+
             if ($cached !== null) {
                 $result[$code] = $cached;
             } else {
                 $uncachedCodes[] = $code;
             }
         }
-        
+
         // Load uncached data
         if (!empty($uncachedCodes)) {
             foreach ($uncachedCodes as $code) {
                 $exists = $this->repository->exists($code);
                 $result[$code] = $exists;
-                
+
                 // Cache the result
                 $cacheKey = self::CACHE_LANGUAGE_EXISTS . $code;
                 $this->cache->set($cacheKey, $exists, $this->defaultTtl);
             }
         }
-        
+
         return $result;
     }
 
@@ -435,7 +435,7 @@ class CachedLanguageRepository implements RepositoryInterface
                     $cacheKey = self::CACHE_LANGUAGE_EXISTS . $code;
                     $this->cache->set($cacheKey, $exists, $this->defaultTtl);
                 }
-                
+
                 return $result;
             });
     }
@@ -467,7 +467,7 @@ class CachedLanguageRepository implements RepositoryInterface
         $this->findAll();
         $this->getLanguageNames();
         $this->count();
-        
+
         // Preload translations for common languages
         $commonLanguages = ['en', 'es', 'fr', 'de'];
         foreach ($commonLanguages as $language) {
@@ -524,7 +524,7 @@ class CachedLanguageRepository implements RepositoryInterface
     private function buildCacheKey(string $method, ...$params): string
     {
         $keyParts = [$method];
-        
+
         foreach ($params as $param) {
             if (is_array($param)) {
                 $keyParts[] = md5(serialize($param));
@@ -532,7 +532,7 @@ class CachedLanguageRepository implements RepositoryInterface
                 $keyParts[] = (string) $param;
             }
         }
-        
+
         return implode('_', $keyParts);
     }
 
@@ -568,12 +568,12 @@ class CachedLanguageRepository implements RepositoryInterface
     private function loadTranslationsFromFile(string $language): array
     {
         $filePath = APP_ROOT . "/resources/lang/{$language}.php";
-        
+
         if (file_exists($filePath)) {
             $translations = include $filePath;
             return is_array($translations) ? $translations : [];
         }
-        
+
         return [];
     }
 

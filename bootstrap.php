@@ -11,10 +11,7 @@
 
 // File: /bootstrap.php
 
-// Load classes using Composer autoloader
-require_once APP_ROOT . '/vendor/autoload.php';
-
-// Load environment variables
+// Load environment variables (autoloader already loaded in index.php)
 $envFile = APP_ROOT . DS . '.env';
 
 if (file_exists($envFile)) {

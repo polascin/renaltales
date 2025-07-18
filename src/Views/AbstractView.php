@@ -202,11 +202,11 @@ abstract class AbstractView implements ViewInterface
     protected function route(string $path, array $params = []): string
     {
         $url = '/' . ltrim($path, '/');
-        
+
         if (!empty($params)) {
             $url .= '?' . http_build_query($params);
         }
-        
+
         return $url;
     }
 
@@ -236,7 +236,7 @@ abstract class AbstractView implements ViewInterface
         if ($date instanceof \DateTime) {
             return $date->format($format);
         }
-        
+
         if (is_string($date)) {
             try {
                 $dateTime = new \DateTime($date);
@@ -245,7 +245,7 @@ abstract class AbstractView implements ViewInterface
                 return $date;
             }
         }
-        
+
         return '';
     }
 
@@ -259,14 +259,14 @@ abstract class AbstractView implements ViewInterface
         if ($this->languageModel) {
             $languages = $this->languageModel->getSupportedLanguages();
             $result = [];
-            
+
             foreach ($languages as $code) {
                 $result[$code] = $this->languageModel->getLanguageName($code);
             }
-            
+
             return $result;
         }
-        
+
         return [
             'en' => 'English',
             'sk' => 'Slovak',

@@ -59,7 +59,7 @@ class PasswordHashingService
         }
 
         $hash = password_hash($password, $this->config['algorithm'], $this->config['options']);
-        
+
         if ($hash === false) {
             throw new Exception('Password hashing failed');
         }
@@ -99,7 +99,7 @@ class PasswordHashingService
     public function validatePassword(string $password): bool
     {
         $length = strlen($password);
-        
+
         // Check length requirements
         if ($length < $this->config['min_length'] || $length > $this->config['max_length']) {
             return false;
@@ -224,23 +224,45 @@ class PasswordHashingService
         $length = strlen($password);
 
         // Length scoring
-        if ($length >= 8) $score += 20;
-        if ($length >= 12) $score += 10;
-        if ($length >= 16) $score += 10;
+        if ($length >= 8) {
+            $score += 20;
+        }
+        if ($length >= 12) {
+            $score += 10;
+        }
+        if ($length >= 16) {
+            $score += 10;
+        }
 
         // Character variety scoring
-        if (preg_match('/[a-z]/', $password)) $score += 15;
-        if (preg_match('/[A-Z]/', $password)) $score += 15;
-        if (preg_match('/[0-9]/', $password)) $score += 15;
-        if (preg_match('/[^A-Za-z0-9]/', $password)) $score += 15;
+        if (preg_match('/[a-z]/', $password)) {
+            $score += 15;
+        }
+        if (preg_match('/[A-Z]/', $password)) {
+            $score += 15;
+        }
+        if (preg_match('/[0-9]/', $password)) {
+            $score += 15;
+        }
+        if (preg_match('/[^A-Za-z0-9]/', $password)) {
+            $score += 15;
+        }
 
         // Bonus for good practices
-        if (preg_match('/[a-z].*[A-Z]|[A-Z].*[a-z]/', $password)) $score += 5;
-        if (preg_match('/[0-9].*[^A-Za-z0-9]|[^A-Za-z0-9].*[0-9]/', $password)) $score += 5;
+        if (preg_match('/[a-z].*[A-Z]|[A-Z].*[a-z]/', $password)) {
+            $score += 5;
+        }
+        if (preg_match('/[0-9].*[^A-Za-z0-9]|[^A-Za-z0-9].*[0-9]/', $password)) {
+            $score += 5;
+        }
 
         // Penalties for common patterns
-        if (preg_match('/(.)\1{2,}/', $password)) $score -= 10; // Repeated characters
-        if (preg_match('/123|abc|qwe|password|admin/i', $password)) $score -= 20; // Common patterns
+        if (preg_match('/(.)\1{2,}/', $password)) {
+            $score -= 10;
+        } // Repeated characters
+        if (preg_match('/123|abc|qwe|password|admin/i', $password)) {
+            $score -= 20;
+        } // Common patterns
 
         return max(0, min(100, $score));
     }
@@ -253,10 +275,18 @@ class PasswordHashingService
      */
     public function getPasswordStrengthDescription(int $score): string
     {
-        if ($score >= 80) return 'Very Strong';
-        if ($score >= 60) return 'Strong';
-        if ($score >= 40) return 'Medium';
-        if ($score >= 20) return 'Weak';
+        if ($score >= 80) {
+            return 'Very Strong';
+        }
+        if ($score >= 60) {
+            return 'Strong';
+        }
+        if ($score >= 40) {
+            return 'Medium';
+        }
+        if ($score >= 20) {
+            return 'Weak';
+        }
         return 'Very Weak';
     }
 

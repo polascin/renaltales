@@ -22,8 +22,8 @@ interface MiddlewareInterface
      * Process the middleware
      *
      * @param mixed $request The request object
-     * @param Closure $next The next middleware in the pipeline
+     * @param Closure(mixed): mixed $next The next middleware in the pipeline
      * @return mixed The response
      */
-    public function handle($request, Closure $next);
+    public function handle($request, Closure $next): mixed;
 }

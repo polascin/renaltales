@@ -39,13 +39,13 @@ class MiddlewareManager
      * Execute the middleware pipeline
      *
      * @param mixed $request The request object
-     * @param Closure $finalHandler The final handler to execute
+     * @param Closure(mixed): mixed $finalHandler The final handler to execute
      * @return mixed The response
      */
-    public function handle($request, Closure $finalHandler)
+    public function handle($request, Closure $finalHandler): mixed
     {
         $middleware = array_reverse($this->middleware);
-        
+
         $pipeline = array_reduce($middleware, function ($next, $middleware) {
             return function ($request) use ($middleware, $next) {
                 return $middleware->handle($request, $next);

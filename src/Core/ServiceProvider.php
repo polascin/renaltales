@@ -83,18 +83,18 @@ class ServiceProvider
             $sessionManager = $container->resolve(SessionManager::class);
             $config = require (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/config/security.php';
             $securityManager = new SecurityManager($sessionManager, $config);
-            
+
             // Inject security services after they're registered
             if ($container->bound(RateLimiterService::class)) {
                 $rateLimiterService = $container->resolve(RateLimiterService::class);
                 $securityManager->setRateLimiterService($rateLimiterService);
             }
-            
+
             if ($container->bound(PasswordHashingService::class)) {
                 $passwordHashingService = $container->resolve(PasswordHashingService::class);
                 $securityManager->setPasswordHashingService($passwordHashingService);
             }
-            
+
             return $securityManager;
         });
 
@@ -208,16 +208,16 @@ class ServiceProvider
             $languageRepository = $container->resolve(CachedLanguageRepository::class);
             $sessionManager = $container->resolve(SessionManager::class);
             $languageModel = $container->resolve(LanguageModel::class);
-            
+
             return new LanguageService($languageRepository, $sessionManager, $languageModel);
         });
-        
+
         // Register RateLimiterService as singleton
         $this->container->singleton(RateLimiterService::class, function (Container $container) {
             $config = require (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/config/security.php';
             return new RateLimiterService($config['rate_limiting'] ?? []);
         });
-        
+
         // Register PasswordHashingService as singleton
         $this->container->singleton(PasswordHashingService::class, function (Container $container) {
             $config = require (defined('APP_ROOT') ? APP_ROOT : dirname(__DIR__, 2)) . '/config/security.php';
@@ -300,7 +300,7 @@ class ServiceProvider
     private function bootLanguageService(): void
     {
         $languageService = $this->container->resolve(LanguageService::class);
-        
+
         // Handle language switching from request parameters
         if (isset($_GET['lang']) && is_string($_GET['lang'])) {
             $requestedLang = trim($_GET['lang']);

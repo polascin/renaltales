@@ -118,60 +118,60 @@ class HomeView extends AbstractView
         return 'home';
     }
 
-  /**
-   * Get the home page template
-   *
-   * @param string $currentLanguage Current language code
-   * @param string $pageTitle Page title
-   * @param string $welcomeTitle Welcome title
-   * @param string $homeIntro Home introduction text
-   * @param string $homeDescription Home description text
-   * @param string $shareStoryTitle Share story title
-   * @param string $shareStoryDesc Share story description
-   * @param string $startSharing Start sharing button text
-   * @param string $readStoriesTitle Read stories title
-   * @param string $readStoriesDesc Read stories description
-   * @param string $browseStories Browse stories button text
-   * @param string $joinCommunityTitle Join community title
-   * @param string $joinCommunityDesc Join community description
-   * @param string $exploreCommunity Explore community button text
-   * @param string $home Home navigation text
-   * @param string $stories Stories navigation text
-   * @param string $community Community navigation text
-   * @param string $about About navigation text
-   * @param string $login Login navigation text
-   * @param string $register Register navigation text
-   * @param string $footerCopyright Footer copyright text
-   * @param string $currentYear Current year
-   * @return string The HTML template
-   */
-  private function getHomePageTemplate(
-    string $currentLanguage,
-    string $pageTitle,
-    string $welcomeTitle,
-    string $homeIntro,
-    string $homeDescription,
-    string $shareStoryTitle,
-    string $shareStoryDesc,
-    string $startSharing,
-    string $readStoriesTitle,
-    string $readStoriesDesc,
-    string $browseStories,
-    string $joinCommunityTitle,
-    string $joinCommunityDesc,
-    string $exploreCommunity,
-    string $home,
-    string $stories,
-    string $community,
-    string $about,
-    string $login,
-    string $register,
-    string $footerCopyright,
-    string $currentYear
-  ): string {
-    $languageSwitcher = $this->renderLanguageSwitcher();
+    /**
+     * Get the home page template
+     *
+     * @param string $currentLanguage Current language code
+     * @param string $pageTitle Page title
+     * @param string $welcomeTitle Welcome title
+     * @param string $homeIntro Home introduction text
+     * @param string $homeDescription Home description text
+     * @param string $shareStoryTitle Share story title
+     * @param string $shareStoryDesc Share story description
+     * @param string $startSharing Start sharing button text
+     * @param string $readStoriesTitle Read stories title
+     * @param string $readStoriesDesc Read stories description
+     * @param string $browseStories Browse stories button text
+     * @param string $joinCommunityTitle Join community title
+     * @param string $joinCommunityDesc Join community description
+     * @param string $exploreCommunity Explore community button text
+     * @param string $home Home navigation text
+     * @param string $stories Stories navigation text
+     * @param string $community Community navigation text
+     * @param string $about About navigation text
+     * @param string $login Login navigation text
+     * @param string $register Register navigation text
+     * @param string $footerCopyright Footer copyright text
+     * @param string $currentYear Current year
+     * @return string The HTML template
+     */
+    private function getHomePageTemplate(
+        string $currentLanguage,
+        string $pageTitle,
+        string $welcomeTitle,
+        string $homeIntro,
+        string $homeDescription,
+        string $shareStoryTitle,
+        string $shareStoryDesc,
+        string $startSharing,
+        string $readStoriesTitle,
+        string $readStoriesDesc,
+        string $browseStories,
+        string $joinCommunityTitle,
+        string $joinCommunityDesc,
+        string $exploreCommunity,
+        string $home,
+        string $stories,
+        string $community,
+        string $about,
+        string $login,
+        string $register,
+        string $footerCopyright,
+        string $currentYear
+    ): string {
+        $languageSwitcher = $this->renderLanguageSwitcher();
 
-    return <<<HTML
+        return <<<HTML
 <!DOCTYPE html>
 <html lang="{$currentLanguage}">
 <head>
@@ -384,35 +384,36 @@ class HomeView extends AbstractView
 </body>
 </html>
 HTML;
-  }
+    }
 
-  /**
-   * Render the language switcher component
-   *
-   * @return string The language switcher HTML
-   */
-  private function renderLanguageSwitcher(): string {
-    try {
-      $currentLanguage = $this->getCurrentLanguage();
-      $languageLabel = $this->getText('current_language', 'Language');
-      $switchLanguageText = $this->getText('switch_language', 'Switch Language');
-      $currentLanguageText = $this->getText('current_language_is', 'Current language is');
+    /**
+     * Render the language switcher component
+     *
+     * @return string The language switcher HTML
+     */
+    private function renderLanguageSwitcher(): string
+    {
+        try {
+            $currentLanguage = $this->getCurrentLanguage();
+            $languageLabel = $this->getText('current_language', 'Language');
+            $switchLanguageText = $this->getText('switch_language', 'Switch Language');
+            $currentLanguageText = $this->getText('current_language_is', 'Current language is');
 
-        $options = '';
-        // Iterate through supported languages to build options
-        foreach ($this->supportedLanguages as $code => $name) {
-            $selected = $code === $currentLanguage ? 'selected' : '';
-            $flagClass = 'flag-' . strtolower($code);
-            $displayText = htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . ' [' . strtoupper(htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8')) . ']';
-            $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected} data-flag=\"{$flagClass}\">" . $displayText . "</option>";
-        }
+            $options = '';
+            // Iterate through supported languages to build options
+            foreach ($this->supportedLanguages as $code => $name) {
+                $selected = $code === $currentLanguage ? 'selected' : '';
+                $flagClass = 'flag-' . strtolower($code);
+                $displayText = htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . ' [' . strtoupper(htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8')) . ']';
+                $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected} data-flag=\"{$flagClass}\">" . $displayText . "</option>";
+            }
 
-        // Get current language name for display
-        $currentLanguageName = $this->supportedLanguages[$currentLanguage] ?? 'English';
-        $tooltipText = $currentLanguageText . ' ' . $currentLanguageName;
+            // Get current language name for display
+            $currentLanguageName = $this->supportedLanguages[$currentLanguage] ?? 'English';
+            $tooltipText = $currentLanguageText . ' ' . $currentLanguageName;
 
-        // HTML structure for language selector
-        return <<<HTML
+            // HTML structure for language selector
+            return <<<HTML
 <div class="language-selector">
     <div class="language-switcher" data-tooltip="{$tooltipText}" role="group" aria-label="{$switchLanguageText}">
         <form class="language-form" method="get" action="" onsubmit="this.querySelector('.language-switcher').classList.add('loading')">
@@ -427,83 +428,88 @@ HTML;
     </div>
 </div>
 HTML;
-    } catch (Exception $e) {
-      // Log error and return empty string to prevent page breaking
-      error_log("HomeView: Error rendering language switcher - " . $e->getMessage());
-      return '';
+        } catch (Exception $e) {
+            // Log error and return empty string to prevent page breaking
+            error_log("HomeView: Error rendering language switcher - " . $e->getMessage());
+            return '';
+        }
     }
-  }
 
 
-  /**
-   * Get the language model
-   *
-   * @return LanguageModel The language model instance
-   */
-  public function getLanguageModel(): ?LanguageModel {
-    return $this->languageModel;
-  }
+    /**
+     * Get the language model
+     *
+     * @return LanguageModel The language model instance
+     */
+    public function getLanguageModel(): ?LanguageModel
+    {
+        return $this->languageModel;
+    }
 
-  /**
-   * Get the application name
-   *
-   * @return string The application name
-   */
-  public function getAppName(): string {
-    return $this->appName;
-  }
+    /**
+     * Get the application name
+     *
+     * @return string The application name
+     */
+    public function getAppName(): string
+    {
+        return $this->appName;
+    }
 
-  /**
-   * Get translated text with fallback support
-   *
-   * @param string $key The translation key
-   * @param string $fallback The fallback text
-   * @return string The translated text
-   */
-  private function getText(string $key, string $fallback): string {
-    if ($this->languageModel && method_exists($this->languageModel, 'getText')) {
-      try {
-        return htmlspecialchars($this->languageModel->getText($key, [], $fallback), ENT_QUOTES, 'UTF-8');
-      } catch (Exception $e) {
-        error_log("HomeView: Error getting text for key '{$key}' - " . $e->getMessage());
+    /**
+     * Get translated text with fallback support
+     *
+     * @param string $key The translation key
+     * @param string $fallback The fallback text
+     * @return string The translated text
+     */
+    private function getText(string $key, string $fallback): string
+    {
+        if ($this->languageModel && method_exists($this->languageModel, 'getText')) {
+            try {
+                return htmlspecialchars($this->languageModel->getText($key, [], $fallback), ENT_QUOTES, 'UTF-8');
+            } catch (Exception $e) {
+                error_log("HomeView: Error getting text for key '{$key}' - " . $e->getMessage());
+                return htmlspecialchars($fallback, ENT_QUOTES, 'UTF-8');
+            }
+        }
+
         return htmlspecialchars($fallback, ENT_QUOTES, 'UTF-8');
-      }
     }
 
-    return htmlspecialchars($fallback, ENT_QUOTES, 'UTF-8');
-  }
+    /**
+     * Get current language with fallback
+     *
+     * @return string The current language code
+     */
+    protected function getCurrentLanguage(): string
+    {
+        if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
+            try {
+                return $this->languageModel->getCurrentLanguage();
+            } catch (Exception $e) {
+                error_log("HomeView: Error getting current language - " . $e->getMessage());
+                return 'en';
+            }
+        }
 
-  /**
-   * Get current language with fallback
-   *
-   * @return string The current language code
-   */
-  protected function getCurrentLanguage(): string {
-    if ($this->languageModel && method_exists($this->languageModel, 'getCurrentLanguage')) {
-      try {
-        return $this->languageModel->getCurrentLanguage();
-      } catch (Exception $e) {
-        error_log("HomeView: Error getting current language - " . $e->getMessage());
         return 'en';
-      }
     }
 
-    return 'en';
-  }
+    /**
+     * Get error template for safe error display
+     *
+     * @param string $title The error title
+     * @param string $message The error message
+     * @return string The error HTML template
+     */
+    private function getErrorTemplate(string $title, string $message): string
+    {
+        $safeTitle = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+        $safeMessage = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+        $safeAppName = htmlspecialchars($this->appName, ENT_QUOTES, 'UTF-8');
 
-  /**
-   * Get error template for safe error display
-   *
-   * @param string $title The error title
-   * @param string $message The error message
-   * @return string The error HTML template
-   */
-  private function getErrorTemplate(string $title, string $message): string {
-    $safeTitle = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-    $safeMessage = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-    $safeAppName = htmlspecialchars($this->appName, ENT_QUOTES, 'UTF-8');
-
-    return <<<HTML
+        return <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -577,5 +583,5 @@ HTML;
 </body>
 </html>
 HTML;
-  }
+    }
 }

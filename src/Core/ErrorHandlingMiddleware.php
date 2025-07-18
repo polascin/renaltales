@@ -37,10 +37,10 @@ class ErrorHandlingMiddleware implements MiddlewareInterface
      * Handle middleware
      *
      * @param mixed $request The request object
-     * @param Closure $next The next middleware in the chain
+     * @param Closure(mixed): mixed $next The next middleware in the chain
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): mixed
     {
         try {
             return $next($request);

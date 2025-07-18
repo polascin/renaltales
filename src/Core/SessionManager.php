@@ -28,15 +28,15 @@ class SessionManager
     {
         $this->translations = $translations;
         $this->debugMode = $debugMode;
-        
+
         // Initialize session configuration before any potential output
         $this->configureSessionSettings();
-        
+
         // Initialize session with proper error handling
         if (!$this->initializeSession()) {
             throw new \RuntimeException('Failed to initialize session');
         }
-        
+
         $this->initializeCSRF();
     }
 
@@ -49,7 +49,7 @@ class SessionManager
         if (PHP_SAPI === 'cli') {
             return;
         }
-        
+
         // Check if headers are already sent
         if (headers_sent($file, $line)) {
             throw new \RuntimeException("Headers already sent in {$file} on line {$line}. Cannot configure session settings.");
@@ -93,7 +93,7 @@ class SessionManager
                 $this->sessionInitialized = true;
                 return true;
             }
-            
+
             // Check if session is already active
             if (session_status() === PHP_SESSION_ACTIVE) {
                 $this->sessionInitialized = true;
@@ -175,7 +175,7 @@ class SessionManager
         $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
         $acceptLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
         $acceptEnc = $_SERVER['HTTP_ACCEPT_ENCODING'] ?? '';
-        
+
         return hash('sha256', $userAgent . $acceptLang . $acceptEnc);
     }
 
@@ -288,7 +288,7 @@ class SessionManager
     /**
      * Set session value with validation
      */
-    public function set(string $key, $value): void
+    public function set(string $key, mixed $value): void
     {
         if (!$this->validateSession()) {
             throw new \RuntimeException('Session is not valid or has expired');
@@ -306,12 +306,12 @@ class SessionManager
     /**
      * Get session value with validation
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         if (!$this->validateSession()) {
             return $default;
         }
-        
+
         return $_SESSION[$key] ?? $default;
     }
 
@@ -323,7 +323,7 @@ class SessionManager
         if (!$this->validateSession()) {
             return false;
         }
-        
+
         return isset($_SESSION[$key]);
     }
 
@@ -335,13 +335,13 @@ class SessionManager
         if (!$this->validateSession()) {
             throw new \RuntimeException('Session is not valid or has expired');
         }
-        
+
         // Prevent removing reserved session keys
         $reservedKeys = ['session_start_time', 'last_activity', 'last_regeneration', 'fingerprint', '_csrf_token'];
         if (in_array($key, $reservedKeys)) {
             throw new \InvalidArgumentException("Cannot remove reserved session key: {$key}");
         }
-        
+
         unset($_SESSION[$key]);
     }
 
@@ -353,22 +353,27 @@ class SessionManager
         if (session_status() === PHP_SESSION_ACTIVE) {
             // Clear session data
             $_SESSION = [];
-            
+
             // Clear session cookie
             if (ini_get('session.use_cookies')) {
                 $params = session_get_cookie_params();
-                setcookie(session_name(), '', time() - 3600,
-                    $params['path'], $params['domain'],
-                    $params['secure'], $params['httponly']
+                setcookie(
+                    session_name(),
+                    '',
+                    time() - 3600,
+                    $params['path'],
+                    $params['domain'],
+                    $params['secure'],
+                    $params['httponly']
                 );
             }
-            
+
             // Destroy session
             session_destroy();
             $this->sessionInitialized = false;
         }
     }
-    
+
     /**
      * Clear expired sessions (manual cleanup)
      */
@@ -378,7 +383,7 @@ class SessionManager
             session_gc();
         }
     }
-    
+
     /**
      * Get session configuration
      */
@@ -386,7 +391,7 @@ class SessionManager
     {
         return $this->sessionConfig;
     }
-    
+
     /**
      * Get session ID
      */
@@ -394,7 +399,7 @@ class SessionManager
     {
         return session_id();
     }
-    
+
     /**
      * Get session name
      */

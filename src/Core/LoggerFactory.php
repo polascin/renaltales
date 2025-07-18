@@ -38,7 +38,7 @@ class LoggerFactory
     public static function create(string $name = 'RenalTales', array $config = []): Logger
     {
         $logger = new Logger($name);
-        
+
         // Default configuration
         $defaultConfig = [
             'level' => Level::Debug,
@@ -55,18 +55,18 @@ class LoggerFactory
             'file_permission' => 0664,
             'use_locking' => false,
         ];
-        
+
         $config = array_merge($defaultConfig, $config);
-        
+
         // Add handlers based on configuration
         self::addHandlers($logger, $config);
-        
+
         // Add processors based on configuration
         self::addProcessors($logger, $config);
-        
+
         return $logger;
     }
-    
+
     /**
      * Add handlers to logger
      *
@@ -91,7 +91,7 @@ class LoggerFactory
                         $logger->pushHandler($handler);
                     }
                     break;
-                    
+
                 case 'rotating':
                     if ($config['file']) {
                         $handler = new RotatingFileHandler(
@@ -106,7 +106,7 @@ class LoggerFactory
                         $logger->pushHandler($handler);
                     }
                     break;
-                    
+
                 case 'error_log':
                     $handler = new ErrorLogHandler(
                         ErrorLogHandler::OPERATING_SYSTEM,
@@ -116,7 +116,7 @@ class LoggerFactory
                     self::setFormatter($handler, $config);
                     $logger->pushHandler($handler);
                     break;
-                    
+
                 case 'syslog':
                     $handler = new SyslogHandler(
                         'RenalTales',
@@ -127,7 +127,7 @@ class LoggerFactory
                     self::setFormatter($handler, $config);
                     $logger->pushHandler($handler);
                     break;
-                    
+
                 case 'stderr':
                     $handler = new StreamHandler(
                         'php://stderr',
@@ -137,7 +137,7 @@ class LoggerFactory
                     self::setFormatter($handler, $config);
                     $logger->pushHandler($handler);
                     break;
-                    
+
                 case 'stdout':
                     $handler = new StreamHandler(
                         'php://stdout',
@@ -150,7 +150,7 @@ class LoggerFactory
             }
         }
     }
-    
+
     /**
      * Add processors to logger
      *
@@ -165,17 +165,17 @@ class LoggerFactory
                 case 'uid':
                     $logger->pushProcessor(new UidProcessor());
                     break;
-                    
+
                 case 'web':
                     if (isset($_SERVER['REQUEST_METHOD'])) {
                         $logger->pushProcessor(new WebProcessor());
                     }
                     break;
-                    
+
                 case 'psr':
                     $logger->pushProcessor(new PsrLogMessageProcessor());
                     break;
-                    
+
                 case 'memory':
                     $logger->pushProcessor(function ($record) {
                         $record['extra']['memory_usage'] = memory_get_usage(true);
@@ -183,7 +183,7 @@ class LoggerFactory
                         return $record;
                     });
                     break;
-                    
+
                 case 'git':
                     $logger->pushProcessor(function ($record) {
                         if (file_exists('.git/HEAD')) {
@@ -203,7 +203,7 @@ class LoggerFactory
             }
         }
     }
-    
+
     /**
      * Set formatter for handler
      *
@@ -217,7 +217,7 @@ class LoggerFactory
             case 'json':
                 $formatter = new JsonFormatter();
                 break;
-                
+
             case 'line':
             default:
                 $formatter = new LineFormatter(
@@ -230,10 +230,10 @@ class LoggerFactory
                 $formatter->includeStacktraces($config['include_stacktraces']);
                 break;
         }
-        
+
         $handler->setFormatter($formatter);
     }
-    
+
     /**
      * Create application logger with environment-specific configuration
      *
@@ -252,10 +252,10 @@ class LoggerFactory
             'format' => $environment === 'production' ? 'json' : 'line',
             'include_stacktraces' => $environment !== 'production',
         ];
-        
+
         return self::create('RenalTales', $config);
     }
-    
+
     /**
      * Create error logger for error handling
      *
@@ -266,7 +266,7 @@ class LoggerFactory
     public static function createErrorLogger(string $environment, string $logPath): Logger
     {
         $errorLogPath = str_replace('.log', '-error.log', $logPath);
-        
+
         $config = [
             'file' => $errorLogPath,
             'level' => Level::Warning,
@@ -276,10 +276,10 @@ class LoggerFactory
             'format' => 'json',
             'include_stacktraces' => true,
         ];
-        
+
         return self::create('RenalTales-Error', $config);
     }
-    
+
     /**
      * Create database logger
      *
@@ -290,7 +290,7 @@ class LoggerFactory
     public static function createDatabaseLogger(string $environment, string $logPath): Logger
     {
         $dbLogPath = str_replace('.log', '-database.log', $logPath);
-        
+
         $config = [
             'file' => $dbLogPath,
             'level' => $environment === 'production' ? Level::Error : Level::Debug,
@@ -300,10 +300,10 @@ class LoggerFactory
             'format' => 'line',
             'include_stacktraces' => false,
         ];
-        
+
         return self::create('RenalTales-DB', $config);
     }
-    
+
     /**
      * Create security logger
      *
@@ -314,7 +314,7 @@ class LoggerFactory
     public static function createSecurityLogger(string $environment, string $logPath): Logger
     {
         $securityLogPath = str_replace('.log', '-security.log', $logPath);
-        
+
         $config = [
             'file' => $securityLogPath,
             'level' => Level::Info,
@@ -324,10 +324,10 @@ class LoggerFactory
             'format' => 'json',
             'include_stacktraces' => false,
         ];
-        
+
         return self::create('RenalTales-Security', $config);
     }
-    
+
     /**
      * Create performance logger
      *
@@ -338,7 +338,7 @@ class LoggerFactory
     public static function createPerformanceLogger(string $environment, string $logPath): Logger
     {
         $perfLogPath = str_replace('.log', '-performance.log', $logPath);
-        
+
         $config = [
             'file' => $perfLogPath,
             'level' => $environment === 'production' ? Level::Warning : Level::Info,
@@ -348,7 +348,7 @@ class LoggerFactory
             'format' => 'json',
             'include_stacktraces' => false,
         ];
-        
+
         return self::create('RenalTales-Performance', $config);
     }
 }

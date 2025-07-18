@@ -36,15 +36,15 @@ class Uri implements UriInterface
     public function getAuthority(): string
     {
         $authority = $this->host;
-        
+
         if ($this->userInfo !== '') {
             $authority = $this->userInfo . '@' . $authority;
         }
-        
+
         if ($this->port !== null) {
             $authority .= ':' . $this->port;
         }
-        
+
         return $authority;
     }
 
@@ -133,44 +133,44 @@ class Uri implements UriInterface
     public function __toString(): string
     {
         $uri = '';
-        
+
         if ($this->scheme !== '') {
             $uri .= $this->scheme . ':';
         }
-        
+
         $authority = $this->getAuthority();
         if ($authority !== '') {
             $uri .= '//' . $authority;
         }
-        
+
         $uri .= $this->path;
-        
+
         if ($this->query !== '') {
             $uri .= '?' . $this->query;
         }
-        
+
         if ($this->fragment !== '') {
             $uri .= '#' . $this->fragment;
         }
-        
+
         return $uri;
     }
 
     private function parseUri(string $uri): void
     {
         $parts = parse_url($uri);
-        
+
         if ($parts === false) {
             throw new \InvalidArgumentException('Invalid URI: ' . $uri);
         }
-        
+
         $this->scheme = $parts['scheme'] ?? '';
         $this->host = $parts['host'] ?? '';
         $this->port = $parts['port'] ?? null;
         $this->path = $parts['path'] ?? '';
         $this->query = $parts['query'] ?? '';
         $this->fragment = $parts['fragment'] ?? '';
-        
+
         if (isset($parts['user'])) {
             $this->userInfo = $parts['user'];
             if (isset($parts['pass'])) {

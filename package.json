@@ -1,0 +1,31 @@
+{
+  "name": "renaltales",
+  "version": "1.0.0",
+  "description": "> *Web Application by* ***Lumpe Paskuden von Lumpenen*** *aka* ***Walter Kyo*** *or* ***Walter Csoelle Kyo***\r > *Author:* Lubomir Polascin (Ľubomír Polaščín)\r > *Technology used:* **PHP**, **HTML**, **CSS**, **JavaScript**, **MySQL**",
+  "main": "index.js",
+  "directories": {
+    "test": "tests",
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:css": "npx stylelint **/*.css",
+    "lint:css:fix": "npx stylelint **/*.css --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polascin/renaltales.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/polascin/renaltales/issues"
+  },
+  "homepage": "https://github.com/polascin/renaltales#readme",
+  "devDependencies": {
+    "stylelint": "^16.21.1",
+    "stylelint-config-standard": "^36.0.1"
+  }
+}

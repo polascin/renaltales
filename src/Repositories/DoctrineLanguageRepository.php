@@ -95,10 +95,10 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
     public function setAsDefault(Language $language): void
     {
         $em = $this->getEntityManager();
-        
+
         // Start transaction
         $em->beginTransaction();
-        
+
         try {
             // Unset current default language
             $qb = $this->createQueryBuilder('l')
@@ -107,14 +107,14 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
                 ->where('l.isDefault = :true')
                 ->setParameter('false', false)
                 ->setParameter('true', true);
-            
+
             $qb->getQuery()->execute();
-            
+
             // Set new default language
             $language->setIsDefault(true);
             $em->persist($language);
             $em->flush();
-            
+
             $em->commit();
         } catch (ORMException $e) {
             $em->rollback();
@@ -152,12 +152,12 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
         }
 
         $results = $qb->getQuery()->getArrayResult();
-        
+
         $languages = [];
         foreach ($results as $result) {
             $languages[$result['code']] = $result['nativeName'];
         }
-        
+
         return $languages;
     }
 
@@ -237,7 +237,7 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
             ->getQuery();
 
         $maxOrder = $qb->getSingleScalarResult();
-        
+
         return $maxOrder ? (int) $maxOrder + 1 : 1;
     }
 
@@ -248,7 +248,7 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
      * @return Language
      * @throws ORMException
      */
-    public function create(array $data): Language
+    public function create(array $data): mixed
     {
         $language = new Language(
             $data['code'],
@@ -287,13 +287,13 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
      * @return Language
      * @throws ORMException
      */
-    public function update($id, array $data): Language
+    public function update($id, array $data): mixed
     {
         $language = $this->find($id);
         if (!$language) {
             throw new ORMException('Language not found');
         }
-        
+
         return $this->updateEntity($language, $data);
     }
 
@@ -359,11 +359,11 @@ class DoctrineLanguageRepository extends EntityRepository implements RepositoryI
         if (!$language) {
             return false;
         }
-        
+
         $em = $this->getEntityManager();
         $em->remove($language);
         $em->flush();
-        
+
         return true;
     }
 

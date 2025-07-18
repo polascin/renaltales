@@ -96,7 +96,7 @@ class CacheManager
     private function setupRedisCache(): void
     {
         $connection = $this->config['connections']['default'] ?? [];
-        
+
         try {
             $this->redisClient = new Client([
                 'scheme' => 'tcp',
@@ -108,7 +108,7 @@ class CacheManager
 
             // Test connection
             $this->redisClient->ping();
-            
+
             $this->cache = new RedisAdapter($this->redisClient, $this->config['prefix'] ?? 'renaltales');
             $this->redisAvailable = true;
             $this->log('Redis cache initialized successfully');
@@ -173,20 +173,20 @@ class CacheManager
         try {
             $item = $this->cache->getItem($this->normalizeKey($key));
             $item->set($value);
-            
+
             if ($ttl !== null) {
                 $item->expiresAfter($ttl);
             } else {
                 $item->expiresAfter($this->getDefaultTtl($key));
             }
-            
+
             $result = $this->cache->save($item);
-            
+
             // Also save to fallback cache if available
             if ($this->fallbackCache && $this->redisAvailable) {
                 $this->setFallback($key, $value, $ttl);
             }
-            
+
             return $result;
         } catch (InvalidArgumentException $e) {
             $this->log('Cache set failed for key: ' . $key . ' - ' . $e->getMessage(), 'error');
@@ -220,12 +220,12 @@ class CacheManager
     {
         try {
             $result = $this->cache->deleteItem($this->normalizeKey($key));
-            
+
             // Also delete from fallback cache if available
             if ($this->fallbackCache && $this->redisAvailable) {
                 $this->deleteFallback($key);
             }
-            
+
             return $result;
         } catch (InvalidArgumentException $e) {
             $this->log('Cache delete failed for key: ' . $key . ' - ' . $e->getMessage(), 'error');
@@ -242,12 +242,12 @@ class CacheManager
     {
         try {
             $result = $this->cache->clear();
-            
+
             // Also clear fallback cache if available
             if ($this->fallbackCache && $this->redisAvailable) {
                 $this->fallbackCache->clear();
             }
-            
+
             $this->log('Cache cleared successfully');
             return $result;
         } catch (Exception $e) {
@@ -266,10 +266,10 @@ class CacheManager
     {
         $result = [];
         $normalizedKeys = array_map([$this, 'normalizeKey'], $keys);
-        
+
         try {
             $items = $this->cache->getItems($normalizedKeys);
-            
+
             foreach ($items as $key => $item) {
                 $originalKey = array_search($key, $normalizedKeys);
                 if ($originalKey !== false && $item->isHit()) {
@@ -279,7 +279,7 @@ class CacheManager
         } catch (InvalidArgumentException $e) {
             $this->log('Cache getMultiple failed: ' . $e->getMessage(), 'error');
         }
-        
+
         return $result;
     }
 
@@ -293,13 +293,13 @@ class CacheManager
     public function setMultiple(array $values, ?int $ttl = null): bool
     {
         $success = true;
-        
+
         foreach ($values as $key => $value) {
             if (!$this->set($key, $value, $ttl)) {
                 $success = false;
             }
         }
-        
+
         return $success;
     }
 
@@ -312,15 +312,15 @@ class CacheManager
     public function deleteMultiple(array $keys): bool
     {
         $normalizedKeys = array_map([$this, 'normalizeKey'], $keys);
-        
+
         try {
             $result = $this->cache->deleteItems($normalizedKeys);
-            
+
             // Also delete from fallback cache if available
             if ($this->fallbackCache && $this->redisAvailable) {
                 $this->fallbackCache->deleteItems($normalizedKeys);
             }
-            
+
             return $result;
         } catch (InvalidArgumentException $e) {
             $this->log('Cache deleteMultiple failed: ' . $e->getMessage(), 'error');
@@ -339,12 +339,12 @@ class CacheManager
     public function remember(string $key, callable $callback, ?int $ttl = null)
     {
         $value = $this->get($key);
-        
+
         if ($value === null) {
             $value = $callback();
             $this->set($key, $value, $ttl);
         }
-        
+
         return $value;
     }
 
@@ -364,12 +364,12 @@ class CacheManager
                 $this->log('Redis increment failed: ' . $e->getMessage(), 'error');
             }
         }
-        
+
         // Fallback to get/set
         $current = $this->get($key) ?? 0;
         $new = $current + $value;
         $this->set($key, $new);
-        
+
         return $new;
     }
 
@@ -389,12 +389,12 @@ class CacheManager
                 $this->log('Redis decrement failed: ' . $e->getMessage(), 'error');
             }
         }
-        
+
         // Fallback to get/set
         $current = $this->get($key) ?? 0;
         $new = $current - $value;
         $this->set($key, $new);
-        
+
         return $new;
     }
 
@@ -410,7 +410,7 @@ class CacheManager
             'redis_available' => $this->redisAvailable,
             'fallback_available' => $this->fallbackCache !== null,
         ];
-        
+
         if ($this->redisAvailable && $this->redisClient) {
             try {
                 $info = $this->redisClient->info();
@@ -419,7 +419,7 @@ class CacheManager
                 $this->log('Failed to get Redis info: ' . $e->getMessage(), 'error');
             }
         }
-        
+
         return $stats;
     }
 
@@ -434,7 +434,7 @@ class CacheManager
         if (!$this->fallbackCache) {
             return null;
         }
-        
+
         try {
             $item = $this->fallbackCache->getItem($this->normalizeKey($key));
             return $item->isHit() ? $item->get() : null;
@@ -457,17 +457,17 @@ class CacheManager
         if (!$this->fallbackCache) {
             return false;
         }
-        
+
         try {
             $item = $this->fallbackCache->getItem($this->normalizeKey($key));
             $item->set($value);
-            
+
             if ($ttl !== null) {
                 $item->expiresAfter($ttl);
             } else {
                 $item->expiresAfter($this->getDefaultTtl($key));
             }
-            
+
             return $this->fallbackCache->save($item);
         } catch (InvalidArgumentException $e) {
             $this->log('Fallback cache set failed for key: ' . $key . ' - ' . $e->getMessage(), 'error');
@@ -486,7 +486,7 @@ class CacheManager
         if (!$this->fallbackCache) {
             return false;
         }
-        
+
         try {
             return $this->fallbackCache->hasItem($this->normalizeKey($key));
         } catch (InvalidArgumentException $e) {
@@ -506,7 +506,7 @@ class CacheManager
         if (!$this->fallbackCache) {
             return false;
         }
-        
+
         try {
             return $this->fallbackCache->deleteItem($this->normalizeKey($key));
         } catch (InvalidArgumentException $e) {
@@ -525,12 +525,12 @@ class CacheManager
     {
         // Remove or replace invalid characters
         $key = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $key);
-        
+
         // Ensure key is not too long
         if (strlen($key) > 250) {
             $key = substr($key, 0, 200) . '_' . md5($key);
         }
-        
+
         return $key;
     }
 
@@ -543,7 +543,7 @@ class CacheManager
     private function getDefaultTtl(string $key): int
     {
         $ttlConfig = $this->config['ttl'] ?? [];
-        
+
         // Match key patterns to TTL configuration
         if (strpos($key, 'language') !== false) {
             return $ttlConfig['languages'] ?? 86400;
@@ -554,7 +554,7 @@ class CacheManager
         } elseif (strpos($key, 'query') !== false) {
             return $ttlConfig['queries'] ?? 1800;
         }
-        
+
         return $ttlConfig['default'] ?? 3600;
     }
 
@@ -603,7 +603,7 @@ class CacheManager
             $this->redisClient->disconnect();
             $this->redisClient = null;
         }
-        
+
         $this->redisAvailable = false;
         $this->log('Cache connections closed');
     }

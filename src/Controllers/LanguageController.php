@@ -50,7 +50,7 @@ class LanguageController extends AbstractController
     {
         $method = $request->getMethod();
         $path = $request->getUri()->getPath();
-        
+
         switch ($path) {
             case '/api/language/switch':
                 return $this->switchLanguage($request);
@@ -72,20 +72,20 @@ class LanguageController extends AbstractController
     public function switchLanguage(ServerRequestInterface $request): ResponseInterface
     {
         $this->logAction('switch_language');
-        
+
         try {
             $requestedLang = $this->getParameter($request, 'lang');
-            
+
             if (!$requestedLang || !is_string($requestedLang)) {
                 return $this->json(['success' => false, 'error' => 'Language parameter is required'], 400);
             }
-            
+
             if (!$this->languageService->isLanguageSupported($requestedLang)) {
                 return $this->json(['success' => false, 'error' => 'Invalid language code'], 400);
             }
-            
+
             $success = $this->languageService->switchLanguage($requestedLang);
-            
+
             if ($success) {
                 if ($this->isAjax($request)) {
                     return $this->json(['success' => true, 'language' => $requestedLang]);
@@ -111,7 +111,7 @@ class LanguageController extends AbstractController
     public function getSupportedLanguages(ServerRequestInterface $request): ResponseInterface
     {
         $this->logAction('get_supported_languages');
-        
+
         try {
             return $this->json([
                 'supported_languages' => $this->languageService->getSupportedLanguages(),
@@ -133,7 +133,7 @@ class LanguageController extends AbstractController
     public function getCurrentLanguage(ServerRequestInterface $request): ResponseInterface
     {
         $this->logAction('get_current_language');
-        
+
         try {
             return $this->json([
                 'current_language' => $this->languageService->getCurrentLanguage(),

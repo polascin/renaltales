@@ -30,7 +30,7 @@ class RateLimiterService
     {
         $this->config = $config;
         $this->storagePath = $config['storage_path'] ?? APP_ROOT . '/storage/rate_limits';
-        
+
         // Create storage directory if it doesn't exist
         if (!is_dir($this->storagePath)) {
             mkdir($this->storagePath, 0755, true);
@@ -161,7 +161,7 @@ class RateLimiterService
         }
 
         $identifier = $this->generateIdentifier($key, $type);
-        
+
         // Check if in lockout
         if ($this->isInLockout($identifier, $type)) {
             $lockoutTime = $this->getLockoutTime($identifier);
@@ -273,7 +273,7 @@ class RateLimiterService
     {
         $file = $this->storagePath . '/' . $identifier . '.lockout';
         file_put_contents($file, time(), LOCK_EX);
-        
+
         // Log the lockout
         $this->logRateLimitViolation($identifier, $type);
     }

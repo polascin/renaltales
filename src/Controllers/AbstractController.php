@@ -101,14 +101,14 @@ abstract class AbstractController implements ControllerInterface
     protected function json(array $data, int $status = 200, array $headers = []): ResponseInterface
     {
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        
+
         $response = $this->createResponse($json, $status);
         $response = $response->withHeader('Content-Type', 'application/json; charset=utf-8');
-        
+
         foreach ($headers as $name => $value) {
             $response = $response->withHeader($name, $value);
         }
-        
+
         return $response;
     }
 
@@ -124,11 +124,11 @@ abstract class AbstractController implements ControllerInterface
     {
         $response = $this->createResponse($html, $status);
         $response = $response->withHeader('Content-Type', 'text/html; charset=utf-8');
-        
+
         foreach ($headers as $name => $value) {
             $response = $response->withHeader($name, $value);
         }
-        
+
         return $response;
     }
 
@@ -156,7 +156,7 @@ abstract class AbstractController implements ControllerInterface
     {
         $viewData = array_merge($this->sharedData, $data);
         $html = $view->render($viewData);
-        
+
         return $this->html($html);
     }
 
@@ -169,10 +169,10 @@ abstract class AbstractController implements ControllerInterface
     protected function validateCSRF(ServerRequestInterface $request): bool
     {
         $parsedBody = $request->getParsedBody();
-        $token = is_array($parsedBody) && isset($parsedBody['csrf_token']) 
-            ? (string) $parsedBody['csrf_token'] 
+        $token = is_array($parsedBody) && isset($parsedBody['csrf_token'])
+            ? (string) $parsedBody['csrf_token']
             : '';
-        
+
         return $this->securityManager->validateCSRFToken($token);
     }
 
@@ -202,12 +202,12 @@ abstract class AbstractController implements ControllerInterface
         if (isset($queryParams[$key])) {
             return $queryParams[$key];
         }
-        
+
         $parsedBody = $request->getParsedBody();
         if (is_array($parsedBody) && isset($parsedBody[$key])) {
             return $parsedBody[$key];
         }
-        
+
         return $default;
     }
 

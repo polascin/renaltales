@@ -24,8 +24,8 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ApplicationController extends AbstractController implements ControllerInterface
 {
-    private ViewController $viewController;
-    private string $requestedPage;
+    private ?ViewController $viewController = null;
+    private string $requestedPage = '';
 
     public function __construct(
         LanguageService $languageService,
@@ -100,9 +100,9 @@ class ApplicationController extends AbstractController implements ControllerInte
     /**
      * Get the view controller
      *
-     * @return ViewController The view controller
+     * @return ViewController|null The view controller
      */
-    public function getViewController(): ViewController
+    public function getViewController(): ?ViewController
     {
         return $this->viewController;
     }

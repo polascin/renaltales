@@ -55,7 +55,7 @@ class AsyncManager
     private ?Logger $logger = null;
 
     /**
-     * @var array<string, callable> Registered task handlers
+     * @var array<string, callable(array): mixed> Registered task handlers
      */
     private array $taskHandlers = [];
 
@@ -169,7 +169,7 @@ class AsyncManager
     public function queryMultiple(array $queries): PromiseInterface
     {
         $promises = [];
-        
+
         foreach ($queries as $query) {
             $promises[] = $this->query($query);
         }
@@ -199,7 +199,7 @@ class AsyncManager
 
         try {
             $promise = $handler($params);
-            
+
             if (!$promise instanceof PromiseInterface) {
                 $promise = \React\Promise\resolve($promise);
             }
@@ -226,7 +226,7 @@ class AsyncManager
      * Register task handler
      *
      * @param string $taskName Task name
-     * @param callable $handler Task handler
+     * @param callable(array): mixed $handler Task handler
      * @return void
      */
     public function registerTask(string $taskName, callable $handler): void
@@ -283,7 +283,7 @@ class AsyncManager
      * @param mixed $data Data for write operations
      * @return PromiseInterface<mixed>
      */
-    public function fileOperation(string $operation, string $filePath, $data = null): PromiseInterface
+    public function fileOperation(string $operation, string $filePath, mixed $data = null): PromiseInterface
     {
         switch ($operation) {
             case 'read':
@@ -330,10 +330,10 @@ class AsyncManager
      * Write file asynchronously
      *
      * @param string $filePath File path
-     * @param string $data Data to write
+     * @param mixed $data Data to write
      * @return PromiseInterface<bool>
      */
-    private function writeFileAsync(string $filePath, string $data): PromiseInterface
+    private function writeFileAsync(string $filePath, mixed $data): PromiseInterface
     {
         return new Promise(function (callable $resolve, callable $reject) use ($filePath, $data) {
             $resource = fopen($filePath, 'w');
@@ -415,7 +415,7 @@ class AsyncManager
                 $promise->cancel();
             }
         }
-        
+
         $this->activePromises = [];
         $this->log('All active promises cancelled');
     }

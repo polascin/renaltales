@@ -22,11 +22,11 @@ use RenalTales\Core\Logger;
 
 // File: public/index.php
 
-// Directory separator constant for cross-platform compatibility
-define('DS', DIRECTORY_SEPARATOR);
-
 // Include application constants definitions
-require_once dirname(__DIR__) . DS . 'config' . DS . 'constants.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'constants.php';
+
+// Load Composer autoloader immediately after constants
+require_once APP_ROOT . '/vendor/autoload.php';
 
 // Include bootstrap for proper setup
 require_once APP_DIR . DS . 'bootstrap.php';

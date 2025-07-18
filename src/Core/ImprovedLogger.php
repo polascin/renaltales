@@ -25,7 +25,7 @@ class ImprovedLogger extends MonologLogger
     public function __construct(string $logFile)
     {
         parent::__construct('RenalTalesLogger');
-        
+
         // Create a handler
         $streamHandler = new StreamHandler($logFile, MonologLogger::DEBUG);
 
@@ -33,4 +33,3 @@ class ImprovedLogger extends MonologLogger
         $this->pushHandler($streamHandler);
     }
 }
-

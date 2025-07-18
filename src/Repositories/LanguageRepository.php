@@ -35,9 +35,10 @@ class LanguageRepository implements RepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function find($id): mixed
     {
         // Implement find logic
+        return null;
     }
 
     /**
@@ -54,30 +55,34 @@ class LanguageRepository implements RepositoryInterface
     public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
     {
         // Implement findBy logic
+        return [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findOneBy(array $criteria)
+    public function findOneBy(array $criteria): mixed
     {
         // Implement findOneBy logic
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create(array $data)
+    public function create(array $data): mixed
     {
         // Implement create logic
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function update($id, array $data)
+    public function update($id, array $data): mixed
     {
         // Implement update logic
+        return null;
     }
 
     /**
@@ -86,6 +91,7 @@ class LanguageRepository implements RepositoryInterface
     public function delete($id): bool
     {
         // Implement delete logic
+        return false;
     }
 
     /**
@@ -104,4 +110,3 @@ class LanguageRepository implements RepositoryInterface
         return in_array($id, $this->model->getSupportedLanguages(), true);
     }
 }
-

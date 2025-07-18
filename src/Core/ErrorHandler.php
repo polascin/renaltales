@@ -39,7 +39,7 @@ class ErrorHandler
         $this->logger = $logger;
         $this->debug = $debug;
         $this->environment = $environment;
-        
+
         // Define error level mappings
         $this->errorLevels = [
             E_ERROR => 'ERROR',
@@ -73,15 +73,15 @@ class ErrorHandler
 
         // Register error handler
         set_error_handler([$this, 'handleError']);
-        
+
         // Register exception handler
         set_exception_handler([$this, 'handleException']);
-        
+
         // Register shutdown handler for fatal errors
         register_shutdown_function([$this, 'handleShutdown']);
-        
+
         $this->registered = true;
-        
+
         $this->logger->info('Global error handler registered', [
             'debug' => $this->debug,
             'environment' => $this->environment
@@ -101,9 +101,9 @@ class ErrorHandler
 
         restore_error_handler();
         restore_exception_handler();
-        
+
         $this->registered = false;
-        
+
         $this->logger->info('Global error handler unregistered');
     }
 
@@ -126,7 +126,7 @@ class ErrorHandler
         }
 
         $errorType = $this->errorLevels[$level] ?? 'UNKNOWN';
-        
+
         // Log the error
         $this->logger->log(
             $this->getMonologLevel($level),
@@ -184,7 +184,7 @@ class ErrorHandler
     public function handleShutdown(): void
     {
         $error = error_get_last();
-        
+
         if ($error && $this->isFatalError($error['type'])) {
             $this->logger->critical('Fatal error during shutdown', [
                 'message' => $error['message'],
@@ -257,10 +257,10 @@ class ErrorHandler
     private function getFallbackErrorPage(Throwable $exception): string
     {
         $title = $this->debug ? 'Application Error' : 'Server Error';
-        $message = $this->debug ? 
-            htmlspecialchars($exception->getMessage()) : 
+        $message = $this->debug ?
+            htmlspecialchars($exception->getMessage()) :
             'An error occurred while processing your request.';
-        
+
         $details = '';
         if ($this->debug) {
             $details = '<pre>' . htmlspecialchars($exception->getTraceAsString()) . '</pre>';
@@ -329,7 +329,7 @@ HTML;
             case E_NOTICE:
             case E_USER_NOTICE:
                 return 'notice';
-            // Handle deprecated E_STRICT constant conditionally
+                // Handle deprecated E_STRICT constant conditionally
             case defined('E_STRICT') ? E_STRICT : -1:
                 return 'info';
             default:

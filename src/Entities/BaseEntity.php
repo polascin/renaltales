@@ -23,12 +23,12 @@ use DateTimeImmutable;
 abstract class BaseEntity
 {
     /**
-     * @var int Primary key identifier
+     * @var int|null Primary key identifier
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    protected int $id;
+    protected ?int $id = null;
 
     /**
      * @var DateTimeImmutable Entity creation timestamp
@@ -54,9 +54,9 @@ abstract class BaseEntity
     /**
      * Get the entity ID
      *
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -128,7 +128,7 @@ abstract class BaseEntity
     public function toArray(): array
     {
         return [
-            'id' => isset($this->id) ? $this->id : null,
+            'id' => $this->id,
             'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
             'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
         ];
@@ -151,7 +151,7 @@ abstract class BaseEntity
      */
     public function isNew(): bool
     {
-        return !isset($this->id);
+        return $this->id === null;
     }
 
     /**

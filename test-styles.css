@@ -1,0 +1,13 @@
+/* Testovací CSS súbor pre stylelint */
+.test-class {
+  color: #FF0000;
+  background-color: white;
+  padding:10px;
+  margin: 0.5rem;
+}
+
+#test-id{
+  font-size: 16px;
+  line-height:1.5;
+  text-align: center;
+}

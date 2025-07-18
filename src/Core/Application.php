@@ -35,9 +35,9 @@ class Application
     private ServiceProvider $serviceProvider;
 
     /**
-     * @var ApplicationController The main application controller
+     * @var ApplicationController|null The main application controller
      */
-    private ApplicationController $applicationController;
+    private ?ApplicationController $applicationController = null;
 
     /**
      * @var bool Whether the application has been bootstrapped
@@ -91,16 +91,16 @@ class Application
      */
     public function run(): void
     {
-        if (!$this->bootstrapped) {
+        if (!$this->bootstrapped || $this->applicationController === null) {
             throw new Exception('Application must be bootstrapped before running');
         }
 
         // Create a PSR-7 request from globals
         $request = $this->createRequestFromGlobals();
-        
+
         // Handle the request and get the response
         $response = $this->applicationController->handle($request);
-        
+
         // Send the response
         $this->sendResponse($response);
     }
@@ -133,7 +133,7 @@ class Application
      */
     public function getApplicationController(): ApplicationController
     {
-        if (!$this->bootstrapped) {
+        if (!$this->bootstrapped || $this->applicationController === null) {
             throw new Exception('Application must be bootstrapped before accessing the application controller');
         }
 
@@ -182,7 +182,7 @@ class Application
     {
         // Perform any cleanup operations
         // This can include logging, closing connections, etc.
-        
+
         if ($this->bootstrapped) {
             // Log application shutdown
             if ($this->container->bound(Logger::class)) {
@@ -246,7 +246,7 @@ class Application
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $headers = [];
         $body = '';
-        
+
         // Extract headers from $_SERVER
         foreach ($_SERVER as $key => $value) {
             if (strpos($key, 'HTTP_') === 0) {
@@ -255,12 +255,12 @@ class Application
                 $headers[ucwords(strtolower($headerName), '-')] = $value;
             }
         }
-        
+
         // Get request body for POST/PUT/PATCH requests
         if (in_array($method, ['POST', 'PUT', 'PATCH'])) {
             $body = file_get_contents('php://input') ?: '';
         }
-        
+
         return new ServerRequest(
             $method,
             $uri,
@@ -285,7 +285,7 @@ class Application
         // Set the response status code
         if (!headers_sent()) {
             http_response_code($response->getStatusCode());
-            
+
             // Set response headers
             foreach ($response->getHeaders() as $name => $values) {
                 foreach ($values as $value) {
@@ -293,7 +293,7 @@ class Application
                 }
             }
         }
-        
+
         // Output the response body
         echo $response->getBody();
     }
