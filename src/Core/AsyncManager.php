@@ -10,9 +10,8 @@ use React\Promise\Promise;
 use React\Promise\PromiseInterface;
 use React\Stream\ReadableResourceStream;
 use React\Stream\WritableResourceStream;
-use React\MySQL\ConnectionInterface;
-use RenalTales\Core\PatchedMysqlFactory;
-use React\MySQL\QueryResult;
+use React\MySQL\MysqlClient;
+use React\MySQL\MysqlResult;
 use Exception;
 use Closure;
 
@@ -35,14 +34,9 @@ class AsyncManager
     private LoopInterface $loop;
 
     /**
-     * @var PatchedMysqlFactory MySQL factory for async connections
+     * @var MysqlClient|null MySQL client for async connections
      */
-    private PatchedMysqlFactory $mysqlFactory;
-
-    /**
-     * @var ConnectionInterface|null Async database connection
-     */
-    private ?ConnectionInterface $asyncConnection = null;
+    private ?MysqlClient $mysqlClient = null;
 
     /**
      * @var array<string, mixed> Database configuration
@@ -80,7 +74,6 @@ class AsyncManager
         $this->dbConfig = $dbConfig;
         $this->logger = $logger;
         $this->loop = Loop::get();
-        $this->mysqlFactory = new PatchedMysqlFactory();
     }
 
     /**
@@ -108,7 +101,7 @@ class AsyncManager
     /**
      * Setup async database connection
      *
-     * @return PromiseInterface<ConnectionInterface>
+     * @return PromiseInterface<void>
      */
     private function setupAsyncConnection(): PromiseInterface
     {
@@ -128,12 +121,13 @@ class AsyncManager
             $config['dbname'] ?? 'renaltales'
         );
 
-        return $this->mysqlFactory->createConnection($dsn)
-            ->then(function (ConnectionInterface $connection) {
-                $this->asyncConnection = $connection;
-                $this->log('Async database connection established');
-                return $connection;
-            });
+        try {
+            $this->mysqlClient = new MysqlClient($dsn, null, $this->loop);
+            $this->log('Async database connection established');
+            return \React\Promise\resolve();
+        } catch (Exception $e) {
+            return \React\Promise\reject($e);
+        }
     }
 
     /**
@@ -141,16 +135,16 @@ class AsyncManager
      *
      * @param string $query SQL query
      * @param array<mixed> $params Query parameters
-     * @return PromiseInterface<QueryResult>
+     * @return PromiseInterface<MysqlResult>
      */
     public function query(string $query, array $params = []): PromiseInterface
     {
-        if (!$this->asyncConnection) {
+        if (!$this->mysqlClient) {
             return \React\Promise\reject(new Exception('Async connection not established'));
         }
 
-        return $this->asyncConnection->query($query, $params)
-            ->then(function (QueryResult $result) use ($query) {
+        return $this->mysqlClient->query($query, $params)
+            ->then(function (MysqlResult $result) use ($query) {
                 $this->log('Async query executed successfully: ' . substr($query, 0, 100));
                 return $result;
             })
@@ -164,7 +158,7 @@ class AsyncManager
      * Execute multiple async queries in parallel
      *
      * @param array<string> $queries Array of SQL queries
-     * @return PromiseInterface<array<QueryResult>>
+     * @return PromiseInterface<array<MysqlResult>>
      */
     public function queryMultiple(array $queries): PromiseInterface
     {
@@ -461,9 +455,9 @@ class AsyncManager
      */
     public function close(): void
     {
-        if ($this->asyncConnection) {
-            $this->asyncConnection->close();
-            $this->asyncConnection = null;
+        if ($this->mysqlClient) {
+            $this->mysqlClient->close();
+            $this->mysqlClient = null;
         }
 
         $this->cancelAllPromises();

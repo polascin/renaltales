@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
 return [
-	'lastFullAnalysisTime' => 1752826852,
+	'lastFullAnalysisTime' => 1752829740,
 	'meta' => array (
   'cacheVersion' => 'v12-linesToIgnore',
   'phpstanVersion' => '1.12.27',
   'phpVersion' => 80408,
-  'projectConfig' => '{parameters: {level: 8, paths: [G:\\Môj disk\\www\\renaltales\\src], excludePaths: {analyseAndScan: [G:\\Môj disk\\www\\renaltales\\vendor], analyse: []}, phpVersion: 80400, checkMissingIterableValueType: false, checkGenericClassInNonGenericObjectType: false, tmpDir: G:\\Môj disk\\www\\renaltales\\.phpstan, checkTooWideReturnTypesInProtectedAndPublicMethods: true, checkUninitializedProperties: true, checkDynamicProperties: true, polluteScopeWithLoopInitialAssignments: false, polluteScopeWithAlwaysIterableForeach: false, checkAlwaysTrueCheckTypeFunctionCall: true, checkAlwaysTrueInstanceof: true, checkAlwaysTrueStrictComparison: true, checkExplicitMixedMissingReturn: true, checkFunctionNameCase: true, checkInternalClassCaseSensitivity: true, checkMissingCallableSignature: true, checkMissingVarTagTypehint: true, treatPhpDocTypesAsCertain: false}}',
+  'projectConfig' => '{parameters: {level: 8, paths: [G:\\Môj disk\\www\\renaltales\\src], excludePaths: {analyseAndScan: [G:\\Môj disk\\www\\renaltales\\vendor], analyse: []}, phpVersion: 80400, tmpDir: G:\\Môj disk\\www\\renaltales\\.phpstan, bootstrapFiles: [G:\\Môj disk\\www\\renaltales\\phpstan-bootstrap.php], checkTooWideReturnTypesInProtectedAndPublicMethods: true, checkUninitializedProperties: true, checkDynamicProperties: true, polluteScopeWithLoopInitialAssignments: false, polluteScopeWithAlwaysIterableForeach: false, checkAlwaysTrueCheckTypeFunctionCall: true, checkAlwaysTrueInstanceof: true, checkAlwaysTrueStrictComparison: true, checkExplicitMixedMissingReturn: true, checkFunctionNameCase: true, checkInternalClassCaseSensitivity: true, checkMissingCallableSignature: true, checkMissingVarTagTypehint: true, treatPhpDocTypesAsCertain: false}}',
   'analysedPaths' => 
   array (
     0 => 'G:\\Môj disk\\www\\renaltales\\src',
@@ -1374,6 +1374,7 @@ return [
   ),
   'executedFilesHashes' => 
   array (
+    'G:\\Môj disk\\www\\renaltales\\phpstan-bootstrap.php' => 'a121676a08f88852da34a7aac68da2f6e045966a',
     'phar://G:\\Môj disk\\www\\renaltales\\vendor\\phpstan\\phpstan\\phpstan.phar\\stubs\\runtime\\Attribute.php' => 'eaf9127f074e9c7ebc65043ec4050f9fed60c2bb',
     'phar://G:\\Môj disk\\www\\renaltales\\vendor\\phpstan\\phpstan\\phpstan.phar\\stubs\\runtime\\ReflectionAttribute.php' => '0b4b78277eb6545955d2ce5e09bff28f1f8052c8',
     'phar://G:\\Môj disk\\www\\renaltales\\vendor\\phpstan\\phpstan\\phpstan.phar\\stubs\\runtime\\ReflectionIntersectionType.php' => 'a3e6299b87ee5d407dae7651758edfa11a74cb11',
@@ -1465,68 +1466,87 @@ return [
       ),
     )),
   ),
+  'G:\\Môj disk\\www\\renaltales\\src\\Controllers\\ViewController.php' => 
+  array (
+    0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Controllers\\ViewController::$data type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Controllers\\ViewController.php',
+       'line' => 27,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Controllers\\ViewController.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 27,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+  ),
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php' => 
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_VERSION not found.',
+       'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'line' => 205,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'tip' => NULL,
        'nodeLine' => 205,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Coalesce',
+       'identifier' => 'nullCoalesce.expr',
        'metadata' => 
       array (
       ),
     )),
     1 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_NAME not found.',
+       'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'line' => 215,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'tip' => NULL,
        'nodeLine' => 215,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Coalesce',
+       'identifier' => 'nullCoalesce.expr',
        'metadata' => 
       array (
       ),
     )),
     2 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ENV not found.',
+       'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'line' => 225,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'tip' => NULL,
        'nodeLine' => 225,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Coalesce',
+       'identifier' => 'nullCoalesce.expr',
        'metadata' => 
       array (
       ),
     )),
     3 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_DEBUG not found.',
+       'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'line' => 235,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Application.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
+       'tip' => NULL,
        'nodeLine' => 235,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'nodeType' => 'PhpParser\\Node\\Expr\\BinaryOp\\Coalesce',
+       'identifier' => 'nullCoalesce.expr',
        'metadata' => 
       array (
       ),
@@ -1535,6 +1555,38 @@ return [
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\AsyncManager::$taskHandlers type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'line' => 60,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 60,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\AsyncManager::$activePromises with generic interface React\\Promise\\PromiseInterface does not specify its types: T',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'line' => 65,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 65,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.generics',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Function React\\Promise\\resolve invoked with 0 parameters, 1 required.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
@@ -1550,7 +1602,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unable to resolve the template type T in call to function React\\Promise\\resolve',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
@@ -1566,7 +1618,23 @@ return [
       array (
       ),
     )),
-    2 => 
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\AsyncManager::registerTask() has parameter $handler with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'line' => 232,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 232,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $stream of class React\\Stream\\ReadableResourceStream constructor expects resource, resource|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
@@ -1582,7 +1650,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Callable callable(mixed): void invoked with 0 parameters, 1 required.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
@@ -1598,42 +1666,26 @@ return [
       array (
       ),
     )),
+    7 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\AsyncManager::race() has parameter $promises with generic interface React\\Promise\\PromiseInterface but does not specify its types: T',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'line' => 381,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\AsyncManager.php',
+       'traitFilePath' => NULL,
+       'tip' => NULL,
+       'nodeLine' => 381,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.generics',
+       'metadata' => 
+      array (
+      ),
+    )),
   ),
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php' => 
   array (
     0 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
-       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
-       'line' => 133,
-       'canBeIgnored' => true,
-       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 133,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
-       'metadata' => 
-      array (
-      ),
-    )),
-    1 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
-       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
-       'line' => 140,
-       'canBeIgnored' => true,
-       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 140,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
-       'metadata' => 
-      array (
-      ),
-    )),
-    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\CacheManager::remember() has parameter $callback with no signature specified for callable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
@@ -1649,7 +1701,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $string of function strlen expects string, string|null given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
@@ -1665,7 +1717,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $string of function md5 expects string, string|null given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
@@ -1681,7 +1733,7 @@ return [
       array (
       ),
     )),
-    5 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $string of function substr expects string, string|null given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
@@ -1697,7 +1749,7 @@ return [
       array (
       ),
     )),
-    6 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\CacheManager::normalizeKey() should return string but returns string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\CacheManager.php',
@@ -1718,6 +1770,70 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\Container::$factories type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'line' => 42,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 42,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\Container::bind() has parameter $concrete with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'line' => 52,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 52,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\Container::singleton() has parameter $concrete with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'line' => 68,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 68,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\Container::factory() has parameter $factory with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'line' => 80,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 80,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $objectOrClass of class ReflectionClass constructor expects class-string<T of object>|T of object, string given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
        'line' => 154,
@@ -1732,7 +1848,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to an undefined method ReflectionIntersectionType|ReflectionNamedType::isBuiltin().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
@@ -1748,7 +1864,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to an undefined method ReflectionIntersectionType|ReflectionNamedType::getName().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
@@ -1764,7 +1880,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to an undefined method ReflectionType::getName().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
@@ -1780,7 +1896,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to an undefined method ReflectionType::isBuiltin().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Container.php',
@@ -1881,6 +1997,22 @@ return [
     )),
     5 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method class@anonymous/Core/DatabaseManager.php:208::startQuery() has parameter $params with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
+       'line' => 216,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 216,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    6 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method class@anonymous/Core/DatabaseManager.php:208::startQuery() has parameter $sql with no type specified.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
        'line' => 216,
@@ -1895,7 +2027,23 @@ return [
       array (
       ),
     )),
-    6 => 
+    7 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method class@anonymous/Core/DatabaseManager.php:208::startQuery() has parameter $types with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
+       'line' => 216,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 216,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to an undefined method Doctrine\\ORM\\Configuration::setSQLLogger().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
@@ -1911,7 +2059,7 @@ return [
       array (
       ),
     )),
-    7 => 
+    9 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\DatabaseManager::isDatabaseLoggingEnabled() is unused.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\DatabaseManager.php',
@@ -1931,6 +2079,38 @@ return [
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\ErrorHandler::$errorLevels type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php',
+       'line' => 27,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 27,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\ErrorHandler::handleError() has parameter $context with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php',
+       'line' => 121,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 121,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $level of method Monolog\\Logger::log() expects \'alert\'|\'critical\'|\'debug\'|\'emergency\'|\'error\'|\'info\'|\'notice\'|\'warning\'|Monolog\\Level, string given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ErrorHandler.php',
@@ -1970,16 +2150,16 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
+       'message' => 'Property RenalTales\\Core\\Logger::$logLevels type has no value type specified in iterable type array.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Logger.php',
-       'line' => 38,
+       'line' => 25,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\Logger.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 38,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 25,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
@@ -1988,6 +2168,54 @@ return [
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\LoggerFactory::create() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'line' => 38,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 38,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\LoggerFactory::addHandlers() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'line' => 77,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 77,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\LoggerFactory::addProcessors() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'line' => 161,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 161,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Cannot access offset \'memory_usage\' on array|DateTimeImmutable|int|string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2003,7 +2231,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Cannot access offset \'memory_peak\' on array|DateTimeImmutable|int|string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2019,7 +2247,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $string of function trim expects string, string|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2035,7 +2263,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Cannot access offset \'git_commit\' on array|DateTimeImmutable|int|string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2051,7 +2279,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $string of function trim expects string, string|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2067,7 +2295,7 @@ return [
       array (
       ),
     )),
-    5 => 
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Cannot access offset \'git_commit\' on array|DateTimeImmutable|int|string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
@@ -2083,10 +2311,61 @@ return [
       array (
       ),
     )),
+    9 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\LoggerFactory::setFormatter() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'line' => 214,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\LoggerFactory.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 214,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+  ),
+  'G:\\Môj disk\\www\\renaltales\\src\\Core\\MiddlewareManager.php' => 
+  array (
+    0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\MiddlewareManager::$middleware type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\MiddlewareManager.php',
+       'line' => 24,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\MiddlewareManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 24,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
   ),
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\SecurityManager::$config type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'line' => 26,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 26,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $prefix of function uniqid expects string, int<0, max> given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2102,7 +2381,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #3 $subject of function preg_replace expects array|string, string|null given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2118,7 +2397,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #3 $subject of function preg_replace expects array|string, string|null given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2134,7 +2413,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\SecurityManager::sanitizeHTML() should return string but returns string|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2150,23 +2429,39 @@ return [
       array (
       ),
     )),
-    4 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_DIR not found.',
+       'message' => 'Method RenalTales\\Core\\SecurityManager::logSecurityEvent() has parameter $context with no value type specified in iterable type array.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
-       'line' => 413,
+       'line' => 401,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 413,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 401,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
     )),
-    5 => 
+    6 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\SecurityManager::getPasswordRequirements() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'line' => 630,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 630,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $prefix of function uniqid expects string, int<0, max> given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2182,7 +2477,23 @@ return [
       array (
       ),
     )),
-    6 => 
+    8 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\SecurityManager::validateFileUpload() has parameter $file with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'line' => 674,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 674,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    9 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $finfo of function finfo_file expects finfo, finfo|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2198,7 +2509,7 @@ return [
       array (
       ),
     )),
-    7 => 
+    10 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $finfo of function finfo_close expects finfo, finfo|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2214,7 +2525,7 @@ return [
       array (
       ),
     )),
-    8 => 
+    11 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $length of function random_bytes expects int<1, max>, int given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2230,7 +2541,7 @@ return [
       array (
       ),
     )),
-    9 => 
+    12 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $prefix of function uniqid expects string, int<0, max> given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
@@ -2246,21 +2557,18 @@ return [
       array (
       ),
     )),
-  ),
-  'G:\\Môj disk\\www\\renaltales\\src\\Core\\ServiceProvider.php' => 
-  array (
-    0 => 
+    13 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
-       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ServiceProvider.php',
-       'line' => 130,
+       'message' => 'Method RenalTales\\Core\\SecurityManager::validateOrigin() has parameter $allowedOrigins with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
+       'line' => 740,
        'canBeIgnored' => true,
-       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\ServiceProvider.php',
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SecurityManager.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 130,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 740,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
@@ -2269,6 +2577,22 @@ return [
   'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\SessionManager::$translations type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'line' => 17,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 17,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Property RenalTales\\Core\\SessionManager::$securityManager is never read, only written.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2284,7 +2608,39 @@ return [
       array (
       ),
     )),
-    1 => 
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Core\\SessionManager::$sessionConfig type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'line' => 22,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 22,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\SessionManager::__construct() has parameter $translations with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'line' => 27,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 27,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Strict comparison using !== between 0|1 and 2 will always evaluate to true.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2300,7 +2656,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unreachable statement - code above always terminates.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2316,7 +2672,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\SessionManager::initializeSessionSecurity() is unused.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2332,7 +2688,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $prefix of function uniqid expects string, int<0, max> given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2348,7 +2704,7 @@ return [
       array (
       ),
     )),
-    5 => 
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Parameter #1 $name of function setcookie expects string, string|false given.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2364,7 +2720,23 @@ return [
       array (
       ),
     )),
-    6 => 
+    9 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\SessionManager::getSessionConfig() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'line' => 390,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 390,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    10 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\SessionManager::getSessionId() should return string but returns string|false.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2380,7 +2752,7 @@ return [
       array (
       ),
     )),
-    7 => 
+    11 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Core\\SessionManager::getSessionName() should return string but returns string|false.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
@@ -2396,10 +2768,106 @@ return [
       array (
       ),
     )),
+    12 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Core\\SessionManager::getTranslations() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'line' => 432,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Core\\SessionManager.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 432,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
   ),
   'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Exceptions\\ApplicationException::$context type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'line' => 22,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 22,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ApplicationException::__construct() has parameter $context with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'line' => 34,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 34,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ApplicationException::getContext() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'line' => 49,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 49,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ApplicationException::setContext() has parameter $context with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'line' => 60,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 60,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ApplicationException::toArray() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'line' => 154,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 154,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Exceptions\\ApplicationException::toJson() should return string but returns string|false.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ApplicationException.php',
@@ -2468,6 +2936,22 @@ return [
     )),
     3 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ConfigurationException::invalidEnvironment() has parameter $validEnvironments with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ConfigurationException.php',
+       'line' => 76,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ConfigurationException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 76,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ConfigurationException.php',
        'line' => 79,
@@ -2487,6 +2971,22 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Exceptions\\ContainerException::circularDependency() has parameter $stack with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
+       'line' => 28,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 28,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
        'line' => 31,
@@ -2501,7 +3001,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
@@ -2517,7 +3017,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
@@ -2533,7 +3033,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Unsafe usage of new static().',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Exceptions\\ContainerException.php',
@@ -2617,9 +3117,348 @@ return [
       ),
     )),
   ),
+  'G:\\Môj disk\\www\\renaltales\\src\\Http\\Response.php' => 
+  array (
+    0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\Response::$headers type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\Response.php',
+       'line' => 24,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\Response.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 24,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+  ),
   'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$headers type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 20,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 20,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$serverParams type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 23,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 23,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$cookieParams type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 24,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 24,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$queryParams type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 25,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 25,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$uploadedFiles type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 26,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 26,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$parsedBody type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 27,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 27,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    6 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Http\\ServerRequest::$attributes type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 28,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 28,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    7 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $cookieParams with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    8 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $headers with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    9 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $parsedBody with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    10 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $queryParams with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    11 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $serverParams with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    12 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::__construct() has parameter $uploadedFiles with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 30,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 30,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    13 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getServerParams() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 167,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 167,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    14 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getCookieParams() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 172,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 172,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    15 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::withCookieParams() has parameter $cookies with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 177,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 177,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    16 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getQueryParams() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 184,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 184,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    17 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::withQueryParams() has parameter $query with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 189,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 189,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    18 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getUploadedFiles() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 196,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 196,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    19 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::withUploadedFiles() has parameter $uploadedFiles with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 201,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 201,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    20 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Http\\ServerRequest::getParsedBody() never returns null so it can be removed from the return type.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
@@ -2635,7 +3474,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    21 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Http\\ServerRequest::getParsedBody() never returns object so it can be removed from the return type.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
@@ -2651,7 +3490,39 @@ return [
       array (
       ),
     )),
-    2 => 
+    22 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getParsedBody() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 208,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 208,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    23 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::withParsedBody() has parameter $data with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 213,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 213,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    24 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Property RenalTales\\Http\\ServerRequest::$parsedBody (array) does not accept array|object|null.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
@@ -2663,6 +3534,22 @@ return [
        'nodeLine' => 216,
        'nodeType' => 'PHPStan\\Node\\PropertyAssignNode',
        'identifier' => 'assign.propertyType',
+       'metadata' => 
+      array (
+      ),
+    )),
+    25 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Http\\ServerRequest::getAttributes() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'line' => 220,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Http\\ServerRequest.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 220,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
@@ -2820,22 +3707,6 @@ return [
       array (
       ),
     )),
-    4 => 
-    \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
-       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Repositories\\CachedLanguageRepository.php',
-       'line' => 570,
-       'canBeIgnored' => true,
-       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Repositories\\CachedLanguageRepository.php',
-       'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 570,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
-       'metadata' => 
-      array (
-      ),
-    )),
   ),
   'G:\\Môj disk\\www\\renaltales\\src\\Repositories\\DoctrineLanguageRepository.php' => 
   array (
@@ -2895,6 +3766,38 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Services\\PasswordHashingService::$config type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'line' => 21,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 21,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\PasswordHashingService::__construct() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'line' => 28,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 28,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Strict comparison using === between non-empty-string and false will always evaluate to false.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
        'line' => 63,
@@ -2909,7 +3812,23 @@ return [
       array (
       ),
     )),
-    1 => 
+    3 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\PasswordHashingService::getPasswordRequirements() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'line' => 133,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 133,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Offset int<0, 87> does not exist on \'\'|\'!@#$%^&*()_+-=[]{}|…\'|\'0123456789\'|\'0123456789!@#$%^&*(…\'|\'ABCDEFGHIJKLMNOPQRS…\'|\'abcdefghijklmnopqrs…\'.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
@@ -2921,6 +3840,38 @@ return [
        'nodeLine' => 206,
        'nodeType' => 'PhpParser\\Node\\Expr\\ArrayDimFetch',
        'identifier' => 'offsetAccess.notFound',
+       'metadata' => 
+      array (
+      ),
+    )),
+    5 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\PasswordHashingService::getAlgorithmInfo() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'line' => 340,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 340,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    6 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\PasswordHashingService::benchmarkPerformance() return type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'line' => 375,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\PasswordHashingService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 375,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
@@ -2997,21 +3948,37 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
+       'message' => 'Property RenalTales\\Services\\RateLimiterService::$config type has no value type specified in iterable type array.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
-       'line' => 32,
+       'line' => 21,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 32,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 21,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
     )),
     1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\RateLimiterService::__construct() has parameter $config with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
+       'line' => 29,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 29,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3027,7 +3994,7 @@ return [
       array (
       ),
     )),
-    2 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3043,7 +4010,7 @@ return [
       array (
       ),
     )),
-    3 => 
+    4 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3059,7 +4026,7 @@ return [
       array (
       ),
     )),
-    4 => 
+    5 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Services\\RateLimiterService::getRemainingAttempts() should return int but returns float|int<0, max>.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3075,7 +4042,7 @@ return [
       array (
       ),
     )),
-    5 => 
+    6 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Expression on left side of ?? is not nullable.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3091,7 +4058,7 @@ return [
       array (
       ),
     )),
-    6 => 
+    7 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Services\\RateLimiterService::getTimeUntilReset() should return int but returns float|int<0, max>.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3107,7 +4074,7 @@ return [
       array (
       ),
     )),
-    7 => 
+    8 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Method RenalTales\\Services\\RateLimiterService::getTimeUntilReset() should return int but returns float|int<0, max>.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3123,23 +4090,39 @@ return [
       array (
       ),
     )),
-    8 => 
+    9 => 
     \PHPStan\Analyser\Error::__set_state(array(
-       'message' => 'Constant APP_ROOT not found.',
+       'message' => 'Method RenalTales\\Services\\RateLimiterService::getAttempts() return type has no value type specified in iterable type array.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
-       'line' => 331,
+       'line' => 200,
        'canBeIgnored' => true,
        'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
        'traitFilePath' => NULL,
-       'tip' => 'Learn more at https://phpstan.org/user-guide/discovering-symbols',
-       'nodeLine' => 331,
-       'nodeType' => 'PhpParser\\Node\\Expr\\ConstFetch',
-       'identifier' => 'constant.notFound',
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 200,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
        'metadata' => 
       array (
       ),
     )),
-    9 => 
+    10 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Services\\RateLimiterService::saveAttempts() has parameter $attempts with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
+       'line' => 223,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 223,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    11 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Argument of an invalid type array<int, string>|false supplied for foreach, only iterables are supported.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Services\\RateLimiterService.php',
@@ -3159,6 +4142,22 @@ return [
   'G:\\Môj disk\\www\\renaltales\\src\\Views\\AbstractView.php' => 
   array (
     0 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Views\\AbstractView::$data type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\AbstractView.php',
+       'line' => 26,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\AbstractView.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 26,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to function method_exists() with RenalTales\\Models\\LanguageModel and \'getText\' will always evaluate to true.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\AbstractView.php',
@@ -3214,6 +4213,38 @@ return [
   array (
     0 => 
     \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Property RenalTales\\Views\\HomeView::$supportedLanguages type has no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
+       'line' => 22,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 22,
+       'nodeType' => 'PHPStan\\Node\\ClassPropertyNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    1 => 
+    \PHPStan\Analyser\Error::__set_state(array(
+       'message' => 'Method RenalTales\\Views\\HomeView::__construct() has parameter $supportedLanguages with no value type specified in iterable type array.',
+       'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
+       'line' => 31,
+       'canBeIgnored' => true,
+       'filePath' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
+       'traitFilePath' => NULL,
+       'tip' => 'See: https://phpstan.org/blog/solving-phpstan-no-value-type-specified-in-iterable-type',
+       'nodeLine' => 31,
+       'nodeType' => 'PHPStan\\Node\\InClassMethodNode',
+       'identifier' => 'missingType.iterableValue',
+       'metadata' => 
+      array (
+      ),
+    )),
+    2 => 
+    \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to function method_exists() with RenalTales\\Models\\LanguageModel and \'getText\' will always evaluate to true.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
        'line' => 468,
@@ -3228,7 +4259,7 @@ return [
       array (
       ),
     )),
-    1 => 
+    3 => 
     \PHPStan\Analyser\Error::__set_state(array(
        'message' => 'Call to function method_exists() with RenalTales\\Models\\LanguageModel and \'getCurrentLanguage\' will always evaluate to true.',
        'file' => 'G:\\Môj disk\\www\\renaltales\\src\\Views\\HomeView.php',
