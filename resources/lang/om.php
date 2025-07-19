@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Seenaa Kalee',
     'welcome' => 'Akkam',

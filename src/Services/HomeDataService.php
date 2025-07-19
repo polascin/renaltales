@@ -8,10 +8,10 @@ use RenalTales\Helpers\Translation;
 
 /**
  * Home Data Service
- * 
+ *
  * Handles data preparation for the home page.
  * Extracts business logic from view components.
- * 
+ *
  * @package RenalTales\Services
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -39,7 +39,7 @@ class HomeDataService
     public function getHomePageData(): array
     {
         $currentLanguage = $this->translation->getCurrentLanguage();
-        
+
         return [
             'meta' => $this->getMetaData($currentLanguage),
             'hero' => $this->getHeroData(),

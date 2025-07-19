@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
  * No dependency injection, no abstract classes, just simple rendering.
  *
  * @package RenalTales\Controllers
- * @version 2025.v3.1.dev  
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class SimplePageController implements ControllerInterface
@@ -26,19 +26,19 @@ class SimplePageController implements ControllerInterface
     {
         $page = $this->getPage($request);
         $data = $this->getData($request);
-        
+
         // Direct template rendering: $template->render('home', ['data' => $data])
         $template = new Template();
         $output = $template->render($page, ['data' => $data]);
-        
+
         return $this->htmlResponse($output);
     }
-    
+
     private function getPage(ServerRequestInterface $request): string
     {
         return $request->getQueryParams()['page'] ?? 'home';
     }
-    
+
     private function getData(ServerRequestInterface $request): array
     {
         return [
@@ -47,12 +47,12 @@ class SimplePageController implements ControllerInterface
             'content' => 'Welcome to RenalTales community platform'
         ];
     }
-    
+
     private function htmlResponse(string $html): ResponseInterface
     {
         return new Response(200, ['Content-Type' => 'text/html'], $html);
     }
-    
+
     public function getName(): string
     {
         return 'SimplePageController';

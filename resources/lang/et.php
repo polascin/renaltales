@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Neerude lood',
     'welcome' => 'Tere tulemast',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Vearaport',
     'feature_request' => 'Funktsioonitaotlus'
 ];
-?>

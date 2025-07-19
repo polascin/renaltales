@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Mga Sugilanon sa Bato',
     'welcome' => 'Maayad nga pag-abot',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Bug report',
     'feature_request' => 'Feature request'
 ];
-?>

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 /**
  * Error Component
- * 
+ *
  * Simple function-based component for error page rendering.
  * Replaces heavy ErrorView class with lightweight function.
- * 
+ *
  * @package RenalTales\Components
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -33,13 +33,13 @@ function render_error_page(Throwable $exception, array $options = []): string
     $debugMode = $options['debug'] ?? false;
     $dataService = new ErrorDataService($debugMode);
     $data = $dataService->getErrorData($exception);
-    
+
     // Start output buffering
     ob_start();
-    
+
     // Include error template
     include __DIR__ . '/../../resources/components/error_layout.php';
-    
+
     return ob_get_clean();
 }
 
@@ -55,7 +55,7 @@ function render_simple_error(string $title, string $message, int $code = 500): s
 {
     $safeTitle = esc_html($title);
     $safeMessage = esc_html($message);
-    
+
     return <<<HTML
     <!DOCTYPE html>
     <html lang="en">
@@ -108,12 +108,12 @@ function render_debug_info(array $debugInfo): string
     if (empty($debugInfo)) {
         return '';
     }
-    
+
     $message = esc_html($debugInfo['message'] ?? '');
     $file = esc_html($debugInfo['file'] ?? '');
     $line = (int)($debugInfo['line'] ?? 0);
     $trace = esc_html($debugInfo['trace'] ?? '');
-    
+
     return <<<HTML
     <div class="debug-info" style="
         margin-top: 30px; padding: 20px; background: #f8f9fa; 

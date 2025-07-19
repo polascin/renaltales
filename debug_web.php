@@ -62,7 +62,7 @@ try {
     echo "File: " . $e->getFile() . ":" . $e->getLine() . "\n";
     echo "\nStack Trace:\n";
     echo $e->getTraceAsString() . "\n";
-    
+
     // Show previous exceptions
     $prev = $e->getPrevious();
     while ($prev) {

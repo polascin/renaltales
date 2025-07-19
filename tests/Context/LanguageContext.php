@@ -45,11 +45,11 @@ class LanguageContext implements Context
     public function theCurrentLanguageIs(string $code): void
     {
         $result = $this->languageService->switchToLanguage($code);
-        
+
         if (!$result) {
             throw new \Exception("Failed to switch to language '$code'");
         }
-        
+
         $this->currentLanguage = $code;
     }
 
@@ -59,7 +59,7 @@ class LanguageContext implements Context
     public function theDefaultLanguageIs(string $code): void
     {
         $defaultLanguage = $this->languageService->getDefaultLanguage();
-        
+
         if ($defaultLanguage->getCode() !== $code) {
             throw new \Exception("Default language is not '$code'");
         }
@@ -71,7 +71,7 @@ class LanguageContext implements Context
     public function iSwitchToLanguage(string $code): void
     {
         $result = $this->languageService->switchToLanguage($code);
-        
+
         if ($result) {
             $this->currentLanguage = $code;
         }
@@ -91,7 +91,7 @@ class LanguageContext implements Context
     public function iRequestAllActiveLanguages(): void
     {
         $languages = $this->languageService->getActiveLanguages();
-        
+
         if (empty($languages)) {
             throw new \Exception('No active languages found');
         }
@@ -103,7 +103,7 @@ class LanguageContext implements Context
     public function theCurrentLanguageShouldBe(string $code): void
     {
         $actualCode = $this->languageService->getCurrentLanguageCode();
-        
+
         if ($actualCode !== $code) {
             throw new \Exception("Expected current language to be '$code' but got '$actualCode'");
         }
@@ -115,7 +115,7 @@ class LanguageContext implements Context
     public function theLanguageShouldBeValid(string $code): void
     {
         $isValid = $this->languageService->isValidLanguageCode($code);
-        
+
         if (!$isValid) {
             throw new \Exception("Language code '$code' should be valid");
         }
@@ -127,7 +127,7 @@ class LanguageContext implements Context
     public function theLanguageShouldBeInvalid(string $code): void
     {
         $isValid = $this->languageService->isValidLanguageCode($code);
-        
+
         if ($isValid) {
             throw new \Exception("Language code '$code' should be invalid");
         }
@@ -139,11 +139,11 @@ class LanguageContext implements Context
     public function iShouldBeAbleToSwitchTo(string $code): void
     {
         $result = $this->languageService->switchToLanguage($code);
-        
+
         if (!$result) {
             throw new \Exception("Should be able to switch to language '$code'");
         }
-        
+
         $this->currentLanguage = $code;
     }
 
@@ -153,7 +153,7 @@ class LanguageContext implements Context
     public function iShouldNotBeAbleToSwitchTo(string $code): void
     {
         $result = $this->languageService->switchToLanguage($code);
-        
+
         if ($result) {
             throw new \Exception("Should not be able to switch to language '$code'");
         }
@@ -166,7 +166,7 @@ class LanguageContext implements Context
     {
         $languages = $this->languageService->getActiveLanguages();
         $actualCount = count($languages);
-        
+
         if ($actualCount < $count) {
             throw new \Exception("Expected at least $count active languages but found $actualCount");
         }
@@ -178,11 +178,11 @@ class LanguageContext implements Context
     public function theLanguagePreferenceShouldPersist(): void
     {
         $currentCode = $this->languageService->getCurrentLanguageCode();
-        
+
         // Create a new service instance to test persistence
         $newService = $this->app->get(LanguageService::class);
         $persistedCode = $newService->getCurrentLanguageCode();
-        
+
         if ($currentCode !== $persistedCode) {
             throw new \Exception("Language preference did not persist. Expected '$currentCode' but got '$persistedCode'");
         }

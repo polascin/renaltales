@@ -115,7 +115,7 @@ class WebContext implements Context
     public function iSubmitTheFormWith(\Behat\Gherkin\Node\TableNode $table): void
     {
         $data = $table->getRowsHash();
-        
+
         // Simulate form submission
         $this->response = [
             'status' => 200,

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Albanian language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'I çaktivizuar',
     'available' => 'I disponueshëm',
     'not_available' => 'Nuk është i disponueshëm',
-    
+
     // Error messages
     'application_error' => 'Gabim i Aplikacionit',
     'service_unavailable' => 'Shërbimi Përkohësisht i Padisponueshëm',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Informacioni i diagnostikimit nuk është i disponueshëm për arsye sigurie.',
     'access_denied' => 'Akses i Mohuar',
     'security_violation' => 'Shkelje sigurie e zbuluar. Sesioni u përfundua.',
-    
+
     // Session management
     'session_init_failed' => 'Inicializimi i menaxhuesit të sesionit dështoi',
     'session_name_failed' => 'Dështoi të vendosë emrin e sesionit',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Dështoi të krijojë direktorinë e regjistrit',
     'session_security_log_failed' => 'Dështoi të shkruajë regjistrin e shkeljes së sigurisë',
     'session_security_log_injection_failed' => 'Regjistrimi i sigurisë dështoi',
-    
+
     // Security messages
     'security_violation_detected' => 'Shkelje sigurie e zbuluar. Sesioni u përfundua.',
     'security_user_agent_mismatch' => 'Agjenti i përdoruesit nuk përputhet',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Tentativë rrëmbimi sesioni e zbuluar',
     'security_invalid_token' => 'Token sigurie i pavlefshëm',
     'security_token_expired' => 'Token sigurie ka skaduar',
-    
+
     // Server information
     'server_information' => 'Informacion i Serverit',
     'application_information' => 'Informacion i Aplikacionit',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Skedari i Gjuhës Aktuale',
     'current_language_flag' => 'Flamuri i Gjuhës Aktuale',
     'current_language_flag_alt' => 'Flamuri i gjuhës aktuale',
-    
+
     // Date and time
     'datetime_placeholder' => 'Këtu do të shfaqet data, koha, duke përfshirë kohën e detajuar të internetit @beat.',
     'debug_mode_enabled' => 'Modaliteti i diagnostikimit është i aktivizuar.',
     'service_information' => 'Informacion i Shërbimit',
     'user_information' => 'Informacion i përdoruesit:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Jetëgjatësia',
     'cookie_path' => 'Rruga',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'I Sigurt',
     'cookie_httponly' => 'Vetëm HTTP',
     'cookie_samesite' => 'I Njëjtë Faqe',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Vulë Kohore',
     'log_entry_ip' => 'Adresa IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID e Sesionit',
     'log_entry_reason' => 'Arsyeja',
     'log_entry_request_uri' => 'URI e Kërkesës',
-    
+
     // User interface
     'welcome_user' => 'Mirë se vini',
     'user' => 'Përdorues',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profili',
     'settings' => 'Cilësimet',
     'register' => 'Regjistrohu',
-    
+
     // Content sections
     'important_notes' => 'Shënime të Rëndësishme',
     'about_renal_tales' => 'Rreth Historive të Veshkave',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'I ri në komunitetin tonë? Filloni duke lexuar disa histori, prezantoni veten, dhe merrni parasysh ndarjen e përvojës tuaj kur të jeni gati.',
     'support_resources' => 'Burimet e Mbështetjes',
     'support_description' => 'Nëse keni nevojë për ndihmë të menjëhershme mjekësore ose jeni në krizë, ju lutemi kontaktoni ofruesin tuaj të kujdesit shëndetësor ose shërbimet e emergjencës.',
-    
+
     // Home page
     'welcome_home' => 'Mirë se vini në Historitë e Veshkave',
     'home_intro' => 'Mirë se vini në komunitetin tonë mbështetës për njerëzit e prekur nga çrregullimet e veshkave. Këtu mund të ndani historinë tuaj, të lexoni përvojat e të tjerëve, dhe të gjeni mbështetje nga njerëz që kuptojnë udhëtimin tuaj. Bashkohuni me ne për të u lidhur me të tjerë, për të ndarë përvojat tuaja, dhe për të gjetur mbështetje në komunitetin tonë. Së bashku, ne mund të bëjmë ndryshimin në jetën e atyre që preken nga çrregullimet e veshkave. Faleminderit që jeni pjesë e komunitetit tonë!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Bashkohuni me Komunitetin',
     'join_community_desc' => 'Lidhuni me të tjerë, merrni pjesë në diskutime, dhe ndërtoni miqësi të qëndrueshme.',
     'explore_community' => 'Eksploroni Komunitetin',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Seksioni i historive së shpejti...',
     'community_coming_soon' => 'Seksioni i komunitetit së shpejti...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Seksioni i historive të mia së shpejti...',
     'profile_coming_soon' => 'Seksioni i profilit së shpejti...',
     'settings_coming_soon' => 'Seksioni i cilësimeve së shpejti...',
-    
+
     // Login page
     'login_welcome' => 'Mirë se u kthyet',
     'login_subtitle' => 'Kyçuni për të hyrë në llogarinë tuaj',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Regjistrohuni këtu',
     'back_to_home' => 'Kthehu në Shtëpi',
     'please_fill_required_fields' => 'Ju lutemi plotësoni të gjitha fushat e kërkuara.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Token sigurie i pavlefshëm. Ju lutemi provoni përsëri.',
     'email_required' => 'Email-i është i kërkuar.',
     'email_invalid' => 'Ju lutemi shkruani një adresë email të vlefshme.',
     'password_required' => 'Fjalëkalimi është i kërkuar.',
     'login_failed' => 'Email ose fjalëkalim i pavlefshëm.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Zgjedhja e gjuhës nuk është e disponueshme',
-    
+
     // Time and date display
     'day' => 'Ditë',
     'year' => 'Vit',
     'week' => 'Javë',
     'today_is' => 'Sot është',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Zgjedhja e gjuhës',
     'language_change' => 'Ndryshoni gjuhën',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Gjuha u ndryshua me sukses',
     'language_switch_error' => 'Gabim gjatë ndryshimit të gjuhës'
 ];
-?>

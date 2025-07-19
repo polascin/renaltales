@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Straeon yr Arennau',
     'welcome' => 'Croeso',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Adroddiad gwall',
     'feature_request' => 'Cais nodwedd'
 ];
-?>

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Turkmen language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Ýapyk',
     'available' => 'Elýeterli',
     'not_available' => 'Elýeterli däl',
-    
+
     // Error messages
     'application_error' => 'Programma ýalňyşlygy',
     'service_unavailable' => 'Hyzmat wagtlaýyn elýeterli däl',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Düzeltmek maglumatlary howpsuzlyk sebäpleri üçin elýeterli däl.',
     'access_denied' => 'Giriş ret edildi',
     'security_violation' => 'Howpsuzlyk bozulmagy tapyldy. Sessiýa gutardy.',
-    
+
     // Session management
     'session_init_failed' => 'Sessiýa dolandyryjysyny başlatmak şowsuz boldy',
     'session_name_failed' => 'Sessiýa adyny kesgitlemegiň şowsuz bolmagy',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Log direktoriýasyny döretmek şowsuz boldy',
     'session_security_log_failed' => 'Howpsuzlyk bozulmasyny log etmek şowsuz boldy',
     'session_security_log_injection_failed' => 'Howpsuzlyk log ýazmagy şowsuz boldy',
-    
+
     // Security messages
     'security_violation_detected' => 'Howpsuzlyk bozulmagy tapyldy. Sessiýa gutardy.',
     'security_user_agent_mismatch' => 'Ulanyjy agenti gabat gelmeýär',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Sessiýany ogurlama synanyşygy tapyldy',
     'security_invalid_token' => 'Nädogry howpsuzlyk belgisi',
     'security_token_expired' => 'Howpsuzlyk belgisiniň wagty gutardy',
-    
+
     // Server information
     'server_information' => 'Server maglumatlary',
     'application_information' => 'Programma maglumatlary',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Häzirki dil faýly',
     'current_language_flag' => 'Häzirki dil baýdagy',
     'current_language_flag_alt' => 'Häzirki dil baýdagy',
-    
+
     // Date and time
     'datetime_placeholder' => 'Bu ýerde sene, wagt, şeýle hem jikme-jik internet wagty @beat görkeziler.',
     'debug_mode_enabled' => 'Düzeltmek re modelimi açyk.',
     'service_information' => 'Hyzmat maglumatlary',
     'user_information' => 'Ulanyjy maglumatlary:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Ömri',
     'cookie_path' => 'Ýol',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Howpsuz',
     'cookie_httponly' => 'Diňe HTTP',
     'cookie_samesite' => 'Şol bir saýt',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Wagt belgisi',
     'log_entry_ip' => 'IP salgysy',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Sessiýa ID-sy',
     'log_entry_reason' => 'Sebäbi',
     'log_entry_request_uri' => 'Haýyş URI',
-    
+
     // User interface
     'welcome_user' => 'Hoş geldiňiz',
     'user' => 'Ulanyjy',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Sazlamalar',
     'register' => 'Hasaba durmak',
-    
+
     // Content sections
     'important_notes' => 'Möhüm bellikler',
     'about_renal_tales' => 'Böwrek hekaýalary hakynda',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Jemgyýetimizde täze? Käbir hekaýalary okamakdan başlaň, özüňizi tanyşdyryň we taýyn bolanyňyzda öz tejriäňizi paýlaşmagy göz öňünde tutuň.',
     'support_resources' => 'Goldaw çeşmeleri',
     'support_description' => 'Gyssagly lukmançylyk kömegine mätäç bolsaňyz ýa-da kynçylykda bolsaňyz, saglyk bejergisini üpjün ediji ýa-da gyssagly hyzmatlar bilen habarlaşyň.',
-    
+
     // Home page
     'welcome_home' => 'Böwrek hekaýalaryna hoş geldiňiz',
     'home_intro' => 'Böwrek keselleri bolan adamlar üçin goldaýjy jemgyýetimize hoş geldiňiz. Bu ýerde öz hekaýaňyzy paýlaşyp, beýlekileriň tejribelerini okap, syýahatyňyzy düşünýän adamlardan goldaw tapyp bilersiňiz. Başgalar bilen baglanşmak, tejribäňizi paýlaşmak we jemgyýetimizdäki goldawy tapmak üçin bize goşulyň. Bilelikde böwrek keselleri bolan adamlaryň durmuşynda üýtgeşiklik getirip bileris. Jemgyýetimiziň bir bölegi bolanyňyz üçin sag boluň!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Jemgyýete goşulyň',
     'join_community_desc' => 'Başgalar bilen baglanşyň, çekişmelere gatnaşyň we dowamly dostluklar guruň.',
     'explore_community' => 'Jemgyýeti öwreniň',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Hekaýalar bölümi gysga wagtyň içinde gelýär...',
     'community_coming_soon' => 'Jemgyýet bölümi gysga wagtyň içinde gelýär...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Meniň hekaýalarym bölümi gysga wagtyň içinde gelýär...',
     'profile_coming_soon' => 'Profil bölümi gysga wagtyň içinde gelýär...',
     'settings_coming_soon' => 'Sazlamalar bölümi gysga wagtyň içinde gelýär...',
-    
+
     // Login page
     'login_welcome' => 'Hoş geldiňiz gaýdyp',
     'login_subtitle' => 'Hasabyňyza girmek üçin giriň',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Bu ýerde hasaba duruň',
     'back_to_home' => 'Öýe gaýt',
     'please_fill_required_fields' => 'Ähli zerur meýdanlary dolduryň.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Nädogry howpsuzlyk belgisi. Gaýtadan synanyşyň.',
     'email_required' => 'E-poçta zerur.',
     'email_invalid' => 'Dogry e-poçta salgysy giriziň.',
     'password_required' => 'Parol zerur.',
     'login_failed' => 'Nädogry e-poçta ýa-da parol.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Dil saýlaýşy elýeterli däl',
-    
+
     // Time and date display
     'day' => 'Gün',
     'year' => 'Ýyl',
     'week' => 'Hepde',
     'today_is' => 'Şu gün',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Dil saýlaýşy',
     'language_change' => 'Dili üýtgetmek',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Dil üstünlikli üýtgedildi',
     'language_switch_error' => 'Dil üýtgetmekde ýalňyşlyk'
 ];
-?>

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Emboozi z Ensigo',
     'welcome' => 'Tukusanyukidde',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Okuloopa ensobi',
     'feature_request' => 'Okusaba ebyongerwako'
 ];
-?>

@@ -44,7 +44,7 @@ class MultilingualContext implements Context
     public function theApplicationSupportsMultipleLanguages(): void
     {
         $languages = $this->languageService->getActiveLanguages();
-        
+
         if (count($languages) < 2) {
             throw new \Exception('Application should support at least 2 languages');
         }
@@ -75,7 +75,7 @@ class MultilingualContext implements Context
     public function iSwitchTheInterfaceLanguageTo(string $language): void
     {
         $result = $this->languageService->switchToLanguage($language);
-        
+
         if (!$result) {
             throw new \Exception("Failed to switch interface language to '$language'");
         }
@@ -99,7 +99,7 @@ class MultilingualContext implements Context
     public function theInterfaceShouldBeDisplayedIn(string $language): void
     {
         $currentLanguage = $this->languageService->getCurrentLanguageCode();
-        
+
         if ($currentLanguage !== $language) {
             throw new \Exception("Interface should be in '$language' but is in '$currentLanguage'");
         }
@@ -111,7 +111,7 @@ class MultilingualContext implements Context
     public function allTextShouldBeProperlyTranslated(): void
     {
         $currentLanguage = $this->languageService->getCurrentLanguageCode();
-        
+
         if (!isset($this->translations[$currentLanguage])) {
             throw new \Exception("No translations found for language '$currentLanguage'");
         }
@@ -123,7 +123,7 @@ class MultilingualContext implements Context
     public function theLanguageSwitcherShouldBeAvailable(): void
     {
         $languages = $this->languageService->getActiveLanguages();
-        
+
         if (count($languages) < 2) {
             throw new \Exception('Language switcher requires at least 2 active languages');
         }
@@ -135,7 +135,7 @@ class MultilingualContext implements Context
     public function theFallbackLanguageShouldBe(string $language): void
     {
         $defaultLanguage = $this->languageService->getDefaultLanguage();
-        
+
         if ($defaultLanguage->getCode() !== $language) {
             throw new \Exception("Fallback language should be '$language' but is '{$defaultLanguage->getCode()}'");
         }
@@ -157,11 +157,11 @@ class MultilingualContext implements Context
     public function languagePreferencesShouldBeRemembered(): void
     {
         $currentLanguage = $this->languageService->getCurrentLanguageCode();
-        
+
         // Create a new service instance to test persistence
         $newService = $this->app->get(LanguageService::class);
         $persistedLanguage = $newService->getCurrentLanguageCode();
-        
+
         if ($currentLanguage !== $persistedLanguage) {
             throw new \Exception("Language preference not remembered. Expected '$currentLanguage' but got '$persistedLanguage'");
         }

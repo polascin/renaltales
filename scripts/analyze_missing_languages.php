@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Important Languages Analysis
  * Identifies missing important world languages from the Renal Tales application
@@ -31,7 +32,7 @@ echo "- Detector reports: " . count($supportedLanguages) . " languages\n\n";
 $importantLanguages = [
     'Top 10 Most Spoken Languages (Native + Second Language)' => [
         'en' => 'English (1.5B speakers)',
-        'zh' => 'Chinese/Mandarin (1.1B speakers)', 
+        'zh' => 'Chinese/Mandarin (1.1B speakers)',
         'hi' => 'Hindi (602M speakers)',
         'es' => 'Spanish (559M speakers)',
         'fr' => 'French (280M speakers)',
@@ -41,7 +42,7 @@ $importantLanguages = [
         'pt' => 'Portuguese (263M speakers)',
         'id' => 'Indonesian (199M speakers)'
     ],
-    
+
     'Major European Languages' => [
         'de' => 'German (134M speakers)',
         'it' => 'Italian (68M speakers)',
@@ -64,7 +65,7 @@ $importantLanguages = [
         'lv' => 'Latvian (1.75M speakers)',
         'et' => 'Estonian (1.1M speakers)'
     ],
-    
+
     'Major Asian Languages' => [
         'ja' => 'Japanese (125M speakers)',
         'ko' => 'Korean (81M speakers)',
@@ -95,7 +96,7 @@ $importantLanguages = [
         'tg' => 'Tajik (8.5M speakers)',
         'mn' => 'Mongolian (5.7M speakers)'
     ],
-    
+
     'Major African Languages' => [
         'sw' => 'Swahili (200M speakers)',
         'am' => 'Amharic (57M speakers)',
@@ -109,7 +110,7 @@ $importantLanguages = [
         'mg' => 'Malagasy (25M speakers)',
         'rw' => 'Kinyarwanda (12M speakers)'
     ],
-    
+
     'Medical & Research Important Languages' => [
         'la' => 'Latin (medical terminology)',
         'sa' => 'Sanskrit (Ayurveda)',
@@ -121,7 +122,7 @@ $importantLanguages = [
         'fo' => 'Faroese (small populations)',
         'lb' => 'Luxembourgish (EU research)'
     ],
-    
+
     'Regional Medical Centers' => [
         'ms' => 'Malay (Southeast Asia medical hub)',
         'tl' => 'Filipino/Tagalog (Philippines)',
@@ -142,13 +143,13 @@ echo "=================================\n\n";
 foreach ($importantLanguages as $category => $languages) {
     echo "$category:\n";
     echo str_repeat('-', strlen($category)) . "\n";
-    
+
     $categoryMissing = [];
     $categorySupported = 0;
-    
+
     foreach ($languages as $langCode => $description) {
         $totalImportant++;
-        
+
         if (in_array($langCode, $actualLanguages)) {
             echo "✅ $langCode - $description (SUPPORTED)\n";
             $supportedImportant++;
@@ -159,15 +160,15 @@ foreach ($importantLanguages as $category => $languages) {
             $categoryMissing[] = $langCode;
         }
     }
-    
+
     $categoryTotal = count($languages);
     $categoryPercent = round(($categorySupported / $categoryTotal) * 100, 1);
     echo "\nCategory Summary: $categorySupported/$categoryTotal supported ($categoryPercent%)\n";
-    
+
     if (!empty($categoryMissing)) {
         echo "Missing: " . implode(', ', $categoryMissing) . "\n";
     }
-    
+
     echo "\n";
 }
 
@@ -182,20 +183,20 @@ echo "Coverage of important languages: " . round(($supportedImportant / $totalIm
 if (!empty($missingImportant)) {
     echo "PRIORITY MISSING LANGUAGES:\n";
     echo "===========================\n";
-    
+
     // Group by category for recommendations
     $missingByCategory = [];
     foreach ($missingImportant as $missing) {
         $missingByCategory[$missing['category']][] = $missing;
     }
-    
+
     foreach ($missingByCategory as $category => $missing) {
         echo "\n$category:\n";
         foreach ($missing as $lang) {
             echo "  - {$lang['code']}: {$lang['description']}\n";
         }
     }
-    
+
     echo "\nRECOMMENDATIONS:\n";
     echo "================\n";
     echo "High Priority (Medical/Research Centers):\n";
@@ -208,7 +209,7 @@ if (!empty($missingImportant)) {
             }
         }
     }
-    
+
     echo "\nMedium Priority (EU/Large Populations):\n";
     $mediumPriority = ['ga', 'cy', 'eu', 'lb'];
     foreach ($mediumPriority as $lang) {
@@ -225,22 +226,22 @@ if (!empty($missingImportant)) {
 
 echo "\nCURRENT LANGUAGE FILES BREAKDOWN:\n";
 echo "==================================\n";
-echo "European languages: " . count(array_filter($actualLanguages, function($lang) {
+echo "European languages: " . count(array_filter($actualLanguages, function ($lang) {
     $european = ['en', 'en-us', 'de', 'fr', 'es', 'it', 'pt', 'ru', 'pl', 'nl', 'el', 'cs', 'hu', 'sv', 'da', 'no', 'fi', 'sk', 'bg', 'hr', 'sl', 'lv', 'lt', 'et', 'ro', 'uk', 'sr', 'mk', 'sq', 'be', 'is', 'mt', 'ga', 'cy', 'eu', 'ca', 'gl', 'lb', 'rm', 'fo', 'kl', 'se', 'gd'];
     return in_array($lang, $european);
 })) . "\n";
 
-echo "Asian languages: " . count(array_filter($actualLanguages, function($lang) {
+echo "Asian languages: " . count(array_filter($actualLanguages, function ($lang) {
     $asian = ['zh', 'hi', 'ar', 'bn', 'ur', 'id', 'ja', 'ko', 'vi', 'th', 'ms', 'tl', 'fa', 'he', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ne', 'si', 'my', 'km', 'lo', 'ka', 'hy', 'az', 'kk', 'ky', 'uz', 'tg', 'mn', 'jv', 'yue', 'wuu', 'bho', 'ps', 'su', 'or', 'as', 'mai', 'bh', 'sa', 'sd', 'dv', 'tk', 'bo', 'ug'];
     return in_array($lang, $asian);
 })) . "\n";
 
-echo "African languages: " . count(array_filter($actualLanguages, function($lang) {
+echo "African languages: " . count(array_filter($actualLanguages, function ($lang) {
     $african = ['sw', 'am', 'ha', 'yo', 'ig', 'zu', 'af', 'xh', 'so', 'mg', 'rw', 'rn', 'lg', 'sn', 'ny', 'wo', 'ln', 'kg', 'lua', 'sg', 'ff', 'bm', 'ak', 'om', 'ti', 'nd', 'nr', 'nso', 'st', 'ss', 've', 'ts', 'tn'];
     return in_array($lang, $african);
 })) . "\n";
 
-echo "Other languages: " . count(array_filter($actualLanguages, function($lang) {
+echo "Other languages: " . count(array_filter($actualLanguages, function ($lang) {
     $other = ['ht', 'qu', 'gn', 'ay', 'eo', 'ceb', 'hil', 'war', 'bcl', 'pam', 'ilo'];
     return in_array($lang, $other);
 })) . "\n";

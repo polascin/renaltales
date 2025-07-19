@@ -1,4 +1,6 @@
-<?php if (!defined('COMPONENT_TEMPLATE')) die('Direct access denied'); ?>
+<?php if (!defined('COMPONENT_TEMPLATE')) {
+    die('Direct access denied');
+} ?>
 <!DOCTYPE html>
 <html lang="<?= esc_attr($page_meta['language'] ?? 'en') ?>">
 <head>

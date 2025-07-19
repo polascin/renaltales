@@ -84,11 +84,11 @@ echo "   - Testing login rate limit for IP: $testIP\n";
 for ($i = 1; $i <= 7; $i++) {
     $allowed = !$securityManager->isRateLimited('login', $testIP);
     echo "   - Attempt $i: " . ($allowed ? "ALLOWED" : "BLOCKED") . "\n";
-    
+
     if ($allowed) {
         $securityManager->recordRateLimitAttempt('login', $testIP);
     }
-    
+
     $remaining = $securityManager->getRemainingAttempts('login', $testIP);
     echo "     Remaining attempts: $remaining\n";
 }
@@ -106,30 +106,30 @@ $testPasswords = [
 
 foreach ($testPasswords as $password) {
     echo "   - Testing password: $password\n";
-    
+
     // Validate password requirements
     $isValid = $securityManager->validatePassword($password);
     echo "     Meets requirements: " . ($isValid ? "YES" : "NO") . "\n";
-    
+
     if ($isValid) {
         try {
             // Hash the password
             $hash = $securityManager->hashPassword($password);
             echo "     Hash: " . substr($hash, 0, 50) . "...\n";
-            
+
             // Verify the password
             $verified = $securityManager->verifyPassword($password, $hash);
             echo "     Verification: " . ($verified ? "SUCCESS" : "FAILED") . "\n";
-            
+
             // Test wrong password
             $wrongVerified = $securityManager->verifyPassword('wrongpassword', $hash);
             echo "     Wrong password test: " . ($wrongVerified ? "FAILED" : "SUCCESS") . "\n";
-            
+
         } catch (Exception $e) {
             echo "     Error: " . $e->getMessage() . "\n";
         }
     }
-    
+
     // Calculate strength
     $strength = $securityManager->calculatePasswordStrength($password);
     echo "     Strength: $strength/100\n\n";

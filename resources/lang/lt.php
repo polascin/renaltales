@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Inkstų istorijos',
     'welcome' => 'Sveiki atvykę',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Klaidos pranešimas',
     'feature_request' => 'Funkcijos užklausa'
 ];
-?>

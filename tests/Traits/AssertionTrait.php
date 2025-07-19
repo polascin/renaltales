@@ -15,7 +15,7 @@ trait AssertionTrait
     protected function assertArrayHasKeys(array $expectedKeys, array $array, string $message = ''): void
     {
         $this->assertIsArray($array);
-        
+
         foreach ($expectedKeys as $key) {
             $this->assertArrayHasKey($key, $array, $message ?: "Array should have key '{$key}'");
         }
@@ -27,7 +27,7 @@ trait AssertionTrait
     protected function assertArrayNotHasKeys(array $keys, array $array, string $message = ''): void
     {
         $this->assertIsArray($array);
-        
+
         foreach ($keys as $key) {
             $this->assertArrayNotHasKey($key, $array, $message ?: "Array should not have key '{$key}'");
         }
@@ -124,7 +124,7 @@ trait AssertionTrait
             $timestamp,
             $message ?: "'{$timestamp}' is not a valid timestamp"
         );
-        
+
         $this->assertLessThanOrEqual(
             time(),
             $timestamp,
@@ -143,7 +143,7 @@ trait AssertionTrait
             $dateTime,
             $message ?: "'{$date}' is not a valid date in format '{$format}'"
         );
-        
+
         $this->assertEquals(
             $date,
             $dateTime->format($format),
@@ -161,7 +161,7 @@ trait AssertionTrait
             $value,
             $message ?: "Value '{$value}' should be >= '{$min}'"
         );
-        
+
         $this->assertLessThanOrEqual(
             $max,
             $value,
@@ -212,14 +212,14 @@ trait AssertionTrait
     {
         $exceptionThrown = false;
         $actualMessage = '';
-        
+
         try {
             $callback();
         } catch (\Exception $e) {
             $exceptionThrown = true;
             $actualMessage = $e->getMessage();
         }
-        
+
         $this->assertTrue($exceptionThrown, 'Expected exception was not thrown');
         $this->assertEquals($expectedMessage, $actualMessage, 'Exception message does not match expected');
     }
@@ -230,7 +230,7 @@ trait AssertionTrait
     protected function assertCollectionContainsOnly(string $expectedClass, array $collection, string $message = ''): void
     {
         $this->assertNotEmpty($collection, $message ?: 'Collection should not be empty');
-        
+
         foreach ($collection as $item) {
             $this->assertInstanceOf(
                 $expectedClass,
@@ -263,7 +263,7 @@ trait AssertionTrait
                 $response->hasHeader($header),
                 $message ?: "Response should have header '{$header}'"
             );
-            
+
             if ($value !== null) {
                 $this->assertEquals(
                     $value,
@@ -296,7 +296,7 @@ trait AssertionTrait
             $key,
             $message ?: "'{$key}' is not a valid cache key"
         );
-        
+
         $this->assertLessThanOrEqual(
             250,
             strlen($key),

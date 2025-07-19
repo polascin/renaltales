@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Venda language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Zwo dzimwa',
     'available' => 'Zwo wanala',
     'not_available' => 'A zwo wanali',
-    
+
     // Error messages
     'application_error' => 'Vhukhakhi ha Apo',
     'service_unavailable' => 'Tshumelo a i Wanali Zwino',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Debug mode a i koni u shumiswa hu tshi itwa u fhufhiwa nga vhupfesesefhi.',
     'access_denied' => 'U Kona ho Hanwaho',
     'security_violation' => 'U thetshelesa ha vhupfesesefhi ho wanwa. Session yo fhedziswa.',
-    
+
     // Session management
     'session_init_failed' => 'U thoma ha mukhoni wa session ho fhufhadzea',
     'session_name_failed' => 'U vhea dzina la session ho fhufhadzea',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'U vhumbha directori ya log ho fhufhadzea',
     'session_security_log_failed' => 'U nwala log ya u thetshelesa vhupfesesefhi ho fhufhadzea',
     'session_security_log_injection_failed' => 'Log injection ya vhupfesesefhi yo fhufhadzea',
-    
+
     // Security messages
     'security_violation_detected' => 'U thetshelesa ha vhupfesesefhi ho wanwa. Session yo fhedziswa.',
     'security_user_agent_mismatch' => 'User agent a zwo fani',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'U lingedza u amba session ho wanwa',
     'security_invalid_token' => 'Token ya vhupfesesefhi isina ndaedzo',
     'security_token_expired' => 'Token ya vhupfesesefhi yo fhela',
-    
+
     // Server information
     'server_information' => 'Mafhungo a Server',
     'application_information' => 'Mafhungo a Apo',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Faela ya Luambo lwa Zwino',
     'current_language_flag' => 'Folaga ya Luambo lwa Zwino',
     'current_language_flag_alt' => 'Folaga ya luambo lwa zwino',
-    
+
     // Date and time
     'datetime_placeholder' => 'Hafha ho dou kombiswa datumu, tshifhinga, na tshifhinga tsha inthanete tsha zwino tshi katela @beat.',
     'debug_mode_enabled' => 'Debug mode yo tendelwa.',
     'service_information' => 'Mafhungo a Tshumelo',
     'user_information' => 'Mafhungo a mushumisi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Vhutshilo',
     'cookie_path' => 'Nzila',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Vhupfesesefhi',
     'cookie_httponly' => 'HTTP fhedzi',
     'cookie_samesite' => 'Site tshithihi',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'Adresi ya IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID ya Session',
     'log_entry_reason' => 'Tshivhangelo',
     'log_entry_request_uri' => 'URI ya Khumbelo',
-    
+
     // User interface
     'welcome_user' => 'Ndaa',
     'user' => 'Mushumisi',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profile',
     'settings' => 'Ndzudzanyo',
     'register' => 'Nwalisa',
-    
+
     // Content sections
     'important_notes' => 'Nwalwa wa ndeme',
     'about_renal_tales' => 'Nga ha Dzingano dza Tshikoloto',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Vha mutswa kha zushaka hashu? Thomani nga u vhala dzingano dzo ralo, u divhana, na u nanahela u kovhekanya masiandoilo avho musi vha tshi lugela.',
     'support_resources' => 'Zwidodombedzwa zwa Tshedzo',
     'support_description' => 'Arali vha tshi toda thuso ya vhukuedzi ya nnelo kana vha khou ya thingokhongolose, vha khou humbelwa u kwamana na muphi wa vhurenderi wa mapfunzo a vhukuedzi kana mapfunzo a nnelo.',
-    
+
     // Home page
     'welcome_home' => 'Ndaa kha Dzingano dza Tshikoloto',
     'home_intro' => 'Ndaa kha zushaka yashu yo sedzamushumowaho vhathu vhane vha amba nga malwadze a tshikoloto. Hafha vha nga kovhekanya ingano yavho, vhala masiandoilo a vhanzhi, na u wana tshedzo kha vhathu vhane vha pfesesa lwendolwendo lwavho.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Khatheleni Zushaka',
     'join_community_desc' => 'Konekanani na vhanzhi, dzihengelani kha mbudziso, na u vhumbha vhukonani vhusiku.',
     'explore_community' => 'Todani Zushaka',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Tshiphemu tsha dzingano tshi khou da nga u fhulufhela...',
     'community_coming_soon' => 'Tshiphemu tsha zushaka tshi khou da nga u fhulufhela...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Tshiphemu tsha dzingano dzanga tshi khou da nga u fhulufhela...',
     'profile_coming_soon' => 'Tshiphemu tsha profile tshi khou da nga u fhulufhela...',
     'settings_coming_soon' => 'Tshiphemu tsha ndzudzanyo tshi khou da nga u fhulufhela...',
-    
+
     // Login page
     'login_welcome' => 'Ndaa hafhu',
     'login_subtitle' => 'Pfani u kona akhaundu yavho',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Nwalisenani hafha',
     'back_to_home' => 'Vhuyani Hayani',
     'please_fill_required_fields' => 'Vha khou humbelwa u dzudza zwifhemu zwothe zwo teaho.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Token ya vhupfesesefhi isina ndaedzo. Vha khou humbelwa u lingedza hafhu.',
     'email_required' => 'Email yo teaho.',
     'email_invalid' => 'Vha khou humbelwa u dzhena adresi ya email yo teaho.',
     'password_required' => 'Password yo teaho.',
     'login_failed' => 'Email kana password isina ndaedzo.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'U nanga luambo a lwo wanali',
-    
+
     // Time and date display
     'day' => 'Duvha',
     'year' => 'Nwaha',
     'week' => 'Vhege',
     'today_is' => 'Namusi ndi',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'U nanga luambo',
     'language_change' => 'Shandukisani luambo',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Luambo lwo shandukiswa nga ndeme kha',
     'language_switch_error' => 'Vhukhakhi kha u shandukisa luambo'
 ];
-?>

@@ -86,7 +86,7 @@ class TemplateRenderer implements TemplateRendererInterface
         }
 
         $templatePath = $this->getTemplatePath($template);
-        
+
         if (!file_exists($templatePath)) {
             throw new Exception("Template not found: {$template} (looked in: {$templatePath})");
         }
@@ -129,16 +129,16 @@ class TemplateRenderer implements TemplateRendererInterface
     {
         // Process partials first
         $template = $this->processPartials($template, $data);
-        
+
         // Process loops
         $template = $this->processLoops($template, $data);
-        
+
         // Process conditions
         $template = $this->processConditions($template, $data);
-        
+
         // Process variable substitutions
         $template = $this->processVariables($template, $data);
-        
+
         return $template;
     }
 
@@ -153,7 +153,7 @@ class TemplateRenderer implements TemplateRendererInterface
     {
         return preg_replace_callback('/\{\{\s*>\s*([a-zA-Z0-9_-]+)\s*\}\}/', function ($matches) use ($data) {
             $partialName = $matches[1];
-            
+
             // Check if it's a registered partial
             if (isset($this->partials[$partialName])) {
                 $partialContent = $this->partials[$partialName];
@@ -167,7 +167,7 @@ class TemplateRenderer implements TemplateRendererInterface
                     return '';
                 }
             }
-            
+
             // Recursively compile the partial
             return $this->compileTemplate($partialContent, $data);
         }, $template);
@@ -182,23 +182,24 @@ class TemplateRenderer implements TemplateRendererInterface
      */
     private function processLoops(string $template, array $data): string
     {
-        return preg_replace_callback('/\{\{\s*#\s*([a-zA-Z0-9_]+)\s*\}\}(.*?)\{\{\s*\/\s*\1\s*\}\}/s', 
+        return preg_replace_callback(
+            '/\{\{\s*#\s*([a-zA-Z0-9_]+)\s*\}\}(.*?)\{\{\s*\/\s*\1\s*\}\}/s',
             function ($matches) use ($data) {
                 $key = $matches[1];
                 $loopTemplate = $matches[2];
-                
+
                 if (!isset($data[$key]) || !is_array($data[$key])) {
                     return '';
                 }
-                
+
                 $output = '';
                 foreach ($data[$key] as $item) {
                     $itemData = is_array($item) ? array_merge($data, $item) : array_merge($data, ['item' => $item]);
                     $output .= $this->compileTemplate($loopTemplate, $itemData);
                 }
-                
+
                 return $output;
-            }, 
+            },
             $template
         );
     }
@@ -213,15 +214,16 @@ class TemplateRenderer implements TemplateRendererInterface
     private function processConditions(string $template, array $data): string
     {
         // Simple condition processing - show content if variable exists and is truthy
-        return preg_replace_callback('/\{\{\s*#\s*([a-zA-Z0-9_]+)\s*\}\}(.*?)\{\{\s*\/\s*\1\s*\}\}/s',
+        return preg_replace_callback(
+            '/\{\{\s*#\s*([a-zA-Z0-9_]+)\s*\}\}(.*?)\{\{\s*\/\s*\1\s*\}\}/s',
             function ($matches) use ($data) {
                 $key = $matches[1];
                 $content = $matches[2];
-                
+
                 if (isset($data[$key]) && $data[$key]) {
                     return $this->compileTemplate($content, $data);
                 }
-                
+
                 return '';
             },
             $template
@@ -239,11 +241,11 @@ class TemplateRenderer implements TemplateRendererInterface
     {
         return preg_replace_callback('/\{\{\s*([a-zA-Z0-9_]+)\s*\}\}/', function ($matches) use ($data) {
             $key = $matches[1];
-            
+
             if (isset($data[$key])) {
                 return htmlspecialchars((string)$data[$key], ENT_QUOTES, 'UTF-8');
             }
-            
+
             // Return empty string for missing variables
             return '';
         }, $template);

@@ -1,7 +1,7 @@
 <?php
 /**
  * Turkish language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +29,7 @@ return [
     'disabled' => 'Devre dışı',
     'available' => 'Mevcut',
     'not_available' => 'Mevcut değil',
-    
+
     // Error messages
     'application_error' => 'Uygulama Hatası',
     'service_unavailable' => 'Hizmet Şu Anda Mevcut Değil',
@@ -42,7 +42,7 @@ return [
     'debug_not_allowed' => 'Güvenlik nedeniyle hata ayıklama modu kullanılamaz.',
     'access_denied' => 'Erişim Engellendi',
     'security_violation' => 'Güvenlik ihlali tespit edildi. Oturum sonlandırıldı.',
-    
+
     // Session management
     'session_init_failed' => 'Oturum yöneticisi başlatma başarısız',
     'session_name_failed' => 'Oturum adı ayarlama başarısız',
@@ -84,7 +84,7 @@ return [
     'session_log_dir_create_failed' => 'Log dizini oluşturma başarısız',
     'session_security_log_failed' => 'Güvenlik ihlali log yazma başarısız',
     'session_security_log_injection_failed' => 'Güvenlik log enjeksiyonu başarısız',
-    
+
     // Security messages
     'security_violation_detected' => 'Güvenlik ihlali tespit edildi. Oturum sonlandırıldı.',
     'security_user_agent_mismatch' => 'Kullanıcı ajanı uyumsuzluğu',
@@ -93,7 +93,7 @@ return [
     'security_hijacking_attempt' => 'Oturum çalma girişimi tespit edildi',
     'security_invalid_token' => 'Geçersiz güvenlik jetonu',
     'security_token_expired' => 'Güvenlik jetonu süresi doldu',
-    
+
     // Server information
     'server_information' => 'Sunucu Bilgisi',
     'application_information' => 'Uygulama Bilgisi',
@@ -112,14 +112,14 @@ return [
     'current_language_file' => 'Mevcut Dil Dosyası',
     'current_language_flag' => 'Mevcut Dil Bayrağı',
     'current_language_flag_alt' => 'Mevcut dil bayrağı',
-    
+
     // Date and time
     'datetime_placeholder' => 'Burada tarih, saat ve güncel internet zamanı @beat dahil gösterilecek.',
     'debug_mode_enabled' => 'Hata ayıklama modu etkin.',
     'service_information' => 'Hizmet Bilgisi',
     'user_information' => 'Kullanıcı bilgisi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Yaşam Süresi',
     'cookie_path' => 'Yol',
@@ -127,7 +127,7 @@ return [
     'cookie_secure' => 'Güvenli',
     'cookie_httponly' => 'Sadece HTTP',
     'cookie_samesite' => 'Aynı Site',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Zaman Damgası',
     'log_entry_ip' => 'IP Adresi',
@@ -135,7 +135,7 @@ return [
     'log_entry_session_id' => 'Oturum Kimliği',
     'log_entry_reason' => 'Sebep',
     'log_entry_request_uri' => 'İstek URI',
-    
+
     // User interface
     'welcome_user' => 'Hoş geldiniz',
     'user' => 'Kullanıcı',
@@ -154,7 +154,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Ayarlar',
     'register' => 'Kayıt',
-    
+
     // Content sections
     'important_notes' => 'Önemli Notlar',
     'about_renal_tales' => 'Böbrek Hikayeleri Hakkında',
@@ -168,7 +168,7 @@ return [
     'getting_started_description' => 'Topluluğumuzda yeni misiniz? Mevcut hikayeleri okuyarak, tanışarak ve hazır olduğunuzda kendi deneyimlerinizi paylaşmayı düşünerek başlayın.',
     'support_resources' => 'Destek Kaynakları',
     'support_description' => 'Acil tıbbi yardıma ihtiyacınız varsa veya kriz durumundaysanız, lütfen sağlık hizmetleri sağlayıcınızla veya acil servislerle iletişime geçin.',
-    
+
     // Home page
     'welcome_home' => 'Böbrek Hikayeleri\'ne Hoş Geldiniz',
     'home_intro' => 'Böbrek hastalığından etkilenen kişileri destekleyen topluluğumuza hoş geldiniz. Burada hikayenizi paylaşabilir, diğerlerinin deneyimlerini okuyabilir ve yolculuğunuzu anlayan insanlardan destek bulabilirsiniz.',
@@ -182,7 +182,7 @@ return [
     'join_community' => 'Topluluğa Katıl',
     'join_community_desc' => 'Diğerleriyle bağlantı kurun, tartışmalara katılın ve kalıcı ilişkiler oluşturun.',
     'explore_community' => 'Topluluğu Keşfet',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Hikayeler bölümü yakında geliyor...',
     'community_coming_soon' => 'Topluluk bölümü yakında geliyor...',
@@ -191,7 +191,7 @@ return [
     'my_stories_coming_soon' => 'Hikayelerim bölümü yakında geliyor...',
     'profile_coming_soon' => 'Profil bölümü yakında geliyor...',
     'settings_coming_soon' => 'Ayarlar bölümü yakında geliyor...',
-    
+
     // Login page
     'login_welcome' => 'Tekrar Hoş Geldiniz',
     'login_subtitle' => 'Hesabınıza erişmek için giriş yapın',
@@ -206,23 +206,23 @@ return [
     'sign_up_here' => 'Buradan kayıt olun',
     'back_to_home' => 'Ana Sayfaya Dön',
     'please_fill_required_fields' => 'Lütfen tüm gerekli alanları doldurun.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Geçersiz güvenlik jetonu. Lütfen tekrar deneyin.',
     'email_required' => 'E-posta gereklidir.',
     'email_invalid' => 'Lütfen geçerli bir e-posta adresi girin.',
     'password_required' => 'Şifre gereklidir.',
     'login_failed' => 'Geçersiz e-posta veya şifre.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Dil seçimi mevcut değil',
-    
+
     // Time and date display
     'day' => 'Gün',
     'year' => 'Yıl',
     'week' => 'Hafta',
     'today_is' => 'Bugün',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Dil seçimi',
     'language_change' => 'Dili değiştir',

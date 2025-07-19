@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'गुर्दाक कथा',
     'welcome' => 'स्वागत अछि',

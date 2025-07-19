@@ -5,10 +5,10 @@ declare(strict_types=1);
 
 /**
  * Validate Doctrine ORM Schema
- * 
+ *
  * This script validates the Doctrine ORM schema to ensure all entities
  * and their mapping configurations are correct.
- * 
+ *
  * @package RenalTales\Scripts
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -37,36 +37,36 @@ use Doctrine\ORM\Tools\SchemaTool;
 
 try {
     echo "=== Doctrine Schema Validation ===\n";
-    
+
     // Initialize application
     $app = new Application();
     $app->bootstrap();
-    
+
     // Get database manager
     $databaseManager = $app->get(DatabaseManager::class);
     $entityManager = $databaseManager->getEntityManager();
-    
+
     echo "✓ Database connection established\n";
     echo "✓ Entity Manager initialized\n";
-    
+
     // Get all entity metadata
     $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
     echo "✓ Found " . count($metadata) . " entity(ies) to validate\n";
-    
+
     // List entities
     foreach ($metadata as $classMetadata) {
         echo "  - Entity: " . $classMetadata->getName() . "\n";
         echo "    Table: " . $classMetadata->getTableName() . "\n";
         echo "    Fields: " . implode(', ', $classMetadata->getFieldNames()) . "\n";
     }
-    
+
     // Create schema validator
     $validator = new SchemaValidator($entityManager);
-    
+
     // Validate class mappings
     echo "\n--- Validating Entity Class Mappings ---\n";
     $classMappingErrors = $validator->validateMapping();
-    
+
     if (empty($classMappingErrors)) {
         echo "✓ All entity class mappings are valid\n";
     } else {
@@ -75,25 +75,25 @@ try {
             echo "  - $error\n";
         }
     }
-    
+
     // Check database schema using SchemaTool
     echo "\n--- Checking Database Schema ---\n";
     $schemaTool = new SchemaTool($entityManager);
-    
+
     try {
         // Check if database exists and create if needed
         $connection = $entityManager->getConnection();
-        
+
         // Try to connect to database
         if (!$connection->isConnected()) {
             $connection->connect();
         }
-        
+
         echo "✓ Database connection is working\n";
-        
+
         // Get the SQL to create the schema
         $sql = $schemaTool->getCreateSchemaSql($metadata);
-        
+
         if (empty($sql)) {
             echo "✓ Database schema appears to be up to date\n";
         } else {
@@ -103,7 +103,7 @@ try {
                 echo "  - " . substr($statement, 0, 80) . "...\n";
             }
         }
-        
+
         // Try to get update schema SQL
         try {
             $updateSql = $schemaTool->getUpdateSchemaSql($metadata);
@@ -118,14 +118,14 @@ try {
         } catch (Exception $e) {
             echo "! Could not check for schema updates: " . $e->getMessage() . "\n";
         }
-        
+
     } catch (Exception $e) {
         echo "✗ Database connection error: " . $e->getMessage() . "\n";
     }
-    
+
     // Overall validation result
     $totalErrors = count($classMappingErrors);
-    
+
     echo "\n=== Validation Summary ===\n";
     if ($totalErrors === 0) {
         echo "✓ Schema validation completed successfully!\n";
@@ -136,7 +136,7 @@ try {
         echo "Please fix the errors above and run validation again\n";
         exit(1);
     }
-    
+
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
     echo "Stack trace:\n" . $e->getTraceAsString() . "\n";

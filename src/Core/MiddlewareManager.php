@@ -43,7 +43,7 @@ class MiddlewareManager
         foreach ($this->middleware as $middleware) {
             $result = $middleware($result);
         }
-        
+
         return $finalHandler($result);
     }
 

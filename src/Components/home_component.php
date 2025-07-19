@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 /**
  * Home Component
- * 
+ *
  * Simple function-based component for home page rendering.
  * Replaces heavy HomeView class with lightweight function.
- * 
+ *
  * @package RenalTales\Components
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -31,16 +31,16 @@ function render_home_page(array $options = []): string
     // Prepare data
     $dataService = new HomeDataService($options['translation'] ?? null);
     $data = $dataService->getHomePageData();
-    
+
     // Extract template variables
     extract($data, EXTR_PREFIX_ALL, 'page');
-    
+
     // Start output buffering
     ob_start();
-    
+
     // Include template partials
     include __DIR__ . '/../../resources/components/home_layout.php';
-    
+
     return ob_get_clean();
 }
 
@@ -55,7 +55,7 @@ function render_hero_section(array $heroData): string
     $title = htmlspecialchars($heroData['title'] ?? '');
     $intro = htmlspecialchars($heroData['intro'] ?? '');
     $description = htmlspecialchars($heroData['description'] ?? '');
-    
+
     return <<<HTML
     <section class="hero-section">
         <div class="hero-content">
@@ -76,14 +76,14 @@ function render_hero_section(array $heroData): string
 function render_feature_cards(array $features): string
 {
     $html = '<section class="features-section"><div class="features-grid">';
-    
+
     foreach ($features as $feature) {
         $title = htmlspecialchars($feature['title'] ?? '');
         $description = htmlspecialchars($feature['description'] ?? '');
         $link = htmlspecialchars($feature['link'] ?? '#');
         $buttonText = htmlspecialchars($feature['button_text'] ?? '');
         $buttonClass = htmlspecialchars($feature['button_class'] ?? 'btn-primary');
-        
+
         $html .= <<<HTML
         <div >
             <h3 class="feature-title">{$title}</h3>
@@ -92,7 +92,7 @@ function render_feature_cards(array $features): string
         </div>
         HTML;
     }
-    
+
     $html .= '</div></section>';
     return $html;
 }
@@ -118,4 +118,3 @@ function esc_attr(string $string): string
 {
     return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Stejjer tal-Kliewi',
     'welcome' => 'Merħba',

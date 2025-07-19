@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Bhili language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'अक्षम',
     'available' => 'उपलब्ध',
     'not_available' => 'उपलब्ध नइखे',
-    
+
     // Error messages
     'application_error' => 'एप्लिकेशन त्रुटि',
     'service_unavailable' => 'सेवा अस्थायी रूप से अनुपलब्ध बा',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'सुरक्षा कारणों से डिबग मोड उपलब्ध नइखे।',
     'access_denied' => 'पहुंच इनकार',
     'security_violation' => 'सुरक्षा उल्लंघन पाइल गइल। सत्र समाप्त कर दिहल गइल।',
-    
+
     // Session management
     'session_init_failed' => 'सत्र प्रबंधक प्रारंभीकरण असफल',
     'session_name_failed' => 'सत्र नाम सेट करैमे असफल',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'लॉग निर्देशिका बनाना असफल',
     'session_security_log_failed' => 'सुरक्षा उल्लंघन लॉग असफल',
     'session_security_log_injection_failed' => 'सुरक्षा लॉग इंजेक्शन असफल',
-    
+
     // Security messages
     'security_violation_detected' => 'सुरक्षा उल्लंघन पाइल गइल। सत्र समाप्त कर दिहल गइल।',
     'security_user_agent_mismatch' => 'उपयोगकर्ता एजेंट मेल नइखे',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'सत्र हाइजैकिंग का प्रयास पाइल गइल',
     'security_invalid_token' => 'अमान्य सुरक्षा टोकन',
     'security_token_expired' => 'सुरक्षा टोकन समाप्त हो गइल',
-    
+
     // Server information
     'server_information' => 'सर्वर जानकारी',
     'application_information' => 'एप्लिकेशन जानकारी',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'मौजूदा भाषा फाइल',
     'current_language_flag' => 'मौजूदा भाषा झंडा',
     'current_language_flag_alt' => 'मौजूदा भाषा झंडा',
-    
+
     // Date and time
     'datetime_placeholder' => 'यहाँ तारीख, समय, विस्तृत इंटरनेट समय @beat सहित दिखाइल जाई।',
     'debug_mode_enabled' => 'डिबग मोड सक्षम बा।',
     'service_information' => 'सेवा जानकारी',
     'user_information' => 'उपयोगकर्ता जानकारी:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'जीवनकाल',
     'cookie_path' => 'पाथ',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'सुरक्षित',
     'cookie_httponly' => 'केवल HTTP',
     'cookie_samesite' => 'समान साइट',
-    
+
     // Log messages
     'log_entry_timestamp' => 'टाइमस्टैम्प',
     'log_entry_ip' => 'आईपी पता',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'सत्र आईडी',
     'log_entry_reason' => 'कारण',
     'log_entry_request_uri' => 'अनुरोध URI',
-    
+
     // User interface
     'welcome_user' => 'स्वागत बा',
     'user' => 'उपयोगकर्ता',
@@ -154,7 +155,7 @@ return [
     'profile' => 'प्रोफाइल',
     'settings' => 'सेटिंग',
     'register' => 'पंजीकरण',
-    
+
     // Content sections
     'important_notes' => 'महत्वपूर्ण नोट',
     'about_renal_tales' => 'गुर्दा कहानी के बारे में',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'हमारे समुदाय में नए हैं? कुछ कहानी पढ़ैसे शुरुआत करीं, अपने आप के परिचय दीं आउर जब तैयार होवीं तो अपने अनुभव साझा करै के बारे में सोचीं।',
     'support_resources' => 'सहायता संसाधन',
     'support_description' => 'यदि आपके तत्काल चिकित्सा सहायता चाहीं या आप संकट में हैं, कृपया अपने स्वास्थ्य सेवा प्रदाता या आपातकालीन सेवान से संपर्क करीं।',
-    
+
     // Home page
     'welcome_home' => 'गुर्दा कहानी में स्वागत बा',
     'home_intro' => 'गुर्दा बीमारी वाले लोगन के लिए हमारे सहायक समुदाय में स्वागत बा। यहाँ आप अपनी कहानी साझा कर सकैं, दुसरे के अनुभव पढ़ सकैं आउर अइसन लोगन से सहायता पा सकैं जो आपके यात्रा के समझै हैं।',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'समुदाय में शामिल होईं',
     'join_community_desc' => 'दुसरन से जुड़ीं, चर्चा में भाग लीं आउर स्थायी मित्रता बनाईं।',
     'explore_community' => 'समुदाय के खोजीं',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'कहानी अनुभाग जल्द आवै वाला बा...',
     'community_coming_soon' => 'समुदाय अनुभाग जल्द आवै वाला बा...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'मेरी कहानी अनुभाग जल्द आवै वाला बा...',
     'profile_coming_soon' => 'प्रोफाइल अनुभाग जल्द आवै वाला बा...',
     'settings_coming_soon' => 'सेटिंग अनुभाग जल्द आवै वाला बा...',
-    
+
     // Login page
     'login_welcome' => 'फिर से स्वागत बा',
     'login_subtitle' => 'अपने खाता के पहुंच के लिए लॉग इन करीं',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'यहाँ साइन अप करीं',
     'back_to_home' => 'घर वापस',
     'please_fill_required_fields' => 'कृपया सभी आवश्यक फील्ड भरीं।',
-    
+
     // Login validation
     'invalid_csrf_token' => 'अमान्य सुरक्षा टोकन। कृपया फिर कोशिश करीं।',
     'email_required' => 'ईमेल आवश्यक बा।',
     'email_invalid' => 'कृपया मान्य ईमेल पता दर्ज करीं।',
     'password_required' => 'पासवर्ड आवश्यक बा।',
     'login_failed' => 'अमान्य ईमेल या पासवर्ड।',
-    
+
     // Language selection
     'language_selection_unavailable' => 'भाषा चयन उपलब्ध नइखे',
-    
+
     // Time and date display
     'day' => 'दिन',
     'year' => 'साल',
     'week' => 'सप्ताह',
     'today_is' => 'आज बा',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'भाषा चुनाव',
     'language_change' => 'भाषा बदलीं',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'भाषा सफलतापूर्वक बदल गइल',
     'language_switch_error' => 'भाषा बदले में त्रुटि'
 ];
-?>

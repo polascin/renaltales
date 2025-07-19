@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Script to populate languages table with language data
  * Based on available language files and LanguageModel mappings
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v3.1.dev
  */
@@ -44,16 +45,16 @@ try {
     // Get supported languages from LanguageModel
     $languageModel = new LanguageModel();
     $supportedLanguages = $languageModel->getSupportedLanguages();
-    
+
     // Deduplicate the array to avoid unique constraint violations
     $supportedLanguages = array_unique($supportedLanguages);
-    
+
     echo "📊 Found " . count($supportedLanguages) . " supported languages (after deduplication)\n";
 
     // Path to language files
     $languageDir = APP_ROOT . '/resources/lang/';
     $availableLanguageFiles = [];
-    
+
     // Scan for available language files
     if (is_dir($languageDir)) {
         $files = scandir($languageDir);
@@ -63,7 +64,7 @@ try {
             }
         }
     }
-    
+
     echo "📁 Found " . count($availableLanguageFiles) . " language files\n";
 
     // Clear existing data
@@ -102,7 +103,7 @@ try {
 
     // Define some popular languages to set as active
     $popularLanguages = ['en', 'sk', 'cs', 'de', 'fr', 'es', 'ru', 'zh', 'ja', 'ar'];
-    
+
     // Define RTL languages
     $rtlLanguages = ['ar', 'he', 'fa', 'ur', 'ps', 'sd', 'dv', 'ug'];
 
@@ -118,7 +119,7 @@ try {
         'no' => 'Europe', 'pl' => 'Europe', 'pt' => 'Europe', 'rm' => 'Europe', 'ro' => 'Europe',
         'ru' => 'Europe', 'se' => 'Europe', 'sk' => 'Europe', 'sl' => 'Europe', 'sq' => 'Europe',
         'sr' => 'Europe', 'sv' => 'Europe', 'uk' => 'Europe',
-        
+
         // Asian languages
         'am' => 'Asia', 'ar' => 'Asia', 'as' => 'Asia', 'bn' => 'Asia', 'bo' => 'Asia', 'dv' => 'Asia',
         'fa' => 'Asia', 'gu' => 'Asia', 'he' => 'Asia', 'hi' => 'Asia', 'hy' => 'Asia', 'ja' => 'Asia',
@@ -128,11 +129,11 @@ try {
         'ta' => 'Asia', 'te' => 'Asia', 'th' => 'Asia', 'ti' => 'Asia', 'tk' => 'Asia', 'ug' => 'Asia',
         'ur' => 'Asia', 'uz' => 'Asia', 'vi' => 'Asia', 'wuu' => 'Asia', 'yue' => 'Asia', 'zh' => 'Asia',
         'zh-cn' => 'Asia', 'zh-tw' => 'Asia',
-        
+
         // American languages
         'ay' => 'America', 'bho' => 'America', 'gn' => 'America', 'ht' => 'America', 'qu' => 'America',
         'war' => 'America', 'en-us' => 'America', 'en-ca' => 'America', 'pt-br' => 'America',
-        
+
         // African languages
         'af' => 'Africa', 'bm' => 'Africa', 'ff' => 'Africa', 'ha' => 'Africa', 'ig' => 'Africa',
         'kg' => 'Africa', 'lg' => 'Africa', 'ln' => 'Africa', 'nd' => 'Africa', 'nr' => 'Africa',
@@ -140,10 +141,10 @@ try {
         'sn' => 'Africa', 'so' => 'Africa', 'ss' => 'Africa', 'st' => 'Africa', 'sw' => 'Africa',
         'tn' => 'Africa', 'ts' => 'Africa', 've' => 'Africa', 'xh' => 'Africa', 'yo' => 'Africa',
         'zu' => 'Africa',
-        
+
         // Oceania
         'en-au' => 'Oceania', 'en-nz' => 'Oceania', 'fj' => 'Oceania', 'su' => 'Oceania',
-        
+
         // Other
         'az' => 'Other', 'bcl' => 'Other', 'bh' => 'Other', 'ceb' => 'Other', 'hil' => 'Other',
         'ilo' => 'Other', 'kl' => 'Other', 'ky' => 'Other', 'la' => 'Other', 'lua' => 'Other',
@@ -154,25 +155,25 @@ try {
     foreach ($supportedLanguages as $index => $langCode) {
         $englishName = LanguageModel::getEnglishLanguageName($langCode);
         $nativeName = LanguageModel::getNativeLanguageName($langCode);
-        
+
         // Check if language file exists
         $hasFile = in_array($langCode, $availableLanguageFiles);
-        
+
         // Determine if language should be active
         $isActive = $hasFile && in_array($langCode, $popularLanguages);
-        
+
         // Set default language (English)
         $isDefault = ($langCode === 'en');
-        
+
         // Determine text direction
         $direction = in_array($langCode, $rtlLanguages) ? 'rtl' : 'ltr';
-        
+
         // Get region
         $region = $regionMap[$langCode] ?? 'Other';
-        
+
         // Sort order based on index in supported languages array
         $sortOrder = $index + 1;
-        
+
         // Insert language record
         $insertStmt->execute([
             'code' => $langCode,
@@ -186,9 +187,9 @@ try {
             'createdat' => $currentTime,
             'updatedat' => $currentTime
         ]);
-        
+
         $insertedCount++;
-        
+
         // Show progress
         if ($insertedCount % 20 === 0) {
             echo "📝 Processed $insertedCount languages...\n";
@@ -196,7 +197,7 @@ try {
     }
 
     echo "✅ Successfully populated $insertedCount languages\n";
-    
+
     // Show summary statistics
     $stats = $pdo->query("
         SELECT 
@@ -206,13 +207,13 @@ try {
             COUNT(DISTINCT region) as regions
         FROM languages
     ")->fetch();
-    
+
     echo "\n📊 Summary Statistics:\n";
     echo "   Total languages: {$stats['total']}\n";
     echo "   Active languages: {$stats['active']}\n";
     echo "   Default languages: {$stats['default_count']}\n";
     echo "   Regions: {$stats['regions']}\n";
-    
+
     // Show sample of inserted data
     echo "\n🔍 Sample of inserted data:\n";
     $sample = $pdo->query("
@@ -222,15 +223,15 @@ try {
         ORDER BY sortorder 
         LIMIT 10
     ");
-    
+
     foreach ($sample as $row) {
         $status = $row['active'] ? '✅' : '❌';
         $default = $row['isdefault'] ? ' (DEFAULT)' : '';
         echo "   $status {$row['code']}: {$row['name']} ({$row['nativename']}) - {$row['region']} [{$row['direction']}]$default\n";
     }
-    
+
     echo "\n🎉 Language population completed successfully!\n";
-    
+
 } catch (Exception $e) {
     echo "❌ Error: " . $e->getMessage() . "\n";
     echo "📍 File: " . $e->getFile() . "\n";

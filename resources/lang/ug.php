@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Uyghur language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'چەكلەنگەن',
     'available' => 'بار',
     'not_available' => 'يوق',
-    
+
     // Error messages
     'application_error' => 'پروگرامما خاتالىقى',
     'service_unavailable' => 'مۇلازىمەت ھازىر ئىشلەتكىلى بولمايدۇ',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'بىخەتەرلىك سەۋەبىدىن debug ھالىتى ئىشلىتىشكە بولمايدۇ.',
     'access_denied' => 'كىرىش رەت قىلىندى',
     'security_violation' => 'بىخەتەرلىك بۇزۇلۇشى بايقالدى. ئولتۇرۇش تاماملاندى.',
-    
+
     // Session management
     'session_init_failed' => 'ئولتۇرۇش باشقۇرغۇچ باشلاش مەغلۇپ بولدى',
     'session_name_failed' => 'ئولتۇرۇش نامى تەڭشەش مەغلۇپ بولدى',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'خاتىرە مۇندەرىجە قۇرۇش مەغلۇپ بولدى',
     'session_security_log_failed' => 'بىخەتەرلىك بۇزۇلۇشى خاتىرىسى يېزىش مەغلۇپ بولدى',
     'session_security_log_injection_failed' => 'بىخەتەرلىك خاتىرىسى injection مەغلۇپ بولدى',
-    
+
     // Security messages
     'security_violation_detected' => 'بىخەتەرلىك بۇزۇلۇشى بايقالدى. ئولتۇرۇش تاماملاندى.',
     'security_user_agent_mismatch' => 'ئىشلەتكۈچى ئاگېنت ماسلاشمىدى',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'ئولتۇرۇش ئوغرىلاش سىنىقى بايقالدى',
     'security_invalid_token' => 'ئىناۋەتسىز بىخەتەرلىك token',
     'security_token_expired' => 'بىخەتەرلىك token ۋاقتى ئاشتى',
-    
+
     // Server information
     'server_information' => 'مۇلازىمېتىر ئۇچۇرى',
     'application_information' => 'پروگرامما ئۇچۇرى',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'ھازىرقى تىل ھۆججىتى',
     'current_language_flag' => 'ھازىرقى تىل بايرىقى',
     'current_language_flag_alt' => 'ھازىرقى تىل بايرىقى',
-    
+
     // Date and time
     'datetime_placeholder' => 'بۇ يەردە چېسلا، ۋاقىت ۋە ھازىرقى ئىنتېرنېت ۋاقتى @beat قاتارلىق كۆرسىتىلىدۇ.',
     'debug_mode_enabled' => 'Debug ھالىتى قوزغىتىلغان.',
     'service_information' => 'مۇلازىمەت ئۇچۇرى',
     'user_information' => 'ئىشلەتكۈچى ئۇچۇرى:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'ياشاش مۇددىتى',
     'cookie_path' => 'يول',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'بىخەتەر',
     'cookie_httponly' => 'HTTP لا',
     'cookie_samesite' => 'ئوخشاش تور بېكەت',
-    
+
     // Log messages
     'log_entry_timestamp' => 'ۋاقىت بەلگىسى',
     'log_entry_ip' => 'IP ئادرېس',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ئولتۇرۇش كىملىكى',
     'log_entry_reason' => 'سەۋەب',
     'log_entry_request_uri' => 'تەلەپ URI',
-    
+
     // User interface
     'welcome_user' => 'خوش كەلدىڭىز',
     'user' => 'ئىشلەتكۈچى',
@@ -154,7 +155,7 @@ return [
     'profile' => 'ھۆججەت',
     'settings' => 'تەڭشەكلەر',
     'register' => 'تىزىملىتىش',
-    
+
     // Content sections
     'important_notes' => 'مۇھىم ئىزاھاتلار',
     'about_renal_tales' => 'بۆرەك ھېكايىلىرى ھەققىدە',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'جامائىتىمىزدە يېڭىمۇ؟ مەۋجۇت ھېكايىلەرنى ئوقۇش، تونۇشۇش ۋە تەييار بولغاندا ئۆزىڭىزنىڭ تەجرىبىلىرىڭىزنى ئورتاقلىشىشنى ئويلاش بىلەن باشلاڭ.',
     'support_resources' => 'قوللاش مەنبەلىرى',
     'support_description' => 'ئالدىراش دوختۇرلۇق ياردەمگە ئېھتىياجىڭىز بولسا ياكى بۇھرانلىق ئەھۋالدا بولسىڭىز، دوختۇرلۇق مۇلازىمەت تەمىنلىگۈچىڭىز ياكى جىددى خىزمەتلەر بىلەن ئالاقىلىشىڭ.',
-    
+
     // Home page
     'welcome_home' => 'بۆرەك ھېكايىلىرىغا خوش كەلدىڭىز',
     'home_intro' => 'بۆرەك كېسەللىكىدىن تەسىرلەنگەن كىشىلەرنى قوللايدىغان جامائىتىمىزگە خوش كەلدىڭىز. بۇ يەردە ھېكايىڭىزنى ئورتاقلىشالايسىز، باشقىلارنىڭ تەجرىبىلىرىنى ئوقۇيالايسىز ۋە سەپىرىڭىزنى چۈشەنىدىغان كىشىلەردىن قوللاش تاپالايسىز.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'جامائەتكە قوشۇلۇڭ',
     'join_community_desc' => 'باشقىلار بىلەن ئۇلىنىڭ، مۇنازىرىلەرگە قاتنىشىڭ ۋە مۇقىم مۇناسىۋەتلەر قۇرۇڭ.',
     'explore_community' => 'جامائەتنى تەكشۈرۈڭ',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'ھېكايىلەر بۆلىكى يېقىندا كېلىدۇ...',
     'community_coming_soon' => 'جامائەت بۆلىكى يېقىندا كېلىدۇ...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'مېنىڭ ھېكايىلىرىم بۆلىكى يېقىندا كېلىدۇ...',
     'profile_coming_soon' => 'ھۆججەت بۆلىكى يېقىندا كېلىدۇ...',
     'settings_coming_soon' => 'تەڭشەكلەر بۆلىكى يېقىندا كېلىدۇ...',
-    
+
     // Login page
     'login_welcome' => 'قايتا خوش كەلدىڭىز',
     'login_subtitle' => 'ھېساباتىڭىزغا كىرىش ئۈچۈن كىرىڭ',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'بۇ يەردىن تىزىملىتىڭ',
     'back_to_home' => 'ئۆي بەتكە قايتىش',
     'please_fill_required_fields' => 'بارلىق زۆرۈر رايونلارنى تولدۇرۇڭ.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'ئىناۋەتسىز بىخەتەرلىك token. قايتا سىناڭ.',
     'email_required' => 'ئېلېكتران خەت زۆرۈر.',
     'email_invalid' => 'ئىناۋەتلىك ئېلېكتران خەت ئادرېسى كىرگۈزۈڭ.',
     'password_required' => 'ئىم زۆرۈر.',
     'login_failed' => 'ئىناۋەتسىز ئېلېكتران خەت ياكى ئىم.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'تىل تاللاش يوق',
-    
+
     // Time and date display
     'day' => 'كۈن',
     'year' => 'يىل',
     'week' => 'ھەپتە',
     'today_is' => 'بۈگۈن',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'تىل تاللاش',
     'language_change' => 'تىل ئۆزگەرتىش',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'تىل مۇۋەپپەقىيەتلىك ئۆزگەرتىلدى',
     'language_switch_error' => 'تىل ئۆزگەرتىشتە خاتالىق'
 ];
-?>

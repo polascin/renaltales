@@ -1,10 +1,10 @@
 <?php
 /**
  * Simple Language Switcher Component
- * 
+ *
  * A streamlined language switcher using the new Translation system.
  * Provides both dropdown and inline button styles.
- * 
+ *
  * @package RenalTales\Views\Components
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín

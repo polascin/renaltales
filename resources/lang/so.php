@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Somali language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'La damay',
     'available' => 'La heli karo',
     'not_available' => 'Lama heli karo',
-    
+
     // Error messages
     'application_error' => 'Khaladka Codsiga',
     'service_unavailable' => 'Adeegga Waqti yar Lama Heli Karo',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Macluumaadka dayactirka lagama heli karo sababo ammaan ah.',
     'access_denied' => 'Gelitaanka la diiday',
     'security_violation' => 'Jabinta ammaanka la ogaaday. Fadhiga la joojiyay.',
-    
+
     // Session management
     'session_init_failed' => 'Bilaabista maaraaha fadhiga way fashilantay',
     'session_name_failed' => 'Dejinta magaca fadhiga way fashilantay',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Samaynta galka diiwaanka way fashilantay',
     'session_security_log_failed' => 'Qorista diiwaanka jabinta ammaanka way fashilantay',
     'session_security_log_injection_failed' => 'Diiwaanka ammaanka way fashilantay',
-    
+
     // Security messages
     'security_violation_detected' => 'Jabinta ammaanka la ogaaday. Fadhiga la joojiyay.',
     'security_user_agent_mismatch' => 'Isticmaaluhu ma isku mid aha',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Isku dayga xadhiga fadhiga la ogaaday',
     'security_invalid_token' => 'Calaamada ammaanka ma sahan tahay',
     'security_token_expired' => 'Calaamada ammaanka waqtigeeda dhamaaday',
-    
+
     // Server information
     'server_information' => 'Macluumaadka Server-ka',
     'application_information' => 'Macluumaadka Codsiga',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Faylka Luqadda Hadda',
     'current_language_flag' => 'Calanka Luqadda Hadda',
     'current_language_flag_alt' => 'Calanka luqadda hadda',
-    
+
     // Date and time
     'datetime_placeholder' => 'Halkan waxaa lagu soo bandhigi doonaa taariikhda, waqtiga, oo ay ku jirto waqtiga internetka ee faahfaahsan @beat.',
     'debug_mode_enabled' => 'Heerka dayactirka waa la damcay.',
     'service_information' => 'Macluumaadka Adeegga',
     'user_information' => 'Macluumaadka isticmaalaha:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Nooshaha',
     'cookie_path' => 'Wadada',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Ammaan',
     'cookie_httponly' => 'HTTP Kaliya',
     'cookie_samesite' => 'Isku Boggii',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Shaabka Waqtiga',
     'log_entry_ip' => 'Ciwaanka IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Aqoonsiga Fadhiga',
     'log_entry_reason' => 'Sababta',
     'log_entry_request_uri' => 'URI Codsashada',
-    
+
     // User interface
     'welcome_user' => 'Soo dhaweyn',
     'user' => 'Isticmaale',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profile-ka',
     'settings' => 'Dejiyo',
     'register' => 'Diiwaangeli',
-    
+
     // Content sections
     'important_notes' => 'Qoraalada Muhiimka ah',
     'about_renal_tales' => 'Ku saabsan Sheekooyin Kelli',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Cusub bulshadeenna? Ku billow aqrinta sheekooyin, isu soo bandhig, ugana fakiri wadaagista waayo-aragnimadaada markii aad diyaar tahay.',
     'support_resources' => 'Kheyraadka Taageerada',
     'support_description' => 'Haddii aad u baahan tahay gargaar caafimaad deg-deg ah ama aad ku jirto xaalad xun, fadlan la xidhiidh bixiyaha daryeelka caafimaadka ama adeegyada deg-deg ah.',
-    
+
     // Home page
     'welcome_home' => 'Ku soo dhawoow Sheekooyin Kelli',
     'home_intro' => 'Ku soo dhawoow bulshadeenna taageeraysa ee dadka saameeysan cilladaha kelli. Halkan waxaad ku wadaagi kartaa sheekaadaada, aqriyo waayo-aragnimada kuwa kale, ugana hesho taageero dad fahmaya safarkaaga. Nagu soo biir si aad ula xidhiidho kuwa kale, wadaagto waayo-aragnimadaada, ugana hesho taageero bulshadeenna. Wada jirna, waxaan ka samayn karnaa farqi noloshada kuwa saameeysan cilladaha kelli. Mahadsanid inaad qayb ka tahay bulshadeenna!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Ku biir Bulshada',
     'join_community_desc' => 'La xidhiidh kuwa kale, ka qaybgal doodaha, ugana dhis saaxiibtinimo waara.',
     'explore_community' => 'Baadh Bulshada',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Qaybta sheekooyin waa iman doonta...',
     'community_coming_soon' => 'Qaybta bulshada waa iman doonta...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Qaybta sheekooynkayga waa iman doonta...',
     'profile_coming_soon' => 'Qaybta profile-ka waa iman doonta...',
     'settings_coming_soon' => 'Qaybta dejinta waa iman doonta...',
-    
+
     // Login page
     'login_welcome' => 'Dib ugu soo dhawoow',
     'login_subtitle' => 'Gal si aad u hesho akoonkaaga',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Halkan ka diiwaan geli',
     'back_to_home' => 'Dib ugu noqo Guriga',
     'please_fill_required_fields' => 'Fadlan buuxi dhammaan goobaha loo baahan yahay.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Calaamada ammaanka ma sahan tahay. Fadlan mar kale isku day.',
     'email_required' => 'Email waa loo baahan yahay.',
     'email_invalid' => 'Fadlan geli email sax ah.',
     'password_required' => 'Erayga sirta ah waa loo baahan yahay.',
     'login_failed' => 'Email ama erayga sirta ah ma sahan.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Doorashada luqadda lama heli karo',
-    
+
     // Time and date display
     'day' => 'Maalin',
     'year' => 'Sannad',
     'week' => 'Usbuuc',
     'today_is' => 'Maanta waa',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Doorashada luqadda',
     'language_change' => 'Beddel luqadda',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Luqadda si guul leh ayaa loo beddelay',
     'language_switch_error' => 'Khalad ayaa ka dhacay beddelka luqadda'
 ];
-?>

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Belarusian language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Выключана',
     'available' => 'Даступна',
     'not_available' => 'Недаступна',
-    
+
     // Error messages
     'application_error' => 'Памылка прыкладання',
     'service_unavailable' => 'Сэрвіс часова недаступны',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Рэжым адладкі недаступны па прычынах бяспекі.',
     'access_denied' => 'Доступ забаронены',
     'security_violation' => 'Выяўлена парушэнне бяспекі. Сеанс завершаны.',
-    
+
     // Session management
     'session_init_failed' => 'Не ўдалося ініціялізаваць менеджар сеансаў',
     'session_name_failed' => 'Не ўдалося ўстанавіць імя сеанса',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Не ўдалося стварыць каталог журналаў',
     'session_security_log_failed' => 'Не ўдалося запісаць журнал парушэння бяспекі',
     'session_security_log_injection_failed' => 'Не ўдалося ін\'екцыя журнала бяспекі',
-    
+
     // Security messages
     'security_violation_detected' => 'Выяўлена парушэнне бяспекі. Сеанс завершаны.',
     'security_user_agent_mismatch' => 'Неадпаведнасць агента карыстальніка',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Выяўлена спроба перахопу сеанса',
     'security_invalid_token' => 'Няправільны токен бяспекі',
     'security_token_expired' => 'Токен бяспекі скончыўся',
-    
+
     // Server information
     'server_information' => 'Інфармацыя пра сервер',
     'application_information' => 'Інфармацыя пра прыкладанне',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Файл бягучай мовы',
     'current_language_flag' => 'Сцяг бягучай мовы',
     'current_language_flag_alt' => 'Сцяг бягучай мовы',
-    
+
     // Date and time
     'datetime_placeholder' => 'Тут будзе адлюстроўвацца дата, час, уключаючы дакладны час інтэрнэта @beat.',
     'debug_mode_enabled' => 'Рэжым адладкі ўключаны.',
     'service_information' => 'Інфармацыя пра сэрвіс',
     'user_information' => 'Інфармацыя пра карыстальніка:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Час жыцця',
     'cookie_path' => 'Шлях',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Бяспечны',
     'cookie_httponly' => 'Толькі HTTP',
     'cookie_samesite' => 'Той жа сайт',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Часавая адметка',
     'log_entry_ip' => 'IP-адрас',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Ідэнтыфікатар сеанса',
     'log_entry_reason' => 'Прычына',
     'log_entry_request_uri' => 'URI запыту',
-    
+
     // User interface
     'welcome_user' => 'Вітаем',
     'user' => 'Карыстальнік',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Профіль',
     'settings' => 'Налады',
     'register' => 'Рэгістрацыя',
-    
+
     // Content sections
     'important_notes' => 'Важныя нататкі',
     'about_renal_tales' => 'Пра гісторыі пра ныркі',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Новы ў нашай супольнасці? Пачніце з чытання некаторых гісторый, прадставецеся і падумайце аб тым, каб падзяліцца сваім досведам, калі будзеце гатовы.',
     'support_resources' => 'Рэсурсы падтрымкі',
     'support_description' => 'Калі вам патрэбна тэрміновая медыцынская дапамога або вы знаходзіцеся ў крызісе, калі ласка, звярніцеся да свайго паставоўцы медыцынскіх паслуг або ў службу экстранных выклікаў.',
-    
+
     // Home page
     'welcome_home' => 'Вітаем у гісторыях пра ныркі',
     'home_intro' => 'Вітаем у нашай падтрымліваючай супольнасці для людзей з захворваннямі нырак. Тут вы можаце падзяліцца сваёй гісторыяй, прачытаць досвед іншых і знайсці падтрымку ад людзей, якія разумеюць ваш шлях.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Далучыцца да супольнасці',
     'join_community_desc' => 'Звязвайцеся з іншымі, удзельнічайце ў дыскусіях і будуйце доўгатэрміновыя сяброўскія адносіны.',
     'explore_community' => 'Даследаваць супольнасць',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Раздзел гісторый хутка з\'явіцца...',
     'community_coming_soon' => 'Раздзел супольнасці хутка з\'явіцца...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Раздзел "Мае гісторыі" хутка з\'явіцца...',
     'profile_coming_soon' => 'Раздзел профілю хутка з\'явіцца...',
     'settings_coming_soon' => 'Раздзел налад хутка з\'явіцца...',
-    
+
     // Login page
     'login_welcome' => 'Вітаем назад',
     'login_subtitle' => 'Увайдзіце, каб атрымаць доступ да вашага ўліковага запісу',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Зарэгіструйцеся тут',
     'back_to_home' => 'Назад на галоўную',
     'please_fill_required_fields' => 'Калі ласка, запоўніце ўсе абавязковыя палі.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Няправільны токен бяспекі. Калі ласка, паспрабуйце зноў.',
     'email_required' => 'Электронная пошта абавязковая.',
     'email_invalid' => 'Калі ласка, увядзіце правільны адрас электроннай пошты.',
     'password_required' => 'Пароль абавязковы.',
     'login_failed' => 'Няправільная электронная пошта або пароль.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Выбар мовы недаступны',
-    
+
     // Time and date display
     'day' => 'Дзень',
     'year' => 'Год',
     'week' => 'Тыдзень',
     'today_is' => 'Сёння',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Выбар мовы',
     'language_change' => 'Змяніць мову',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Мова паспяхова зменена',
     'language_switch_error' => 'Памылка пры змене мовы'
 ];
-?>

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'סיפורי כליות',
     'welcome' => 'ברוכים הבאים',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'דיווח באג',
     'feature_request' => 'בקשת תכונה'
 ];
-?>

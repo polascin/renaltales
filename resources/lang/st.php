@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Sesotho language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'E thibetswe',
     'available' => 'E fumaneha',
     'not_available' => 'Ha e fumanehi',
-    
+
     // Error messages
     'application_error' => 'Phoso ya Kopo',
     'service_unavailable' => 'Tshebeletso ha e Fumanehi Hahale-hale',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Tlhahisoleseding ya debug ha e fumanehi ka lebaka la tshireletso.',
     'access_denied' => 'Phihlello e Hanne',
     'security_violation' => 'Kgahlamelo ya tshireletso e fumanwe. Kopano e emisitswe.',
-    
+
     // Session management
     'session_init_failed' => 'Tshebediso ya modulasetulo wa kopano e hlolehile',
     'session_name_failed' => 'E hlolehile ho beha lebitso la kopano',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'E hlolehile ho theha bukana ya lenane',
     'session_security_log_failed' => 'E hlolehile ho ngola lenane la kgahlamelo ya tshireletso',
     'session_security_log_injection_failed' => 'Lenaneo la tshireletso le hlolehile',
-    
+
     // Security messages
     'security_violation_detected' => 'Kgahlamelo ya tshireletso e fumanwe. Kopano e emisitswe.',
     'security_user_agent_mismatch' => 'Moemeli wa mosebedisi ha a tshwane',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Boiteko ba ho utswa kopano bo fumanwe',
     'security_invalid_token' => 'Letshwao la tshireletso le sa sebetseng',
     'security_token_expired' => 'Letshwao la tshireletso le phelile',
-    
+
     // Server information
     'server_information' => 'Tlhahisoleseding ya Seva',
     'application_information' => 'Tlhahisoleseding ya Kopo',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Faele ya Puo ya Hona Jwale',
     'current_language_flag' => 'Folaga ya Puo ya Hona Jwale',
     'current_language_flag_alt' => 'Folaga ya puo ya hona jwale',
-    
+
     // Date and time
     'datetime_placeholder' => 'Mona ho tla bontshwa letsatsi, nako, ho kenyeletswa nako e qaqileng ya inthanete @beat.',
     'debug_mode_enabled' => 'Mokgwa wa debug o buletswe.',
     'service_information' => 'Tlhahisoleseding ya Tshebeletso',
     'user_information' => 'Tlhahisoleseding ya mosebedisi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Bophelo',
     'cookie_path' => 'Tsela',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Tshireletso',
     'cookie_httponly' => 'HTTP Feela',
     'cookie_samesite' => 'Saete e Tshwanang',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Letshwao la Nako',
     'log_entry_ip' => 'Aterese ya IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID ya Kopano',
     'log_entry_reason' => 'Lebaka',
     'log_entry_request_uri' => 'URI ya Kopo',
-    
+
     // User interface
     'welcome_user' => 'Lumela',
     'user' => 'Mosebedisi',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profaele',
     'settings' => 'Ditlhophiso',
     'register' => 'Ngodisa',
-    
+
     // Content sections
     'important_notes' => 'Dinotlolo tsa Bohlokwa',
     'about_renal_tales' => 'Ka Dipale tsa Dilakelo',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'O mocha setjhabeng sa rona? Qala ka ho bala dipale tse ding, itlhahise, le ho nahana ka ho arolelana boiphihlelo ba hao ha o se o lokile.',
     'support_resources' => 'Disebediswa tsa Tsheholo',
     'support_description' => 'Haeba o hloka thuso ya bongaka ka pela kapa o mokgathateng, ka kopo ikopanye le mofani wa hao wa tlhokomelo ya bophelo kapa ditshebeletso tsa tshohanyetso.',
-    
+
     // Home page
     'welcome_home' => 'Lumela ho Dipale tsa Dilakelo',
     'home_intro' => 'Lumela setjhabeng sa rona se tshehetsang sa batho ba amamehang ke mathata a dilakelo. Mona o ka arolelana pale ya hao, o bale boiphihlelo ba ba bang, le ho fumana tsheholo ho tswa ho batho ba utlwisisang leeto la hao. Re kenyeletse ho re kopanye le ba bang, arolelane boiphihlelo ba hao, le ho fumana tsheholo setjhabeng sa rona. Hammoho, re ka etsa phapang bophelong ba ba amamehang ke mathata a dilakelo. Re leboha ka ho ba karolo ya setjhaba sa rona!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Kenella Setjhaba',
     'join_community_desc' => 'Hokahane le ba bang, nka karolo dingotjweng, le ho aha botsoalle bo tswellang.',
     'explore_community' => 'Hlahloba Setjhaba',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Karolo ya dipale e tla tlala haufinyane...',
     'community_coming_soon' => 'Karolo ya setjhaba e tla tlala haufinyane...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Karolo ya dipale tsa ka e tla tlala haufinyane...',
     'profile_coming_soon' => 'Karolo ya profaele e tla tlala haufinyane...',
     'settings_coming_soon' => 'Karolo ya ditlhophiso e tla tlala haufinyane...',
-    
+
     // Login page
     'login_welcome' => 'Lumela Hape',
     'login_subtitle' => 'Kena ho fihlella akhaonto ya hao',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Ngodisa mona',
     'back_to_home' => 'Khutlela Lehae',
     'please_fill_required_fields' => 'Ka kopo tlatsa masimo ohle a hlokahalang.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Letshwao la tshireletso le sa sebetseng. Ka kopo leka hape.',
     'email_required' => 'Email e hlokeha.',
     'email_invalid' => 'Ka kopo kenya aterese ya email e nepahetseng.',
     'password_required' => 'Phasewede e hlokeha.',
     'login_failed' => 'Email kapa phasewede e sa sebetseng.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Kgetho ya puo ha e fumanehi',
-    
+
     // Time and date display
     'day' => 'Letsatsi',
     'year' => 'Selemo',
     'week' => 'Beke',
     'today_is' => 'Kajeno ke',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Kgetho ya puo',
     'language_change' => 'Fetola puo',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Puo e fetotswe ka katleho ho',
     'language_switch_error' => 'Phoso ha ho fetolwa puo'
 ];
-?>

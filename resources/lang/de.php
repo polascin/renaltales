@@ -1,7 +1,7 @@
 <?php
 /**
  * German language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +29,7 @@ return [
     'disabled' => 'Deaktiviert',
     'available' => 'Verfügbar',
     'not_available' => 'Nicht verfügbar',
-    
+
     // Error messages
     'application_error' => 'Anwendungsfehler',
     'service_unavailable' => 'Service ist vorübergehend nicht verfügbar',
@@ -42,7 +42,7 @@ return [
     'debug_not_allowed' => 'Debug-Modus ist aus Sicherheitsgründen nicht verfügbar.',
     'access_denied' => 'Zugriff verweigert',
     'security_violation' => 'Sicherheitsverletzung erkannt. Sitzung beendet.',
-    
+
     // Session management
     'session_init_failed' => 'Sitzungsmanager-Initialisierung fehlgeschlagen',
     'session_name_failed' => 'Sitzungsname konnte nicht gesetzt werden',
@@ -84,7 +84,7 @@ return [
     'session_log_dir_create_failed' => 'Log-Verzeichnis konnte nicht erstellt werden',
     'session_security_log_failed' => 'Sicherheitsverletzungs-Protokollierung fehlgeschlagen',
     'session_security_log_injection_failed' => 'Sicherheitslog-Injection fehlgeschlagen',
-    
+
     // Security messages
     'security_violation_detected' => 'Sicherheitsverletzung erkannt. Sitzung beendet.',
     'security_user_agent_mismatch' => 'Benutzeragent stimmt nicht überein',
@@ -93,7 +93,7 @@ return [
     'security_hijacking_attempt' => 'Sitzungs-Hijacking-Versuch erkannt',
     'security_invalid_token' => 'Ungültiger Sicherheitstoken',
     'security_token_expired' => 'Sicherheitstoken abgelaufen',
-    
+
     // Server information
     'server_information' => 'Serverinformationen',
     'application_information' => 'Anwendungsinformationen',
@@ -112,14 +112,14 @@ return [
     'current_language_file' => 'Aktuelle Sprachdatei',
     'current_language_flag' => 'Aktuelle Sprachflagge',
     'current_language_flag_alt' => 'Aktuelle Sprachflagge',
-    
+
     // Date and time
     'datetime_placeholder' => 'Datum, Zeit einschließlich detaillierter Internetzeit @beat wird hier angezeigt.',
     'debug_mode_enabled' => 'Debug-Modus ist aktiviert.',
     'service_information' => 'Service-Informationen',
     'user_information' => 'Benutzerinformationen:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Lebensdauer',
     'cookie_path' => 'Pfad',
@@ -127,7 +127,7 @@ return [
     'cookie_secure' => 'Sicher',
     'cookie_httponly' => 'Nur HTTP',
     'cookie_samesite' => 'Gleiche Site',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Zeitstempel',
     'log_entry_ip' => 'IP-Adresse',
@@ -135,7 +135,7 @@ return [
     'log_entry_session_id' => 'Sitzungs-ID',
     'log_entry_reason' => 'Grund',
     'log_entry_request_uri' => 'Anfrage-URI',
-    
+
     // User interface
     'welcome_user' => 'Willkommen',
     'user' => 'Benutzer',
@@ -154,7 +154,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Einstellungen',
     'register' => 'Registrieren',
-    
+
     // Content sections
     'important_notes' => 'Wichtige Hinweise',
     'about_renal_tales' => 'Über Nierengeschichten',
@@ -168,7 +168,7 @@ return [
     'getting_started_description' => 'Neu in unserer Community? Beginnen Sie damit, einige Geschichten zu lesen, stellen Sie sich vor und erwägen Sie, Ihre eigene Erfahrung zu teilen, wenn Sie bereit sind.',
     'support_resources' => 'Unterstützungsressourcen',
     'support_description' => 'Wenn Sie sofortige medizinische Hilfe benötigen oder sich in einer Krise befinden, wenden Sie sich bitte an Ihren Gesundheitsdienstleister oder Notdienste.',
-    
+
     // Home page
     'welcome_home' => 'Willkommen bei Nierengeschichten',
     'home_intro' => 'Willkommen in unserer unterstützenden Gemeinschaft für Menschen mit Nierenerkrankungen. Hier können Sie Ihre Geschichte teilen, die Erfahrungen anderer lesen und Unterstützung von Menschen finden, die Ihre Reise verstehen.',
@@ -182,7 +182,7 @@ return [
     'join_community' => 'Der Gemeinschaft beitreten',
     'join_community_desc' => 'Vernetzen Sie sich mit anderen, nehmen Sie an Diskussionen teil und bauen Sie dauerhafte Freundschaften auf.',
     'explore_community' => 'Gemeinschaft erkunden',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Geschichten-Bereich kommt bald...',
     'community_coming_soon' => 'Community-Bereich kommt bald...',
@@ -191,7 +191,7 @@ return [
     'my_stories_coming_soon' => 'Meine Geschichten-Bereich kommt bald...',
     'profile_coming_soon' => 'Profil-Bereich kommt bald...',
     'settings_coming_soon' => 'Einstellungen-Bereich kommt bald...',
-    
+
     // Login page
     'login_welcome' => 'Willkommen zurück',
     'login_subtitle' => 'Melden Sie sich an, um auf Ihr Konto zuzugreifen',
@@ -206,23 +206,23 @@ return [
     'sign_up_here' => 'Hier registrieren',
     'back_to_home' => 'Zurück zur Startseite',
     'please_fill_required_fields' => 'Bitte füllen Sie alle erforderlichen Felder aus.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Ungültiger Sicherheitstoken. Bitte versuchen Sie es erneut.',
     'email_required' => 'E-Mail ist erforderlich.',
     'email_invalid' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
     'password_required' => 'Passwort ist erforderlich.',
     'login_failed' => 'Ungültige E-Mail oder Passwort.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Sprachauswahl nicht verfügbar',
-    
+
     // Time and date display
     'day' => 'Tag',
     'year' => 'Jahr',
     'week' => 'Woche',
     'today_is' => 'Heute ist',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Sprachauswahl',
     'language_change' => 'Sprache ändern',

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Kongo language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Ekangami',
     'available' => 'Ezali',
     'not_available' => 'Ezali te',
-    
+
     // Error messages
     'application_error' => 'Libunga lya Lukanda',
     'service_unavailable' => 'Mosala Ezali te Sikawa',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Mode ya debug ekoki kosalema te mpo na bomoi.',
     'access_denied' => 'Bokotisi Eboyi',
     'security_violation' => 'Mobulu ya bomoi emonani. Session esili.',
-    
+
     // Session management
     'session_init_failed' => 'Kobanda manager ya session ekweyi',
     'session_name_failed' => 'Kotya kombo ya session ekweyi',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Kosala dossier ya log ekweyi',
     'session_security_log_failed' => 'Kokoma log ya mobulu ya bomoi ekweyi',
     'session_security_log_injection_failed' => 'Injection ya log ya bomoi ekweyi',
-    
+
     // Security messages
     'security_violation_detected' => 'Mobulu ya bomoi emonani. Session esili.',
     'security_user_agent_mismatch' => 'Agent ya mosaleli ekokani te',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Komeka kozua session emonani',
     'security_invalid_token' => 'Token ya bomoi ezali malamu te',
     'security_token_expired' => 'Token ya bomoi esili',
-    
+
     // Server information
     'server_information' => 'Basango ya Serveur',
     'application_information' => 'Basango ya Lukanda',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Fisye ya Mbanda ya Sikawa',
     'current_language_flag' => 'Dalapo ya Mbanda ya Sikawa',
     'current_language_flag_alt' => 'Dalapo ya mbanda ya sikawa',
-    
+
     // Date and time
     'datetime_placeholder' => 'Awa ekozala komona mokolo, ntango, mpe ntango ya sika ya internet @beat.',
     'debug_mode_enabled' => 'Mode ya debug ezali kosala.',
     'service_information' => 'Basango ya Mosala',
     'user_information' => 'Basango ya mosaleli:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Bomoi',
     'cookie_path' => 'Nzela',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Bomoi',
     'cookie_httponly' => 'HTTP Kaka',
     'cookie_samesite' => 'Site Moko',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'Adresse IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID ya Session',
     'log_entry_reason' => 'Tina',
     'log_entry_request_uri' => 'URI ya Kosenga',
-    
+
     // User interface
     'welcome_user' => 'Yikwabote',
     'user' => 'Mosaleli',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Ba Paramètres',
     'register' => 'Komikoma',
-    
+
     // Content sections
     'important_notes' => 'Ba Notes ya Ntina',
     'about_renal_tales' => 'Na Tina ya Makanda ma Mpiku',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Ozali ya sika na lisanga na biso? Banda na kotanga makanda oyo ezali, koyeba baninga, mpe komeka kosalela masolo na yo tango okozala prêt.',
     'support_resources' => 'Biloko ya Lisungi',
     'support_description' => 'Soki ozali na mposa ya lisungi ya monganga ya nokinoki to ozali na mikakatano, bendelela monganga na yo to ba services ya urgence.',
-    
+
     // Home page
     'welcome_home' => 'Yikwabote na Makanda ma Mpiku',
     'home_intro' => 'Yikwabote na lisanga na biso oyo esungaka bato oyo bazali na maladi ya mpiku. Awa okoki kosalela lisolo na yo, kotanga masolo ya basusu, mpe kozwa lisungi epai ya bato oyo basosolaka mobembo na yo.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Kota na Lisanga',
     'join_community_desc' => 'Sangana na basusu, kota na makelele, mpe tonga bolingani ya ntango molai.',
     'explore_community' => 'Nyata Lisanga',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Eteni ya makanda ekoya...',
     'community_coming_soon' => 'Eteni ya lisanga ekoya...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Eteni ya makanda na ngai ekoya...',
     'profile_coming_soon' => 'Eteni ya profil ekoya...',
     'settings_coming_soon' => 'Eteni ya ba paramètres ekoya...',
-    
+
     // Login page
     'login_welcome' => 'Yikwabote Lisusu',
     'login_subtitle' => 'Kota mpo na kokota na compte na yo',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Mikoma awa',
     'back_to_home' => 'Zonga na Ndako',
     'please_fill_required_fields' => 'Tondisa biteni bisusu oyo esengi.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Token ya bomoi ezali malamu te. Meka lisusu.',
     'email_required' => 'Email esengi.',
     'email_invalid' => 'Koma adresse email oyo ezali malamu.',
     'password_required' => 'Mot de passe esengi.',
     'login_failed' => 'Email to mot de passe ezali malamu te.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Kopona mbanda ezali te',
-    
+
     // Time and date display
     'day' => 'Mokolo',
     'year' => 'Mobu',
     'week' => 'Poso',
     'today_is' => 'Lelo ezali',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Kopona mbanda',
     'language_change' => 'Bongola mbanda',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Mbanda ebongolami malamu na',
     'language_switch_error' => 'Libunga na kobongola mbanda'
 ];
-?>

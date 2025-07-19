@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Wu Chinese language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => '關仔个',
     'available' => '有个',
     'not_available' => '無没个',
-    
+
     // Error messages
     'application_error' => '應用程序錯誤',
     'service_unavailable' => '服務現在用弗來',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => '為仔安全起見，調試模式用弗來。',
     'access_denied' => '訪問被拒絕',
     'security_violation' => '發現安全違規。會話已經結束。',
-    
+
     // Session management
     'session_init_failed' => '會話管理器啟動失敗仔',
     'session_name_failed' => '設置會話名稱失敗仔',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => '日誌目錄創建失敗仔',
     'session_security_log_failed' => '安全違規日誌寫入失敗仔',
     'session_security_log_injection_failed' => '安全日誌注入失敗仔',
-    
+
     // Security messages
     'security_violation_detected' => '發現安全違規。會話已經結束。',
     'security_user_agent_mismatch' => '用戶代理弗匹配',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => '發現會話劫持嘗試',
     'security_invalid_token' => '無效個安全令牌',
     'security_token_expired' => '安全令牌過期仔',
-    
+
     // Server information
     'server_information' => '服務器信息',
     'application_information' => '應用程序信息',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => '當前語言文件',
     'current_language_flag' => '當前語言標誌',
     'current_language_flag_alt' => '當前語言標誌',
-    
+
     // Date and time
     'datetime_placeholder' => '搭裏會顯示日期、時間，包括當前網絡時間@beat。',
     'debug_mode_enabled' => '調試模式已經啟用。',
     'service_information' => '服務信息',
     'user_information' => '用戶信息：',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => '生存時間',
     'cookie_path' => '路徑',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => '安全',
     'cookie_httponly' => '僅HTTP',
     'cookie_samesite' => '同站',
-    
+
     // Log messages
     'log_entry_timestamp' => '時間戳',
     'log_entry_ip' => 'IP地址',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => '會話ID',
     'log_entry_reason' => '原因',
     'log_entry_request_uri' => '請求URI',
-    
+
     // User interface
     'welcome_user' => '歡迎',
     'user' => '用戶',
@@ -154,7 +155,7 @@ return [
     'profile' => '個人資料',
     'settings' => '設置',
     'register' => '註冊',
-    
+
     // Content sections
     'important_notes' => '重要注意事項',
     'about_renal_tales' => '關於腎臟故事',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => '在我伲社區是新个？從閱讀現有故事開始，認識大家，搭在準備好个辰光考慮分享儂個經歷。',
     'support_resources' => '支持資源',
     'support_description' => '如果儂需要緊急醫療幫助或者在危機情況當中，請聯繫儂個醫療保健提供者或者緊急服務。',
-    
+
     // Home page
     'welcome_home' => '歡迎來到腎臟故事',
     'home_intro' => '歡迎來到我伲支持腎病患者個社區。在搭裏儂可以分享儂個故事，閱讀他人個經歷，搭從理解儂旅程個人那裏得到支持。',
@@ -182,7 +183,7 @@ return [
     'join_community' => '加入社區',
     'join_community_desc' => '與他人聯繫，參與討論，搭建立持久個關係。',
     'explore_community' => '探索社區',
-    
+
     // Placeholder content
     'stories_coming_soon' => '故事部分即將推出...',
     'community_coming_soon' => '社區部分即將推出...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => '我個故事部分即將推出...',
     'profile_coming_soon' => '個人資料部分即將推出...',
     'settings_coming_soon' => '設置部分即將推出...',
-    
+
     // Login page
     'login_welcome' => '歡迎回來',
     'login_subtitle' => '登錄以訪問儂個賬戶',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => '在搭裏註冊',
     'back_to_home' => '回到首頁',
     'please_fill_required_fields' => '請填寫所有必填字段。',
-    
+
     // Login validation
     'invalid_csrf_token' => '無效個安全令牌。請重新嘗試。',
     'email_required' => '電子郵件是必需个。',
     'email_invalid' => '請輸入有效個電子郵件地址。',
     'password_required' => '密碼是必需个。',
     'login_failed' => '無效個電子郵件或密碼。',
-    
+
     // Language selection
     'language_selection_unavailable' => '語言選擇弗可用',
-    
+
     // Time and date display
     'day' => '天',
     'year' => '年',
     'week' => '週',
     'today_is' => '今朝是',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => '語言選擇',
     'language_change' => '換語言',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => '語言成功換仔',
     'language_switch_error' => '換語言辰光出錯仔'
 ];
-?>

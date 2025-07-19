@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Waray language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Ginpaundang',
     'available' => 'May-ada',
     'not_available' => 'Waray may-ada',
-    
+
     // Error messages
     'application_error' => 'Sayop han Application',
     'service_unavailable' => 'An Serbisyo Waray Makakamit Kaintós',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'An debug mode diri mahimo gamiton tungod han seguridad.',
     'access_denied' => 'Ginbawal an Pag-abot',
     'security_violation' => 'Nakit-an nga may sayop ha seguridad. Ginpatapos an session.',
-    
+
     // Session management
     'session_init_failed' => 'Napakyas an pagsugod han session manager',
     'session_name_failed' => 'Napakyas an pagtakda han ngaran han session',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Napakyas an paghimo han log directory',
     'session_security_log_failed' => 'Napakyas an pagsurat han security violation log',
     'session_security_log_injection_failed' => 'Napakyas an security log injection',
-    
+
     // Security messages
     'security_violation_detected' => 'Nakit-an nga may sayop ha seguridad. Ginpatapos an session.',
     'security_user_agent_mismatch' => 'Diri nagkakaroon an user agent',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Nakit-an nga may attempt nga pagkuha han session',
     'security_invalid_token' => 'Diri balido nga security token',
     'security_token_expired' => 'Nahuman na an security token',
-    
+
     // Server information
     'server_information' => 'Kasayuran han Server',
     'application_information' => 'Kasayuran han Application',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'File han Kaintós nga Yinaknan',
     'current_language_flag' => 'Flag han Kaintós nga Yinaknan',
     'current_language_flag_alt' => 'Flag han kaintós nga yinaknan',
-    
+
     // Date and time
     'datetime_placeholder' => 'Dinhi makikita an petsa, oras, ngan an kaintós nga oras han internet lakip an @beat.',
     'debug_mode_enabled' => 'An debug mode ginpapagan.',
     'service_information' => 'Kasayuran han Serbisyo',
     'user_information' => 'Kasayuran han user:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Pagkabuhi',
     'cookie_path' => 'Dalan',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Seguro',
     'cookie_httponly' => 'HTTP la',
     'cookie_samesite' => 'Pareho nga Site',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'IP Address',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Session ID',
     'log_entry_reason' => 'Rason',
     'log_entry_request_uri' => 'URI han Request',
-    
+
     // User interface
     'welcome_user' => 'Maupay nga pag-abot',
     'user' => 'User',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profile',
     'settings' => 'Mga Setting',
     'register' => 'Pagrehistro',
-    
+
     // Content sections
     'important_notes' => 'Importante nga mga Nota',
     'about_renal_tales' => 'Mahitungod ha Mga Istorya han Bato',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Bag-o kamo ha amon komunidad? Sugdi ha pagbasa hin mga istorya nga nag-eexist, pakigkilala, ngan hunahuna an pagpakigbahin hin inyong mga kaagi kun ready na kamo.',
     'support_resources' => 'Mga Resource para han Suporta',
     'support_description' => 'Kun kinahanglan ninyo hin dinalidali nga medical assistance o kamo ha crisis nga sitwasyon, pakikontak an inyong healthcare provider o emergency services.',
-    
+
     // Home page
     'welcome_home' => 'Maupay nga Pag-abot ha Mga Istorya han Bato',
     'home_intro' => 'Maupay nga pag-abot ha amon komunidad nga nagsusuporta han mga tawo nga may sakit han bato. Dinhi makakahimo kamo magpakigbahin hin inyong istorya, magbasa hin mga kaagi han iba, ngan makakita hin suporta tikang han mga tawo nga nakakaintindi han inyong byahe.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Sumali ha Komunidad',
     'join_community_desc' => 'Magkonekta han iba, makig-apil ha mga diskusyon, ngan maghimo hin lasting nga mga relasyon.',
     'explore_community' => 'I-explore an Komunidad',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'An stories section madto na hin dali...',
     'community_coming_soon' => 'An community section madto na hin dali...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'An akon nga mga istorya section madto na hin dali...',
     'profile_coming_soon' => 'An profile section madto na hin dali...',
     'settings_coming_soon' => 'An settings section madto na hin dali...',
-    
+
     // Login page
     'login_welcome' => 'Maupay nga Pagbalik',
     'login_subtitle' => 'Mag-login para ma-access an inyong account',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Mag-sign up dinhi',
     'back_to_home' => 'Balik ha Balay',
     'please_fill_required_fields' => 'Pakisulod an tanan nga kinahanglan nga mga field.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Diri balido nga security token. Pakisulayan tikang hin liwat.',
     'email_required' => 'Kinahanglan an email.',
     'email_invalid' => 'Pakisulod an balido nga email address.',
     'password_required' => 'Kinahanglan an password.',
     'login_failed' => 'Diri balido nga email o password.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Waray makakamit nga pagpili hin yinaknan',
-    
+
     // Time and date display
     'day' => 'Adlaw',
     'year' => 'Tuig',
     'week' => 'Semana',
     'today_is' => 'Kaintós amo an',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Pagpili hin yinaknan',
     'language_change' => 'Liwata an yinaknan',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Malampuson nga nabago an yinaknan ha',
     'language_switch_error' => 'Sayop ha pagliliwat han yinaknan'
 ];
-?>

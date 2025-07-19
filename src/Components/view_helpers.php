@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 /**
  * View Helper Functions
- * 
+ *
  * Simple utility functions to replace AbstractView functionality
- * 
+ *
  * @package RenalTales\Components
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -55,11 +55,11 @@ function asset_url(string $path): string
 function route_url(string $path, array $params = []): string
 {
     $url = '/' . ltrim($path, '/');
-    
+
     if (!empty($params)) {
         $url .= '?' . http_build_query($params);
     }
-    
+
     return $url;
 }
 
@@ -75,7 +75,7 @@ function format_date($date, string $format = 'Y-m-d H:i:s'): string
     if ($date instanceof DateTime) {
         return $date->format($format);
     }
-    
+
     if (is_string($date)) {
         try {
             $dateTime = new DateTime($date);
@@ -84,7 +84,7 @@ function format_date($date, string $format = 'Y-m-d H:i:s'): string
             return $date;
         }
     }
-    
+
     return '';
 }
 
@@ -100,16 +100,16 @@ function render_partial(string $partialPath, array $data = []): string
     if (!file_exists($partialPath)) {
         return "<!-- Partial not found: {$partialPath} -->";
     }
-    
+
     // Extract data to variables
     extract($data, EXTR_SKIP);
-    
+
     // Start output buffering
     ob_start();
-    
+
     // Include the partial
     include $partialPath;
-    
+
     // Return the captured output
     return ob_get_clean();
 }

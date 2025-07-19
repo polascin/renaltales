@@ -12,8 +12,10 @@ if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         $line = trim($line);
-        if (empty($line) || strpos($line, '#') === 0) continue;
-        
+        if (empty($line) || strpos($line, '#') === 0) {
+            continue;
+        }
+
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
@@ -35,11 +37,11 @@ return [
         'executed_at_column_name' => 'executed_at',
         'execution_time_column_name' => 'execution_time',
     ],
-    
+
     'migrations_paths' => [
         'RenalTales\\Migrations' => $appRoot . '/database/migrations',
     ],
-    
+
     'all_or_nothing' => true,
     'transactional' => true,
     'check_database_platform' => true,

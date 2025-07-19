@@ -12,5 +12,3 @@ echo "This script previously created test users but database functionality has b
 echo "For language processing focus, no database operations are needed.\n";
 
 echo "\nCompleted at: " . date('Y-m-d H:i:s') . "\n";
-
-?>

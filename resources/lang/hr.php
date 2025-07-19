@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Priče o bubrezima',
     'welcome' => 'Dobrodošli',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Izvještaj o grešci',
     'feature_request' => 'Zahtjev za značajku'
 ];
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Comprehensive verification of language persistence
  * Tests the complete flow from flag button click to session persistence
@@ -49,11 +50,11 @@ $testLanguages = ['sk', 'en', 'cs', 'de'];
 
 foreach ($testLanguages as $lang) {
     echo "   Testing switch to '$lang':\n";
-    
+
     // Step 1: Check if supported
     $isSupported = in_array($lang, $supportedLanguages);
     echo "      - Is Supported: " . ($isSupported ? 'YES' : 'NO') . "\n";
-    
+
     if ($isSupported) {
         // Step 2: Get LanguageDetector
         $languageDetector = $languageModel->getLanguageDetector();
@@ -61,16 +62,16 @@ foreach ($testLanguages as $lang) {
             // Step 3: Set language
             $result = $languageDetector->setLanguage($lang);
             echo "      - setLanguage result: " . ($result ? 'SUCCESS' : 'FAILED') . "\n";
-            
+
             // Step 4: Verify session update
             $sessionLang = $_SESSION['language'] ?? 'not set';
             echo "      - Session updated: " . ($sessionLang === $lang ? 'YES' : 'NO') . " (value: $sessionLang)\n";
-            
+
             // Step 5: Test LanguageModel persistence
             $newLanguageModel = new LanguageModel();
             $currentLang = $newLanguageModel->getCurrentLanguage();
             echo "      - LanguageModel persistence: " . ($currentLang === $lang ? 'YES' : 'NO') . " (value: $currentLang)\n";
-            
+
             // Step 6: Test SessionManager access
             $sessionManagerLang = $sessionManager->getSession('language');
             echo "      - SessionManager access: " . ($sessionManagerLang === $lang ? 'YES' : 'NO') . " (value: " . ($sessionManagerLang ?? 'null') . ")\n";
@@ -129,7 +130,7 @@ if ($sessionManager->validateCSRFToken($csrfToken) && in_array($requestedLanguag
         $result = $languageDetector->setLanguage($requestedLanguage);
         echo "   Language Set Result: " . ($result ? 'SUCCESS' : 'FAILED') . "\n";
         echo "   Session After Set: " . ($_SESSION['language'] ?? 'not set') . "\n";
-        
+
         // Verify with new LanguageModel (simulating next request)
         $nextRequestModel = new LanguageModel();
         $nextRequestLang = $nextRequestModel->getCurrentLanguage();
@@ -155,4 +156,3 @@ echo "   ✓ Cross-request persistence: " . ($finalLanguage === $sessionLanguage
 echo "\n" . "=" . str_repeat("=", 60) . "\n";
 echo "FINAL STATE: Language = $finalLanguage, Session = $sessionLanguage\n";
 echo "=" . str_repeat("=", 60) . "\n";
-?>

@@ -1,4 +1,5 @@
 <?php
+
 return [
     // ===============================
     // 1. APPLICATION METADATA
@@ -397,4 +398,3 @@ return [
     'day_sunday' => 'Vasárnap',
     'footer_copyright' => 'Ľubomír Polaščín',
 ];
-?>

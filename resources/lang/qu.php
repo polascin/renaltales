@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Uñunkuna Willakuykuna',
     'welcome' => 'Allin hamusqayki',

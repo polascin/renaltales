@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Sundanese language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Ditumpurkeun',
     'available' => 'Sadia',
     'not_available' => 'Teu sadia',
-    
+
     // Error messages
     'application_error' => 'Kasalahan Aplikasi',
     'service_unavailable' => 'Layanan Samentara Teu Sadia',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Inpormasi debug teu sadia pikeun alesan kaamanan.',
     'access_denied' => 'Aksés Ditolak',
     'security_violation' => 'Pelanggaran kaamanan kapendak. Sési ditungtungan.',
-    
+
     // Session management
     'session_init_failed' => 'Inisialisasi manajer sési gagal',
     'session_name_failed' => 'Gagal nyetelan ngaran sési',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Gagal nyieun direktori log',
     'session_security_log_failed' => 'Gagal nulis log pelanggaran kaamanan',
     'session_security_log_injection_failed' => 'Logging kaamanan gagal',
-    
+
     // Security messages
     'security_violation_detected' => 'Pelanggaran kaamanan kapendak. Sési ditungtungan.',
     'security_user_agent_mismatch' => 'User agent teu cocog',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Percobaan pembajakan sési kapendak',
     'security_invalid_token' => 'Token kaamanan teu valid',
     'security_token_expired' => 'Token kaamanan kadaluwarsa',
-    
+
     // Server information
     'server_information' => 'Inpormasi Server',
     'application_information' => 'Inpormasi Aplikasi',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Berkas Basa Ayeuna',
     'current_language_flag' => 'Bandéra Basa Ayeuna',
     'current_language_flag_alt' => 'Bandéra basa ayeuna',
-    
+
     // Date and time
     'datetime_placeholder' => 'Didieu bakal ditémbongkeun tanggal, waktu, kaasup waktu internét detil @beat.',
     'debug_mode_enabled' => 'Mode debug diaktipkeun.',
     'service_information' => 'Inpormasi Layanan',
     'user_information' => 'Inpormasi pangguna:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Umur',
     'cookie_path' => 'Jalur',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Aman',
     'cookie_httponly' => 'HTTP Wungkul',
     'cookie_samesite' => 'SameSite',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Stempel Waktu',
     'log_entry_ip' => 'Alamat IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID Sési',
     'log_entry_reason' => 'Alesan',
     'log_entry_request_uri' => 'URI Pamundut',
-    
+
     // User interface
     'welcome_user' => 'Wilujeng sumping',
     'user' => 'Pangguna',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Setélan',
     'register' => 'Daftar',
-    
+
     // Content sections
     'important_notes' => 'Catetan Penting',
     'about_renal_tales' => 'Ngeunaan Carita Ginjal',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Anyar di komunitas urang? Mimitian ku maca sababaraha carita, perkenalkeun diri anjeun, sareng pertimbangkeun pikeun ngabagi pangalaman anjeun nalika anjeun siap.',
     'support_resources' => 'Sumber Dukungan',
     'support_description' => 'Upami anjeun peryogi bantuan médis langsung atanapi aya dina krisis, mangga hubungi panyadia perawatan kaséhatan anjeun atanapi layanan darurat.',
-    
+
     // Home page
     'welcome_home' => 'Wilujeng sumping ka Carita Ginjal',
     'home_intro' => 'Wilujeng sumping ka komunitas dukungan urang pikeun jalma nu kapangaruhan ku gangguan ginjal. Didieu anjeun tiasa ngabagi carita anjeun, maca pangalaman batur, sareng mendakan dukungan ti jalma anu ngartos perjalanan anjeun. Seungkeun sareng kami pikeun nyambung sareng anu sanés, ngabagi pangalaman anjeun, sareng mendakan dukungan dina komunitas urang. Babarengan, urang tiasa ngadamel bédana dina kahirupan jalma anu kapangaruhan ku gangguan ginjal. Hatur nuhun janten bagian tina komunitas urang!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Gabung Komunitas',
     'join_community_desc' => 'Sambung sareng anu sanés, ilubiung dina diskusi, sareng ngawangun persahabatan anu langgeng.',
     'explore_community' => 'Jelajahi Komunitas',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Seksi carita badé sumping...',
     'community_coming_soon' => 'Seksi komunitas badé sumping...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Seksi carita kuring badé sumping...',
     'profile_coming_soon' => 'Seksi profil badé sumping...',
     'settings_coming_soon' => 'Seksi setélan badé sumping...',
-    
+
     // Login page
     'login_welcome' => 'Wilujeng Uih Deui',
     'login_subtitle' => 'Asup pikeun ngaksés akun anjeun',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Daftar didieu',
     'back_to_home' => 'Balik ka Imah',
     'please_fill_required_fields' => 'Mangga eusian sadaya kolom anu diperyogikeun.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Token kaamanan teu valid. Mangga cobian deui.',
     'email_required' => 'Email diperyogikeun.',
     'email_invalid' => 'Mangga asupkeun alamat email anu valid.',
     'password_required' => 'Kecap sandi diperyogikeun.',
     'login_failed' => 'Email atanapi kecap sandi teu valid.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Pilihan basa teu sadia',
-    
+
     // Time and date display
     'day' => 'Dinten',
     'year' => 'Taun',
     'week' => 'Minggu',
     'today_is' => 'Dinten ieu',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Pilihan basa',
     'language_change' => 'Ganti basa',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Basa geus hasil diganti',
     'language_switch_error' => 'Aya lepat dina ngaganti basa'
 ];
-?>

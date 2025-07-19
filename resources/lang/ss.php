@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Swazi language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Kukhubatisiwe',
     'available' => 'Kuyatfolakala',
     'not_available' => 'Akutfolakali',
-    
+
     // Error messages
     'application_error' => 'Livele Leli-App',
     'service_unavailable' => 'Insita Ayitfolakali Njengaloku',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Lwati lwekulungisa alutfolakali ngetibanelo tekuphepha.',
     'access_denied' => 'Kungena Kugenwe',
     'security_violation' => 'Kuphulwa kwekuphepha kubonwe. Seshini siphele.',
-    
+
     // Session management
     'session_init_failed' => 'Kucala kwamphakathi weseshini sekuhlulekile',
     'session_name_failed' => 'Kuhlulekile kubeka ligama leseshini',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Kuhlulekile kudala umtlamo werrejista',
     'session_security_log_failed' => 'Kuhlulekile kubhala rrejista yekuphulwa kwekuphepha',
     'session_security_log_injection_failed' => 'Kurrejista kwekuphepha sekuhlulekile',
-    
+
     // Security messages
     'security_violation_detected' => 'Kuphulwa kwekuphepha kubonwe. Seshini siphele.',
     'security_user_agent_mismatch' => 'Ummeli wemuntfu akahambisani',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Umzamo wekubamba seshini ubonwe',
     'security_invalid_token' => 'Incambu yekuphepha engasebentiko',
     'security_token_expired' => 'Incambu yekuphepha isiphele',
-    
+
     // Server information
     'server_information' => 'Lwati Lwesiveni',
     'application_information' => 'Lwati Lweli-App',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Lifayela Lelulwimi Lwaloku',
     'current_language_flag' => 'Lifulegi Lelulwimi Lwaloku',
     'current_language_flag_alt' => 'Fulegi yelulwimi lwaloku',
-    
+
     // Date and time
     'datetime_placeholder' => 'Lapha kuta buka lusuku, sikhatsi, kufaka nesikhatsi se-internet lesichaziwe @beat.',
     'debug_mode_enabled' => 'Modi yekulungisa inikwe amandla.',
     'service_information' => 'Lwati Lwensita',
     'user_information' => 'Lwati lwemuntfu:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Buyalo',
     'cookie_path' => 'Indlela',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Kuphepha',
     'cookie_httponly' => 'HTTP Kuphela',
     'cookie_samesite' => 'Sito Sinye',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Lisiginecha Sesikhatsi',
     'log_entry_ip' => 'Likheli le-IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Si-ID Seseshini',
     'log_entry_reason' => 'Sizatfu',
     'log_entry_request_uri' => 'URI Yekucela',
-    
+
     // User interface
     'welcome_user' => 'Sawubona',
     'user' => 'Muntfu',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Liprofiili',
     'settings' => 'Tekusetjenta',
     'register' => 'Zibhalise',
-    
+
     // Content sections
     'important_notes' => 'Emakhadi Lekutsi',
     'about_renal_tales' => 'Ngetindzaba Tetikoloto',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Umuntjwa emphakathini wetfu? Cala ngekufundza tindaba, tazise, futsi ucabange ngekwabelana ngalokukuhlangenwe nakho uma ukulungele.',
     'support_resources' => 'Temsetjentiswa Tekusekela',
     'support_description' => 'Uma udinga lusito lwetemitsi ngekushesha noma usebudzimeni, sicela utintjintje umniketi wekwelapha kwakho noma tinsita temashesha.',
-    
+
     // Home page
     'welcome_home' => 'Sawubona eTindzaba Tetikoloto',
     'home_intro' => 'Sawubona emphakathini wetfu losekela labantfu labalimala ngetikhubateko tetikoloto. Lapha ungakwabelana ngelindaba yakho, ufundze toko lokuhlangene nalabo labanye, futsi utfole lusekelo kubantfu labakutiva luhambo lwakho. Zihlanganise nathi kutsi uhlanganise nalabo labanye, abelane ngalokuhlangenwe nakho kwakho, futsi utfole lusekelo emphakathini wetfu. Sihlangene, singatsi singenta umehluko ebuyalweni babo labalimala ngetikhubateko tetikoloto. Siyabonga ngekutsi uyingcenye yemphakathi wetfu!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Zihlanganise Nemphakathi',
     'join_community_desc' => 'Jongana nalabo labanye, dzingidze ema-kutjelo, futsi yakhe ubungani lobuyabheka.',
     'explore_community' => 'Hlola Umphakathi',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Tingcenye tetindzaba tita kutsa masinyane...',
     'community_coming_soon' => 'Tingcenye temphakathi tita kutsa masinyane...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Tingcenye tetindzaba tami tita kutsa masinyane...',
     'profile_coming_soon' => 'Tingcenye teliprofiili tita kutsa masinyane...',
     'settings_coming_soon' => 'Tingcenye tetekusetjenta tita kutsa masinyane...',
-    
+
     // Login page
     'login_welcome' => 'Sawubona Kutsi Ubuyile',
     'login_subtitle' => 'Ngena kutsi ubone li-akhawundi yakho',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Zibhalise lapha',
     'back_to_home' => 'Buyela Elikhaya',
     'please_fill_required_fields' => 'Sicela ugcwalise tonkhe tindawo letifunekako.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Incambu yekuphepha lengasebentiko. Sicela uzame futsi.',
     'email_required' => 'I-imeyli iyafuneka.',
     'email_invalid' => 'Sicela ufake likheli le-imeyli lelifanele.',
     'password_required' => 'Liphasiwedi iyafuneka.',
     'login_failed' => 'I-imeyli noma liphasiwedi engasebentiko.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Kukhetsa lulwimi akutfolakali',
-    
+
     // Time and date display
     'day' => 'Lusuku',
     'year' => 'Umnyaka',
     'week' => 'Liviki',
     'today_is' => 'Namulanje ngu',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Kukhetsa lulwimi',
     'language_change' => 'Shintsha lulwimi',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Lulwimi lushintswe ngemphumelelo ku',
     'language_switch_error' => 'Livele ekushintseni lulwimi'
 ];
-?>

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Assamese language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'নিষ্ক্ৰিয়',
     'available' => 'উপলব্ধ',
     'not_available' => 'উপলব্ধ নহয়',
-    
+
     // Error messages
     'application_error' => 'এপ্লিকেচন ভুল',
     'service_unavailable' => 'সেৱা বৰ্তমান উপলব্ধ নহয়',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'সুৰক্ষাৰ কাৰণে ডিবাগ মোড ব্যৱহাৰ কৰিব নোৱাৰি।',
     'access_denied' => 'প্ৰৱেশ নিষেধ',
     'security_violation' => 'সুৰক্ষা উলংঘন ধৰা পৰিছে। অধিৱেশন শেষ কৰা হৈছে।',
-    
+
     // Session management
     'session_init_failed' => 'অধিৱেশন ব্যৱস্থাপক আৰম্ভ কৰিবলৈ ব্যৰ্থ',
     'session_name_failed' => 'অধিৱেশনৰ নাম সংহতি কৰিবলৈ ব্যৰ্থ',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'লগ ডাইৰেক্টৰী সৃষ্টি কৰিবলৈ ব্যৰ্থ',
     'session_security_log_failed' => 'সুৰক্ষা উলংঘন লগ লিখিবলৈ ব্যৰ্থ',
     'session_security_log_injection_failed' => 'সুৰক্ষা লগ ইনজেকচন ব্যৰ্থ',
-    
+
     // Security messages
     'security_violation_detected' => 'সুৰক্ষা উলংঘন ধৰা পৰিছে। অধিৱেশন শেষ কৰা হৈছে।',
     'security_user_agent_mismatch' => 'ব্যৱহাৰকাৰী এজেণ্ট মিল নাই',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'অধিৱেশন হাইজেকিং প্ৰচেষ্টা ধৰা পৰিছে',
     'security_invalid_token' => 'অবৈধ সুৰক্ষা টোকেন',
     'security_token_expired' => 'সুৰক্ষা টোকেনৰ সময় শেষ',
-    
+
     // Server information
     'server_information' => 'চাৰ্ভাৰৰ তথ্য',
     'application_information' => 'এপ্লিকেচনৰ তথ্য',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'বৰ্তমান ভাষাৰ ফাইল',
     'current_language_flag' => 'বৰ্তমান ভাষাৰ পতাকা',
     'current_language_flag_alt' => 'বৰ্তমান ভাষাৰ পতাকা',
-    
+
     // Date and time
     'datetime_placeholder' => 'ইয়াত তাৰিখ, সময়, আৰু বৰ্তমান ইণ্টাৰনেট সময় @beat প্ৰদৰ্শিত হ\'ব।',
     'debug_mode_enabled' => 'ডিবাগ মোড সক্ৰিয় আছে।',
     'service_information' => 'সেৱাৰ তথ্য',
     'user_information' => 'ব্যৱহাৰকাৰীৰ তথ্য:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'জীৱনকাল',
     'cookie_path' => 'পথ',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'সুৰক্ষিত',
     'cookie_httponly' => 'কেৱল HTTP',
     'cookie_samesite' => 'একে চাইট',
-    
+
     // Log messages
     'log_entry_timestamp' => 'টাইমষ্টেম্প',
     'log_entry_ip' => 'আইপি ঠিকনা',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'অধিৱেশন আইডি',
     'log_entry_reason' => 'কাৰণ',
     'log_entry_request_uri' => 'অনুৰোধ URI',
-    
+
     // User interface
     'welcome_user' => 'স্বাগতম',
     'user' => 'ব্যৱহাৰকাৰী',
@@ -154,7 +155,7 @@ return [
     'profile' => 'প্ৰফাইল',
     'settings' => 'ছেটিংস',
     'register' => 'নিবন্ধন',
-    
+
     // Content sections
     'important_notes' => 'গুৰুত্বপূৰ্ণ টোকা',
     'about_renal_tales' => 'বৃক্কৰ কাহিনী সম্পৰ্কে',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'আমাৰ সমাজত নতুন? কিছুমান কাহিনী পঢ়ি, নিজকে পৰিচয় কৰাই আৰম্ভ কৰক, আৰু প্ৰস্তুত হ\'লে নিজৰ অভিজ্ঞতা ভাগ-বতৰা কৰাৰ কথা বিবেচনা কৰক।',
     'support_resources' => 'সহায়ৰ সম্পদ',
     'support_description' => 'যদি আপোনাৰ তৎক্ষণাৎ চিকিৎসা সহায়ৰ প্ৰয়োজন বা আপুনি সংকটত আছে, দয়া কৰি আপোনাৰ স্বাস্থ্য পৰিসেৱা প্ৰদানকাৰী বা জৰুৰীকালীন সেৱাৰ সৈতে যোগাযোগ কৰক।',
-    
+
     // Home page
     'welcome_home' => 'বৃক্কৰ কাহিনীলৈ স্বাগতম',
     'home_intro' => 'বৃক্কৰোগত আক্ৰান্ত লোকসকলক সহায় কৰা আমাৰ সমাজলৈ স্বাগতম। ইয়াত আপুনি আপোনাৰ কাহিনী ভাগ-বতৰা কৰিব পাৰে, আনৰ অভিজ্ঞতা পঢ়িব পাৰে, আৰু আপোনাৰ যাত্ৰা বুজি পোৱা লোকসকলৰ পৰা সহায় বিচাৰিব পাৰে।',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'সমাজত যোগদান কৰক',
     'join_community_desc' => 'আনৰ সৈতে সংযোগ কৰক, আলোচনাত অংশগ্ৰহণ কৰক, আৰু দীৰ্ঘস্থায়ী বন্ধুত্ব গঢ়ক।',
     'explore_community' => 'সমাজ অন্বেষণ কৰক',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'কাহিনী বিভাগ শীঘ্ৰেই আহিছে...',
     'community_coming_soon' => 'সমাজ বিভাগ শীঘ্ৰেই আহিছে...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'মোৰ কাহিনী বিভাগ শীঘ্ৰেই আহিছে...',
     'profile_coming_soon' => 'প্ৰফাইল বিভাগ শীঘ্ৰেই আহিছে...',
     'settings_coming_soon' => 'ছেটিংস বিভাগ শীঘ্ৰেই আহিছে...',
-    
+
     // Login page
     'login_welcome' => 'পুনৰ স্বাগতম',
     'login_subtitle' => 'আপোনাৰ একাউণ্ট এক্সেছ কৰিবলৈ লগইন কৰক',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'ইয়াত ছাইন আপ কৰক',
     'back_to_home' => 'ঘৰলৈ উভতি যাওক',
     'please_fill_required_fields' => 'দয়া কৰি সকলো প্ৰয়োজনীয় ক্ষেত্ৰ পূৰণ কৰক।',
-    
+
     // Login validation
     'invalid_csrf_token' => 'অবৈধ সুৰক্ষা টোকেন। দয়া কৰি পুনৰ চেষ্টা কৰক।',
     'email_required' => 'ইমেইল প্ৰয়োজনীয়।',
     'email_invalid' => 'দয়া কৰি এটা বৈধ ইমেইল ঠিকনা দিয়ক।',
     'password_required' => 'পাছৱৰ্ড প্ৰয়োজনীয়।',
     'login_failed' => 'অবৈধ ইমেইল বা পাছৱৰ্ড।',
-    
+
     // Language selection
     'language_selection_unavailable' => 'ভাষা নিৰ্বাচন উপলব্ধ নহয়',
-    
+
     // Time and date display
     'day' => 'দিন',
     'year' => 'বছৰ',
     'week' => 'সপ্তাহ',
     'today_is' => 'আজি হৈছে',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'ভাষা নিৰ্বাচন',
     'language_change' => 'ভাষা সলনি কৰক',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'ভাষা সফলভাৱে সলনি কৰা হৈছে',
     'language_switch_error' => 'ভাষা সলনি কৰোতে ভুল হৈছে'
 ];
-?>

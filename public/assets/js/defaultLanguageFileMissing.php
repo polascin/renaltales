@@ -30,7 +30,7 @@
 </html>
 <?php
     exit; // Stop further execution of the script
-?>
-<?php 
-    endif; 
+    ?>
+<?php
+endif;
 ?>

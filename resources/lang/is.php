@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Nýrnasögur',
     'welcome' => 'Velkomin',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Villa tilkynning',
     'feature_request' => 'Eiginleiki beiðni'
 ];
-?>

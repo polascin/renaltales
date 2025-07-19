@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Nier Geschichten',
     'welcome' => 'Wëllkomm',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Bug-Rapport',
     'feature_request' => 'Feature-Ufro'
 ];
-?>

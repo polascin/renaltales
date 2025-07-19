@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Giltzurrunen Istoriak',
     'welcome' => 'Ongi etorri',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Errore txostena',
     'feature_request' => 'Eginbide eskaria'
 ];
-?>

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'मूत्रपिंडाच्या कथा',
     'welcome' => 'स्वागत',

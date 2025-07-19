@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Aymara language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Jark\'atatawa',
     'available' => 'Utjaniwa',
     'not_available' => 'Janiw utjkiti',
-    
+
     // Error messages
     'application_error' => 'Pantjat Lurañan',
     'service_unavailable' => 'Jichha Lurata Janiw Utjkiti',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Debug luraña janiw luratäkiti jan walt\'awinak.',
     'access_denied' => 'Mantañax Jark\'atawa',
     'security_violation' => 'Jan walt\'awina ukaspa uñjatawa. Sesión tukuyatawa.',
-    
+
     // Session management
     'session_init_failed' => 'Sesión apnaqiri qalltaña janiw luratäkiti',
     'session_name_failed' => 'Sesión sutip qalltaña janiw luratäkiti',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Log directorio lurañax janiw luratäkiti',
     'session_security_log_failed' => 'Jan walt\'awi log qillqaña janiw luratäkiti',
     'session_security_log_injection_failed' => 'Jan walt\'awi log inyección janiw luratäkiti',
-    
+
     // Security messages
     'security_violation_detected' => 'Jan walt\'awina ukaspa uñjatawa. Sesión tukuyatawa.',
     'security_user_agent_mismatch' => 'Apnaqiri agente janiw kikipäkiti',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Sesión jilt\'añ yant\'aña uñjatawa',
     'security_invalid_token' => 'Jan walt\'ir token',
     'security_token_expired' => 'Token pacha tukuyatawa',
-    
+
     // Server information
     'server_information' => 'Servidor Yatiyawinakapasa',
     'application_information' => 'Lurata Yatiyawinakapasa',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Jichhür Aru Archivo',
     'current_language_flag' => 'Jichhür Aru Wiphala',
     'current_language_flag_alt' => 'Jichhür aru wiphala',
-    
+
     // Date and time
     'datetime_placeholder' => 'Akax uru, pacha, ukhamaraki jichhür internet pacha @beat uñjayañataki.',
     'debug_mode_enabled' => 'Debug luraña irpatata.',
     'service_information' => 'Lurata Yatiyawi',
     'user_information' => 'Apnaqiri yatiyawi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Jakañ Pacha',
     'cookie_path' => 'Thakhi',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Jan Walt\'awinik',
     'cookie_httponly' => 'HTTP Khiti',
     'cookie_samesite' => 'Kikpa Sitio',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'IP Dirección',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Sesión ID',
     'log_entry_reason' => 'Tina',
     'log_entry_request_uri' => 'Mayiña URI',
-    
+
     // User interface
     'welcome_user' => 'Kusisiñani',
     'user' => 'Apnaqiri',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Perfil',
     'settings' => 'Ajllirinaka',
     'register' => 'Qillqantasiña',
-    
+
     // Content sections
     'important_notes' => 'Wakiskir Qillqawi',
     'about_renal_tales' => 'Luk\'a Arunak Ukampi',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Machaq jiwasan ayllunakanxa? Qhipüru utji arunk ullaña, jikisiña, ukhamaraki wakisski ukhaxa nayran amuyt\'awinak amuyt\'aña yänakaña.',
     'support_resources' => 'Yanapt\'iri Yanapt\'awinak',
     'support_description' => 'Jichha qullañ yanapt\'ä munsta jan ukax jan walt\'awimpis utjsta ukhax, qulliri jan ukax jan walt\'awi yanapt\'irinakampi aruskipt\'aña.',
-    
+
     // Home page
     'welcome_home' => 'Luk\'a Arunakar Kusisiñani',
     'home_intro' => 'Luk\'an usunak jaqinakaru yanapt\'ir ayllunakar kusisiñani. Akax arunk amuyt\'añax yanapt\'añatakiw, mayanak amuyt\'awinakap ullañatakiw, ukhamaraki jakañam yatxatanak jaqinakapat yanapt\'aw jikñañatakiw.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Ayllurar Mantaña',
     'join_community_desc' => 'Mayanakarux mayacht\'aña, aruskipañanakarux chikt\'aña, ukhamaraki sapa kuti munañanak tukuyaña.',
     'explore_community' => 'Ayllu Thaqhaña',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Arunak t\'aqa jutaniwa...',
     'community_coming_soon' => 'Ayllu t\'aqa jutaniwa...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Nayan arunak t\'aqa jutaniwa...',
     'profile_coming_soon' => 'Perfil t\'aqa jutaniwa...',
     'settings_coming_soon' => 'Ajllirinaka t\'aqa jutaniwa...',
-    
+
     // Login page
     'login_welcome' => 'Wasitat Kusisiñani',
     'login_subtitle' => 'Cuentamar mantañataki mantaña',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Akankir qillqantasiña',
     'back_to_home' => 'Utar kutxataña',
     'please_fill_required_fields' => 'Taqpach wakiskir chiqanakan phuqhañani.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Jan walt\'ir token. Wasitat yant\'aña.',
     'email_required' => 'Email wakisiwa.',
     'email_invalid' => 'Walt\'ir email dirección qillqaña.',
     'password_required' => 'Clave wakisiwa.',
     'login_failed' => 'Jan walt\'ir email jan ukax clave.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Aru ajlliña janiw utjkiti',
-    
+
     // Time and date display
     'day' => 'Uru',
     'year' => 'Mara',
     'week' => 'Simana',
     'today_is' => 'Jichhax',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Aru ajllita',
     'language_change' => 'Aru mayjt\'aña',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Aru suma mayjt\'atawa',
     'language_switch_error' => 'Pantjata aru mayjt\'añanx'
 ];
-?>

@@ -2,9 +2,9 @@
 
 /**
  * Translation Helper Functions
- * 
+ *
  * Provides global helper functions for easy translation access in templates and views.
- * 
+ *
  * @package RenalTales\Helpers
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -24,12 +24,12 @@ if (!function_exists('__')) {
     function __(string $key, string $default = '', array $parameters = []): string
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             // Initialize translation if not available
             $translation = new Translation();
         }
-        
+
         return $translation->get($key, $default, $parameters);
     }
 }
@@ -59,11 +59,11 @@ if (!function_exists('setLanguage')) {
     function setLanguage(string $language): bool
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             $translation = new Translation();
         }
-        
+
         return $translation->setLanguage($language);
     }
 }
@@ -77,11 +77,11 @@ if (!function_exists('getCurrentLanguage')) {
     function getCurrentLanguage(): string
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             $translation = new Translation();
         }
-        
+
         return $translation->getCurrentLanguage();
     }
 }
@@ -95,11 +95,11 @@ if (!function_exists('getSupportedLanguages')) {
     function getSupportedLanguages(): array
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             $translation = new Translation();
         }
-        
+
         return $translation->getSupportedLanguages();
     }
 }
@@ -114,11 +114,11 @@ if (!function_exists('switchLanguage')) {
     function switchLanguage(string $language): bool
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             $translation = new Translation();
         }
-        
+
         return $translation->switchTo($language);
     }
 }
@@ -133,11 +133,11 @@ if (!function_exists('detectLanguage')) {
     function detectLanguage(string $default = 'en'): string
     {
         global $translation;
-        
+
         if (!$translation instanceof Translation) {
             $translation = new Translation();
         }
-        
+
         return $translation->detectLanguage($default);
     }
 }

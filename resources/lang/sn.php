@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Ngano dzeItsvo',
     'welcome' => 'Mauya',

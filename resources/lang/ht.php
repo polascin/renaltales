@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Istwa Ren yo',
     'welcome' => 'Byenveni',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Rapò sou erè',
     'feature_request' => 'Demann karakteristik'
 ];
-?>

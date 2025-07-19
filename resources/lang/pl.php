@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Polish language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Wyłączone',
     'available' => 'Dostępne',
     'not_available' => 'Niedostępne',
-    
+
     // Error messages
     'application_error' => 'Błąd Aplikacji',
     'service_unavailable' => 'Usługa Czasowo Niedostępna',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Informacje debugowania nie są dostępne ze względów bezpieczeństwa.',
     'access_denied' => 'Dostęp Odmówiony',
     'security_violation' => 'Wykryto naruszenie bezpieczeństwa. Sesja zakończona.',
-    
+
     // Session management
     'session_init_failed' => 'Inicjalizacja menedżera sesji nie powiodła się',
     'session_name_failed' => 'Nie udało się ustawić nazwy sesji',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Nie udało się utworzyć katalogu logów',
     'session_security_log_failed' => 'Nie udało się zapisać loga naruszenia bezpieczeństwa',
     'session_security_log_injection_failed' => 'Logowanie bezpieczeństwa nie powiodło się',
-    
+
     // Security messages
     'security_violation_detected' => 'Wykryto naruszenie bezpieczeństwa. Sesja zakończona.',
     'security_user_agent_mismatch' => 'Niezgodność agenta użytkownika',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Wykryto próbę przejęcia sesji',
     'security_invalid_token' => 'Nieprawidłowy token bezpieczeństwa',
     'security_token_expired' => 'Token bezpieczeństwa wygasł',
-    
+
     // Server information
     'server_information' => 'Informacje o Serwerze',
     'application_information' => 'Informacje o Aplikacji',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Plik Bieżącego Języka',
     'current_language_flag' => 'Flaga Bieżącego Języka',
     'current_language_flag_alt' => 'Flaga bieżącego języka',
-    
+
     // Date and time
     'datetime_placeholder' => 'Tutaj zostanie wyświetlona data, czas, w tym szczegółowy czas internetowy @beat.',
     'debug_mode_enabled' => 'Tryb debugowania jest włączony.',
     'service_information' => 'Informacje o Usłudze',
     'user_information' => 'Informacje o użytkowniku:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Czas Życia',
     'cookie_path' => 'Ścieżka',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Bezpieczne',
     'cookie_httponly' => 'Tylko HTTP',
     'cookie_samesite' => 'SameSite',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Znacznik Czasu',
     'log_entry_ip' => 'Adres IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID Sesji',
     'log_entry_reason' => 'Powód',
     'log_entry_request_uri' => 'URI Żądania',
-    
+
     // User interface
     'welcome_user' => 'Witamy',
     'user' => 'Użytkownik',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Ustawienia',
     'register' => 'Zarejestruj',
-    
+
     // Content sections
     'important_notes' => 'Ważne Uwagi',
     'about_renal_tales' => 'O Historie Nerek',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Nowy w naszej społeczności? Zacznij od przeczytania historii, przedstaw się i rozważ podzielenie się własnym doświadczeniem, gdy będziesz gotowy.',
     'support_resources' => 'Zasoby Wsparcia',
     'support_description' => 'Jeśli potrzebujesz natychmiastowej pomocy medycznej lub jesteś w kryzysie, skontaktuj się ze swoim dostawcą opieki zdrowotnej lub służbami ratunkowymi.',
-    
+
     // Home page
     'welcome_home' => 'Witamy w Historie Nerek',
     'home_intro' => 'Witamy w naszej wspierającej społeczności dla osób dotkniętych chorobami nerek. Tutaj możesz podzielić się swoją historią, przeczytać doświadczenia innych i znaleźć wsparcie od ludzi, którzy rozumieją Twoją drogę.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Dołącz do Społeczności',
     'join_community_desc' => 'Połącz się z innymi, uczestnicz w dyskusjach i buduj trwałe przyjaźnie.',
     'explore_community' => 'Odkrywaj Społeczność',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Sekcja historii już wkrótce...',
     'community_coming_soon' => 'Sekcja społeczności już wkrótce...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Sekcja moich historii już wkrótce...',
     'profile_coming_soon' => 'Sekcja profilu już wkrótce...',
     'settings_coming_soon' => 'Sekcja ustawień już wkrótce...',
-    
+
     // Login page
     'login_welcome' => 'Witamy z powrotem',
     'login_subtitle' => 'Zaloguj się, aby uzyskać dostęp do swojego konta',
@@ -206,14 +207,14 @@ return [
     'sign_up_here' => 'Zarejestruj się tutaj',
     'back_to_home' => 'Powrót do Strony Głównej',
     'please_fill_required_fields' => 'Wypełnij wszystkie wymagane pola.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Nieprawidłowy token bezpieczeństwa. Spróbuj ponownie.',
     'email_required' => 'Email jest wymagany.',
     'email_invalid' => 'Wprowadź prawidłowy adres email.',
     'password_required' => 'Hasło jest wymagane.',
     'login_failed' => 'Nieprawidłowy email lub hasło.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Wybór języka niedostępny',
     'language_selection' => 'Wybór języka',
@@ -225,11 +226,10 @@ return [
     'language_switch' => 'Przełącz język',
     'language_switch_success' => 'Język został pomyślnie zmieniony',
     'language_switch_error' => 'Błąd podczas zmiany języka',
-    
+
     // Time and date display
     'day' => 'Dzień',
     'year' => 'Rok',
     'week' => 'Tydzień',
     'today_is' => 'Dziś jest',
 ];
-?>

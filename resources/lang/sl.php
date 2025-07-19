@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Zgodbe o ledvicah',
     'welcome' => 'Dobrodošli',

@@ -1,7 +1,7 @@
 <?php
 /**
  * Header Partial Component
- * 
+ *
  * Simple header template partial
  */
 ?>

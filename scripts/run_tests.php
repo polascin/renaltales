@@ -4,10 +4,10 @@ namespace RenalTales\Scripts;
 
 /**
  * Test Execution Script
- * 
+ *
  * Comprehensive test runner for all test suites including
  * unit tests, integration tests, security tests, and API tests
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0
  */
@@ -27,28 +27,28 @@ class TestRunner
     private $passedTests = 0;
     private $failedTests = 0;
     private $skippedTests = 0;
-    
+
     public function __construct()
     {
         $this->startTime = microtime(true);
-        
+
         // Ensure testing environment
         $_ENV['APP_ENV'] = 'testing';
         $_ENV['DB_DATABASE'] = 'renaltales_test';
-        
+
         echo "=== RenalTales Test Suite Runner ===\n";
         echo "Environment: " . $_ENV['APP_ENV'] . "\n";
         echo "Database: " . $_ENV['DB_DATABASE'] . "\n";
         echo "Started at: " . date('Y-m-d H:i:s') . "\n\n";
     }
-    
+
     /**
      * Run all test suites
      */
     public function runAllTests(): void
     {
         $this->setupTestEnvironment();
-        
+
         $testSuites = [
             'Unit Tests' => 'tests/Unit',
             'Integration Tests' => 'tests/Integration',
@@ -57,15 +57,15 @@ class TestRunner
             'Feature Tests' => 'tests/Feature',
             'Database Tests' => 'tests/Database'
         ];
-        
+
         foreach ($testSuites as $suiteName => $suitePath) {
             $this->runTestSuite($suiteName, $suitePath);
         }
-        
+
         $this->generateReport();
         $this->cleanupTestEnvironment();
     }
-    
+
     /**
      * Run specific test suite
      */
@@ -73,28 +73,28 @@ class TestRunner
     {
         echo "Running $suiteName...\n";
         echo str_repeat('-', 50) . "\n";
-        
+
         if (!is_dir(APP_ROOT . '/' . $suitePath)) {
             echo "⚠ Test suite directory not found: $suitePath\n";
             $this->skippedTests++;
             return;
         }
-        
+
         $testFiles = glob(APP_ROOT . '/' . $suitePath . '/*Test.php');
-        
+
         if (empty($testFiles)) {
             echo "⚠ No test files found in $suitePath\n";
             $this->skippedTests++;
             return;
         }
-        
+
         $suiteResults = [];
         $suiteStartTime = microtime(true);
-        
+
         foreach ($testFiles as $testFile) {
             $result = $this->runTestFile($testFile);
             $suiteResults[] = $result;
-            
+
             if ($result['status'] === 'passed') {
                 $this->passedTests += $result['tests'];
             } elseif ($result['status'] === 'failed') {
@@ -102,12 +102,12 @@ class TestRunner
             } else {
                 $this->skippedTests += $result['tests'];
             }
-            
+
             $this->totalTests += $result['tests'];
         }
-        
+
         $suiteTime = microtime(true) - $suiteStartTime;
-        
+
         $this->results[$suiteName] = [
             'results' => $suiteResults,
             'time' => $suiteTime,
@@ -115,10 +115,10 @@ class TestRunner
             'failed' => array_sum(array_column($suiteResults, 'failed')),
             'skipped' => array_sum(array_column($suiteResults, 'skipped'))
         ];
-        
+
         echo "\n$suiteName completed in " . number_format($suiteTime, 2) . "s\n\n";
     }
-    
+
     /**
      * Run individual test file
      */
@@ -126,9 +126,9 @@ class TestRunner
     {
         $fileName = basename($testFile);
         echo "  Running $fileName... ";
-        
+
         $startTime = microtime(true);
-        
+
         // Use PHPUnit if available, otherwise simple test execution
         if (class_exists('PHPUnit\TextUI\Command')) {
             return $this->runPHPUnitTest($testFile);
@@ -136,7 +136,7 @@ class TestRunner
             return $this->runSimpleTest($testFile);
         }
     }
-    
+
     /**
      * Run test using PHPUnit
      */
@@ -144,15 +144,15 @@ class TestRunner
     {
         $command = "vendor/bin/phpunit --colors=never --no-progress $testFile 2>&1";
         $output = shell_exec($command);
-        
+
         // Parse PHPUnit output
         $passed = preg_match('/OK \((\d+) tests?/', $output, $matches) ? (int)$matches[1] : 0;
         $failed = preg_match('/FAILURES!\s*Tests: \d+, Assertions: \d+, Failures: (\d+)/', $output, $matches) ? (int)$matches[1] : 0;
         $errors = preg_match('/ERRORS!\s*Tests: \d+, Assertions: \d+, Errors: (\d+)/', $output, $matches) ? (int)$matches[1] : 0;
         $skipped = preg_match('/skipped: (\d+)/', $output, $matches) ? (int)$matches[1] : 0;
-        
+
         $totalTests = $passed + $failed + $errors + $skipped;
-        
+
         if ($failed > 0 || $errors > 0) {
             echo "✗ FAILED\n";
             echo "    Output: " . substr($output, 0, 200) . "...\n";
@@ -164,7 +164,7 @@ class TestRunner
             echo "- SKIPPED\n";
             $status = 'skipped';
         }
-        
+
         return [
             'file' => basename($testFile),
             'status' => $status,
@@ -175,7 +175,7 @@ class TestRunner
             'output' => $output
         ];
     }
-    
+
     /**
      * Run simple test execution
      */
@@ -185,25 +185,25 @@ class TestRunner
             // Capture output
             ob_start();
             $error = false;
-            
+
             try {
                 require_once $testFile;
-                
+
                 // Try to instantiate and run test class
                 $className = $this->getTestClassName($testFile);
                 if (class_exists($className)) {
                     $testInstance = new $className();
-                    
+
                     // Run test methods
                     $methods = get_class_methods($testInstance);
-                    $testMethods = array_filter($methods, function($method) {
+                    $testMethods = array_filter($methods, function ($method) {
                         return strpos($method, 'test') === 0;
                     });
-                    
+
                     foreach ($testMethods as $method) {
                         $testInstance->$method();
                     }
-                    
+
                     echo "✓ PASSED\n";
                     $status = 'passed';
                     $tests = count($testMethods);
@@ -216,7 +216,7 @@ class TestRunner
                     $passed = 0;
                     $failed = 0;
                 }
-                
+
             } catch (Exception $e) {
                 echo "✗ FAILED (" . $e->getMessage() . ")\n";
                 $status = 'failed';
@@ -225,9 +225,9 @@ class TestRunner
                 $failed = 1;
                 $error = true;
             }
-            
+
             $output = ob_get_clean();
-            
+
             return [
                 'file' => basename($testFile),
                 'status' => $status,
@@ -238,12 +238,12 @@ class TestRunner
                 'output' => $output,
                 'error' => $error
             ];
-            
+
         } catch (Exception $e) {
             ob_end_clean();
-            
+
             echo "✗ FAILED (" . $e->getMessage() . ")\n";
-            
+
             return [
                 'file' => basename($testFile),
                 'status' => 'failed',
@@ -256,7 +256,7 @@ class TestRunner
             ];
         }
     }
-    
+
     /**
      * Get test class name from file
      */
@@ -265,17 +265,17 @@ class TestRunner
         $fileName = basename($testFile, '.php');
         return $fileName;
     }
-    
+
     /**
      * Setup test environment
      */
     private function setupTestEnvironment(): void
     {
         echo "Setting up test environment...\n";
-        
+
         // Create test database
         $this->setupTestDatabase();
-        
+
         // Create test directories
         $testDirs = [
             'storage/testing',
@@ -284,17 +284,17 @@ class TestRunner
             'storage/testing/sessions',
             'storage/testing/uploads'
         ];
-        
+
         foreach ($testDirs as $dir) {
             $fullPath = APP_ROOT . '/' . $dir;
             if (!is_dir($fullPath)) {
                 mkdir($fullPath, 0755, true);
             }
         }
-        
+
         echo "✓ Test environment setup complete\n\n";
     }
-    
+
     /**
      * Setup test database
      */
@@ -305,35 +305,35 @@ class TestRunner
             $config = $GLOBALS['config']['database'];
             $dsn = "mysql:host={$config['host']};charset={$config['charset']}";
             $pdo = new PDO($dsn, $config['user'], $config['password']);
-            
+
             $testDb = $_ENV['DB_DATABASE'];
             $pdo->exec("CREATE DATABASE IF NOT EXISTS `$testDb` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-            
+
             echo "✓ Test database created/verified\n";
-            
+
         } catch (Exception $e) {
             echo "✗ Failed to setup test database: " . $e->getMessage() . "\n";
         }
     }
-    
+
     /**
      * Generate test report
      */
     private function generateReport(): void
     {
         $totalTime = microtime(true) - $this->startTime;
-        
+
         echo "\n" . str_repeat('=', 70) . "\n";
         echo "TEST RESULTS SUMMARY\n";
         echo str_repeat('=', 70) . "\n";
-        
+
         foreach ($this->results as $suiteName => $suiteData) {
             echo "\n$suiteName:\n";
             echo "  Time: " . number_format($suiteData['time'], 2) . "s\n";
             echo "  Passed: " . $suiteData['passed'] . "\n";
             echo "  Failed: " . $suiteData['failed'] . "\n";
             echo "  Skipped: " . $suiteData['skipped'] . "\n";
-            
+
             if ($suiteData['failed'] > 0) {
                 echo "  Status: ✗ FAILED\n";
             } elseif ($suiteData['passed'] > 0) {
@@ -342,7 +342,7 @@ class TestRunner
                 echo "  Status: - SKIPPED\n";
             }
         }
-        
+
         echo "\n" . str_repeat('-', 70) . "\n";
         echo "OVERALL RESULTS:\n";
         echo "  Total Tests: $this->totalTests\n";
@@ -351,44 +351,44 @@ class TestRunner
         echo "  Skipped: $this->skippedTests\n";
         echo "  Success Rate: " . ($this->totalTests > 0 ? number_format(($this->passedTests / $this->totalTests) * 100, 1) : 0) . "%\n";
         echo "  Total Time: " . number_format($totalTime, 2) . "s\n";
-        
+
         if ($this->failedTests > 0) {
             echo "\n❌ TESTS FAILED\n";
             exit(1);
         } else {
             echo "\n✅ ALL TESTS PASSED\n";
         }
-        
+
         // Generate detailed report file
         $this->generateDetailedReport();
     }
-    
+
     /**
      * Generate detailed test report
      */
     private function generateDetailedReport(): void
     {
         $reportPath = APP_ROOT . '/tests/results/test_report_' . date('Y-m-d_H-i-s') . '.html';
-        
+
         // Create results directory if it doesn't exist
         $resultsDir = dirname($reportPath);
         if (!is_dir($resultsDir)) {
             mkdir($resultsDir, 0755, true);
         }
-        
+
         $html = $this->generateReportHTML();
         file_put_contents($reportPath, $html);
-        
+
         echo "📄 Detailed report saved to: $reportPath\n";
     }
-    
+
     /**
      * Generate HTML report
      */
     private function generateReportHTML(): string
     {
         $totalTime = microtime(true) - $this->startTime;
-        
+
         $html = '<!DOCTYPE html>
 <html>
 <head>
@@ -439,12 +439,12 @@ class TestRunner
         <p><strong>Success Rate:</strong> ' . ($this->totalTests > 0 ? number_format(($this->passedTests / $this->totalTests) * 100, 1) : 0) . '%</p>
         <p><strong>Total Time:</strong> ' . number_format($totalTime, 2) . 's</p>
     </div>';
-        
+
         foreach ($this->results as $suiteName => $suiteData) {
             $html .= '<div class="suite">
                 <h3>' . $suiteName . '</h3>
                 <p><strong>Time:</strong> ' . number_format($suiteData['time'], 2) . 's</p>';
-            
+
             foreach ($suiteData['results'] as $result) {
                 $statusClass = $result['status'];
                 $html .= '<div class="test-file ' . $statusClass . '">
@@ -454,29 +454,29 @@ class TestRunner
                        <strong>Passed:</strong> ' . $result['passed'] . ' | 
                        <strong>Failed:</strong> ' . $result['failed'] . ' | 
                        <strong>Skipped:</strong> ' . $result['skipped'] . '</p>';
-                
+
                 if (!empty($result['output'])) {
                     $html .= '<pre>' . htmlspecialchars($result['output']) . '</pre>';
                 }
-                
+
                 $html .= '</div>';
             }
-            
+
             $html .= '</div>';
         }
-        
+
         $html .= '</body></html>';
-        
+
         return $html;
     }
-    
+
     /**
      * Cleanup test environment
      */
     private function cleanupTestEnvironment(): void
     {
         echo "\nCleaning up test environment...\n";
-        
+
         // Clean up test files
         $testDirs = [
             'storage/testing/cache',
@@ -484,7 +484,7 @@ class TestRunner
             'storage/testing/sessions',
             'storage/testing/uploads'
         ];
-        
+
         foreach ($testDirs as $dir) {
             $fullPath = APP_ROOT . '/' . $dir;
             if (is_dir($fullPath)) {
@@ -496,7 +496,7 @@ class TestRunner
                 }
             }
         }
-        
+
         echo "✓ Test environment cleanup complete\n";
     }
 }
@@ -504,7 +504,7 @@ class TestRunner
 // Command line interface
 if (php_sapi_name() === 'cli') {
     $runner = new TestRunner();
-    
+
     if (isset($argv[1])) {
         switch ($argv[1]) {
             case 'unit':
@@ -537,4 +537,3 @@ if (php_sapi_name() === 'cli') {
     echo "This script must be run from the command line.\n";
     exit(1);
 }
-?>

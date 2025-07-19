@@ -8,10 +8,10 @@ use Throwable;
 
 /**
  * Error Data Service
- * 
+ *
  * Handles error data preparation and logging.
  * Extracts business logic from error view components.
- * 
+ *
  * @package RenalTales\Services
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín

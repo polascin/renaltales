@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Debug the exact language persistence issue
  */
@@ -59,7 +60,7 @@ if ($testDetector) {
     $result = $testDetector->setLanguage('cs');
     echo "   setLanguage result: " . ($result ? 'SUCCESS' : 'FAILED') . "\n";
     echo "   Session after setLanguage: " . ($_SESSION['language'] ?? 'not set') . "\n";
-    
+
     // Create new model to test persistence
     echo "   Creating new LanguageModel to test persistence...\n";
     $persistenceModel = new LanguageModel();
@@ -76,5 +77,3 @@ $reflector = new ReflectionClass('LanguageModel');
 $constructor = $reflector->getMethod('__construct');
 echo "Constructor source is not directly accessible via reflection.\n";
 echo "But based on the code, LanguageModel calls detectLanguage() in constructor.\n";
-
-?>

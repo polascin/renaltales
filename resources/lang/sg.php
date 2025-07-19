@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Âkôlï tî Ngangû',
     'welcome' => 'Mbôte na tongoû',

@@ -6,9 +6,9 @@ namespace RenalTales\Views;
 
 /**
  * Login View Class
- * 
+ *
  * Refactored to use simple component function
- * 
+ *
  * @package RenalTales\Views
  * @version 2025.v3.1.dev
  * @deprecated Use component function: render_login_form
@@ -23,9 +23,9 @@ class LoginView
 
 /**
  * Render login form
- * 
+ *
  * Simple function-based login component
- * 
+ *
  * @param array $data Form data
  * @return string Rendered HTML
  */
@@ -36,7 +36,7 @@ function render_login_form(array $data = []): string
     $loginButton = htmlspecialchars($data['loginButton'] ?? 'Login');
     $actionUrl = htmlspecialchars($data['actionUrl'] ?? '/login');
     $title = htmlspecialchars($data['title'] ?? 'Login');
-    
+
     return <<<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -69,4 +69,3 @@ function render_login_form(array $data = []): string
 </html>
 HTML;
 }
-

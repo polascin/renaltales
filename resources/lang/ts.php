@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Tsonga language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Yi siviwile',
     'available' => 'Yi kumeka',
     'not_available' => 'A yi kumeki',
-    
+
     // Error messages
     'application_error' => 'Xihoxo xa Xitirhiswa',
     'service_unavailable' => 'Vukorhokeri a ri kumeki Sweswi',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Rungula ra debug a ri kumeki hikwalaho ka vuhlayiseki.',
     'access_denied' => 'Ku Nghena ku Balwile',
     'security_violation' => 'Ku tyeka ka vuhlayiseki ku voniwe. Sesini yi herile.',
-    
+
     // Session management
     'session_init_failed' => 'Ku sungula ka mulanguteri wa sesini ku herile',
     'session_name_failed' => 'Ku veka vito ra sesini ku herile',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Ku tumbuluxa direktori ya log ku herile',
     'session_security_log_failed' => 'Ku tsala log ya ku tyeka vuhlayiseki ku herile',
     'session_security_log_injection_failed' => 'Ku loga vuhlayiseki ku herile',
-    
+
     // Security messages
     'security_violation_detected' => 'Ku tyeka ka vuhlayiseki ku voniwe. Sesini yi herile.',
     'security_user_agent_mismatch' => 'Murhangeri wa mutirhisi a ku fambani',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Ku ringeta ku nyakula sesini ku voniwe',
     'security_invalid_token' => 'Toko ya vuhlayiseki leyi nga tirhiki',
     'security_token_expired' => 'Toko ya vuhlayiseki yi herile',
-    
+
     // Server information
     'server_information' => 'Rungula ra Seva',
     'application_information' => 'Rungula ra Xitirhiswa',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Fayili ya Ririmi ra Sweswi',
     'current_language_flag' => 'Folaga ya Ririmi ra Sweswi',
     'current_language_flag_alt' => 'Folaga ya ririmi ra sweswi',
-    
+
     // Date and time
     'datetime_placeholder' => 'Laha ku ta kombisiwa siku, nkarhi, ku katsa nkarhi wo antswa wa inthanete @beat.',
     'debug_mode_enabled' => 'Mokgwa wa debug wu pfuxetiwile.',
     'service_information' => 'Rungula ra Vukorhokeri',
     'user_information' => 'Rungula ra mutirhisi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Vutomi',
     'cookie_path' => 'Ndlela',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Vuhlayiseki',
     'cookie_httponly' => 'HTTP Ntsena',
     'cookie_samesite' => 'Sayiti yin\'we',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Sitewo sa Nkarhi',
     'log_entry_ip' => 'Adirese ya IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID ya Sesini',
     'log_entry_reason' => 'Xivangelo',
     'log_entry_request_uri' => 'URI ya Xikombelo',
-    
+
     // User interface
     'welcome_user' => 'Avuxeni',
     'user' => 'Mutirhisi',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Phrofayile',
     'settings' => 'Swivumbiwa',
     'register' => 'Tsalela',
-    
+
     // Content sections
     'important_notes' => 'Swinongonyisi swo Nkoka',
     'about_renal_tales' => 'Malunghana na Mitsheketo ya Swikoloto',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'U ntshwa eka vaaki va hina? Sungula hi ku hlaya mitsheketo yo karhi, u tivisa, naswona u anakanyisa ku avelana mavono-nkulu ya wena loko u lulamerile.',
     'support_resources' => 'Switirhisiwa swa Nseketelo',
     'support_description' => 'Loko u lava mpfuno wa vutshila wa ku hatlisa kumbe u ri eka ndhawu ya matshamelo, hi kombela u hundzukuxana na mupfaki wa vukorhokeri bya rihanyu kumbe vukorhokeri bya ku hatlisa.',
-    
+
     // Home page
     'welcome_home' => 'Avuxeni eka Mitsheketo ya Swikoloto',
     'home_intro' => 'Avuxeni eka vaaki va hina vo sekela vanhu lava khumbekeritiweke hi swiphiqo swa swikoloto. Laha u nga avelana tsheketo ra wena, u hlaya mavono-nkulu ya van\'wana, na ku kuma nseketelo eka vanhu lava twisisaka riendzo ra wena. Hi hlangana na hina ku hlangana na van\'wana, avelana mavono-nkulu ya wena, na ku kuma nseketelo eka vaaki va hina. Hi n\'wana, hi nga endla ku antswisa eka vutomi bya lava khumbekeritiweke hi swiphiqo swa swikoloto. Hi khensa hikwalaho ka ku va xiphemu xa vaaki va hina!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Joyina Vaaki',
     'join_community_desc' => 'Hlangana na van\'wana, teka xiphemu eka minhlawulo, na ku aka vuanani byo tshama.',
     'explore_community' => 'Kambela Vaaki',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Xiphemu xa mitsheketo xi ta na hi ku hatlisa...',
     'community_coming_soon' => 'Xiphemu xa vaaki xi ta na hi ku hatlisa...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Xiphemu xa mitsheketo ya mina xi ta na hi ku hatlisa...',
     'profile_coming_soon' => 'Xiphemu xa phrofayile xi ta na hi ku hatlisa...',
     'settings_coming_soon' => 'Xiphemu xa swivumbiwa xi ta na hi ku hatlisa...',
-    
+
     // Login page
     'login_welcome' => 'Avuxeni Nakambe',
     'login_subtitle' => 'Nghena ku fikelela akhawunti ya wena',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Tsalela laha',
     'back_to_home' => 'Vuya Kaya',
     'please_fill_required_fields' => 'Hi kombela u tata switirhisiwa hinkwaswo leswi lavekaka.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Toko ya vuhlayiseki leyi nga tirhiki. Hi kombela u ringeta nakambe.',
     'email_required' => 'Imeyili yi laveka.',
     'email_invalid' => 'Hi kombela u nghenisa adirese ya imeyili leyi tirhaka.',
     'password_required' => 'Phasiwedi yi laveka.',
     'login_failed' => 'Imeyili kumbe phasiwedi leyi nga tirhiki.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Ku hlawula ririmi a ku kumeki',
-    
+
     // Time and date display
     'day' => 'Siku',
     'year' => 'Lembe',
     'week' => 'Vhiki',
     'today_is' => 'Namuntlha i',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Ku hlawula ririmi',
     'language_change' => 'Cinca ririmi',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Ririmi ri cinciwile hi ku humelela eka',
     'language_switch_error' => 'Xihoxo eka ku cinca ririmi'
 ];
-?>

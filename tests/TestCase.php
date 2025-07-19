@@ -16,7 +16,7 @@ use Faker\Generator as Faker;
 
 /**
  * Base TestCase class for all PHPUnit tests
- * 
+ *
  * Provides common functionality for all test classes including:
  * - Application setup and teardown
  * - Database management
@@ -78,16 +78,16 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Initialize faker
         $this->faker = FakerFactory::create();
-        
+
         // Get container instance
         $this->container = static::$app->getContainer();
-        
+
         // Set up database for testing
         $this->setUpDatabase();
-        
+
         // Clear test data
         $this->testData = [];
     }
@@ -99,10 +99,10 @@ abstract class TestCase extends BaseTestCase
     {
         // Clean up database
         $this->tearDownDatabase();
-        
+
         // Clear test data
         $this->testData = [];
-        
+
         parent::tearDown();
     }
 
@@ -124,7 +124,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Get a service from the container
-     * 
+     *
      * @param string $abstract The service identifier
      * @return mixed The service instance
      */
@@ -135,7 +135,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Create a test double for a service
-     * 
+     *
      * @param string $className The class name to mock
      * @param array $methods Methods to mock
      * @return \PHPUnit\Framework\MockObject\MockObject
@@ -147,7 +147,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Replace a service in the container with a mock
-     * 
+     *
      * @param string $abstract The service identifier
      * @param \PHPUnit\Framework\MockObject\MockObject $mock The mock object
      */
@@ -158,7 +158,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Assert that a service is registered in the container
-     * 
+     *
      * @param string $abstract The service identifier
      * @param string $message Custom assertion message
      */
@@ -172,7 +172,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Assert that a service is not registered in the container
-     * 
+     *
      * @param string $abstract The service identifier
      * @param string $message Custom assertion message
      */
@@ -186,7 +186,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Get test data by key
-     * 
+     *
      * @param string $key The data key
      * @param mixed $default Default value if key doesn't exist
      * @return mixed The test data
@@ -198,7 +198,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Set test data by key
-     * 
+     *
      * @param string $key The data key
      * @param mixed $value The data value
      */
@@ -217,7 +217,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Create a temporary file for testing
-     * 
+     *
      * @param string $content File content
      * @param string $extension File extension
      * @return string The temporary file path
@@ -226,20 +226,20 @@ abstract class TestCase extends BaseTestCase
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'renaltales_test_') . $extension;
         file_put_contents($tempFile, $content);
-        
+
         // Register for cleanup
         register_shutdown_function(function () use ($tempFile) {
             if (file_exists($tempFile)) {
                 unlink($tempFile);
             }
         });
-        
+
         return $tempFile;
     }
 
     /**
      * Get the path to test fixtures
-     * 
+     *
      * @param string $fixture The fixture name
      * @return string The fixture path
      */
@@ -250,20 +250,20 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Load fixture data
-     * 
+     *
      * @param string $fixture The fixture name
      * @return mixed The fixture data
      */
     protected function loadFixture(string $fixture)
     {
         $path = $this->getFixture($fixture);
-        
+
         if (!file_exists($path)) {
             throw new \RuntimeException("Fixture file not found: {$path}");
         }
-        
+
         $extension = pathinfo($path, PATHINFO_EXTENSION);
-        
+
         switch ($extension) {
             case 'json':
                 return json_decode(file_get_contents($path), true);
@@ -276,7 +276,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Skip test if condition is not met
-     * 
+     *
      * @param bool $condition The condition to check
      * @param string $message Skip message
      */
@@ -289,7 +289,7 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Skip test if extension is not loaded
-     * 
+     *
      * @param string $extension The extension name
      * @param string $message Skip message
      */

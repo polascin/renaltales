@@ -9,14 +9,16 @@ namespace RenalTales\Scripts;
 
 require_once __DIR__ . '/bootstrap.php';
 
-class HealthChecker {
+class HealthChecker
+{
     private array $errors = [];
     private array $warnings = [];
     private array $info = [];
-    
-    public function runAll(): void {
+
+    public function runAll(): void
+    {
         echo "🔍 Running comprehensive health check...\n\n";
-        
+
         $this->checkPhpSyntax();
         $this->checkFilePermissions();
         $this->checkRequiredFiles();
@@ -24,39 +26,41 @@ class HealthChecker {
         $this->checkSecurityConfig();
         $this->checkEnvironmentFiles();
         $this->checkDirectoryStructure();
-        
+
         $this->displayResults();
     }
-    
-    private function checkPhpSyntax(): void {
+
+    private function checkPhpSyntax(): void
+    {
         echo "📋 Checking PHP syntax...\n";
-        
+
         $phpFiles = glob(__DIR__ . '/{*.php,*/*.php,*/*/*.php,*/*/*/*.php}', GLOB_BRACE);
-        
+
         foreach ($phpFiles as $file) {
             $output = [];
             $returnCode = 0;
             exec("php -l \"$file\" 2>&1", $output, $returnCode);
-            
+
             if ($returnCode !== 0) {
                 $this->errors[] = "PHP Syntax Error in $file: " . implode("\n", $output);
             }
         }
-        
+
         if (empty($this->errors)) {
             $this->info[] = "✅ All PHP files have valid syntax";
         }
     }
-    
-    private function checkFilePermissions(): void {
+
+    private function checkFilePermissions(): void
+    {
         echo "🔐 Checking file permissions...\n";
-        
+
         $criticalDirs = [
             __DIR__ . '/storage',
             __DIR__ . '/storage/uploads',
             __DIR__ . '/storage/logs'
         ];
-        
+
         foreach ($criticalDirs as $dir) {
             if (is_dir($dir)) {
                 if (!is_writable($dir)) {
@@ -66,14 +70,14 @@ class HealthChecker {
                 $this->warnings[] = "Missing directory: $dir";
             }
         }
-        
+
         // Check sensitive files are not world-readable
         $sensitiveFiles = [
             __DIR__ . '/.env',
             __DIR__ . '/.env.production',
             __DIR__ . '/.env.development'
         ];
-        
+
         foreach ($sensitiveFiles as $file) {
             if (file_exists($file)) {
                 $perms = fileperms($file);
@@ -83,10 +87,11 @@ class HealthChecker {
             }
         }
     }
-    
-    private function checkRequiredFiles(): void {
+
+    private function checkRequiredFiles(): void
+    {
         echo "📁 Checking required files...\n";
-        
+
         $requiredFiles = [
             'core/AuthenticationManager.php',
             'core/SessionManager.php',
@@ -99,44 +104,46 @@ class HealthChecker {
             'controllers/BaseController.php',
             'views/ApplicationView.php'
         ];
-        
+
         foreach ($requiredFiles as $file) {
             $fullPath = __DIR__ . '/' . $file;
             if (!file_exists($fullPath)) {
                 $this->errors[] = "Missing required file: $file";
             }
         }
-        
+
         if (count($this->errors) === 0) {
             $this->info[] = "✅ All required files are present";
         }
     }
-    
-    private function checkDatabaseConfig(): void {
+
+    private function checkDatabaseConfig(): void
+    {
         echo "🗄️ Checking database configuration...\n";
-        
+
         // Check if environment variables are set
         $dbVars = ['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD'];
         $missingVars = [];
-        
+
         foreach ($dbVars as $var) {
             if (empty($_ENV[$var])) {
                 $missingVars[] = $var;
             }
         }
-        
+
         if (!empty($missingVars)) {
             $this->warnings[] = "Missing database environment variables: " . implode(', ', $missingVars);
             $this->info[] = "ℹ️ This is expected in development - use .env.development or .env.production";
         }
-        
+
         // Database functionality removed for language processing focus
         $this->info[] = "ℹ️ Database functionality removed - focusing on language processing";
     }
-    
-    private function checkSecurityConfig(): void {
+
+    private function checkSecurityConfig(): void
+    {
         echo "🛡️ Checking security configuration...\n";
-        
+
         // Check for hardcoded credentials
         $configFiles = [
             'config/database.php',
@@ -144,14 +151,14 @@ class HealthChecker {
             'config/environments/production.php',
             'config/environments/development.php'
         ];
-        
+
         $patterns = [
             '/["\']password["\']\s*=>\s*["\'][^"\']+["\']/',
             '/["\']host["\']\s*=>\s*["\'][^"\']+\./',
             '/["\']username["\']\s*=>\s*["\'][a-zA-Z0-9]+["\']/',
             '/DB_PASSWORD\s*=\s*["\'][^"\']+["\']/'
         ];
-        
+
         foreach ($configFiles as $file) {
             $fullPath = __DIR__ . '/' . $file;
             if (file_exists($fullPath)) {
@@ -164,23 +171,24 @@ class HealthChecker {
                 }
             }
         }
-        
+
         // Check security headers implementation
         if (class_exists('ApplicationController')) {
             $this->info[] = "✅ Security headers implementation available";
         }
     }
-    
-    private function checkEnvironmentFiles(): void {
+
+    private function checkEnvironmentFiles(): void
+    {
         echo "🌍 Checking environment files...\n";
-        
+
         $envFiles = ['.env', '.env.production', '.env.development'];
-        
+
         foreach ($envFiles as $file) {
             $fullPath = __DIR__ . '/' . $file;
             if (file_exists($fullPath)) {
                 $this->info[] = "✅ Found: $file";
-                
+
                 // Check if it has required structure
                 $content = file_get_contents($fullPath);
                 if (!str_contains($content, 'DB_HOST') || !str_contains($content, 'DB_DATABASE')) {
@@ -190,7 +198,7 @@ class HealthChecker {
                 $this->warnings[] = "Missing environment file: $file";
             }
         }
-        
+
         // Check .gitignore excludes .env files
         $gitignorePath = __DIR__ . '/.gitignore';
         if (file_exists($gitignorePath)) {
@@ -202,32 +210,34 @@ class HealthChecker {
             }
         }
     }
-    
-    private function checkDirectoryStructure(): void {
+
+    private function checkDirectoryStructure(): void
+    {
         echo "📂 Checking directory structure...\n";
-        
+
         $requiredDirs = [
-            'core', 'models', 'views', 'controllers', 'config', 
+            'core', 'models', 'views', 'controllers', 'config',
             'resources', 'storage', 'uploads', 'logs', 'database'
         ];
-        
+
         foreach ($requiredDirs as $dir) {
             $fullPath = __DIR__ . '/' . $dir;
             if (!is_dir($fullPath)) {
                 $this->warnings[] = "Missing directory: $dir";
             }
         }
-        
+
         if (count($this->warnings) === 0) {
             $this->info[] = "✅ Directory structure is complete";
         }
     }
-    
-    private function displayResults(): void {
+
+    private function displayResults(): void
+    {
         echo "\n" . str_repeat("=", 60) . "\n";
         echo "📊 HEALTH CHECK RESULTS\n";
         echo str_repeat("=", 60) . "\n\n";
-        
+
         if (!empty($this->errors)) {
             echo "🔴 ERRORS (" . count($this->errors) . "):\n";
             foreach ($this->errors as $error) {
@@ -235,7 +245,7 @@ class HealthChecker {
             }
             echo "\n";
         }
-        
+
         if (!empty($this->warnings)) {
             echo "🟡 WARNINGS (" . count($this->warnings) . "):\n";
             foreach ($this->warnings as $warning) {
@@ -243,7 +253,7 @@ class HealthChecker {
             }
             echo "\n";
         }
-        
+
         if (!empty($this->info)) {
             echo "🟢 STATUS (" . count($this->info) . "):\n";
             foreach ($this->info as $info) {
@@ -251,7 +261,7 @@ class HealthChecker {
             }
             echo "\n";
         }
-        
+
         // Overall status
         if (empty($this->errors)) {
             if (empty($this->warnings)) {
@@ -262,7 +272,7 @@ class HealthChecker {
         } else {
             echo "❌ OVERALL STATUS: NEEDS ATTENTION\n";
         }
-        
+
         echo "\nHealth check completed at: " . date('Y-m-d H:i:s') . "\n";
     }
 }

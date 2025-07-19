@@ -1,7 +1,7 @@
 <?php
 /**
  * Error Layout Template
- * 
+ *
  * Simple error page layout
  */
 

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'ବୃକ୍କର କାହାଣୀ',
     'welcome' => 'ସ୍ୱାଗତ',

@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Tajik language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Ғайрифаъол шуда',
     'available' => 'Дастрас',
     'not_available' => 'Дастрас нест',
-    
+
     // Error messages
     'application_error' => 'Хатогии барнома',
     'service_unavailable' => 'Хидмат муваққатан дастрас нест',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Маълумоти debug аз сабабҳои амниятӣ дастрас нест.',
     'access_denied' => 'Дастрасӣ рад карда шуд',
     'security_violation' => 'Вайронии амниятӣ муайян шуд. Иҷлос ба поён расид.',
-    
+
     // Session management
     'session_init_failed' => 'Ибтидоии менеҷери иҷлос нокомёб шуд',
     'session_name_failed' => 'Танзими номи иҷлос нокомёб шуд',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Эҷоди феҳристи лог нокомёб шуд',
     'session_security_log_failed' => 'Навиштани логи вайронии амниятӣ нокомёб шуд',
     'session_security_log_injection_failed' => 'Логнависии амниятӣ нокомёб шуд',
-    
+
     // Security messages
     'security_violation_detected' => 'Вайронии амниятӣ муайян шуд. Иҷлос ба поён расид.',
     'security_user_agent_mismatch' => 'Намояндаи корбар мувофиқат намекунад',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Кӯшиши ғоратгарии иҷлос муайян шуд',
     'security_invalid_token' => 'Нишонаи амниятии беэътибор',
     'security_token_expired' => 'Нишонаи амниятӣ ба поён расид',
-    
+
     // Server information
     'server_information' => 'Маълумоти сервер',
     'application_information' => 'Маълумоти барнома',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Файли забони ҷорӣ',
     'current_language_flag' => 'Парчами забони ҷорӣ',
     'current_language_flag_alt' => 'Парчами забони ҷорӣ',
-    
+
     // Date and time
     'datetime_placeholder' => 'Дар ин ҷо сана, вақт, аз ҷумла вақти муфассали интернет @beat нишон дода мешавад.',
     'debug_mode_enabled' => 'Ҳолати debug фаъол шуда.',
     'service_information' => 'Маълумоти хидмат',
     'user_information' => 'Маълумоти корбар:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Умр',
     'cookie_path' => 'Роҳ',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Бехатар',
     'cookie_httponly' => 'Танҳо HTTP',
     'cookie_samesite' => 'Ҳамон сайт',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Тамғаи вақт',
     'log_entry_ip' => 'Нишонии IP',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID-и иҷлос',
     'log_entry_reason' => 'Сабаб',
     'log_entry_request_uri' => 'URI-и дархост',
-    
+
     // User interface
     'welcome_user' => 'Хуш омадед',
     'user' => 'Корбар',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Профил',
     'settings' => 'Танзимот',
     'register' => 'Қайдкунӣ',
-    
+
     // Content sections
     'important_notes' => 'Ёддоштҳои муҳим',
     'about_renal_tales' => 'Дар бораи ҳикояҳои гурда',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Дар ҷомеаи мо нав ҳастед? Аз хондани баъзе ҳикояҳо оғоз кунед, худатонро муаррифӣ кунед ва вақте ки омода ҳастед дар бораи мубодилаи таҷрибаатон фикр кунед.',
     'support_resources' => 'Манбаъҳои дастгирӣ',
     'support_description' => 'Агар шумо ба кӯмаки фаврии тиббӣ ниёз дошта бошед ё дар бӯҳрон бошед, лутфан бо пешкашкунандаи ғамхории тандурустии худ ё хидматҳои фаврӣ тамос гиред.',
-    
+
     // Home page
     'welcome_home' => 'Хуш омадед ба Ҳикояҳои гурда',
     'home_intro' => 'Хуш омадед ба ҷомеаи дастгирикунандаи мо барои одамони дучори бемориҳои гурда. Дар ин ҷо шумо метавонед ҳикояи худро мубодила кунед, таҷрибаи дигаронро хонед ва аз одамоне ки сафари шуморо мефаҳманд дастгирӣ пайдо кунед. Бо мо ҳамроҳ шавед то бо дигарон пайваст шавед, таҷрибаҳои худро мубодила кунед ва дар ҷомеаи мо дастгирӣ пайдо кунед. Якҷоя мо метавонем дар зиндагии касоне ки аз бемориҳои гурда азият мекашанд тағйироти муҳим ворид кунем. Ташаккур, ки қисми ҷомеаи мо ҳастед!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Ба ҷомеа пайваст шавед',
     'join_community_desc' => 'Бо дигарон алоқа барқарор кунед, дар муҳокимаҳо иштирок кунед ва дӯстиҳои доимӣ бунёд кунед.',
     'explore_community' => 'Ҷомеаро таҳқиқ кунед',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Бахши ҳикояҳо ба наздикӣ меояд...',
     'community_coming_soon' => 'Бахши ҷомеа ба наздикӣ меояд...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Бахши ҳикояҳои ман ба наздикӣ меояд...',
     'profile_coming_soon' => 'Бахши профил ба наздикӣ меояд...',
     'settings_coming_soon' => 'Бахши танзимот ба наздикӣ меояд...',
-    
+
     // Login page
     'login_welcome' => 'Хуш омадед бозгашт',
     'login_subtitle' => 'Барои дастрасӣ ба ҳисоби худ дохил шавед',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Дар ин ҷо қайд шавед',
     'back_to_home' => 'Бозгашт ба хона',
     'please_fill_required_fields' => 'Лутфан ҳамаи майдонҳои лозимӣро пур кунед.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Нишонаи амниятии беэътибор. Лутфан аз нав кӯшиш кунед.',
     'email_required' => 'Почтаи электронӣ лозим аст.',
     'email_invalid' => 'Лутфан нишонии дурусти почтаи электрониро ворид кунед.',
     'password_required' => 'Рамзи убур лозим аст.',
     'login_failed' => 'Почтаи электронӣ ё рамзи убури беэътибор.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Интихоби забон дастрас нест',
-    
+
     // Time and date display
     'day' => 'Рӯз',
     'year' => 'Сол',
     'week' => 'Ҳафта',
     'today_is' => 'Имрӯз',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Интихоби забон',
     'language_change' => 'Тағйир додани забон',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Забон бо муваффақият тағйир дода шуд',
     'language_switch_error' => 'Хатогӣ дар тағйир додани забон'
 ];
-?>

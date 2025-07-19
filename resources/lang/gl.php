@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Historias dos riles',
     'welcome' => 'Benvido',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Informe de erro',
     'feature_request' => 'Solicitude de función'
 ];
-?>

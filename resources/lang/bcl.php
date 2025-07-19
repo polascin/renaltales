@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Central Bikol language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Napatay',
     'available' => 'May sarod',
     'not_available' => 'Mayo sarod',
-    
+
     // Error messages
     'application_error' => 'Salang sa Application',
     'service_unavailable' => 'An Serbisyo Dai Magagamit Taon',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'An debug mode dai pwedeng gamiton tungod sa seguridad.',
     'access_denied' => 'Pinagbawal an Pag-abut',
     'security_violation' => 'Nakakua na may salang sa seguridad. Pigtapos na an session.',
-    
+
     // Session management
     'session_init_failed' => 'Nagkasal an pagsimula kan session manager',
     'session_name_failed' => 'Nagkasal an pagtakda kan ngaran kan session',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Nagkasal an paghimo kan log directory',
     'session_security_log_failed' => 'Nagkasal an pagsurat kan security violation log',
     'session_security_log_injection_failed' => 'Nagkasal an security log injection',
-    
+
     // Security messages
     'security_violation_detected' => 'Nakakua na may salang sa seguridad. Pigtapos na an session.',
     'security_user_agent_mismatch' => 'Dai nagtutugma an user agent',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Nakakua na may attempt na pagkapon kan session',
     'security_invalid_token' => 'Dai tama na security token',
     'security_token_expired' => 'Nagtapos na an security token',
-    
+
     // Server information
     'server_information' => 'Impormasyon kan Server',
     'application_information' => 'Impormasyon kan Application',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'File kan Taong Tataramon',
     'current_language_flag' => 'Flag kan Taong Tataramon',
     'current_language_flag_alt' => 'Flag kan taong tataramon',
-    
+
     // Date and time
     'datetime_placeholder' => 'Digdi makikita an petsa, oras, asin an taong oras kan internet naglalakip kan @beat.',
     'debug_mode_enabled' => 'An debug mode napagana.',
     'service_information' => 'Impormasyon kan Serbisyo',
     'user_information' => 'Impormasyon kan user:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Lifetime',
     'cookie_path' => 'Dalan',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Seguro',
     'cookie_httponly' => 'HTTP Lang',
     'cookie_samesite' => 'Pareho na Site',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'IP Address',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Session ID',
     'log_entry_reason' => 'Rason',
     'log_entry_request_uri' => 'URI kan Request',
-    
+
     // User interface
     'welcome_user' => 'Maogmang pagkabot',
     'user' => 'User',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profile',
     'settings' => 'Mga Setting',
     'register' => 'Pagrehistro',
-    
+
     // Content sections
     'important_notes' => 'Importante na mga Nota',
     'about_renal_tales' => 'Mahitungod sa Mga Kwentong Bato',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Bago kamo sa among komunidad? Simulaan sa pagbasa nin mga kwentong nag-eexist, pakigkilala, asin hunahunaan an pagbabahagi nin inyong mga karanasan kun ready na kamo.',
     'support_resources' => 'Mga Resource para sa Suporta',
     'support_description' => 'Kun kinangayan ninyo nin dinalidaling medical assistance o kamo sa crisis na sitwasyon, pakikontak an inyong healthcare provider o emergency services.',
-    
+
     // Home page
     'welcome_home' => 'Maogmang Pagkabot sa Mga Kwentong Bato',
     'home_intro' => 'Maogmang pagkabot sa among komunidad na nagsusuporta sa mga tawo na may sakit sa bato. Digdi makakahimo kamo magbahagi nin inyong kwento, magbasa nin mga karanasan kan iba, asin makakita nin suporta gikan sa mga tawo na nakakaintindi kan inyong byahe.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Sumali sa Komunidad',
     'join_community_desc' => 'Magkonekta sa iba, makiapil sa mga diskusyon, asin maghimo nin lasting na mga relasyon.',
     'explore_community' => 'I-explore an Komunidad',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'An stories section madto na nin dali...',
     'community_coming_soon' => 'An community section madto na nin dali...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'An mga kwentong saindo section madto na nin dali...',
     'profile_coming_soon' => 'An profile section madto na nin dali...',
     'settings_coming_soon' => 'An settings section madto na nin dali...',
-    
+
     // Login page
     'login_welcome' => 'Maogmang Pagbalik',
     'login_subtitle' => 'Mag-login para ma-access an inyong account',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Mag-sign up digdi',
     'back_to_home' => 'Balik sa Harong',
     'please_fill_required_fields' => 'Pakisulod an gabos na kinangayan na mga field.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Dai tama na security token. Paki-subok giraray.',
     'email_required' => 'Kinangayan an email.',
     'email_invalid' => 'Pakisulod an tama na email address.',
     'password_required' => 'Kinangayan an password.',
     'login_failed' => 'Dai tama na email o password.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Mayo pagpili nin tataramon na magagamit',
-    
+
     // Time and date display
     'day' => 'Aldaw',
     'year' => 'Taon',
     'week' => 'Semana',
     'today_is' => 'Ngonyan amo an',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Pagpili nin tataramon',
     'language_change' => 'Ribayan an tataramon',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Malampuson na nabago an tataramon sa',
     'language_switch_error' => 'Salang sa pagbabago kan tataramon'
 ];
-?>

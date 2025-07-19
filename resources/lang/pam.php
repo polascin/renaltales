@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Kwentung Batu',
     'welcome' => 'Malaus ya datang',

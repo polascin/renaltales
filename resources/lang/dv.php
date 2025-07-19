@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'ގުރުދާގެ ހަދީސްތައް',
     'welcome' => 'މަރުހަބާ',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'ބަގް ރިޕޯޓް',
     'feature_request' => 'ފީޗާ ހުށަހެޅުން'
 ];
-?>

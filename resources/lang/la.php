@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Latin (la) Language File for Renal Tales
  * Medical terminology and classical Latin translations
- * 
+ *
  * Note: This includes medical Latin terminology commonly used in nephrology
  * and healthcare, as well as classical Latin equivalents for interface elements
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -22,7 +23,7 @@ return [
     'language' => 'Lingua',
     'current_language' => 'Lingua currens',
     'change' => 'Muta',
-    
+
     // Navigation and menu
     'home' => 'Domus',
     'main_menu' => 'Menu Principale',
@@ -36,7 +37,7 @@ return [
     'login' => 'Intra',
     'logout' => 'Exi',
     'register' => 'Registra te',
-    
+
     // Medical terminology (nephrology specific)
     'kidney' => 'Ren',
     'kidneys' => 'Renes',
@@ -54,7 +55,7 @@ return [
     'end_stage_renal_disease' => 'Morbus Renalis Terminalis',
     'hemodialysis' => 'Haemodialysis',
     'peritoneal_dialysis' => 'Dialysis Peritonealis',
-    
+
     // User interface
     'user_information' => 'Informationes Usoris',
     'user_data_unavailable' => 'Data usoris non disponibilia',
@@ -63,7 +64,7 @@ return [
     'user' => 'Usor',
     'role' => 'Munus',
     'language_selection_unavailable' => 'Selectio linguae non disponibilis',
-    
+
     // Content sections
     'important_notes' => 'Notae Importantes',
     'about_renal_tales' => 'De Narrationibus Renalibus',
@@ -77,7 +78,7 @@ return [
     'getting_started_description' => 'Novus in nostra communitate? Incipe legendo narrationes, te ipsum introduce, et considera tuam propriam experientiam participandam cum paratus es.',
     'support_resources' => 'Fontes Auxilii',
     'support_description' => 'Si auxilium medicum immediatum necesitas vel in crisi es, quaeso contacta tuum medicorum provisorem vel servitia emergentiae.',
-    
+
     // Home page content
     'home_intro' => 'Salve ad nostram communitatem auxiliatricem pro hominibus morbis renalibus affectis. Hic potes tuam fabulam participare, experientias aliorum legere, et auxilium ab hominibus qui tuum iter intelligunt invenire.',
     'home_intro2' => 'Haec applicatio web designata est ad narrationes personales et fabulas inter individua morbis renalibus affecta facilitandas, inclusi qui dialysim patiuntur, qui in stadio ante vel post dialysim sunt, et individua sine limitationibus dialysis viventia. Haec platea communitatem auxiliatricem fovere conatur, permittens usoribus se conjungere, experientias participare, et perspectivas providere quae aliis in itineribus cum sanitate renali navigandis auxiliari possunt.',
@@ -90,16 +91,16 @@ return [
     'join_community' => 'Adjunge Communitati',
     'join_community_desc' => 'Conjungere cum aliis, participare in disputationibus, et amicitias durables aedificare.',
     'explore_community' => 'Explora Communitatem',
-    
+
     // Time and date
     'day' => 'Dies',
     'week' => 'Hebdomada',
     'year' => 'Annus',
     'today_is' => 'Hodie est',
-    
+
     // Footer
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Sectio narrationum mox veniet...',
     'community_coming_soon' => 'Sectio communitatis mox veniet...',
@@ -108,7 +109,7 @@ return [
     'my_stories_coming_soon' => 'Sectio narrationum mearum mox veniet...',
     'profile_coming_soon' => 'Sectio profili mox veniet...',
     'settings_coming_soon' => 'Sectio configurationum mox veniet...',
-    
+
     // Medical conditions and terms (extended)
     'hypertension' => 'Hypertensio',
     'diabetes' => 'Diabetes',
@@ -133,7 +134,7 @@ return [
     'erythropoietin' => 'Erythropoietinum',
     'parathyroid_hormone' => 'Hormonum Parathyroideum',
     'vitamin_d' => 'Vitaminum D',
-    
+
     // Treatment and procedures
     'treatment' => 'Tractamentum',
     'medication' => 'Medicamentum',
@@ -149,7 +150,7 @@ return [
     'recipient' => 'Recipiens',
     'living_donor' => 'Donator Vivus',
     'deceased_donor' => 'Donator Mortuus',
-    
+
     // Symptoms and signs
     'symptom' => 'Symptoma',
     'symptoms' => 'Symptomata',
@@ -169,7 +170,7 @@ return [
     'headache' => 'Cephalgia',
     'dizziness' => 'Vertigo',
     'confusion' => 'Confusio',
-    
+
     // Laboratory values
     'laboratory' => 'Laboratorium',
     'blood_test' => 'Examen Sanguinis',
@@ -182,7 +183,7 @@ return [
     'hematocrit' => 'Haematocritum',
     'white_blood_cells' => 'Leucocyti',
     'platelets' => 'Thrombocyti',
-    
+
     // Quality of life
     'quality_of_life' => 'Qualitas Vitae',
     'well_being' => 'Benevalentia',
@@ -199,7 +200,7 @@ return [
     'dietitian' => 'Diaeteticus',
     'social_worker' => 'Operator Socialis',
     'psychologist' => 'Psychologus',
-    
+
     // Common phrases
     'thank_you' => 'Gratias tibi',
     'please' => 'Quaeso',
@@ -228,7 +229,7 @@ return [
     'solidarity' => 'Solidaritas',
     'unity' => 'Unitas',
     'community_spirit' => 'Spiritus Communitatis',
-    
+
     // Motivational and inspirational
     'never_give_up' => 'Numquam cede',
     'stay_strong' => 'Mane fortis',
@@ -297,4 +298,3 @@ return [
     'staging' => 'Staging',
     'classification' => 'Classificatio'
 ];
-?>

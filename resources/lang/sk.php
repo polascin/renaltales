@@ -1,7 +1,7 @@
 <?php
 /**
  * Slovak language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +29,7 @@ return [
     'disabled' => 'Zakázané',
     'available' => 'Dostupné',
     'not_available' => 'Nie je dostupné',
-    
+
     // Error messages
     'application_error' => 'Chyba aplikácie',
     'service_unavailable' => 'Služba je dočasne nedostupná',
@@ -42,7 +42,7 @@ return [
     'debug_not_allowed' => 'Debug režim nie je dostupný z bezpečnostných dôvodov.',
     'access_denied' => 'Prístup zamietnutý',
     'security_violation' => 'Bezpečnostné porušenie zistené. Relácia ukončená.',
-    
+
     // Session management
     'session_init_failed' => 'Inicializácia správcu relácií zlyhala',
     'session_name_failed' => 'Nepodarilo sa nastaviť názov relácie',
@@ -84,7 +84,7 @@ return [
     'session_log_dir_create_failed' => 'Nepodarilo sa vytvoriť adresár logov',
     'session_security_log_failed' => 'Logovanie bezpečnostného porušenia zlyhalo',
     'session_security_log_injection_failed' => 'Injekcia bezpečnostného logu zlyhala',
-    
+
     // Security messages
     'security_violation_detected' => 'Bezpečnostné porušenie zistené. Relácia ukončená.',
     'security_user_agent_mismatch' => 'Nesúlad user agenta',
@@ -93,7 +93,7 @@ return [
     'security_hijacking_attempt' => 'Pokus o únos relácie zistený',
     'security_invalid_token' => 'Neplatný bezpečnostný token',
     'security_token_expired' => 'Bezpečnostný token vypršal',
-    
+
     // Server information
     'server_information' => 'Informácie o serveri',
     'application_information' => 'Informácie o aplikácii',
@@ -112,14 +112,14 @@ return [
     'current_language_file' => 'Súbor aktuálneho jazyka',
     'current_language_flag' => 'Vlajka aktuálneho jazyka',
     'current_language_flag_alt' => 'Vlajka aktuálneho jazyka',
-    
+
     // Date and time
     'datetime_placeholder' => 'Dátum, čas vrátane detailného internetového času @beat sa zobrazí tu.',
     'debug_mode_enabled' => 'Debug režim je povolený.',
     'service_information' => 'Informácie o službe',
     'user_information' => 'Informácie o používateľovi:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Životnosť',
     'cookie_path' => 'Cesta',
@@ -127,7 +127,7 @@ return [
     'cookie_secure' => 'Bezpečné',
     'cookie_httponly' => 'Len HTTP',
     'cookie_samesite' => 'Rovnaká stránka',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Časová značka',
     'log_entry_ip' => 'IP adresa',
@@ -135,7 +135,7 @@ return [
     'log_entry_session_id' => 'ID relácie',
     'log_entry_reason' => 'Dôvod',
     'log_entry_request_uri' => 'URI požiadavky',
-    
+
     // User interface
     'welcome_user' => 'Vitajte',
     'user' => 'Používateľ',
@@ -154,7 +154,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Nastavenia',
     'register' => 'Registrovať sa',
-    
+
     // Content sections
     'important_notes' => 'Dôležité poznámky',
     'about_renal_tales' => 'O ľadvinových príbehoch',
@@ -168,7 +168,7 @@ return [
     'getting_started_description' => 'Ste noví v našej komunite? Začnite čítaním niektorých príbehov, predstavte sa a zvážte zdieľanie vlastnej skúsenosti, keď budete pripravení.',
     'support_resources' => 'Podporné zdroje',
     'support_description' => 'Ak potrebujete okamžitú lekársku pomoc alebo ste v kríze, kontaktujte svojho poskytovateľa zdravotnej starostlivosti alebo pohotovostné služby.',
-    
+
     // Home page
     'welcome_home' => 'Vitajte v ľadvinových príbehoch',
     'home_intro' => 'Vitajte v našej podpornej komunite pre ľudí s poruchami obličiek. Tu môžete zdieľať svoj príbeh, čítať skúsenosti ostatných a nájsť podporu od ľudí, ktorí rozumejú vašej ceste.',
@@ -182,7 +182,7 @@ return [
     'join_community' => 'Pripojte sa ku komunite',
     'join_community_desc' => 'Spojte sa s ostatnými, zapojte sa do diskusií a budujte trvalé priateľstvá.',
     'explore_community' => 'Preskúmať komunitu',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Sekcia príbehov už čoskoro...',
     'community_coming_soon' => 'Sekcia komunity už čoskoro...',
@@ -191,7 +191,7 @@ return [
     'my_stories_coming_soon' => 'Sekcia mojich príbehov už čoskoro...',
     'profile_coming_soon' => 'Sekcia profilu už čoskoro...',
     'settings_coming_soon' => 'Sekcia nastavení už čoskoro...',
-    
+
     // Login page
     'login_welcome' => 'Vitajte späť',
     'login_subtitle' => 'Prihláste sa na prístup k vášmu účtu',
@@ -206,23 +206,23 @@ return [
     'sign_up_here' => 'Zaregistrujte sa tu',
     'back_to_home' => 'Späť domov',
     'please_fill_required_fields' => 'Prosím, vyplňte všetky povinné polia.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Neplatný bezpečnostný token. Prosím, skúste to znovu.',
     'email_required' => 'Email je povinný.',
     'email_invalid' => 'Prosím, zadajte platnú emailovú adresu.',
     'password_required' => 'Heslo je povinné.',
     'login_failed' => 'Neplatný email alebo heslo.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Výber jazyka nie je dostupný',
-    
+
     // Time and date display
     'day' => 'Deň',
     'year' => 'Rok',
     'week' => 'Týždeň',
     'today_is' => 'Dnes je',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Výber jazyka',
     'language_change' => 'Zmeniť jazyk',

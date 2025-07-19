@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Tarnit oqaluttuarisai',
     'welcome' => 'Tikilluarit',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Ajornerit nalunaarnerit',
     'feature_request' => 'Suliffeqarnerit apeqqutit'
 ];
-?>

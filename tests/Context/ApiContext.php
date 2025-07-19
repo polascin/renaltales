@@ -48,7 +48,7 @@ class ApiContext implements Context
     public function iSendAPostRequestToWithData(string $endpoint, \Behat\Gherkin\Node\TableNode $table): void
     {
         $data = $table->getRowsHash();
-        
+
         // Simulate API POST request
         $this->lastResponse = [
             'status' => 'success',
@@ -83,7 +83,7 @@ class ApiContext implements Context
     public function theResponseShouldBeValidJson(): void
     {
         $json = json_encode($this->lastResponse);
-        
+
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new \Exception('Response is not valid JSON');
         }

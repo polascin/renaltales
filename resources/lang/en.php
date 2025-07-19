@@ -1,7 +1,8 @@
 <?php
+
 /**
  * English language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Disabled',
     'available' => 'Available',
     'not_available' => 'Not available',
-    
+
     // Error messages
     'application_error' => 'Application Error',
     'service_unavailable' => 'Service is temporarily unavailable',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Debug mode is not available for security reasons.',
     'access_denied' => 'Access denied',
     'security_violation' => 'Security violation detected. Session terminated.',
-    
+
     // Session management
     'session_init_failed' => 'Session manager initialization failed',
     'session_name_failed' => 'Failed to set session name',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Failed to create log directory',
     'session_security_log_failed' => 'Security violation logging failed',
     'session_security_log_injection_failed' => 'Security log injection failed',
-    
+
     // Security messages
     'security_violation_detected' => 'Security violation detected. Session terminated.',
     'security_user_agent_mismatch' => 'User agent mismatch',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Session hijacking attempt detected',
     'security_invalid_token' => 'Invalid security token',
     'security_token_expired' => 'Security token expired',
-    
+
     // Server information
     'server_information' => 'Server information',
     'application_information' => 'Application information',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Current language file',
     'current_language_flag' => 'Current language flag',
     'current_language_flag_alt' => 'Current language flag',
-    
+
     // Date and time
     'datetime_placeholder' => 'Date, time including detailed internet time @beat will be displayed here.',
     'debug_mode_enabled' => 'Debug mode is enabled.',
     'service_information' => 'Service information',
     'user_information' => 'User information:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Lifetime',
     'cookie_path' => 'Path',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Secure',
     'cookie_httponly' => 'HTTP Only',
     'cookie_samesite' => 'Same Site',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Timestamp',
     'log_entry_ip' => 'IP address',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'Session ID',
     'log_entry_reason' => 'Reason',
     'log_entry_request_uri' => 'Request URI',
-    
+
     // User interface
     'welcome_user' => 'Welcome',
     'user' => 'User',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profile',
     'settings' => 'Settings',
     'register' => 'Register',
-    
+
     // Content sections
     'important_notes' => 'Important Notes',
     'about_renal_tales' => 'About Renal Tales',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'New to our community? Start by reading some stories, introduce yourself, and consider sharing your own experience when you\'re ready.',
     'support_resources' => 'Support Resources',
     'support_description' => 'If you need immediate medical help or are in crisis, please contact your healthcare provider or emergency services.',
-    
+
     // Home page
     'welcome_home' => 'Welcome to Renal Tales',
     'home_intro' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Join Community',
     'join_community_desc' => 'Connect with others, participate in discussions, and build lasting friendships.',
     'explore_community' => 'Explore Community',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Stories section coming soon...',
     'community_coming_soon' => 'Community section coming soon...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'My Stories section coming soon...',
     'profile_coming_soon' => 'Profile section coming soon...',
     'settings_coming_soon' => 'Settings section coming soon...',
-    
+
     // Login page
     'login_welcome' => 'Welcome Back',
     'login_subtitle' => 'Sign in to access your account',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Sign up here',
     'back_to_home' => 'Back to Home',
     'please_fill_required_fields' => 'Please fill in all required fields.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Invalid security token. Please try again.',
     'email_required' => 'Email is required.',
     'email_invalid' => 'Please enter a valid email address.',
     'password_required' => 'Password is required.',
     'login_failed' => 'Invalid email or password.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Language selection not available',
-    
+
     // Time and date display
     'day' => 'Day',
     'year' => 'Year',
     'week' => 'Week',
     'today_is' => 'Today is',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Language selection',
     'language_change' => 'Change language',
@@ -233,8 +234,8 @@ return [
     'language_switch' => 'Switch language',
     'language_switch_success' => 'Language successfully changed',
     'language_switch_error' => 'Error changing language',
-    
-    
+
+
     // Navigation and menu
     'nav.home' => 'Home',
     'nav.stories' => 'Stories',
@@ -248,12 +249,12 @@ return [
     'nav.logout' => 'Log Out',
     'nav.register' => 'Sign Up',
     'logged_in_as' => 'Logged in as',
-    
+
     // Home page content
     'home.title' => 'Renal Tales - Home',
     'home.welcome' => 'Welcome to Renal Tales',
     'home.description' => 'Welcome to our supportive community for people affected by kidney disorders. Here you can share your story, read others\' experiences, and find support from people who understand your journey.',
-    
+
     // Login system
     'login_title' => 'Log In',
     'login_description' => 'Log in to share your stories, connect with the community, and manage your profile.',
@@ -269,7 +270,7 @@ return [
     'logout_failed' => 'Logout failed',
     'create_account' => 'Create an account',
     'have_account' => 'Already have an account?',
-    
+
     // Authentication and authorization
     'unauthorized' => 'Unauthorized',
     'forbidden' => 'Forbidden',
@@ -283,7 +284,7 @@ return [
     'invalid_verification_code' => 'Invalid verification code',
     'verification_expired' => 'Verification code has expired',
     'too_many_login_attempts' => 'Too many login attempts. Please try again later.',
-    
+
     // Registration
     'register_title' => 'Sign Up',
     'register_subtitle' => 'Join our community',
@@ -301,7 +302,7 @@ return [
     'username_exists' => 'Username is already taken',
     'passwords_dont_match' => 'Passwords do not match',
     'terms_required' => 'You must agree to the Terms of Service',
-    
+
     // Medical terminology - Renal/Kidney specific
     'kidney' => 'Kidney',
     'kidneys' => 'Kidneys',

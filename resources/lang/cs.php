@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Czech language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Zakázáno',
     'available' => 'Dostupné',
     'not_available' => 'Není dostupné',
-    
+
     // Error messages
     'application_error' => 'Chyba aplikace',
     'service_unavailable' => 'Služba je dočasně nedostupná',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Debug režim není dostupný z bezpečnostních důvodů.',
     'access_denied' => 'Přístup odepřen',
     'security_violation' => 'Bezpečnostní porušení zjištěno. Relace ukončena.',
-    
+
     // Session management
     'session_init_failed' => 'Inicializace správce relací selhala',
     'session_name_failed' => 'Nepodařilo se nastavit název relace',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Nepodařilo se vytvořit adresář logů',
     'session_security_log_failed' => 'Logování bezpečnostního porušení selhalo',
     'session_security_log_injection_failed' => 'Injekce bezpečnostního logu selhala',
-    
+
     // Security messages
     'security_violation_detected' => 'Bezpečnostní porušení zjištěno. Relace ukončena.',
     'security_user_agent_mismatch' => 'Nesoulad user agenta',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Pokus o únos relace zjištěn',
     'security_invalid_token' => 'Neplatný bezpečnostní token',
     'security_token_expired' => 'Bezpečnostní token vypršel',
-    
+
     // Server information
     'server_information' => 'Informace o serveru',
     'application_information' => 'Informace o aplikaci',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Soubor aktuálního jazyka',
     'current_language_flag' => 'Vlajka aktuálního jazyka',
     'current_language_flag_alt' => 'Vlajka aktuálního jazyka',
-    
+
     // Date and time
     'datetime_placeholder' => 'Datum, čas včetně detailního internetového času @beat se zobrazí zde.',
     'debug_mode_enabled' => 'Debug režim je povolen.',
     'service_information' => 'Informace o službě',
     'user_information' => 'Informace o uživateli:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Životnost',
     'cookie_path' => 'Cesta',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Bezpečné',
     'cookie_httponly' => 'Pouze HTTP',
     'cookie_samesite' => 'Stejná stránka',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Časové razítko',
     'log_entry_ip' => 'IP adresa',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID relace',
     'log_entry_reason' => 'Důvod',
     'log_entry_request_uri' => 'URI požadavku',
-    
+
     // User interface
     'welcome_user' => 'Vítejte',
     'user' => 'Uživatel',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Nastavení',
     'register' => 'Registrovat se',
-    
+
     // Content sections
     'important_notes' => 'Důležité poznámky',
     'about_renal_tales' => 'O ledvinových příbězích',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Jste noví v naší komunitě? Začněte čtením některých příběhů, představte se a zvažte sdílení vlastní zkušenosti, až budete připraveni.',
     'support_resources' => 'Podpůrné zdroje',
     'support_description' => 'Pokud potřebujete okamžitou lékařskou pomoc nebo jste v krizi, kontaktujte svého poskytovatele zdravotní péče nebo pohotovostní služby.',
-    
+
     // Home page
     'welcome_home' => 'Vítejte v ledvinových příbězích',
     'home_intro' => 'Vítejte v naší podpůrné komunitě pro lidi s poruchami ledvin. Zde můžete sdílet svůj příběh, číst zkušenosti ostatních a najít podporu od lidí, kteří rozumějí vaší cestě.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Připojte se ke komunitě',
     'join_community_desc' => 'Spojte se s ostatními, zapojte se do diskusí a budujte trvalá přátelství.',
     'explore_community' => 'Prozkoumat komunitu',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Sekce příběhů již brzy...',
     'community_coming_soon' => 'Sekce komunity již brzy...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Sekce mých příběhů již brzy...',
     'profile_coming_soon' => 'Sekce profilu již brzy...',
     'settings_coming_soon' => 'Sekce nastavení již brzy...',
-    
+
     // Login page
     'login_welcome' => 'Vítejte zpět',
     'login_subtitle' => 'Přihlaste se pro přístup k vašemu účtu',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Zaregistrujte se zde',
     'back_to_home' => 'Zpět domů',
     'please_fill_required_fields' => 'Prosím, vyplňte všechna povinná pole.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Neplatný bezpečnostní token. Prosím, zkuste to znovu.',
     'email_required' => 'Email je povinný.',
     'email_invalid' => 'Prosím, zadejte platnou emailovou adresu.',
     'password_required' => 'Heslo je povinné.',
     'login_failed' => 'Neplatný email nebo heslo.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Výběr jazyka není dostupný',
-    
+
     // Time and date display
     'day' => 'Den',
     'year' => 'Rok',
     'week' => 'Týden',
     'today_is' => 'Dnes je',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Výběr jazyka',
     'language_change' => 'Změnit jazyk',
@@ -233,10 +234,10 @@ return [
     'language_switch' => 'Přepnout jazyk',
     'language_switch_success' => 'Jazyk úspěšně změněn',
     'language_switch_error' => 'Chyba při změně jazyka',
-    
+
     // Miscellaneous
     'not_available' => 'Nedostupné',
-    
+
     // Error messages
     'application_error' => 'Chyba aplikace',
     'service_unavailable' => 'Služba dočasně nedostupná',
@@ -249,7 +250,7 @@ return [
     'debug_not_allowed' => 'Ladicí informace nejsou dostupné z bezpečnostních důvodů.',
     'access_denied' => 'Přístup odepřen',
     'security_violation' => 'Detekováno porušení bezpečnosti. Relace ukončena.',
-    
+
     // Session management
     'session_init_failed' => 'Inicializace správce relací selhala',
     'session_name_failed' => 'Nastavení názvu relace selhalo',
@@ -291,7 +292,7 @@ return [
     'session_log_dir_create_failed' => 'Vytvoření adresáře logů selhalo',
     'session_security_log_failed' => 'Zápis logu porušení bezpečnosti selhal',
     'session_security_log_injection_failed' => 'Bezpečnostní logování selhalo',
-    
+
     // Security messages
     'security_violation_detected' => 'Detekováno porušení bezpečnosti. Relace ukončena.',
     'security_user_agent_mismatch' => 'Neshoda user agenta',
@@ -300,7 +301,7 @@ return [
     'security_hijacking_attempt' => 'Detekován pokus o únos relace',
     'security_invalid_token' => 'Neplatný bezpečnostní token',
     'security_token_expired' => 'Bezpečnostní token vypršel',
-    
+
     // Server information
     'server_information' => 'Informace o serveru',
     'application_information' => 'Informace o aplikaci',
@@ -319,14 +320,14 @@ return [
     'current_language_file' => 'Soubor aktuálního jazyka',
     'current_language_flag' => 'Vlajka aktuálního jazyka',
     'current_language_flag_alt' => 'Vlajka aktuálního jazyka',
-    
+
     // Date and time
     'datetime_placeholder' => 'Zde bude zobrazen datum, čas, včetně podrobného internetového času @beat.',
     'debug_mode_enabled' => 'Režim ladění je povolen.',
     'service_information' => 'Informace o službě',
     'user_information' => 'Informace o uživateli:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Životnost',
     'cookie_path' => 'Cesta',
@@ -334,7 +335,7 @@ return [
     'cookie_secure' => 'Zabezpečené',
     'cookie_httponly' => 'Pouze HTTP',
     'cookie_samesite' => 'SameSite',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Časová značka',
     'log_entry_ip' => 'IP adresa',
@@ -342,7 +343,7 @@ return [
     'log_entry_session_id' => 'ID relace',
     'log_entry_reason' => 'Důvod',
     'log_entry_request_uri' => 'URI požadavku',
-    
+
     // Uživatelské rozhraní
     'welcome_user' => 'Vítejte',
     'user' => 'Uživatel',
@@ -361,7 +362,7 @@ return [
     'profile' => 'Profil',
     'settings' => 'Nastavení',
     'register' => 'Registrovat se',
-    
+
     // Sekce obsahu
     'important_notes' => 'Důležité poznámky',
     'about_renal_tales' => 'O Ledvinových příbězích',
@@ -375,7 +376,7 @@ return [
     'getting_started_description' => 'Jste noví v naší komunitě? Začněte čtením příběhů, představte se a zvažte sdílení své vlastní zkušenosti, až budete připraveni.',
     'support_resources' => 'Zdroje podpory',
     'support_description' => 'Pokud potřebujete okamžitou lékařskou pomoc nebo jste v krizi, kontaktujte svého poskytovatele zdravotní péče nebo záchranné služby.',
-    
+
     // Domovská stránka
     'welcome_home' => 'Vítejte v Ledvinových příbězích',
     'home_intro' => 'Vítejte v naší podpůrné komunitě pro lidi ovlivněné poruchami ledvin. Zde můžete sdílet svůj příběh, číst zkušenosti ostatních a najít podporu od lidí, kteří rozumějí vaší cestě.',
@@ -389,7 +390,7 @@ return [
     'join_community' => 'Připojit se ke komunitě',
     'join_community_desc' => 'Spojte se s ostatními, účastněte se diskusí a budujte trvalá přátelství.',
     'explore_community' => 'Prozkoumat komunitu',
-    
+
     // Zástupný obsah
     'stories_coming_soon' => 'Sekce příběhů bude brzy...',
     'community_coming_soon' => 'Sekce komunity bude brzy...',
@@ -398,7 +399,7 @@ return [
     'my_stories_coming_soon' => 'Sekce moje příběhy bude brzy...',
     'profile_coming_soon' => 'Sekce profil bude brzy...',
     'settings_coming_soon' => 'Sekce nastavení bude brzy...',
-    
+
     // Přihlašovací stránka
     'login_welcome' => 'Vítejte zpět',
     'login_subtitle' => 'Přihlaste se pro přístup k vašemu účtu',
@@ -413,17 +414,17 @@ return [
     'sign_up_here' => 'Registrujte se zde',
     'back_to_home' => 'Zpět na domovskou stránku',
     'please_fill_required_fields' => 'Prosím vyplňte všechna povinná pole.',
-    
+
     // Validace přihlášení
     'invalid_csrf_token' => 'Neplatný bezpečnostní token. Zkuste to prosím znovu.',
     'email_required' => 'Email je povinný.',
     'email_invalid' => 'Zadejte prosím platnou emailovou adresu.',
     'password_required' => 'Heslo je povinné.',
     'login_failed' => 'Neplatný email nebo heslo.',
-    
+
     // Výběr jazyka
     'language_selection_unavailable' => 'Výběr jazyka není dostupný',
-    
+
     // Zobrazení času a data
     'day' => 'Den',
     'year' => 'Rok',

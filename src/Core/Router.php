@@ -53,10 +53,10 @@ class Router
             // Fallback to request target if URI fails
             $path = parse_url($request->getRequestTarget(), PHP_URL_PATH) ?: '/';
         }
-        
+
         // Clean the path
         $path = rtrim($path, '/') ?: '/';
-        
+
         // Check if route exists
         if (!isset($this->routes[$path])) {
             // Try to handle query parameter routing for backward compatibility
@@ -64,13 +64,13 @@ class Router
             if (isset($queryParams['page'])) {
                 return $this->handlePageRequest($request, $queryParams['page']);
             }
-            
+
             // Route not found - return 404
             return $this->createErrorResponse('Page not found', 404);
         }
 
         [$controllerClass, $method] = $this->routes[$path];
-        
+
         try {
             $controller = new $controllerClass();
             return $controller->$method($request);
@@ -95,11 +95,11 @@ class Router
             case 'home':
                 $controller = new HomeController();
                 return $controller->index($request);
-                
+
             case 'language':
                 $controller = new LanguageController();
                 return $controller->current($request);
-                
+
             default:
                 return $this->createErrorResponse('Page not found', 404);
         }

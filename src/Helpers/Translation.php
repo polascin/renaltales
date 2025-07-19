@@ -6,10 +6,10 @@ namespace RenalTales\Helpers;
 
 /**
  * Simple Translation Class
- * 
+ *
  * Provides streamlined translation functionality without complex caching.
  * Loads language files directly and provides simple key-based translation.
- * 
+ *
  * @package RenalTales\Helpers
  * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
@@ -105,7 +105,7 @@ class Translation
     protected function loadLanguage(string $language): void
     {
         $filePath = $this->translationPath . DIRECTORY_SEPARATOR . $language . '.php';
-        
+
         if (file_exists($filePath)) {
             $translations = include $filePath;
             $this->translations = is_array($translations) ? $translations : [];
@@ -134,7 +134,7 @@ class Translation
     public function get(string $key, string $default = '', array $parameters = []): string
     {
         $text = $this->translations[$key] ?? $default ?: $key;
-        
+
         // Replace parameters in the format {param}
         foreach ($parameters as $param => $value) {
             $text = str_replace('{' . $param . '}', (string)$value, $text);
@@ -158,10 +158,10 @@ class Translation
 
         $this->language = $language;
         $this->loadLanguage($language);
-        
+
         // Store in session if available
         $this->persistLanguageChoice($language);
-        
+
         return true;
     }
 
@@ -237,7 +237,7 @@ class Translation
                 // Extract language code from format like "en-US;q=0.8"
                 $lang = strtolower(trim(explode(';', $lang)[0]));
                 $lang = substr($lang, 0, 2); // Take only first 2 characters
-                
+
                 if ($this->isLanguageSupported($lang)) {
                     return $lang;
                 }

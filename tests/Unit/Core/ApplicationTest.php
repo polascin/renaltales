@@ -55,9 +55,9 @@ class ApplicationTest extends TestCase
     public function testCanBeBootstrapped(): void
     {
         $this->assertFalse($this->application->isBootstrapped());
-        
+
         $result = $this->application->bootstrap();
-        
+
         $this->assertInstanceOf(Application::class, $result);
         $this->assertTrue($this->application->isBootstrapped());
     }
@@ -69,9 +69,9 @@ class ApplicationTest extends TestCase
     {
         $this->application->bootstrap();
         $this->assertTrue($this->application->isBootstrapped());
-        
+
         $result = $this->application->bootstrap();
-        
+
         $this->assertInstanceOf(Application::class, $result);
         $this->assertTrue($this->application->isBootstrapped());
     }
@@ -82,7 +82,7 @@ class ApplicationTest extends TestCase
     public function testApplicationControllerAvailableAfterBootstrap(): void
     {
         $this->application->bootstrap();
-        
+
         $controller = $this->application->getApplicationController();
         $this->assertInstanceOf(ApplicationController::class, $controller);
     }
@@ -94,7 +94,7 @@ class ApplicationTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Application must be bootstrapped before accessing the application controller');
-        
+
         $this->application->getApplicationController();
     }
 
@@ -105,7 +105,7 @@ class ApplicationTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('Application must be bootstrapped before running');
-        
+
         $this->application->run();
     }
 
@@ -125,7 +125,7 @@ class ApplicationTest extends TestCase
     public function testCanRetrieveServices(): void
     {
         $this->application->bootstrap();
-        
+
         $this->assertTrue($this->application->has(Container::class));
         $container = $this->application->get(Container::class);
         $this->assertInstanceOf(Container::class, $container);
@@ -137,10 +137,10 @@ class ApplicationTest extends TestCase
     public function testCanBeShutDown(): void
     {
         $this->application->bootstrap();
-        
+
         // Should not throw exception
         $this->application->shutdown();
-        
+
         $this->assertTrue($this->application->isBootstrapped());
     }
 
@@ -151,7 +151,7 @@ class ApplicationTest extends TestCase
     {
         // Should not throw exception
         $this->application->shutdown();
-        
+
         $this->assertFalse($this->application->isBootstrapped());
     }
 }

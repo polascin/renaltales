@@ -1,7 +1,7 @@
 <?php
 /**
  * Comprehensive Test for Language and Session Integration
- * 
+ *
  * This test validates the integration between LanguageManager and SessionManager
  * and ensures they work together properly.
  */
@@ -21,10 +21,10 @@ try {
     // Initialize systems
     $languageModel = new LanguageModel();
     $sessionManager = new SessionManager([], true, ['127.0.0.1', '::1'], 1800);
-    
+
     // Test 1: Language System Basic Functionality
     echo "<h2>Test 1: Language System Basic Functionality</h2>";
-    
+
     $supportedLanguages = $languageModel->getSupportedLanguages();
     if (empty($supportedLanguages)) {
         $errors[] = "No supported languages found";
@@ -32,17 +32,17 @@ try {
         $successes[] = "Found " . count($supportedLanguages) . " supported languages";
         echo "<p>Supported languages: " . implode(', ', $supportedLanguages) . "</p>";
     }
-    
+
     // Test if 'en' is supported
     if ($languageModel->isSupported('en')) {
         $successes[] = "English language is supported";
     } else {
         $errors[] = "English language is not supported";
     }
-    
+
     // Test 2: Language Detection
     echo "<h2>Test 2: Language Detection</h2>";
-    
+
     $detectedLanguage = $languageModel->detectLanguage();
     if ($detectedLanguage) {
         $successes[] = "Language detected: " . $detectedLanguage;
@@ -50,25 +50,25 @@ try {
     } else {
         $errors[] = "Failed to detect language";
     }
-    
+
     // Test 3: Session Integration
     echo "<h2>Test 3: Session Integration</h2>";
-    
+
     // Test setting language in session
     $testLanguage = 'en';
     $sessionManager->setSession('language', $testLanguage);
     $retrievedLanguage = $sessionManager->getSession('language');
-    
+
     if ($retrievedLanguage === $testLanguage) {
         $successes[] = "Language successfully stored and retrieved from session";
         echo "<p>Session language: <strong>" . $retrievedLanguage . "</strong></p>";
     } else {
         $errors[] = "Failed to store/retrieve language from session";
     }
-    
+
     // Test 4: Language Switching
     echo "<h2>Test 4: Language Switching</h2>";
-    
+
     if (isset($_GET['switch_to'])) {
         $newLanguage = $_GET['switch_to'];
         if ($languageModel->isSupported($newLanguage)) {
@@ -80,10 +80,10 @@ try {
             $errors[] = "Attempted to switch to unsupported language: " . $newLanguage;
         }
     }
-    
+
     // Test 5: Session Persistence
     echo "<h2>Test 5: Session Persistence</h2>";
-    
+
     $sessionInfo = $sessionManager->getSessionInfo();
     if ($sessionInfo['is_initialized']) {
         $successes[] = "Session is properly initialized";
@@ -93,20 +93,20 @@ try {
     } else {
         $errors[] = "Session is not properly initialized";
     }
-    
+
     // Test 6: Language Flag Integration
     echo "<h2>Test 6: Language Flag Integration</h2>";
-    
+
     $currentLang = $sessionManager->getSession('language') ?: $detectedLanguage;
     $flagCode = $languageModel->getFlagCode($currentLang);
-    
+
     echo "<p>Current language flag: <strong>" . $flagCode . "</strong></p>";
     // Note: getFlagPath is not available in LanguageModel, so we'll skip this line
     echo "<p>Flag code: <strong>" . $flagCode . "</strong></p>";
-    
+
     // Test 7: Language Information
     echo "<h2>Test 7: Language Information</h2>";
-    
+
     // getLanguageInfo is not available in LanguageModel, so we'll show basic info
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Property</th><th>Value</th></tr>";
@@ -115,16 +115,16 @@ try {
     echo "<tr><td>Flag Code</td><td>" . htmlspecialchars($flagCode) . "</td></tr>";
     echo "<tr><td>Is Supported</td><td>" . ($languageModel->isSupported($currentLang) ? 'true' : 'false') . "</td></tr>";
     echo "</table>";
-    
+
     // Test 8: Cookie Integration
     echo "<h2>Test 8: Cookie Integration</h2>";
-    
+
     $cookieLanguage = $_COOKIE['language'] ?? 'Not set';
     echo "<p>Cookie language: <strong>" . htmlspecialchars($cookieLanguage) . "</strong></p>";
-    
+
     // Test 9: System Statistics
     echo "<h2>Test 9: System Statistics</h2>";
-    
+
     // getSystemStats is not available in LanguageModel, so we'll show basic stats
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Statistic</th><th>Value</th></tr>";
@@ -132,10 +132,10 @@ try {
     echo "<tr><td>Current Language</td><td>" . htmlspecialchars($languageModel->getCurrentLanguage()) . "</td></tr>";
     echo "<tr><td>Total Translations</td><td>" . count($languageModel->getAllTexts()) . "</td></tr>";
     echo "</table>";
-    
+
     // Test 10: Debug Information
     echo "<h2>Test 10: Debug Information</h2>";
-    
+
     // getDebugInfo is not available in LanguageModel, so we'll show basic debug info
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Debug Property</th><th>Value</th></tr>";
@@ -144,7 +144,7 @@ try {
     echo "<tr><td>Cookie Language</td><td>" . htmlspecialchars($_COOKIE['language'] ?? 'Not set') . "</td></tr>";
     echo "<tr><td>Browser Language</td><td>" . htmlspecialchars($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'Not available') . "</td></tr>";
     echo "</table>";
-    
+
 } catch (Exception $e) {
     $errors[] = "Critical error: " . $e->getMessage();
     echo "<p style='color: red;'>Critical error: " . htmlspecialchars($e->getMessage()) . "</p>";
@@ -251,7 +251,7 @@ try {
                 echo "<a href='?switch_to=" . urlencode($lang) . "'>" . htmlspecialchars($langName) . " (" . htmlspecialchars($lang) . ")</a> ";
             }
         }
-        ?>
+?>
     </div>
     
     <h2>Test Results Summary</h2>
@@ -285,14 +285,14 @@ try {
     if (isset($sessionManager)) {
         echo "<h3>Session Manager Debug</h3>";
         $sessionManager->displaySessionDebug();
-        
+
         echo "<h3>Session Statistics</h3>";
         $sessionManager->displaySessionStats();
-        
+
         echo "<h3>Session Table</h3>";
         $sessionManager->displaySessionTable();
     }
-    ?>
+?>
     
     <script>
         function clearSession() {

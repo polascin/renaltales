@@ -25,10 +25,10 @@ trait DatabaseTrait
     protected function setUpDatabase(): void
     {
         $this->entityManager = $this->getService(EntityManagerInterface::class);
-        
+
         // Create schema
         $this->createSchema();
-        
+
         // Seed basic test data
         $this->seedDatabase();
     }
@@ -41,7 +41,7 @@ trait DatabaseTrait
         if ($this->entityManager) {
             // Drop schema
             $this->dropSchema();
-            
+
             // Clear entity manager
             $this->entityManager->clear();
         }
@@ -54,10 +54,10 @@ trait DatabaseTrait
     {
         $schemaTool = new SchemaTool($this->entityManager);
         $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
-        
+
         // Drop existing schema if it exists
         $schemaTool->dropSchema($metadata);
-        
+
         // Create new schema
         $schemaTool->createSchema($metadata);
     }
@@ -69,7 +69,7 @@ trait DatabaseTrait
     {
         $schemaTool = new SchemaTool($this->entityManager);
         $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
-        
+
         $schemaTool->dropSchema($metadata);
     }
 
@@ -93,7 +93,7 @@ trait DatabaseTrait
             $language->setNativeName($langData[2]);
             $language->setIsDefault($langData[3]);
             $language->setIsActive(true);
-            
+
             $this->entityManager->persist($language);
         }
 
@@ -170,17 +170,17 @@ trait DatabaseTrait
     protected function createTestEntity(string $entityClass, array $data = []): object
     {
         $entity = new $entityClass();
-        
+
         foreach ($data as $property => $value) {
             $setter = 'set' . ucfirst($property);
             if (method_exists($entity, $setter)) {
                 $entity->$setter($value);
             }
         }
-        
+
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
-        
+
         return $entity;
     }
 
@@ -223,7 +223,7 @@ trait DatabaseTrait
     protected function assertEntityExists(string $entityClass, array $criteria = [], string $message = ''): void
     {
         $entity = $this->findEntity($entityClass, $criteria);
-        
+
         $this->assertNotNull(
             $entity,
             $message ?: "Entity of type '{$entityClass}' with criteria " . json_encode($criteria) . " should exist"
@@ -236,7 +236,7 @@ trait DatabaseTrait
     protected function assertEntityNotExists(string $entityClass, array $criteria = [], string $message = ''): void
     {
         $entity = $this->findEntity($entityClass, $criteria);
-        
+
         $this->assertNull(
             $entity,
             $message ?: "Entity of type '{$entityClass}' with criteria " . json_encode($criteria) . " should not exist"
@@ -249,7 +249,7 @@ trait DatabaseTrait
     protected function assertEntityCount(string $entityClass, int $expectedCount, array $criteria = [], string $message = ''): void
     {
         $count = $this->countEntities($entityClass, $criteria);
-        
+
         $this->assertEquals(
             $expectedCount,
             $count,

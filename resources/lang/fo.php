@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Nýrnasøgur',
     'welcome' => 'Vælkomið',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Villubólkur',
     'feature_request' => 'Funkleikauppskot'
 ];
-?>

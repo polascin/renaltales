@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Scéalta na nDuán',
     'welcome' => 'Fáilte',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Tuairisc fabhtanna',
     'feature_request' => 'Iarratas gnéithe'
 ];
-?>

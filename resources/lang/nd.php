@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Izindaba Zezinso',
     'welcome' => 'Siyakwamukela',

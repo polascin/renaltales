@@ -43,7 +43,7 @@ class ErrorController
         $queryParams = $request->getQueryParams();
         $message = $queryParams['message'] ?? 'An error occurred';
         $statusCode = (int)($queryParams['code'] ?? 500);
-        
+
         return $this->error($message, $statusCode);
     }
 
@@ -58,7 +58,7 @@ class ErrorController
     {
         // Prepare error data
         $data = $this->prepareErrorData($message, $statusCode);
-        
+
         try {
             // Try to render error template
             $template = new Template();
@@ -67,7 +67,7 @@ class ErrorController
             // Fallback to simple HTML if template fails
             $html = $this->getSimpleErrorHtml($message, $statusCode);
         }
-        
+
         return new Response($statusCode, ['Content-Type' => 'text/html; charset=utf-8'], $html);
     }
 
@@ -81,27 +81,27 @@ class ErrorController
     private function prepareErrorData(string $message, int $statusCode): array
     {
         $currentLanguage = $this->translation->getCurrentLanguage();
-        
+
         return [
             // Meta information
             'page_title' => $this->trans('error.title', 'Error') . ' - RenalTales',
             'app_name' => 'RenalTales',
             'language' => $currentLanguage,
             'year' => date('Y'),
-            
+
             // Error information
             'error_code' => $statusCode,
             'error_message' => $message,
             'error_title' => $this->getErrorTitle($statusCode),
             'error_description' => $this->getErrorDescription($statusCode),
-            
+
             // Navigation
             'nav_home' => $this->trans('nav.home', 'Home'),
             'back_to_home' => $this->trans('back_to_home', 'Back to Home'),
-            
+
             // Footer
             'footer_copyright' => $this->trans('footer_copyright', 'Ľubomír Polaščín'),
-            
+
             // Language switcher
             'language_label' => $this->trans('current_language', 'Language'),
             'current_language' => $currentLanguage,
@@ -162,13 +162,13 @@ class ErrorController
     {
         $supportedLanguages = [
             'en' => 'English',
-            'sk' => 'Slovak', 
+            'sk' => 'Slovak',
             'la' => 'Latin',
         ];
-        
+
         $languages = [];
         $currentLanguage = $this->translation->getCurrentLanguage();
-        
+
         foreach ($supportedLanguages as $code => $name) {
             $languages[] = [
                 'code' => $code,
@@ -176,7 +176,7 @@ class ErrorController
                 'selected' => $code === $currentLanguage
             ];
         }
-        
+
         return $languages;
     }
 
@@ -191,7 +191,7 @@ class ErrorController
     {
         $title = $this->getErrorTitle($statusCode);
         $description = $this->getErrorDescription($statusCode);
-        
+
         return "<!DOCTYPE html>
 <html lang=\"en\">
 <head>

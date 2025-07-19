@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Bulgarian language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Изключено',
     'available' => 'Налично',
     'not_available' => 'Не е налично',
-    
+
     // Error messages
     'application_error' => 'Грешка в приложението',
     'service_unavailable' => 'Услугата е временно недостъпна',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Режимът за отстраняване на грешки не е достъпен поради причини за сигурност.',
     'access_denied' => 'Достъпът е отказан',
     'security_violation' => 'Открито е нарушение на сигурността. Сесията е прекратена.',
-    
+
     // Session management
     'session_init_failed' => 'Неуспешно инициализиране на мениджъра на сесии',
     'session_name_failed' => 'Неуспешно задаване на името на сесията',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Неуспешно създаване на директория за логове',
     'session_security_log_failed' => 'Неуспешно записване на лог за нарушение на сигурността',
     'session_security_log_injection_failed' => 'Неуспешна инжекция на лог за сигурност',
-    
+
     // Security messages
     'security_violation_detected' => 'Открито е нарушение на сигурността. Сесията е прекратена.',
     'security_user_agent_mismatch' => 'Несъответствие на потребителския агент',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Открит е опит за отвличане на сесия',
     'security_invalid_token' => 'Невалиден токен за сигурност',
     'security_token_expired' => 'Токенът за сигурност е изтекъл',
-    
+
     // Server information
     'server_information' => 'Информация за сървъра',
     'application_information' => 'Информация за приложението',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Файл на текущия език',
     'current_language_flag' => 'Знаме на текущия език',
     'current_language_flag_alt' => 'Знаме на текущия език',
-    
+
     // Date and time
     'datetime_placeholder' => 'Тук ще се показва дата, час, включително подробно интернет време @beat.',
     'debug_mode_enabled' => 'Режимът за отстраняване на грешки е включен.',
     'service_information' => 'Информация за услугата',
     'user_information' => 'Информация за потребителя:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Живот',
     'cookie_path' => 'Път',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Сигурен',
     'cookie_httponly' => 'Само HTTP',
     'cookie_samesite' => 'Същия сайт',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Времева отметка',
     'log_entry_ip' => 'IP адрес',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ID на сесията',
     'log_entry_reason' => 'Причина',
     'log_entry_request_uri' => 'URI на заявката',
-    
+
     // User interface
     'welcome_user' => 'Добре дошли',
     'user' => 'Потребител',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Профил',
     'settings' => 'Настройки',
     'register' => 'Регистрация',
-    
+
     // Content sections
     'important_notes' => 'Важни бележки',
     'about_renal_tales' => 'За историите за бъбреците',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Нови сте в нашата общност? Започнете с четене на някои истории, представете се и помислете за споделяне на собствения си опит, когато сте готови.',
     'support_resources' => 'Ресурси за подкрепа',
     'support_description' => 'Ако имате нужда от незабавна медицинска помощ или сте в криза, моля, свържете се с вашия доставчик на здравни услуги или спешни служби.',
-    
+
     // Home page
     'welcome_home' => 'Добре дошли в историите за бъбреците',
     'home_intro' => 'Добре дошли в нашата подкрепяща общност за хора с бъбречни заболявания. Тук можете да споделите своята история, да четете опитностите на другите и да намерите подкрепа от хора, които разбират вашето пътуване.',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Присъединете се към общността',
     'join_community_desc' => 'Свържете се с другите, участвайте в дискусии и изградете трайни приятелства.',
     'explore_community' => 'Изследвайте общността',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Секцията с истории идва скоро...',
     'community_coming_soon' => 'Секцията за общността идва скоро...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Секцията "Моите истории" идва скоро...',
     'profile_coming_soon' => 'Секцията за профила идва скоро...',
     'settings_coming_soon' => 'Секцията с настройки идва скоро...',
-    
+
     // Login page
     'login_welcome' => 'Добре дошли отново',
     'login_subtitle' => 'Влезте, за да получите достъп до вашия акаунт',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Регистрирайте се тук',
     'back_to_home' => 'Назад към началото',
     'please_fill_required_fields' => 'Моля, попълнете всички задължителни полета.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Невалиден токен за сигурност. Моля, опитайте отново.',
     'email_required' => 'Имейлът е задължителен.',
     'email_invalid' => 'Моля, въведете валиден имейл адрес.',
     'password_required' => 'Паролата е задължителна.',
     'login_failed' => 'Невалиден имейл или парола.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Изборът на език не е наличен',
-    
+
     // Time and date display
     'day' => 'Ден',
     'year' => 'Година',
     'week' => 'Седмица',
     'today_is' => 'Днес е',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Избор на език',
     'language_change' => 'Промени език',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Езикът е успешно променен',
     'language_switch_error' => 'Грешка при промяна на езика'
 ];
-?>

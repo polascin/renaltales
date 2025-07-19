@@ -12,5 +12,3 @@ echo "This script previously ran database migrations but database functionality 
 echo "For language processing focus, no database operations are needed.\n";
 
 echo "\nCompleted at: " . date('Y-m-d H:i:s') . "\n";
-
-?>

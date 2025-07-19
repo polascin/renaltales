@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'वृक्ककथाः',
     'welcome' => 'स्वागतम्',

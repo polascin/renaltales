@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Serbian language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'Онемогућено',
     'available' => 'Доступно',
     'not_available' => 'Није доступно',
-    
+
     // Error messages
     'application_error' => 'Грешка апликације',
     'service_unavailable' => 'Сервис привремено недоступан',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'Информације за дебаговање нису доступне из безбедносних разлога.',
     'access_denied' => 'Приступ одбијен',
     'security_violation' => 'Откривена безбедносна повреда. Сесија је прекинута.',
-    
+
     // Session management
     'session_init_failed' => 'Иницијализација менаџера сесије неуспешна',
     'session_name_failed' => 'Неуспешно постављање назива сесије',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'Неуспешно креирање директоријума за лог',
     'session_security_log_failed' => 'Неуспешно писање лога безбедносне повреде',
     'session_security_log_injection_failed' => 'Логовање безбедности неуспешно',
-    
+
     // Security messages
     'security_violation_detected' => 'Откривена безбедносна повреда. Сесија је прекинута.',
     'security_user_agent_mismatch' => 'Корисничи агент се не слаже',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'Откривен покушај отмице сесије',
     'security_invalid_token' => 'Неважећи безбедносни токен',
     'security_token_expired' => 'Безбедносни токен је истекао',
-    
+
     // Server information
     'server_information' => 'Информације о серверу',
     'application_information' => 'Информације о апликацији',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'Датотека тренутног језика',
     'current_language_flag' => 'Застава тренутног језика',
     'current_language_flag_alt' => 'Застава тренутног језика',
-    
+
     // Date and time
     'datetime_placeholder' => 'Овде ће бити приказан датум, време, укључујући детаљно интернет време @beat.',
     'debug_mode_enabled' => 'Режим дебаговања је омогућен.',
     'service_information' => 'Информације о сервису',
     'user_information' => 'Информације о кориснику:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'Животни век',
     'cookie_path' => 'Путања',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'Сигуран',
     'cookie_httponly' => 'Само ХТТП',
     'cookie_samesite' => 'Исти сајт',
-    
+
     // Log messages
     'log_entry_timestamp' => 'Временска ознака',
     'log_entry_ip' => 'ИП адреса',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ИД сесије',
     'log_entry_reason' => 'Разлог',
     'log_entry_request_uri' => 'УРИ захтева',
-    
+
     // User interface
     'welcome_user' => 'Добродошли',
     'user' => 'Корисник',
@@ -154,7 +155,7 @@ return [
     'profile' => 'Профил',
     'settings' => 'Подешавања',
     'register' => 'Региструј се',
-    
+
     // Content sections
     'important_notes' => 'Важне напомене',
     'about_renal_tales' => 'О причама о бубрезима',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'Нови сте у нашој заједници? Почните читањем неких прича, представите се, и размислите о дељењу свог искуства када будете спремни.',
     'support_resources' => 'Ресурси подршке',
     'support_description' => 'Ако вам је потребна хитна медицинска помоћ или сте у кризи, молимо контактирајте свог пружаоца здравствене заштите или хитне службе.',
-    
+
     // Home page
     'welcome_home' => 'Добродошли у Приче о бубрезима',
     'home_intro' => 'Добродошли у нашу подржавајућу заједницу за људе погођене поремећајима бубрега. Овде можете поделити своју причу, прочитати искуства других, и наћи подршку од људи који разумеју ваше путовање. Придружите нам се да се повежете са другима, поделите своја искуства, и нађете подршку у нашој заједници. Заједно, можемо да направимо разлику у животима оних погођених поремећајима бубрега. Хвала вам што сте део наше заједнице!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'Придружите се заједници',
     'join_community_desc' => 'Повежите се са другима, учествујте у дискусијама, и изградите трајна пријатељства.',
     'explore_community' => 'Истражите заједницу',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'Секција прича ускоро...',
     'community_coming_soon' => 'Секција заједнице ускоро...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'Секција мојих прича ускоро...',
     'profile_coming_soon' => 'Секција профила ускоро...',
     'settings_coming_soon' => 'Секција подешавања ускоро...',
-    
+
     // Login page
     'login_welcome' => 'Добродошли назад',
     'login_subtitle' => 'Пријавите се да приступите свом налогу',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'Региструјте се овде',
     'back_to_home' => 'Назад на почетну',
     'please_fill_required_fields' => 'Молимо попуните сва обавезна поља.',
-    
+
     // Login validation
     'invalid_csrf_token' => 'Неважећи безбедносни токен. Молимо покушајте поново.',
     'email_required' => 'Е-пошта је обавезна.',
     'email_invalid' => 'Молимо унесите важећу е-пошту.',
     'password_required' => 'Лозинка је обавезна.',
     'login_failed' => 'Неважећа е-пошта или лозинка.',
-    
+
     // Language selection
     'language_selection_unavailable' => 'Избор језика није доступан',
-    
+
     // Time and date display
     'day' => 'Дан',
     'year' => 'Година',
     'week' => 'Недеља',
     'today_is' => 'Данас је',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'Избор језика',
     'language_change' => 'Промени језик',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'Језик је успешно промењен',
     'language_switch_error' => 'Грешка при промени језика'
 ];
-?>

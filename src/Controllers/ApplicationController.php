@@ -26,7 +26,7 @@ class ApplicationController implements ControllerInterface
     {
         $page = $this->getRequestedPage($request);
         $data = $this->preparePageData($request, $page);
-        
+
         $template = new Template();
         return $this->createHtmlResponse(
             $template->render($page, $data)

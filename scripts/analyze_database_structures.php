@@ -36,13 +36,13 @@ class DatabaseStructureAnalyzer
     private array $recommendations = [];
     private array $errors = [];
     private PDO $pdo;
-    
+
     public function __construct()
     {
         // Initialize local database connection
         $this->initializeLocalConnection();
     }
-    
+
     /**
      * Initialize local database connection
      */
@@ -56,21 +56,21 @@ class DatabaseStructureAnalyzer
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false
             ]);
-            
+
             echo "✅ Successfully connected to local database\n";
         } catch (PDOException $e) {
             $this->errors[] = "Failed to connect to local database: " . $e->getMessage();
             throw new Exception("Cannot connect to local database: " . $e->getMessage());
         }
     }
-    
+
     /**
      * Run complete analysis
      */
     public function runAnalysis(): void
     {
         echo "🔍 Starting database structure analysis...\n\n";
-        
+
         try {
             $this->analyzeLocalDatabase();
             $this->analyzeMigrationFiles();
@@ -82,43 +82,43 @@ class DatabaseStructureAnalyzer
             exit(1);
         }
     }
-    
+
     /**
      * Analyze local database structure
      */
     private function analyzeLocalDatabase(): void
     {
         echo "📊 Analyzing local database structure...\n";
-        
+
         try {
             // Get all tables in the local database
             $stmt = $this->pdo->query("SHOW TABLES");
             $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
-            
+
             foreach ($tables as $table) {
                 $this->localTables[$table] = $this->getTableStructure($table);
                 echo "  - Found table: {$table}\n";
             }
-            
+
             echo "✅ Found " . count($this->localTables) . " tables in local database\n\n";
         } catch (PDOException $e) {
             $this->errors[] = "Error analyzing local database: " . $e->getMessage();
             throw new Exception("Failed to analyze local database: " . $e->getMessage());
         }
     }
-    
+
     /**
      * Get table structure
      */
     private function getTableStructure(string $tableName): array
     {
         $structure = [];
-        
+
         try {
             // Get column information
             $stmt = $this->pdo->query("DESCRIBE `{$tableName}`");
             $columns = $stmt->fetchAll();
-            
+
             foreach ($columns as $column) {
                 $structure['columns'][] = [
                     'name' => $column['Field'],
@@ -129,11 +129,11 @@ class DatabaseStructureAnalyzer
                     'extra' => $column['Extra']
                 ];
             }
-            
+
             // Get indexes
             $stmt = $this->pdo->query("SHOW INDEX FROM `{$tableName}`");
             $indexes = $stmt->fetchAll();
-            
+
             foreach ($indexes as $index) {
                 $structure['indexes'][] = [
                     'name' => $index['Key_name'],
@@ -142,68 +142,68 @@ class DatabaseStructureAnalyzer
                     'type' => $index['Index_type']
                 ];
             }
-            
+
             // Get row count
             $stmt = $this->pdo->query("SELECT COUNT(*) as count FROM `{$tableName}`");
             $result = $stmt->fetch();
             $structure['row_count'] = $result['count'];
-            
+
         } catch (PDOException $e) {
             $this->errors[] = "Error getting structure for table {$tableName}: " . $e->getMessage();
             $structure = ['error' => $e->getMessage()];
         }
-        
+
         return $structure;
     }
-    
+
     /**
      * Analyze migration files
      */
     private function analyzeMigrationFiles(): void
     {
         echo "📋 Analyzing migration files...\n";
-        
+
         $migrationPath = APP_ROOT . DS . 'database' . DS . 'migrations';
-        
+
         if (!is_dir($migrationPath)) {
             $this->errors[] = "Migration directory not found: {$migrationPath}";
             return;
         }
-        
+
         $migrationFiles = glob($migrationPath . DS . '*.php');
-        
+
         foreach ($migrationFiles as $file) {
             echo "  - Analyzing migration: " . basename($file) . "\n";
             $this->analyzeMigrationFile($file);
         }
-        
+
         echo "✅ Analyzed " . count($migrationFiles) . " migration files\n\n";
     }
-    
+
     /**
      * Analyze individual migration file
      */
     private function analyzeMigrationFile(string $filePath): void
     {
         $content = file_get_contents($filePath);
-        
+
         // Extract CREATE TABLE statements
         preg_match_all('/CREATE TABLE (\w+) \(([^)]*)\)/i', $content, $createMatches);
-        
+
         for ($i = 0; $i < count($createMatches[1]); $i++) {
             $tableName = $createMatches[1][$i];
             $tableDefinition = $createMatches[2][$i];
-            
+
             $this->migrationTables[$tableName] = [
                 'action' => 'create',
                 'definition' => $tableDefinition,
                 'file' => basename($filePath)
             ];
         }
-        
+
         // Extract DROP TABLE statements
         preg_match_all('/DROP TABLE ([^;]+);/i', $content, $dropMatches);
-        
+
         foreach ($dropMatches[1] as $tableName) {
             $tableName = trim($tableName);
             $this->migrationTables[$tableName] = [
@@ -212,20 +212,20 @@ class DatabaseStructureAnalyzer
             ];
         }
     }
-    
+
     /**
      * Compare local and migration structures
      */
     private function compareStructures(): void
     {
         echo "🔄 Comparing local database with migration expectations...\n";
-        
+
         $localTableNames = array_keys($this->localTables);
         $migrationTableNames = array_keys($this->migrationTables);
-        
+
         // Tables that exist locally but not in migrations
         $extraLocalTables = array_diff($localTableNames, $migrationTableNames);
-        
+
         // Tables that should exist after migrations but don't exist locally
         $missingLocalTables = [];
         foreach ($this->migrationTables as $tableName => $info) {
@@ -233,7 +233,7 @@ class DatabaseStructureAnalyzer
                 $missingLocalTables[] = $tableName;
             }
         }
-        
+
         // Tables that should be dropped
         $tablesToDrop = [];
         foreach ($this->migrationTables as $tableName => $info) {
@@ -241,24 +241,24 @@ class DatabaseStructureAnalyzer
                 $tablesToDrop[] = $tableName;
             }
         }
-        
+
         echo "  - Local tables not in migrations: " . count($extraLocalTables) . "\n";
         echo "  - Tables to be created: " . count($missingLocalTables) . "\n";
         echo "  - Tables to be dropped: " . count($tablesToDrop) . "\n\n";
-        
+
         // Store results for recommendations
         $this->recommendations['extra_local'] = $extraLocalTables;
         $this->recommendations['missing_local'] = $missingLocalTables;
         $this->recommendations['to_drop'] = $tablesToDrop;
     }
-    
+
     /**
      * Generate recommendations
      */
     private function generateRecommendations(): void
     {
         echo "💡 Generating recommendations...\n\n";
-        
+
         // Recommendations for extra local tables
         if (!empty($this->recommendations['extra_local'])) {
             echo "⚠️  Tables exist locally but not in migrations:\n";
@@ -267,7 +267,7 @@ class DatabaseStructureAnalyzer
             }
             echo "  → These tables may need to be included in migrations if they're needed remotely\n\n";
         }
-        
+
         // Recommendations for missing local tables
         if (!empty($this->recommendations['missing_local'])) {
             echo "📋 Tables that will be created by migrations:\n";
@@ -277,7 +277,7 @@ class DatabaseStructureAnalyzer
             }
             echo "  → These tables will be created when migrations are run on the remote database\n\n";
         }
-        
+
         // Recommendations for tables to drop
         if (!empty($this->recommendations['to_drop'])) {
             echo "🗑️  Tables that will be dropped by migrations:\n";
@@ -288,7 +288,7 @@ class DatabaseStructureAnalyzer
             echo "  → ⚠️  WARNING: These tables and their data will be lost when migrations run!\n\n";
         }
     }
-    
+
     /**
      * Display detailed results
      */
@@ -297,7 +297,7 @@ class DatabaseStructureAnalyzer
         echo str_repeat("=", 70) . "\n";
         echo "📊 DATABASE STRUCTURE ANALYSIS REPORT\n";
         echo str_repeat("=", 70) . "\n\n";
-        
+
         // Local database summary
         echo "🏠 LOCAL DATABASE STRUCTURE:\n";
         echo "  Database: renaltales\n";
@@ -308,14 +308,14 @@ class DatabaseStructureAnalyzer
             echo "    - {$tableName}: {$columnCount} columns, {$rowCount} rows\n";
         }
         echo "\n";
-        
+
         // Migration analysis
         echo "📋 MIGRATION ANALYSIS:\n";
         echo "  Migration files analyzed: " . count(glob(APP_ROOT . DS . 'database' . DS . 'migrations' . DS . '*.php')) . "\n";
         echo "  Tables to create: " . count($this->recommendations['missing_local']) . "\n";
         echo "  Tables to drop: " . count($this->recommendations['to_drop']) . "\n";
         echo "\n";
-        
+
         // Critical warnings
         if (!empty($this->recommendations['to_drop'])) {
             echo "⚠️  CRITICAL WARNINGS:\n";
@@ -324,7 +324,7 @@ class DatabaseStructureAnalyzer
             echo "  - Tables to be dropped: " . implode(', ', $this->recommendations['to_drop']) . "\n";
             echo "\n";
         }
-        
+
         // Safe operation recommendations
         echo "✅ SAFE OPERATION RECOMMENDATIONS:\n";
         echo "  1. Create backup of remote database before running migrations\n";
@@ -332,7 +332,7 @@ class DatabaseStructureAnalyzer
         echo "  3. Review migration files to ensure they match your intentions\n";
         echo "  4. Consider creating separate migrations for new tables only\n";
         echo "\n";
-        
+
         // Next steps
         echo "🚀 NEXT STEPS:\n";
         echo "  1. Connect to remote database and run: SHOW TABLES;\n";
@@ -340,7 +340,7 @@ class DatabaseStructureAnalyzer
         echo "  3. Create focused migrations for missing tables only\n";
         echo "  4. Run migrations carefully with proper backups\n";
         echo "\n";
-        
+
         // Display any errors
         if (!empty($this->errors)) {
             echo "❌ ERRORS ENCOUNTERED:\n";
@@ -349,7 +349,7 @@ class DatabaseStructureAnalyzer
             }
             echo "\n";
         }
-        
+
         echo "Analysis completed at: " . date('Y-m-d H:i:s') . "\n";
     }
 }

@@ -3,14 +3,14 @@
 
 /**
  * Enhanced Language Switcher Component with Accessibility Features
- * 
+ *
  * Features:
  * - ARIA labels and descriptions for screen readers
  * - Keyboard navigation support
  * - Loading states and visual feedback
  * - Mobile-responsive design
  * - RTL language support
- * 
+ *
  * Usage: include this file and pass $currentLanguage and $availableLanguages
  * Example: include 'resources/views/components/language-switcher-enhanced.php';
  *
@@ -20,14 +20,22 @@
  * @var bool $showFlags Whether to display flag icons
  */
 
-if (!isset($currentLanguage)) $currentLanguage = 'en';
-if (!isset($supportedLanguages)) $supportedLanguages = [
-    'en' => 'English',
-    'sk' => 'Slovak',  
-    'la' => 'Latin',
-];
-if (!isset($languageLabel)) $languageLabel = 'Language';
-if (!isset($showFlags)) $showFlags = true;
+if (!isset($currentLanguage)) {
+    $currentLanguage = 'en';
+}
+if (!isset($supportedLanguages)) {
+    $supportedLanguages = [
+        'en' => 'English',
+        'sk' => 'Slovak',
+        'la' => 'Latin',
+    ];
+}
+if (!isset($languageLabel)) {
+    $languageLabel = 'Language';
+}
+if (!isset($showFlags)) {
+    $showFlags = true;
+}
 
 // Get current language name
 $currentLanguageName = $supportedLanguages[$currentLanguage] ?? 'English';
@@ -35,7 +43,7 @@ $currentLanguageName = $supportedLanguages[$currentLanguage] ?? 'English';
 // Flag mapping for supported languages
 $flags = [
     'en' => '🇺🇸',
-    'sk' => '🇸🇰', 
+    'sk' => '🇸🇰',
     'la' => '⚛️'
 ];
 ?>

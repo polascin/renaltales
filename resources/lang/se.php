@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Betnegat muitalusat',
     'welcome' => 'Bures boahtin',

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'د پښتورګو کیسې',
     'welcome' => 'ښه راغلاست',

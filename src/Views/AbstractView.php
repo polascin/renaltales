@@ -369,4 +369,3 @@ abstract class AbstractView implements ViewInterface
 HTML;
     }
 }
-

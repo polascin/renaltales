@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Switch Language API
  * Allows manual switching of language via URL parameter
@@ -27,32 +28,32 @@ try {
         throw new Exception('No language specified');
     }
 
-$languageModel = new LanguageModel();
-    
-if ($languageModel->isSupported($lang)) {
-$result = $languageModel->setLanguage($lang);
+    $languageModel = new LanguageModel();
+
+    if ($languageModel->isSupported($lang)) {
+        $result = $languageModel->setLanguage($lang);
         if ($result) {
             // Get updated language information
-$currentLanguage = $languageModel->getCurrentLanguage();
-$flag = $languageModel->getFlagCode($currentLanguage);
-            
+            $currentLanguage = $languageModel->getCurrentLanguage();
+            $flag = $languageModel->getFlagCode($currentLanguage);
+
             // Get session information
             $sessionInfo = [
                 'language' => $_SESSION['language'] ?? 'not set',
                 'session_id' => session_id(),
                 'started' => isset($_SESSION['language_set_time']) ? date('Y-m-d H:i:s', $_SESSION['language_set_time']) : 'not set'
             ];
-            
+
             // Get cookie information
             $cookieInfo = [
                 'language' => $_COOKIE['language'] ?? 'not set',
                 'expires' => isset($_COOKIE['language']) ? 'set (30 days)' : 'not set'
             ];
-            
+
             // Get browser detection info
             $browserHeaders = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'not available';
             $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'not available';
-            
+
             $response = [
                 'success' => true,
                 'language' => $currentLanguage,
@@ -99,4 +100,3 @@ $flag = $languageModel->getFlagCode($currentLanguage);
         'timestamp' => date('Y-m-d H:i:s')
     ]);
 }
-?>

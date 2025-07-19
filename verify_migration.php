@@ -44,7 +44,7 @@ try {
     echo "2. Checking if languages table exists...\n";
     $schemaManager = $connection->createSchemaManager();
     $tables = $schemaManager->listTableNames();
-    
+
     if (in_array('languages', $tables)) {
         echo "   ✓ Languages table exists\n\n";
     } else {
@@ -56,13 +56,13 @@ try {
     // Check table structure
     echo "3. Checking table structure...\n";
     $columns = $schemaManager->listTableColumns('languages');
-    
+
     $expectedColumns = ['id', 'code', 'name', 'native_name', 'region', 'enabled', 'created_at', 'updated_at'];
     $actualColumns = array_keys($columns);
-    
+
     echo "   Expected columns: " . implode(', ', $expectedColumns) . "\n";
     echo "   Actual columns: " . implode(', ', $actualColumns) . "\n";
-    
+
     $missingColumns = array_diff($expectedColumns, $actualColumns);
     if (empty($missingColumns)) {
         echo "   ✓ All expected columns present\n\n";
@@ -75,11 +75,11 @@ try {
     $stmt = $connection->prepare("SELECT * FROM languages LIMIT 5");
     $result = $stmt->executeQuery();
     $languages = $result->fetchAllAssociative();
-    
+
     if (!empty($languages)) {
         echo "   ✓ Data retrieved successfully\n";
         echo "   Found " . count($languages) . " records\n\n";
-        
+
         echo "   Sample records:\n";
         foreach ($languages as $i => $language) {
             echo "   Record " . ($i + 1) . ":\n";
@@ -97,7 +97,7 @@ try {
     $countStmt = $connection->prepare("SELECT COUNT(*) as total FROM languages");
     $countResult = $countStmt->executeQuery();
     $totalCount = $countResult->fetchAssociative()['total'];
-    
+
     echo "   Total records in languages table: $totalCount\n\n";
 
     // Check if data looks correct (basic validation)
@@ -106,17 +106,17 @@ try {
         $validationStmt = $connection->prepare("SELECT COUNT(*) as enabled_count FROM languages WHERE enabled = 1");
         $validationResult = $validationStmt->executeQuery();
         $enabledCount = $validationResult->fetchAssociative()['enabled_count'];
-        
+
         echo "   Enabled languages: $enabledCount\n";
         echo "   Disabled languages: " . ($totalCount - $enabledCount) . "\n";
-        
+
         // Check for required languages
         $requiredLanguages = ['en', 'sk', 'cs'];
         foreach ($requiredLanguages as $code) {
             $checkStmt = $connection->prepare("SELECT COUNT(*) as count FROM languages WHERE code = ?");
             $checkResult = $checkStmt->executeQuery([$code]);
             $count = $checkResult->fetchAssociative()['count'];
-            
+
             if ($count > 0) {
                 echo "   ✓ Required language '$code' found\n";
             } else {

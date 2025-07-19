@@ -1,7 +1,7 @@
 <?php
 /**
  * Footer Partial Component
- * 
+ *
  * Simple footer template partial
  */
 ?>

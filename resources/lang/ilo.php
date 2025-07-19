@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Dagiti Estoria ti Bekkel',
     'welcome' => 'Nawadwad nga isasangpet',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Report ti bug',
     'feature_request' => 'Kiddaw ti feature'
 ];
-?>

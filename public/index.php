@@ -40,28 +40,28 @@ require_once APP_DIR . DS . 'bootstrap.php';
 ob_start();
 
 try {
-  // Initialize and bootstrap the application
-  $app = new \RenalTales\Core\Application();
-  $app->bootstrap();
-  $app->run();
+    // Initialize and bootstrap the application
+    $app = new \RenalTales\Core\Application();
+    $app->bootstrap();
+    $app->run();
 } catch (\Throwable $e) {
-  // Clean any buffered output before showing error
-  if (ob_get_level()) {
-    ob_end_clean();
-  }
+    // Clean any buffered output before showing error
+    if (ob_get_level()) {
+        ob_end_clean();
+    }
 
-  error_log('Error in index.php: ' . $e->getMessage());
+    error_log('Error in index.php: ' . $e->getMessage());
 
-  // Try to get language service if application was initialized
-  $languageService = null;
-  if (isset($app) && $app->isBootstrapped()) {
-    $languageService = $app->get(\RenalTales\Services\LanguageService::class);
-  }
+    // Try to get language service if application was initialized
+    $languageService = null;
+    if (isset($app) && $app->isBootstrapped()) {
+        $languageService = $app->get(\RenalTales\Services\LanguageService::class);
+    }
 
-  // Get debug mode from environment or constant
-  $debugMode = filter_var($_ENV['APP_DEBUG'] ?? APP_DEBUG ?? false, FILTER_VALIDATE_BOOLEAN);
+    // Get debug mode from environment or constant
+    $debugMode = filter_var($_ENV['APP_DEBUG'] ?? APP_DEBUG ?? false, FILTER_VALIDATE_BOOLEAN);
 
-  $errorView = new \RenalTales\Views\ErrorView($e, $debugMode, $languageService);
-  echo $errorView->render();
-  exit;
+    $errorView = new \RenalTales\Views\ErrorView($e, $debugMode, $languageService);
+    echo $errorView->render();
+    exit;
 }

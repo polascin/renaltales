@@ -60,11 +60,11 @@ class DatabaseContext implements Context
     {
         $schemaTool = new SchemaTool($this->entityManager);
         $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
-        
+
         // Drop existing schema and create new one
         $schemaTool->dropSchema($metadata);
         $schemaTool->createSchema($metadata);
-        
+
         // Seed basic data
         $this->seedBasicData();
     }
@@ -95,7 +95,7 @@ class DatabaseContext implements Context
             $language->setNativeName($langData[2]);
             $language->setIsDefault($langData[3]);
             $language->setIsActive(true);
-            
+
             $this->entityManager->persist($language);
         }
 
@@ -108,7 +108,7 @@ class DatabaseContext implements Context
     public function thereAreLanguagesInTheDatabase(): void
     {
         $languages = $this->entityManager->getRepository(Language::class)->findAll();
-        
+
         if (empty($languages)) {
             throw new \Exception('No languages found in database');
         }
@@ -120,7 +120,7 @@ class DatabaseContext implements Context
     public function thereIsALanguageWithCode(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if (!$language) {
             throw new \Exception("Language with code '$code' not found");
         }
@@ -132,7 +132,7 @@ class DatabaseContext implements Context
     public function thereIsNoLanguageWithCode(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if ($language) {
             throw new \Exception("Language with code '$code' should not exist");
         }
@@ -149,7 +149,7 @@ class DatabaseContext implements Context
         $language->setNativeName($name);
         $language->setIsDefault(false);
         $language->setIsActive(true);
-        
+
         $this->entityManager->persist($language);
         $this->entityManager->flush();
     }
@@ -160,7 +160,7 @@ class DatabaseContext implements Context
     public function iDeleteTheLanguageWithCode(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if ($language) {
             $this->entityManager->remove($language);
             $this->entityManager->flush();
@@ -173,7 +173,7 @@ class DatabaseContext implements Context
     public function theLanguageWithCodeShouldExist(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if (!$language) {
             throw new \Exception("Language with code '$code' should exist");
         }
@@ -185,7 +185,7 @@ class DatabaseContext implements Context
     public function theLanguageWithCodeShouldNotExist(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if ($language) {
             throw new \Exception("Language with code '$code' should not exist");
         }
@@ -197,7 +197,7 @@ class DatabaseContext implements Context
     public function thereShouldBeLanguagesInTheDatabase(int $count): void
     {
         $actualCount = $this->entityManager->getRepository(Language::class)->count([]);
-        
+
         if ($actualCount !== $count) {
             throw new \Exception("Expected $count languages but found $actualCount");
         }
@@ -209,11 +209,11 @@ class DatabaseContext implements Context
     public function theLanguageShouldBeActive(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if (!$language) {
             throw new \Exception("Language with code '$code' not found");
         }
-        
+
         if (!$language->isActive()) {
             throw new \Exception("Language '$code' should be active");
         }
@@ -225,11 +225,11 @@ class DatabaseContext implements Context
     public function theLanguageShouldBeTheDefaultLanguage(string $code): void
     {
         $language = $this->entityManager->getRepository(Language::class)->findOneBy(['code' => $code]);
-        
+
         if (!$language) {
             throw new \Exception("Language with code '$code' not found");
         }
-        
+
         if (!$language->isDefault()) {
             throw new \Exception("Language '$code' should be the default language");
         }

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Crita Ginjel',
     'welcome' => 'Sugeng rawuh',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Laporan bug',
     'feature_request' => 'Panjaluk fitur'
 ];
-?>

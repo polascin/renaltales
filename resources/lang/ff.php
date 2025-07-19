@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Taali Kollaaji',
     'welcome' => 'Jaraama',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Haalugo juumre',
     'feature_request' => 'Ɗaɓɓitaare hesere'
 ];
-?>

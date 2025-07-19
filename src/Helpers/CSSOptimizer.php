@@ -6,14 +6,14 @@ namespace RenalTales\Helpers;
 
 /**
  * CSS Optimizer Helper
- * 
+ *
  * Advanced CSS loading optimization with:
  * - Critical CSS inlining
  * - Lazy loading of non-critical styles
  * - CSS containment
  * - Resource hints
  * - Performance monitoring
- * 
+ *
  * @package RenalTales\Helpers
  * @author Ľubomír Polaščín
  */
@@ -43,7 +43,7 @@ class CSSOptimizer
     public static function getCriticalCSS(string $page = 'default'): string
     {
         self::initialize();
-        
+
         if (isset(self::$criticalCSS[$page])) {
             return self::$criticalCSS[$page];
         }
@@ -63,27 +63,27 @@ class CSSOptimizer
     public static function generateCSSLinks(array $stylesheets, string $page = 'default'): string
     {
         self::initialize();
-        
+
         $html = '';
         $timestamp = self::getTimestamp();
-        
+
         // Add preload hints for critical resources
         $html .= self::generatePreloadHints($stylesheets, $timestamp);
-        
+
         // Inline critical CSS
         $criticalCSS = self::getCriticalCSS($page);
         if (!empty($criticalCSS)) {
             $html .= '<style id="critical-css">' . $criticalCSS . '</style>' . PHP_EOL;
         }
-        
+
         // Generate optimized CSS links
         foreach ($stylesheets as $stylesheet) {
             $html .= self::generateOptimizedLink($stylesheet, $timestamp);
         }
-        
+
         // Add lazy loading script
         $html .= self::generateLazyLoadScript();
-        
+
         return $html;
     }
 
@@ -93,10 +93,10 @@ class CSSOptimizer
     private static function generatePreloadHints(array $stylesheets, string $timestamp): string
     {
         $html = '';
-        
+
         // Preload critical stylesheets
         $criticalSheets = ['reset.css', 'variables.css', 'core.css'];
-        
+
         foreach ($criticalSheets as $sheet) {
             if (in_array($sheet, $stylesheets)) {
                 $html .= sprintf(
@@ -107,11 +107,11 @@ class CSSOptimizer
                 );
             }
         }
-        
+
         // Preconnect to external resources
         $html .= '<link rel="preconnect" href="https://fonts.googleapis.com">' . PHP_EOL;
         $html .= '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . PHP_EOL;
-        
+
         return $html;
     }
 
@@ -122,25 +122,25 @@ class CSSOptimizer
     {
         $optimizedPath = self::getOptimizedPath($stylesheet);
         $isCritical = self::isCritical($stylesheet);
-        
+
         // Use optimized version in production
         if (self::$isProduction && file_exists($optimizedPath)) {
             $path = str_replace(getcwd(), '', $optimizedPath);
         } else {
             $path = "/assets/css/{$stylesheet}";
         }
-        
+
         $attributes = [
             'rel' => 'stylesheet',
             'href' => "{$path}?v={$timestamp}"
         ];
-        
+
         // Add CSS containment for better performance
         if (!$isCritical) {
             $attributes['media'] = 'print';
             $attributes['onload'] = "this.media='all'";
         }
-        
+
         // Add integrity check in production
         if (self::$isProduction) {
             $integrity = self::getIntegrity($optimizedPath);
@@ -149,7 +149,7 @@ class CSSOptimizer
                 $attributes['crossorigin'] = 'anonymous';
             }
         }
-        
+
         return self::buildLinkTag($attributes);
     }
 
@@ -191,7 +191,7 @@ class CSSOptimizer
                 return trim(file_get_contents($buildFile));
             }
         }
-        
+
         return (string) time();
     }
 
@@ -203,7 +203,7 @@ class CSSOptimizer
         if (!file_exists($filePath)) {
             return null;
         }
-        
+
         $content = file_get_contents($filePath);
         return 'sha384-' . base64_encode(hash('sha384', $content, true));
     }
@@ -217,7 +217,7 @@ class CSSOptimizer
         foreach ($attributes as $key => $value) {
             $attrStrings[] = sprintf('%s="%s"', $key, htmlspecialchars($value, ENT_QUOTES));
         }
-        
+
         return sprintf('<link %s>%s', implode(' ', $attrStrings), PHP_EOL);
     }
 
@@ -393,7 +393,7 @@ HTML;
     {
         self::$criticalCSS = [];
         self::$loadedStyles = [];
-        
+
         // Clear compiled CSS files
         $distDir = getcwd() . '/public/assets/css/dist';
         if (is_dir($distDir)) {
@@ -417,13 +417,12 @@ HTML;
             'stylesheets_loaded' => count(self::$loadedStyles),
             'cache_size' => 0
         ];
-        
+
         // Calculate cache size
         foreach (self::$criticalCSS as $css) {
             $stats['cache_size'] += strlen($css);
         }
-        
+
         return $stats;
     }
 }
-

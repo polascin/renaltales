@@ -15,40 +15,42 @@
 $envFile = APP_ROOT . DS . '.env';
 
 if (file_exists($envFile)) {
-  // Manual parsing of .env file - reliable and works in all environments
-  $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-  foreach ($lines as $line) {
-    $line = trim($line);
-    if (empty($line) || strpos($line, '#') === 0) continue;
+    // Manual parsing of .env file - reliable and works in all environments
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (empty($line) || strpos($line, '#') === 0) {
+            continue;
+        }
 
-    if (strpos($line, '=') !== false) {
-      list($key, $value) = explode('=', $line, 2);
-      $key = trim($key);
-      $value = trim($value, "\"' ");
-      $_ENV[$key] = $value;
-      putenv("$key=$value");
+        if (strpos($line, '=') !== false) {
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value, "\"' ");
+            $_ENV[$key] = $value;
+            putenv("$key=$value");
+        }
     }
-  }
 } else {
-  // Create basic environment if no .env file exists
-  $_ENV['APP_ENV'] = 'development';
-  $_ENV['APP_DEBUG'] = 'true';
+    // Create basic environment if no .env file exists
+    $_ENV['APP_ENV'] = 'development';
+    $_ENV['APP_DEBUG'] = 'true';
 
-  // Set putenv for backward compatibility
-  foreach ($_ENV as $key => $value) {
-    putenv("$key=$value");
-  }
+    // Set putenv for backward compatibility
+    foreach ($_ENV as $key => $value) {
+        putenv("$key=$value");
+    }
 }
 
 // Set up error reporting based on environment
 if (filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN)) {
-  // In debug mode, show all errors except deprecation warnings
-  // (deprecation warnings from vendor libraries can be noisy)
-  error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
-  ini_set('display_errors', 1);
+    // In debug mode, show all errors except deprecation warnings
+    // (deprecation warnings from vendor libraries can be noisy)
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+    ini_set('display_errors', 1);
 } else {
-  error_reporting(0);
-  ini_set('display_errors', 0);
+    error_reporting(0);
+    ini_set('display_errors', 0);
 }
 
 // Set timezone
@@ -58,7 +60,7 @@ date_default_timezone_set($_ENV['APP_TIMEZONE'] ?? 'UTC');
 $logPath = APP_ROOT . DS . (isset($_ENV['LOG_PATH']) && $_ENV['LOG_PATH'] ? $_ENV['LOG_PATH'] : 'storage/logs/app.log');
 $logDir = dirname($logPath);
 if (!is_dir($logDir)) {
-  mkdir($logDir, 0755, true);
+    mkdir($logDir, 0755, true);
 }
 /**
  * Simple file logger
@@ -66,14 +68,15 @@ if (!is_dir($logDir)) {
  * @param string $message
  * @param array $context
  */
-function app_log($message, $context = []) {
-  global $logPath;
-  $date = date('Y-m-d H:i:s');
-  $ctx = $context ? ' | ' . json_encode($context) : '';
-  file_put_contents($logPath, "[$date] $message$ctx\n", FILE_APPEND);
+function app_log($message, $context = [])
+{
+    global $logPath;
+    $date = date('Y-m-d H:i:s');
+    $ctx = $context ? ' | ' . json_encode($context) : '';
+    file_put_contents($logPath, "[$date] $message$ctx\n", FILE_APPEND);
 }
 $GLOBALS['logger'] = function ($msg, $ctx = []) {
-  app_log($msg, $ctx);
+    app_log($msg, $ctx);
 };
 
 // Basic configuration array
@@ -118,7 +121,7 @@ use RenalTales\Helpers\Translation;
 
 // Start session if not already started for language detection (only if headers not sent)
 if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-  session_start();
+    session_start();
 }
 
 $translation = new Translation();

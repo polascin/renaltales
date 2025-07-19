@@ -34,7 +34,7 @@ final class Version20250717130515 extends AbstractMigration
             sortOrder INT NOT NULL,
             PRIMARY KEY (id)
         ) DEFAULT CHARACTER SET utf8mb4 ENGINE = InnoDB');
-        
+
         // Add indexes separately to avoid potential issues
         $this->addSql('CREATE UNIQUE INDEX languages_code_unique ON languages (code)');
         $this->addSql('CREATE INDEX languages_active_idx ON languages (active)');

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Istorgias dal ravnels',
     'welcome' => 'Bainvegni',

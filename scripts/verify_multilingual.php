@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Final Verification Script for Multilingual Environment
  * Demonstrates working language system with priority ordering
@@ -21,12 +22,13 @@ for ($i = 0; $i < min(15, count($languages)); $i++) {
     $name = $detector->getLanguageName($lang);
     $flag = $detector->getFlagCode($lang);
     $direction = $detector->getDirection($lang);
-    
-    printf("%2d. %-6s %-20s [%s] %s\n", 
-        $i + 1, 
-        $lang, 
-        $name, 
-        $flag, 
+
+    printf(
+        "%2d. %-6s %-20s [%s] %s\n",
+        $i + 1,
+        $lang,
+        $name,
+        $flag,
         $direction === 'rtl' ? '(RTL)' : ''
     );
 }
@@ -70,7 +72,7 @@ foreach ($rtlLanguages as $lang) {
     $isRTL = $detector->isRTL($lang);
     $direction = $detector->getDirection($lang);
     $flag = $detector->getFlagCode($lang);
-    
+
     echo "$lang ($name): RTL=" . ($isRTL ? 'YES' : 'NO') . ", direction=$direction, flag=$flag\n";
 }
 
@@ -84,7 +86,7 @@ foreach ($coreEuropean as $lang) {
     $name = $detector->getLanguageName($lang);
     $flag = $detector->getFlagCode($lang);
     $position = array_search($lang, $languages) + 1;
-    
+
     echo sprintf("%-6s %-20s [%s] Position: %2d\n", $lang, $name, $flag, $position);
 }
 

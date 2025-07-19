@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Apytu\'u rembiasakue',
     'welcome' => 'Tereg̃uahẽporãite',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Jejavy marandu',
     'feature_request' => 'Mba\'e pyahu jerure'
 ];
-?>

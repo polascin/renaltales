@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Nkhani za Impsyo',
     'welcome' => 'Takulandirani',

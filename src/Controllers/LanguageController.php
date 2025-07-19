@@ -207,7 +207,7 @@ class LanguageController
 
         // Switch language
         $result = $this->switch($language);
-        
+
         if ($result['success']) {
             echo json_encode($result);
         } else {
@@ -246,7 +246,7 @@ class LanguageController
     {
         try {
             $this->translation->clearPreferences($defaultLanguage);
-            
+
             return [
                 'success' => true,
                 'message' => 'Language preferences reset successfully',
@@ -273,7 +273,7 @@ class LanguageController
         $languageNames = [
             'en' => 'English',
             'sk' => 'Slovenčina',
-            'cs' => 'Čeština', 
+            'cs' => 'Čeština',
             'de' => 'Deutsch',
             'fr' => 'Français',
             'es' => 'Español',

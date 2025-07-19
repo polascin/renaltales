@@ -1,4 +1,5 @@
 <?php
+
 return [
     // ===============================
     // 1. APPLICATION METADATA
@@ -396,11 +397,10 @@ return [
     'day_saturday' => 'Samedi',
     'day_sunday' => 'Dimanche',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Time and date display
     'day' => 'Jour',
     'year' => 'Année',
     'week' => 'Semaine',
     'today_is' => 'Aujourd\'hui c\'est',
 ];
-?>

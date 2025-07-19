@@ -1,7 +1,8 @@
-﻿<?php
+<?php
+
 /**
  * Tigrinya language file for Renal Tales
- * 
+ *
  * @author Ľubomír Polaščín
  * @version 2025.v1.0test
  */
@@ -29,7 +30,7 @@ return [
     'disabled' => 'ተዓጽዩ',
     'available' => 'ርክብ',
     'not_available' => 'ዘይርከብ',
-    
+
     // Error messages
     'application_error' => 'ናይ መተግበሪ ጌጋ',
     'service_unavailable' => 'ግልጋሎት ሃንደበት ዘይርከብ',
@@ -42,7 +43,7 @@ return [
     'debug_not_allowed' => 'ናይ ምድራዝ ሓበሬታ ብምኽንያት ጸጥታ ዘይርከብ።',
     'access_denied' => 'መኣከቢ ተኸልኪሉ',
     'security_violation' => 'ናይ ጸጥታ ምጥሓስ ተረኺቡ። መወዳእታ ተዓጺዩ።',
-    
+
     // Session management
     'session_init_failed' => 'ናይ መወዳእታ ማኔጀር ምጅማር ሃሊዩ',
     'session_name_failed' => 'ናይ መወዳእታ ስም ምምራጽ ሃሊዩ',
@@ -84,7 +85,7 @@ return [
     'session_log_dir_create_failed' => 'ናይ ሎግ ዶሴ ምፍጣር ሃሊዩ',
     'session_security_log_failed' => 'ናይ ጸጥታ ምጥሓስ ሎግ ምጽሓፍ ሃሊዩ',
     'session_security_log_injection_failed' => 'ናይ ጸጥታ ሎግ ምጽሓፍ ሃሊዩ',
-    
+
     // Security messages
     'security_violation_detected' => 'ናይ ጸጥታ ምጥሓስ ተረኺቡ። መወዳእታ ተዓጺዩ።',
     'security_user_agent_mismatch' => 'ናይ ተጠቃሚ ወኪል ዘይተዛመድ',
@@ -93,7 +94,7 @@ return [
     'security_hijacking_attempt' => 'ናይ መወዳእታ ምዝላፍ ፈተነ ተረኺቡ',
     'security_invalid_token' => 'ዘይሓቂ ናይ ጸጥታ ማህተም',
     'security_token_expired' => 'ናይ ጸጥታ ማህተም ዝወደቐ',
-    
+
     // Server information
     'server_information' => 'ናይ ሰርቨር ሓበሬታ',
     'application_information' => 'ናይ መተግበሪ ሓበሬታ',
@@ -112,14 +113,14 @@ return [
     'current_language_file' => 'ናይ ሕጂ ቋንቋ ፋይል',
     'current_language_flag' => 'ናይ ሕጂ ቋንቋ ባንደራ',
     'current_language_flag_alt' => 'ናይ ሕጂ ቋንቋ ባንደራ',
-    
+
     // Date and time
     'datetime_placeholder' => 'ኣብዚ ዕለት፣ ግዜ፣ ከምኡውን ዝርዝር ናይ ኢንተርነት ግዜ @beat ክረአዩ እዮም።',
     'debug_mode_enabled' => 'ናይ ምድራዝ ኩነታት ተኸዒሉ።',
     'service_information' => 'ናይ ግልጋሎት ሓበሬታ',
     'user_information' => 'ናይ ተጠቃሚ ሓበሬታ:',
     'footer_copyright' => 'Ľubomír Polaščín',
-    
+
     // Cookie and session parameters
     'cookie_lifetime' => 'ህይወት',
     'cookie_path' => 'መስመር',
@@ -127,7 +128,7 @@ return [
     'cookie_secure' => 'ዕቱብ',
     'cookie_httponly' => 'HTTP ጥራይ',
     'cookie_samesite' => 'ሓደ ሳይት',
-    
+
     // Log messages
     'log_entry_timestamp' => 'ናይ ግዜ ማህተም',
     'log_entry_ip' => 'ናይ IP ኣድራሻ',
@@ -135,7 +136,7 @@ return [
     'log_entry_session_id' => 'ናይ መወዳእታ መለለዪ',
     'log_entry_reason' => 'ምኽንያት',
     'log_entry_request_uri' => 'ናይ ጥያቐ URI',
-    
+
     // User interface
     'welcome_user' => 'እንቋዕ ብደሓን መጻእኩም',
     'user' => 'ተጠቃሚ',
@@ -154,7 +155,7 @@ return [
     'profile' => 'መገልጺ',
     'settings' => 'ተዋሕሶታት',
     'register' => 'ተመዝገብ',
-    
+
     // Content sections
     'important_notes' => 'ኣገዳስቲ ማስታወሻታት',
     'about_renal_tales' => 'ብዛዕባ ናይ ኩላሊት ዛንታታት',
@@ -168,7 +169,7 @@ return [
     'getting_started_description' => 'ኣብ ማሕበረሰብና ሓደስቲ ዲኹም? ካብ ገለ ዛንታታት ምንባብ ጀሚርኩም፣ ርእስኹም ኣተዋውዑ፣ ከምኡውን ክትዳለዉ ከለኹም ተመኩሮኹም ምክፋል ኣብ ግምት ኣእትዉ።',
     'support_resources' => 'ናይ ደገፍ ንብረታት',
     'support_description' => 'ቅጽበታዊ ሕክምናዊ ሓገዝ ዘድልየኩም እንተኾይኑ ወይ ድማ ኣብ ጸብሳበር እንተደኣ ኮይንኩም፣ በጃኹም ናይ ሓኪም ኣገልግሎት ወይ ናይ ህጹጽ ኣገልግሎት ተወከስትና ረኸቡ።',
-    
+
     // Home page
     'welcome_home' => 'እንቋዕ ብደሓን ናብ ናይ ኩላሊት ዛንታታት መጻእኩም',
     'home_intro' => 'እንቋዕ ብደሓን ናብ ዘደግፍ ማሕበረሰብና ናይ ብናይ ኩላሊት ሽግራት ዝተጸለዉ ሰባት መጻእኩም። ኣብዚ ዛንታኹም ክትካፈሉ፣ ተመኩሮ ካልኦት ክትንብቡ፣ ከምኡውን ካብ ጉዕዞኹም ዝርዳእ ሰባት ደገፍ ክትረኽቡ ትኽእሉ። ምስ ካልኦት ንምራኻብ፣ ተመኩሮኹም ንምክፋል፣ ከምኡውን ኣብ ማሕበረሰብና ደገፍ ንምርካብ ሰላምታና ተቐበሉ። ብሓባር፣ ብናይ ኩላሊት ሽግራት ዝተጸለዉ ሰባት ህይወት ለውጢ ክንገብር ንኽእል። ናይ ማሕበረሰብና ኣካል ስለዝኾንኩም የቐንየልና!',
@@ -182,7 +183,7 @@ return [
     'join_community' => 'ኣብ ማሕበረሰብ ተሳተፉ',
     'join_community_desc' => 'ምስ ካልኦት ተራኸቡ፣ ኣብ ምሕባራት ተሳተፉ፣ ከምኡውን ዝጸንሕ ዕርክነት ምስረቱ።',
     'explore_community' => 'ማሕበረሰብ ዳስሱ',
-    
+
     // Placeholder content
     'stories_coming_soon' => 'ናይ ዛንታታት ክፋል ብቕርቢ ይመጽእ...',
     'community_coming_soon' => 'ናይ ማሕበረሰብ ክፋል ብቕርቢ ይመጽእ...',
@@ -191,7 +192,7 @@ return [
     'my_stories_coming_soon' => 'ናተይ ዛንታታት ክፋል ብቕርቢ ይመጽእ...',
     'profile_coming_soon' => 'ናይ መገልጺ ክፋል ብቕርቢ ይመጽእ...',
     'settings_coming_soon' => 'ናይ ተዋሕሶታት ክፋል ብቕርቢ ይመጽእ...',
-    
+
     // Login page
     'login_welcome' => 'እንቋዕ ብደሓን ተመለስኩም',
     'login_subtitle' => 'ኣካውንትኩም ንምብጻሕ እተዉ',
@@ -206,23 +207,23 @@ return [
     'sign_up_here' => 'ኣብዚ ተመዝገቡ',
     'back_to_home' => 'ናብ ገዛ ተመለሱ',
     'please_fill_required_fields' => 'በጃኹም ኹሎም ዘድልዩ ዓውድታት ምልኡ።',
-    
+
     // Login validation
     'invalid_csrf_token' => 'ዘይሓቂ ናይ ጸጥታ ማህተም። በጃኹም ደጊምኩም ፈትኑ።',
     'email_required' => 'ኢመይል የድሊ።',
     'email_invalid' => 'በጃኹም ሓቂ ናይ ኢመይል ኣድራሻ ገብሩ።',
     'password_required' => 'ናይ ሚስጢር ቃል የድሊ።',
     'login_failed' => 'ዘይሓቂ ኢመይል ወይ ናይ ሚስጢር ቃል።',
-    
+
     // Language selection
     'language_selection_unavailable' => 'ናይ ቋንቋ ምምራጽ ዘይርከብ',
-    
+
     // Time and date display
     'day' => 'መዓልቲ',
     'year' => 'ዓመት',
     'week' => 'ሰሙን',
     'today_is' => 'ሎሚ እዩ',
-    
+
     // Legacy language management (maintained for compatibility)
     'language_selection' => 'ቋንቋ ምምራጽ',
     'language_change' => 'ቋንቋ ቀይር',
@@ -234,4 +235,3 @@ return [
     'language_switch_success' => 'ቋንቋ ብዓወት ተቀይሩ',
     'language_switch_error' => 'ቋንቋ ክቐየር ከሎ ጌጋ ተፈጺሙ'
 ];
-?>

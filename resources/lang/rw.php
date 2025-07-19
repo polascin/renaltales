@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Inkuru z\'Impyiko',
     'welcome' => 'Murakaza neza',

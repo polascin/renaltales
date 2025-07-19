@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CSS Validation Script
  */
@@ -7,7 +8,8 @@ $errors = 0;
 $warnings = 0;
 $passes = 0;
 
-function checkResult($condition, $passMsg, $failMsg) {
+function checkResult($condition, $passMsg, $failMsg)
+{
     global $errors, $passes;
     if ($condition) {
         echo "✓ $passMsg\n";
@@ -18,7 +20,8 @@ function checkResult($condition, $passMsg, $failMsg) {
     }
 }
 
-function checkWarning($condition, $passMsg, $warnMsg) {
+function checkWarning($condition, $passMsg, $warnMsg)
+{
     global $warnings, $passes;
     if ($condition) {
         echo "✓ $passMsg\n";
@@ -37,7 +40,7 @@ checkResult(file_exists($mainCss), "main.css exists", "main.css not found");
 
 if (file_exists($mainCss)) {
     $content = file_get_contents($mainCss);
-    
+
     // Test 2: Check essential imports
     $requiredImports = [
         'themes.css' => "url('public/assets/css/themes.css')",
@@ -46,7 +49,7 @@ if (file_exists($mainCss)) {
         'typography.css' => "url('core/typography.css')",
         'responsive.css' => "url('public/assets/css/responsive.css')"
     ];
-    
+
     echo "\n--- Testing imports ---\n";
     foreach ($requiredImports as $file => $importPath) {
         checkResult(strpos($content, $importPath) !== false, "$file import found", "$file import missing");
@@ -57,7 +60,7 @@ if (file_exists($mainCss)) {
 echo "\n--- Testing file existence ---\n";
 $cssFiles = [
     'public/assets/css/themes.css',
-    'public/assets/css/basic.css', 
+    'public/assets/css/basic.css',
     'public/assets/css/layout.css',
     'public/assets/css/responsive.css',
     'core/variables.css',
@@ -91,7 +94,7 @@ $themesFile = __DIR__ . '/public/assets/css/themes.css';
 if (file_exists($themesFile)) {
     $content = file_get_contents($themesFile);
     $requiredVars = ['primary-color', 'secondary-color', 'background-color', 'text-color'];
-    
+
     foreach ($requiredVars as $var) {
         checkResult(strpos($content, "--$var") !== false, "Variable --$var found", "Variable --$var missing");
     }
@@ -99,7 +102,7 @@ if (file_exists($themesFile)) {
 
 echo "\n=== SUMMARY ===\n";
 echo "Passes: $passes\n";
-echo "Warnings: $warnings\n"; 
+echo "Warnings: $warnings\n";
 echo "Errors: $errors\n";
 
 if ($errors === 0) {
@@ -107,4 +110,3 @@ if ($errors === 0) {
 } else {
     echo "\n❌ CSS VALIDATION FAILED - Fix $errors errors\n";
 }
-?>

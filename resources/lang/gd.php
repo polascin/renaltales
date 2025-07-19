@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Sgeulachdan nan Dubhagan',
     'welcome' => 'Fàilte',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Aithisg bhuga',
     'feature_request' => 'Iarrtas feart'
 ];
-?>

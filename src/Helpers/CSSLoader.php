@@ -4,7 +4,7 @@ namespace RenalTales\Helpers;
 
 /**
  * CSS Loader Helper
- * 
+ *
  * Provides methods for loading CSS files with cache busting timestamps
  * and managing consolidated CSS assets.
  */
@@ -30,7 +30,7 @@ class CSSLoader
     {
         $filePath = self::ASSETS_PHYSICAL_PATH . $filename;
         $timestamp = file_exists($filePath) ? filemtime($filePath) : time();
-        
+
         return self::ASSETS_BASE_PATH . $filename . '?v=' . $timestamp;
     }
 
@@ -55,11 +55,11 @@ class CSSLoader
     {
         $url = self::getCSSUrl($filename);
         $attrs = '';
-        
+
         foreach ($attributes as $key => $value) {
             $attrs .= ' ' . htmlspecialchars($key) . '="' . htmlspecialchars($value) . '"';
         }
-        
+
         return '<link rel="stylesheet" href="' . htmlspecialchars($url) . '"' . $attrs . '>';
     }
 
@@ -83,10 +83,10 @@ class CSSLoader
     {
         $files = [];
         $cssDir = self::ASSETS_PHYSICAL_PATH;
-        
+
         if (is_dir($cssDir)) {
             $iterator = new \DirectoryIterator($cssDir);
-            
+
             foreach ($iterator as $fileInfo) {
                 if ($fileInfo->isFile() && $fileInfo->getExtension() === 'css') {
                     $filename = $fileInfo->getFilename();
@@ -99,7 +99,7 @@ class CSSLoader
                 }
             }
         }
-        
+
         return $files;
     }
 

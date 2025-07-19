@@ -11,13 +11,19 @@
  * @var string $languageLabel (optional)
  */
 
-if (!isset($currentLanguage)) $currentLanguage = 'en';
-if (!isset($supportedLanguages)) $supportedLanguages = [
-    'en' => 'English',
-    'sk' => 'Slovak',
-    'la' => 'Latin',
-];
-if (!isset($languageLabel)) $languageLabel = 'Language';
+if (!isset($currentLanguage)) {
+    $currentLanguage = 'en';
+}
+if (!isset($supportedLanguages)) {
+    $supportedLanguages = [
+        'en' => 'English',
+        'sk' => 'Slovak',
+        'la' => 'Latin',
+    ];
+}
+if (!isset($languageLabel)) {
+    $languageLabel = 'Language';
+}
 ?>
 <div >
     <div >

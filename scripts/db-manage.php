@@ -59,20 +59,20 @@ try {
     // Initialize application
     $app = new Application();
     $app->bootstrap();
-    
+
     // Get database manager
     $databaseManager = $app->get(DatabaseManager::class);
     $entityManager = $databaseManager->getEntityManager();
-    
+
     // Create dependency factory for migrations
     $dependencyFactory = $databaseManager->createMigrationDependencyFactory();
-    
+
     // Create console application
     $console = new ConsoleApplication('RenalTales Database Manager', '1.0.0');
-    
+
     // Entity Manager Provider for ORM commands
     $entityManagerProvider = new SingleManagerProvider($entityManager);
-    
+
     // Add ORM commands
     $console->addCommands([
         new CreateCommand($entityManagerProvider),
@@ -84,7 +84,7 @@ try {
         new QueryCommand($entityManagerProvider),
         new ResultCommand($entityManagerProvider),
     ]);
-    
+
     // Add Migration commands
     $console->addCommands([
         new DiffCommand($dependencyFactory),
@@ -97,13 +97,13 @@ try {
         new SyncMetadataCommand($dependencyFactory),
         new VersionCommand($dependencyFactory),
     ]);
-    
+
     // Add custom commands
     $console->register('db:test-connection')
         ->setDescription('Test database connection')
         ->setCode(function ($input, $output) use ($databaseManager) {
             $output->writeln('<info>Testing database connection...</info>');
-            
+
             if ($databaseManager->isConnected()) {
                 $output->writeln('<info>✓ Database connection is working!</info>');
                 return 0;
@@ -112,87 +112,87 @@ try {
                 return 1;
             }
         });
-    
+
     $console->register('db:create-database')
         ->setDescription('Create database if it doesn\'t exist')
         ->setCode(function ($input, $output) use ($databaseManager) {
             $output->writeln('<info>Creating database...</info>');
-            
+
             try {
                 $connection = $databaseManager->getConnection();
                 $config = $databaseManager->getConfig();
                 $connectionConfig = $config['connections'][$config['default']] ?? [];
-                
+
                 if (!$connectionConfig) {
                     throw new Exception('Database configuration not found');
                 }
-                
+
                 $dbName = $connectionConfig['dbname'] ?? '';
                 if (!$dbName) {
                     throw new Exception('Database name not configured');
                 }
-                
+
                 // Connect to server without database name
                 $serverConnection = $connectionConfig;
                 unset($serverConnection['dbname']);
-                
+
                 $serverConn = \Doctrine\DBAL\DriverManager::getConnection($serverConnection);
-                
+
                 // Create database
                 $platform = $serverConn->getDatabasePlatform();
                 $sql = $platform->getCreateDatabaseSQL($dbName);
-                
+
                 $serverConn->executeStatement($sql);
                 $output->writeln("<info>✓ Database '{$dbName}' created successfully!</info>");
-                
+
                 return 0;
             } catch (Exception $e) {
                 $output->writeln("<error>✗ Failed to create database: {$e->getMessage()}</error>");
                 return 1;
             }
         });
-    
+
     $console->register('db:drop-database')
         ->setDescription('Drop database')
         ->setCode(function ($input, $output) use ($databaseManager) {
             $output->writeln('<info>Dropping database...</info>');
-            
+
             try {
                 $config = $databaseManager->getConfig();
                 $connectionConfig = $config['connections'][$config['default']] ?? [];
-                
+
                 if (!$connectionConfig) {
                     throw new Exception('Database configuration not found');
                 }
-                
+
                 $dbName = $connectionConfig['dbname'] ?? '';
                 if (!$dbName) {
                     throw new Exception('Database name not configured');
                 }
-                
+
                 // Connect to server without database name
                 $serverConnection = $connectionConfig;
                 unset($serverConnection['dbname']);
-                
+
                 $serverConn = \Doctrine\DBAL\DriverManager::getConnection($serverConnection);
-                
+
                 // Drop database
                 $platform = $serverConn->getDatabasePlatform();
                 $sql = $platform->getDropDatabaseSQL($dbName);
-                
+
                 $serverConn->executeStatement($sql);
                 $output->writeln("<info>✓ Database '{$dbName}' dropped successfully!</info>");
-                
+
                 return 0;
             } catch (Exception $e) {
                 $output->writeln("<error>✗ Failed to drop database: {$e->getMessage()}</error>");
                 return 1;
             }
         });
-    
+
     // Run console application
     $console->run();
-    
+
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
     echo "Stack trace:\n" . $e->getTraceAsString() . "\n";

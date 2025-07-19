@@ -17,11 +17,11 @@ trait MockTrait
     protected function createMock(string $className, array $methods = []): MockObject
     {
         $builder = $this->getMockBuilder($className);
-        
+
         if (!empty($methods)) {
             $builder->onlyMethods($methods);
         }
-        
+
         return $builder->getMock();
     }
 

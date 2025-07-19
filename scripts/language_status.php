@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Language Status API
  * Provides real-time language information for the test page
@@ -22,37 +23,37 @@ header('Cache-Control: no-cache');
 
 try {
     $languageModel = new LanguageModel();
-    
+
     // Get current language information
     $currentLanguage = $languageModel->getCurrentLanguage();
     $supportedLanguages = $languageModel->getSupportedLanguages();
-    
+
     // Get session information
     $sessionInfo = [
         'language' => $_SESSION['language'] ?? 'not set',
         'session_id' => session_id(),
         'started' => isset($_SESSION['language_set_time']) ? date('Y-m-d H:i:s', $_SESSION['language_set_time']) : 'not set'
     ];
-    
+
     // Get cookie information
     $cookieInfo = [
         'language' => $_COOKIE['language'] ?? 'not set',
         'expires' => isset($_COOKIE['language']) ? 'set (30 days)' : 'not set'
     ];
-    
+
     // Get browser detection info
     $browserHeaders = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'not available';
     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'not available';
-    
+
     // Get flag for current language
     $flag = $languageModel->getFlagCode($currentLanguage);
-    
+
     // Get all supported languages with their names
     $supportedLanguagesWithNames = [];
     foreach ($supportedLanguages as $lang) {
         $supportedLanguagesWithNames[$lang] = $languageModel->getLanguageName($lang);
     }
-    
+
     // Prepare response
     $response = [
         'language' => $currentLanguage,
@@ -73,9 +74,9 @@ try {
             'both_match' => ($_SESSION['language'] ?? null) === ($_COOKIE['language'] ?? null)
         ]
     ];
-    
+
     echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    
+
 } catch (Exception $e) {
     // Error response
     http_response_code(500);
@@ -85,4 +86,3 @@ try {
         'timestamp' => date('Y-m-d H:i:s')
     ]);
 }
-?>

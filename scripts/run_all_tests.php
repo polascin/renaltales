@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 /**
  * Comprehensive test runner script
- * 
+ *
  * This script runs all types of tests:
  * - Unit tests
- * - Integration tests  
+ * - Integration tests
  * - Feature tests
  * - Behat BDD tests
  * - Generates coverage reports
@@ -29,14 +29,15 @@ if (!is_dir('vendor')) {
 }
 
 // Functions
-function runCommand(string $command, string $description): bool {
+function runCommand(string $command, string $description): bool
+{
     echo "📋 $description...\n";
     echo "   Running: $command\n";
-    
+
     $output = [];
     $returnCode = 0;
     exec($command . ' 2>&1', $output, $returnCode);
-    
+
     if ($returnCode === 0) {
         echo "   ✅ Success\n\n";
         return true;
@@ -50,7 +51,8 @@ function runCommand(string $command, string $description): bool {
     }
 }
 
-function createDirectoryIfNotExists(string $dir): void {
+function createDirectoryIfNotExists(string $dir): void
+{
     if (!is_dir($dir)) {
         mkdir($dir, 0755, true);
         echo "📁 Created directory: $dir\n";
@@ -121,7 +123,7 @@ foreach ($testPlan as $test) {
         'success' => $success,
         'required' => $test['required']
     ];
-    
+
     if ($success) {
         $successCount++;
     } else {

@@ -33,20 +33,20 @@ function setupPreCommitHooks(): void
 
     // Determine which script to use based on OS
     $isWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
-    
+
     if ($isWindows) {
         // Windows setup
         $hookContent = "@echo off\n";
         $hookContent .= "php \"" . str_replace('/', '\\', $preCommitBatScript) . "\"\n";
         $hookContent .= "exit /b %errorlevel%\n";
-        
+
         echo "Setting up Windows pre-commit hook...\n";
     } else {
         // Unix/Linux/Mac setup
         $hookContent = "#!/bin/bash\n";
         $hookContent .= "\"$preCommitScript\"\n";
         $hookContent .= "exit \$?\n";
-        
+
         echo "Setting up Unix/Linux pre-commit hook...\n";
     }
 
@@ -61,7 +61,7 @@ function setupPreCommitHooks(): void
         if (!chmod($preCommitHook, 0755)) {
             echo "Warning: Could not make pre-commit hook executable.\n";
         }
-        
+
         // Also make the script executable
         if (file_exists($preCommitScript)) {
             chmod($preCommitScript, 0755);
@@ -85,24 +85,24 @@ function setupPreCommitHooks(): void
 function testHook(): void
 {
     echo "\nTesting pre-commit hook...\n";
-    
+
     $isWindows = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
     $rootDir = dirname(__DIR__);
-    
+
     if ($isWindows) {
         $command = 'cd /d "' . $rootDir . '" && scripts\\pre-commit.bat';
     } else {
         $command = 'cd "' . $rootDir . '" && scripts/pre-commit';
     }
-    
+
     $output = [];
     $returnCode = 0;
     exec($command, $output, $returnCode);
-    
+
     foreach ($output as $line) {
         echo $line . "\n";
     }
-    
+
     if ($returnCode === 0) {
         echo "\n✓ Pre-commit hook test passed!\n";
     } else {

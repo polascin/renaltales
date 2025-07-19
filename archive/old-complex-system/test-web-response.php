@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Test web server response and CSS file accessibility
  */
@@ -15,20 +16,20 @@ $testUrls = [
 
 foreach ($testUrls as $url) {
     echo "Testing: $url\n";
-    
+
     $context = stream_context_create([
         'http' => [
             'timeout' => 5,
             'ignore_errors' => true
         ]
     ]);
-    
+
     $response = @file_get_contents($url, false, $context);
-    
+
     if ($response !== false) {
         $httpCode = isset($http_response_header[0]) ? $http_response_header[0] : 'Unknown';
         echo "✓ Response: $httpCode\n";
-        
+
         if (strpos($url, '.css') !== false) {
             // Check CSS content
             if (strpos($response, ':root') !== false || strpos($response, 'body') !== false) {
@@ -57,12 +58,12 @@ foreach ($cssFiles as $file) {
         $content = file_get_contents($fullPath);
         $size = strlen($content);
         echo "✓ $file accessible ($size bytes)\n";
-        
+
         // Check for CSS custom properties
         if (strpos($content, '--') !== false) {
             echo "  → Contains CSS custom properties\n";
         }
-        
+
         // Check for media queries for responsive design
         if (strpos($content, '@media') !== false) {
             echo "  → Contains media queries (responsive)\n";
@@ -79,4 +80,3 @@ echo "- Check Network tab for any failed CSS requests\n";
 echo "- Look for 404 errors or failed resource loads\n";
 
 echo "\n=== Test Complete ===\n";
-?>

@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Nieru stāsti',
     'welcome' => 'Laipni lūdzam',

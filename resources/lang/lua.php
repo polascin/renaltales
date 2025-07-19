@@ -1,4 +1,5 @@
 <?php
+
 return [
     'app_title' => 'Maluangu a Mpiku',
     'welcome' => 'Tuwelele',
@@ -296,4 +297,3 @@ return [
     'bug_report' => 'Kusolola cipulo',
     'feature_request' => 'Kulomba kima kya mona'
 ];
-?>

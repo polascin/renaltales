@@ -43,11 +43,11 @@ class HomeController
     {
         // Prepare data directly in controller
         $data = $this->prepareHomeData($request);
-        
+
         // Render template directly
         $template = new Template();
         $html = $template->render('home', $data, true);
-        
+
         return new Response(200, ['Content-Type' => 'text/html; charset=utf-8'], $html);
     }
 
@@ -60,7 +60,7 @@ class HomeController
     private function prepareHomeData(ServerRequestInterface $request): array
     {
         $currentLanguage = $this->translation->getCurrentLanguage();
-        
+
         return [
             // Meta information
             'title' => $this->trans('home.title', 'RenalTales - Home'),
@@ -70,17 +70,17 @@ class HomeController
             'language' => $currentLanguage,
             'year' => date('Y'),
             'asset_url' => '/assets',
-            
+
             // Hero/Welcome section - matching template variables
             'welcome_title' => $this->trans('home.welcome', 'Welcome to RenalTales!'),
             'welcome_message' => $this->trans('home.description', 'Welcome to our supportive community for people affected by kidney disorders.'),
             'get_started_text' => $this->trans('get_started', 'Get Started'),
-            
+
             // Hero section (additional)
             'hero_title' => $this->trans('home.welcome', 'Welcome to RenalTales!'),
             'hero_intro' => $this->trans('home.description', 'Welcome to our supportive community for people affected by kidney disorders.'),
             'hero_description' => $this->trans('home_intro2', 'This web application is designed to facilitate the sharing of personal experiences among individuals affected by kidney disorders.'),
-            
+
             // Feature cards - matching template
             'feature1_title' => $this->trans('share_story', 'Share Your Story'),
             'feature1_description' => $this->trans('share_story_desc', 'Your experience matters. Share your journey to inspire and support others.'),
@@ -89,7 +89,7 @@ class HomeController
             'feature3_title' => $this->trans('join_community', 'Join Community'),
             'feature3_description' => $this->trans('join_community_desc', 'Connect with others, participate in discussions, and build lasting friendships.'),
             'features' => $this->getFeatureCards(),
-            
+
             // Navigation - matching template
             'home_text' => $this->trans('nav.home', 'Home'),
             'about_text' => $this->trans('nav.about', 'About'),
@@ -99,20 +99,20 @@ class HomeController
             'nav_about' => $this->trans('nav.about', 'About'),
             'nav_login' => $this->trans('nav.login', 'Login'),
             'nav_register' => $this->trans('nav.register', 'Register'),
-            
+
             // Footer - matching template
             'all_rights_reserved' => $this->trans('all_rights_reserved', 'All rights reserved.'),
             'privacy_text' => $this->trans('privacy', 'Privacy'),
             'terms_text' => $this->trans('terms', 'Terms'),
             'contact_text' => $this->trans('contact', 'Contact'),
             'footer_copyright' => $this->trans('footer_copyright', 'Ľubomír Polaščín'),
-            
+
             // Language switcher
             'language_switcher' => '<select><!-- Language options --></select>',
             'language_label' => $this->trans('current_language', 'Language'),
             'current_language' => $currentLanguage,
             'supported_languages' => $this->getSupportedLanguages(),
-            
+
             // Sidebar
             'sidebar_menu_title' => $this->trans('main_menu', 'Quick Navigation'),
             'sidebar_about_title' => $this->trans('about_renal_tales', 'About Renal Tales'),
@@ -178,13 +178,13 @@ class HomeController
     {
         $supportedLanguages = [
             'en' => 'English',
-            'sk' => 'Slovak', 
+            'sk' => 'Slovak',
             'la' => 'Latin',
         ];
-        
+
         $languages = [];
         $currentLanguage = $this->translation->getCurrentLanguage();
-        
+
         foreach ($supportedLanguages as $code => $name) {
             $languages[] = [
                 'code' => $code,
@@ -192,7 +192,7 @@ class HomeController
                 'selected' => $code === $currentLanguage
             ];
         }
-        
+
         return $languages;
     }
 
