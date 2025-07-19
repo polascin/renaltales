@@ -14,7 +14,7 @@ use Throwable;
  * Provides enhanced error handling with context information and logging support.
  *
  * @package RenalTales\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class ApplicationException extends Exception

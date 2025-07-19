@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Maluangu a Mpiku',
     'welcome' => 'Tuwelele',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Kya mitubia',
     'copyright' => 'Malonga ma mukuadi',
     'license' => 'Licencia',
-    'version' => 'Cisonga',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Masakumunu',
     'acknowledgments' => 'Kutema',
     'feedback' => 'Kujiba',

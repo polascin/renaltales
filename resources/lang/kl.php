@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Tarnit oqaluttuarisai',
     'welcome' => 'Tikilluarit',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Inatsisinut',
     'copyright' => 'Sennaasut pisinnaatitaaffiit',
     'license' => 'Pisinnaatitaaq',
-    'version' => 'Allaffik',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Qujanartoq',
     'acknowledgments' => 'Qujaaqutit',
     'feedback' => 'Saqqummiuneq',

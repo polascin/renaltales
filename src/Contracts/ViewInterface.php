@@ -11,7 +11,7 @@ namespace RenalTales\Contracts;
  * Views should be responsible for rendering content.
  *
  * @package RenalTales\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 interface ViewInterface

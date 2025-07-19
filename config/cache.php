@@ -9,7 +9,7 @@ declare(strict_types=1);
  * This configuration supports multiple cache stores with different drivers.
  *
  * @package RenalTales\Config
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 

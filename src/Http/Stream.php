@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamInterface;
  * Provides minimal functionality needed for HTTP response streams.
  *
  * @package RenalTales\Http
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class Stream implements StreamInterface

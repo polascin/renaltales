@@ -4717,7 +4717,7 @@ return [
  * Controllers should handle HTTP requests and return responses.
  *
  * @package RenalTales\\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Contracts',
@@ -4866,7 +4866,7 @@ return [
  * Follows the PSR-15 middleware pattern.
  *
  * @package RenalTales\\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Contracts',
@@ -4957,7 +4957,7 @@ return [
  * providing common CRUD operations and data access patterns.
  *
  * @package RenalTales\\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Contracts',
@@ -5422,7 +5422,7 @@ return [
  * Views should be responsible for rendering content.
  *
  * @package RenalTales\\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Contracts',
@@ -5611,7 +5611,7 @@ return [
  * - Logging
  *
  * @package RenalTales\\Controllers
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Controllers',
@@ -7027,7 +7027,7 @@ return [
  *
  * @package RenalTales
  * @author Ľubomír Polaščín
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Controllers',
          'uses' => 
@@ -7510,7 +7510,7 @@ return [
  *
  * @package RenalTales
  * @author Ľubomír Polaščín
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Controllers',
          'uses' => 
@@ -7920,7 +7920,7 @@ return [
  * handles dependency injection setup, and manages the application lifecycle.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -8545,7 +8545,7 @@ return [
  * and async task execution.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -9572,7 +9572,7 @@ return [
  * for the application.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -10509,7 +10509,7 @@ return [
  * service instantiation, singleton management, and automatic dependency resolution.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -11378,7 +11378,7 @@ return [
  * Handles entity management, migrations, and caching configuration.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -11900,7 +11900,7 @@ return [
  * Integrates with Monolog for comprehensive logging and provides user-friendly error pages.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -12381,7 +12381,7 @@ return [
  * logs them using the logger & provides a response to the client.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Core',
          'uses' => 
@@ -12548,7 +12548,7 @@ return [
  * Provides advanced logging capabilities using Monolog, enabling logging to various outputs.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Core',
          'uses' => 
@@ -12640,7 +12640,7 @@ return [
  * For advanced logging, use the LoggerFactory to create Monolog loggers.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -13257,7 +13257,7 @@ return [
  * Supports multiple output destinations, log rotation, and different formatting options.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -13714,7 +13714,7 @@ return [
  * Manages the middleware pipeline and handles execution of middleware chain.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -13933,7 +13933,7 @@ return [
  * by explicitly marking nullable parameters.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -15503,7 +15503,7 @@ return [
  * Handles the configuration and binding of services for dependency injection.
  *
  * @package RenalTales\\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Core',
@@ -16409,7 +16409,7 @@ return [
  * Provides common functionality like timestamps and primary key handling.
  *
  * @package RenalTales\\Entities
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Entities',
@@ -17013,7 +17013,7 @@ return [
  * Contains language code, name, and status information.
  *
  * @package RenalTales\\Entities
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Entities',
@@ -17875,7 +17875,7 @@ return [
  * Provides enhanced error handling with context information and logging support.
  *
  * @package RenalTales\\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Exceptions',
@@ -18485,7 +18485,7 @@ return [
  * configuration files, invalid configuration values, or validation failures.
  *
  * @package RenalTales\\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Exceptions',
@@ -18815,7 +18815,7 @@ return [
  * an error during dependency resolution.
  *
  * @package RenalTales\\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Exceptions',
@@ -19078,7 +19078,7 @@ return [
  * in the container.
  *
  * @package RenalTales\\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Exceptions',
@@ -19329,7 +19329,7 @@ return [
  * Provides minimal functionality needed for HTTP responses.
  *
  * @package RenalTales\\Http
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Http',
@@ -20992,7 +20992,7 @@ return [
  * Provides minimal functionality needed for HTTP response streams.
  *
  * @package RenalTales\\Http
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Http',
@@ -22051,7 +22051,7 @@ return [
  *
  * @author Ľubomír Polaščín
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Models',
          'uses' => 
@@ -22698,7 +22698,7 @@ return [
  * with Redis caching and async operations support.
  *
  * @package RenalTales\\Repositories
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Repositories',
@@ -23869,7 +23869,7 @@ return [
  * Provides methods to find, create, update, and delete languages.
  *
  * @package RenalTales\\Repositories
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  * @extends EntityRepository<Language>
  */',
@@ -24934,7 +24934,7 @@ return [
  * Provides data access functionality for the LanguageModel.
  *
  * @package RenalTales\\Repositories
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Repositories',
          'uses' => 
@@ -25476,7 +25476,7 @@ return [
  * Acts as an intermediary between controllers and repositories.
  *
  * @package RenalTales\\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Services',
@@ -26157,7 +26157,7 @@ return [
  * to bcrypt for legacy support.
  *
  * @package RenalTales\\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Services',
@@ -26732,7 +26732,7 @@ return [
  * metrics collection, and performance analysis.
  *
  * @package RenalTales\\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Services',
@@ -27428,7 +27428,7 @@ return [
  * and other abuse scenarios.
  *
  * @package RenalTales\\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Services',
@@ -27839,7 +27839,7 @@ return [
  * - Security helpers
  *
  * @package RenalTales\\Views
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */',
          'namespace' => 'RenalTales\\Views',
@@ -28827,7 +28827,7 @@ return [
  *
  * @author Ľubomír Polaščín
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Views',
          'uses' => 
@@ -29104,7 +29104,7 @@ return [
  *
  * @author Ľubomír Polaščín
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Views',
          'uses' => 
@@ -29395,7 +29395,7 @@ return [
  * Handles the display and rendering of the login page for the application.
  *
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */',
          'namespace' => 'RenalTales\\Views',
          'uses' => 

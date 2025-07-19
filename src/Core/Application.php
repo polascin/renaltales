@@ -19,7 +19,7 @@ use Exception;
  * handles dependency injection setup, and manages the application lifecycle.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class Application
@@ -202,7 +202,7 @@ class Application
      */
     public function getVersion(): string
     {
-        return APP_VERSION ?? '2025.3.1.dev';
+        return APP_VERSION ?? '2025.v3.1.dev';
     }
 
     /**

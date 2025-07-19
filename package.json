@@ -1,6 +1,6 @@
 {
   "name": "renaltales",
-  "version": "1.0.0",
+  "version": "2025.v3.1.dev",
   "description": "> *Web Application by* ***Lumpe Paskuden von Lumpenen*** *aka* ***Walter Kyo*** *or* ***Walter Csoelle Kyo***\r > *Author:* Lubomir Polascin (Ľubomír Polaščín)\r > *Technology used:* **PHP**, **HTML**, **CSS**, **JavaScript**, **MySQL**",
   "main": "index.js",
   "directories": {

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Scéalta na nDuán',
     'welcome' => 'Fáilte',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Dlíthiúil',
     'copyright' => 'Cóipcheart',
     'license' => 'Ceadúnas',
-    'version' => 'Leagan',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Creidiúintí',
     'acknowledgments' => 'Aitheantas',
     'feedback' => 'Aiseolas',

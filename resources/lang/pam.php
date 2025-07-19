@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Kwentung Batu',
     'welcome' => 'Malaus ya datang',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Copyright',
     'license' => 'License',
-    'version' => 'Version',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Credits',
     'acknowledgments' => 'Pamangganan',
     'feedback' => 'Feedback',

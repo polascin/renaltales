@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Contains language code, name, and status information.
  *
  * @package RenalTales\Entities
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 #[ORM\Entity(repositoryClass: 'RenalTales\Repositories\DoctrineLanguageRepository')]

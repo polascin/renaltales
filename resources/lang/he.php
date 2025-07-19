@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'סיפורי כליות',
     'welcome' => 'ברוכים הבאים',
@@ -288,7 +288,7 @@ return [
     'legal' => 'משפטי',
     'copyright' => 'זכויות יוצרים',
     'license' => 'רישיון',
-    'version' => 'גרסה',
+    'version' => '2025.v3.1.dev',
     'credits' => 'קרדיטים',
     'acknowledgments' => 'תודות',
     'feedback' => 'משוב',

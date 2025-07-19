@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'मूत्रपिंडाच्या कथा',
     'welcome' => 'स्वागत',
@@ -288,7 +288,7 @@ return [
     'legal' => 'कायदेशीर',
     'copyright' => 'प्रतिलिपि अधिकार',
     'license' => 'परवाना',
-    'version' => 'आवृत्ती',
+    'version' => '2025.v3.1.dev',
     'credits' => 'श्रेय',
     'acknowledgments' => 'पावती',
     'feedback' => 'अभिप्राय',

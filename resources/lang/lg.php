@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Emboozi z Ensigo',
     'welcome' => 'Tukusanyukidde',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Ebyamateeka',
     'copyright' => 'Obuyinza ku biwandiiko',
     'license' => 'Olukusa',
-    'version' => 'Omutindo',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Okusiima',
     'acknowledgments' => 'Okukkiriza',
     'feedback' => 'Okuddamu obubaka',

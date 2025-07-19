@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Giltzurrunen Istoriak',
     'welcome' => 'Ongi etorri',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legezkoa',
     'copyright' => 'Egile eskubideak',
     'license' => 'Lizentzia',
-    'version' => 'Bertsioa',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Kredituak',
     'acknowledgments' => 'Eskerrak',
     'feedback' => 'Feedback',

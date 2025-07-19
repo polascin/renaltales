@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Uñunkuna Willakuykuna',
     'welcome' => 'Allin hamusqayki',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Kamachisqa',
     'copyright' => 'Qillqana chanin',
     'license' => 'Saqiy',
-    'version' => 'Rikch\'ay',
+    'version' => '2025.v3.1.dev'ay',
     'credits' => 'Yupaychana',
     'acknowledgments' => 'Riqsichiy',
     'feedback' => 'Kutichiy',

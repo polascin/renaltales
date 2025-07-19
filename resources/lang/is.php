@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Nýrnasögur',
     'welcome' => 'Velkomin',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Lögfræði',
     'copyright' => 'Höfundarréttur',
     'license' => 'Leyfi',
-    'version' => 'Útgáfa',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Þakkir',
     'acknowledgments' => 'Viðurkenningar',
     'feedback' => 'Endurgjöf',

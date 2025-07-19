@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'ବୃକ୍କର କାହାଣୀ',
     'welcome' => 'ସ୍ୱାଗତ',
@@ -288,7 +288,7 @@ return [
     'legal' => 'ଆଇନଗତ',
     'copyright' => 'କପିରାଇଟ',
     'license' => 'ଲାଇସେନ୍ସ',
-    'version' => 'ସଂସ୍କରଣ',
+    'version' => '2025.v3.1.dev',
     'credits' => 'କ୍ରେଡିଟ',
     'acknowledgments' => 'ସ୍ୱୀକୃତି',
     'feedback' => 'ମତାମତ',

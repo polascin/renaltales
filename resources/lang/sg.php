@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Âkôlï tî Ngangû',
     'welcome' => 'Mbôte na tongoû',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Kôde',
     'copyright' => 'Sirî-îrî',
     'license' => 'Permî',
-    'version' => 'Versyön',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Pâse',
     'acknowledgments' => 'Sîngbo',
     'feedback' => 'Yâbi',

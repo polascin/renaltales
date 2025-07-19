@@ -128,8 +128,8 @@ $optimizedCSS = CSSOptimizer::generateCSSLinks($stylesheets, 'home');
 <link rel="stylesheet" href="/assets/css/consolidated.css?v=<?php echo time(); ?>">
 ```
 
-**Status:** ⚠️ **PATH ISSUE** - File exists in `/assets/css/` not `/assets/css/`
-**Issues:** Path refers to `consolidated.css` which is in `/assets/css/` directory, not `/assets/css/`
+**Status:** ⚠️ **PATH ISSUE** - File exists in `assets/css/` not `public/assets/css/`
+**Issues:** Path refers to `consolidated.css` which is in `assets/css/` directory, not `public/assets/css/`
 
 ### 2.3 Component Files
 

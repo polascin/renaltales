@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'ເລື່ອງຂອງໄຕ',
     'welcome' => 'ຍິນດີຕ້ອນຮັບ',
@@ -288,7 +288,7 @@ return [
     'legal' => 'ກົດໝາຍ',
     'copyright' => 'ລິຂະສິດ',
     'license' => 'ໃບອະນຸຍາດ',
-    'version' => 'ເວີຊັ່ນ',
+    'version' => '2025.v3.1.dev',
     'credits' => 'ຄຳຂອບໃຈ',
     'acknowledgments' => 'ການຂອບໃຈ',
     'feedback' => 'ຄຳຄິດເຫັນ',

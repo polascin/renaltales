@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Nier Geschichten',
     'welcome' => 'Wëllkomm',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Copyright',
     'license' => 'Lizenz',
-    'version' => 'Versioun',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Kreditter',
     'acknowledgments' => 'Unerkennung',
     'feedback' => 'Feedback',

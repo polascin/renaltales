@@ -23,7 +23,7 @@ use Monolog\Level;
  * Supports multiple output destinations, log rotation, and different formatting options.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class LoggerFactory

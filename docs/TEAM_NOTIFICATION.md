@@ -121,7 +121,7 @@ Before merging CSS changes, ensure:
 - **Browser DevTools**: Testing and debugging
 
 ### Documentation
-- **CSS Architecture Guide**: `docs/CSS_ARCHITECTURE.md`
+- **CSS Architecture Guide**: `CSS_ARCHITECTURE.md`
 - **Component Library**: Coming soon
 - **Style Guide**: Available in design system
 
@@ -135,7 +135,7 @@ Before merging CSS changes, ensure:
 ### Getting Help
 - **Slack**: #frontend-development channel
 - **Email**: frontend-team@renaltales.com
-- **Documentation**: Check `docs/CSS_ARCHITECTURE.md`
+- **Documentation**: Check `CSS_ARCHITECTURE.md`
 
 ### Common Questions
 
@@ -161,7 +161,7 @@ A: No, existing code will continue to work. New features should follow the new g
    ```
 
 2. **Review the documentation**:
-   - Read `docs/CSS_ARCHITECTURE.md`
+   - Read `CSS_ARCHITECTURE.md`
    - Familiarize yourself with the new file structure
 
 3. **Update your workflow**:

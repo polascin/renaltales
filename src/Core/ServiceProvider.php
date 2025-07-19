@@ -32,7 +32,7 @@ use Psr\Log\LoggerInterface;
  * Handles the configuration and binding of services for dependency injection.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class ServiceProvider

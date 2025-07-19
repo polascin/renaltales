@@ -12,7 +12,7 @@ declare(strict_types=1);
  * 3. Identifies differences and provides recommendations
  *
  * @package RenalTales\Scripts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 

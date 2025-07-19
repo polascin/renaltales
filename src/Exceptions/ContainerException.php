@@ -13,7 +13,7 @@ use Psr\Container\ContainerExceptionInterface;
  * an error during dependency resolution.
  *
  * @package RenalTales\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class ContainerException extends ApplicationException implements ContainerExceptionInterface

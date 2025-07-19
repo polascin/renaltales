@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Izindaba Zezinso',
     'welcome' => 'Sawubona',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Ezomthetho',
     'copyright' => 'Ilungelo lomqambi',
     'license' => 'Ilayisense',
-    'version' => 'Inguqulo',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Ukubonga',
     'acknowledgments' => 'Ukuvuma',
     'feedback' => 'Impendulo',

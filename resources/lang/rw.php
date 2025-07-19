@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Inkuru z\'Impyiko',
     'welcome' => 'Murakaza neza',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Vy\'amategeko',
     'copyright' => 'Uburenganzira bw\'umwanditsi',
     'license' => 'Uruhushya',
-    'version' => 'Ubwoko',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Icyubahiro',
     'acknowledgments' => 'Kwicuza',
     'feedback' => 'Ibisubizo',

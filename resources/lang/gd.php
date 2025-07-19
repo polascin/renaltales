@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Sgeulachdan nan Dubhagan',
     'welcome' => 'Fàilte',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Laghail',
     'copyright' => 'Còir-sgrìobhaidh',
     'license' => 'Cead',
-    'version' => 'Tionndadh',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Creideasan',
     'acknowledgments' => 'Aithneachadh',
     'feedback' => 'Fios air ais',

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'गुर्दाक कथा',
     'welcome' => 'स्वागत अछि',
@@ -288,7 +288,7 @@ return [
     'legal' => 'कानूनी',
     'copyright' => 'कॉपीराइट',
     'license' => 'लाइसेंस',
-    'version' => 'संस्करण',
+    'version' => '2025.v3.1.dev',
     'credits' => 'क्रेडिट',
     'acknowledgments' => 'स्वीकृति',
     'feedback' => 'प्रतिक्रिया',

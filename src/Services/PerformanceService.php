@@ -16,7 +16,7 @@ use React\Promise\PromiseInterface;
  * metrics collection, and performance analysis.
  *
  * @package RenalTales\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class PerformanceService

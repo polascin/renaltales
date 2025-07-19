@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Taali Kollaaji',
     'welcome' => 'Jaraama',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Laawol',
     'copyright' => 'Yaase nder',
     'license' => 'Jamiroore',
-    'version' => 'Yamre',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Moƴƴude',
     'acknowledgments' => 'Yeeso',
     'feedback' => 'Jaabo',

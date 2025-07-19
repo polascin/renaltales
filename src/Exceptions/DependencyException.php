@@ -13,7 +13,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * in the container.
  *
  * @package RenalTales\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class DependencyException extends ApplicationException implements NotFoundExceptionInterface

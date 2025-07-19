@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Ngano dzeItsvo',
     'welcome' => 'Mauya',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Zvemitemo',
     'copyright' => 'Copyright',
     'license' => 'Rezinesi',
-    'version' => 'Shanduko',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Matenda',
     'acknowledgments' => 'Kutenda',
     'feedback' => 'Mhinduro',

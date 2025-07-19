@@ -16,11 +16,16 @@ use RenalTales\Core\Logger;
  * Main entry point for the RenalTales application
  *
  * @package RenalTales
- * @version 2025.v3.0dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  **/
 
 // File: public/index.php
+
+// Show all errors
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(-1);
 
 // Include application constants definitions
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'constants.php';
@@ -39,24 +44,23 @@ try {
   $app = new \RenalTales\Core\Application();
   $app->bootstrap();
   $app->run();
-
 } catch (\Throwable $e) {
   // Clean any buffered output before showing error
   if (ob_get_level()) {
     ob_end_clean();
   }
-  
+
   error_log('Error in index.php: ' . $e->getMessage());
-  
+
   // Try to get language service if application was initialized
   $languageService = null;
   if (isset($app) && $app->isBootstrapped()) {
     $languageService = $app->get(\RenalTales\Services\LanguageService::class);
   }
-  
+
   // Get debug mode from environment or constant
   $debugMode = filter_var($_ENV['APP_DEBUG'] ?? APP_DEBUG ?? false, FILTER_VALIDATE_BOOLEAN);
-  
+
   $errorView = new \RenalTales\Views\ErrorView($e, $debugMode, $languageService);
   echo $errorView->render();
   exit;

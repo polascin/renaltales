@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Betnegat muitalusat',
     'welcome' => 'Bures boahtin',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Lágalaš',
     'copyright' => 'Kopiijaoaivegahti',
     'license' => 'Liseansa',
-    'version' => 'Veršuvdna',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Giitit',
     'acknowledgments' => 'Dakkášuvvan',
     'feedback' => 'Máhcaheapmi',

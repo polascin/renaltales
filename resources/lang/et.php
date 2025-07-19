@@ -288,7 +288,7 @@ return [
     'legal' => 'Õiguslik',
     'copyright' => 'Autoriõigus',
     'license' => 'Litsents',
-    'version' => 'Versioon',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Tänuavaldused',
     'acknowledgments' => 'Tunnustused',
     'feedback' => 'Tagasiside',

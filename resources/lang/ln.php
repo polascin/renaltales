@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Lisolo ya Mpiku',
     'welcome' => 'Boyei malamu',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Ya mibeko',
     'copyright' => 'Ndingisa ya mokomi',
     'license' => 'Ndembo',
-    'version' => 'Ndenge',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Bopesi nkembo',
     'acknowledgments' => 'Boyambi',
     'feedback' => 'Eyano',

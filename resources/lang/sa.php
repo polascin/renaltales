@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'वृक्ककथाः',
     'welcome' => 'स्वागतम्',
@@ -288,7 +288,7 @@ return [
     'legal' => 'कानूनी',
     'copyright' => 'प्रतिलिप्यधिकारः',
     'license' => 'अनुज्ञप्तिः',
-    'version' => 'संस्करणम्',
+    'version' => '2025.v3.1.dev',
     'credits' => 'श्रेयः',
     'acknowledgments' => 'कृतज्ञता',
     'feedback' => 'प्रतिपुष्टिः',

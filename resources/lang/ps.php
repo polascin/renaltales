@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'د پښتورګو کیسې',
     'welcome' => 'ښه راغلاست',
@@ -288,7 +288,7 @@ return [
     'legal' => 'قانوني',
     'copyright' => 'د چاپ حق',
     'license' => 'جواز',
-    'version' => 'نسخه',
+    'version' => '2025.v3.1.dev',
     'credits' => 'ستاینې',
     'acknowledgments' => 'ومنل',
     'feedback' => 'غبرګون',

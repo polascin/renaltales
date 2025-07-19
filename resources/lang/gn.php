@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Apytu\'u rembiasakue',
     'welcome' => 'Tereg̃uahẽporãite',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Derecho',
     'copyright' => 'Jehaiha derecho',
     'license' => 'Ñemoneĩ',
-    'version' => 'Mba\'eichagua',
+    'version' => '2025.v3.1.dev'eichagua',
     'credits' => 'Mba\'eporã',
     'acknowledgments' => 'Aguyjepyre',
     'feedback' => 'Ñe\'ẽporã',

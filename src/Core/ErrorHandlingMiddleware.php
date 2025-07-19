@@ -17,7 +17,7 @@ use Psr\Log\LoggerInterface;
  * logs them using the logger & provides a response to the client.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */
 class ErrorHandlingMiddleware implements MiddlewareInterface
 {

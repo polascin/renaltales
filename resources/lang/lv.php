@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Nieru stāsti',
     'welcome' => 'Laipni lūdzam',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Juridiski',
     'copyright' => 'Autortiesības',
     'license' => 'Licence',
-    'version' => 'Versija',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Pateicības',
     'acknowledgments' => 'Atzinība',
     'feedback' => 'Atsauksmes',

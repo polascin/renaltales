@@ -15,7 +15,7 @@ use DateTimeImmutable;
  * Provides common functionality like timestamps and primary key handling.
  *
  * @package RenalTales\Entities
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 #[ORM\MappedSuperclass]

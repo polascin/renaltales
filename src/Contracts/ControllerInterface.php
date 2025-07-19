@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * Controllers should handle HTTP requests and return responses.
  *
  * @package RenalTales\Contracts
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 interface ControllerInterface

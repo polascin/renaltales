@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Nkhani za Impsyo',
     'welcome' => 'Takulandirani',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Zamalamulo',
     'copyright' => 'Ufulu wolemba',
     'license' => 'Chilolezo',
-    'version' => 'Mtundu',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Kuyamika',
     'acknowledgments' => 'Kuvomereza',
     'feedback' => 'Mayankho',

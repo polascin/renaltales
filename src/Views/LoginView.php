@@ -12,7 +12,7 @@ use RenalTales\Contracts\ViewInterface;
  * Handles the display and rendering of the login page for the application.
  *
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */
 class LoginView implements ViewInterface
 {

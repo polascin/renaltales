@@ -5,7 +5,7 @@
  * This file initializes the application environment and sets up autoloading
  *
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  **/
 
@@ -80,7 +80,7 @@ $GLOBALS['logger'] = function ($msg, $ctx = []) {
 $config = [
   'app' => [
     'name' => $_ENV['APP_NAME'] ?? 'RenalTales',
-    'version' => $_ENV['APP_VERSION'] ?? '2025.3.1.dev',
+    'version' => $_ENV['APP_VERSION'] ?? '2025.v3.1.dev',
     'env' => $_ENV['APP_ENV'] ?? 'development',
     'debug' => filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN),
     'url' => $_ENV['APP_URL'] ?? 'http://localhost',

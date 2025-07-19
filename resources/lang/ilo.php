@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Dagiti Estoria ti Bekkel',
     'welcome' => 'Nawadwad nga isasangpet',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Copyright',
     'license' => 'Lisensia',
-    'version' => 'Bersion',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Dagiti kredito',
     'acknowledgments' => 'Dagiti panagyaman',
     'feedback' => 'Feedback',

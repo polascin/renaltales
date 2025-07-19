@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Stejjer tal-Kliewi',
     'welcome' => 'Merħba',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legali',
     'copyright' => 'Copyright',
     'license' => 'Liċenzja',
-    'version' => 'Verżjoni',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Krediti',
     'acknowledgments' => 'Rikonoxximenti',
     'feedback' => 'Feedback',

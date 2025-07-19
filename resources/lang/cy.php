@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Straeon yr Arennau',
     'welcome' => 'Croeso',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Cyfreithiol',
     'copyright' => 'Hawlfraint',
     'license' => 'Trwydded',
-    'version' => 'Fersiwn',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Diolchiadau',
     'acknowledgments' => 'Cydnabyddiaeth',
     'feedback' => 'Adborth',

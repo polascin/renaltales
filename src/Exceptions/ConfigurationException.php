@@ -13,7 +13,7 @@ use Exception;
  * configuration files, invalid configuration values, or validation failures.
  *
  * @package RenalTales\Exceptions
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class ConfigurationException extends Exception

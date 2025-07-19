@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
  * - Logging
  *
  * @package RenalTales\Controllers
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 abstract class AbstractController implements ControllerInterface

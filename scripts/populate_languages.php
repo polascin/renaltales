@@ -4,7 +4,7 @@
  * Based on available language files and LanguageModel mappings
  * 
  * @author Ľubomír Polaščín
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */
 
 declare(strict_types=1);

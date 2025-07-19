@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Seenaa Kalee',
     'welcome' => 'Akkam',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Seeraa',
     'copyright' => 'Mirga barreeffamaa',
     'license' => 'Hayyama',
-    'version' => 'Verzhanii',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Galateeffannaa',
     'acknowledgments' => 'Beeksisa',
     'feedback' => 'Deebii',

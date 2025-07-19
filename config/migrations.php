@@ -14,7 +14,7 @@ use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
  * This file defines migration paths, table storage, and other migration settings.
  *
  * @package RenalTales\Config
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 

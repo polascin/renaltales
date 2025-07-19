@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Inkstų istorijos',
     'welcome' => 'Sveiki atvykę',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Teisinė informacija',
     'copyright' => 'Autorių teisės',
     'license' => 'Licencija',
-    'version' => 'Versija',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Padėkos',
     'acknowledgments' => 'Pripažinimai',
     'feedback' => 'Atsiliepimai',

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * such as application name, version, and default language.
  *
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 
@@ -22,7 +22,7 @@ define('DS', DIRECTORY_SEPARATOR);
 // Define application constants
 // Name, version, and default language of the application; change as needed
 define('APP_NAME', 'RenalTales');
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '2025.v3.1.dev');
 define('DEFAULT_LANGUAGE', 'sk');
 // Base URL of the application; change as needed; https://ladvina.eu/ in production
 define('APP_URL', 'https://renaltales.test/');

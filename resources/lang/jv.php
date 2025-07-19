@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Crita Ginjel',
     'welcome' => 'Sugeng rawuh',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Hak cipta',
     'license' => 'Lisensi',
-    'version' => 'Versi',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Kredit',
     'acknowledgments' => 'Pengakuan',
     'feedback' => 'Umpan balik',

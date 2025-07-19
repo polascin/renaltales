@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Nýrnasøgur',
     'welcome' => 'Vælkomið',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Løgfrøðiligt',
     'copyright' => 'Upphavsrættur',
     'license' => 'Loyvi',
-    'version' => 'Útgáva',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Takk',
     'acknowledgments' => 'Virðing',
     'feedback' => 'Viðbráðan',

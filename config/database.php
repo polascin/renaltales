@@ -9,7 +9,7 @@ declare(strict_types=1);
  * This configuration is used by the Doctrine ORM setup.
  *
  * @package RenalTales\Config
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 

@@ -13,7 +13,7 @@ use Closure;
  * Manages the middleware pipeline and handles execution of middleware chain.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class MiddlewareManager

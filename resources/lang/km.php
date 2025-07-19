@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'រឿងរ៉ាវរបស់តម្រងន័យ',
     'welcome' => 'សូមស្វាគមន៍',
@@ -288,7 +288,7 @@ return [
     'legal' => 'ច្បាប់',
     'copyright' => 'រក្សាសិទ្ធិ',
     'license' => 'អាជ្ញាប័ណ្ណ',
-    'version' => 'កំណែ',
+    'version' => '2025.v3.1.dev',
     'credits' => 'កិត្តិយស',
     'acknowledgments' => 'ការទទួលស្គាល់',
     'feedback' => 'មតិត្រឡប់',

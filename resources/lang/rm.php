@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Istorgias dal ravnels',
     'welcome' => 'Bainvegni',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Dretg d\'autur',
     'license' => 'Licenza',
-    'version' => 'Versiun',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Credits',
     'acknowledgments' => 'Renconuschientschas',
     'feedback' => 'Resun',

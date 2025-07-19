@@ -15,7 +15,7 @@ use RenalTales\Models\LanguageModel;
  * Acts as an intermediary between controllers and repositories.
  *
  * @package RenalTales\Services
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class LanguageService

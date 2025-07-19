@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Historias dos riles',
     'welcome' => 'Benvido',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Dereitos de autor',
     'license' => 'Licenza',
-    'version' => 'Versión',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Créditos',
     'acknowledgments' => 'Recoñecementos',
     'feedback' => 'Comentarios',

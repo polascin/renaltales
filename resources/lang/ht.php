@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Istwa Ren yo',
     'welcome' => 'Byenveni',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Dwa otè',
     'license' => 'Lisans',
-    'version' => 'Vèsyon',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Kredi yo',
     'acknowledgments' => 'Rekonèsans',
     'feedback' => 'Kominikasyon',

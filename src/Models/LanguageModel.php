@@ -12,7 +12,7 @@ namespace RenalTales\Models;
  *
  * @author Ľubomír Polaščín
  * @package RenalTales
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */
 
 // File: src/Models/LanguageModel.php

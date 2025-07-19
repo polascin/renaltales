@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Turkish language file for Renal Tales
  * 
@@ -505,7 +505,7 @@ return [
     'legal' => 'Hukuki',
     'copyright' => 'Telif hakkı',
     'license' => 'Lisans',
-    'version' => 'Sürüm',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Katkıda bulunanlar',
     'acknowledgments' => 'Teşekkürler',
     'feedback' => 'Geri bildirim',

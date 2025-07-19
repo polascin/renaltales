@@ -16,7 +16,7 @@ use RenalTales\Views\ErrorView;
  * Integrates with Monolog for comprehensive logging and provides user-friendly error pages.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class ErrorHandler

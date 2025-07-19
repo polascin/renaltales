@@ -6,7 +6,7 @@ This document describes the refactored architecture of the RenalTales applicatio
 
 ## Architecture Components
 
-### 1. Dependency Injection Container (`src/Core/Container.php`)
+#### 1. Dependency Injection Container (`src/Core/Container.php`)
 
 The DI container is the heart of the new architecture. It provides:
 - Service binding and resolution

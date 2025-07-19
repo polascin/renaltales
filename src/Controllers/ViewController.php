@@ -17,7 +17,7 @@ use RenalTales\Views\ErrorView;
  *
  * @package RenalTales
  * @author Ľubomír Polaščín
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  */
 class ViewController implements ViewInterface
 {

@@ -16,7 +16,7 @@ use Psr\Log\InvalidArgumentException;
  * For advanced logging, use the LoggerFactory to create Monolog loggers.
  *
  * @package RenalTales\Core
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class Logger implements LoggerInterface

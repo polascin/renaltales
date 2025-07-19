@@ -14,7 +14,7 @@ use Psr\Http\Message\StreamInterface;
  * Provides minimal functionality needed for HTTP responses.
  *
  * @package RenalTales\Http
- * @version 2025.3.1.dev
+ * @version 2025.v3.1.dev
  * @author Ľubomír Polaščín
  */
 class Response implements ResponseInterface

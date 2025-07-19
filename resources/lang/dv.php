@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'ގުރުދާގެ ހަދީސްތައް',
     'welcome' => 'މަރުހަބާ',
@@ -288,7 +288,7 @@ return [
     'legal' => 'ޤާނޫނީ',
     'copyright' => 'ކޮޕީރައިޓް',
     'license' => 'ލައިސަންސް',
-    'version' => 'ވަރޝަން',
+    'version' => '2025.v3.1.dev',
     'credits' => 'ޝުކުރިއްޔާ',
     'acknowledgments' => 'ޤަދަރުދަންނަވަން',
     'feedback' => 'އަންނައުޢު',

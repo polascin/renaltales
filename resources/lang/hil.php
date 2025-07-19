@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 return [
     'app_title' => 'Mga Sugilanon sa Bato',
     'welcome' => 'Maayad nga pag-abot',
@@ -288,7 +288,7 @@ return [
     'legal' => 'Legal',
     'copyright' => 'Copyright',
     'license' => 'License',
-    'version' => 'Version',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Credits',
     'acknowledgments' => 'Acknowledgments',
     'feedback' => 'Feedback',

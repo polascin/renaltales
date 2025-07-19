@@ -288,7 +288,7 @@ return [
     'legal' => 'Правно',
     'copyright' => 'Авторски права',
     'license' => 'Лиценца',
-    'version' => 'Верзија',
+    'version' => '2025.v3.1.dev',
     'credits' => 'Заслуги',
     'acknowledgments' => 'Признанија',
     'feedback' => 'Повратни информации',
