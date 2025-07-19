@@ -3,21 +3,7 @@
 
 /* File: public/assets/css/style.css */
 
-/* Main Header Container Styles */
-.main-header {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  margin: 0.5rem 0 1rem 0;
-  background-color: var(--panel-bg);
-  border: solid thin var(--panel-border);
-  border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: var(--text-color);
-}
-
+/* Header sections - use with .main-header from navigation.css */
 .header-left {
   flex-grow: 1;
   flex-shrink: 1;
@@ -47,8 +33,9 @@
   background-color: var(--panel-bg);
   border: solid thin var(--panel-border);
   border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: var(--text-color)
+  box-shadow: 0 2px 4px var(--shadow-color);
+  color: var(--color-text);
+  transition: var(--transition-theme);
 }
 .main-header-container .left-section {
   flex-grow: 1;
@@ -86,31 +73,31 @@
   font-family: var(--font-family-fantasy);
   font-size: 3rem;
   font-weight: bold;
-  color: var(--title-color);
+  color: var(--color-primary-light);
   margin: 0 0 1rem 0;
-  text-shadow: 1px 1px 1px var(--black-color), 0 0 25px var(--accent-color), 0 0 10px var(--accent-darker);
+  text-shadow: 1px 1px 1px var(--color-neutral-950), 0 0 25px var(--color-accent), 0 0 10px var(--color-accent-hover);
 }
 .main-header-container h2 {
   font-family: var(--font-family-cursive);
   font-size: 1.5rem;
   font-weight: normal;
-  color: var(--secondary-dark);
+  color: var(--color-secondary-hover);
   margin: 0;
-  text-shadow: 1px 1px 1px var(--black-color), 0 0 10px var(--accent-color);
+  text-shadow: 1px 1px 1px var(--color-neutral-950), 0 0 10px var(--color-accent);
 }
 .main-header-container h3 {
   font-family: var(--font-family-system);
   font-size: 1rem;
   font-weight: normal;
-  color: var(--warning-color);
+  color: var(--color-warning);
   margin: 0;
-  text-shadow: 1px 1px 2px var(--text-color);
+  text-shadow: 1px 1px 2px var(--color-text);
 }
 .main-header-container h4 {
   font-family: var(--font-family-system);
   font-size: small;
   font-weight: normal;
-  color: var(--text-color);
+  color: var(--color-text);
   margin: 0.5rem 0 0 0;
 }
 .main-header-container h5 {
@@ -118,14 +105,14 @@
   font-family: var(--font-family-system);
   font-size: 0.875rem;
   font-weight: normal;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 .main-header-container h6 {
   margin: 0.5rem 0 0 0;
   font-family: var(--font-family-system);
   font-size: 0.75rem;
   font-weight: normal;
-  color: var(--text-color);
+  color: var(--color-text);
   clear: both;
 }
 
@@ -142,66 +129,73 @@
 
 .user-info .logged-in-user {
   padding: 0.5rem;
-  background-color: var(--success-bg, #d4edda);
-  border: 1px solid var(--success-border, #c3e6cb);
+  background-color: var(--color-success);
+  border: 1px solid var(--color-secondary);
   border-radius: 1rem;
   margin-bottom: 0.5rem;
+  color: var(--color-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .user-info .guest-user {
   padding: 0.5rem;
-  background-color: var(--info-bg, #d1ecf1);
-  border: 1px solid var(--info-border, #bee5eb);
+  background-color: var(--color-info);
+  border: 1px solid var(--color-primary);
   border-radius: 1rem;
   margin-bottom: 0.5rem;
+  color: var(--color-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .user-info .logout-link,
 .user-info .login-link {
   display: inline-block;
   padding: 0.25rem 0.5rem;
-  background-color: var(--primary-bg, #007bff);
-  color: var(--primary-text, #fff);
+  background-color: var(--color-primary);
+  color: var(--color-neutral-0);
   text-decoration: none;
   border-radius: 0.25rem;
   font-size: 0.875rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .user-info .logout-link:hover,
 .user-info .login-link:hover {
-  background-color: var(--primary-hover, #0056b3);
+  background-color: var(--color-primary-hover);
+  color: var(--color-neutral-0);
 }
 
 .user-info .logout-link {
-  background-color: var(--danger-bg, #dc3545);
+  background-color: var(--color-danger);
 }
 
 .user-info .logout-link:hover {
-  background-color: var(--danger-hover, #c82333);
+  background-color: var(--color-accent-hover);
 }
 
 .user-info p {
   margin: 0.25rem 0;
+  color: var(--color-text);
 }
 
 .user-info small {
-  color: var(--gray-darker, #333333); /* Much darker for better contrast */
+  color: var(--color-text-secondary);
 }
 
 /* Main Menu Styles */
 .main-menu {
-  background-color: var(--panel-bg, #f8f9fa);
-  border: 1px solid var(--panel-border, #dee2e6);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 1rem;
   padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .main-menu h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--panel-border, #dee2e6);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--panel-border);
   padding-bottom: 0.5rem;
 }
 
@@ -219,15 +213,15 @@
   display: block;
   padding: 0.75rem 1rem;
   text-decoration: none;
-  color: var(--text-color, #333);
+  color: var(--color-text);
   border-radius: 0.25rem;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-bottom: 0.25rem;
 }
 
 .main-menu .menu-item:hover {
-  background-color: var(--primary-bg, #007bff);
-  color: var(--primary-text, #fff);
+  background-color: var(--color-primary);
+  color: var(--color-neutral-0);
 }
 
 .main-menu .menu-item i {
@@ -238,54 +232,57 @@
 
 .main-menu .menu-separator {
   height: 1px;
-  background-color: var(--panel-border, #dee2e6);
+  background-color: var(--panel-border);
   margin: 0.5rem 0;
 }
 
 .main-menu .login-item {
-  background-color: var(--success-bg, #28a745);
-  color: var(--success-text, #fff);
+  background-color: var(--color-success);
+  color: var(--color-neutral-0);
 }
 
 .main-menu .login-item:hover {
-  background-color: var(--success-hover, #218838);
+  background-color: var(--color-secondary-hover);
 }
 
 .main-menu .register-item {
-  background-color: var(--info-bg, #17a2b8);
-  color: var(--info-text, #fff);
+  background-color: var(--color-info);
+  color: var(--color-neutral-0);
 }
 
 .main-menu .register-item:hover {
-  background-color: var(--info-hover, #138496);
+  background-color: var(--color-primary-hover);
 }
 
 /* Content Body Styles */
 .content-body {
-  background-color: var(--panel-bg, #fff);
-  border: 1px solid var(--panel-border, #dee2e6);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 1rem;
   padding: 1rem;
   min-height: 400px;
+  color: var(--color-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .home-section h2 {
-  color: var(--primary-color, #007bff);
+  color: var(--color-primary);
   margin: 0;
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  text-shadow: 1px 1px 1px var(--text-color);
+  text-shadow: 1px 1px 1px var(--color-text);
 }
 
 .home-intro {
   margin: 1rem 0 0 0;
   padding: 1rem;
   text-align: justify;
-  background-color: var(--info-bg, #d1ecf1);
+  background-color: var(--color-info);
   border-radius: 1rem;
-  border-left: 4px solid var(--info-border, #bee5eb);
-  color: var(--text-color); /* Ensure proper text color */
+  border-left: 4px solid var(--color-primary);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .feature-grid {
@@ -296,20 +293,21 @@
 }
 
 .feature-card {
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 1rem;
   padding: 1.5rem;
   text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .feature-card h3 {
-  color: var(--text-color, #333);
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
 .feature-card p {
-  color: var(--gray-darker, #333333); /* Much darker for better contrast */
+  color: var(--color-text-secondary);
   margin-bottom: 1.5rem;
 }
 
@@ -317,17 +315,18 @@
 
 /* Content Notes Styles */
 .content-notes {
-  background-color: var(--panel-bg, #f8f9fa);
-  border: 1px solid var(--panel-border, #dee2e6);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--panel-border);
   border-radius: 1rem;
   padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .content-notes h3 {
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--panel-border, #dee2e6);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--panel-border);
   padding-bottom: 0.5rem;
 }
 
@@ -342,18 +341,18 @@
 .note-section h4 {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
-  color: var(--primary-color, #007bff);
+  color: var(--color-primary);
 }
 
 .note-section p {
   font-size: 0.9rem;
-  color: var(--gray-darker, #333333); /* Much darker for better contrast */
+  color: var(--color-text-secondary);
   line-height: 1.4;
 }
 
 .note-section ul {
   font-size: 0.9rem;
-  color: var(--gray-darker, #333333); /* Much darker for better contrast */
+  color: var(--color-text-secondary);
   margin: 0;
   padding-left: 1.2rem;
 }
@@ -366,7 +365,7 @@
 
 /* Login Page Styles */
 .login-page {
-  background-color: var(--body-bg);
+  background-color: var(--color-background);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -379,7 +378,8 @@
   background-color: var(--panel-bg);
   border: solid thin var(--panel-border);
   border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px var(--color-neutral-600);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .login-header {
@@ -388,12 +388,12 @@
 }
 
 .login-header h1 {
-  color: var(--primary-color);
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
 }
 
 .login-header p {
-  color: var(--gray-darker);
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
@@ -411,23 +411,25 @@
 
 .form-group label {
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--color-text);
 }
 
 .form-group input[type="email"],
 .form-group input[type="password"] {
   padding: 0.75rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: 1rem;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .form-group input[type="email"]:focus,
 .form-group input[type="password"]:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(160, 196, 255, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-hover);
 }
 
 .form-group-checkbox {
@@ -442,8 +444,8 @@
 
 .btn-login {
   padding: 0.75rem 1.5rem;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-neutral-0);
   border: none;
   border-radius: 1rem;
   font-size: 1rem;
@@ -453,7 +455,7 @@
 }
 
 .btn-login:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--color-primary-hover);
 }
 
 .btn-login:active {
@@ -461,12 +463,13 @@
 }
 
 .login-errors {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: var(--color-danger);
+  color: var(--color-neutral-0);
   padding: 1rem;
   border-radius: 1rem;
-  border: 1px solid #f5c6cb;
+  border: 1px solid var(--color-accent-hover);
   margin-bottom: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .login-errors ul {
@@ -483,13 +486,15 @@
 }
 
 .login-links a {
-  color: var(--primary-color);
+  color: var(--color-primary);
   text-decoration: none;
   font-size: 0.9rem;
+  transition: color 0.3s ease;
 }
 
 .login-links a:hover {
   text-decoration: underline;
+  color: var(--color-primary-hover);
 }
 
 .back-to-home {
@@ -498,77 +503,83 @@
 }
 
 .back-to-home a {
-  color: var(--gray-darker);
+  color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
+  transition: color 0.3s ease;
 }
 
 .back-to-home a:hover {
   text-decoration: underline;
+  color: var(--color-text);
 }
 
-/* User Info Styles */
+/* Additional User Info Styles - Updated to use new color variables */
 .user-info {
   padding: 1rem;
   background-color: var(--panel-bg);
   border: solid thin var(--panel-border);
   border-radius: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .logged-in-user {
   padding: 0.5rem;
-  background-color: var(--success-color);
-  color: var(--gray-darkest);
-  border: 1px solid var(--secondary-dark);
+  background-color: var(--color-success);
+  color: var(--color-text);
+  border: 1px solid var(--color-secondary-hover);
   border-radius: 0.3rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .guest-user {
   padding: 0.5rem;
-  background-color: var(--light-color);
-  color: var(--gray-darker);
-  border: 1px solid var(--border-color);
+  background-color: var(--color-neutral-100);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   border-radius: 0.3rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .login-link, .logout-link {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-neutral-0);
   text-decoration: none;
   border-radius: 0.25rem;
   font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .login-link:hover, .logout-link:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--color-primary-hover);
   text-decoration: none;
+  color: var(--color-neutral-0);
 }
 
 .logout-link {
-  background-color: var(--danger-color);
+  background-color: var(--color-danger);
 }
 
 .logout-link:hover {
-  background-color: var(--accent-dark);
+  background-color: var(--color-accent-hover);
 }
 
-/* Menu Item Styles */
+/* Menu Item Styles - Updated to use new color variables */
 .menu-item.login-item {
-  color: var(--primary-color);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
 .menu-item.register-item {
-  color: var(--success-color);
+  color: var(--color-success);
   font-weight: 600;
 }
 
 .menu-separator {
   height: 1px;
-  background-color: var(--border-color);
+  background-color: var(--color-border);
   margin: 0.5rem 0;
   list-style: none;
 }

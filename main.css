@@ -1,0 +1,241 @@
+/**
+ * MAIN CSS ORCHESTRATOR - Renal Tales
+ * ====================================
+ * 
+ * This file serves as the main entry point for all CSS in the Renal Tales application.
+ * The import order follows the ITCSS (Inverted Triangle CSS) methodology and is crucial
+ * for proper cascade, specificity management, and performance optimization.
+ * 
+ * Architecture Philosophy:
+ * - Mobile-first responsive design
+ * - BEM naming methodology for components
+ * - CSS custom properties for theming and design tokens
+ * - Modular component architecture
+ * - Performance-optimized loading strategy
+ * 
+ * Import Order Explanation:
+ * 1. Theme Foundation - Global color palette and design tokens
+ * 2. Core Variables - Component-specific design tokens
+ * 3. Reset & Typography - Baseline styles and text system
+ * 4. Layout System - Grid, containers, and spacing utilities
+ * 5. Base Styles - Basic element styling
+ * 6. Components - Modular UI components (buttons, forms, cards, etc.)
+ * 7. Page-Specific - Application and page-specific styles
+ * 8. Utilities - Responsive utilities and performance optimizations
+ * 9. Overrides - Minimal component-specific adjustments
+ * 
+ * Last Updated: December 2024
+ * Dependencies: Modern browsers with CSS Grid, Flexbox, and Custom Properties
+ * Performance Target: Critical CSS ≤ 14KB, Total CSS ≤ 100KB
+ */
+
+/* ==========================================================================
+   LAYER 1: THEME FOUNDATION
+   ========================================================================== 
+   
+   The theme system provides the foundational design tokens including:
+   - Complete color palette (primary, secondary, accent, neutral scales)
+   - Typography tokens (font families, sizes, line heights)
+   - Spacing scale (xs through 3xl)
+   - Border radius and shadow tokens
+   - Light/dark theme implementations
+   - Legacy variable mappings for backward compatibility
+   
+   This file is loaded first to establish the design token foundation
+   that all other components and utilities will reference.
+   ========================================================================== */
+
+@import url('public/assets/css/themes.css');
+
+/* ==========================================================================
+   LAYER 2: COMPONENT DESIGN TOKENS
+   ========================================================================== 
+   
+   Component-specific design tokens that extend the base theme system:
+   - Additional spacing scale variations (xxs, base, 4xl, 5xl)
+   - Component-specific shadow definitions
+   - Grid system variables
+   - Extended border width options
+   - Component-specific line height variations
+   
+   These tokens are separated from the main themes to avoid duplication
+   and provide component-specific customization options.
+   ========================================================================== */
+
+@import url('core/variables.css');
+
+/* ==========================================================================
+   LAYER 3: RESET & NORMALIZE
+   ========================================================================== 
+   
+   CSS reset and normalization to create a consistent baseline across
+   all browsers. Includes:
+   - Box-sizing reset to border-box
+   - Margin and padding reset
+   - Consistent baseline for form elements
+   - Focus outline improvements for accessibility
+   
+   Must load early to establish consistent foundation before other styles.
+   ========================================================================== */
+
+@import url('core/reset.css');
+
+/* ==========================================================================
+   LAYER 4: TYPOGRAPHY SYSTEM
+   ========================================================================== 
+   
+   Typography styles and utility classes including:
+   - Font family definitions and fallbacks
+   - Responsive font sizing using modular scale
+   - Text utility classes (.text-center, .font-bold, etc.)
+   - Line height and letter spacing optimizations
+   
+   Typography is fundamental and affects layout, so it loads early
+   in the cascade to provide stable text rendering.
+   ========================================================================== */
+
+@import url('core/typography.css');
+
+/* ==========================================================================
+   LAYER 5: LAYOUT SYSTEM
+   ========================================================================== 
+   
+   Layout system includes grid containers, flexible layouts, and spacing:
+   - CSS Grid layout definitions for main application structure
+   - Container classes with responsive max-widths
+   - Flexbox utilities for component-level layouts
+   - Spacing utilities (margins, padding) following consistent scale
+   
+   Layout loads after typography to ensure text-dependent layouts
+   render correctly across all devices and screen sizes.
+   ========================================================================== */
+
+/* Main application layout containers with CSS Grid and responsive design */
+@import url('public/assets/css/layout.css');
+
+/* Spacing utilities using design token scale (margin, padding, gaps) */
+@import url('layout/spacing.css');
+
+/* ==========================================================================
+   LAYER 6: FOUNDATION STYLES
+   ========================================================================== 
+   
+   Base element styling that builds upon the reset and typography layers:
+   - Element-specific styling (headings, paragraphs, lists)
+   - Default link and button styling
+   - Form element base styling
+   - Table and media element defaults
+   
+   These styles provide sensible defaults for HTML elements before
+   component-specific styling is applied.
+   ========================================================================== */
+
+/* Base element styles, responsive typography, and default element behavior */
+@import url('public/assets/css/basic.css');
+
+/* ==========================================================================
+   LAYER 7: COMPONENT LIBRARY
+   ========================================================================== 
+   
+   Modular UI components following BEM methodology:
+   - Each component is self-contained and reusable
+   - Components use design tokens for consistent theming
+   - Includes variants, states, and responsive behavior
+   - Focus on accessibility and keyboard navigation
+   
+   Components are loaded in dependency order (simpler components first)
+   to avoid specificity conflicts and ensure proper inheritance.
+   ========================================================================== */
+
+/* Interactive button components with variants (primary, secondary, sizes, states) */
+@import url('components/buttons.css');
+
+/* Form input elements, validation states, and form-specific layouts */
+@import url('components/forms.css');
+
+/* Card container components with headers, content areas, and actions */
+@import url('components/cards.css');
+
+/* Navigation menus, breadcrumbs, and navigation-specific interactions */
+@import url('components/navigation.css');
+
+/* Legacy component compatibility layer for backward compatibility */
+@import url('public/assets/css/components.css');
+
+/* ==========================================================================
+   LAYER 8: PAGE-SPECIFIC STYLES
+   ========================================================================== 
+   
+   Application-specific styling that combines components into page layouts:
+   - Page-specific component combinations and modifications
+   - Application header, footer, and main content areas
+   - Route-specific styling requirements
+   - Integration between different component systems
+   
+   Page styles build upon components to create complete user interfaces
+   while maintaining the component architecture's flexibility.
+   ========================================================================== */
+
+/* General application styles, header components, and shared page elements */
+@import url('public/assets/css/style.css');
+
+/* Modern home page layout enhancements and interactive features */
+@import url('public/assets/css/modern-home.css');
+
+/* Error page specific styling and messaging components */
+@import url('public/assets/css/error.css');
+
+/* Application navigation styling (distinct from component navigation) */
+@import url('public/assets/css/navigation.css');
+
+/* ==========================================================================
+   LAYER 9: RESPONSIVE UTILITIES & PERFORMANCE
+   ========================================================================== 
+   
+   Utility classes and performance optimizations:
+   - Responsive visibility and layout utilities
+   - Performance-critical CSS optimizations
+   - Critical rendering path improvements
+   - Mobile-specific performance enhancements
+   
+   Utilities load last to ensure they can override component styles
+   when needed, providing maximum flexibility for responsive design.
+   ========================================================================== */
+
+/* Responsive breakpoint utilities, visibility classes, and mobile optimizations */
+@import url('public/assets/css/responsive.css');
+
+/* Performance optimizations including critical CSS and loading improvements */
+@import url('public/assets/css/performance.css');
+
+/* ==========================================================================
+   LAYER 10: COMPONENT OVERRIDES & CUSTOMIZATIONS
+   ========================================================================== 
+   
+   Final layer for component-specific adjustments and customizations:
+   - Minimal, targeted overrides for specific use cases
+   - Third-party component integration adjustments
+   - Application-specific component modifications
+   - Emergency fixes (to be refactored into proper components)
+   
+   ⚠️  WARNING: Use this section sparingly. Most styling should be handled
+   in the appropriate component or utility files. Overrides here should
+   be temporary and migrated to proper architectural locations.
+   
+   Guidelines for overrides:
+   - Document the reason for each override
+   - Include a plan for proper architectural solution
+   - Use specific selectors to minimize cascade impact
+   - Regular review and cleanup of accumulated overrides
+   ========================================================================== */
+
+/* Temporary component overrides - minimize usage and document each override */
+/* Example override structure:
+   .specific-page .component {
+     // Override reason: [explanation]
+     // TODO: Move to proper component file
+     property: value;
+   }
+*/
+
+/* END OF CSS ARCHITECTURE - All imports above this line */

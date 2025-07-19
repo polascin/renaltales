@@ -1,0 +1,44 @@
+/**
+ * Core Variables - Component-specific Design Tokens
+ * 
+ * Note: Main color palette and theme variables are now in themes.css
+ * This file contains component-specific variables that are unique to the 
+ * modular component system and not duplicated in themes.css
+ */
+
+:root {
+  /* ==========================================================================
+     COMPONENT-SPECIFIC VARIABLES (not in themes.css)
+     ========================================================================== */
+  
+  /* Additional spacing scale using different ratio */
+  --space-xxs: 0.125rem;        /* 2px - extra small spacing */
+  --space-base: 0.667rem;       /* 10.67px - base unit for modular scale */
+  --space-4xl: 3.745rem;        /* 59.92px - very large spacing */
+  --space-5xl: 4.993rem;        /* 79.89px - maximum spacing */
+  
+  /* Component-specific shadows with unique styling */
+  --shadow-xs: 0 1px 1px 0 rgba(0, 0, 0, 0.05);     /* Extra small shadow */
+  --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-floating: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Component-specific shadows for semantic colors */
+  --shadow-primary: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+  --shadow-success: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+  --shadow-warning: 0 4px 6px -1px rgba(245, 158, 11, 0.3);
+  --shadow-error: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
+  
+  /* Grid system specific to component layout */
+  --grid-columns: 12;
+  --grid-gutter: var(--space-lg);
+  
+  /* Border width variations for components */
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+  
+  /* Line height variations for specific component needs */
+  --line-height-none: 1;         /* For large text like headings */
+  --line-height-snug: 1.375;     /* Between tight and normal */
+  --line-height-loose: 2;        /* For very relaxed text */
+}

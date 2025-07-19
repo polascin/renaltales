@@ -1,0 +1,173 @@
+/**
+ * Responsive Mixins and Media Query Utilities
+ * Mobile-first approach with consistent breakpoints
+ */
+
+/* ==========================================================================
+   MOBILE-FIRST MEDIA QUERIES
+   ========================================================================== */
+
+/* Small devices and up (576px+) */
+@media (min-width: 576px) {
+  .responsive-sm-up {
+    /* Styles for small devices and larger */
+  }
+}
+
+/* Medium devices and up (768px+) */
+@media (min-width: 768px) {
+  .responsive-md-up {
+    /* Styles for medium devices and larger */
+  }
+}
+
+/* Large devices and up (992px+) */
+@media (min-width: 992px) {
+  .responsive-lg-up {
+    /* Styles for large devices and larger */
+  }
+}
+
+/* Extra large devices and up (1200px+) */
+@media (min-width: 1200px) {
+  .responsive-xl-up {
+    /* Styles for extra large devices and larger */
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE TYPOGRAPHY SCALING
+   ========================================================================== */
+
+/* Base typography - mobile first */
+:root {
+  --responsive-font-size-xs: 0.75rem;    /* 12px */
+  --responsive-font-size-sm: 0.875rem;   /* 14px */
+  --responsive-font-size-base: 1rem;     /* 16px */
+  --responsive-font-size-lg: 1.125rem;   /* 18px */
+  --responsive-font-size-xl: 1.25rem;    /* 20px */
+  --responsive-font-size-2xl: 1.5rem;    /* 24px */
+  --responsive-font-size-3xl: 1.875rem;  /* 30px */
+  --responsive-font-size-4xl: 2.25rem;   /* 36px */
+  --responsive-font-size-5xl: 3rem;      /* 48px */
+  --responsive-font-size-6xl: 3.75rem;   /* 60px */
+}
+
+/* Small devices and up - slight increase in font sizes */
+@media (min-width: 576px) {
+  :root {
+    --responsive-font-size-3xl: 2rem;      /* 32px */
+    --responsive-font-size-4xl: 2.5rem;    /* 40px */
+    --responsive-font-size-5xl: 3.5rem;    /* 56px */
+    --responsive-font-size-6xl: 4rem;      /* 64px */
+  }
+}
+
+/* Medium devices and up - moderate increase */
+@media (min-width: 768px) {
+  :root {
+    --responsive-font-size-3xl: 2.25rem;   /* 36px */
+    --responsive-font-size-4xl: 2.75rem;   /* 44px */
+    --responsive-font-size-5xl: 4rem;      /* 64px */
+    --responsive-font-size-6xl: 4.5rem;    /* 72px */
+  }
+}
+
+/* Large devices and up - full scale */
+@media (min-width: 992px) {
+  :root {
+    --responsive-font-size-3xl: 2.5rem;    /* 40px */
+    --responsive-font-size-4xl: 3rem;      /* 48px */
+    --responsive-font-size-5xl: 4.5rem;    /* 72px */
+    --responsive-font-size-6xl: 5rem;      /* 80px */
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE SPACING SYSTEM
+   ========================================================================== */
+
+/* Base spacing - mobile first */
+:root {
+  --responsive-space-xs: 0.25rem;   /* 4px */
+  --responsive-space-sm: 0.5rem;    /* 8px */
+  --responsive-space-md: 0.75rem;   /* 12px */
+  --responsive-space-lg: 1rem;      /* 16px */
+  --responsive-space-xl: 1.5rem;    /* 24px */
+  --responsive-space-2xl: 2rem;     /* 32px */
+  --responsive-space-3xl: 2.5rem;   /* 40px */
+  --responsive-space-4xl: 3rem;     /* 48px */
+  --responsive-space-5xl: 4rem;     /* 64px */
+  --responsive-space-6xl: 5rem;     /* 80px */
+}
+
+/* Medium devices and up - increase spacing */
+@media (min-width: 768px) {
+  :root {
+    --responsive-space-xl: 2rem;      /* 32px */
+    --responsive-space-2xl: 2.5rem;   /* 40px */
+    --responsive-space-3xl: 3rem;     /* 48px */
+    --responsive-space-4xl: 4rem;     /* 64px */
+    --responsive-space-5xl: 5rem;     /* 80px */
+    --responsive-space-6xl: 6rem;     /* 96px */
+  }
+}
+
+/* Large devices and up - maximum spacing */
+@media (min-width: 992px) {
+  :root {
+    --responsive-space-2xl: 3rem;     /* 48px */
+    --responsive-space-3xl: 4rem;     /* 64px */
+    --responsive-space-4xl: 5rem;     /* 80px */
+    --responsive-space-5xl: 6rem;     /* 96px */
+    --responsive-space-6xl: 8rem;     /* 128px */
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE CONTAINER SYSTEM
+   ========================================================================== */
+
+.container-responsive {
+  width: 100%;
+  padding-left: var(--responsive-space-md);
+  padding-right: var(--responsive-space-md);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 576px) {
+  .container-responsive {
+    max-width: 540px;
+    padding-left: var(--responsive-space-lg);
+    padding-right: var(--responsive-space-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    max-width: 720px;
+    padding-left: var(--responsive-space-xl);
+    padding-right: var(--responsive-space-xl);
+  }
+}
+
+@media (min-width: 992px) {
+  .container-responsive {
+    max-width: 960px;
+    padding-left: var(--responsive-space-2xl);
+    padding-right: var(--responsive-space-2xl);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-responsive {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container-responsive {
+    max-width: 1320px;
+  }
+}

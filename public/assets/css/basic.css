@@ -25,51 +25,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 */
 
-/* Global Variables */
-:root {
-  --title-color: #a7c6ed; /* Pastel Blue */
-  --accent-color: #ff6f61; /* Pastel Coral */
-  --accent-dark: #d95f4f; /* Darker Pastel Coral */
-  --accent-light: #ff8f7b; /* Light Pastel Coral */
-  --accent-lighter: #ffb3a1; /* Lighter Pastel Coral */
-  --accent-lightest: #ffd3d1; /* Lightest Pastel Coral */
-  --accent-darkest: #c94c4c; /* Dark Pastel Coral */
-  --accent-darker: #a43d3d; /* Darker Pastel Coral */
-  --primary-color: #a0c4ff; /* Pastel Steel Blue */
-  --primary-dark: #7c9dd0; /* Darker Pastel Steel Blue */
-  --secondary-color: #b9fbc0; /* Pastel Green */
-  --secondary-dark: #8ef6a6; /* Darker Pastel Green */
-  --danger-color: #ff6b6b; /* Pastel Red */
-  --warning-color: #ffe66d; /* Pastel Yellow */
-  --success-color: #b9fbc0; /* Pastel Green */
-  --info-color: #85e3ff; /* Pastel Cyan */
-  --light-color: #f9f9f9; /* Very Light Pastel Gray */
-  --dark-color: #d3d3d3; /* Light Pastel Gray */
-  --gray-color: #b0b0b0; /* Light Gray */
-  --white-color: #ffffff; /* White */
-  --black-color: #000000; /* Black */
-  --gray-light: #f0f0f0; /* Light Gray */
-  --gray-dark: #808080; /* Dark Gray */
-  --gray-darker: #333333; /* Much darker gray for better contrast */
-  --gray-darkest: #000000; /* Pure black for maximum contrast */
-  --gray-lightest: #f5f5f5; /* Lightest Gray */
-  --gray-lighter: #e0e0e0; /* Lighter Gray */
-  --body-bg: #f0f4f8; /* Pastel Background */
-  --background-color: snow; /* Light Background Color */
-  --text-color: #000000; /* Pure black for maximum contrast */
-  --border-color: #e0e0e0; /* Light Border Color */
-  --panel-bg: seashell; /* Color for panels */
-  --panel-border: #dcdcdc; /* Light Gray Border for Panels */
-  --font-family-sans: 'Poppins', sans-serif;
-  --font-family-serif: 'Playfair Display', serif;
-  --font-family-mono: 'Source Code Pro', monospace;
-  --font-family-cursive: 'Pacifico', cursive;
-  --font-family-fantasy: 'Eagle Lake', 'Lobster', fantasy;
-  --font-family-system: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  --font-family-ui: 'ui-serif', 'ui-sans-serif', 'ui-monospace', 'ui-rounded';
-  --font-family-emoji: 'emoji', 'math', 'fangsong';
-  color: whitesmoke
-}
+/* Global Variables - Theme System */
+/* Theme variables are managed in themes.css */
+/* This file uses the consolidated theme variables from themes.css */
 
 /* Reset */
 *,
@@ -98,8 +56,8 @@ body {
   max-width: 1280px;
   padding: 0;
   font-family: var(--font-family-sans);
-  background-color: var(--body-bg);
-  color: var(--text-color);
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-size: 16px;
   line-height: 1.7; /* Improved line height for better readability */
   overflow-x: hidden;
@@ -124,8 +82,8 @@ dialog {
 footer {
   text-align: center;
   font-size: 0.9rem;
-  color: #000000; /* Pure black for maximum contrast */
-  border-top: 1px solid #eee;
+  color: var(--color-text);
+  border-top: 1px solid var(--color-border);
   margin-top: 2rem;
   padding-top: 1rem;
 }

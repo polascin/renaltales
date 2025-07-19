@@ -271,8 +271,7 @@ class ErrorHandler
 <html>
 <head>
     <title>{$title}</title>
-    <link rel="stylesheet" href="/assets/css/basic.css">
-    <link rel="stylesheet" href="/assets/css/error.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
     <h1>{$title}</h1>

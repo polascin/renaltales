@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace RenalTales\Views;
 
 use RenalTales\Models\LanguageModel;
+use RenalTales\Helpers\CSSOptimizer;
 use Exception;
 
 /**
@@ -170,6 +171,12 @@ class HomeView extends AbstractView
         string $currentYear
     ): string {
         $languageSwitcher = $this->renderLanguageSwitcher();
+        
+        // Use single main.css with cache busting and optimizations
+        $timestamp = time();
+        $optimizedCSS = "<link rel="stylesheet" href="/assets/css/main.css?v={$timestamp}" media="all">";
+        $containmentCSS = CSSOptimizer::generateContainmentCSS();
+        $performanceMonitoring = CSSOptimizer::generatePerformanceMonitoring();
 
         return <<<HTML
 <!DOCTYPE html>
@@ -184,49 +191,57 @@ class HomeView extends AbstractView
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="/assets/css/basic.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/layout.css">
-    <link rel="stylesheet" href="/assets/css/navigation.css">
-    <link rel="stylesheet" href="/assets/css/language-switcher.css">
-    <link rel="stylesheet" href="/assets/css/modern-home.css">
-    <link rel="stylesheet" href="/assets/css/responsive.css">
+    
+    {$optimizedCSS}
+    {$containmentCSS}
 </head>
 <body>
     <!-- Header Section -->
-<header class="main-header" role="banner">
-    <div class="container">
-        <div class="main-header-container">
-            <div class="left-section">
-                <a href="/" class="navbar-brand">
-                    <img src="/assets/images/logos/logo.webp" alt="{$pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
-                </a>
-            </div>
-            <div class="central-section">
-                <h1>{$this->getAppName()}</h1>
-                <h2>{$this->trans('app.subtitle', 'Supporting Kidney Health Stories')}</h2>
-            </div>
-            <div class="right-section">
-                {$languageSwitcher}
+    <header class="main-header" role="banner">
+        <div class="container">
+            <div class="header-container">
+                <div class="header-left">
+                    <a href="/" class="brand-logo">
+                        <img src="/assets/images/logos/logo.gif" alt="{$pageTitle} Logo" class="logo" role="img" onerror="this.style.display='none'">
+                    </a>
+                </div>
+                <div class="header-center">
+                    <h1 class="site-title">{$this->getAppName()}</h1>
+                    <p class="site-tagline">Supporting Kidney Health Stories</p>
+                </div>
+                <div class="header-right">
+                    <div class="header-controls">
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false" title="Switch between light and dark themes">
+                            <span class="theme-icon theme-icon-light" aria-hidden="true">☀️</span>
+                            <span class="theme-icon theme-icon-dark" aria-hidden="true">🌙</span>
+                        </button>
+                        {$languageSwitcher}
+                    </div>
+                </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-md">
-            <button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-navigation" role="navigation">
+        <div class="container">
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
             </button>
-            <div class="navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active"><a href="/" class="nav-link">{$home}</a></li>
-                    <li class="nav-item"><a href="/stories" class="nav-link">{$stories}</a></li>
-                    <li class="nav-item"><a href="/community" class="nav-link">{$community}</a></li>
-                    <li class="nav-item"><a href="/about" class="nav-link">{$about}</a></li>
-                    <li class="nav-item"><a href="/login" class="nav-link btn btn-primary">{$login}</a></li>
-                    <li class="nav-item"><a href="/register" class="nav-link btn btn-secondary">{$register}</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</header>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/" class="nav-link active">{$home}</a></li>
+                <li class="nav-item"><a href="/stories" class="nav-link">{$stories}</a></li>
+                <li class="nav-item"><a href="/community" class="nav-link">{$community}</a></li>
+                <li class="nav-item"><a href="/about" class="nav-link">{$about}</a></li>
+                <li class="nav-item nav-actions">
+                    <a href="/login" class="nav-link btn btn-outline">{$login}</a>
+                    <a href="/register" class="nav-link btn btn-primary">{$register}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Hero/Welcome Section -->
     <section class="hero-section">
@@ -334,6 +349,7 @@ class HomeView extends AbstractView
     </footer>
 
     <!-- JavaScript Files -->
+    <script src="/assets/js/theme-switcher.js"></script>
     <script src="/assets/js/language-switcher.js"></script>
     <script>
         // Mobile navigation toggle
@@ -372,15 +388,26 @@ class HomeView extends AbstractView
                 });
             }
 
-            // Language switcher keyboard shortcuts help
+            // Enhanced keyboard shortcuts help
             document.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && e.altKey && e.key === 'h') {
                     e.preventDefault();
-                    alert('Language Switcher Shortcuts:\n\nCtrl+Alt+L: Focus language selector\nCtrl+Alt+E: Switch to English\nCtrl+Alt+S: Switch to Slovak');
+                    alert('Keyboard Shortcuts:\n\nLanguage Switcher:\nCtrl+Alt+L: Focus language selector\nCtrl+Alt+E: Switch to English\nCtrl+Alt+S: Switch to Slovak\n\nTheme Toggle:\nCtrl+Alt+T: Toggle theme\nCtrl+Alt+D: Switch to dark theme\nCtrl+Alt+Light: Switch to light theme');
+                }
+                
+                // Theme toggle keyboard shortcuts
+                if (e.ctrlKey && e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    const themeToggle = document.getElementById('theme-toggle');
+                    if (themeToggle) {
+                        themeToggle.click();
+                    }
                 }
             });
         });
     </script>
+    
+    {$performanceMonitoring}
 </body>
 </html>
 HTML;
@@ -397,32 +424,23 @@ HTML;
             $currentLanguage = $this->getCurrentLanguage();
             $languageLabel = $this->getText('current_language', 'Language');
             $switchLanguageText = $this->getText('switch_language', 'Switch Language');
-            $currentLanguageText = $this->getText('current_language_is', 'Current language is');
 
             $options = '';
             // Iterate through supported languages to build options
             foreach ($this->supportedLanguages as $code => $name) {
                 $selected = $code === $currentLanguage ? 'selected' : '';
-                $flagClass = 'flag-' . strtolower($code);
-                $displayText = htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8') . ' [' . strtoupper(htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8')) . ']';
-                $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected} data-flag=\"{$flagClass}\">" . $displayText . "</option>";
+                $displayText = htmlspecialchars((string)$name, ENT_QUOTES, 'UTF-8');
+                $options .= "<option value=\"" . htmlspecialchars((string)$code, ENT_QUOTES, 'UTF-8') . "\" {$selected}>" . $displayText . "</option>";
             }
 
-            // Get current language name for display
-            $currentLanguageName = $this->supportedLanguages[$currentLanguage] ?? 'English';
-            $tooltipText = $currentLanguageText . ' ' . $currentLanguageName;
-
-            // HTML structure for language selector
+            // HTML structure for language selector - matching homepage.html structure
             return <<<HTML
 <div class="language-selector">
-    <div class="language-switcher" data-tooltip="{$tooltipText}" role="group" aria-label="{$switchLanguageText}">
-        <form class="language-form" method="get" action="" onsubmit="this.querySelector('.language-switcher').classList.add('loading')">
-            <label for="lang-select" class="language-label sr-only">{$languageLabel}:</label>
-            <select name="lang" id="lang-select" class="form-select language-select"
-                    onchange="this.form.submit()"
-                    aria-label="{$switchLanguageText}"
-                    title="{$switchLanguageText}">
-                {$options} <!-- Render language options -->
+    <div class="language-switcher">
+        <form class="language-form" method="get" action="">
+            <label for="lang-select" class="language-label">{$languageLabel}:</label>
+            <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
+                {$options}
             </select>
         </form>
     </div>

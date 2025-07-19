@@ -1,0 +1,116 @@
+/* Consolidated Language Switcher Styles */
+
+.language-selector {
+    position: relative;
+    display: inline-block;
+    margin: 0 0 0 auto;
+    background-color: var(--background-color, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    position: relative;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    font-size: 16px;
+}
+
+.language-switcher.loading::after {
+    content: "";
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.language-switcher select {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    background: var(--white-color, #ffffff);
+    color: var(--text-color, #000000);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.language-switcher select:focus {
+    outline: none;
+    border-color: var(--primary-color, #a0c4ff);
+    box-shadow: 0 0 0 3px rgba(160, 196, 255, 0.3);
+}
+
+.language-switcher .flag {
+    width: 24px;
+    height: 18px;
+    border-radius: 3px;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--border-color, #e0e0e0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.language-switcher .language-label {
+    font-weight: 600;
+    color: var(--text-color, #000000);
+    letter-spacing: 0.5px;
+}
+
+.language-switcher::before {
+    content: "🌐";
+    font-size: 1.2em;
+    margin-right: 0.25rem;
+    opacity: 0.7;
+}
+
+.language-switcher:focus-within {
+    outline: 2px solid var(--primary-color, #a0c4ff);
+    outline-offset: 2px;
+}
+
+.language-switcher select::-ms-expand {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        font-size: 15px;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .language-switcher .flag {
+        width: 20px;
+        height: 15px;
+    }
+
+    .language-switcher .language-label {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .language-switcher {
+        font-size: 14px;
+        padding: 0.3rem 0.6rem;
+    }
+}
+

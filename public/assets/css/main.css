@@ -1,0 +1,20 @@
+/* Main CSS Entry Point - RenalTales */
+/* Import CSS files in the correct order for optimal loading and style cascade */
+
+/* 1. CSS Variables and Theme System */
+@import 'themes.css';
+
+/* 2. Reset and Foundation */
+@import 'basic.css';
+
+/* 3. Layout Structure */
+@import 'layout.css';
+
+/* 4. UI Components */
+@import 'components.css';
+
+/* 5. Application-specific Styles */
+@import 'style.css';
+
+/* 6. Media Queries and Responsive Design */
+@import 'responsive.css';

@@ -1,42 +1,58 @@
 # CSS Architecture Documentation - Renal Tales
 
 ## Overview
-This document describes the CSS architecture and organization for the Renal Tales application after the CSS migration and restructuring.
+This document describes the modern CSS architecture and organization for the Renal Tales application. The architecture follows industry best practices with a modular, scalable, and maintainable approach using BEM methodology and CSS custom properties.
 
 ## File Structure
 
+### Main Orchestrator
+```
+main.css                   # Main CSS orchestrator with import order and comments
+```
+
 ### Core Foundation Files
 ```
-public/assets/css/
-├── basic.css           # CSS reset, variables, root styles, typography
-├── layout.css          # Grid system, containers, layout structures
-├── components.css      # UI components (buttons, forms, cards, modals)
-└── style.css          # Main application styles and header components
+core/
+├── variables.css          # Component-specific design tokens and variables
+├── reset.css              # CSS normalization and reset
+├── typography.css         # Typography styles and utility classes
+└── responsive-mixins.css  # Responsive design mixins and utilities
 ```
 
-### Page-Specific Styles
+### Layout System
 ```
-public/assets/css/
-├── home.css           # Homepage-specific styles
-├── navigation.css     # Navigation component styles
-├── error.css          # Error page styles
-├── language-switcher.css  # Language switcher component
-├── post-navigation.css    # Post navigation styles
-└── footnotes.css      # Footnotes styling
+layout/
+└── spacing.css           # Margin, padding, and spacing utilities
 ```
 
-### Responsive Styles
+### Component Library
 ```
-public/assets/css/
-├── responsive.css            # Main responsive breakpoints
-└── footnotes-responsive.css  # Responsive footnotes
+components/
+├── buttons.css           # Button variants and interactive states
+├── forms.css            # Form elements and validation styles
+├── cards.css            # Card component variants and layouts
+├── navigation.css       # Navigation and menu components
+└── modern-enhancements.css # Modern component enhancements
 ```
 
-### Production Files
+### Theme System
 ```
 public/assets/css/
-├── *.min.css          # Minified versions for production
-└── style.min.css      # Main minified stylesheet
+└── themes.css           # Unified theme system with light/dark modes
+```
+
+### Legacy and Application Styles
+```
+public/assets/css/
+├── basic.css            # Base styles and responsive typography
+├── layout.css           # Main layout containers and structures
+├── components.css       # Legacy component compatibility layer
+├── style.css           # General application and header styles
+├── modern-home.css     # Modern home page enhancements
+├── navigation.css      # Navigation-specific styles
+├── error.css           # Error page styles
+├── responsive.css      # Responsive utilities and breakpoints
+└── performance.css     # Performance-related optimizations
 ```
 
 ## CSS Naming Conventions
@@ -66,44 +82,44 @@ We follow BEM naming conventions for consistent, maintainable CSS:
 
 ## CSS Custom Properties (Variables)
 
-### Color System
+Our CSS architecture uses a comprehensive design token system with CSS custom properties. For complete documentation of our variable naming conventions, see [CSS Variable Naming Conventions](CSS_VARIABLE_NAMING.md).
+
+### Color System Overview
+The color system uses a modern approach with semantic tokens:
+
 ```css
-:root {
-  /* Primary Colors */
-  --primary-color: #a0c4ff;        /* Pastel Steel Blue */
-  --primary-dark: #7c9dd0;
-  
-  /* Accent Colors */
-  --accent-color: #ff6f61;         /* Pastel Coral */
-  --accent-dark: #d95f4f;
-  --accent-light: #ff8f7b;
-  
-  /* Semantic Colors */
-  --success-color: #b9fbc0;        /* Pastel Green */
-  --danger-color: #ff6b6b;         /* Pastel Red */
-  --warning-color: #ffe66d;        /* Pastel Yellow */
-  --info-color: #85e3ff;           /* Pastel Cyan */
-  
-  /* Neutral Colors */
-  --background-color: snow;
-  --text-color: #333333;
-  --border-color: #e0e0e0;
-  --panel-bg: seashell;
-  --panel-border: #dcdcdc;
-}
+/* Modern color scale (50-950) */
+--color-primary-500        /* Base brand color */
+--color-primary-hover      /* Interactive hover state */
+--color-primary-active     /* Interactive active state */
+
+/* Semantic color tokens */
+--color-background         /* Main page background */
+--color-text               /* Primary text color */
+--color-border             /* Default border color */
+--color-surface            /* Card and modal backgrounds */
 ```
 
-### Typography System
+### Typography System Overview
+Typography tokens following modular scale principles:
+
 ```css
-:root {
-  --font-family-sans: 'Poppins', sans-serif;
-  --font-family-serif: 'Playfair Display', serif;
-  --font-family-mono: 'Source Code Pro', monospace;
-  --font-family-cursive: 'Pacifico', cursive;
-  --font-family-fantasy: 'Eagle Lake', 'Lobster', fantasy;
-  --font-family-system: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+/* Font families */
+--font-family-sans         /* Primary interface font */
+--font-family-serif        /* Content and display font */
+--font-family-mono         /* Code and technical content */
+
+/* Modular font scale */
+--font-size-base           /* 16px base */
+--font-size-lg             /* 20px */
+--font-size-xl             /* 25px */
+--font-size-2xl            /* 31px */
 ```
+
+### Design Token Documentation
+For comprehensive documentation of all CSS variables and naming conventions, see:
+- **[CSS Variable Naming Conventions](CSS_VARIABLE_NAMING.md)** - Complete variable naming system
+- **[CSS Architecture Guide](CSS_ARCHITECTURE_GUIDE.md)** - Development methodology and best practices
 
 ## Responsive Design Strategy
 
@@ -244,8 +260,44 @@ We follow BEM naming conventions for consistent, maintainable CSS:
 - **Training**: Regular CSS architecture workshops
 - **Tools**: Use shared linting and formatting configurations
 
+## Related Documentation
+
+### CSS Architecture Documentation Suite
+This document is part of a comprehensive CSS architecture documentation suite:
+
+1. **[CSS Architecture Documentation](CSS_ARCHITECTURE.md)** (This file)
+   - Overview of file structure and organization
+   - BEM naming conventions
+   - Responsive design strategy
+   - Development guidelines
+
+2. **[CSS Architecture Guide](CSS_ARCHITECTURE_GUIDE.md)**
+   - Detailed development methodology
+   - Component architecture patterns
+   - Performance optimization strategies
+   - Theme system implementation
+   - Browser support and accessibility guidelines
+
+3. **[CSS Variable Naming Conventions](CSS_VARIABLE_NAMING.md)**
+   - Complete CSS custom property naming system
+   - Design token categories and hierarchies
+   - Usage guidelines and best practices
+   - Legacy compatibility mappings
+
+### Quick Reference Links
+- **Main CSS File**: [`main.css`](../main.css) - Main orchestrator with import order
+- **Theme System**: [`public/assets/css/themes.css`](../public/assets/css/themes.css) - Color and theme tokens
+- **Core Variables**: [`core/variables.css`](../core/variables.css) - Component design tokens
+- **Component Library**: [`components/`](../components/) - Modular UI components
+
+### External Resources
+- [BEM Methodology](https://getbem.com/) - Official BEM documentation
+- [ITCSS Architecture](https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/) - Scalable CSS architecture
+- [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) - MDN documentation
+- [CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) - Grid system reference
+
 ---
 
 **Last Updated**: December 2024  
 **Maintainer**: Frontend Development Team  
-**Version**: 1.0.0
+**Version**: 2.0.0

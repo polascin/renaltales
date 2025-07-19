@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Console Test - CSS Load Validation</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--color-background, #ffffff);
+            color: var(--color-text, #000000);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        .pass {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .fail {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        .console-output {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-line;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        button {
+            background: var(--color-primary, #007bff);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Load Validation - Browser Console Test</h1>
+    
+    <p>This page tests if all CSS files are loading correctly without 404 errors.</p>
+    
+    <div class="test-controls">
+        <button onclick="checkCSSFiles()">Check CSS File Loading</button>
+        <button onclick="checkCSSVariables()">Check CSS Variables</button>
+        <button onclick="checkResponsiveFeatures()">Check Responsive Features</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+    
+    <div id="results"></div>
+    
+    <div id="console-log">
+        <h3>Console Output:</h3>
+        <div class="console-output" id="console-output"></div>
+    </div>
+
+    <script>
+        // Console capture
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        function logToPage(type, ...args) {
+            const output = document.getElementById('console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const message = `[${timestamp}] ${type.toUpperCase()}: ${args.join(' ')}\n`;
+            output.textContent += message;
+            output.scrollTop = output.scrollHeight;
+            
+            // Also log to actual console
+            if (type === 'error') originalError(...args);
+            else if (type === 'warn') originalWarn(...args);
+            else originalLog(...args);
+        }
+        
+        console.log = (...args) => logToPage('log', ...args);
+        console.error = (...args) => logToPage('error', ...args);
+        console.warn = (...args) => logToPage('warn', ...args);
+
+        function addResult(type, message) {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('console-output').textContent = '';
+        }
+
+        async function checkCSSFiles() {
+            console.log('Starting CSS file validation...');
+            
+            const cssFiles = [
+                '/assets/css/main.css',
+                '/assets/css/themes.css',
+                '/assets/css/basic.css',
+                '/assets/css/layout.css',
+                '/assets/css/responsive.css',
+                '/assets/css/components.css'
+            ];
+
+            let passCount = 0;
+            let failCount = 0;
+
+            for (const file of cssFiles) {
+                try {
+                    const response = await fetch(file);
+                    if (response.ok) {
+                        const contentType = response.headers.get('Content-Type');
+                        if (contentType && contentType.includes('text/css')) {
+                            addResult('pass', `✓ ${file} loaded successfully (${response.status})`);
+                            console.log(`CSS file loaded: ${file}`);
+                            passCount++;
+                        } else {
+                            addResult('warning', `⚠ ${file} loaded but may not be CSS (${contentType})`);
+                            console.warn(`Unexpected content type for ${file}: ${contentType}`);
+                        }
+                    } else {
+                        addResult('fail', `✗ ${file} failed to load (${response.status})`);
+                        console.error(`Failed to load CSS file: ${file} (${response.status})`);
+                        failCount++;
+                    }
+                } catch (error) {
+                    addResult('fail', `✗ ${file} network error: ${error.message}`);
+                    console.error(`Network error loading ${file}:`, error);
+                    failCount++;
+                }
+            }
+
+            if (failCount === 0) {
+                addResult('pass', `✅ All ${passCount} CSS files loaded successfully - No 404 errors!`);
+            } else {
+                addResult('fail', `❌ ${failCount} CSS files failed to load`);
+            }
+        }
+
+        function checkCSSVariables() {
+            console.log('Checking CSS variables...');
+            
+            const testVariables = [
+                '--color-primary',
+                '--color-secondary',
+                '--color-background',
+                '--color-text',
+                '--color-border',
+                '--color-surface'
+            ];
+
+            const rootStyles = getComputedStyle(document.documentElement);
+            let variablesFound = 0;
+            
+            testVariables.forEach(variable => {
+                const value = rootStyles.getPropertyValue(variable);
+                if (value && value.trim()) {
+                    addResult('pass', `✓ ${variable}: ${value.trim()}`);
+                    variablesFound++;
+                } else {
+                    addResult('fail', `✗ ${variable} not found or empty`);
+                }
+            });
+
+            console.log(`Found ${variablesFound}/${testVariables.length} CSS variables`);
+            
+            if (variablesFound === testVariables.length) {
+                addResult('pass', '✅ All CSS variables loaded correctly');
+            } else {
+                addResult('warning', `⚠ ${testVariables.length - variablesFound} CSS variables missing`);
+            }
+        }
+
+        function checkResponsiveFeatures() {
+            console.log('Checking responsive features...');
+            
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            addResult('pass', `Current viewport: ${viewportWidth}x${viewportHeight}`);
+            
+            // Test media queries
+            const mediaQueries = [
+                { query: '(max-width: 320px)', name: 'Mobile Small' },
+                { query: '(max-width: 768px)', name: 'Mobile/Tablet' },
+                { query: '(max-width: 1024px)', name: 'Tablet/Desktop' },
+                { query: '(min-width: 1025px)', name: 'Desktop' }
+            ];
+
+            mediaQueries.forEach(({ query, name }) => {
+                const matches = window.matchMedia(query).matches;
+                if (matches) {
+                    addResult('pass', `✓ Current breakpoint: ${name} (${query})`);
+                }
+            });
+
+            // Test system preferences
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                addResult('pass', '✓ System prefers dark mode');
+            } else {
+                addResult('pass', '✓ System prefers light mode');
+            }
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                addResult('pass', '✓ User prefers reduced motion');
+            } else {
+                addResult('pass', '✓ User allows motion animations');
+            }
+
+            console.log('Responsive feature check completed');
+        }
+
+        // Auto-run initial checks
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, running automatic checks...');
+            setTimeout(() => {
+                checkCSSFiles();
+            }, 1000);
+        });
+
+        // Monitor for network errors
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'LINK' && e.target.rel === 'stylesheet') {
+                console.error('CSS file failed to load:', e.target.href);
+                addResult('fail', `✗ CSS load error: ${e.target.href}`);
+            }
+        });
+
+        // Log page load completion
+        window.addEventListener('load', function() {
+            console.log('All resources finished loading');
+            addResult('pass', '✅ Page fully loaded - checking for errors...');
+            
+            // Check if main CSS loaded by testing if variables are available
+            setTimeout(() => {
+                const testVar = getComputedStyle(document.documentElement).getPropertyValue('--color-primary');
+                if (testVar) {
+                    addResult('pass', '✅ Main CSS variables detected - CSS loaded successfully');
+                } else {
+                    addResult('fail', '❌ Main CSS variables not found - CSS may not have loaded');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
