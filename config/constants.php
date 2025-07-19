@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// -*- coding: utf-8 -*-
-
 /**
  * Constants for the RenalTales application
  * This file defines various constants used throughout the application
