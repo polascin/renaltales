@@ -127,7 +127,7 @@ class Stream implements StreamInterface
      */
     public function write($string): int
     {
-        $this->content .= $string;
+        $this->content = substr($this->content, 0, $this->position) . $string . substr($this->content, $this->position + strlen($string));
         return strlen($string);
     }
 

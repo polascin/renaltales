@@ -7,8 +7,8 @@ namespace RenalTales\Controllers;
 use RenalTales\Http\Response;
 use RenalTales\Helpers\Translation;
 use RenalTales\Core\Template;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface; // Add missing import
+use Psr\Http\Message\ResponseInterface; // Add missing import
 
 /**
  * Home Controller

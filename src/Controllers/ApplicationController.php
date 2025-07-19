@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace RenalTales\Controllers;
 
+
+use Psr\Http\Message\ServerRequestInterface;
 use RenalTales\Contracts\ControllerInterface;
 use RenalTales\Http\Response;
 use RenalTales\Core\Template;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -35,19 +36,30 @@ class ApplicationController implements ControllerInterface
 
     private function getRequestedPage(ServerRequestInterface $request): string
     {
-        $page = $request->getQueryParams()['page'] ?? 'home';
+        $params = $this->getQueryParams($request);
+        $page = $params['page'] ?? 'home';
         return is_string($page) ? trim($page) : 'home';
     }
 
     private function preparePageData(ServerRequestInterface $request, string $page): array
     {
+        $params = $this->getQueryParams($request);
         return [
             'page_title' => ucfirst($page),
             'app_name' => 'RenalTales',
-            'language' => $request->getQueryParams()['lang'] ?? 'en',
+            'language' => $params['lang'] ?? 'en',
             'current_page' => $page,
             'year' => date('Y')
         ];
+    }
+
+    /**
+     * Parse query parameters from PSR-7 ServerRequestInterface
+     */
+    private function getQueryParams(ServerRequestInterface $request): array
+    {
+        parse_str($request->getUri()->getQuery(), $params);
+        return $params;
     }
 
     private function createHtmlResponse(string $html): ResponseInterface
