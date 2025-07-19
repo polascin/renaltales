@@ -1,20 +1,64 @@
-/* Main CSS Entry Point - RenalTales */
-/* Import CSS files in the correct order for optimal loading and style cascade */
+/*!*
+ * MAIN.CSS - Modern Frontend Architecture for RenalTales
+ * =====================================================
+ * 
+ * Comprehensive frontend design system with:
+ * - Modern CSS architecture using CSS custom properties
+ * - Component-based design system
+ * - Accessibility-first approach
+ * - Performance optimizations
+ * - Responsive design patterns
+ * - Dark/light theme support
+ * 
+ * @author RenalTales Development Team
+ * @version 2025.v4.0
+ * @updated 2025-01-19
+ */
 
-/* 1. CSS Variables and Theme System */
+/* =============================================================================
+   ARCHITECTURE OVERVIEW
+   
+   1. CSS Variables & Design Tokens - Global design system variables
+   2. CSS Reset & Foundations - Normalize and base styles
+   3. Typography System - Responsive typography with fluid scaling
+   4. Layout System - Modern grid and flexbox layouts
+   5. Component System - Reusable UI components
+   6. Utility Classes - Functional CSS utilities
+   7. Application Styles - App-specific implementations
+   8. Responsive Design - Mobile-first responsive patterns
+   9. Accessibility Features - Enhanced accessibility support
+   10. Performance Optimizations - Critical CSS and loading strategies
+   ============================================================================= */
+
+/* 1. CSS Variables and Design Tokens */
 @import 'themes.css';
 
-/* 2. Reset and Foundation */
+/* 2. CSS Reset and Foundation Styles */
 @import 'basic.css';
 
-/* 3. Layout Structure */
+/* 3. Modern Typography System */
+@import 'typography.css';
+
+/* 4. Layout System (Grid, Flexbox, Containers) */
 @import 'layout.css';
 
-/* 4. UI Components */
+/* 5. Component System */
 @import 'components.css';
 
-/* 5. Application-specific Styles */
+/* 5.1. Enhanced Feature Cards */
+@import '../../components/feature-cards.css';
+
+/* 6. Navigation System */
+@import 'navigation.css';
+
+/* 7. Hero Section Enhancements */
+@import 'hero.css';
+
+/* 8. Application-specific Styles */
 @import 'style.css';
 
-/* 6. Media Queries and Responsive Design */
+/* 9. Responsive Design and Media Queries */
 @import 'responsive.css';
+
+/* 10. Performance and Critical CSS */
+@import 'performance.css';

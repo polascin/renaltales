@@ -174,7 +174,7 @@ class HomeView extends AbstractView
         
         // Use single main.css with cache busting and optimizations
         $timestamp = time();
-        $optimizedCSS = "<link rel="stylesheet" href="/assets/css/main.css?v={$timestamp}" media="all">";
+        $optimizedCSS = "<link rel=\"stylesheet\" href=\"/assets/css/main.css?v={$timestamp}\" media=\"all\">";
         $containmentCSS = CSSOptimizer::generateContainmentCSS();
         $performanceMonitoring = CSSOptimizer::generatePerformanceMonitoring();
 
@@ -196,6 +196,8 @@ class HomeView extends AbstractView
     {$containmentCSS}
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Header Section -->
     <header class="main-header" role="banner">
         <div class="container">
@@ -230,7 +232,7 @@ class HomeView extends AbstractView
                 <span class="hamburger"></span>
                 <span class="hamburger"></span>
             </button>
-            <ul class="nav-menu">
+            <ul class="nav-menu" aria-label="Primary navigation">
                 <li class="nav-item"><a href="/" class="nav-link active">{$home}</a></li>
                 <li class="nav-item"><a href="/stories" class="nav-link">{$stories}</a></li>
                 <li class="nav-item"><a href="/community" class="nav-link">{$community}</a></li>

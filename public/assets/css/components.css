@@ -1,22 +1,22 @@
 /*!*
- * COMPONENTS.CSS - UI Components for Renal Tales
- * ===============================================
+ * COMPONENTS.CSS - Modern UI Component System for RenalTales
+ * ==========================================================
  * 
- * Buttons, forms, cards, modals, alerts, and badges
+ * Comprehensive component library featuring:
+ * - Modern button variants with states and animations
+ * - Accessible form components with validation states
+ * - Flexible card layouts with content variants
+ * - Modal system with backdrop and focus management
+ * - Alert system with semantic variants
+ * - Interactive badges and indicators
+ * - Responsive table components
+ * - Styled list variants
+ * - Navigation components
+ * - Loading states and skeleton screens
  * 
- * Table of Contents:
- * 1. Buttons
- * 2. Forms
- * 3. Cards
- * 4. Modals
- * 5. Alerts
- * 6. Badges
- * 7. Tables
- * 8. Lists
- * 
- * @author Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin
- * @version 2025.v3.1.dev
- * @since 2024
+ * @author RenalTales Development Team
+ * @version 2025.v4.0
+ * @updated 2025-01-19
  */
 
 /* ========================================
@@ -403,4 +403,512 @@
 
 .list-group-flush .list-group-item:last-child {
   border-bottom-width: 0;
+}
+
+/* =============================================================================
+   MODERN COMPONENT SYSTEM - 2025 UPDATE
+   ============================================================================= */
+
+/* ========================================
+ * MODERN BUTTON SYSTEM
+ * ======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-normal);
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.btn-primary {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-color: var(--button-primary-border);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--button-primary-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active {
+  background-color: var(--button-primary-bg-active);
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border-color: var(--button-secondary-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--button-secondary-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+}
+
+.btn-lg {
+  padding: var(--space-lg) var(--space-2xl);
+  font-size: var(--text-lg);
+  border-radius: var(--radius-xl);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Button Loading State */
+.btn-loading {
+  pointer-events: none;
+  position: relative;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1rem;
+  margin: -0.5rem 0 0 -0.5rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.8s linear infinite;
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================
+ * MODERN FORM SYSTEM
+ * ======================================== */
+
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--input-text);
+  background-color: var(--input-bg);
+  background-clip: padding-box;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-lg);
+  transition: var(--transition-normal);
+  appearance: none;
+}
+
+.form-control:focus {
+  background-color: var(--input-bg-focus);
+  border-color: var(--input-border-focus);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+}
+
+.form-control::placeholder {
+  color: var(--input-placeholder);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: var(--color-surface-tertiary);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Form Validation States */
+.form-control.is-valid {
+  border-color: var(--color-success);
+}
+
+.form-control.is-invalid {
+  border-color: var(--color-danger);
+}
+
+.valid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-success);
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+/* ========================================
+ * MODERN CARD SYSTEM
+ * ======================================== */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--card-bg);
+  background-clip: border-box;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: var(--space-xl);
+}
+
+.card-title {
+  margin-bottom: var(--space-md);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.card-text {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.card-header {
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--color-surface-secondary);
+  border-bottom: 1px solid var(--card-border);
+  border-top-left-radius: calc(var(--radius-xl) - 1px);
+  border-top-right-radius: calc(var(--radius-xl) - 1px);
+}
+
+.card-footer {
+  padding: var(--space-lg) var(--space-xl);
+  background-color: var(--color-surface-secondary);
+  border-top: 1px solid var(--card-border);
+  border-bottom-left-radius: calc(var(--radius-xl) - 1px);
+  border-bottom-right-radius: calc(var(--radius-xl) - 1px);
+}
+
+/* Feature Cards */
+.feature-card {
+  text-align: center;
+  padding: var(--space-2xl);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-secondary) 100%);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.feature-card h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+/* ========================================
+ * NAVIGATION COMPONENTS
+ * ======================================== */
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--nav-text);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  transition: var(--transition-normal);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--nav-text-hover);
+  background-color: var(--color-surface-hover);
+}
+
+.nav-link.active {
+  color: var(--nav-text-active);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
+ * LOADING STATES & SKELETONS
+ * ======================================== */
+
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--color-primary-rgb), 0.1),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-secondary) 0%,
+    var(--color-surface-tertiary) 50%,
+    var(--color-surface-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  width: 60%;
+  margin-bottom: var(--space-md);
+}
+
+/* ========================================
+ * UTILITY COMPONENTS
+ * ======================================== */
+
+/* Divider */
+.divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-lg) 0;
+}
+
+.divider-text {
+  position: relative;
+  text-align: center;
+  background-color: var(--color-background);
+  padding: 0 var(--space-lg);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  margin: var(--space-lg) 0;
+}
+
+.divider-text::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-border);
+  z-index: -1;
+}
+
+/* Tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  background-color: var(--color-neutral-800);
+  color: var(--color-text-inverse);
+  text-align: center;
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-sm);
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--text-sm);
+  opacity: 0;
+  transition: var(--transition-fast);
+}
+
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--color-neutral-800) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Progress Bars */
+.progress {
+  display: flex;
+  height: 1rem;
+  overflow: hidden;
+  font-size: var(--text-xs);
+  background-color: var(--color-surface-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--color-text-inverse);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--color-primary);
+  transition: var(--transition-normal);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .btn {
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .card-body {
+    padding: var(--space-lg);
+  }
+  
+  .feature-card {
+    padding: var(--space-xl);
+  }
+  
+  .nav-link {
+    padding: var(--space-md);
+  }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-800) 0%,
+    var(--color-neutral-700) 50%,
+    var(--color-neutral-800) 100%
+  );
 }

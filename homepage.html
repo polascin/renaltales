@@ -14,6 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Eagle+Lake&family=Funnel+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/assets/css/hero.css">
+    <link rel="stylesheet" href="/assets/css/feature-cards.css">
+    <link rel="stylesheet" href="/assets/css/typography.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -87,63 +90,236 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">Vitajte v Renal Tales!</h2>
-                <p class="hero-subtitle">Podporná komunita pre ľudí postihnutých poruchami obličiek</p>
-                <p class="hero-description">Zdieľajte svoje príbehy, nájdite podporu a spojte sa s ostatnými na podobných cestách.</p>
-                <div class="hero-actions">
-                    <a href="/stories/create" class="btn btn-primary btn-large">Zdieľať príbeh</a>
-                    <a href="/stories" class="btn btn-secondary btn-large">Čítať príbehy</a>
+        <div class="hero-container">
+            <div class="hero-content" data-animate>
+                <div class="hero-text">
+                    <h2 class="hero-title">Vitajte v Renal Tales!</h2>
+                    <p class="hero-subtitle">Podporná komunita pre ľudí postihnutých poruchami obličiek</p>
+                    <p class="hero-description">Zdieľajte svoje príbehy, nájdite podporu a spojte sa s ostatnými na podobných cestách.</p>
+                    <div class="hero-actions">
+                        <a href="/stories/create" class="hero-btn hero-btn--primary" data-animate>Začať zdieľať príbeh</a>
+                        <a href="/stories" class="hero-btn hero-btn--secondary" data-animate>Objavovať príbehy</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-container">
+                        <div class="hero-image-placeholder">Loading...</div>
+                        <img class="hero-image" 
+                             data-lazy-src="data:image/svg+xml,%3Csvg width='1200' height='750' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234f46e5;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3Cg transform='translate(600,375)'%3E%3Ccircle cx='0' cy='-50' r='30' fill='white' opacity='0.8'/%3E%3Ccircle cx='-40' cy='10' r='25' fill='white' opacity='0.6'/%3E%3Ccircle cx='40' cy='10' r='25' fill='white' opacity='0.6'/%3E%3Ccircle cx='-20' cy='50' r='20' fill='white' opacity='0.4'/%3E%3Ccircle cx='20' cy='50' r='20' fill='white' opacity='0.4'/%3E%3C/g%3E%3Ctext x='50%25' y='85%25' font-family='Arial, sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='white' opacity='0.9'%3ECommunity Support%3C/text%3E%3C/svg%3E" 
+                             alt="Community support illustration - people coming together" />
+                    </div>
                 </div>
             </div>
+            <div class="hero-decoration hero-decoration--circle"></div>
+            <div class="hero-decoration hero-decoration--wave"></div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Features Section -->
-            <section class="features-section">
-                <div class="section-header">
-                    <h2>Ako vám môžeme pomôcť</h2>
-                    <p>Naša platforma ponúka rôzne spôsoby, ako sa spojiť s komunitou a nájsť podporu.</p>
+            <!-- Enhanced Features Section -->
+            <section class="features-section" aria-labelledby="features-title">
+                <!-- Section Header with Improved Typography Hierarchy -->
+                <div class="section-header" role="banner">
+                    <h2 id="features-title" class="section-title">
+                        Ako vám môžeme pomôcť
+                        <span class="section-title__accent">spojiť sa s komunitou</span>
+                    </h2>
+                    <p class="section-description">
+                        Naša platforma ponúka rôzne spôsoby, ako sa spojiť s komunitou a nájsť podporu. 
+                        Objavte funkcie navrhnuté špeciálne pre vašu cestu so zdravím obličiek.
+                    </p>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                        </div>
-                        <h3>Zdieľajte svoj príbeh</h3>
-                        <p>Vaša skúsenosť je cenná. Zdieľajte svoju cestu, aby ste inšpirovali a podporili ostatných v našej komunite.</p>
-                        <a href="/stories/create" class="btn btn-outline">Začať písať</a>
+
+                <!-- Enhanced Feature Cards Container -->
+                <div class="feature-cards" role="region" aria-label="Platform features">
+                    <div class="feature-cards__container">
+                        
+                        <!-- Feature Card 1: Share Your Story -->
+                        <article class="feature-card feature-card--primary" tabindex="0" role="article">
+                            <!-- Optional shimmer effect -->
+                            <div class="feature-card__shimmer" aria-hidden="true"></div>
+                            
+                            <!-- Enhanced Icon with Semantic Meaning -->
+                            <div class="feature-card__icon" role="img" aria-label="Share story icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                </svg>
+                            </div>
+                            
+                            <!-- Enhanced Content Structure -->
+                            <div class="feature-card__content">
+                                <h3 class="feature-card__title">
+                                    Zdieľajte svoj príbeh
+                                    <span class="feature-card__sr-only">- Napíšte a zdieľajte svoju osobnú skúsenosť</span>
+                                </h3>
+                                
+                                <p class="feature-card__description">
+                                    Vaša skúsenosť je cenná a môže inšpirovať ostatných. Zdieľajte svoju cestu, 
+                                    výzvy a víťazstvá, aby ste podporili ostatných členov našej komunity na podobných cestách.
+                                </p>
+                                
+                                <!-- Enhanced Action Button -->
+                                <div class="feature-card__action">
+                                    <a href="/stories/create" 
+                                       class="feature-card__btn"
+                                       role="button"
+                                       aria-describedby="share-story-desc">
+                                        <span>Začať písať</span>
+                                        <svg class="feature-card__btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    <div id="share-story-desc" class="feature-card__sr-only">
+                                        Otvorí formulár pre vytvorenie nového príbehu
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Feature Card 2: Read Stories -->
+                        <article class="feature-card feature-card--info" tabindex="0" role="article">
+                            <div class="feature-card__shimmer" aria-hidden="true"></div>
+                            
+                            <div class="feature-card__icon" role="img" aria-label="Read stories icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                            </div>
+                            
+                            <div class="feature-card__content">
+                                <h3 class="feature-card__title">
+                                    Čítajte príbehy
+                                    <span class="feature-card__sr-only">- Objavte inšpiratívne príbehy ostatných</span>
+                                </h3>
+                                
+                                <p class="feature-card__description">
+                                    Nájdite inšpiráciu, útěchu a praktické rady v autentických skúsenostiach 
+                                    ostatných členov našej komunity. Každý príbeh je jedinečný a hodnotný.
+                                </p>
+                                
+                                <div class="feature-card__action">
+                                    <a href="/stories" 
+                                       class="feature-card__btn"
+                                       role="button"
+                                       aria-describedby="read-stories-desc">
+                                        <span>Prehliadať príbehy</span>
+                                        <svg class="feature-card__btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    <div id="read-stories-desc" class="feature-card__sr-only">
+                                        Prejde na stránku so všetkými príbehmi komunity
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Feature Card 3: Join Community -->
+                        <article class="feature-card feature-card--success" tabindex="0" role="article">
+                            <div class="feature-card__shimmer" aria-hidden="true"></div>
+                            
+                            <div class="feature-card__icon" role="img" aria-label="Community icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            
+                            <div class="feature-card__content">
+                                <h3 class="feature-card__title">
+                                    Pripojte sa ku komunite
+                                    <span class="feature-card__sr-only">- Spojte sa s ostatnými členmi</span>
+                                </h3>
+                                
+                                <p class="feature-card__description">
+                                    Spojte sa s ľuďmi, ktorí rozumejú vašej situácii. Zapojte sa do diskusií, 
+                                    zdieľajte skúsenosti a budujte trvalé priateľstvá v podpornom prostredí.
+                                </p>
+                                
+                                <div class="feature-card__action">
+                                    <a href="/community" 
+                                       class="feature-card__btn"
+                                       role="button"
+                                       aria-describedby="join-community-desc">
+                                        <span>Preskúmať komunitu</span>
+                                        <svg class="feature-card__btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    <div id="join-community-desc" class="feature-card__sr-only">
+                                        Otvorí komunitnú sekciu s diskusiami a aktivitami
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Feature Card 4: Get Support (New Addition) -->
+                        <article class="feature-card feature-card--warning" tabindex="0" role="article">
+                            <div class="feature-card__shimmer" aria-hidden="true"></div>
+                            
+                            <div class="feature-card__icon" role="img" aria-label="Support icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <path d="M12 17h.01"></path>
+                                </svg>
+                            </div>
+                            
+                            <div class="feature-card__content">
+                                <h3 class="feature-card__title">
+                                    Získajte podporu
+                                    <span class="feature-card__sr-only">- Nájdite pomoc a odpovede</span>
+                                </h3>
+                                
+                                <p class="feature-card__description">
+                                    Potrebujete pomoc alebo máte otázky? Naše centrum podpory obsahuje užitočné 
+                                    zdroje, často kladené otázky a možnosti priameho kontaktu s naším tímom.
+                                </p>
+                                
+                                <div class="feature-card__action">
+                                    <a href="/support" 
+                                       class="feature-card__btn"
+                                       role="button"
+                                       aria-describedby="get-support-desc">
+                                        <span>Centrum podpory</span>
+                                        <svg class="feature-card__btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                    <div id="get-support-desc" class="feature-card__sr-only">
+                                        Otvorí centrum podpory s pomocnými zdrojmi
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                            </svg>
+                </div>
+
+                <!-- Optional: Feature Statistics -->
+                <div class="features-stats" role="complementary" aria-label="Platform statistics">
+                    <div class="features-stats__container">
+                        <div class="stat-card">
+                            <div class="stat-card__number" aria-label="500 plus">500+</div>
+                            <div class="stat-card__label">Zdieľaných príbehov</div>
                         </div>
-                        <h3>Čítajte príbehy</h3>
-                        <p>Nájdite inšpiráciu a útěchu v skúsenostiach ostatných členov našej komunity.</p>
-                        <a href="/stories" class="btn btn-outline">Prehliadať príbehy</a>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                        <div class="stat-card">
+                            <div class="stat-card__number" aria-label="1200 plus">1,200+</div>
+                            <div class="stat-card__label">Aktivních členov</div>
                         </div>
-                        <h3>Pripojte sa ku komunite</h3>
-                        <p>Spojte sa s ostatnými, zapojte sa do diskusií a budujte trvalé priateľstvá.</p>
-                        <a href="/community" class="btn btn-outline">Preskúmať komunitu</a>
+                        <div class="stat-card">
+                            <div class="stat-card__number" aria-label="50 plus">50+</div>
+                            <div class="stat-card__label">Krajín</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__number" aria-label="24 lomítko 7">24/7</div>
+                            <div class="stat-card__label">Komunita online</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -315,5 +491,7 @@
     
     <!-- Theme Switcher Script -->
     <script src="/assets/js/theme-switcher.js"></script>
+    <script src="/assets/js/hero-optimizations.js"></script>
+    <script src="/assets/js/feature-cards.js"></script>
 </body>
 </html>

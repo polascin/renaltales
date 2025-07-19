@@ -1,3 +1,360 @@
+/*!*
+ * PERFORMANCE.CSS - Performance Optimization System for RenalTales
+ * =================================================================
+ * 
+ * Comprehensive performance optimization features:
+ * - Critical CSS loading strategies
+ * - Image loading optimizations
+ * - Animation performance
+ * - Memory usage optimizations
+ * - Render blocking prevention
+ * - Progressive enhancement
+ * 
+ * @author RenalTales Development Team
+ * @version 2025.v4.0
+ * @updated 2025-01-19
+ */
+
+/* =============================================================================
+   CRITICAL CSS & LOADING STRATEGIES
+   ============================================================================= */
+
+/* Above-the-fold content optimization */
+.critical {
+  /* Mark critical content for priority loading */
+  content-visibility: auto;
+  contain-intrinsic-size: auto;
+}
+
+/* Defer non-critical content rendering */
+.non-critical {
+  content-visibility: auto;
+  contain-intrinsic-size: 300px;
+}
+
+/* =============================================================================
+   IMAGE OPTIMIZATION
+   ============================================================================= */
+
+/* Progressive image loading */
+img {
+  /* Optimize image rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  
+  /* Lazy loading by default */
+  loading: lazy;
+  
+  /* Decode images asynchronously */
+  decoding: async;
+}
+
+/* Critical images (above the fold) */
+img.critical {
+  loading: eager;
+  decoding: sync;
+  fetchpriority: high;
+}
+
+/* Image placeholders for better UX */
+.img-placeholder {
+  background-color: var(--color-surface-secondary);
+  background-image: linear-gradient(
+    45deg,
+    transparent 25%,
+    var(--color-surface-tertiary) 25%,
+    var(--color-surface-tertiary) 75%,
+    transparent 75%
+  );
+  background-size: 20px 20px;
+  animation: placeholder-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes placeholder-shimmer {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+/* =============================================================================
+   ANIMATION PERFORMANCE
+   ============================================================================= */
+
+/* GPU-accelerated animations */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize transform animations */
+.animate-transform {
+  will-change: transform;
+}
+
+.animate-opacity {
+  will-change: opacity;
+}
+
+/* Clean up will-change after animation */
+.animation-complete {
+  will-change: auto;
+}
+
+/* =============================================================================
+   LAYOUT PERFORMANCE
+   ============================================================================= */
+
+/* Prevent layout shifts */
+.layout-stable {
+  contain: layout style paint;
+}
+
+/* Optimize scroll performance */
+.scroll-optimized {
+  transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Container queries preparation */
+.container-query {
+  container-type: inline-size;
+  contain: layout inline-size;
+}
+
+/* =============================================================================
+   MEMORY OPTIMIZATION
+   ============================================================================= */
+
+/* Optimize off-screen content */
+.offscreen {
+  content-visibility: hidden;
+  contain: strict;
+}
+
+/* Virtual scrolling optimization */
+.virtual-scroll {
+  contain: layout style paint size;
+  overflow: auto;
+  height: 100%;
+}
+
+/* =============================================================================
+   FONT LOADING OPTIMIZATION
+   ============================================================================= */
+
+/* Font display strategy */
+@font-face {
+  font-display: swap; /* Prevent invisible text */
+}
+
+/* Preload critical fonts */
+.font-preload {
+  font-display: optional;
+}
+
+/* =============================================================================
+   CSS CONTAINMENT
+   ============================================================================= */
+
+/* Component isolation */
+.component {
+  contain: layout style;
+}
+
+.isolated-component {
+  contain: layout style paint;
+}
+
+.strict-component {
+  contain: strict;
+  contain-intrinsic-size: 300px 200px;
+}
+
+/* =============================================================================
+   PROGRESSIVE ENHANCEMENT
+   ============================================================================= */
+
+/* Base styles for no-JS environment */
+.no-js .js-only {
+  display: none !important;
+}
+
+/* Progressive disclosure */
+.progressive-disclosure {
+  display: none;
+}
+
+.js .progressive-disclosure {
+  display: block;
+}
+
+/* =============================================================================
+   INTERACTION OPTIMIZATIONS
+   ============================================================================= */
+
+/* Touch action optimization */
+.touch-optimized {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Scroll anchoring */
+.scroll-anchor {
+  overflow-anchor: auto;
+}
+
+.no-scroll-anchor {
+  overflow-anchor: none;
+}
+
+/* =============================================================================
+   VIEWPORT OPTIMIZATIONS
+   ============================================================================= */
+
+/* Intersection observer targets */
+.observe-visibility {
+  /* Placeholder for intersection observer */
+  transition: opacity var(--transition-normal);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =============================================================================
+   CRITICAL RENDERING PATH
+   ============================================================================= */
+
+/* Above-the-fold critical styles */
+.hero-section,
+.main-header,
+.main-navigation {
+  /* Mark as critical for rendering */
+  contain: layout style;
+  will-change: auto;
+}
+
+/* Below-the-fold optimization */
+.below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+/* =============================================================================
+   BROWSER-SPECIFIC OPTIMIZATIONS
+   ============================================================================= */
+
+/* Safari optimizations */
+@supports (-webkit-appearance: none) {
+  .safari-optimized {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* Firefox optimizations */
+@-moz-document url-prefix() {
+  .firefox-optimized {
+    transform: translateZ(0);
+  }
+}
+
+/* Chrome optimizations */
+@supports (contain: paint) {
+  .chrome-optimized {
+    contain: layout style paint;
+  }
+}
+
+/* =============================================================================
+   PERFORMANCE MONITORING
+   ============================================================================= */
+
+/* Performance markers */
+.perf-marker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-accent);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* =============================================================================
+   MEDIA QUERIES FOR PERFORMANCE
+   ============================================================================= */
+
+/* Reduce animations for low-end devices */
+@media (max-width: 480px), (max-height: 640px) {
+  * {
+    animation-duration: 0.1s !important;
+    transition-duration: 0.1s !important;
+  }
+}
+
+/* High-performance mode for modern browsers */
+@supports (contain: paint) and (content-visibility: auto) {
+  .modern-browser {
+    contain: layout style paint;
+    content-visibility: auto;
+  }
+}
+
+/* Print performance */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* =============================================================================
+   ACCESSIBILITY PERFORMANCE
+   ============================================================================= */
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* High contrast performance */
+@media (prefers-contrast: high) {
+  .high-contrast-optimized {
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+}
+
 /**
  * Performance Optimized CSS
  * 
