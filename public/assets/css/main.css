@@ -1,55 +1,103 @@
-/*!*
- * MAIN.CSS - Modern Frontend Architecture for RenalTales
- * =====================================================
- * 
- * Comprehensive frontend design system with:
- * - Modern CSS architecture using CSS custom properties
- * - Component-based design system
- * - Accessibility-first approach
- * - Performance optimizations
- * - Responsive design patterns
- * - Dark/light theme support
- * 
- * @author RenalTales Development Team
- * @version 2025.v4.0
- * @updated 2025-01-19
- */
+/* MAIN.CSS - Consolidated Frontend Styles for RenalTales */
 
-/* =============================================================================
-   ARCHITECTURE OVERVIEW
-   
-   1. CSS Variables & Design Tokens - Global design system variables
-   2. CSS Reset & Foundations - Normalize and base styles
-   3. Typography System - Responsive typography with fluid scaling
-   4. Layout System - Modern grid and flexbox layouts
-   5. Component System - Reusable UI components
-   6. Utility Classes - Functional CSS utilities
-   7. Application Styles - App-specific implementations
-   8. Responsive Design - Mobile-first responsive patterns
-   9. Accessibility Features - Enhanced accessibility support
-   10. Performance Optimizations - Critical CSS and loading strategies
-   ============================================================================= */
+/* Architecture Overview:
+   --------------------------------
+   1. CSS Variables & Design Tokens
+   2. CSS Reset & Foundations
+   3. Typography System
+   4. Layout System
+   5. Component System
+   6. Utility Classes
+   7. Application Styles
+   8. Responsive Design
+   9. Accessibility Features
+   10. Performance Optimizations */
 
+/* 1. CSS Variables and Design Tokens */
 /* 1. CSS Variables and Design Tokens */
 @import 'themes.css';
 
 /* 2. CSS Reset and Foundation Styles */
-@import 'basic.css';
+/* 2. CSS Reset and Foundation Styles */
+/* Base Reset Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, a {
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+}
 
 /* 3. Modern Typography System */
 @import 'typography.css';
 
 /* 4. Layout System (Grid, Flexbox, Containers) */
-@import 'layout.css';
+/* 3. Layout System */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+/* Container Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 /* 5. Component System */
-@import 'components.css';
+/* 4. Components */
+/* Navigation */
+.nav {
+  list-style: none;
+  display: flex;
+}
+.nav-link {
+  text-decoration: none;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+}
+.button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Cards */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.card__title {
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-lg);
+}
+
+/* Forms */
+.form {
+  width: 100%;
+}
+.form__group {
+  margin-bottom: var(--space-md);
+}
 
 /* 5.1. Enhanced Feature Cards */
 @import '../../components/feature-cards.css';
 
 /* 6. Navigation System */
-@import 'navigation.css';
+@import 'components/navigation.css';
 
 /* 7. Hero Section Enhancements */
 @import 'hero.css';
@@ -58,7 +106,14 @@
 @import 'style.css';
 
 /* 9. Responsive Design and Media Queries */
-@import 'responsive.css';
+/* 5. Responsive Design */
+@media (max-width: 480px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Add responsive rules here */
 
 /* 10. Performance and Critical CSS */
 @import 'performance.css';
+

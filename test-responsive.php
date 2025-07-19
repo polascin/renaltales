@@ -6,7 +6,7 @@
 echo "=== Responsive Design Test ===\n\n";
 
 // Test responsive.css content
-$responsiveCss = __DIR__ . '/public/assets/css/responsive.css';
+$responsiveCss = __DIR__ . '/public/assets/css/base/responsive.css';
 
 if (file_exists($responsiveCss)) {
     $content = file_get_contents($responsiveCss);
@@ -141,3 +141,4 @@ echo "3. Test on actual mobile devices\n";
 echo "4. Check touch interactions and mobile navigation\n";
 
 ?>
+

@@ -203,7 +203,22 @@ class ServiceProvider
      */
     private function registerServices(): void
     {
-        // Register LanguageService
+        // Register simplified Translation service as singleton
+        $this->container->singleton(\RenalTales\Helpers\Translation::class, function (Container $container) {
+            // Use global translation instance if available
+            if (isset($GLOBALS['translation']) && $GLOBALS['translation'] instanceof \RenalTales\Helpers\Translation) {
+                return $GLOBALS['translation'];
+            }
+            return new \RenalTales\Helpers\Translation();
+        });
+
+        // Register SimpleLanguageController
+        $this->container->bind(\RenalTales\Controllers\SimpleLanguageController::class, function (Container $container) {
+            $translation = $container->resolve(\RenalTales\Helpers\Translation::class);
+            return new \RenalTales\Controllers\SimpleLanguageController($translation);
+        });
+
+        // Keep legacy LanguageService for backward compatibility (deprecated)
         $this->container->bind(LanguageService::class, function (Container $container) {
             $languageRepository = $container->resolve(CachedLanguageRepository::class);
             $sessionManager = $container->resolve(SessionManager::class);

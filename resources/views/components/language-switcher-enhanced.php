@@ -40,13 +40,13 @@ $flags = [
 ];
 ?>
 
-<div class="language-selector" role="region" aria-label="Language selection">
-    <div class="language-selector-container">
+<div  role="region" aria-label="Language selection">
+    <div >
         <form class="language-form" method="get" action="" novalidate>
             <fieldset>
                 <legend class="sr-only">Select your preferred language</legend>
                 
-                <div class="language-switcher" 
+                <div  
                      data-tooltip="Current language is <?= htmlspecialchars($currentLanguageName) ?>"
                      role="group"
                      aria-label="Language selection">
@@ -127,7 +127,7 @@ $flags = [
 <script>
 // Enhanced Language Switcher Initialization
 document.addEventListener('DOMContentLoaded', function() {
-    const languageSwitcher = document.querySelector('.language-switcher');
+    const languageSwitcher = document.querySelector('');
     const languageSelect = document.getElementById('lang-select');
     const languageForm = document.querySelector('.language-form');
     
@@ -263,3 +263,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+

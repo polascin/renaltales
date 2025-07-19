@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RenalTales - Responsive Demo</title>
+    <link rel="stylesheet" href="../public/assets/css/main.css">
+    <style>
+        .demo-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+        .viewport-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 1000;
+        }
+        .component-showcase {
+            display: grid;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        @media (min-width: 768px) {
+            .component-showcase {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .component-showcase {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="viewport-info">
+        <div>Viewport: <span id="viewport-size">0x0</span></div>
+        <div>Breakpoint: <span id="breakpoint">unknown</span></div>
+    </div>
+
+    <div class="header">
+        <div class="header__container">
+            <div class="header__left">
+                <img src="../public/assets/images/logo.png" alt="RenalTales" class="header__logo">
+            </div>
+            <div class="header__center">
+                <h1>RenalTales</h1>
+                <h2>Responsive Design Test</h2>
+            </div>
+            <div class="header__right">
+                <div class="lang-switcher">
+                    <select class="lang-switcher__selector">
+                        <option value="en">English</option>
+                        <option value="sk">Slovenčina</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Services</a></li>
+            <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="breadcrumbs">
+            <div class="breadcrumbs__item">
+                <a href="#" class="breadcrumbs__link">Home</a>
+            </div>
+            <div class="breadcrumbs__item">
+                <span class="breadcrumbs__current">Responsive Test</span>
+            </div>
+        </div>
+
+        <section class="demo-section">
+            <h2>Button Components</h2>
+            <div class="component-showcase">
+                <button class="button button--primary">Primary Button</button>
+                <button class="button button--secondary">Secondary Button</button>
+                <button class="button button--success">Success Button</button>
+                <button class="button button--danger">Danger Button</button>
+                <button class="button button--small">Small Button</button>
+                <button class="button button--large">Large Button</button>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <h2>Form Components</h2>
+            <div class="form">
+                <div class="form__group">
+                    <label class="form__label">Email Address</label>
+                    <input type="email" class="form__input" placeholder="Enter your email">
+                </div>
+                <div class="form__group">
+                    <label class="form__label">Message</label>
+                    <textarea class="form__input" rows="4" placeholder="Your message"></textarea>
+                </div>
+                <button class="button button--primary">Submit</button>
+            </div>
+        </section>
+
+        <section class="demo-section">
+            <h2>Card Components</h2>
+            <div class="component-showcase">
+                <div class="card">
+                    <div class="card__header">
+                        <h3 class="card__title">Sample Card</h3>
+                    </div>
+                    <div class="card__body">
+                        <p class="card__text">This is a sample card with some content to test responsive behavior.</p>
+                    </div>
+                    <div class="card__footer">
+                        <button class="button button--primary">Action</button>
+                    </div>
+                </div>
+                
+                <div class="card card--elevated">
+                    <div class="card__body">
+                        <h4 class="card__title">Elevated Card</h4>
+                        <p class="card__text">This card has enhanced shadow for better visual hierarchy.</p>
+                    </div>
+                </div>
+                
+                <div class="card card--outlined">
+                    <div class="card__body">
+                        <h4 class="card__title">Outlined Card</h4>
+                        <p class="card__text">This card uses borders instead of shadows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            document.getElementById('viewport-size').textContent = width + 'x' + height;
+            
+            let breakpoint = 'Unknown';
+            if (width < 480) breakpoint = 'Small Mobile';
+            else if (width < 768) breakpoint = 'Mobile';
+            else if (width < 992) breakpoint = 'Tablet';
+            else if (width < 1200) breakpoint = 'Small Desktop';
+            else breakpoint = 'Desktop';
+            
+            document.getElementById('breakpoint').textContent = breakpoint;
+        }
+        
+        window.addEventListener('resize', updateViewportInfo);
+        window.addEventListener('load', updateViewportInfo);
+        
+        // Test responsive images
+        if ('ResizeObserver' in window) {
+            const observer = new ResizeObserver(entries => {
+                console.log('Viewport changed:', entries[0].contentRect);
+            });
+            observer.observe(document.body);
+        }
+    </script>
+</body>
+</html>

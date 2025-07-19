@@ -183,10 +183,10 @@
 @import url('public/assets/css/modern-home.css');
 
 /* Error page specific styling and messaging components */
-@import url('public/assets/css/error.css');
+@import url('public/assets/css/pages/error.css');
 
 /* Application navigation styling (distinct from component navigation) */
-@import url('public/assets/css/navigation.css');
+@import url('public/assets/css/components/navigation.css');
 
 /* ==========================================================================
    LAYER 9: RESPONSIVE UTILITIES & PERFORMANCE
@@ -203,7 +203,7 @@
    ========================================================================== */
 
 /* Responsive breakpoint utilities, visibility classes, and mobile optimizations */
-@import url('public/assets/css/responsive.css');
+@import url('public/assets/css/base/responsive.css');
 
 /* Performance optimizations including critical CSS and loading improvements */
 @import url('public/assets/css/performance.css');
@@ -239,3 +239,4 @@
 */
 
 /* END OF CSS ARCHITECTURE - All imports above this line */
+

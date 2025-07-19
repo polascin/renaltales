@@ -68,7 +68,7 @@ class CSSValidator {
             'typography.css' =&gt; '@import url(\'core/typography.css\')',
             'layout.css' =&gt; '@import url(\'public/assets/css/layout.css\')',
             'basic.css' =&gt; '@import url(\'public/assets/css/basic.css\')',
-            'responsive.css' =&gt; '@import url(\'public/assets/css/responsive.css\')'
+            'responsive.css' =&gt; '@import url(\'public/assets/css/base/responsive.css\')'
         ];
         
         foreach ($requiredImports as $file =&gt; $expectedImport) {
@@ -101,7 +101,7 @@ class CSSValidator {
             'public/assets/css/basic.css',
             'public/assets/css/components.css',
             'public/assets/css/layout.css',
-            'public/assets/css/responsive.css',
+            'public/assets/css/base/responsive.css',
             'core/variables.css',
             'core/reset.css',
             'core/typography.css',
@@ -242,7 +242,7 @@ class CSSValidator {
     private function testResponsiveBreakpoints() {
         echo "&lt;div class='section'&gt;&lt;h2&gt;Test 5: Responsive Breakpoint Validation&lt;/h2&gt;\n";
         
-        $responsiveFile = $this->basePath . DIRECTORY_SEPARATOR . 'public/assets/css/responsive.css';
+        $responsiveFile = $this->basePath . DIRECTORY_SEPARATOR . 'public/assets/css/base/responsive.css';
         
         if (!file_exists($responsiveFile)) {
             $this->addError("Responsive CSS file not found");
@@ -312,3 +312,4 @@ class CSSValidator {
 $validator = new CSSValidator(__DIR__);
 $validator-&gt;validateAll();
 ?&gt;
+

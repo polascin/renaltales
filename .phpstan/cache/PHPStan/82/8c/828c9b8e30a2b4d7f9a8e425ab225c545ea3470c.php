@@ -1,7 +1,0 @@
-<?php declare(strict_types = 1);
-
-// variadic-method-RenalTales\Controllers\ViewController-initializeView-G:\Môj disk\www\renaltales\src\Controllers\ViewController.php
-return \PHPStan\Cache\CacheItem::__set_state(array(
-   'variableKey' => '1752826655-v4',
-   'data' => false,
-));

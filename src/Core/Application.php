@@ -10,7 +10,7 @@ use RenalTales\Controllers\ApplicationController;
 use RenalTales\Http\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Exception;
+use RenalTales\Core\Router;
 
 /**
  * Application Factory
@@ -66,20 +66,14 @@ class Application
         }
 
         try {
-            // Register all services
-            $this->serviceProvider->register();
-
-            // Boot all services
-            $this->serviceProvider->boot();
-
-            // Create the main application controller
-            $this->applicationController = $this->container->resolve(ApplicationController::class);
-
+            // Simplified bootstrap - just mark as bootstrapped
+            // We're no longer using complex service providers
             $this->bootstrapped = true;
 
             return $this;
-        } catch (Exception $e) {
-            throw new Exception("Failed to bootstrap application: {$e->getMessage()}", 0, $e);
+        } catch (\Throwable $e) {
+            error_log("Failed to bootstrap application: {$e->getMessage()}");
+            throw new \Exception("Failed to bootstrap application: {$e->getMessage()}", 0, $e);
         }
     }
 
@@ -91,18 +85,23 @@ class Application
      */
     public function run(): void
     {
-        if (!$this->bootstrapped || $this->applicationController === null) {
-            throw new Exception('Application must be bootstrapped before running');
+        try {
+            // Create a PSR-7 request from globals
+            $request = $this->createRequestFromGlobals();
+
+            // Use the new Router to handle the request
+            $router = new Router();
+            $response = $router->handle($request);
+
+            // Send the response
+            $this->sendResponse($response);
+        } catch (\Throwable $e) {
+            // Handle any errors that occur during request processing
+            error_log("Application error: " . $e->getMessage());
+            
+            // Send a simple error response
+            $this->sendErrorResponse($e->getMessage(), 500);
         }
-
-        // Create a PSR-7 request from globals
-        $request = $this->createRequestFromGlobals();
-
-        // Handle the request and get the response
-        $response = $this->applicationController->handle($request);
-
-        // Send the response
-        $this->sendResponse($response);
     }
 
     /**
@@ -296,5 +295,49 @@ class Application
 
         // Output the response body
         echo $response->getBody();
+    }
+
+    /**
+     * Send a simple error response
+     *
+     * @param string $message Error message
+     * @param int $statusCode HTTP status code
+     * @return void
+     */
+    private function sendErrorResponse(string $message, int $statusCode = 500): void
+    {
+        if (!headers_sent()) {
+            http_response_code($statusCode);
+            header('Content-Type: text/html; charset=utf-8');
+        }
+
+        $html = "<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Error {$statusCode} - RenalTales</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .error-container { max-width: 600px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #d32f2f; margin-bottom: 20px; }
+        p { color: #666; line-height: 1.6; margin-bottom: 15px; }
+        .error-code { font-size: 2em; font-weight: bold; color: #d32f2f; margin-bottom: 10px; }
+        a { color: #1976d2; text-decoration: none; padding: 10px 20px; background: #e3f2fd; border-radius: 4px; display: inline-block; margin-top: 20px; }
+        a:hover { background: #bbdefb; }
+    </style>
+</head>
+<body>
+    <div class=\"error-container\">
+        <div class=\"error-code\">Error {$statusCode}</div>
+        <h1>Application Error</h1>
+        <p>An error occurred while processing your request.</p>
+        <p><strong>Message:</strong> {$message}</p>
+        <a href=\"/\">Back to Home</a>
+    </div>
+</body>
+</html>";
+
+        echo $html;
     }
 }

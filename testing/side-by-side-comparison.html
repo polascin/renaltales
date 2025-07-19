@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RenalTales - Side-by-Side CSS Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
+            padding: 1rem;
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            height: calc(100vh - 2rem);
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .panel-header {
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .old-version .panel-header {
+            background: linear-gradient(135deg, #ff7b7b 0%, #d65a31 100%);
+        }
+        
+        .new-version .panel-header {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        }
+        
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
+        }
+        
+        .demo-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .control-group {
+            margin-bottom: 0.75rem;
+        }
+        
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        select, input[type="range"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+        
+        .zoom-display {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 0.25rem;
+        }
+        
+        .sync-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sync-checkbox input[type="checkbox"] {
+            width: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+            
+            .controls {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="control-group">
+            <label for="page-select">Test Page:</label>
+            <select id="page-select">
+                <option value="home">Home Page</option>
+                <option value="navigation">Navigation Components</option>
+                <option value="breadcrumbs">Breadcrumbs</option>
+                <option value="forms">Form Elements</option>
+                <option value="buttons">Button Variations</option>
+                <option value="cards">Card Components</option>
+                <option value="error">Error Page</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="language-select">Language:</label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="sk">Slovak</option>
+                <option value="de">German</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="it">Italian</option>
+                <option value="ru">Russian</option>
+                <option value="zh">Chinese</option>
+                <option value="ja">Japanese</option>
+                <option value="ar">Arabic</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="viewport-select">Viewport:</label>
+            <select id="viewport-select">
+                <option value="desktop">Desktop (1200px)</option>
+                <option value="tablet">Tablet (768px)</option>
+                <option value="mobile">Mobile (375px)</option>
+                <option value="large">Large Screen (1600px)</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="zoom-range">Zoom Level:</label>
+            <input type="range" id="zoom-range" min="25" max="200" value="100" step="25">
+            <div class="zoom-display">100%</div>
+        </div>
+        
+        <div class="control-group">
+            <div class="sync-checkbox">
+                <input type="checkbox" id="sync-scroll" checked>
+                <label for="sync-scroll">Sync Scrolling</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="comparison-container">
+        <div class="panel old-version">
+            <div class="panel-header">
+                OLD VERSION (Legacy CSS)
+            </div>
+            <div class="panel-content">
+                <iframe id="old-frame" class="demo-frame" src="demo-old.html"></iframe>
+            </div>
+        </div>
+        
+        <div class="panel new-version">
+            <div class="panel-header">
+                NEW VERSION (Simplified Architecture)
+            </div>
+            <div class="panel-content">
+                <iframe id="new-frame" class="demo-frame" src="demo-new.html"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Control elements
+        const pageSelect = document.getElementById('page-select');
+        const languageSelect = document.getElementById('language-select');
+        const viewportSelect = document.getElementById('viewport-select');
+        const zoomRange = document.getElementById('zoom-range');
+        const zoomDisplay = document.querySelector('.zoom-display');
+        const syncScrollCheckbox = document.getElementById('sync-scroll');
+        const oldFrame = document.getElementById('old-frame');
+        const newFrame = document.getElementById('new-frame');
+        
+        // Viewport dimensions
+        const viewportSizes = {
+            mobile: { width: '375px', height: '667px' },
+            tablet: { width: '768px', height: '1024px' },
+            desktop: { width: '1200px', height: '800px' },
+            large: { width: '1600px', height: '900px' }
+        };
+        
+        // Page mappings
+        const pageUrls = {
+            home: { old: 'demo-old.html', new: 'demo-new.html' },
+            navigation: { old: 'demo-old.html#nav', new: 'demo-new.html#nav' },
+            breadcrumbs: { old: 'demo-old.html#breadcrumbs', new: 'demo-new.html#breadcrumbs' },
+            forms: { old: 'demo-old.html#forms', new: 'demo-new.html#forms' },
+            buttons: { old: 'demo-old.html#buttons', new: 'demo-new.html#buttons' },
+            cards: { old: 'demo-old.html#cards', new: 'demo-new.html#cards' },
+            error: { old: 'error-old.html', new: 'error-new.html' }
+        };
+        
+        // Update frame sources based on selected page and language
+        function updateFrames() {
+            const selectedPage = pageSelect.value;
+            const selectedLanguage = languageSelect.value;
+            const urls = pageUrls[selectedPage];
+            
+            if (urls) {
+                oldFrame.src = `${urls.old}?lang=${selectedLanguage}`;
+                newFrame.src = `${urls.new}?lang=${selectedLanguage}`;
+            }
+        }
+        
+        // Update viewport size
+        function updateViewport() {
+            const selectedViewport = viewportSelect.value;
+            const size = viewportSizes[selectedViewport];
+            
+            if (size) {
+                [oldFrame, newFrame].forEach(frame => {
+                    frame.style.width = size.width;
+                    frame.style.height = size.height;
+                });
+            } else {
+                [oldFrame, newFrame].forEach(frame => {
+                    frame.style.width = '100%';
+                    frame.style.height = '100%';
+                });
+            }
+        }
+        
+        // Update zoom level
+        function updateZoom() {
+            const zoomValue = zoomRange.value;
+            zoomDisplay.textContent = `${zoomValue}%`;
+            
+            const zoomScale = zoomValue / 100;
+            [oldFrame, newFrame].forEach(frame => {
+                frame.style.transform = `scale(${zoomScale})`;
+                frame.style.transformOrigin = 'top left';
+            });
+        }
+        
+        // Sync scrolling between frames
+        function setupScrollSync() {
+            let syncingScroll = false;
+            
+            function syncScroll(sourceFrame, targetFrame) {
+                if (!syncScrollCheckbox.checked || syncingScroll) return;
+                
+                syncingScroll = true;
+                
+                try {
+                    const sourceDoc = sourceFrame.contentDocument || sourceFrame.contentWindow.document;
+                    const targetDoc = targetFrame.contentDocument || targetFrame.contentWindow.document;
+                    
+                    if (sourceDoc && targetDoc) {
+                        const sourceScrollTop = sourceDoc.documentElement.scrollTop || sourceDoc.body.scrollTop;
+                        const sourceScrollLeft = sourceDoc.documentElement.scrollLeft || sourceDoc.body.scrollLeft;
+                        
+                        targetDoc.documentElement.scrollTop = sourceScrollTop;
+                        targetDoc.body.scrollTop = sourceScrollTop;
+                        targetDoc.documentElement.scrollLeft = sourceScrollLeft;
+                        targetDoc.body.scrollLeft = sourceScrollLeft;
+                    }
+                } catch (e) {
+                    console.warn('Could not sync scroll due to cross-origin restrictions');
+                }
+                
+                setTimeout(() => {
+                    syncingScroll = false;
+                }, 100);
+            }
+            
+            // Set up scroll event listeners when frames load
+            oldFrame.addEventListener('load', () => {
+                try {
+                    oldFrame.contentWindow.addEventListener('scroll', () => {
+                        syncScroll(oldFrame, newFrame);
+                    });
+                } catch (e) {
+                    console.warn('Could not set up scroll sync due to cross-origin restrictions');
+                }
+            });
+            
+            newFrame.addEventListener('load', () => {
+                try {
+                    newFrame.contentWindow.addEventListener('scroll', () => {
+                        syncScroll(newFrame, oldFrame);
+                    });
+                } catch (e) {
+                    console.warn('Could not set up scroll sync due to cross-origin restrictions');
+                }
+            });
+        }
+        
+        // Event listeners
+        pageSelect.addEventListener('change', updateFrames);
+        languageSelect.addEventListener('change', updateFrames);
+        viewportSelect.addEventListener('change', updateViewport);
+        zoomRange.addEventListener('input', updateZoom);
+        
+        // Initialize
+        updateFrames();
+        updateViewport();
+        updateZoom();
+        setupScrollSync();
+        
+        // Performance comparison functionality
+        function measurePerformance() {
+            const oldMetrics = {
+                loadTime: 0,
+                renderTime: 0,
+                resourceCount: 0,
+                totalSize: 0
+            };
+            
+            const newMetrics = {
+                loadTime: 0,
+                renderTime: 0,
+                resourceCount: 0,
+                totalSize: 0
+            };
+            
+            // This would be implemented with actual performance measurement APIs
+            // For now, we'll simulate the metrics
+            console.log('Performance comparison:', { oldMetrics, newMetrics });
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        pageSelect.value = 'home';
+                        updateFrames();
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        pageSelect.value = 'navigation';
+                        updateFrames();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        pageSelect.value = 'breadcrumbs';
+                        updateFrames();
+                        break;
+                    case 'r':
+                        e.preventDefault();
+                        location.reload();
+                        break;
+                }
+            }
+        });
+        
+        // Add visual diff indicators (would require actual diff library in production)
+        function highlightDifferences() {
+            // This would use a library like pixelmatch or similar
+            // to highlight visual differences between the two versions
+            console.log('Visual diff analysis would be performed here');
+        }
+        
+        // Auto-refresh frames every 30 seconds during development
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            setInterval(() => {
+                const currentOldSrc = oldFrame.src;
+                const currentNewSrc = newFrame.src;
+                oldFrame.src = currentOldSrc;
+                newFrame.src = currentNewSrc;
+            }, 30000);
+        }
+    </script>
+</body>
+</html>

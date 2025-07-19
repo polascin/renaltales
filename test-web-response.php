@@ -10,7 +10,7 @@ $testUrls = [
     'http://localhost:8000/',
     'http://localhost:8000/assets/css/main.css',
     'http://localhost:8000/assets/css/themes.css',
-    'http://localhost:8000/assets/css/responsive.css'
+    'http://localhost:8000/assets/css/base/responsive.css'
 ];
 
 foreach ($testUrls as $url) {
@@ -80,3 +80,4 @@ echo "- Look for 404 errors or failed resource loads\n";
 
 echo "\n=== Test Complete ===\n";
 ?>
+

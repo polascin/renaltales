@@ -4,84 +4,69 @@ declare(strict_types=1);
 
 namespace RenalTales\Views;
 
-use RenalTales\Contracts\ViewInterface;
-
 /**
  * Login View Class
- *
- * Handles the display and rendering of the login page for the application.
- *
- * @package RenalTales
+ * 
+ * Refactored to use simple component function
+ * 
+ * @package RenalTales\Views
  * @version 2025.v3.1.dev
+ * @deprecated Use component function: render_login_form
  */
-class LoginView implements ViewInterface
+class LoginView
 {
-    /**
-     * Render the view content
-     *
-     * @param array<string, mixed> $data Data to be passed to the view
-     * @return string The rendered view content
-     */
     public function render(array $data = []): string
     {
-        // Create a basic login form template
-        $usernameLabel = $data['usernameLabel'] ?? 'Username';
-        $passwordLabel = $data['passwordLabel'] ?? 'Password';
-        $loginButton = $data['loginButton'] ?? 'Login';
-        $actionUrl = $data['actionUrl'] ?? '/login';
+        return render_login_form($data);
+    }
+}
 
-        return <<<HTML
+/**
+ * Render login form
+ * 
+ * Simple function-based login component
+ * 
+ * @param array $data Form data
+ * @return string Rendered HTML
+ */
+function render_login_form(array $data = []): string
+{
+    $usernameLabel = htmlspecialchars($data['usernameLabel'] ?? 'Username');
+    $passwordLabel = htmlspecialchars($data['passwordLabel'] ?? 'Password');
+    $loginButton = htmlspecialchars($data['loginButton'] ?? 'Login');
+    $actionUrl = htmlspecialchars($data['actionUrl'] ?? '/login');
+    $title = htmlspecialchars($data['title'] ?? 'Login');
+    
+    return <<<HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>{$title} - RenalTales</title>
+    <link rel="stylesheet" href="/assets/css/main.css?v=" . time() . ">">
 </head>
-<body>
-    <form action="{$actionUrl}" method="post">
-        <label for="username">{$usernameLabel}</label>
-        <input type="text" name="username" id="username" required>
-
-        <label for="password">{$passwordLabel}</label>
-        <input type="password" name="password" id="password" required>
-
-        <button type="submit">{$loginButton}</button>
-    </form>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-form-wrapper">
+            <h1 class="login-title">{$title}</h1>
+            <form action="{$actionUrl}" method="post" class="login-form">
+                <div >
+                    <label for="username" >{$usernameLabel}</label>
+                    <input type="text" name="username" id="username" class="form-input" required>
+                </div>
+                
+                <div >
+                    <label for="password" >{$passwordLabel}</label>
+                    <input type="password" name="password" id="password" class="form-input" required>
+                </div>
+                
+                <button type="submit" >{$loginButton}</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 HTML;
-    }
-
-    /**
-     * Set view data
-     *
-     * @param array<string, mixed> $data Data to be set
-     * @return ViewInterface
-     */
-    public function with(array $data): ViewInterface
-    {
-        // For simplicity, we won't store additional data
-        return $this;
-    }
-
-    /**
-     * Get view name/identifier
-     *
-     * @return string The view name
-     */
-    public function getName(): string
-    {
-        return 'login';
-    }
-
-    /**
-     * Check if view exists
-     *
-     * @return bool True if view exists, false otherwise
-     */
-    public function exists(): bool
-    {
-        return true;
-    }
 }
+

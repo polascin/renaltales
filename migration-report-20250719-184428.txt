@@ -1,0 +1,76 @@
+RenalTales Migration Report
+==========================
+Generated: 07/19/2025 18:44:28
+Dry Run: False
+
+Files Processed:
+- PHP Files: 791
+- CSS Files: 25 
+- JS Files: 11
+- HTML Files: 15
+
+CSS Mappings Applied:
+- css/cards.css → css/components/cards.css
+- assets/css/navigation.css → assets/css/components/navigation.css
+- css/forms.css → css/components/forms.css
+- public/assets/css/navigation.css → public/assets/css/components/navigation.css
+- css/responsive.css → css/base/responsive.css
+- css/error.css → css/pages/error.css
+- css/buttons.css → css/components/buttons.css
+- css/navigation.css → css/components/navigation.css
+
+
+BEM Class Mappings Applied:
+- form-group → form__group
+- main-header-container → header__container
+- main-header → header
+- btn-light → button--light
+- breadcrumb-item → breadcrumbs__item
+- btn-dark → button--dark
+- card-title → card__title
+- card-text → card__text
+- form-control → form__input
+- language-switcher → lang-switcher
+- btn-sm → button--small
+- language-selector → lang-switcher__selector
+- navbar-brand → nav__brand
+- card → card
+- btn-primary → button--primary
+- form-label → form__label
+- header-right → header__right
+- btn → button
+- navbar-nav → nav__list
+- navbar-collapse → nav__collapse
+- btn-warning → button--warning
+- language-flag → lang-switcher__flag
+- card-header → card__header
+- btn-success → button--success
+- header-left → header__left
+- nav-link → nav__link
+- btn-danger → button--danger
+- header-center → header__center
+- card-body → card__body
+- btn-secondary → button--secondary
+- navbar-toggler → nav__toggle
+- breadcrumb → breadcrumbs
+- btn-lg → button--large
+- btn-info → button--info
+- breadcrumb a → breadcrumbs__link
+- breadcrumb .active → breadcrumbs__current
+- card-footer → card__footer
+- nav-item → nav__item
+- btn-outline-primary → button--outline-primary
+- is-valid → form__input--valid
+- is-invalid → form__input--error
+- form-text → form__help-text
+- navbar → nav
+
+
+Backup Location: G:\Môj disk\www\renaltales\migration-backups-20250719-184409
+
+Next Steps:
+1. Test the application thoroughly
+2. Run CSS validation
+3. Check responsive design
+4. Verify all language variations
+5. Run performance tests

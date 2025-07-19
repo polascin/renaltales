@@ -84,7 +84,7 @@ abstract class AbstractView implements ViewInterface
     }
 
     /**
-     * Get translated text
+     * Get translated text using the simplified translation system
      *
      * @param string $key Translation key
      * @param string $fallback Fallback text
@@ -93,16 +93,34 @@ abstract class AbstractView implements ViewInterface
      */
     protected function trans(string $key, string $fallback = '', array $parameters = []): string
     {
-        if ($this->languageModel && method_exists($this->languageModel, 'getText')) {
-            try {
-                return $this->escapeHtml($this->languageModel->getText($key, $parameters, $fallback));
-            } catch (\Exception $e) {
-                error_log("AbstractView: Error getting text for key '{$key}' - " . $e->getMessage());
-                return $this->escapeHtml($fallback);
-            }
-        }
+        // Use the global helper function __ for consistency
+        return $this->escapeHtml(__($key, $fallback, $parameters));
+    }
 
-        return $this->escapeHtml($fallback);
+    /**
+     * Alias for trans() method for backward compatibility
+     *
+     * @param string $key Translation key
+     * @param string $fallback Fallback text
+     * @param array<string, string|int|float> $parameters Parameters for replacement
+     * @return string Translated text
+     */
+    protected function getText(string $key, string $fallback = '', array $parameters = []): string
+    {
+        return $this->trans($key, $fallback, $parameters);
+    }
+
+    /**
+     * Get translated text without HTML escaping (for raw output)
+     *
+     * @param string $key Translation key
+     * @param string $fallback Fallback text
+     * @param array<string, string|int|float> $parameters Parameters for replacement
+     * @return string Translated text (unescaped)
+     */
+    protected function transRaw(string $key, string $fallback = '', array $parameters = []): string
+    {
+        return __($key, $fallback, $parameters);
     }
 
     /**
@@ -324,7 +342,7 @@ abstract class AbstractView implements ViewInterface
             margin-bottom: 30px;
             line-height: 1.5;
         }
-        .btn {
+         {
             padding: 12px 24px;
             text-decoration: none;
             border-radius: 6px;
@@ -334,7 +352,7 @@ abstract class AbstractView implements ViewInterface
             margin: 0 10px;
             transition: all 0.3s ease;
         }
-        .btn:hover {
+        :hover {
             background-color: #2980b9;
         }
     </style>
@@ -343,11 +361,12 @@ abstract class AbstractView implements ViewInterface
     <div class="error-container">
         <h1 class="error-title">{$safeTitle}</h1>
         <p class="error-message">{$safeMessage}</p>
-        <a href="javascript:history.back()" class="btn">Go Back</a>
-        <a href="/" class="btn">Go Home</a>
+        <a href="javascript:history.back()" >Go Back</a>
+        <a href="/" >Go Home</a>
     </div>
 </body>
 </html>
 HTML;
     }
 }
+

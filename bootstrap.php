@@ -110,9 +110,29 @@ $config = [
 // Make config available globally
 $GLOBALS['config'] = $config;
 
+// Load translation helper functions
+require_once APP_ROOT . DS . 'src' . DS . 'Helpers' . DS . 'helpers.php';
+
+// Initialize global translation instance with language detection
+use RenalTales\Helpers\Translation;
+
+// Start session if not already started for language detection (only if headers not sent)
+if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
+  session_start();
+}
+
+$translation = new Translation();
+// Detect user's preferred language and set it
+$detectedLanguage = $translation->detectLanguage('en');
+$translation->setLanguage($detectedLanguage);
+
+// Make translation instance available globally
+$GLOBALS['translation'] = $translation;
+
 // Application initialization complete
 app_log('Application bootstrap completed', [
   'app_name' => $config['app']['name'],
   'environment' => $config['app']['env'],
   'debug' => $config['app']['debug'],
+  'language' => $translation->getCurrentLanguage(),
 ]);

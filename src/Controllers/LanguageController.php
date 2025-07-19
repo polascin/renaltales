@@ -4,178 +4,326 @@ declare(strict_types=1);
 
 namespace RenalTales\Controllers;
 
-use RenalTales\Services\LanguageService;
-use RenalTales\Core\SecurityManager;
-use RenalTales\Core\SessionManager;
 use RenalTales\Http\Response;
-use Psr\Log\LoggerInterface;
+use RenalTales\Helpers\Translation;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Language Controller
  *
- * Handles language switching and language-related endpoints for the application.
+ * Simplified controller for language operations.
+ * Direct route handling without complex service layers.
  *
- * @package RenalTales
- * @author Ľubomír Polaščín
+ * @package RenalTales\Controllers
  * @version 2025.v3.1.dev
+ * @author Ľubomír Polaščín
  */
-class LanguageController extends AbstractController
+class LanguageController
 {
+    /**
+     * @var Translation Translation instance
+     */
+    private Translation $translation;
+
     /**
      * Constructor
      *
-     * @param LanguageService $languageService Language service
-     * @param SecurityManager $securityManager Security manager
-     * @param SessionManager $sessionManager Session manager
-     * @param LoggerInterface $logger Logger
+     * @param Translation|null $translation Translation instance (optional)
      */
-    public function __construct(
-        LanguageService $languageService,
-        SecurityManager $securityManager,
-        SessionManager $sessionManager,
-        LoggerInterface $logger
-    ) {
-        parent::__construct($languageService, $securityManager, $sessionManager, $logger);
+    public function __construct(?Translation $translation = null)
+    {
+        $this->translation = $translation ?? new Translation();
     }
 
     /**
-     * Handle HTTP request
+     * Switch to a different language
      *
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function handle(ServerRequestInterface $request): ResponseInterface
+    public function switch(ServerRequestInterface $request): ResponseInterface
     {
-        $method = $request->getMethod();
-        $path = $request->getUri()->getPath();
+        // Get language from request
+        $data = json_decode($request->getBody()->getContents(), true);
+        $language = $data['language'] ?? $request->getQueryParams()['lang'] ?? '';
 
-        switch ($path) {
-            case '/api/language/switch':
-                return $this->switchLanguage($request);
-            case '/api/language/supported':
-                return $this->getSupportedLanguages($request);
-            case '/api/language/current':
-                return $this->getCurrentLanguage($request);
-            default:
-                return $this->json(['error' => 'Endpoint not found'], 404);
+        if (empty($language)) {
+            return $this->jsonResponse([
+                'success' => false,
+                'error' => 'Language not specified'
+            ], 400);
         }
-    }
 
-    /**
-     * Switch the application's language
-     *
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
-     */
-    public function switchLanguage(ServerRequestInterface $request): ResponseInterface
-    {
-        $this->logAction('switch_language');
-
-        try {
-            $requestedLang = $this->getParameter($request, 'lang');
-
-            if (!$requestedLang || !is_string($requestedLang)) {
-                return $this->json(['success' => false, 'error' => 'Language parameter is required'], 400);
-            }
-
-            if (!$this->languageService->isLanguageSupported($requestedLang)) {
-                return $this->json(['success' => false, 'error' => 'Invalid language code'], 400);
-            }
-
-            $success = $this->languageService->switchLanguage($requestedLang);
-
-            if ($success) {
-                if ($this->isAjax($request)) {
-                    return $this->json(['success' => true, 'language' => $requestedLang]);
-                } else {
-                    $referer = $request->getHeaderLine('Referer') ?: '/';
-                    return $this->redirect($referer);
-                }
-            } else {
-                return $this->json(['success' => false, 'error' => 'Failed to switch language'], 500);
-            }
-        } catch (\Exception $e) {
-            $this->logError('Error switching language', $e);
-            return $this->json(['success' => false, 'error' => 'Internal server error'], 500);
+        // Validate language
+        if (!$this->translation->isLanguageSupported($language)) {
+            return $this->jsonResponse([
+                'success' => false,
+                'error' => 'Unsupported language',
+                'current_language' => $this->translation->getCurrentLanguage(),
+                'supported_languages' => $this->translation->getSupportedLanguages()
+            ], 400);
         }
-    }
 
-    /**
-     * Get the list of supported languages
-     *
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
-     */
-    public function getSupportedLanguages(ServerRequestInterface $request): ResponseInterface
-    {
-        $this->logAction('get_supported_languages');
+        // Switch language
+        $success = $this->translation->switchTo($language);
 
-        try {
-            return $this->json([
-                'supported_languages' => $this->languageService->getSupportedLanguages(),
-                'language_names' => $this->languageService->getSupportedLanguagesWithNames(),
-                'current_language' => $this->languageService->getCurrentLanguage()
+        if ($success) {
+            return $this->jsonResponse([
+                'success' => true,
+                'message' => 'Language switched successfully',
+                'current_language' => $this->translation->getCurrentLanguage(),
+                'supported_languages' => $this->translation->getSupportedLanguages()
             ]);
-        } catch (\Exception $e) {
-            $this->logError('Error getting supported languages', $e);
-            return $this->json(['error' => 'Internal server error'], 500);
         }
+
+        return $this->jsonResponse([
+            'success' => false,
+            'error' => 'Failed to switch language',
+            'current_language' => $this->translation->getCurrentLanguage(),
+            'supported_languages' => $this->translation->getSupportedLanguages()
+        ], 500);
     }
 
     /**
-     * Get the current language
+     * Get current language information
      *
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      */
-    public function getCurrentLanguage(ServerRequestInterface $request): ResponseInterface
+    public function current(ServerRequestInterface $request): ResponseInterface
     {
-        $this->logAction('get_current_language');
+        $data = [
+            'current_language' => $this->translation->getCurrentLanguage(),
+            'supported_languages' => $this->getSupportedLanguagesWithNames(),
+            'translations_count' => count($this->translation->getAllTranslations())
+        ];
 
-        try {
-            return $this->json([
-                'current_language' => $this->languageService->getCurrentLanguage(),
-                'language_name' => $this->languageService->getLanguageName(
-                    $this->languageService->getCurrentLanguage()
-                )
-            ]);
-        } catch (\Exception $e) {
-            $this->logError('Error getting current language', $e);
-            return $this->json(['error' => 'Internal server error'], 500);
+        return $this->jsonResponse($data);
+    }
+
+    /**
+     * Get all supported languages
+     *
+     * @return array Supported languages with names
+     */
+    public function list(): array
+    {
+        $languages = [];
+        $supportedLanguages = $this->translation->getSupportedLanguages();
+
+        // Simple language names mapping
+        $languageNames = [
+            'en' => 'English',
+            'sk' => 'Slovenčina',
+            'cs' => 'Čeština',
+            'de' => 'Deutsch',
+            'fr' => 'Français',
+            'es' => 'Español',
+            'it' => 'Italiano',
+            'pt' => 'Português',
+            'ru' => 'Русский',
+            'ja' => '日本語',
+            'zh' => '中文',
+            'ar' => 'العربية',
+            'hi' => 'हिन्दी',
+            'ko' => '한국어',
+            'th' => 'ไทย',
+            'vi' => 'Tiếng Việt',
+            'tr' => 'Türkçe',
+            'pl' => 'Polski',
+            'nl' => 'Nederlands',
+            'sv' => 'Svenska',
+            'da' => 'Dansk',
+            'no' => 'Norsk',
+            'fi' => 'Suomi',
+            'el' => 'Ελληνικά',
+            'he' => 'עברית',
+            'hu' => 'Magyar',
+            'ro' => 'Română',
+            'bg' => 'Български',
+            'hr' => 'Hrvatski',
+            'sr' => 'Српски',
+            'sl' => 'Slovenščina',
+            'et' => 'Eesti',
+            'lv' => 'Latviešu',
+            'lt' => 'Lietuvių',
+            'uk' => 'Українська',
+            'be' => 'Беларуская',
+            'ca' => 'Català',
+            'eu' => 'Euskera',
+            'gl' => 'Galego',
+            'cy' => 'Cymraeg',
+            'ga' => 'Gaeilge',
+            'gd' => 'Gàidhlig',
+            'is' => 'Íslenska',
+            'fo' => 'Føroyskt',
+            'mt' => 'Malti',
+            'sq' => 'Shqip',
+            'mk' => 'Македонски',
+            'la' => 'Latina'
+        ];
+
+        foreach ($supportedLanguages as $code) {
+            $languages[$code] = [
+                'code' => $code,
+                'name' => $languageNames[$code] ?? ucfirst($code),
+                'is_current' => $code === $this->translation->getCurrentLanguage()
+            ];
+        }
+
+        return [
+            'languages' => $languages,
+            'current_language' => $this->translation->getCurrentLanguage(),
+            'total_count' => count($supportedLanguages)
+        ];
+    }
+
+    /**
+     * Handle AJAX language switch request
+     *
+     * @return void
+     */
+    public function handleAjaxSwitch(): void
+    {
+        header('Content-Type: application/json');
+
+        // Check if request is POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+            return;
+        }
+
+        // Get language from POST data
+        $input = json_decode(file_get_contents('php://input'), true);
+        $language = $input['language'] ?? $_POST['language'] ?? '';
+
+        if (empty($language)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'error' => 'Language not specified']);
+            return;
+        }
+
+        // Switch language
+        $result = $this->switch($language);
+        
+        if ($result['success']) {
+            echo json_encode($result);
+        } else {
+            http_response_code(400);
+            echo json_encode($result);
         }
     }
 
     /**
-     * Create a basic response
+     * Handle regular form-based language switch
      *
-     * @param string $body
-     * @param int $status
+     * @param string $redirectUrl URL to redirect after switching
+     * @return void
+     */
+    public function handleFormSwitch(string $redirectUrl = '/'): void
+    {
+        $language = $_POST['language'] ?? $_GET['lang'] ?? '';
+
+        if (!empty($language)) {
+            $this->switch($language);
+        }
+
+        // Redirect back to the referring page or specified URL
+        $referer = $_SERVER['HTTP_REFERER'] ?? $redirectUrl;
+        header('Location: ' . $referer);
+        exit;
+    }
+
+    /**
+     * Reset language preferences to default
+     *
+     * @param string $defaultLanguage Default language to reset to
+     * @return array Response data
+     */
+    public function reset(string $defaultLanguage = 'en'): array
+    {
+        try {
+            $this->translation->clearPreferences($defaultLanguage);
+            
+            return [
+                'success' => true,
+                'message' => 'Language preferences reset successfully',
+                'current_language' => $this->translation->getCurrentLanguage(),
+                'supported_languages' => $this->translation->getSupportedLanguages()
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => 'Failed to reset language preferences: ' . $e->getMessage(),
+                'current_language' => $this->translation->getCurrentLanguage(),
+                'supported_languages' => $this->translation->getSupportedLanguages()
+            ];
+        }
+    }
+
+    /**
+     * Get supported languages with names
+     *
+     * @return array
+     */
+    private function getSupportedLanguagesWithNames(): array
+    {
+        $languageNames = [
+            'en' => 'English',
+            'sk' => 'Slovenčina',
+            'cs' => 'Čeština', 
+            'de' => 'Deutsch',
+            'fr' => 'Français',
+            'es' => 'Español',
+            'it' => 'Italiano',
+            'pt' => 'Português',
+            'ru' => 'Русский',
+            'ja' => '日本語',
+            'zh' => '中文',
+            'ar' => 'العربية',
+            'la' => 'Latina'
+        ];
+
+        $languages = [];
+        $currentLanguage = $this->translation->getCurrentLanguage();
+        $supportedLanguages = $this->translation->getSupportedLanguages();
+
+        foreach ($supportedLanguages as $code) {
+            $languages[$code] = [
+                'code' => $code,
+                'name' => $languageNames[$code] ?? ucfirst($code),
+                'is_current' => $code === $currentLanguage
+            ];
+        }
+
+        return $languages;
+    }
+
+    /**
+     * Create JSON response
+     *
+     * @param array $data
+     * @param int $statusCode
      * @return ResponseInterface
      */
-    protected function createResponse(string $body, int $status = 200): ResponseInterface
+    private function jsonResponse(array $data, int $statusCode = 200): ResponseInterface
     {
-        return new Response($status, [], $body);
+        return new Response(
+            $statusCode,
+            ['Content-Type' => 'application/json; charset=utf-8'],
+            json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+        );
     }
 
     /**
-     * Get controller name
+     * Get translation instance
      *
-     * @return string
+     * @return Translation Translation instance
      */
-    public function getName(): string
+    public function getTranslation(): Translation
     {
-        return 'LanguageController';
-    }
-
-    /**
-     * Get supported HTTP methods
-     *
-     * @return array<string>
-     */
-    public function getSupportedMethods(): array
-    {
-        return ['GET', 'POST', 'PUT'];
+        return $this->translation;
     }
 }

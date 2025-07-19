@@ -44,7 +44,7 @@ if (file_exists($mainCss)) {
         'variables.css' => "url('core/variables.css')",
         'reset.css' => "url('core/reset.css')",
         'typography.css' => "url('core/typography.css')",
-        'responsive.css' => "url('public/assets/css/responsive.css')"
+        'responsive.css' => "url('public/assets/css/base/responsive.css')"
     ];
     
     echo "\n--- Testing imports ---\n";
@@ -59,7 +59,7 @@ $cssFiles = [
     'public/assets/css/themes.css',
     'public/assets/css/basic.css', 
     'public/assets/css/layout.css',
-    'public/assets/css/responsive.css',
+    'public/assets/css/base/responsive.css',
     'core/variables.css',
     'core/reset.css',
     'core/typography.css',
@@ -108,3 +108,4 @@ if ($errors === 0) {
     echo "\n❌ CSS VALIDATION FAILED - Fix $errors errors\n";
 }
 ?>
+

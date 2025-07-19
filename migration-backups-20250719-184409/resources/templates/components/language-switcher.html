@@ -1,0 +1,12 @@
+<div class="language-selector">
+    <div class="language-switcher">
+        <form class="language-form" method="get" action="">
+            <label for="lang-select" class="language-label">{{languageLabel}}:</label>
+            <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
+                {{#supportedLanguages}}
+                    <option value="{{code}}" {{#selected}}selected{{/selected}}>{{name}}</option>
+                {{/supportedLanguages}}
+            </select>
+        </form>
+    </div>
+</div>

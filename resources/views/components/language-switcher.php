@@ -19,8 +19,8 @@ if (!isset($supportedLanguages)) $supportedLanguages = [
 ];
 if (!isset($languageLabel)) $languageLabel = 'Language';
 ?>
-<div class="language-selector">
-    <div class="language-selector-container">
+<div >
+    <div >
         <form class="language-form" method="get" action="">
             <label for="lang-select" class="language-label"><?= htmlspecialchars($languageLabel) ?>:</label>
             <select name="lang" id="lang-select" class="language-select" onchange="this.form.submit()">
@@ -35,3 +35,4 @@ if (!isset($languageLabel)) $languageLabel = 'Language';
 </div>
 
 <!-- Language Selector Styles are loaded via CSS files -->
+

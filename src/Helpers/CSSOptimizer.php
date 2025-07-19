@@ -307,7 +307,7 @@ HTML;
     contain: layout style;
 }
 
-.card-grid {
+-grid {
     contain: layout;
 }
 
@@ -328,7 +328,7 @@ HTML;
     will-change: transform;
 }
 
-.language-switcher {
+ {
     will-change: auto;
 }
 
@@ -426,3 +426,4 @@ HTML;
         return $stats;
     }
 }
+

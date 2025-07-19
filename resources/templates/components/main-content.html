@@ -1,0 +1,21 @@
+<!-- Main Content Area -->
+<main class="main-container">
+    <div class="main-content-container">
+        <div class="content-body">
+            <section class="home-section">
+                <div class="home-intro">
+                    <p>{{homeDescription}}</p>
+                </div>
+
+                <div class="feature-grid">
+                    {{#featureCards}}
+                        {{>feature-card}}
+                    {{/featureCards}}
+                </div>
+            </section>
+        </div>
+    </div>
+
+    {{>sidebar-menu}}
+    {{>sidebar-notes}}
+</main>

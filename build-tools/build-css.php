@@ -216,8 +216,8 @@ class CSSBuilder
         
         $criticalSelectors = [
             'html', 'body', '*', '*::before', '*::after',
-            '.container', '.main-header', '.hero-section', 
-            '.nav-menu', '.nav-link', '.btn', '.btn-primary',
+            '.container', '', '.hero-section', 
+            '.nav-menu', '', '', '',
             '.site-title', '.site-tagline', '.hero-title', '.hero-intro',
             'h1', 'h2', 'h3', 'p', 'a'
         ];
@@ -379,3 +379,4 @@ if (basename($_SERVER['PHP_SELF']) === 'build-css.php') {
     $builder = new CSSBuilder();
     $builder->build();
 }
+
