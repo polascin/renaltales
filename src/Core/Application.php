@@ -11,6 +11,7 @@ use RenalTales\Http\ServerRequest;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RenalTales\Core\Router;
+use Exception;
 
 /**
  * Application Factory
@@ -98,7 +99,7 @@ class Application
         } catch (\Throwable $e) {
             // Handle any errors that occur during request processing
             error_log("Application error: " . $e->getMessage());
-            
+
             // Send a simple error response
             $this->sendErrorResponse($e->getMessage(), 500);
         }

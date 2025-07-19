@@ -397,7 +397,7 @@ class LanguageModel
           'en' => 'gb',
           'en-gb' => 'gb',
           'eo' => 'eu',
-          'es' => 'es',
+          // 'es' => 'es', // Removed duplicate key
           'et' => 'ee',
           'eu' => 'es',
           'fi' => 'fi',
@@ -520,7 +520,6 @@ class LanguageModel
           'en-au' => 'au',
           'en-nz' => 'nz',
           'fj' => 'fj',
-          'mt' => 'mt',
           'su' => 'id',
 
           // Other languages
@@ -696,7 +695,6 @@ class LanguageModel
           'en-au' => 'English (Australia)',
           'en-nz' => 'English (NZ)',
           'fj' => 'Fijian',
-          'mt' => 'Malti',
           'su' => 'Basa Sunda',
 
           // Other languages
@@ -862,7 +860,6 @@ class LanguageModel
           'en-au' => 'English (Australia)',
           'en-nz' => 'English (NZ)',
           'fj' => 'Fijian',
-          'mt' => 'Maltese',
           'su' => 'Sundanese',
 
           // Other languages
