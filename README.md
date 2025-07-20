@@ -1,2 +1,8 @@
-# renaltales
-Renal tales and kidney stories from and for the community of people with various kidney disorders, people on dialysis, people before, after, and with no chance for kidney transplant.
+# **Renal Tales**
+
+> *Web Application by* ***Lumpe Paskuden von Lumpenen*** *aka* ***Walter Kyo*** *or* ***Walter Csoelle Kyo***  
+> *Author:* Lubomir Polascin (Ľubomír Polaščín)  
+> *Technology used:* **PHP**, **HTML**, **CSS**, **JavaScript**, **MySQL**
+
+---
+

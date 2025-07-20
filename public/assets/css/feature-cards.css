@@ -1,0 +1,469 @@
+/**
+ * Enhanced Feature Cards Component
+ * ================================
+ * 
+ * Modern feature cards with focus on:
+ * - Visual hierarchy through typography and spacing
+ * - Icon integration with semantic meaning
+ * - Smooth hover effects and animations
+ * - Full accessibility support (WCAG 2.1 AA)
+ * - Responsive design principles
+ * - Theme support (light/dark modes)
+ * 
+ * @author RenalTales Development Team
+ * @version 2025.v1.0
+ */
+
+/* ==========================================================================
+   FEATURE CARDS FOUNDATION
+   ========================================================================== */
+
+.feature-cards {
+  --feature-card-gap: clamp(1rem, 4vw, 2rem);
+  --feature-card-padding: clamp(1.5rem, 4vw, 2.5rem);
+  --feature-card-border-radius: 1rem;
+  --feature-card-shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --feature-card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --feature-card-transform-hover: translateY(-4px);
+}
+
+.feature-cards__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  gap: var(--feature-card-gap);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* ==========================================================================
+   INDIVIDUAL FEATURE CARD
+   ========================================================================== */
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--feature-card-padding);
+  background: var(--color-background, #ffffff);
+  border: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+  border-radius: var(--feature-card-border-radius);
+  box-shadow: var(--feature-card-shadow-base);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Enhanced focus styles for accessibility */
+.feature-card:focus-within {
+  outline: 3px solid var(--color-focus, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* Hover effects with performance optimization */
+.feature-card:hover {
+  transform: var(--feature-card-transform-hover);
+  box-shadow: var(--feature-card-shadow-hover);
+  border-color: var(--color-primary, #3b82f6);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .feature-card {
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .feature-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   FEATURE CARD ICON SYSTEM
+   ========================================================================== */
+
+.feature-card__icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--color-primary, #3b82f6), var(--color-primary-dark, #1e40af));
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.feature-card__icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover .feature-card__icon::before {
+  opacity: 1;
+}
+
+.feature-card__icon svg,
+.feature-card__icon img {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover .feature-card__icon svg,
+.feature-card:hover .feature-card__icon img {
+  transform: scale(1.1);
+}
+
+/* Icon variants for different card types */
+.feature-card--primary .feature-card__icon {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.feature-card--success .feature-card__icon {
+  background: linear-gradient(135deg, #10b981, #047857);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+.feature-card--warning .feature-card__icon {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.3);
+}
+
+.feature-card--info .feature-card__icon {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  box-shadow: 0 4px 8px rgba(6, 182, 212, 0.3);
+}
+
+/* ==========================================================================
+   FEATURE CARD CONTENT HIERARCHY
+   ========================================================================== */
+
+.feature-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-card__title {
+  margin: 0 0 1rem 0;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text-primary, #1f2937);
+  transition: color 0.2s ease;
+}
+
+.feature-card:hover .feature-card__title {
+  color: var(--color-primary, #3b82f6);
+}
+
+.feature-card__description {
+  margin: 0 0 2rem 0;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary, #6b7280);
+  flex-grow: 1;
+}
+
+.feature-card__action {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   FEATURE CARD BUTTONS
+   ========================================================================== */
+
+.feature-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-primary, #3b82f6);
+  background: transparent;
+  border: 2px solid var(--color-primary, #3b82f6);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card__btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary, #3b82f6);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.feature-card__btn:hover::before,
+.feature-card__btn:focus::before {
+  left: 0;
+}
+
+.feature-card__btn:hover,
+.feature-card__btn:focus {
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.feature-card__btn:active {
+  transform: translateY(0);
+}
+
+/* Button icon animation */
+.feature-card__btn-icon {
+  transition: transform 0.2s ease;
+}
+
+.feature-card__btn:hover .feature-card__btn-icon {
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .feature-card {
+    border-width: 2px;
+    border-color: var(--color-text-primary, #000);
+  }
+  
+  .feature-card__icon {
+    border: 2px solid var(--color-text-primary, #000);
+  }
+}
+
+/* Screen reader only content */
+.feature-card__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus visible for better keyboard navigation */
+.feature-card__btn:focus-visible {
+  outline: 3px solid var(--color-focus, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .feature-cards__container {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .feature-card__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .feature-card__icon svg,
+  .feature-card__icon img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-cards__container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .feature-card {
+    --feature-card-padding: clamp(1.25rem, 3vw, 2rem);
+  }
+  
+  .feature-card__icon {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .feature-card__icon svg,
+  .feature-card__icon img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .feature-card__title {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+  }
+  
+  .feature-card__description {
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-card {
+    --feature-card-padding: 1.25rem;
+  }
+  
+  .feature-card__btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==========================================================================
+   DARK THEME SUPPORT
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #1f2937;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-text-primary: #f9fafb;
+    --color-text-secondary: #d1d5db;
+    --color-focus: #60a5fa;
+  }
+}
+
+[data-theme="dark"] {
+  --color-background: #1f2937;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-focus: #60a5fa;
+}
+
+/* ==========================================================================
+   SPECIAL EFFECTS AND ANIMATIONS
+   ========================================================================== */
+
+/* Subtle shimmer effect on hover (optional enhancement) */
+.feature-card__shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.feature-card:hover .feature-card__shimmer {
+  left: 100%;
+}
+
+/* Loading state styles */
+.feature-card--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.feature-card--loading .feature-card__icon {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES FOR FEATURE CARDS
+   ========================================================================== */
+
+.feature-cards--compact .feature-card {
+  --feature-card-padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.feature-cards--large .feature-card {
+  --feature-card-padding: clamp(2rem, 5vw, 3rem);
+}
+
+.feature-cards--2-columns {
+  --feature-cards-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr));
+}
+
+.feature-cards--3-columns {
+  --feature-cards-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+}
+
+.feature-cards--4-columns {
+  --feature-cards-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+.feature-cards__container.feature-cards--2-columns,
+.feature-cards__container.feature-cards--3-columns,
+.feature-cards__container.feature-cards--4-columns {
+  grid-template-columns: var(--feature-cards-columns);
+}
+
+/* ==========================================================================
+   PRINT STYLES
+   ========================================================================== */
+
+@media print {
+  .feature-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .feature-card:hover {
+    transform: none;
+  }
+  
+  .feature-card__icon {
+    background: #f3f4f6 !important;
+    color: #000 !important;
+    box-shadow: none;
+  }
+  
+  .feature-card__btn {
+    border: 1px solid #000;
+    color: #000;
+  }
+}

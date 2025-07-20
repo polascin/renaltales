@@ -1,0 +1,526 @@
+/**
+ * Forms Component
+ * Following BEM methodology for consistent naming
+ */
+
+/* ==========================================================================
+   FORM BASE STYLES
+   ========================================================================== */
+
+.form {
+  width: 100%;
+  margin: 0;
+}
+
+.form__group {
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+.form__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+  line-height: var(--line-height-tight);
+}
+
+.form__label--required::after {
+  content: '*';
+  margin-left: var(--space-xxs);
+  color: var(--color-error);
+}
+
+.form__help {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================================================
+   INPUT FIELDS
+   ========================================================================== */
+
+.form__input {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  background-clip: padding-box;
+  border: var(--border-width-thin) solid var(--color-gray-300);
+  border-radius: var(--border-radius-base);
+  transition: var(--transition-colors);
+  appearance: none;
+}
+
+.form__input:focus {
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  border-color: var(--color-primary-500);
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem var(--color-primary-100);
+}
+
+.form__input::placeholder {
+  color: var(--color-gray-400);
+  opacity: 1;
+}
+
+.form__input:disabled,
+.form__input[readonly] {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Input Sizes */
+.form__input--small {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+.form__input--large {
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-lg);
+}
+
+/* ==========================================================================
+   TEXTAREA
+   ========================================================================== */
+
+.form__textarea {
+  display: block;
+  width: 100%;
+  min-height: 6rem;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  background-clip: padding-box;
+  border: var(--border-width-thin) solid var(--color-gray-300);
+  border-radius: var(--border-radius-base);
+  resize: vertical;
+  transition: var(--transition-colors);
+  appearance: none;
+}
+
+.form__textarea:focus {
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  border-color: var(--color-primary-500);
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem var(--color-primary-100);
+}
+
+.form__textarea::placeholder {
+  color: var(--color-gray-400);
+  opacity: 1;
+}
+
+.form__textarea:disabled,
+.form__textarea[readonly] {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   SELECT ELEMENTS
+   ========================================================================== */
+
+.form__select {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) 2.5rem var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-900);
+  background-color: var(--color-white);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right var(--space-sm) center;
+  background-size: 1rem 0.75rem;
+  border: var(--border-width-thin) solid var(--color-gray-300);
+  border-radius: var(--border-radius-base);
+  transition: var(--transition-colors);
+  appearance: none;
+}
+
+.form__select:focus {
+  border-color: var(--color-primary-500);
+  outline: 0;
+  box-shadow: 0 0 0 0.125rem var(--color-primary-100);
+}
+
+.form__select:disabled {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.form__select[multiple] {
+  padding-right: var(--space-md);
+  background-image: none;
+}
+
+/* ==========================================================================
+   CHECKBOX & RADIO
+   ========================================================================== */
+
+.form__checkbox,
+.form__radio {
+  display: block;
+  position: relative;
+  margin-bottom: var(--space-sm);
+}
+
+.form__checkbox-input,
+.form__radio-input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.form__checkbox-label,
+.form__radio-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  user-select: none;
+}
+
+.form__checkbox-indicator,
+.form__radio-indicator {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  background-color: var(--color-white);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: var(--border-width-thin) solid var(--color-gray-300);
+  transition: var(--transition-colors);
+}
+
+.form__checkbox-indicator {
+  border-radius: var(--border-radius-sm);
+}
+
+.form__radio-indicator {
+  border-radius: var(--border-radius-full);
+}
+
+.form__checkbox-input:checked + .form__checkbox-label .form__checkbox-indicator {
+  background-color: var(--color-primary-500);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3e%3c/svg%3e");
+  border-color: var(--color-primary-500);
+}
+
+.form__radio-input:checked + .form__radio-label .form__radio-indicator {
+  background-color: var(--color-primary-500);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3e%3ccircle cx='10' cy='10' r='3'/%3e%3c/svg%3e");
+  border-color: var(--color-primary-500);
+}
+
+.form__checkbox-input:focus + .form__checkbox-label .form__checkbox-indicator,
+.form__radio-input:focus + .form__radio-label .form__radio-indicator {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 0.125rem var(--color-primary-100);
+}
+
+.form__checkbox-input:disabled + .form__checkbox-label,
+.form__radio-input:disabled + .form__radio-label {
+  color: var(--color-gray-400);
+  cursor: not-allowed;
+}
+
+.form__checkbox-input:disabled + .form__checkbox-label .form__checkbox-indicator,
+.form__radio-input:disabled + .form__radio-label .form__radio-indicator {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   FIELDSETS & LEGENDS
+   ========================================================================== */
+
+.form__fieldset {
+  margin: 0 0 var(--space-lg) 0;
+  padding: 0;
+  border: var(--border-width-thin) solid var(--color-gray-200);
+  border-radius: var(--border-radius-base);
+}
+
+.form__legend {
+  display: block;
+  width: auto;
+  padding: 0 var(--space-sm);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  line-height: var(--line-height-tight);
+}
+
+.form__fieldset-body {
+  padding: var(--space-md);
+}
+
+/* ==========================================================================
+   VALIDATION STATES
+   ========================================================================== */
+
+/* Success State */
+.form__group--success .form__input,
+.form__group--success .form__textarea,
+.form__group--success .form__select {
+  border-color: var(--color-success);
+}
+
+.form__group--success .form__input:focus,
+.form__group--success .form__textarea:focus,
+.form__group--success .form__select:focus {
+  border-color: var(--color-success);
+  box-shadow: 0 0 0 0.125rem var(--color-success-100, rgba(34, 197, 94, 0.2));
+}
+
+.form__feedback--success {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
+/* Error State */
+.form__group--error .form__input,
+.form__group--error .form__textarea,
+.form__group--error .form__select {
+  border-color: var(--color-error);
+}
+
+.form__group--error .form__input:focus,
+.form__group--error .form__textarea:focus,
+.form__group--error .form__select:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 0.125rem var(--color-error-100, rgba(239, 68, 68, 0.2));
+}
+
+.form__feedback--error {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
+/* Warning State */
+.form__group--warning .form__input,
+.form__group--warning .form__textarea,
+.form__group--warning .form__select {
+  border-color: var(--color-warning);
+}
+
+.form__group--warning .form__input:focus,
+.form__group--warning .form__textarea:focus,
+.form__group--warning .form__select:focus {
+  border-color: var(--color-warning);
+  box-shadow: 0 0 0 0.125rem var(--color-warning-100, rgba(245, 158, 11, 0.2));
+}
+
+.form__feedback--warning {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-warning);
+}
+
+/* ==========================================================================
+   INPUT GROUPS
+   ========================================================================== */
+
+.form__input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.form__input-group .form__input {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
+.form__input-group-prepend,
+.form__input-group-append {
+  display: flex;
+}
+
+.form__input-group-prepend .form__input-group-text,
+.form__input-group-append .form__input-group-text {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-gray-500);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--color-gray-50);
+  border: var(--border-width-thin) solid var(--color-gray-300);
+}
+
+.form__input-group-prepend .form__input-group-text {
+  border-right: 0;
+  border-top-left-radius: var(--border-radius-base);
+  border-bottom-left-radius: var(--border-radius-base);
+}
+
+.form__input-group-append .form__input-group-text {
+  border-left: 0;
+  border-top-right-radius: var(--border-radius-base);
+  border-bottom-right-radius: var(--border-radius-base);
+}
+
+.form__input-group .form__input:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form__input-group .form__input:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* ==========================================================================
+   FORM LAYOUT UTILITIES
+   ========================================================================== */
+
+.form--inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.form--inline .form__group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column wrap;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.form--inline .form__label {
+  margin-bottom: var(--space-xs);
+}
+
+.form__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--space-sm) * -1);
+  margin-right: calc(var(--space-sm) * -1);
+}
+
+.form__col {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+.form__col--auto {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.form__col--6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.form__col--4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.form__col--3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .form__row {
+    margin-left: calc(var(--space-xs) * -1);
+    margin-right: calc(var(--space-xs) * -1);
+  }
+  
+  .form__col {
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+  }
+  
+  .form__col--6,
+  .form__col--4,
+  .form__col--3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .form--inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .form--inline .form__group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form__input,
+  .form__textarea,
+  .form__select {
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  .form__input--large {
+    padding: var(--space-sm) var(--space-md);
+  }
+  
+  .form__input-group-prepend .form__input-group-text,
+  .form__input-group-append .form__input-group-text {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+}

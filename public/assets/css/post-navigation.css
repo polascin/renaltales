@@ -1,0 +1,94 @@
+/* Styles for POST navigation buttons to look like links */
+
+.post-nav-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    display: inline;
+}
+
+.post-nav-btn:hover {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+.post-nav-btn:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+/* Menu item styles */
+.menu-item.post-nav-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.menu-item.post-nav-btn:hover {
+    background-color: #f0f0f0;
+    text-decoration: none;
+}
+
+/* Button styles for feature cards */
+.btn.post-nav-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: 2px solid #0066cc;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-primary.post-nav-btn {
+    background-color: #0066cc;
+    color: white;
+}
+
+.btn-primary.post-nav-btn:hover {
+    background-color: #004499;
+}
+
+.btn-secondary.post-nav-btn {
+    background-color: transparent;
+    color: #0066cc;
+}
+
+.btn-secondary.post-nav-btn:hover {
+    background-color: #0066cc;
+    color: white;
+}
+
+/* Login/logout link styles */
+.login-link.post-nav-btn,
+.logout-link.post-nav-btn {
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.login-link.post-nav-btn:hover,
+.logout-link.post-nav-btn:hover {
+    color: #004499;
+}
+
+/* Ensure forms display inline */
+.post-nav-btn form {
+    display: inline;
+}
+
+/* Icon spacing */
+.post-nav-btn i {
+    margin-right: 5px;
+}

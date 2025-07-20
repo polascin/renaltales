@@ -1,0 +1,119 @@
+/* MAIN.CSS - Consolidated Frontend Styles for RenalTales */
+
+/* Architecture Overview:
+   --------------------------------
+   1. CSS Variables & Design Tokens
+   2. CSS Reset & Foundations
+   3. Typography System
+   4. Layout System
+   5. Component System
+   6. Utility Classes
+   7. Application Styles
+   8. Responsive Design
+   9. Accessibility Features
+   10. Performance Optimizations */
+
+/* 1. CSS Variables and Design Tokens */
+/* 1. CSS Variables and Design Tokens */
+@import 'themes.css';
+
+/* 2. CSS Reset and Foundation Styles */
+/* 2. CSS Reset and Foundation Styles */
+/* Base Reset Styles */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, a {
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+}
+
+/* 3. Modern Typography System */
+@import 'typography.css';
+
+/* 4. Layout System (Grid, Flexbox, Containers) */
+/* 3. Layout System */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  gap: 1rem;
+  min-height: 100vh;
+}
+
+/* Container Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 5. Component System */
+/* 4. Components */
+/* Navigation */
+.nav {
+  list-style: none;
+  display: flex;
+}
+.nav-link {
+  text-decoration: none;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+}
+.button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Cards */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.card__title {
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-lg);
+}
+
+/* Forms */
+.form {
+  width: 100%;
+}
+.form__group {
+  margin-bottom: var(--space-md);
+}
+
+/* 5.1. Enhanced Feature Cards */
+@import '../../components/feature-cards.css';
+
+/* 6. Navigation System */
+@import 'components/navigation.css';
+
+/* 7. Hero Section Enhancements */
+@import 'hero.css';
+
+/* 8. Application-specific Styles */
+@import 'style.css';
+
+/* 9. Responsive Design and Media Queries */
+/* 5. Responsive Design */
+@media (max-width: 480px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Add responsive rules here */
+
+/* 10. Performance and Critical CSS */
+@import 'performance.css';
+

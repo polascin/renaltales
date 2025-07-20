@@ -1,0 +1,685 @@
+/**
+ * Modern UI Enhancements
+ * Subtle animations, modern shadows, focus states, loading skeletons, and micro-interactions
+ */
+
+/* ==========================================================================
+   ENHANCED DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Enhanced Animation Timing */
+  --animation-duration-fast: 120ms;
+  --animation-duration-normal: 200ms;
+  --animation-duration-slow: 300ms;
+  --animation-duration-slower: 500ms;
+  
+  /* Enhanced Easing Functions */
+  --easing-linear: linear;
+  --easing-ease: ease;
+  --easing-ease-in: ease-in;
+  --easing-ease-out: ease-out;
+  --easing-ease-in-out: ease-in-out;
+  --easing-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-snappy: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Enhanced Shadows with Depth */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-soft: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  --shadow-large: 0 8px 16px 0 rgba(0, 0, 0, 0.10);
+  --shadow-xl-modern: 0 20px 40px 0 rgba(0, 0, 0, 0.12);
+  --shadow-floating: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+  
+  /* Colored Shadows */
+  --shadow-primary: 0 4px 14px 0 rgba(14, 165, 233, 0.15);
+  --shadow-success: 0 4px 14px 0 rgba(16, 185, 129, 0.15);
+  --shadow-warning: 0 4px 14px 0 rgba(245, 158, 11, 0.15);
+  --shadow-error: 0 4px 14px 0 rgba(239, 68, 68, 0.15);
+  
+  /* Focus Ring Colors */
+  --focus-ring-color: var(--color-primary-500);
+  --focus-ring-offset: 2px;
+  --focus-ring-width: 2px;
+  --focus-ring-style: solid;
+  --focus-ring-opacity: 0.5;
+  
+  /* Loading Skeleton Colors */
+  --skeleton-base-color: var(--color-gray-200);
+  --skeleton-highlight-color: var(--color-gray-100);
+  --skeleton-animation-duration: 1.5s;
+  
+  /* Micro-interaction Colors */
+  --ripple-color: rgba(0, 0, 0, 0.1);
+  --ripple-duration: 600ms;
+  
+  /* Enhanced Border Radius */
+  --border-radius-xs: 0.125rem;  /* 2px */
+  --border-radius-sm: 0.25rem;   /* 4px */
+  --border-radius-md: 0.375rem;  /* 6px */
+  --border-radius-lg: 0.5rem;    /* 8px */
+  --border-radius-xl: 0.75rem;   /* 12px */
+  --border-radius-2xl: 1rem;     /* 16px */
+  --border-radius-3xl: 1.5rem;   /* 24px */
+  --border-radius-4xl: 2rem;     /* 32px */
+}
+
+/* ==========================================================================
+   SMOOTH SCROLLING
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-50);
+  border-radius: var(--border-radius-lg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
+  transition: background-color var(--animation-duration-normal) var(--easing-smooth);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-300) var(--color-gray-50);
+}
+
+/* ==========================================================================
+   ENHANCED FOCUS VISIBLE STYLES
+   ========================================================================== */
+
+/* Remove default focus outline */
+*:focus {
+  outline: none;
+}
+
+/* Enhanced focus visible styles */
+*:focus-visible {
+  outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--border-radius-sm);
+}
+
+/* Special focus styles for interactive elements */
+button:focus-visible,
+.button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: var(--focus-ring-width) var(--focus-ring-style) var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(14, 165, 233, var(--focus-ring-opacity));
+}
+
+/* ==========================================================================
+   LOADING SKELETONS
+   ========================================================================== */
+
+.skeleton {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base-color) 0%,
+    var(--skeleton-highlight-color) 50%,
+    var(--skeleton-base-color) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading var(--skeleton-animation-duration) ease-in-out infinite;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Skeleton variants */
+.skeleton--text {
+  height: 1em;
+  margin: 0.25em 0;
+}
+
+.skeleton--heading {
+  height: 1.5em;
+  margin: 0.5em 0;
+}
+
+.skeleton--avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--border-radius-full);
+}
+
+.skeleton--card {
+  height: 8rem;
+  border-radius: var(--border-radius-lg);
+}
+
+.skeleton--button {
+  height: 2.5rem;
+  width: 6rem;
+  border-radius: var(--border-radius-base);
+}
+
+.skeleton--image {
+  width: 100%;
+  height: 12rem;
+  border-radius: var(--border-radius-md);
+}
+
+/* ==========================================================================
+   ENHANCED INTERACTIVE STATES
+   ========================================================================== */
+
+/* Smooth transitions for all interactive elements */
+button,
+.button,
+a,
+input,
+textarea,
+select,
+.card,
+.form__group {
+  transition: all var(--animation-duration-normal) var(--easing-smooth);
+}
+
+/* Enhanced hover states */
+.interactive-hover {
+  transition: all var(--animation-duration-normal) var(--easing-smooth);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-floating);
+}
+
+/* Enhanced active states */
+.interactive-active {
+  transition: all var(--animation-duration-fast) var(--easing-smooth);
+}
+
+.interactive-active:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-medium);
+}
+
+/* ==========================================================================
+   MICRO-INTERACTIONS
+   ========================================================================== */
+
+/* Ripple effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--ripple-color);
+  transform: translate(-50%, -50%);
+  transition: width var(--ripple-duration) var(--easing-ease-out),
+              height var(--ripple-duration) var(--easing-ease-out);
+}
+
+.ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Bounce animation */
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Fade in animation */
+.fade-in {
+  animation: fadeIn var(--animation-duration-slow) var(--easing-ease-out);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale in animation */
+.scale-in {
+  animation: scaleIn var(--animation-duration-normal) var(--easing-spring);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide in from left */
+.slide-in-left {
+  animation: slideInLeft var(--animation-duration-slow) var(--easing-smooth);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right */
+.slide-in-right {
+  animation: slideInRight var(--animation-duration-slow) var(--easing-smooth);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   ENHANCED SHADOWS AND ELEVATIONS
+   ========================================================================== */
+
+/* Shadow utility classes */
+.shadow-xs { box-shadow: var(--shadow-xs); }
+.shadow-soft { box-shadow: var(--shadow-soft); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-large { box-shadow: var(--shadow-large); }
+.shadow-xl { box-shadow: var(--shadow-xl-modern); }
+.shadow-floating { box-shadow: var(--shadow-floating); }
+
+/* Colored shadow utilities */
+.shadow-primary { box-shadow: var(--shadow-primary); }
+.shadow-success { box-shadow: var(--shadow-success); }
+.shadow-warning { box-shadow: var(--shadow-warning); }
+.shadow-error { box-shadow: var(--shadow-error); }
+
+/* Elevation system */
+.elevation-0 { box-shadow: none; }
+.elevation-1 { box-shadow: var(--shadow-xs); }
+.elevation-2 { box-shadow: var(--shadow-soft); }
+.elevation-3 { box-shadow: var(--shadow-medium); }
+.elevation-4 { box-shadow: var(--shadow-large); }
+.elevation-5 { box-shadow: var(--shadow-xl-modern); }
+
+/* Interactive elevation changes */
+.elevation-hover {
+  transition: box-shadow var(--animation-duration-normal) var(--easing-smooth);
+}
+
+.elevation-hover:hover {
+  box-shadow: var(--shadow-floating);
+}
+
+/* ==========================================================================
+   ENHANCED BUTTON INTERACTIONS
+   ========================================================================== */
+
+/* Enhanced button hover states */
+.button {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform var(--animation-duration-slow) var(--easing-smooth);
+}
+
+.button:hover::before {
+  transform: translateX(100%);
+}
+
+/* Enhanced button focus states */
+.button:focus-visible {
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(14, 165, 233, var(--focus-ring-opacity));
+}
+
+.button--primary:focus-visible {
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(14, 165, 233, 0.4);
+}
+
+.button--success:focus-visible {
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(16, 185, 129, 0.4);
+}
+
+.button--warning:focus-visible {
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(245, 158, 11, 0.4);
+}
+
+.button--error:focus-visible {
+  box-shadow: 0 0 0 var(--focus-ring-offset) rgba(239, 68, 68, 0.4);
+}
+
+/* ==========================================================================
+   ENHANCED FORM INTERACTIONS
+   ========================================================================== */
+
+/* Enhanced form input focus states */
+.form__input:focus,
+.form__textarea:focus,
+.form__select:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Enhanced validation states with animations */
+.form__group--error .form__input,
+.form__group--error .form__textarea,
+.form__group--error .form__select {
+  animation: shake var(--animation-duration-slow) var(--easing-ease-out);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Enhanced success state animation */
+.form__group--success .form__input,
+.form__group--success .form__textarea,
+.form__group--success .form__select {
+  animation: successPulse var(--animation-duration-slow) var(--easing-ease-out);
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* ==========================================================================
+   ENHANCED CARD INTERACTIONS
+   ========================================================================== */
+
+.card {
+  transition: all var(--animation-duration-normal) var(--easing-smooth);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-floating);
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-xl-modern);
+}
+
+.card--interactive:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: var(--shadow-medium);
+}
+
+/* ==========================================================================
+   LOADING STATES
+   ========================================================================== */
+
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--color-gray-200);
+  border-radius: 50%;
+  border-top-color: var(--color-primary-500);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.loading-dots::before,
+.loading-dots::after,
+.loading-dots {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-primary-500);
+  animation: loadingDots 1.4s ease-in-out infinite both;
+}
+
+.loading-dots::before {
+  animation-delay: -0.32s;
+}
+
+.loading-dots::after {
+  animation-delay: -0.16s;
+}
+
+@keyframes loadingDots {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   ENHANCED NAVIGATION INTERACTIONS
+   ========================================================================== */
+
+.nav-link {
+  position: relative;
+  transition: all var(--animation-duration-normal) var(--easing-smooth);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary-500);
+  transition: width var(--animation-duration-normal) var(--easing-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link--active::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: var(--color-primary-600);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .button {
+    border-width: 2px;
+  }
+  
+  .form__input,
+  .form__textarea,
+  .form__select {
+    border-width: 2px;
+  }
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Animation delay utilities */
+.delay-75 { animation-delay: 75ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+/* Transform utilities */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-rotate:hover {
+  transform: rotate(3deg);
+}
+
+/* Transition utilities */
+.transition-all { transition: all var(--animation-duration-normal) var(--easing-smooth); }
+.transition-colors { transition: color var(--animation-duration-normal) var(--easing-smooth), background-color var(--animation-duration-normal) var(--easing-smooth); }
+.transition-opacity { transition: opacity var(--animation-duration-normal) var(--easing-smooth); }
+.transition-transform { transition: transform var(--animation-duration-normal) var(--easing-smooth); }
+
+/* ==========================================================================
+   ENHANCED RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  .button,
+  .nav-link,
+  .card--interactive {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Enhanced mobile interactions */
+@media (max-width: 768px) {
+  .card:hover {
+    transform: none;
+  }
+  
+  .card--interactive:hover {
+    transform: none;
+  }
+  
+  .interactive-hover:hover {
+    transform: none;
+  }
+}

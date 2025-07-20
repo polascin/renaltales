@@ -1,0 +1,691 @@
+/*!
+ * THEMES.CSS - Consolidated Theme System for Renal Tales
+ * ======================================================
+ * 
+ * Unified theme system with proper CSS custom properties
+ * - Base colors and semantic tokens
+ * - Light and dark theme implementations
+ * - Component-specific design tokens
+ * - Accessibility and animation support
+ * 
+ * @author Lumpe Paskuden von Lumpenen aka Walter Kyo aka Walter Csoelle Kyo aka Lubomir Polascin
+ * @version 2025.v3.1.dev
+ * @since 2024
+ */
+
+/* =============================================================================
+   BASE THEME TOKENS
+   ============================================================================= */
+
+:root {
+  /* ==========================================================================
+     TYPOGRAPHY TOKENS
+     ========================================================================== */
+  --font-family-sans: 'Poppins', sans-serif;
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-mono: 'Source Code Pro', monospace;
+  --font-family-cursive: 'Pacifico', cursive;
+  --font-family-fantasy: 'Eagle Lake', 'Lobster', fantasy;
+  --font-family-system: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* ==========================================================================
+     SPACING TOKENS
+     ========================================================================== */
+  --space-xs: 0.25rem;    /* 4px */
+  --space-sm: 0.5rem;     /* 8px */
+  --space-md: 1rem;       /* 16px */
+  --space-lg: 1.5rem;     /* 24px */
+  --space-xl: 2rem;       /* 32px */
+  --space-2xl: 3rem;      /* 48px */
+  --space-3xl: 4rem;      /* 64px */
+
+  /* ==========================================================================
+     BORDER RADIUS TOKENS
+     ========================================================================== */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-full: 9999px;
+
+  /* ==========================================================================
+     SHADOW TOKENS
+     ========================================================================== */
+  --shadow-sm: 0 1px 2px 0 var(--shadow-color);
+  --shadow-md: 0 4px 6px -1px var(--shadow-color);
+  --shadow-lg: 0 10px 15px -3px var(--shadow-color);
+  --shadow-xl: 0 20px 25px -5px var(--shadow-color);
+
+  /* ==========================================================================
+     ANIMATION TOKENS
+     ========================================================================== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+  --transition-theme: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+/* =============================================================================
+   LIGHT THEME (DEFAULT)
+   ============================================================================= */
+
+:root,
+[data-theme="light"],
+.theme-light {
+  /* ==========================================================================
+     BASE COLORS - Light Theme
+     ========================================================================== */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;  /* Main primary */
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  --color-secondary-50: #f0fdf4;
+  --color-secondary-100: #dcfce7;
+  --color-secondary-200: #bbf7d0;
+  --color-secondary-300: #86efac;
+  --color-secondary-400: #4ade80;
+  --color-secondary-500: #22c55e;  /* Main secondary */
+  --color-secondary-600: #16a34a;
+  --color-secondary-700: #15803d;
+  --color-secondary-800: #166534;
+  --color-secondary-900: #14532d;
+
+  --color-accent-50: #fef2f2;
+  --color-accent-100: #fee2e2;
+  --color-accent-200: #fecaca;
+  --color-accent-300: #fca5a5;
+  --color-accent-400: #f87171;
+  --color-accent-500: #ef4444;   /* Main accent */
+  --color-accent-600: #dc2626;
+  --color-accent-700: #b91c1c;
+  --color-accent-800: #991b1b;
+  --color-accent-900: #7f1d1d;
+
+  /* Neutral colors */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* Status colors */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* ==========================================================================
+     SEMANTIC COLOR TOKENS - Light Theme
+     ========================================================================== */
+  
+  /* Primary tokens */
+  --color-primary: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-600);
+  --color-primary-active: var(--color-primary-700);
+  --color-primary-light: var(--color-primary-100);
+  --color-primary-lighter: var(--color-primary-50);
+
+  /* Secondary tokens */
+  --color-secondary: var(--color-secondary-500);
+  --color-secondary-hover: var(--color-secondary-600);
+  --color-secondary-active: var(--color-secondary-700);
+  --color-secondary-light: var(--color-secondary-100);
+  --color-secondary-lighter: var(--color-secondary-50);
+
+  /* Accent tokens */
+  --color-accent: var(--color-accent-500);
+  --color-accent-hover: var(--color-accent-600);
+  --color-accent-active: var(--color-accent-700);
+  --color-accent-light: var(--color-accent-100);
+  --color-accent-lighter: var(--color-accent-50);
+
+  /* ==========================================================================
+     SURFACE & BACKGROUND TOKENS - Light Theme
+     ========================================================================== */
+  --color-background: var(--color-neutral-0);
+  --color-background-secondary: var(--color-neutral-50);
+  --color-background-tertiary: var(--color-neutral-100);
+  --color-surface: var(--color-neutral-0);
+  --color-surface-secondary: var(--color-neutral-50);
+  --color-surface-tertiary: var(--color-neutral-100);
+  --color-surface-hover: var(--color-neutral-50);
+  --color-surface-active: var(--color-neutral-100);
+
+  /* ==========================================================================
+     TEXT TOKENS - Light Theme
+     ========================================================================== */
+  --color-text: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-0);
+  --color-text-disabled: var(--color-neutral-400);
+  --color-text-link: var(--color-primary);
+  --color-text-link-hover: var(--color-primary-hover);
+
+  /* ==========================================================================
+     BORDER TOKENS - Light Theme
+     ========================================================================== */
+  --color-border: var(--color-neutral-200);
+  --color-border-secondary: var(--color-neutral-300);
+  --color-border-tertiary: var(--color-neutral-400);
+  --color-border-focus: var(--color-primary);
+  --color-border-error: var(--color-danger);
+
+  /* ==========================================================================
+     SHADOW TOKENS - Light Theme
+     ========================================================================== */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-color-strong: rgba(0, 0, 0, 0.25);
+
+  /* ==========================================================================
+     COMPONENT TOKENS - Light Theme
+     ========================================================================== */
+  
+  /* Buttons */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-bg-hover: var(--color-primary-hover);
+  --button-primary-bg-active: var(--color-primary-active);
+  --button-primary-text: var(--color-neutral-0);
+  --button-primary-border: var(--color-primary);
+
+  --button-secondary-bg: var(--color-neutral-0);
+  --button-secondary-bg-hover: var(--color-neutral-50);
+  --button-secondary-bg-active: var(--color-neutral-100);
+  --button-secondary-text: var(--color-primary);
+  --button-secondary-border: var(--color-primary);
+
+  /* Cards */
+  --card-bg: var(--color-surface);
+  --card-border: var(--color-border);
+  --card-shadow: var(--shadow-md);
+
+  /* Forms */
+  --input-bg: var(--color-surface);
+  --input-bg-focus: var(--color-surface);
+  --input-border: var(--color-border);
+  --input-border-focus: var(--color-border-focus);
+  --input-text: var(--color-text);
+  --input-placeholder: var(--color-text-tertiary);
+
+  /* Navigation */
+  --nav-bg: var(--color-surface);
+  --nav-border: var(--color-border);
+  --nav-text: var(--color-text);
+  --nav-text-hover: var(--color-primary);
+  --nav-text-active: var(--color-primary-active);
+
+  /* Header/Footer */
+  --header-bg: var(--color-surface);
+  --header-border: var(--color-border);
+  --header-text: var(--color-text);
+  --footer-bg: var(--color-background-secondary);
+  --footer-text: var(--color-text-secondary);
+
+  /* Panels */
+  --panel-bg: var(--color-surface-secondary);
+  --panel-border: var(--color-border);
+}
+
+/* =============================================================================
+   DARK THEME
+   ============================================================================= */
+
+[data-theme="dark"],
+.theme-dark {
+  /* ==========================================================================
+     BASE COLORS - Dark Theme
+     ========================================================================== */
+  --color-primary-50: #1e3a8a;
+  --color-primary-100: #1d4ed8;
+  --color-primary-200: #2563eb;
+  --color-primary-300: #3b82f6;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #93c5fd;  /* Main primary - lighter for dark theme */
+  --color-primary-600: #bfdbfe;
+  --color-primary-700: #dbeafe;
+  --color-primary-800: #eff6ff;
+  --color-primary-900: #f8faff;
+
+  --color-secondary-50: #14532d;
+  --color-secondary-100: #166534;
+  --color-secondary-200: #15803d;
+  --color-secondary-300: #16a34a;
+  --color-secondary-400: #22c55e;
+  --color-secondary-500: #4ade80;  /* Main secondary - lighter for dark theme */
+  --color-secondary-600: #86efac;
+  --color-secondary-700: #bbf7d0;
+  --color-secondary-800: #dcfce7;
+  --color-secondary-900: #f0fdf4;
+
+  --color-accent-50: #7f1d1d;
+  --color-accent-100: #991b1b;
+  --color-accent-200: #b91c1c;
+  --color-accent-300: #dc2626;
+  --color-accent-400: #ef4444;
+  --color-accent-500: #f87171;   /* Main accent - lighter for dark theme */
+  --color-accent-600: #fca5a5;
+  --color-accent-700: #fecaca;
+  --color-accent-800: #fee2e2;
+  --color-accent-900: #fef2f2;
+
+  /* Neutral colors - inverted */
+  --color-neutral-0: #0a0a0a;
+  --color-neutral-50: #171717;
+  --color-neutral-100: #262626;
+  --color-neutral-200: #404040;
+  --color-neutral-300: #525252;
+  --color-neutral-400: #737373;
+  --color-neutral-500: #a3a3a3;
+  --color-neutral-600: #d4d4d4;
+  --color-neutral-700: #e5e5e5;
+  --color-neutral-800: #f5f5f5;
+  --color-neutral-900: #fafafa;
+  --color-neutral-950: #ffffff;
+
+  /* Status colors - adjusted for dark theme */
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #60a5fa;
+
+  /* ==========================================================================
+     SEMANTIC COLOR TOKENS - Dark Theme
+     ========================================================================== */
+  
+  /* Primary tokens */
+  --color-primary: var(--color-primary-500);
+  --color-primary-hover: var(--color-primary-400);
+  --color-primary-active: var(--color-primary-300);
+  --color-primary-light: var(--color-primary-200);
+  --color-primary-lighter: var(--color-primary-100);
+
+  /* Secondary tokens */
+  --color-secondary: var(--color-secondary-500);
+  --color-secondary-hover: var(--color-secondary-400);
+  --color-secondary-active: var(--color-secondary-300);
+  --color-secondary-light: var(--color-secondary-200);
+  --color-secondary-lighter: var(--color-secondary-100);
+
+  /* Accent tokens */
+  --color-accent: var(--color-accent-500);
+  --color-accent-hover: var(--color-accent-400);
+  --color-accent-active: var(--color-accent-300);
+  --color-accent-light: var(--color-accent-200);
+  --color-accent-lighter: var(--color-accent-100);
+
+  /* ==========================================================================
+     SURFACE & BACKGROUND TOKENS - Dark Theme
+     ========================================================================== */
+  --color-background: var(--color-neutral-0);
+  --color-background-secondary: var(--color-neutral-50);
+  --color-background-tertiary: var(--color-neutral-100);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-secondary: var(--color-neutral-100);
+  --color-surface-tertiary: var(--color-neutral-200);
+  --color-surface-hover: var(--color-neutral-100);
+  --color-surface-active: var(--color-neutral-200);
+
+  /* ==========================================================================
+     TEXT TOKENS - Dark Theme
+     ========================================================================== */
+  --color-text: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-inverse: var(--color-neutral-0);
+  --color-text-disabled: var(--color-neutral-400);
+  --color-text-link: var(--color-primary);
+  --color-text-link-hover: var(--color-primary-hover);
+
+  /* ==========================================================================
+     BORDER TOKENS - Dark Theme
+     ========================================================================== */
+  --color-border: var(--color-neutral-200);
+  --color-border-secondary: var(--color-neutral-300);
+  --color-border-tertiary: var(--color-neutral-400);
+  --color-border-focus: var(--color-primary);
+  --color-border-error: var(--color-danger);
+
+  /* ==========================================================================
+     SHADOW TOKENS - Dark Theme
+     ========================================================================== */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-color-strong: rgba(0, 0, 0, 0.75);
+
+  /* ==========================================================================
+     COMPONENT TOKENS - Dark Theme
+     ========================================================================== */
+  
+  /* Buttons */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-bg-hover: var(--color-primary-hover);
+  --button-primary-bg-active: var(--color-primary-active);
+  --button-primary-text: var(--color-neutral-0);
+  --button-primary-border: var(--color-primary);
+
+  --button-secondary-bg: var(--color-surface);
+  --button-secondary-bg-hover: var(--color-surface-hover);
+  --button-secondary-bg-active: var(--color-surface-active);
+  --button-secondary-text: var(--color-primary);
+  --button-secondary-border: var(--color-primary);
+
+  /* Cards */
+  --card-bg: var(--color-surface);
+  --card-border: var(--color-border);
+  --card-shadow: var(--shadow-md);
+
+  /* Forms */
+  --input-bg: var(--color-surface);
+  --input-bg-focus: var(--color-surface);
+  --input-border: var(--color-border);
+  --input-border-focus: var(--color-border-focus);
+  --input-text: var(--color-text);
+  --input-placeholder: var(--color-text-tertiary);
+
+  /* Navigation */
+  --nav-bg: var(--color-surface);
+  --nav-border: var(--color-border);
+  --nav-text: var(--color-text);
+  --nav-text-hover: var(--color-primary);
+  --nav-text-active: var(--color-primary-active);
+
+  /* Header/Footer */
+  --header-bg: var(--color-surface);
+  --header-border: var(--color-border);
+  --header-text: var(--color-text);
+  --footer-bg: var(--color-background-secondary);
+  --footer-text: var(--color-text-secondary);
+
+  /* Panels */
+  --panel-bg: var(--color-surface-secondary);
+  --panel-border: var(--color-border);
+}
+
+/* =============================================================================
+   LEGACY COMPATIBILITY LAYER
+   ============================================================================= */
+
+:root {
+  /* Legacy variables for backward compatibility - mapped to new tokens */
+  --theme-primary: var(--color-primary);
+  --theme-primary-dark: var(--color-primary-hover);
+  --theme-secondary: var(--color-secondary);
+  --theme-secondary-dark: var(--color-secondary-hover);
+  --theme-accent: var(--color-accent);
+  --theme-accent-dark: var(--color-accent-hover);
+  --theme-accent-light: var(--color-accent-light);
+  --theme-accent-lighter: var(--color-accent-lighter);
+  --theme-accent-lightest: var(--color-accent-lighter);
+  --theme-accent-darkest: var(--color-accent-active);
+  --theme-accent-darker: var(--color-accent-hover);
+  --theme-title: var(--color-primary-light);
+  
+  /* Status colors */
+  --theme-danger: var(--color-danger);
+  --theme-warning: var(--color-warning);
+  --theme-success: var(--color-success);
+  --theme-info: var(--color-info);
+  
+  /* Neutral colors */
+  --theme-light: var(--color-neutral-100);
+  --theme-dark: var(--color-neutral-800);
+  --theme-gray: var(--color-neutral-500);
+  --theme-white: var(--color-neutral-0);
+  --theme-black: var(--color-neutral-950);
+  --theme-gray-light: var(--color-neutral-200);
+  --theme-gray-dark: var(--color-neutral-600);
+  --theme-gray-darker: var(--color-neutral-700);
+  --theme-gray-darkest: var(--color-neutral-900);
+  --theme-gray-lightest: var(--color-neutral-100);
+  --theme-gray-lighter: var(--color-neutral-300);
+  
+  /* Background and Surface Colors */
+  --theme-body-bg: var(--color-background);
+  --theme-background: var(--color-background);
+  --theme-text: var(--color-text);
+  --theme-border: var(--color-border);
+  --theme-panel-bg: var(--panel-bg);
+  --theme-panel-border: var(--panel-border);
+
+  /* Old naming convention support */
+  --title-color: var(--color-primary-light);
+  --accent-color: var(--color-accent);
+  --accent-dark: var(--color-accent-hover);
+  --accent-light: var(--color-accent-light);
+  --accent-lighter: var(--color-accent-lighter);
+  --accent-lightest: var(--color-accent-lighter);
+  --accent-darkest: var(--color-accent-active);
+  --accent-darker: var(--color-accent-hover);
+  --primary-color: var(--color-primary);
+  --primary-dark: var(--color-primary-hover);
+  --secondary-color: var(--color-secondary);
+  --secondary-dark: var(--color-secondary-hover);
+  --danger-color: var(--color-danger);
+  --warning-color: var(--color-warning);
+  --success-color: var(--color-success);
+  --info-color: var(--color-info);
+  --light-color: var(--color-neutral-100);
+  --dark-color: var(--color-neutral-800);
+  --gray-color: var(--color-neutral-500);
+  --white-color: var(--color-neutral-0);
+  --black-color: var(--color-neutral-950);
+  --gray-light: var(--color-neutral-200);
+  --gray-dark: var(--color-neutral-600);
+  --gray-darker: var(--color-neutral-700);
+  --gray-darkest: var(--color-neutral-900);
+  --gray-lightest: var(--color-neutral-100);
+  --gray-lighter: var(--color-neutral-300);
+  --body-bg: var(--color-background);
+  --background-color: var(--color-background);
+  --text-color: var(--color-text);
+  --border-color: var(--color-border);
+  --panel-bg: var(--panel-bg);
+  --panel-border: var(--panel-border);
+
+  /* Button tokens for legacy support */
+  --button-bg-color: var(--button-primary-bg);
+  --button-text-color: var(--button-primary-text);
+
+  /* Add missing variables from theme.css */
+  --card-bg-color: var(--card-bg);
+}
+
+/* =============================================================================
+   THEME TOGGLE COMPONENT STYLES
+   ============================================================================= */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-theme), transform var(--transition-fast), box-shadow var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background-color: var(--button-primary-bg-hover);
+    outline: none;
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Theme Toggle Icons */
+.theme-toggle .icon {
+    width: 20px;
+    height: 20px;
+    transition: var(--transition-normal);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.theme-toggle .icon.sun {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.theme-toggle .icon.moon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* Dark theme active */
+[data-theme="dark"] .theme-toggle .icon.sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+[data-theme="dark"] .theme-toggle .icon.moon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+/* Theme Toggle positioning in header */
+.theme-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.theme-toggle-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-right: var(--space-sm);
+}
+
+/* Responsive adjustments for the header */
+@media (max-width: 768px) {
+    .header-right {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-sm);
+    }
+    
+    .theme-toggle {
+        margin-left: var(--space-sm);
+    }
+    
+    .theme-toggle-label {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .theme-toggle .icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .header-right {
+        gap: var(--space-sm);
+    }
+}
+
+/* =============================================================================
+   ACCESSIBILITY & ANIMATIONS
+   ============================================================================= */
+
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+    transition: var(--transition-theme);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .theme-toggle:hover,
+    .theme-toggle:focus {
+        transform: none;
+    }
+    
+    .theme-toggle:active {
+        transform: none;
+    }
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    :root,
+    [data-theme="light"] {
+        --color-border: #000000;
+        --color-text: #000000;
+        --color-background: #ffffff;
+    }
+    
+    [data-theme="dark"] {
+        --color-border: #ffffff;
+        --color-text: #ffffff;
+        --color-background: #000000;
+    }
+}
+
+/* =============================================================================
+   BASE STYLES WITH THEME SUPPORT
+   ============================================================================= */
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family-sans);
+    transition: var(--transition-theme);
+}
+
+/* Ensure theme system initialization */
+html {
+    color-scheme: light dark;
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
