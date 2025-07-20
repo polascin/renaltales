@@ -2,66 +2,51 @@
 
 declare(strict_types=1);
 
-namespace RenalTales;
-
-use RenalTales\Core\SecurityManager;
-use RenalTales\Controllers\ViewController;
-use RenalTales\Controllers\ApplicationController;
-use RenalTales\Models\LanguageModel;
-use RenalTales\Views\ErrorView;
-use RenalTales\Core\SessionManager;
-use RenalTales\Core\Logger;
-
 /**
  * Main entry point for the RenalTales application
  *
  * @package RenalTales
- * @version 2025.v3.1.dev
+ * @version 2025.v4.0.dev
  * @author Ľubomír Polaščín
  **/
 
-// File: public/index.php
+// File: /public/index.php
 
-// Show all errors
+// Set error reporting level
+error_reporting(E_ALL);
 ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
+ini_set('display_errors', '1');
+
+// Debugging
+require_once __DIR__ . '/debugging.php';
+
+// Set timezone
+date_default_timezone_set('Europe/Bratislava');
+
+// Directory separator constant for cross-platform compatibility
+define('DS', DIRECTORY_SEPARATOR);
 
 // Include application constants definitions
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'constants.php';
+require_once dirname(__DIR__) . DS . 'config' . DS . 'constants.php';
 
-// Load Composer autoloader immediately after constants
-require_once APP_ROOT . '/vendor/autoload.php';
-
-// Include bootstrap for proper setup
-require_once APP_DIR . DS . 'bootstrap.php';
+// Include Composer autoloader = Include application classes
+require_once dirname(__DIR__) . DS . 'vendor' . DS . 'autoload.php';
 
 // Start output buffering
 ob_start();
 
+// Create an instance of the application
+$app = new RenalTales\Core\Application();
+
 try {
-    // Initialize and bootstrap the application
-    $app = new \RenalTales\Core\Application();
-    $app->bootstrap();
-    $app->run();
-} catch (\Throwable $e) {
-    // Clean any buffered output before showing error
-    if (ob_get_level()) {
-        ob_end_clean();
-    }
-
-    error_log('Error in index.php: ' . $e->getMessage());
-
-    // Try to get language service if application was initialized
-    $languageService = null;
-    if (isset($app) && $app->isBootstrapped()) {
-        $languageService = $app->get(\RenalTales\Services\LanguageService::class);
-    }
-
-    // Get debug mode from environment or constant
-    $debugMode = filter_var($_ENV['APP_DEBUG'] ?? APP_DEBUG ?? false, FILTER_VALIDATE_BOOLEAN);
-
-    $errorView = new \RenalTales\Views\ErrorView($e, $debugMode, $languageService);
-    echo $errorView->render();
-    exit;
+  // Run the application
+  $output = $app->run();
+  echo $output;
+  // Flush the output buffer
+  ob_flush();
+  // Clean up the output buffer
+  ob_end_clean();
+} catch (Exception $e) {
+  error_log('Exception in index.php: ' . $e->getMessage());
+  echo 'An error occurred while processing the request.';
 }

@@ -1,8 +1,15 @@
 <?php
 
-// Application bootstrap file
-
 declare(strict_types=1);
 
-// Require the constants configuration
-require_once dirname(__DIR__) . '/config/constants.php';
+/**
+ * RenalTales application bootstrap file
+ *
+ * @package RenalTales
+ * @version 2025.v4.0.dev
+ * @author Ľubomír Polaščín
+ **/
+
+// File: /bootstrap.php
+
+// Bootstrap the application

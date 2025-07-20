@@ -1,358 +1,489 @@
-/**
- * Typography System
- * ==================
- *
- * Comprehensive typography system with:
- * - Font family declarations (sans, serif, mono, display)
- * - Modular type scale
- * - Line height system
- * - Font weight tokens
- * - Text styling utilities
- *
- * @author Renal Tales Team
- * @version 2025.v3.1.dev
+/*!*
+ * TYPOGRAPHY.CSS - Modern Typography System for RenalTales
+ * =========================================================
+ * 
+ * Comprehensive typography system featuring:
+ * - Fluid typography with clamp() functions
+ * - Semantic type hierarchy
+ * - Accessibility-optimized font settings
+ * - Multiple font loading strategies
+ * - Reading-optimized line heights and spacing
+ * 
+ * @author RenalTales Development Team
+ * @version 2025.v4.0
+ * @updated 2025-01-19
  */
 
-/* ==========================================================================
-   FONT FAMILY DECLARATIONS
-   ========================================================================== */
+/* =============================================================================
+   FONT LOADING STRATEGIES
+   ============================================================================= */
 
-:root {
-  /* Font Stacks */
-  --font-family-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-family-mono: 'Source Code Pro', 'Fira Code', 'Monaco', 'Consolas', monospace;
-  --font-family-cursive: 'Pacifico', cursive;
-  --font-family-fantasy: 'Eagle Lake', 'Lobster', fantasy;
-  --font-family-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  
-  /* Display fonts for headings */
-  --font-family-display: var(--font-family-fantasy);
-  --font-family-heading: var(--font-family-serif);
-  --font-family-body: var(--font-family-sans);
+/* Font Display Strategy - Optimize loading performance */
+@font-face {
+  font-family: 'Poppins';
+  font-display: swap; /* Prevents invisible text during font load */
+  src: local('Poppins'), url('/assets/fonts/poppins.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
 }
 
-/* ==========================================================================
-   TYPE SCALE (Modular Scale - Major Third 1.250)
-   ========================================================================== */
-
-:root {
-  /* Font sizes following a modular scale */
-  --font-size-2xs: 0.512rem;    /* 8.19px */
-  --font-size-xs: 0.64rem;      /* 10.24px */
-  --font-size-sm: 0.8rem;       /* 12.8px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-md: 1.25rem;      /* 20px */
-  --font-size-lg: 1.563rem;     /* 25px */
-  --font-size-xl: 1.953rem;     /* 31.25px */
-  --font-size-2xl: 2.441rem;    /* 39.06px */
-  --font-size-3xl: 3.052rem;    /* 48.83px */
-  --font-size-4xl: 3.815rem;    /* 61.04px */
-  --font-size-5xl: 4.768rem;    /* 76.29px */
-  --font-size-6xl: 5.96rem;     /* 95.37px */
-  
-  /* Semantic font sizes */
-  --font-size-caption: var(--font-size-xs);
-  --font-size-small: var(--font-size-sm);
-  --font-size-body: var(--font-size-base);
-  --font-size-lead: var(--font-size-md);
-  --font-size-h6: var(--font-size-md);
-  --font-size-h5: var(--font-size-lg);
-  --font-size-h4: var(--font-size-xl);
-  --font-size-h3: var(--font-size-2xl);
-  --font-size-h2: var(--font-size-3xl);
-  --font-size-h1: var(--font-size-4xl);
-  --font-size-hero: var(--font-size-5xl);
-  --font-size-display: var(--font-size-6xl);
+@font-face {
+  font-family: 'Playfair Display';
+  font-display: swap;
+  src: local('Playfair Display'), url('/assets/fonts/playfair.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
 }
 
-/* ==========================================================================
-   FONT WEIGHTS
-   ========================================================================== */
+/* =============================================================================
+   TYPOGRAPHY DESIGN TOKENS
+   ============================================================================= */
 
 :root {
-  --font-weight-thin: 100;
-  --font-weight-extra-light: 200;
+  /* Font Family Stack */
+  --font-primary: 'Poppins', system-ui, -apple-system, 'Segoe UI', 'Roboto', sans-serif;
+  --font-secondary: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  --font-system: system-ui, -apple-system, 'Segoe UI', 'Roboto', sans-serif;
+
+  /* Fluid Typography Scale - Responsive font sizes using clamp() */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);   /* 12-14px */
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);     /* 14-16px */
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);     /* 16-18px */
+  --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);    /* 18-20px */
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);     /* 20-24px */
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);          /* 24-32px */
+  --text-3xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.5rem);  /* 30-40px */
+  --text-4xl: clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem);    /* 36-56px */
+  --text-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.5rem);        /* 48-72px */
+
+  /* Font Weights */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --font-weight-extra-bold: 800;
-  --font-weight-black: 900;
-  
-  /* Semantic font weights */
-  --font-weight-body: var(--font-weight-normal);
-  --font-weight-heading: var(--font-weight-semibold);
-  --font-weight-strong: var(--font-weight-bold);
-  --font-weight-display: var(--font-weight-bold);
+  --font-weight-extrabold: 800;
+
+  /* Line Heights - Optimized for readability */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* Reading Metrics */
+  --measure-narrow: 45ch;  /* Narrow reading width */
+  --measure-wide: 75ch;    /* Wide reading width */
+  --measure-optimal: 60ch; /* Optimal reading width */
 }
 
-/* ==========================================================================
-   LINE HEIGHTS
-   ========================================================================== */
+/* =============================================================================
+   BASE TYPOGRAPHY STYLES
+   ============================================================================= */
 
-:root {
-  --line-height-none: 1;
-  --line-height-tight: 1.25;
-  --line-height-snug: 1.375;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
-  --line-height-loose: 2;
-  
-  /* Semantic line heights */
-  --line-height-heading: var(--line-height-tight);
-  --line-height-body: var(--line-height-relaxed);
-  --line-height-caption: var(--line-height-normal);
+/* Reset and base styles */
+* {
+  /* Better font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* ==========================================================================
-   LETTER SPACING
-   ========================================================================== */
-
-:root {
-  --letter-spacing-tighter: -0.05em;
-  --letter-spacing-tight: -0.025em;
-  --letter-spacing-normal: 0em;
-  --letter-spacing-wide: 0.025em;
-  --letter-spacing-wider: 0.05em;
-  --letter-spacing-widest: 0.1em;
+html {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  font-variant-ligatures: common-ligatures;
 }
 
-/* ==========================================================================
-   BASE TYPOGRAPHY ELEMENTS
-   ========================================================================== */
-
-/* Body text */
 body {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-body);
-  line-height: var(--line-height-body);
-  letter-spacing: var(--letter-spacing-normal);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  transition: var(--transition-theme);
 }
+
+/* =============================================================================
+   SEMANTIC TYPE HIERARCHY
+   ============================================================================= */
 
 /* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  letter-spacing: var(--letter-spacing-tight);
-  margin: 0 0 0.5em 0;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text);
+  letter-spacing: var(--tracking-tight);
 }
 
 h1 {
-  font-size: var(--font-size-h1);
-  font-family: var(--font-family-display);
-  font-weight: var(--font-weight-display);
-  letter-spacing: var(--letter-spacing-tighter);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--leading-none);
+  margin-bottom: var(--space-2xl);
 }
 
 h2 {
-  font-size: var(--font-size-h2);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xl);
 }
 
 h3 {
-  font-size: var(--font-size-h3);
-  line-height: var(--line-height-snug);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-lg);
 }
 
 h4 {
-  font-size: var(--font-size-h4);
-  line-height: var(--line-height-snug);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 h5 {
-  font-size: var(--font-size-h5);
-  line-height: var(--line-height-normal);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 h6 {
-  font-size: var(--font-size-h6);
-  line-height: var(--line-height-normal);
-}
-
-/* Paragraphs and text elements */
-p {
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
-  margin: 0 0 1em 0;
-}
-
-/* Lead text */
-.lead,
-.text-lead {
-  font-size: var(--font-size-lead);
-  line-height: var(--line-height-relaxed);
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Paragraphs and body text */
+p {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-lg);
+  max-width: var(--measure-optimal);
+  color: var(--color-text);
+}
+
+/* Lead paragraphs */
+.lead {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-secondary);
+  max-width: var(--measure-wide);
 }
 
 /* Small text */
-small,
-.text-small {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-normal);
+small, .text-small {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text-secondary);
 }
 
-/* Caption text */
-.caption,
-.text-caption {
-  font-size: var(--font-size-caption);
-  line-height: var(--line-height-caption);
-  color: var(--color-text-secondary, currentColor);
+/* =============================================================================
+   TEXT UTILITIES
+   ============================================================================= */
+
+/* Font Sizes */
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+
+/* Font Weights */
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+.font-extrabold { font-weight: var(--font-weight-extrabold); }
+
+/* Font Families */
+.font-primary { font-family: var(--font-primary); }
+.font-secondary { font-family: var(--font-secondary); }
+.font-mono { font-family: var(--font-mono); }
+.font-system { font-family: var(--font-system); }
+
+/* Line Heights */
+.leading-none { line-height: var(--leading-none); }
+.leading-tight { line-height: var(--leading-tight); }
+.leading-snug { line-height: var(--leading-snug); }
+.leading-normal { line-height: var(--leading-normal); }
+.leading-relaxed { line-height: var(--leading-relaxed); }
+.leading-loose { line-height: var(--leading-loose); }
+
+/* Letter Spacing */
+.tracking-tighter { letter-spacing: var(--tracking-tighter); }
+.tracking-tight { letter-spacing: var(--tracking-tight); }
+.tracking-normal { letter-spacing: var(--tracking-normal); }
+.tracking-wide { letter-spacing: var(--tracking-wide); }
+.tracking-wider { letter-spacing: var(--tracking-wider); }
+.tracking-widest { letter-spacing: var(--tracking-widest); }
+
+/* Text Alignment */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* Text Colors */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-tertiary); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-info { color: var(--color-info); }
+
+/* Text Transforms */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* Text Decoration */
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* Text Overflow */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* Code elements */
-code,
-kbd,
-samp {
-  font-family: var(--font-family-mono);
-  font-size: 0.9em;
-  font-weight: var(--font-weight-medium);
+.text-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =============================================================================
+   READING-OPTIMIZED COMPONENTS
+   ============================================================================= */
+
+/* Readable content wrapper */
+.prose {
+  max-width: var(--measure-optimal);
+  line-height: var(--leading-relaxed);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+}
+
+.prose p {
+  margin-bottom: var(--space-lg);
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-xl);
+}
+
+.prose li {
+  margin-bottom: var(--space-sm);
+}
+
+/* Blockquotes */
+blockquote, .blockquote {
+  font-size: var(--text-xl);
+  font-style: italic;
+  line-height: var(--leading-relaxed);
+  margin: var(--space-2xl) 0;
+  padding: var(--space-lg) var(--space-xl);
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-secondary);
+  quotes: '"' '"' "'" "'";
+}
+
+blockquote::before {
+  content: open-quote;
+  font-size: var(--text-4xl);
+  color: var(--color-primary);
+  line-height: 0;
+  display: inline-block;
+  vertical-align: -0.4em;
+}
+
+/* Code and preformatted text */
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--color-surface-tertiary);
+  padding: 0.125rem 0.25rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
 }
 
 pre {
-  font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-relaxed);
-  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  background-color: var(--color-surface-tertiary);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
   overflow-x: auto;
+  margin: var(--space-lg) 0;
 }
 
-/* Emphasis elements */
-strong,
-b {
-  font-weight: var(--font-weight-strong);
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
 }
 
-em,
-i {
-  font-style: italic;
+/* =============================================================================
+   ACCESSIBILITY FEATURES
+   ============================================================================= */
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
-/* Quotations */
-blockquote {
-  font-size: var(--font-size-lg);
-  font-style: italic;
-  line-height: var(--line-height-relaxed);
-  margin: 1.5em 0;
-  padding-left: 1.5em;
-  border-left: 4px solid var(--color-border, currentColor);
+/* Skip link for better navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-medium);
+  z-index: 1000;
 }
 
-q {
-  font-style: italic;
+.skip-link:focus {
+  top: 6px;
 }
 
-/* Lists */
-ul,
-ol {
-  margin: 1em 0;
-  padding-left: 1.5em;
+/* Focus indicators for better keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
-li {
-  margin: 0.5em 0;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text: #000000;
+    --color-background: #ffffff;
+    --color-primary: #0000ff;
+    --color-border: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --color-text: #ffffff;
+    --color-background: #000000;
+    --color-primary: #ffff00;
+    --color-border: #ffffff;
+  }
 }
 
-/* ==========================================================================
-   UTILITY CLASSES
-   ========================================================================== */
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
-/* Font family utilities */
-.font-sans { font-family: var(--font-family-sans) !important; }
-.font-serif { font-family: var(--font-family-serif) !important; }
-.font-mono { font-family: var(--font-family-mono) !important; }
-.font-cursive { font-family: var(--font-family-cursive) !important; }
-.font-fantasy { font-family: var(--font-family-fantasy) !important; }
-.font-display { font-family: var(--font-family-display) !important; }
-.font-heading { font-family: var(--font-family-heading) !important; }
-.font-body { font-family: var(--font-family-body) !important; }
-
-/* Font size utilities */
-.text-2xs { font-size: var(--font-size-2xs) !important; }
-.text-xs { font-size: var(--font-size-xs) !important; }
-.text-sm { font-size: var(--font-size-sm) !important; }
-.text-base { font-size: var(--font-size-base) !important; }
-.text-md { font-size: var(--font-size-md) !important; }
-.text-lg { font-size: var(--font-size-lg) !important; }
-.text-xl { font-size: var(--font-size-xl) !important; }
-.text-2xl { font-size: var(--font-size-2xl) !important; }
-.text-3xl { font-size: var(--font-size-3xl) !important; }
-.text-4xl { font-size: var(--font-size-4xl) !important; }
-.text-5xl { font-size: var(--font-size-5xl) !important; }
-.text-6xl { font-size: var(--font-size-6xl) !important; }
-
-/* Font weight utilities */
-.font-thin { font-weight: var(--font-weight-thin) !important; }
-.font-extralight { font-weight: var(--font-weight-extra-light) !important; }
-.font-light { font-weight: var(--font-weight-light) !important; }
-.font-normal { font-weight: var(--font-weight-normal) !important; }
-.font-medium { font-weight: var(--font-weight-medium) !important; }
-.font-semibold { font-weight: var(--font-weight-semibold) !important; }
-.font-bold { font-weight: var(--font-weight-bold) !important; }
-.font-extrabold { font-weight: var(--font-weight-extra-bold) !important; }
-.font-black { font-weight: var(--font-weight-black) !important; }
-
-/* Line height utilities */
-.leading-none { line-height: var(--line-height-none) !important; }
-.leading-tight { line-height: var(--line-height-tight) !important; }
-.leading-snug { line-height: var(--line-height-snug) !important; }
-.leading-normal { line-height: var(--line-height-normal) !important; }
-.leading-relaxed { line-height: var(--line-height-relaxed) !important; }
-.leading-loose { line-height: var(--line-height-loose) !important; }
-
-/* Letter spacing utilities */
-.tracking-tighter { letter-spacing: var(--letter-spacing-tighter) !important; }
-.tracking-tight { letter-spacing: var(--letter-spacing-tight) !important; }
-.tracking-normal { letter-spacing: var(--letter-spacing-normal) !important; }
-.tracking-wide { letter-spacing: var(--letter-spacing-wide) !important; }
-.tracking-wider { letter-spacing: var(--letter-spacing-wider) !important; }
-.tracking-widest { letter-spacing: var(--letter-spacing-widest) !important; }
-
-/* Text style utilities */
-.italic { font-style: italic !important; }
-.not-italic { font-style: normal !important; }
-.uppercase { text-transform: uppercase !important; }
-.lowercase { text-transform: lowercase !important; }
-.capitalize { text-transform: capitalize !important; }
-.normal-case { text-transform: none !important; }
-
-/* Text decoration utilities */
-.underline { text-decoration: underline !important; }
-.line-through { text-decoration: line-through !important; }
-.no-underline { text-decoration: none !important; }
-
-/* Text alignment utilities */
-.text-left { text-align: left !important; }
-.text-center { text-align: center !important; }
-.text-right { text-align: right !important; }
-.text-justify { text-align: justify !important; }
-
-/* ==========================================================================
+/* =============================================================================
    RESPONSIVE TYPOGRAPHY
-   ========================================================================== */
+   ============================================================================= */
 
-/* Responsive font sizes */
-@media (max-width: 768px) {
-  h1 { font-size: var(--font-size-3xl); }
-  h2 { font-size: var(--font-size-2xl); }
-  h3 { font-size: var(--font-size-xl); }
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .prose {
+    max-width: 100%;
+  }
   
-  .text-hero { font-size: var(--font-size-3xl) !important; }
-  .text-display { font-size: var(--font-size-4xl) !important; }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: var(--leading-snug);
+  }
+  
+  blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: var(--space-lg);
+  }
 }
 
-@media (max-width: 480px) {
-  h1 { font-size: var(--font-size-2xl); }
-  h2 { font-size: var(--font-size-xl); }
-  h3 { font-size: var(--font-size-lg); }
+/* Large screen optimizations */
+@media (min-width: 1024px) {
+  .prose-lg {
+    max-width: var(--measure-wide);
+    font-size: var(--text-lg);
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
   
-  .text-hero { font-size: var(--font-size-2xl) !important; }
-  .text-display { font-size: var(--font-size-3xl) !important; }
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  
+  p, blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  blockquote {
+    page-break-inside: avoid;
+  }
 }

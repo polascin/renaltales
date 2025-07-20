@@ -13,125 +13,426 @@
 # Configuration files with sensitive data
 config/*.local.php
 config/*.prod.php
-config/*.production.php
-config/*.staging.php
-config/*.development.php
-config/*.testing.php
 config/secrets.php
-config/database.php
-config/auth.php
-config/mail.php
-config/services.php
-config/session.php
-config/jwt.php
-config/oauth.php
-config/stripe.php
-
-# Sensitive credential files
-credentials.php
-credentials.json
-credentials.yaml
-credentials.yml
-credentials.xml
-credentials.ini
-credentials.conf
-credentials.config
-credentials.env
-credentials.txt
-secrets.php
-secrets.json
-secrets.yaml
-secrets.yml
-secrets.xml
-secrets.ini
-secrets.conf
-secrets.config
-secrets.env
-secrets.txt
 
 # Certificate and key files
 *.pem
 *.key
 *.crt
-.microkey
-
-# SSH and authentication files
-.ssh/
-id_rsa
-id_rsa.pub
-.known_hosts
-
-# Database credentials and dumps
-*.sql
-*.dump
-*.bak
+*.csr
+*.srl
+*.p12
+*.pfx
 
 # ===== DEPENDENCIES ===========================
 # Composer
 /vendor/
 composer.phar
-# Node.js
-yarn.lock
-node_modules/
+# Note: composer.lock should be committed for applications
 
-# ===== TESTING & COVERAGE =====================
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# ===== STORAGE & UPLOADS ======================
 # Application storage
+/storage/logs/*.log
+
+# Ignore environment files except for examples
+.env
+.env.*
+!.env.example
+!.env.local.example
+!.env.production.example
+/storage/cache/*
+!/storage/cache/.gitkeep
+/storage/sessions/*
+!/storage/sessions/.gitkeep
+/storage/temp/*
+
+# Composer dependencies
+/vendor/
+composer.phar
+# Note: composer.lock should be committed for applications
+!/storage/temp/.gitkeep
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/backups/*
+!/storage/backups/.gitkeep
+
+# Public uploads
+
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+/public/uploads/*
+!/public/uploads/.gitkeep
+/uploads/*
+!/uploads/.gitkeep
+
+# Legacy logs directory
+/logs/*
+!/logs/.gitkeep
+
+# ===== DATABASE ===============================
+# Database files
+*.sqlite
+*.sqlite3
+
+# Application storage (keep .gitkeep to track empty dirs)
 /storage/logs/*.log
 /storage/cache/*
 !/storage/cache/.gitkeep
 /storage/sessions/*
 !/storage/sessions/.gitkeep
+/storage/temp/*
+!/storage/temp/.gitkeep
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+/storage/backups/*
+!/storage/backups/.gitkeep
+*.db
+*.sql.backup
 
-# Public uploads
+# Database dumps
+*.sql.gz
+
+# Public uploads (keep .gitkeep)
 /public/uploads/*
 !/public/uploads/.gitkeep
+/uploads/*
+!/uploads/.gitkeep
+*.sql.bz2
+database_dump_*.sql
 
-# ===== DATABASE ===============================
-# Database files
-*.sqlite
-*.db
 
-# ===== BACKUP & TEMPORARY FILES ===============
+# Legacy logs directory (keep .gitkeep)
+/logs/*
+!/logs/.gitkeep
+# ===== BUILD & COMPILED FILES =================
 # Build artifacts
 /build/
+/dist/
+/public/build/
+/public/dist/
 
-# ===== TESTING 6 COVERAGE =====================
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.sql.backup
+/public/hot/
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ===== DEVELOPMENT TOOLS ======================
+# Build artifacts
+/build/
+/dist/
+/public/build/
+/public/dist/
+/public/hot/
+# IDE and Editor files
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+.project
+.buildpath
+.settings/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+
+
+# IDE and Editor files
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+.project
+.buildpath
+.settings/
+
+# ===== TESTING & COVERAGE =====================
+# PHPUnit
 /phpunit.xml
-.php_unit.result.cache
+.phpunit.result.cache
+.phpunit.cache/
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+
+# Test coverage
 /coverage/
 .coverage
+coverage.xml
+*.coverage
+
+# PHPUnit
+/phpunit.xml
+.phpunit.result.cache
+.phpunit.cache/
 *.coveragexml
 
+# Test files (keep structured tests, ignore ad-hoc test files)
+test_*.php
+!tests/
+
+# Test coverage
+/coverage/
+.coverage
+coverage.xml
+*.coverage
+*.coveragexml
+
+# ===== DEBUG & DEVELOPMENT ====================
+# Debug and development files
+debug_*.php
+fix_*.php
+
+# Test files (keep structured tests, ignore ad-hoc test files)
+test_*.php
+!tests/
+check_*.php
+simple_*.php
+
 # ===== CODE QUALITY TOOLS =====================
+# PHP Static Analysis
+.phpstan-cache/
+.psalm-cache/
+
+# Debug and development files
+debug_*.php
+fix_*.php
+check_*.php
+simple_*.php
+.php_cs
+.php_cs.cache
+.php-cs-fixer.cache
+
+# PHP Static Analysis
+.phpstan-cache/
+.psalm-cache/
+
 # PHP CS Fixer
 .php_cs
-/php_cs.cache
+.php_cs.cache
+.php-cs-fixer.cache
+.phpstan-cache/
+.psalm-cache/
+php-cs-fixer*.*
 
-# OS FILES
+# PHP Static Analysis
+.phpstan-cache/
+.psalm-cache/
+
+# ===== OPERATING SYSTEM FILES =================
 # Windows
 Thumbs.db
+Desktop.ini
 $RECYCLE.BIN/
+*.lnk
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
 
 # macOS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+.LSOverride
 
 # Linux
+*~
+
+# Linux
+*~
+.directory
+.Trash-*
 .directory
 .Trash-*
 
-# ===== BACKUP 6 TEMPORARY FILES ===============
+# ===== BACKUP & TEMPORARY FILES ===============
 # Backup files
 *.backup
+*.bak
+*.old
+
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+*_backup.*
+backup_*
+*.orig
+*_backup.*
+backup_*
+
+# Log files
+*.log
+*.out
+*.pid
+error_log
+*.log
+*.out
+*.pid
+
+# Temporary files
+*.tmp
+*.temp
+error_log
+
+# Application documentation (if auto-generated)
+/docs/generated/
+*.tmp
+*.temp
+
+# Cache files
+cache.properties
 
 # ===== PROJECT SPECIFIC =======================
-# Documentation reports
+# Application documentation (if auto-generated)
+/docs/generated/
+
+# Cache files
+cache.properties
+
+# Application specific temporary files (keep .gitkeep)
+/var/cache/*
+!/var/cache/.gitkeep
+/var/logs/*
+!/var/logs/.gitkeep
+/var/sessions/*
+!/var/sessions/.gitkeep
+
+# Application specific temporary files
+/var/cache/*
+
+# Asset flags (if they are downloaded/generated)
+/public/assets/flags/*
+!/public/assets/flags/.gitkeep
+!/var/cache/.gitkeep
+/var/logs/*
+!/var/logs/.gitkeep
+/var/sessions/*
+!/var/sessions/.gitkeep
+
+# Asset flags (if they are downloaded/generated)
+/public/assets/flags/*
+!/public/assets/flags/.gitkeep
+
+# Documentation reports (if auto-generated)
 *_REPORT.md
+*_SUMMARY.md
+*_FIXES.md
+*_RESOLUTION.md
+*_IMPLEMENTATION.md
+*_COMPLETE.md
+*_ALERT.md
+
+# Documentation reports (if auto-generated)
+*_REPORT.md
+*_SUMMARY.md
+*_FIXES.md
+*_RESOLUTION.md
+*_IMPLEMENTATION.md
+*_COMPLETE.md
+*_ALERT.md
+*_ANALYSIS*.md
+*_CONSISTENCY*.md
+*_INTEGRITY*.md
+*_COMPATIBILITY*.md
+*_COMPLIANCE*.md
+*_REMAINING*.md
+*.html
 !README.md
+!SETUP.md
+!SECURITY.md
+*_ANALYSIS*.md
+*_CONSISTENCY*.md
+
+# Workspace files
+*.code-workspace
+*_INTEGRITY*.md
+*_COMPATIBILITY*.md
+*_COMPLIANCE*.md
+*_REMAINING*.md
+*.html
+!README.md
+!SETUP.md
+!SECURITY.md
+
 
 # Important: These patterns ensure critical files are tracked
 !.htaccess
+!.github/
 !composer.json
 !package.json
+!README.md
 !LICENSE
+!CHANGELOG.md
 !**/.gitkeep
 
+# Workspace files
+*.code-workspace
+
+# ===== KEEP THESE FILES =======================
+# Important: These patterns ensure critical files are tracked
+!.htaccess
+!.github/
+!composer.json
+!package.json
+!README.md
+!LICENSE
+!CHANGELOG.md
